@@ -10,25 +10,38 @@ import UIKit
 
 class CellOne: UICollectionViewCell {
 
-    var imageView: UIImageView = UIImageView()
     var titleLabel: UILabel = UILabel()
+    var subLabel: UILabel = UILabel()
+    var lineView: UIView = UIView()
+    var lineWidth: CGFloat = 0.0
+    let leftMargin: CGFloat = 24.0
+    let veritcalMargins: CGFloat = 20.0
+    let fontSize: CGFloat = 13.0
+    let subFontSize: CGFloat = 13.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor(white: 0.0, alpha: 0.3)
+        lineWidth = contentView.frame.width - leftMargin
+        self.backgroundColor = .whiteColor()
         
-        imageView.clipsToBounds = true
-        imageView.contentMode = .ScaleAspectFill
-        self.contentView.addSubview(imageView)
-        
-        titleLabel = UILabel(frame: CGRectMake(0.0, self.bounds.size.height-50.0, self.bounds.size.width, 40.0))
+        titleLabel = UILabel(frame: CGRectMake(leftMargin, veritcalMargins, self.bounds.size.width, 16.0))
         titleLabel.autoresizingMask = .FlexibleWidth
-        titleLabel.textAlignment = .Center
-//        titleLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.3)
-        titleLabel.font = .systemFontOfSize(20.0)
-        titleLabel.textColor = .whiteColor()
-        self.contentView.addSubview(titleLabel)
+        titleLabel.font = .systemFontOfSize(fontSize)
+        titleLabel.textColor = .draftColorTextBlue()
+        titleLabel.textAlignment = .Left
+        contentView.addSubview(titleLabel)
+        
+        subLabel = UILabel(frame: CGRectMake(leftMargin, self.bounds.size.height-veritcalMargins-subFontSize, self.bounds.size.width, 13.0))
+        subLabel.autoresizingMask = .FlexibleWidth
+        subLabel.font = .systemFontOfSize(subFontSize)
+        subLabel.textColor = .draftColorTextLightBlue()
+        subLabel.textAlignment = .Left
+        contentView.addSubview(subLabel)
+        
+        lineView.frame = CGRectMake(leftMargin, contentView.frame.height - 1, lineWidth, 0.5)
+        lineView.backgroundColor = .draftColorDividerLightBlue()
+        contentView.addSubview(lineView)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -36,7 +49,10 @@ class CellOne: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        imageView.frame = self.bounds
+        lineWidth = contentView.frame.width - leftMargin
+        titleLabel.frame = CGRectMake(leftMargin, veritcalMargins, self.bounds.size.width, 16.0)
+        subLabel.frame = CGRectMake(leftMargin, self.bounds.size.height-veritcalMargins-fontSize, self.bounds.size.width, 13.0)
+        lineView.frame = CGRectMake(leftMargin, self.bounds.size.height - 1, lineWidth, 0.5)
     }
     
 }

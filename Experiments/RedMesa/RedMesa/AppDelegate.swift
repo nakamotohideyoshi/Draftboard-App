@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var screenOne: ScreenOne = ScreenOne()
+    var contestsScreenOne: ContestsViewController = ContestsViewController()
+    var contestsNavigationController: UINavigationController = UINavigationController()
     var tabber: UITabBarController = UITabBarController()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -22,10 +23,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window = UIWindow()
         }
         
-        // Setup Screens
-        let layout = LayoutOne()
-        screenOne = ScreenOne(collectionViewLayout: layout)
-        tabber.setViewControllers([screenOne], animated: true)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+        // Setup Contest
+        let layout = ContestsLayoutOne()
+        contestsScreenOne = ContestsViewController(collectionViewLayout: layout)
+        contestsNavigationController = UINavigationController(rootViewController: contestsScreenOne)
+        contestsNavigationController.title = "CONTESTS"
+        
+        contestsNavigationController.navigationBar.barTintColor = UIColor.draftColorDarkBlue()
+        UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
+        let attributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UINavigationBar.appearance().titleTextAttributes = attributes
+        
+        
+        // Add all screens to the Tab Bar
+        tabber.setViewControllers([contestsNavigationController], animated: true)
         
         // setup window
         window!.rootViewController = tabber

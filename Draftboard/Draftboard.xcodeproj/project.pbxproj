@@ -113,6 +113,7 @@
 		3E7860B31B9FB0E7004013AB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Rally Interactive";
 				TargetAttributes = {
@@ -304,6 +305,7 @@
 				3E7860DC1B9FB0E7004013AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		932C56231BA34E3A00731E3E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932C56221BA34E3A00731E3E /* UIColor+Extension.swift */; };
+		93364B6B1BA3961100A86645 /* ContestFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93364B6A1BA3961100A86645 /* ContestFilterButton.swift */; };
 		939C1C0E1BA0E2D00054992A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C0D1BA0E2D00054992A /* AppDelegate.swift */; };
-		939C1C101BA0E2D00054992A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C0F1BA0E2D00054992A /* ViewController.swift */; };
 		939C1C151BA0E2D00054992A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 939C1C141BA0E2D00054992A /* Images.xcassets */; };
 		939C1C181BA0E2D00054992A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939C1C161BA0E2D00054992A /* LaunchScreen.xib */; };
 		939C1C241BA0E2D00054992A /* RedMesaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C231BA0E2D00054992A /* RedMesaTests.swift */; };
-		939C1C341BA0E4010054992A /* ScreenOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C331BA0E4010054992A /* ScreenOne.swift */; };
-		939C1C361BA0E45E0054992A /* LayoutOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C351BA0E45E0054992A /* LayoutOne.swift */; };
+		939C1C341BA0E4010054992A /* ContestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C331BA0E4010054992A /* ContestsViewController.swift */; };
+		939C1C361BA0E45E0054992A /* ContestsLayoutOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C351BA0E45E0054992A /* ContestsLayoutOne.swift */; };
 		939C1C381BA0E5110054992A /* ContestRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C371BA0E5110054992A /* ContestRow.swift */; };
 		939C1C3A1BA0E5A60054992A /* HeaderViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C391BA0E5A60054992A /* HeaderViewOne.swift */; };
 		939C1C3C1BA0E6860054992A /* CellOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C3B1BA0E6860054992A /* CellOne.swift */; };
@@ -30,17 +31,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		932C56221BA34E3A00731E3E /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		93364B6A1BA3961100A86645 /* ContestFilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestFilterButton.swift; sourceTree = "<group>"; };
 		939C1C081BA0E2D00054992A /* RedMesa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedMesa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		939C1C0C1BA0E2D00054992A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		939C1C0D1BA0E2D00054992A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		939C1C0F1BA0E2D00054992A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		939C1C141BA0E2D00054992A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		939C1C171BA0E2D00054992A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		939C1C1D1BA0E2D00054992A /* RedMesaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedMesaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		939C1C221BA0E2D00054992A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		939C1C231BA0E2D00054992A /* RedMesaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedMesaTests.swift; sourceTree = "<group>"; };
-		939C1C331BA0E4010054992A /* ScreenOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenOne.swift; sourceTree = "<group>"; };
-		939C1C351BA0E45E0054992A /* LayoutOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutOne.swift; sourceTree = "<group>"; };
+		939C1C331BA0E4010054992A /* ContestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsViewController.swift; sourceTree = "<group>"; };
+		939C1C351BA0E45E0054992A /* ContestsLayoutOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsLayoutOne.swift; sourceTree = "<group>"; };
 		939C1C371BA0E5110054992A /* ContestRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestRow.swift; sourceTree = "<group>"; };
 		939C1C391BA0E5A60054992A /* HeaderViewOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewOne.swift; sourceTree = "<group>"; };
 		939C1C3B1BA0E6860054992A /* CellOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellOne.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		932C56241BA34E3E00731E3E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				932C56221BA34E3A00731E3E /* UIColor+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		939C1BFF1BA0E2D00054992A = {
 			isa = PBXGroup;
 			children = (
@@ -85,11 +95,9 @@
 		939C1C0A1BA0E2D00054992A /* RedMesa */ = {
 			isa = PBXGroup;
 			children = (
-				939C1C3F1BA0ECEA0054992A /* SideHeaderLayout */,
-				939C1C3E1BA0ECD20054992A /* ViewObjects */,
-				939C1C3D1BA0ECC50054992A /* ModelObjects */,
 				939C1C0D1BA0E2D00054992A /* AppDelegate.swift */,
-				939C1C0F1BA0E2D00054992A /* ViewController.swift */,
+				932C56241BA34E3E00731E3E /* Extensions */,
+				939C1C3F1BA0ECEA0054992A /* Contests */,
 				939C1C141BA0E2D00054992A /* Images.xcassets */,
 				939C1C161BA0E2D00054992A /* LaunchScreen.xib */,
 				939C1C0B1BA0E2D00054992A /* Supporting Files */,
@@ -122,30 +130,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		939C1C3D1BA0ECC50054992A /* ModelObjects */ = {
+		939C1C3D1BA0ECC50054992A /* ContestsModels */ = {
 			isa = PBXGroup;
 			children = (
 				939C1C371BA0E5110054992A /* ContestRow.swift */,
 			);
-			name = ModelObjects;
+			name = ContestsModels;
 			sourceTree = "<group>";
 		};
-		939C1C3E1BA0ECD20054992A /* ViewObjects */ = {
+		939C1C3E1BA0ECD20054992A /* ContestsViews */ = {
 			isa = PBXGroup;
 			children = (
 				939C1C391BA0E5A60054992A /* HeaderViewOne.swift */,
 				939C1C3B1BA0E6860054992A /* CellOne.swift */,
+				93364B6A1BA3961100A86645 /* ContestFilterButton.swift */,
 			);
-			name = ViewObjects;
+			name = ContestsViews;
 			sourceTree = "<group>";
 		};
-		939C1C3F1BA0ECEA0054992A /* SideHeaderLayout */ = {
+		939C1C3F1BA0ECEA0054992A /* Contests */ = {
 			isa = PBXGroup;
 			children = (
-				939C1C331BA0E4010054992A /* ScreenOne.swift */,
-				939C1C351BA0E45E0054992A /* LayoutOne.swift */,
+				939C1C331BA0E4010054992A /* ContestsViewController.swift */,
+				939C1C351BA0E45E0054992A /* ContestsLayoutOne.swift */,
+				939C1C3E1BA0ECD20054992A /* ContestsViews */,
+				939C1C3D1BA0ECC50054992A /* ContestsModels */,
 			);
-			name = SideHeaderLayout;
+			name = Contests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,10 +262,11 @@
 			files = (
 				939C1C3A1BA0E5A60054992A /* HeaderViewOne.swift in Sources */,
 				939C1C3C1BA0E6860054992A /* CellOne.swift in Sources */,
-				939C1C341BA0E4010054992A /* ScreenOne.swift in Sources */,
+				939C1C341BA0E4010054992A /* ContestsViewController.swift in Sources */,
 				939C1C381BA0E5110054992A /* ContestRow.swift in Sources */,
-				939C1C101BA0E2D00054992A /* ViewController.swift in Sources */,
-				939C1C361BA0E45E0054992A /* LayoutOne.swift in Sources */,
+				932C56231BA34E3A00731E3E /* UIColor+Extension.swift in Sources */,
+				939C1C361BA0E45E0054992A /* ContestsLayoutOne.swift in Sources */,
+				93364B6B1BA3961100A86645 /* ContestFilterButton.swift in Sources */,
 				939C1C0E1BA0E2D00054992A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

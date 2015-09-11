@@ -19,7 +19,7 @@ class HeaderViewOne: UICollectionViewCell {
         titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
         titleLabel.textAlignment = .Center
         titleLabel.font = UIFont.systemFontOfSize(8.0)
-        titleLabel.textColor = .whiteColor()
+        titleLabel.textColor = .blackColor()
         contentView.addSubview(titleLabel)
     }
     

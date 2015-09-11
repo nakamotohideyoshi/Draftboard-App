@@ -8,35 +8,35 @@
 
 import UIKit
 
-class LayoutOne: UICollectionViewFlowLayout {
+class ContestsLayoutOne: UICollectionViewFlowLayout {
    
     var headerAttributes: Array<AnyObject!> = []
     var itemAttributes: Array<AnyObject!> = []
     var allElements: Array<AnyObject!> = []
     var contentSize: CGSize = CGSizeZero
     private var itemOffset: UIOffset = UIOffsetMake(60.0, 0.0)
-    private var rowDimensions: CGSize = CGSizeMake(60.0, 60.0)
+    private var rowDimensions: CGSize = CGSizeMake(0.0, 80.0) // width dynamic, height 80.0
     
     let kRowTypeWide: Int = 0
     let kRowTypeDefault: Int = 1
 
+    // 99% of the calculations for the layout happens here
     override func prepareLayout() {
         itemAttributes = []
         
         let rowXOffset: CGFloat = 60.0
         var yOffset: CGFloat = 0
         var sectionOffset: CGFloat = 0
-        let rowHeight: CGFloat = 50.0
+        let rowHeight: CGFloat = 80.0
         
         var contentHeight: CGFloat = 0.0
         // We'll create a dynamic layout. Each row will have a random number of columns
         // Loop through all the items and calculate the UICollectionViewLayoutAttributes for each one
-        
         rowDimensions = CGSizeMake(self.collectionView!.bounds.size.width - rowXOffset, rowHeight)
         
         // number of sections
         let numberOfSections = collectionView?.numberOfSections()
-//        var numberOfItems = 0
+        
         for index in 0..<numberOfSections! {
             
             var sectionHeight: CGFloat = 0.0
@@ -76,11 +76,8 @@ class LayoutOne: UICollectionViewFlowLayout {
         let screenRect = UIScreen.mainScreen().bounds
         let screenWidth = screenRect.size.width
         
-        
-
-        
         // Return this in collectionViewContentSize
-        contentSize = CGSizeMake(screenWidth, contentHeight + 49.0) // We add 49.00 because we have a tabbar controller.
+        contentSize = CGSizeMake(screenWidth, contentHeight) // We add 49.00 because we have a tabbar controller.
         
         print("screenWidth: \(screenWidth), contentHeight: \(contentHeight)")
     }

@@ -1,5 +1,5 @@
 //
-//  ScreenOne.swift
+//  ContestsViewController.swift
 //  
 //
 //  Created by Karl Weber on 9/9/15.
@@ -10,28 +10,36 @@ import UIKit
 
 let reuseIdentifier = "Cell"
 
-class ScreenOne: UICollectionViewController {
+class ContestsViewController: UICollectionViewController {
 
     private let reuseIdentifier = "CellOne"
     private let headerReuseIdentifier = "ContestHeader"
     private let headerViewKind = "Header"
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     private var headers: Array<AnyObject!> = []
+    var lineupButton: UIButton = UIButton()
+    var gameTypeButton: UIButton = UIButton()
     
     var contests = [ContestRow]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "ScreenOne"
+        self.setNeedsStatusBarAppearanceUpdate()
         
-        self.view.backgroundColor = .lightGrayColor()
+        self.title = "Contests"
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().translucent = false
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+        self.collectionView!.backgroundColor = .draftColorDarkBlue()
         
         self.collectionView!.delegate = self
         self.collectionView!.dataSource = self
         self.collectionView!.showsVerticalScrollIndicator = false
         
         buildTheData()
+        buildTheButtons()
 
         // Register cell classes
         self.collectionView!.registerClass(CellOne.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -72,11 +80,35 @@ class ScreenOne: UICollectionViewController {
         contests.append(group3)
     }
     
+    func buildTheButtons(){
+        
+        let width = self.view.bounds.width / 2
+        let height: CGFloat = 50.0
+        
+        lineupButton   = UIButton(frame: CGRectMake(0, 0, width, height))
+        gameTypeButton = UIButton(frame: CGRectMake(width, 0, width, height))
+        
+        lineupButton.titleLabel?.textAlignment = .Center
+        lineupButton.titleLabel?.textColor = .whiteColor()
+        lineupButton.titleLabel?.text = "Warriors Stack"
+        gameTypeButton.titleLabel?.textAlignment = .Center
+        gameTypeButton.titleLabel?.textColor = .whiteColor()
+        gameTypeButton.titleLabel?.text = "All GameTypes"
+    }
+    
+    func setLineupButtonText(text: String) {
+        lineupButton.titleLabel?.text = text
+    }
+    
+    func setgameTypeButtonText(text: String) {
+        lineupButton.titleLabel?.text = text
+    }
+    
     func totalrows() -> Int {
         
         var total = 0
         for index in 0..<self.contests.count {
-            for group in 0..<self.contests[index].items.count {
+            for _ in 0..<self.contests[index].items.count {
                 total = total + 1
             }
         }
@@ -100,7 +132,8 @@ class ScreenOne: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CellOne {
         let cell: CellOne = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CellOne
 
-        cell.titleLabel.text = "hello"
+        cell.titleLabel.text = "$100-Free Roll"
+        cell.subLabel.text = "$10 Fee / $100 Prizes"
         
         return cell
     }
@@ -113,30 +146,31 @@ class ScreenOne: UICollectionViewController {
         maybeAddAHeader(cell)
         
         // do stuff
-        cell.titleLabel.text = "9:32"
-        
-        cell.backgroundColor = .grayColor()
-        if indexPath.section % 2 == 0 {
-            cell.backgroundColor = .lightGrayColor()
-        }
+        cell.titleLabel.text = contests[indexPath.section].title
+
+        cell.backgroundColor = .whiteColor()
+//        cell.backgroundColor = .grayColor()
+//        if indexPath.section % 2 == 0 {
+//            cell.backgroundColor = .lightGrayColor()
+//        }
         
         return cell
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        let headers = getHeadersAboveTop() as! [HeaderViewOne]
+        let cutoffHeaders = getHeadersAboveTop() as! [HeaderViewOne]
         
         // iterate over each header
-        for header in headers {
+        for header in cutoffHeaders {
             
             print("header.frame.origin.y: \(header.frame.origin.y), collectionView!.contentOffset.y: \(collectionView!.contentOffset.y)")
             
             // check if the the header point x point is above the scroll y offset
-            if header.frame.origin.y < collectionView!.contentOffset.y {
+            if header.frame.origin.y < (collectionView!.contentOffset.y) {
                 
                 // adjust the titleLabel's frame to be just below the top, but never below the frame
-                var yOffset = collectionView!.contentOffset.y - header.frame.origin.y
+                var yOffset = (collectionView!.contentOffset.y) - header.frame.origin.y
                 
                 if yOffset > (header.frame.size.height - 50) {
                     yOffset = header.frame.size.height - 50

@@ -39,8 +39,9 @@ class LineupsListController: UIViewController, UITableViewDataSource, UITableVie
         let sheet = UIActionSheet()
         sheet.title = "Filter by sport:"
         sheet.delegate = self
-        let options = ["All sports", "NBA", "NFL"]
-        for (i, option) in enumerate(options) {
+        var options = ["All sports", "NBA", "NFL"]
+//        options.enumerate()
+        for (i, option) in options.enumerate() {
             let selected = (i == 0)
             let title = (selected ? "    " + option + " ✔︎" : option)
             sheet.addButtonWithTitle(title)
