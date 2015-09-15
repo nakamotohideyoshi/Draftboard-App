@@ -18,7 +18,25 @@
 		3E7860ED1B9FB216004013AB /* ContestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860EC1B9FB216004013AB /* ContestsViewController.swift */; };
 		3E7860EF1B9FB225004013AB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860EE1B9FB225004013AB /* AccountViewController.swift */; };
 		3EA8B5AB1BA7ABC1002EEC32 /* UIView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA8B5AA1BA7ABC1002EEC32 /* UIView+Anchor.swift */; };
+		5D9BA7181BA32DC30028144A /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA7171BA32DC30028144A /* Constraint.swift */; };
+		5DC589431BA1DC0E00B9D134 /* LineupCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC589421BA1DC0E00B9D134 /* LineupCard.swift */; };
+		5DC589451BA2106700B9D134 /* Restraint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC589441BA2106700B9D134 /* Restraint.framework */; };
+		5DC589461BA2106700B9D134 /* Restraint.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC589441BA2106700B9D134 /* Restraint.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5DC589471BA2106700B9D134 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5DC589461BA2106700B9D134 /* Restraint.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,6 +52,9 @@
 		3E7860EC1B9FB216004013AB /* ContestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsViewController.swift; sourceTree = "<group>"; };
 		3E7860EE1B9FB225004013AB /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		3EA8B5AA1BA7ABC1002EEC32 /* UIView+Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Anchor.swift"; sourceTree = "<group>"; };
+		5D9BA7171BA32DC30028144A /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		5DC589421BA1DC0E00B9D134 /* LineupCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCard.swift; sourceTree = "<group>"; };
+		5DC589441BA2106700B9D134 /* Restraint.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Restraint.framework; path = Carthage/Build/iOS/Restraint.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC589451BA2106700B9D134 /* Restraint.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +72,7 @@
 		3E7860B21B9FB0E7004013AB = {
 			isa = PBXGroup;
 			children = (
+				5DC589441BA2106700B9D134 /* Restraint.framework */,
 				3E7860BD1B9FB0E7004013AB /* Draftboard */,
 				3E7860BC1B9FB0E7004013AB /* Products */,
 			);
@@ -66,6 +89,7 @@
 		3E7860BD1B9FB0E7004013AB /* Draftboard */ = {
 			isa = PBXGroup;
 			children = (
+				5DC589411BA1DBDB00B9D134 /* Lineup */,
 				3E7860E01B9FB195004013AB /* AppDelegate.swift */,
 				3E7860E21B9FB1B4004013AB /* TabController.swift */,
 				3E7860E41B9FB1CF004013AB /* ResultsViewController.swift */,
@@ -78,6 +102,7 @@
 				3E7860C71B9FB0E7004013AB /* Images.xcassets */,
 				3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */,
 				3E7860BE1B9FB0E7004013AB /* Supporting Files */,
+				5D9BA7171BA32DC30028144A /* Constraint.swift */,
 			);
 			path = Draftboard;
 			sourceTree = "<group>";
@@ -90,6 +115,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5DC589411BA1DBDB00B9D134 /* Lineup */ = {
+			isa = PBXGroup;
+			children = (
+				5DC589421BA1DC0E00B9D134 /* LineupCard.swift */,
+			);
+			path = Lineup;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -100,6 +133,7 @@
 				3E7860B71B9FB0E7004013AB /* Sources */,
 				3E7860B81B9FB0E7004013AB /* Frameworks */,
 				3E7860B91B9FB0E7004013AB /* Resources */,
+				5DC589471BA2106700B9D134 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -116,7 +150,8 @@
 		3E7860B31B9FB0E7004013AB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Rally Interactive";
 				TargetAttributes = {
 					3E7860BA1B9FB0E7004013AB = {
@@ -162,10 +197,12 @@
 				3E7860E71B9FB1E2004013AB /* LineupsNavigationController.swift in Sources */,
 				3E7860E11B9FB195004013AB /* AppDelegate.swift in Sources */,
 				3E7860EF1B9FB225004013AB /* AccountViewController.swift in Sources */,
+				5DC589431BA1DC0E00B9D134 /* LineupCard.swift in Sources */,
 				3E7860E31B9FB1B4004013AB /* TabController.swift in Sources */,
 				3E7860EB1B9FB204004013AB /* LineupsDetailController.swift in Sources */,
 				3E7860E91B9FB1F4004013AB /* LineupsListController.swift in Sources */,
 				3E7860ED1B9FB216004013AB /* ContestsViewController.swift in Sources */,
+				5D9BA7181BA32DC30028144A /* Constraint.swift in Sources */,
 				3E7860E51B9FB1CF004013AB /* ResultsViewController.swift in Sources */,
 				3EA8B5AB1BA7ABC1002EEC32 /* UIView+Anchor.swift in Sources */,
 			);
@@ -206,6 +243,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -271,8 +309,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Draftboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyinteractive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -283,8 +327,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Draftboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyinteractive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

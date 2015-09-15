@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import Restraint
 
-class LineupsListController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIActionSheetDelegate {
+class LineupsListController: UIViewController, UINavigationControllerDelegate, UIActionSheetDelegate {
     
     let tableView = UITableView()
-    var lineups : [UIViewController] = []
+    var lineups : [LineupCard] = []
+    var scrollView = UIScrollView()
     
     override func loadView() {
         self.view = UIView(frame: UIScreen.mainScreen().bounds)
+        self.view.backgroundColor = .greenColor()
+        
+        // Derp UIKit
+        self.automaticallyAdjustsScrollViewInsets = false
         
         // Properties for navigation
         self.title = "Lineups"
@@ -23,55 +29,94 @@ class LineupsListController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationItem.leftBarButtonItem = filterButton
         self.navigationItem.rightBarButtonItem = addButton
         
-        // Scrollview
-        self.tableView.frame = self.view.bounds
-        self.tableView.backgroundColor = UIColor.clearColor()
-        self.tableView.pagingEnabled = true
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.tableFooterView = UIView()
-        self.view.addSubview(self.tableView)
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .blueColor()
         
-        self.addLineup()
+//        let exv = UIView()
+//        view.addSubview(exv)
+//        exv.backgroundColor = .yellowColor()
+//        exv.translatesAutoresizingMaskIntoConstraints = false
+//        exv.addConstraints(Constraint.makeEq(exv, [.Width, .Height], 200))
+//        view.addConstraints(Constraint.makeEq(exv, view, [.CenterX, .CenterY]))
+        
+//        var cs = [NSLayoutConstraint]()
+//        cs.append(Restraint(scrollView, .Top, .Equal, view, .Top).constraint())
+//        cs.append(Restraint(scrollView, .Left, .Equal, view, .Left).constraint())
+//        cs.append(Restraint(scrollView, .Right, .Equal, view, .Right).constraint())
+//        cs.append(Restraint(scrollView, .Bottom, .Equal, view, .Bottom).constraint())
+//        view.addConstraints(cs)
+        
+//        Constraint.makeEqual(scrollView, view, .Top).addToView(view)
+//        Constraint.makeEqual(scrollView, view, .Left).addToView(view)
+//        Constraint.makeEqual(scrollView, view, .Right).addToView(view)
+//        Constraint.makeEqual(scrollView, view, .Bottom).addToView(view)
+        
+        view.addConstraints(Constraint.makeEq(scrollView, view, [.Top, .Left, .Bottom, .Right]))
+        
+        lineups.append(LineupCard())
+        lineups.append(LineupCard())
+        lineups.append(LineupCard())
+        lineups.append(LineupCard())
+        lineups.append(LineupCard())
+        lineups.append(LineupCard())
+        
+        layoutCards()
     }
     
     func filterLineups() {
-        let sheet = UIActionSheet()
-        sheet.title = "Filter by sport:"
-        sheet.delegate = self
+        let sheet = UIAlertController(title: "Filter by sport:", message:"", preferredStyle: .ActionSheet)
         let options = ["All sports", "NBA", "NFL"]
-        for (i, option) in enumerate(options) {
+        
+        for (i, option) in options.enumerate() {
             let selected = (i == 0)
             let title = (selected ? "    " + option + " ✔︎" : option)
-            sheet.addButtonWithTitle(title)
+            sheet.addAction(UIAlertAction(title: title, style: .Default, handler: { (action) -> Void in
+                // TODO: select the sport
+            }))
         }
-        sheet.showInView(self.view)
+        
+        self.presentViewController(sheet, animated: true) { () -> Void in
+            // TODO: anything?
+        }
     }
     
     func addLineup() {
-        self.lineups.append(LineupsDetailController())
-        self.tableView.reloadData()
+        let lineupCard = LineupCard()
+        self.lineups.append(lineupCard)
+        layoutCards()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.lineups.count
+    func layoutCards() {
+        
+        var previousCard : LineupCard?
+        
+        for (_, card) in lineups.enumerate() {
+            
+            // Add card
+            scrollView.addSubview(card)
+            card.translatesAutoresizingMaskIntoConstraints = false
+            
+            // Set card dimensions
+            let w = Restraint(card, .Width, .Equal, scrollView, .Width).constraint()
+            let h = Restraint(card, .Height, .Equal, 200.0).constraint()
+            
+            scrollView.addConstraint(w)
+            card.addConstraint(h)
+            
+            // Position first card
+            if (previousCard == nil) {
+                let t = Restraint(card, .Top, .Equal, scrollView, .Top).constraint()
+                scrollView.addConstraint(t)
+            } else {
+                let t = Restraint(card, .Top, .Equal, previousCard!, .Bottom, 1, 20.0).constraint()
+                scrollView.addConstraint(t)
+            }
+            
+            previousCard = card
+        }
+        
+        let t = Restraint(previousCard!, .Bottom, .Equal, scrollView, .Bottom).constraint()
+        scrollView.addConstraint(t)
     }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel!.text = "Lineup name"
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vc = self.lineups[indexPath.row]
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
 }
