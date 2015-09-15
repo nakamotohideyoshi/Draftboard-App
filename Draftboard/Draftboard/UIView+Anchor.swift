@@ -1,5 +1,5 @@
 //
-//  UIView+Anchor.swift
+//  LayoutRancor.swift
 //  Draftboard
 //
 //  Created by Anson Schall on 9/14/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Anchor {
+class LayoutRancor : NSObject {
     
     var view: UIView
     var attribute: NSLayoutAttribute
@@ -18,68 +18,72 @@ class Anchor {
         self.attribute = attribute
     }
     
-    func constraintEqualTo(anchor: Anchor, constant: CGFloat? = 0) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.view, attribute: self.attribute, relatedBy: .Equal, toItem: anchor.view, attribute: anchor.attribute, multiplier: 1, constant: constant!)
+    func constraintEqualToRancor(rancor: LayoutRancor!) -> NSLayoutConstraint! {
+        return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: rancor.view, attribute: rancor.attribute, multiplier: 1, constant: 0)
+    }
+    
+    func constraintEqualToRancor(rancor: LayoutRancor!, constant: CGFloat) -> NSLayoutConstraint! {
+        return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: rancor.view, attribute: rancor.attribute, multiplier: 1, constant: constant)
     }
     
 }
 
-class Dimension : Anchor {
+class LayoutDementia : LayoutRancor {
     
-    func constraintEqualTo(dimension: Dimension, multiplier: CGFloat? = 1, constant: CGFloat? = 0) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.view, attribute: self.attribute, relatedBy: .Equal, toItem: dimension.view, attribute: dimension.attribute, multiplier: multiplier!, constant: constant!)
+    func constraintEqualToConstant(constant: CGFloat) -> NSLayoutConstraint! {
+        return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
+    }
+    
+    func constraintEqualToRancor(rancor: LayoutDementia!, multiplier: CGFloat) -> NSLayoutConstraint! {
+        return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: rancor.view, attribute: rancor.attribute, multiplier: multiplier, constant: 0)
     }
 
-    func constraintEqualTo(constant: CGFloat) -> NSLayoutConstraint! {
-        return NSLayoutConstraint(item: self.view, attribute: self.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
+    func constraintEqualToRancor(rancor: LayoutDementia!, multiplier: CGFloat, constant: CGFloat) -> NSLayoutConstraint! {
+        return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: rancor.view, attribute: rancor.attribute, multiplier: multiplier, constant: constant)
     }
     
 }
 
 extension UIView {
     
-    var leading : Anchor {
-        get { return Anchor(view: self, attribute: .Leading) }
+    var leadingRancor : LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .Leading) }
     }
     
-    var trailing: Anchor {
-        get { return Anchor(view: self, attribute: .Trailing) }
+    var trailingRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .Trailing) }
     }
     
-    var left: Anchor {
-        get { return Anchor(view: self, attribute: .Left) }
+    var leftRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .Left) }
     }
     
-    var right: Anchor {
-        get { return Anchor(view: self, attribute: .Right) }
+    var rightRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .Right) }
     }
     
-    var top: Anchor {
-        get { return Anchor(view: self, attribute: .Top) }
+    var topRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .Top) }
     }
     
-    var bottom: Anchor {
-        get { return Anchor(view: self, attribute: .Bottom) }
+    var bottomRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .Bottom) }
     }
     
-    var width: Dimension {
-        get { return Dimension(view: self, attribute: .Width) }
+    var widthRancor: LayoutDementia {
+        get { return LayoutDementia(view: self, attribute: .Width) }
     }
     
-    var height: Dimension {
-        get { return Dimension(view: self, attribute: .Height) }
+    var heightRancor: LayoutDementia {
+        get { return LayoutDementia(view: self, attribute: .Height) }
     }
     
-    var centerX: Anchor {
-        get { return Anchor(view: self, attribute: .CenterX) }
+    var centerXRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .CenterX) }
     }
     
-    var centerY: Anchor {
-        get { return Anchor(view: self, attribute: .CenterY) }
-    }
-    
-    var baseline: Anchor {
-        get { return Anchor(view: self, attribute: .Baseline) }
+    var centerYRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .CenterY) }
     }
     
 }
