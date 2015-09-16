@@ -9,7 +9,6 @@
 import UIKit
 
 class Anchor {
-    
     var view: UIView
     var attribute: NSLayoutAttribute
     
@@ -21,7 +20,6 @@ class Anchor {
     func constraintEqualTo(anchor: Anchor, constant: CGFloat? = 0) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: self.view, attribute: self.attribute, relatedBy: .Equal, toItem: anchor.view, attribute: anchor.attribute, multiplier: 1, constant: constant!)
     }
-    
 }
 
 class Dimension : Anchor {
