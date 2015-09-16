@@ -26,8 +26,8 @@
                         <constraint firstAttribute="width" constant="30" id="pqN-Ba-iHs"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha">
-                    <rect key="frame" x="0.0" y="32" width="60" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha">
+                    <rect key="frame" x="0.0" y="33" width="60" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="huW-Fe-Xz6"/>
                     </constraints>

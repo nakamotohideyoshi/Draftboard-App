@@ -67,21 +67,21 @@ class LineupsListController: UIViewController, UINavigationControllerDelegate, U
         
         // Set card dimensions
         cardView.translatesAutoresizingMaskIntoConstraints = false
-        cardView.width.constraintEqualTo(scrollView.width, multiplier: 0.9).active = true
-        cardView.centerX.constraintEqualTo(scrollView.centerX).active = true
-        cardView.height.constraintEqualTo(cardView.totalHeight).active = true
+        cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor, multiplier: 0.9).active = true
+        cardView.centerXRancor.constraintEqualToRancor(scrollView.centerXRancor).active = true
+        cardView.heightRancor.constraintEqualToConstant(cardView.totalHeight).active = true
         
         // Position card vertically
         let lastCardView = lineupCardViews.last
         if (lastCardView == nil) {
-            cardView.top.constraintEqualTo(scrollView.top).active = true
+            cardView.topRancor.constraintEqualToRancor(scrollView.topRancor).active = true
         } else {
-            cardView.top.constraintEqualTo(lastCardView!.bottom, constant: 20).active = true
+            cardView.topRancor.constraintEqualToRancor(lastCardView!.bottomRancor, constant: 20).active = true
         }
         
         // Attach to bottom of scrollView
         lastConstraint?.active = false
-        lastConstraint = cardView.bottom.constraintEqualTo(scrollView.bottom)
+        lastConstraint = cardView.bottomRancor.constraintEqualToRancor(scrollView.bottomRancor)
         lastConstraint?.active = true
         
         // Store card

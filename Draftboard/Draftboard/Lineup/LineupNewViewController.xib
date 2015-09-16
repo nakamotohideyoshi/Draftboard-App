@@ -38,8 +38,8 @@
                             </constraints>
                             <state key="normal" title="Edit"/>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Lineup 02" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4of-CN-ikV">
-                            <rect key="frame" x="60" y="33" width="77" height="24"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lineup 02" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4of-CN-ikV">
+                            <rect key="frame" x="60" y="33" width="75" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="q6F-0i-pRh"/>
                             </constraints>

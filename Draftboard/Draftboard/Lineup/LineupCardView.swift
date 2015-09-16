@@ -47,13 +47,13 @@ class LineupCardView: UIView {
         totalHeight = 66.0 + contentHeight + 48.0
         
         contentHeightConstraint.active = false
-        contentView.height.constraintEqualTo(contentHeight).active = true
+        contentView.heightRancor.constraintEqualToConstant(contentHeight).active = true
         
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.left.constraintEqualTo(self.left).active = true
-        view.top.constraintEqualTo(self.top).active = true
-        view.bottom.constraintEqualTo(self.bottom).active = true
-        view.right.constraintEqualTo(self.right).active = true
+        view.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+        view.topRancor.constraintEqualToRancor(self.topRancor).active = true
+        view.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+        view.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
         
         layoutCellViews()
     }
@@ -66,15 +66,15 @@ class LineupCardView: UIView {
             contentView.addSubview(cellView)
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
-            cellView.width.constraintEqualTo(contentView.width, multiplier: 1.0, constant: 0.0).active = true
-            cellView.height.constraintEqualTo(60).active = true
-            cellView.centerX.constraintEqualTo(contentView.centerX).active = true
+            cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor, multiplier: 1.0, constant: 0.0).active = true
+            cellView.heightRancor.constraintEqualToConstant(60).active = true
+            cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             if (lastCellView == nil) {
-                cellView.top.constraintEqualTo(contentView.top).active = true
+                cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
             }
             else {
-                cellView.top.constraintEqualTo(lastCellView!.bottom).active = true
+                cellView.topRancor.constraintEqualToRancor(lastCellView!.bottomRancor).active = true
             }
             
             lastCellView = cellView

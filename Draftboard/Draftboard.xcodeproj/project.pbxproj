@@ -16,7 +16,7 @@
 		3E7860EB1B9FB204004013AB /* LineupsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860EA1B9FB204004013AB /* LineupsDetailController.swift */; };
 		3E7860ED1B9FB216004013AB /* ContestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860EC1B9FB216004013AB /* ContestsViewController.swift */; };
 		3E7860EF1B9FB225004013AB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860EE1B9FB225004013AB /* AccountViewController.swift */; };
-		3EA8B5AB1BA7ABC1002EEC32 /* UIView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA8B5AA1BA7ABC1002EEC32 /* UIView+Anchor.swift */; };
+		3EA8B5AB1BA7ABC1002EEC32 /* LayoutRancor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */; };
 		5D6AAA5C1BA781E700CEACE7 /* LineupCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6AAA5B1BA781E700CEACE7 /* LineupCellView.xib */; };
 		5D6AAA5E1BA7870A00CEACE7 /* LineupCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6AAA5D1BA7870A00CEACE7 /* LineupCellView.swift */; };
 		5D81D36F1BA8C0BA003BEEC2 /* LineupCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D36E1BA8C0BA003BEEC2 /* LineupCardView.xib */; };
@@ -24,7 +24,6 @@
 		5D81D3731BA8D1BC003BEEC2 /* LineupEmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D81D3721BA8D1BC003BEEC2 /* LineupEmptyCellView.swift */; };
 		5D81D3751BA8D54F003BEEC2 /* LineupsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D81D3741BA8D54F003BEEC2 /* LineupsListController.swift */; };
 		5D81D3771BA8D56B003BEEC2 /* LineupNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D3761BA8D56B003BEEC2 /* LineupNewViewController.xib */; };
-		5D9BA7181BA32DC30028144A /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9BA7171BA32DC30028144A /* Constraint.swift */; };
 		5DC589431BA1DC0E00B9D134 /* LineupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC589421BA1DC0E00B9D134 /* LineupCardView.swift */; };
 		5DC589451BA2106700B9D134 /* Restraint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC589441BA2106700B9D134 /* Restraint.framework */; };
 		5DC589461BA2106700B9D134 /* Restraint.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC589441BA2106700B9D134 /* Restraint.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -56,7 +55,7 @@
 		3E7860EA1B9FB204004013AB /* LineupsDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupsDetailController.swift; sourceTree = "<group>"; };
 		3E7860EC1B9FB216004013AB /* ContestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsViewController.swift; sourceTree = "<group>"; };
 		3E7860EE1B9FB225004013AB /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		3EA8B5AA1BA7ABC1002EEC32 /* UIView+Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Anchor.swift"; sourceTree = "<group>"; };
+		3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutRancor.swift; sourceTree = "<group>"; };
 		5D6AAA5B1BA781E700CEACE7 /* LineupCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupCellView.xib; sourceTree = "<group>"; };
 		5D6AAA5D1BA7870A00CEACE7 /* LineupCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCellView.swift; sourceTree = "<group>"; };
 		5D81D36E1BA8C0BA003BEEC2 /* LineupCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupCardView.xib; sourceTree = "<group>"; };
@@ -64,7 +63,6 @@
 		5D81D3721BA8D1BC003BEEC2 /* LineupEmptyCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEmptyCellView.swift; sourceTree = "<group>"; };
 		5D81D3741BA8D54F003BEEC2 /* LineupsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupsListController.swift; sourceTree = "<group>"; };
 		5D81D3761BA8D56B003BEEC2 /* LineupNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupNewViewController.xib; sourceTree = "<group>"; };
-		5D9BA7171BA32DC30028144A /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		5DC589421BA1DC0E00B9D134 /* LineupCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCardView.swift; sourceTree = "<group>"; };
 		5DC589441BA2106700B9D134 /* Restraint.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Restraint.framework; path = Carthage/Build/iOS/Restraint.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,11 +107,10 @@
 				3E7860EA1B9FB204004013AB /* LineupsDetailController.swift */,
 				3E7860EC1B9FB216004013AB /* ContestsViewController.swift */,
 				3E7860EE1B9FB225004013AB /* AccountViewController.swift */,
-				3EA8B5AA1BA7ABC1002EEC32 /* UIView+Anchor.swift */,
+				3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */,
 				3E7860C71B9FB0E7004013AB /* Images.xcassets */,
 				3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */,
 				3E7860BE1B9FB0E7004013AB /* Supporting Files */,
-				5D9BA7171BA32DC30028144A /* Constraint.swift */,
 			);
 			path = Draftboard;
 			sourceTree = "<group>";
@@ -226,9 +223,8 @@
 				5D81D3731BA8D1BC003BEEC2 /* LineupEmptyCellView.swift in Sources */,
 				5D81D3751BA8D54F003BEEC2 /* LineupsListController.swift in Sources */,
 				3E7860ED1B9FB216004013AB /* ContestsViewController.swift in Sources */,
-				5D9BA7181BA32DC30028144A /* Constraint.swift in Sources */,
 				3E7860E51B9FB1CF004013AB /* ResultsViewController.swift in Sources */,
-				3EA8B5AB1BA7ABC1002EEC32 /* UIView+Anchor.swift in Sources */,
+				3EA8B5AB1BA7ABC1002EEC32 /* LayoutRancor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,10 +36,10 @@ class LineupCellView: UIView {
         addSubview(view)
 
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.left.constraintEqualTo(self.left).active = true
-        view.top.constraintEqualTo(self.top).active = true
-        view.bottom.constraintEqualTo(self.bottom).active = true
-        view.right.constraintEqualTo(self.right).active = true
+        view.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+        view.topRancor.constraintEqualToRancor(self.topRancor).active = true
+        view.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+        view.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
         
         bottomBorderView.hidden = true
     }
