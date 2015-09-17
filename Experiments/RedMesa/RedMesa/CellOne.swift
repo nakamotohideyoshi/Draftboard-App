@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CellOne: UICollectionViewCell {
+class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
 
     var titleLabel: UILabel = UILabel()
     var subLabel: UILabel = UILabel()
@@ -18,6 +18,15 @@ class CellOne: UICollectionViewCell {
     let veritcalMargins: CGFloat = 20.0
     let fontSize: CGFloat = 13.0
     let subFontSize: CGFloat = 13.0
+    
+    var squareView: UIView = UIView()
+    var leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer()
+    var rightSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer()
+    
+    var buttonsExposed: Bool = false
+    
+    var parentCollectionView: UICollectionView?
+    var currentIndexPath: NSIndexPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +51,30 @@ class CellOne: UICollectionViewCell {
         lineView.frame = CGRectMake(leftMargin, contentView.frame.height - 1, lineWidth, 0.5)
         lineView.backgroundColor = .draftColorDividerLightBlue()
         contentView.addSubview(lineView)
+        
+        squareView.backgroundColor = .blueColor()
+        squareView.frame = CGRectMake(contentView.frame.size.width, contentView.frame.origin.y, contentView.frame.size.width, contentView.frame.size.height)
+        contentView.addSubview(squareView)
+        
+        // react to swiping.
+        leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "didSwipeLeft:")
+        leftSwipeGestureRecognizer.direction = .Left
+        leftSwipeGestureRecognizer.delegate = self
+        self.contentView.addGestureRecognizer(leftSwipeGestureRecognizer)
+        
+        
+        rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "didSwipeRight:")
+        rightSwipeGestureRecognizer.direction = .Right
+        rightSwipeGestureRecognizer.delegate = self
+        self.contentView.addGestureRecognizer(rightSwipeGestureRecognizer)
+        
+//        [self.tapGestureRecognizer requireGestureRecognizerToFail:_containingTableView.panGestureRecognizer];
+    }
+    
+    func setContainingCollectionView(collectionView: UICollectionView) {
+        self.parentCollectionView = collectionView
+//        let parentRecognizer: UIPanGestureRecognizer = collectionView.panGestureRecognizer
+//        swiperGestureRecognizer.requireGestureRecognizerToFail(parentRecognizer)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -53,6 +86,29 @@ class CellOne: UICollectionViewCell {
         titleLabel.frame = CGRectMake(leftMargin, veritcalMargins, self.bounds.size.width, 16.0)
         subLabel.frame = CGRectMake(leftMargin, self.bounds.size.height-veritcalMargins-fontSize, self.bounds.size.width, 13.0)
         lineView.frame = CGRectMake(leftMargin, self.bounds.size.height - 1, lineWidth, 0.5)
+        
+        if buttonsExposed {
+            squareView.frame = CGRectMake(contentView.frame.origin.x, contentView.frame.origin.y, contentView.frame.size.width, contentView.frame.size.height)
+        } else {
+            squareView.frame = CGRectMake(contentView.frame.size.width, contentView.frame.origin.y, contentView.frame.size.width, contentView.frame.size.height)
+        }
     }
     
+    func didSwipeLeft(gestureRecognizer: UISwipeGestureRecognizer) {
+        if buttonsExposed == false {
+            buttonsExposed = true
+            squareView.frame = CGRectMake(contentView.frame.origin.x, contentView.frame.origin.y, contentView.frame.size.width, contentView.frame.size.height)
+        }
+    }
+    
+    func didSwipeRight(gestureRecognizer: UISwipeGestureRecognizer) {
+        if buttonsExposed {
+            buttonsExposed = false
+            squareView.frame = CGRectMake(contentView.frame.size.width, contentView.frame.origin.y, contentView.frame.size.width, contentView.frame.size.height)
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("touches ended")
+    }
 }

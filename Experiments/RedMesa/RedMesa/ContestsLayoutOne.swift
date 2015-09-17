@@ -13,15 +13,18 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
     var headerAttributes: Array<AnyObject!> = []
     var itemAttributes: Array<AnyObject!> = []
     var allElements: Array<AnyObject!> = []
+    var filterAttributes: Array<AnyObject!> = []
     var contentSize: CGSize = CGSizeZero
     private var itemOffset: UIOffset = UIOffsetMake(60.0, 0.0)
     private var rowDimensions: CGSize = CGSizeMake(0.0, 80.0) // width dynamic, height 80.0
-    
     let kRowTypeWide: Int = 0
     let kRowTypeDefault: Int = 1
+    private let headerViewKind = "Header"
+    private let FilterViewKind = "Filter"
 
     // 99% of the calculations for the layout happens here
     override func prepareLayout() {
+        self.scrollDirection = .Vertical
         itemAttributes = []
         
         let rowXOffset: CGFloat = 60.0
@@ -33,6 +36,22 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
         // We'll create a dynamic layout. Each row will have a random number of columns
         // Loop through all the items and calculate the UICollectionViewLayoutAttributes for each one
         rowDimensions = CGSizeMake(self.collectionView!.bounds.size.width - rowXOffset, rowHeight)
+        
+        let filterwidth = self.collectionView!.bounds.size.width / 2
+        filterAttributes = []
+        
+        let filterIndexPathOne = NSIndexPath(forItem: 0, inSection: 0)
+        let filterAttributesOne = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: "Filter", withIndexPath: filterIndexPathOne)
+        filterAttributesOne.zIndex = 2
+        
+        let filterIndexPathTwo = NSIndexPath(forItem: 0, inSection: 1)
+        let filterAttributesTwo = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: "Filter", withIndexPath: filterIndexPathTwo)
+        filterAttributesTwo.zIndex = 2
+        
+        // increase the height here
+        yOffset = yOffset + 50.0
+        contentHeight = yOffset
+        sectionOffset = yOffset
         
         // number of sections
         let numberOfSections = collectionView?.numberOfSections()
@@ -66,9 +85,15 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
             sectionOffset = sectionOffset + sectionHeight
             contentHeight = contentHeight + sectionHeight
             sectionHeight = 0
-            
-            print("sectionOffset: \(sectionOffset)")
         }
+
+        // recalculate the buttons frames to fool the collectionview into always including it
+        filterAttributesOne.frame = CGRectIntegral(CGRectMake(0.0, 0.0, filterwidth, 50.0))
+        filterAttributes.append(filterAttributesOne)
+        allElements.append(filterAttributesOne)
+        filterAttributesTwo.frame = CGRectIntegral(CGRectMake(filterwidth, 0.0, filterwidth, 50.0))
+        filterAttributes.append(filterAttributesTwo)
+        allElements.append(filterAttributesTwo)
         
         // the contentSize Determines how it scrolls
         // so if its width is the same as the screen
@@ -78,8 +103,6 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
         
         // Return this in collectionViewContentSize
         contentSize = CGSizeMake(screenWidth, contentHeight) // We add 49.00 because we have a tabbar controller.
-        
-        print("screenWidth: \(screenWidth), contentHeight: \(contentHeight)")
     }
     
     override func collectionViewContentSize() -> CGSize {
@@ -87,17 +110,32 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes {
-        print("row: \(indexPath.row)")
         return itemAttributes[indexPath.row] as! UICollectionViewLayoutAttributes
     }
     
     override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes {
-        return headerAttributes[indexPath.section] as! UICollectionViewLayoutAttributes
+        
+        if elementKind == FilterViewKind {
+            return filterAttributes[indexPath.section] as! UICollectionViewLayoutAttributes
+        } else {
+            // headerViewKind
+            return headerAttributes[indexPath.section] as! UICollectionViewLayoutAttributes
+        }
     }
     
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return allElements.filter({
             (includedElement: AnyObject!) -> Bool in
+            
+            if let kind = includedElement.representedElementKind {
+//                print("kind: \(kind)")
+                if kind == FilterViewKind {
+                    let offset = self.collectionView!.contentOffset.y
+                    let filterAttributes = includedElement as! UICollectionViewLayoutAttributes
+                    filterAttributes.frame = CGRectMake(filterAttributes.frame.origin.x, offset, filterAttributes.frame.width, filterAttributes.frame.height)
+                }
+            }
+            
             if includedElement.frame != nil {
                 return CGRectIntersectsRect(rect, includedElement.frame)
             }
@@ -105,13 +143,22 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
         }) as? [UICollectionViewLayoutAttributes]
     }
     
-    // layoutAttributesForSupplementaryViewOfKind:atIndexPath:
-    
-    // layoutAttributesForDecorationViewOfKind:atIndexPath:
-    
-    // shouldInvalidateLayoutForBoundsChange:
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
-        return false
+        
+        var invalidate = false
+        
+        for filtr in filterAttributes {
+            if filtr.frame != nil {
+                invalidate = !CGRectIntersectsRect(newBounds, filtr.frame)
+            }
+        }
+        return invalidate
+    }
+    
+    override func invalidationContextForBoundsChange(newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+        let context = super.invalidationContextForBoundsChange(newBounds)
+        context.invalidatedSupplementaryIndexPaths
+        return context
     }
     
     // Layout Utility
