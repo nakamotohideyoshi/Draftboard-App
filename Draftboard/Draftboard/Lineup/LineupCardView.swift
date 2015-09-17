@@ -66,9 +66,13 @@ class LineupCardView: UIView {
             contentView.addSubview(cellView)
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
-            cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor, multiplier: 1.0, constant: 0.0).active = true
+            cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
             cellView.heightRancor.constraintEqualToConstant(60).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
+            
+            cellView.onTap = {(target: AnyObject) -> () in
+                print("wtfffffff")
+            }
             
             if (lastCellView == nil) {
                 cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true

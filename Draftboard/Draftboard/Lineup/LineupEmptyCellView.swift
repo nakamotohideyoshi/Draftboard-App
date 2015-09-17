@@ -10,11 +10,11 @@ import UIKit
 
 @IBDesignable class LineupEmptyCellView: UIView {
 
-    @IBOutlet weak var abbrvLabel: UILabel!
+    @IBOutlet weak var abbrvLabel: DraftboardLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var bottomBorderView: UIView!
     @IBOutlet weak var topBorderView: UIView!
-    @IBOutlet weak var positionLabel: UILabel!
+    @IBOutlet weak var positionLabel: DraftboardLabel!
     
     var view : UIView!
     
@@ -31,7 +31,6 @@ import UIKit
     func setup() {
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "LineupEmptyCellView", bundle: bundle)
-        
         view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
         addSubview(view)
         
