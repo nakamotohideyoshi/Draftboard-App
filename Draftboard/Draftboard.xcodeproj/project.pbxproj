@@ -23,6 +23,7 @@
 		5D6FB0281BAA4C890071A753 /* DraftboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FB0271BAA4C890071A753 /* DraftboardView.swift */; };
 		5D6FB02A1BAA4C9A0071A753 /* DraftboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FB0291BAA4C9A0071A753 /* DraftboardButton.swift */; };
 		5D6FB02C1BAA676E0071A753 /* DraftboardButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6FB02B1BAA676E0071A753 /* DraftboardButton.xib */; };
+		5D6FB0301BAA837D0071A753 /* DraftboardNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6FB02F1BAA837D0071A753 /* DraftboardNibView.swift */; };
 		5D81D36F1BA8C0BA003BEEC2 /* LineupCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D36E1BA8C0BA003BEEC2 /* LineupCardView.xib */; };
 		5D81D3711BA8D1AD003BEEC2 /* LineupEmptyCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D3701BA8D1AD003BEEC2 /* LineupEmptyCellView.xib */; };
 		5D81D3731BA8D1BC003BEEC2 /* LineupEmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D81D3721BA8D1BC003BEEC2 /* LineupEmptyCellView.swift */; };
@@ -68,6 +69,7 @@
 		5D6FB0271BAA4C890071A753 /* DraftboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardView.swift; sourceTree = "<group>"; };
 		5D6FB0291BAA4C9A0071A753 /* DraftboardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardButton.swift; sourceTree = "<group>"; };
 		5D6FB02B1BAA676E0071A753 /* DraftboardButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardButton.xib; sourceTree = "<group>"; };
+		5D6FB02F1BAA837D0071A753 /* DraftboardNibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardNibView.swift; sourceTree = "<group>"; };
 		5D81D36E1BA8C0BA003BEEC2 /* LineupCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupCardView.xib; sourceTree = "<group>"; };
 		5D81D3701BA8D1AD003BEEC2 /* LineupEmptyCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupEmptyCellView.xib; sourceTree = "<group>"; };
 		5D81D3721BA8D1BC003BEEC2 /* LineupEmptyCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEmptyCellView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				5D6FB0271BAA4C890071A753 /* DraftboardView.swift */,
 				5D6FB0291BAA4C9A0071A753 /* DraftboardButton.swift */,
 				5D6FB02B1BAA676E0071A753 /* DraftboardButton.xib */,
+				5D6FB02F1BAA837D0071A753 /* DraftboardNibView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				3E7860E11B9FB195004013AB /* AppDelegate.swift in Sources */,
 				3E7860EF1B9FB225004013AB /* AccountViewController.swift in Sources */,
 				5DC589431BA1DC0E00B9D134 /* LineupCardView.swift in Sources */,
+				5D6FB0301BAA837D0071A753 /* DraftboardNibView.swift in Sources */,
 				5DEFAE021BA9C48E00A9AFC1 /* DraftboardLabel.swift in Sources */,
 				3E7860E31B9FB1B4004013AB /* TabController.swift in Sources */,
 				3E7860EB1B9FB204004013AB /* LineupsDetailController.swift in Sources */,

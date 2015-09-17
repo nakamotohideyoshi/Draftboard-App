@@ -9,7 +9,7 @@
 import UIKit
 import Restraint
 
-class LineupCardView: UIView {
+class LineupCardView: DraftboardNibView {
     
     let cellReuseId = "lineup-card-cell"
     
@@ -21,45 +21,21 @@ class LineupCardView: UIView {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
     
-    var view: UIView!
-    
     let itemCount = Int(arc4random_uniform(12)) + 1
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        setup()
-    }
-    
-    func setup() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let nib = UINib(nibName: "LineupCardView", bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
-        addSubview(view)
-        
+    override func awakeFromNib() {
         contentHeight = (CGFloat(itemCount + 1) * 60.0)
         totalHeight = 66.0 + contentHeight + 48.0
         
         contentHeightConstraint.active = false
         contentView.heightRancor.constraintEqualToConstant(contentHeight).active = true
         
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
-        view.topRancor.constraintEqualToRancor(self.topRancor).active = true
-        view.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        view.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
-        
         layoutCellViews()
     }
     
     func layoutCellViews() {
-        
         var lastCellView: LineupCellView?
         for _ in 0...itemCount {
             let cellView = LineupCellView()
@@ -71,7 +47,7 @@ class LineupCardView: UIView {
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             cellView.onTap = {(target: AnyObject) -> () in
-                print("wtfffffff")
+                print("cell tap")
             }
             
             if (lastCellView == nil) {

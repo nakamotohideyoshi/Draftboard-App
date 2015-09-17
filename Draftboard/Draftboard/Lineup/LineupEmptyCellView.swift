@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class LineupEmptyCellView: UIView {
+@IBDesignable class LineupEmptyCellView: DraftboardNibView {
 
     @IBOutlet weak var abbrvLabel: DraftboardLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -16,30 +16,7 @@ import UIKit
     @IBOutlet weak var topBorderView: UIView!
     @IBOutlet weak var positionLabel: DraftboardLabel!
     
-    var view : UIView!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        setup()
-    }
-    
-    func setup() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let nib = UINib(nibName: "LineupEmptyCellView", bundle: bundle)
-        view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
-        addSubview(view)
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
-        view.topRancor.constraintEqualToRancor(self.topRancor).active = true
-        view.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        view.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
-        
+    override func awakeFromNib() {
         bottomBorderView.hidden = true
     }
     

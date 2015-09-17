@@ -277,6 +277,11 @@
                                 <constraint firstAttribute="width" constant="50" id="2Jq-yb-c6y"/>
                                 <constraint firstAttribute="height" constant="24" id="TzT-qn-j8W"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyv-eW-Nx5" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="255" y="33" width="50" height="24"/>
@@ -285,6 +290,11 @@
                                 <constraint firstAttribute="width" constant="50" id="GQo-cC-Jt9"/>
                                 <constraint firstAttribute="height" constant="24" id="YoR-2o-9LJ"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <constraints>

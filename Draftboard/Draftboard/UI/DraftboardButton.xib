@@ -15,11 +15,6 @@
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <color key="textColor" red="0.15686274510000001" green="0.7725490196" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -38,7 +33,7 @@
                     <exclude reference="RwE-k9-73r"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="220.5" y="132.5"/>
+            <point key="canvasLocation" x="-92.5" y="-194.5"/>
         </view>
     </objects>
 </document>

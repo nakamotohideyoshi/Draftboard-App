@@ -9,33 +9,10 @@
 import UIKit
 
 @IBDesignable
-class DraftboardButton: UIView {
-
-    var view : UIView!
+class DraftboardButton: DraftboardNibView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        setup()
-    }
-    
-    func setup(){
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let nib = UINib(nibName: "DraftboardButton", bundle: bundle)
-        view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
-        addSubview(view)
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
-        view.topRancor.constraintEqualToRancor(self.topRancor).active = true
-        view.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        view.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
-        
-        self.layer.borderColor = UIColor.greenColor().CGColor
+    override func awakeFromNib() {
+        self.layer.borderColor = UIColor.redColor().CGColor
         self.layer.borderWidth = 2.0
         self.layer.cornerRadius = 2.0
     }

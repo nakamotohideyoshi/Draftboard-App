@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LineupCellView: UIView {
+class LineupCellView: DraftboardNibView {
     
     @IBOutlet weak var topBorderView: UIView!
     @IBOutlet weak var bottomBorderView: UIView!
@@ -24,42 +24,17 @@ class LineupCellView: UIView {
     let tapRecognizer = UITapGestureRecognizer()
     
     let selectedView = UIView()
-    var view : UIView!
     var selected = false
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        setup()
-    }
-    
-    func setup() {
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let nib = UINib(nibName: "LineupCellView", bundle: bundle)
-        
-        self.backgroundColor = .whiteColor()
-        view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
-        addSubview(view)
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
-        view.topRancor.constraintEqualToRancor(self.topRancor).active = true
-        view.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        view.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
-        view.backgroundColor = .clearColor()
-        
+
+    override func awakeFromNib() {
         selectedView.frame = self.bounds
         selectedView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         selectedView.backgroundColor = .yellowColor()
         selectedView.hidden = true
         selectedView.alpha = 0
         
-        self.addSubview(selectedView)
-        self.sendSubviewToBack(selectedView)
+        nibView.addSubview(selectedView)
+        nibView.sendSubviewToBack(selectedView)
         
         tapRecognizer.addTarget(self, action: "handleTap:")
         self.addGestureRecognizer(tapRecognizer)
