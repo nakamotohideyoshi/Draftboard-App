@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if window == nil {
             window = UIWindow()
         }
+        window!.makeKeyAndVisible()
+        window!.frame = UIScreen.mainScreen().bounds
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
@@ -38,14 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let attributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().titleTextAttributes = attributes
         
-        
         // Add all screens to the Tab Bar
         tabber.setViewControllers([contestsNavigationController], animated: true)
         
         // setup window
         window!.rootViewController = tabber
-        window!.makeKeyAndVisible()
-        
+
         return true
     }
 

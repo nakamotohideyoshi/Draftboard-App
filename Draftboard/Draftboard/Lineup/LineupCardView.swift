@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Restraint
+
 
 class LineupCardView: DraftboardNibView {
     

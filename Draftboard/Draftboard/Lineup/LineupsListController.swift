@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Restraint
 
 class LineupsListController: UIViewController, UINavigationControllerDelegate, UIActionSheetDelegate {
     

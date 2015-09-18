@@ -37,4 +37,10 @@ class ContestFilterButton: UICollectionViewCell {
         filterButton.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, 50.0)
     }
 
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.applyLayoutAttributes(layoutAttributes)
+        contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+        self.layoutSubviews()
+    }
+    
 }

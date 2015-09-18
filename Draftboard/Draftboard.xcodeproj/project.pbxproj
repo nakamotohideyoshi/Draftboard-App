@@ -30,8 +30,6 @@
 		5D81D3751BA8D54F003BEEC2 /* LineupsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D81D3741BA8D54F003BEEC2 /* LineupsListController.swift */; };
 		5D81D3771BA8D56B003BEEC2 /* LineupNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D3761BA8D56B003BEEC2 /* LineupNewViewController.xib */; };
 		5DC589431BA1DC0E00B9D134 /* LineupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC589421BA1DC0E00B9D134 /* LineupCardView.swift */; };
-		5DC589451BA2106700B9D134 /* Restraint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC589441BA2106700B9D134 /* Restraint.framework */; };
-		5DC589461BA2106700B9D134 /* Restraint.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC589441BA2106700B9D134 /* Restraint.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5DEFAE021BA9C48E00A9AFC1 /* DraftboardLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEFAE011BA9C48E00A9AFC1 /* DraftboardLabel.swift */; };
 		5DEFAE041BAA0B4000A9AFC1 /* LineupNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEFAE031BAA0B4000A9AFC1 /* LineupNewViewController.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +41,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5DC589461BA2106700B9D134 /* Restraint.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,7 +73,6 @@
 		5D81D3741BA8D54F003BEEC2 /* LineupsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupsListController.swift; sourceTree = "<group>"; };
 		5D81D3761BA8D56B003BEEC2 /* LineupNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupNewViewController.xib; sourceTree = "<group>"; };
 		5DC589421BA1DC0E00B9D134 /* LineupCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCardView.swift; sourceTree = "<group>"; };
-		5DC589441BA2106700B9D134 /* Restraint.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Restraint.framework; path = Carthage/Build/iOS/Restraint.framework; sourceTree = "<group>"; };
 		5DEFAE011BA9C48E00A9AFC1 /* DraftboardLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardLabel.swift; sourceTree = "<group>"; };
 		5DEFAE031BAA0B4000A9AFC1 /* LineupNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupNewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DC589451BA2106700B9D134 /* Restraint.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +91,6 @@
 		3E7860B21B9FB0E7004013AB = {
 			isa = PBXGroup;
 			children = (
-				5DC589441BA2106700B9D134 /* Restraint.framework */,
 				3E7860BD1B9FB0E7004013AB /* Draftboard */,
 				3E7860BC1B9FB0E7004013AB /* Products */,
 			);

@@ -21,32 +21,44 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
     let kRowTypeDefault: Int = 1
     private let headerViewKind = "Header"
     private let FilterViewKind = "Filter"
+    
+    private var oldBounds: CGRect?
 
     // 99% of the calculations for the layout happens here
     override func prepareLayout() {
+        
         self.scrollDirection = .Vertical
         itemAttributes = []
+        allElements = []
+        filterAttributes = []
         
         let rowXOffset: CGFloat = 60.0
         var yOffset: CGFloat = 0
         var sectionOffset: CGFloat = 0
         let rowHeight: CGFloat = 80.0
-        
         var contentHeight: CGFloat = 0.0
+        
         // We'll create a dynamic layout. Each row will have a random number of columns
         // Loop through all the items and calculate the UICollectionViewLayoutAttributes for each one
         rowDimensions = CGSizeMake(self.collectionView!.bounds.size.width - rowXOffset, rowHeight)
         
         let filterwidth = self.collectionView!.bounds.size.width / 2
-        filterAttributes = []
+        print("filterwidth: \(filterwidth)")
         
+        // recalculate the buttons frames to fool the collectionview into always including it
         let filterIndexPathOne = NSIndexPath(forItem: 0, inSection: 0)
         let filterAttributesOne = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: "Filter", withIndexPath: filterIndexPathOne)
         filterAttributesOne.zIndex = 2
+        filterAttributesOne.frame = CGRectIntegral(CGRectMake(0.0, 0.0, filterwidth, 50.0))
+        filterAttributes.append(filterAttributesOne)
+        allElements.append(filterAttributesOne)
         
         let filterIndexPathTwo = NSIndexPath(forItem: 0, inSection: 1)
         let filterAttributesTwo = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: "Filter", withIndexPath: filterIndexPathTwo)
         filterAttributesTwo.zIndex = 2
+        filterAttributesTwo.frame = CGRectIntegral(CGRectMake(filterwidth, 0.0, filterwidth, 50.0))
+        filterAttributes.append(filterAttributesTwo)
+        allElements.append(filterAttributesTwo)
         
         // increase the height here
         yOffset = yOffset + 50.0
@@ -87,13 +99,7 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
             sectionHeight = 0
         }
 
-        // recalculate the buttons frames to fool the collectionview into always including it
-        filterAttributesOne.frame = CGRectIntegral(CGRectMake(0.0, 0.0, filterwidth, 50.0))
-        filterAttributes.append(filterAttributesOne)
-        allElements.append(filterAttributesOne)
-        filterAttributesTwo.frame = CGRectIntegral(CGRectMake(filterwidth, 0.0, filterwidth, 50.0))
-        filterAttributes.append(filterAttributesTwo)
-        allElements.append(filterAttributesTwo)
+
         
         // the contentSize Determines how it scrolls
         // so if its width is the same as the screen
@@ -103,6 +109,7 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
         
         // Return this in collectionViewContentSize
         contentSize = CGSizeMake(screenWidth, contentHeight) // We add 49.00 because we have a tabbar controller.
+        oldBounds = screenRect
     }
     
     override func collectionViewContentSize() -> CGSize {
@@ -124,18 +131,17 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        
         return allElements.filter({
             (includedElement: AnyObject!) -> Bool in
             
             if let kind = includedElement.representedElementKind {
-//                print("kind: \(kind)")
                 if kind == FilterViewKind {
                     let offset = self.collectionView!.contentOffset.y
                     let filterAttributes = includedElement as! UICollectionViewLayoutAttributes
                     filterAttributes.frame = CGRectMake(filterAttributes.frame.origin.x, offset, filterAttributes.frame.width, filterAttributes.frame.height)
                 }
             }
-            
             if includedElement.frame != nil {
                 return CGRectIntersectsRect(rect, includedElement.frame)
             }
@@ -143,34 +149,18 @@ class ContestsLayoutOne: UICollectionViewFlowLayout {
         }) as? [UICollectionViewLayoutAttributes]
     }
     
+    // called a ton when we scroll
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
-        
         var invalidate = false
-        
         for filtr in filterAttributes {
             if filtr.frame != nil {
                 invalidate = !CGRectIntersectsRect(newBounds, filtr.frame)
             }
         }
+        if !CGRectEqualToRect(self.oldBounds!, newBounds) {
+            invalidate = true
+        }
         return invalidate
-    }
-    
-    override func invalidationContextForBoundsChange(newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
-        let context = super.invalidationContextForBoundsChange(newBounds)
-        context.invalidatedSupplementaryIndexPaths
-        return context
-    }
-    
-    // Layout Utility
-    func sizeForItemWithRowType(columnType: Int) -> CGSize {
-        if columnType == kRowTypeDefault {
-            return CGSizeMake(self.collectionView!.bounds.size.width - itemOffset.horizontal, self.collectionView!.bounds.size.width*0.4)
-        }
-        
-        if columnType == kRowTypeWide {
-            return CGSizeMake(self.collectionView!.bounds.size.width*0.66 - itemOffset.horizontal, self.collectionView!.bounds.size.width*0.4)
-        }
-        return CGSizeZero
     }
 
 }

@@ -88,10 +88,10 @@ class ContestsViewController: UICollectionViewController {
         contests.append(group3)
     }
     
-//    func buildTheButtons(){
-//        filters.append("Warriors Stack")
-//        filters.append("All GameTypes")
-//    }
+    func buildTheButtons(){
+        filters.append("Warriors Stack")
+        filters.append("All GameTypes")
+    }
     
     func buildTheLineups() {
         availableLineups.append("Warriors Stack")
@@ -132,20 +132,20 @@ class ContestsViewController: UICollectionViewController {
         cell.titleLabel.text = "$100-Free Roll"
         cell.subLabel.text = "$10 Fee / $100 Prizes"
         cell.currentIndexPath = indexPath
-        cell.setContainingCollectionView(self.collectionView!)
+        cell.setContainingCollectionView(self)
         
         return cell
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        print("Supplementary kind: \(kind)")
-        
         if kind == FilterViewKind {
 
             let cell = collectionView.dequeueReusableSupplementaryViewOfKind(FilterViewKind, withReuseIdentifier: filterReuseIdentifier, forIndexPath: indexPath) as! ContestFilterButton
             maybeAddAFilter(cell)
             
-            if indexPath.section == 0 { 
+            cell.filterButton.removeTarget(nil, action: nil, forControlEvents: .TouchUpInside)
+            
+            if indexPath.section == 0 {
                 cell.filterButton.addTarget(self, action: "filterLineups:", forControlEvents: .TouchUpInside)
                 cell.filterButton.setTitle(availableLineups[chosenLineup], forState: .Normal)
             } else {
@@ -163,7 +163,7 @@ class ContestsViewController: UICollectionViewController {
         }
     }
     
-    // on tapping the filters
+    // On tapping the filters
     func filterLineups(sender: UIButton!) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
@@ -184,30 +184,35 @@ class ContestsViewController: UICollectionViewController {
         self.presentViewController(alert, animated: true, completion: {})
     }
     
-    // on tapping the filters
+    // On tapping the filters
     func filterGameTypes(sender: UIButton!) {
-        
+        print("FILTER GAMETYPES!!!")
     }
     
-    // on scroll
+    // handle the presentation of the detail view
+    func userDidTapOnRowWithIndexPath(indexPath: NSIndexPath) {
+        print("user did tap on row with index path called: \(indexPath.section, indexPath.row)")
+        
+        let contestsDetail = ContestsDetailViewController()
+//        self.presentViewController(contestsDetail, animated: true, completion: nil)
+        self.navigationController?.pushViewController(contestsDetail, animated: true)
+    }
+    
+    // On scroll
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-//        self.collectionViewLayout.invalidateLayout()
-        
-            //invalidateSupplementaryElementsOfKind("Filter", atIndexPaths: [NSIndexPath(forRow: 0, inSection: 0),NSIndexPath(forRow: 0, inSection: 1)])
         
         let cutoffHeaders = getHeadersAboveTop() as! [HeaderViewOne]
         
         // iterate over each header
         for header in cutoffHeaders {
             // check if the the header point x point is above the scroll y offset
-            if header.frame.origin.y  < (collectionView!.contentOffset.y + 50) {
+            if header.frame.origin.y < (collectionView!.contentOffset.y + 50) {
                 
                 // adjust the titleLabel's frame to be just below the top, but never below the frame
                 // also just below the other buttons
                 var yOffset = (collectionView!.contentOffset.y) - header.frame.origin.y + 50
                 
-                if yOffset > (header.frame.size.height ) {
+                if yOffset > (header.frame.size.height) {
                     yOffset = header.frame.size.height
                 }
                 
@@ -222,6 +227,17 @@ class ContestsViewController: UICollectionViewController {
             let filterthingy = filterView as! ContestFilterButton
             filterthingy.frame = CGRectMake(filterthingy.frame.origin.x, collectionView!.contentOffset.y, filterthingy.frame.size.width, filterthingy.frame.size.height)
         }
+    }
+    
+    // We might not even need this.
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        self.collectionView!.collectionViewLayout.invalidateLayout()
+        coordinator.animateAlongsideTransition(nil, completion: {
+            context in
+            self.collectionView!.collectionViewLayout.invalidateLayout()
+            self.collectionView!.reloadData()
+        })
     }
     
     /*

@@ -25,7 +25,7 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
     
     var buttonsExposed: Bool = false
     
-    var parentCollectionView: UICollectionView?
+    var parentCollectionView: ContestsViewController?
     var currentIndexPath: NSIndexPath?
     
     override init(frame: CGRect) {
@@ -66,12 +66,10 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
         rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "didSwipeRight:")
         rightSwipeGestureRecognizer.direction = .Right
         rightSwipeGestureRecognizer.delegate = self
-        self.contentView.addGestureRecognizer(rightSwipeGestureRecognizer)
-        
-//        [self.tapGestureRecognizer requireGestureRecognizerToFail:_containingTableView.panGestureRecognizer];
+        self.contentView.addGestureRecognizer(rightSwipeGestureRecognizer)        
     }
     
-    func setContainingCollectionView(collectionView: UICollectionView) {
+    func setContainingCollectionView(collectionView: ContestsViewController) {
         self.parentCollectionView = collectionView
 //        let parentRecognizer: UIPanGestureRecognizer = collectionView.panGestureRecognizer
 //        swiperGestureRecognizer.requireGestureRecognizerToFail(parentRecognizer)
@@ -82,6 +80,8 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
     }
     
     override func layoutSubviews() {
+//        print("layoutSubViewsCalled: width:\(contentView.frame.size.width), height:\(contentView.frame.size.height)")
+        
         lineWidth = contentView.frame.width - leftMargin
         titleLabel.frame = CGRectMake(leftMargin, veritcalMargins, self.bounds.size.width, 16.0)
         subLabel.frame = CGRectMake(leftMargin, self.bounds.size.height-veritcalMargins-fontSize, self.bounds.size.width, 13.0)
@@ -109,6 +109,13 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("touches ended")
+        self.parentCollectionView!.userDidTapOnRowWithIndexPath(currentIndexPath!)
     }
+    
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.applyLayoutAttributes(layoutAttributes)
+        contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+        self.layoutSubviews()
+    }
+    
 }

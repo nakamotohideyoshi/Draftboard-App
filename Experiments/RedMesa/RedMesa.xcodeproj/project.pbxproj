@@ -20,7 +20,6 @@
 		939C1C381BA0E5110054992A /* ContestRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C371BA0E5110054992A /* ContestRow.swift */; };
 		939C1C3A1BA0E5A60054992A /* HeaderViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C391BA0E5A60054992A /* HeaderViewOne.swift */; };
 		939C1C3C1BA0E6860054992A /* CellOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C3B1BA0E6860054992A /* CellOne.swift */; };
-		93CBE68B1BA788AA006FB76C /* ContestsLayoutInvalidationContextOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CBE68A1BA788AA006FB76C /* ContestsLayoutInvalidationContextOne.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 		939C1C371BA0E5110054992A /* ContestRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestRow.swift; sourceTree = "<group>"; };
 		939C1C391BA0E5A60054992A /* HeaderViewOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewOne.swift; sourceTree = "<group>"; };
 		939C1C3B1BA0E6860054992A /* CellOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellOne.swift; sourceTree = "<group>"; };
-		93CBE68A1BA788AA006FB76C /* ContestsLayoutInvalidationContextOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsLayoutInvalidationContextOne.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +167,6 @@
 			children = (
 				939C1C331BA0E4010054992A /* ContestsViewController.swift */,
 				939C1C351BA0E45E0054992A /* ContestsLayoutOne.swift */,
-				93CBE68A1BA788AA006FB76C /* ContestsLayoutInvalidationContextOne.swift */,
 				939C1C3E1BA0ECD20054992A /* ContestsViews */,
 				939C1C3D1BA0ECC50054992A /* ContestsModels */,
 				9327371D1BAB2B5300198AA9 /* ContestsDetailViewController */,
@@ -285,7 +282,6 @@
 				932C56231BA34E3A00731E3E /* UIColor+Extension.swift in Sources */,
 				939C1C361BA0E45E0054992A /* ContestsLayoutOne.swift in Sources */,
 				93364B6B1BA3961100A86645 /* ContestFilterButton.swift in Sources */,
-				93CBE68B1BA788AA006FB76C /* ContestsLayoutInvalidationContextOne.swift in Sources */,
 				9327371C1BAB2B4D00198AA9 /* ContestsDetailViewController.swift in Sources */,
 				939C1C0E1BA0E2D00054992A /* AppDelegate.swift in Sources */,
 			);
