@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9327371A1BAA054C00198AA9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932737191BAA054C00198AA9 /* QuartzCore.framework */; };
+		9327371C1BAB2B4D00198AA9 /* ContestsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327371B1BAB2B4D00198AA9 /* ContestsDetailViewController.swift */; };
 		932C56231BA34E3A00731E3E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932C56221BA34E3A00731E3E /* UIColor+Extension.swift */; };
 		93364B6B1BA3961100A86645 /* ContestFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93364B6A1BA3961100A86645 /* ContestFilterButton.swift */; };
 		939C1C0E1BA0E2D00054992A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939C1C0D1BA0E2D00054992A /* AppDelegate.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		932737191BAA054C00198AA9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9327371B1BAB2B4D00198AA9 /* ContestsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsDetailViewController.swift; sourceTree = "<group>"; };
 		932C56221BA34E3A00731E3E /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		93364B6A1BA3961100A86645 /* ContestFilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestFilterButton.swift; sourceTree = "<group>"; };
 		939C1C081BA0E2D00054992A /* RedMesa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedMesa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9327371A1BAA054C00198AA9 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9327371D1BAB2B5300198AA9 /* ContestsDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9327371B1BAB2B4D00198AA9 /* ContestsDetailViewController.swift */,
+			);
+			name = ContestsDetailViewController;
+			sourceTree = "<group>";
+		};
 		932C56241BA34E3E00731E3E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +90,7 @@
 		939C1BFF1BA0E2D00054992A = {
 			isa = PBXGroup;
 			children = (
+				932737191BAA054C00198AA9 /* QuartzCore.framework */,
 				939C1C0A1BA0E2D00054992A /* RedMesa */,
 				939C1C201BA0E2D00054992A /* RedMesaTests */,
 				939C1C091BA0E2D00054992A /* Products */,
@@ -155,6 +169,7 @@
 				939C1C351BA0E45E0054992A /* ContestsLayoutOne.swift */,
 				939C1C3E1BA0ECD20054992A /* ContestsViews */,
 				939C1C3D1BA0ECC50054992A /* ContestsModels */,
+				9327371D1BAB2B5300198AA9 /* ContestsDetailViewController */,
 			);
 			name = Contests;
 			sourceTree = "<group>";
@@ -204,7 +219,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Rally Interactive";
 				TargetAttributes = {
 					939C1C071BA0E2D00054992A = {
@@ -267,6 +282,7 @@
 				932C56231BA34E3A00731E3E /* UIColor+Extension.swift in Sources */,
 				939C1C361BA0E45E0054992A /* ContestsLayoutOne.swift in Sources */,
 				93364B6B1BA3961100A86645 /* ContestFilterButton.swift in Sources */,
+				9327371C1BAB2B4D00198AA9 /* ContestsDetailViewController.swift in Sources */,
 				939C1C0E1BA0E2D00054992A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +338,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -391,6 +408,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RedMesa/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyinteractive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -402,6 +420,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RedMesa/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyinteractive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -420,6 +439,7 @@
 				);
 				INFOPLIST_FILE = RedMesaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyinteractive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RedMesa.app/RedMesa";
 			};
@@ -435,6 +455,7 @@
 				);
 				INFOPLIST_FILE = RedMesaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyinteractive.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RedMesa.app/RedMesa";
 			};

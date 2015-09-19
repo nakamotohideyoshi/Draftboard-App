@@ -15,12 +15,17 @@ class ContestsViewController: UICollectionViewController {
     private let reuseIdentifier = "CellOne"
     private let headerReuseIdentifier = "ContestHeader"
     private let headerViewKind = "Header"
+    private let filterReuseIdentifier = "FilterHeader"
+    private let FilterViewKind = "Filter"
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
-    private var headers: Array<AnyObject!> = []
-    var lineupButton: UIButton = UIButton()
-    var gameTypeButton: UIButton = UIButton()
+    var contests = [ContestRow]() // data
+    var headers: Array<AnyObject!> = [] // stored cells
+    var filters = [String]() // data
+    var filtersViews: Array<AnyObject!> = [] // stored cells
     
-    var contests = [ContestRow]()
+    var availableLineups = [String]()
+    var chosenLineup: Int = 0
+    var activeRows = [NSIndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,16 +45,19 @@ class ContestsViewController: UICollectionViewController {
         
         buildTheData()
         buildTheButtons()
+        buildTheLineups()
 
         // Register cell classes
         self.collectionView!.registerClass(CellOne.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Register header views
         self.collectionView!.registerClass(HeaderViewOne.self, forSupplementaryViewOfKind: headerViewKind, withReuseIdentifier: headerReuseIdentifier)
+        
+        // Register filter views
+        self.collectionView!.registerClass(ContestFilterButton.self, forSupplementaryViewOfKind: FilterViewKind, withReuseIdentifier: filterReuseIdentifier)
     }
 
     func buildTheData() {
-        
         var group1items = Array<String>()
         group1items.append("feed the cat")
         group1items.append("clean the cat")
@@ -81,27 +89,16 @@ class ContestsViewController: UICollectionViewController {
     }
     
     func buildTheButtons(){
-        
-        let width = self.view.bounds.width / 2
-        let height: CGFloat = 50.0
-        
-        lineupButton   = UIButton(frame: CGRectMake(0, 0, width, height))
-        gameTypeButton = UIButton(frame: CGRectMake(width, 0, width, height))
-        
-        lineupButton.titleLabel?.textAlignment = .Center
-        lineupButton.titleLabel?.textColor = .whiteColor()
-        lineupButton.titleLabel?.text = "Warriors Stack"
-        gameTypeButton.titleLabel?.textAlignment = .Center
-        gameTypeButton.titleLabel?.textColor = .whiteColor()
-        gameTypeButton.titleLabel?.text = "All GameTypes"
+        filters.append("Warriors Stack")
+        filters.append("All GameTypes")
     }
     
-    func setLineupButtonText(text: String) {
-        lineupButton.titleLabel?.text = text
-    }
-    
-    func setgameTypeButtonText(text: String) {
-        lineupButton.titleLabel?.text = text
+    func buildTheLineups() {
+        availableLineups.append("Warriors Stack")
+        availableLineups.append("Warriors Stack 2")
+        availableLineups.append("Neutron Power")
+        availableLineups.append("Marvel")
+        availableLineups.append("DC")
     }
     
     func totalrows() -> Int {
@@ -134,54 +131,113 @@ class ContestsViewController: UICollectionViewController {
 
         cell.titleLabel.text = "$100-Free Roll"
         cell.subLabel.text = "$10 Fee / $100 Prizes"
+        cell.currentIndexPath = indexPath
+        cell.setContainingCollectionView(self)
         
         return cell
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        print("Supplementary kind: \(kind)")
-        
-        let cell = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerReuseIdentifier, forIndexPath: indexPath) as! HeaderViewOne
-        
-        maybeAddAHeader(cell)
-        
-        // do stuff
-        cell.titleLabel.text = contests[indexPath.section].title
+        if kind == FilterViewKind {
 
-        cell.backgroundColor = .whiteColor()
-//        cell.backgroundColor = .grayColor()
-//        if indexPath.section % 2 == 0 {
-//            cell.backgroundColor = .lightGrayColor()
-//        }
-        
-        return cell
+            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(FilterViewKind, withReuseIdentifier: filterReuseIdentifier, forIndexPath: indexPath) as! ContestFilterButton
+            maybeAddAFilter(cell)
+            
+            cell.filterButton.removeTarget(nil, action: nil, forControlEvents: .TouchUpInside)
+            
+            if indexPath.section == 0 {
+                cell.filterButton.addTarget(self, action: "filterLineups:", forControlEvents: .TouchUpInside)
+                cell.filterButton.setTitle(availableLineups[chosenLineup], forState: .Normal)
+            } else {
+                cell.filterButton.addTarget(self, action: "filterGameTypes:", forControlEvents: .TouchUpInside)
+                cell.filterButton.setTitle(filters[indexPath.section], forState: .Normal)
+            }
+            return cell
+        } else {
+            // headerViewKind
+            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(headerViewKind, withReuseIdentifier: headerReuseIdentifier, forIndexPath: indexPath) as! HeaderViewOne
+            maybeAddAHeader(cell)
+            cell.titleLabel.text = contests[indexPath.section].title
+            cell.backgroundColor = .whiteColor()
+            return cell
+        }
     }
     
+    // On tapping the filters
+    func filterLineups(sender: UIButton!) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let numberOfLineups = availableLineups.count
+        for index in 0..<numberOfLineups {
+            alert.addAction(UIAlertAction(title: availableLineups[index], style: UIAlertActionStyle.Default, handler: {
+                (alert: UIAlertAction!) in
+                let button = self.filtersViews[0] as! ContestFilterButton
+                button.filterButton.setTitle(self.availableLineups[index], forState: .Normal)
+                self.chosenLineup = index
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
+            (alert: UIAlertAction!) in
+            print("Cancel")
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: {})
+    }
+    
+    // On tapping the filters
+    func filterGameTypes(sender: UIButton!) {
+        print("FILTER GAMETYPES!!!")
+    }
+    
+    // handle the presentation of the detail view
+    func userDidTapOnRowWithIndexPath(indexPath: NSIndexPath) {
+        print("user did tap on row with index path called: \(indexPath.section, indexPath.row)")
+        
+        let contestsDetail = ContestsDetailViewController()
+//        self.presentViewController(contestsDetail, animated: true, completion: nil)
+        self.navigationController?.pushViewController(contestsDetail, animated: true)
+    }
+    
+    // On scroll
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         
         let cutoffHeaders = getHeadersAboveTop() as! [HeaderViewOne]
         
         // iterate over each header
         for header in cutoffHeaders {
-            
-            print("header.frame.origin.y: \(header.frame.origin.y), collectionView!.contentOffset.y: \(collectionView!.contentOffset.y)")
-            
             // check if the the header point x point is above the scroll y offset
-            if header.frame.origin.y < (collectionView!.contentOffset.y) {
+            if header.frame.origin.y < (collectionView!.contentOffset.y + 50) {
                 
                 // adjust the titleLabel's frame to be just below the top, but never below the frame
-                var yOffset = (collectionView!.contentOffset.y) - header.frame.origin.y
+                // also just below the other buttons
+                var yOffset = (collectionView!.contentOffset.y) - header.frame.origin.y + 50
                 
-                if yOffset > (header.frame.size.height - 50) {
-                    yOffset = header.frame.size.height - 50
+                if yOffset > (header.frame.size.height) {
+                    yOffset = header.frame.size.height
                 }
                 
-                print("yOffset: \(yOffset)")
                 header.titleLabel.frame = CGRectMake(0, yOffset, header.titleLabel.frame.size.width, header.titleLabel.frame.size.height)
             } else {
                 header.titleLabel.frame = CGRectMake(0, 0, header.titleLabel.frame.size.width, header.titleLabel.frame.size.height)
             }
         }
+        
+        // for filter buttons
+        for filterView in filtersViews {
+            let filterthingy = filterView as! ContestFilterButton
+            filterthingy.frame = CGRectMake(filterthingy.frame.origin.x, collectionView!.contentOffset.y, filterthingy.frame.size.width, filterthingy.frame.size.height)
+        }
+    }
+    
+    // We might not even need this.
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        self.collectionView!.collectionViewLayout.invalidateLayout()
+        coordinator.animateAlongsideTransition(nil, completion: {
+            context in
+            self.collectionView!.collectionViewLayout.invalidateLayout()
+            self.collectionView!.reloadData()
+        })
     }
     
     /*
@@ -193,8 +249,6 @@ class ContestsViewController: UICollectionViewController {
         let height = collectionView!.frame.height
         let rect = CGRectMake(0, 0 + collectionView!.contentOffset.y, width, height)
         
-//        print(" x: \(collectionView!.contentOffset.x), y: \(collectionView!.contentOffset.y), width: \(width), height: \(height)")
-        
         return headers.filter({
             (includedElement: AnyObject!) -> Bool in
             if includedElement.frame != nil {
@@ -205,16 +259,26 @@ class ContestsViewController: UICollectionViewController {
     }
     
     func maybeAddAHeader(header: UICollectionReusableView) {
-        
         var add = true
         for object in headers {
             if CGRectEqualToRect(object.frame, header.frame) {
                 add = false
             }
         }
-        
         if add {
             headers.append(header)
+        }
+    }
+    
+    func maybeAddAFilter(filter: UICollectionReusableView) {
+        var add = true
+        for object in filtersViews {
+            if CGRectEqualToRect(object.frame, filter.frame) {
+                add = false
+            }
+        }
+        if add {
+            filtersViews.append(filter)
         }
     }
 
