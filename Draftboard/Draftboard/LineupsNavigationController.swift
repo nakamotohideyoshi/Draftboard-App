@@ -10,7 +10,7 @@ import UIKit
 
 class LineupsNavigationController: UINavigationController {
     
-    let list = LineupsListController()
+    let list = LineupsListController(nibName: "LineupListController", bundle: nil)
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +30,4 @@ class LineupsNavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
 }

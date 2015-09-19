@@ -7,19 +7,18 @@
 //
 
 import UIKit
-import Restraint
 
 class LineupCardView: DraftboardNibView {
     
     let cellReuseId = "lineup-card-cell"
     
+    @IBOutlet weak var editButton: DraftboardButton!
     @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var iconView: DraftboardView!
+    @IBOutlet weak var iconImageView: DraftboardImageView!
     
     let itemCount = Int(arc4random_uniform(12)) + 1
     var contentHeight: CGFloat!
@@ -27,7 +26,7 @@ class LineupCardView: DraftboardNibView {
     
     override func awakeFromNib() {
         contentHeight = (CGFloat(itemCount + 1) * 60.0)
-        totalHeight = 66.0 + contentHeight + 48.0
+        totalHeight = 66.0 + contentHeight + 46.0
         
         contentHeightConstraint.active = false
         contentView.heightRancor.constraintEqualToConstant(contentHeight).active = true
@@ -43,7 +42,7 @@ class LineupCardView: DraftboardNibView {
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
             cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
-            cellView.heightRancor.constraintEqualToConstant(60).active = true
+            cellView.heightRancor.constraintEqualToConstant(60.0).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             cellView.onTap = {(target: AnyObject) -> () in
