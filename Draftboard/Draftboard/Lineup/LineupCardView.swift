@@ -10,8 +10,6 @@ import UIKit
 
 class LineupCardView: DraftboardNibView {
     
-    let cellReuseId = "lineup-card-cell"
-    
     @IBOutlet weak var editButton: DraftboardButton!
     @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
@@ -44,10 +42,6 @@ class LineupCardView: DraftboardNibView {
             cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
             cellView.heightRancor.constraintEqualToConstant(60.0).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
-            
-            cellView.onTap = {(target: AnyObject) -> () in
-                print("cell tap")
-            }
             
             if (lastCellView == nil) {
                 cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true

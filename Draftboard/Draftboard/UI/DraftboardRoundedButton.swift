@@ -9,13 +9,29 @@
 import UIKit
 
 @IBDesignable
-class DraftboardRoundedButton: DraftboardNibView {
+class DraftboardRoundedButton: DraftboardNibControl {
     
     @IBOutlet weak var label: DraftboardLabel!
     @IBOutlet weak var borderImageView: UIImageView!
+    @IBOutlet weak var selectedView: DraftboardView!
+    
+    var labelColor: UIColor?
     
     override func awakeFromNib() {
-        // nothing here
+        labelColor = label.textColor
+    }
+    
+    override var highlighted: Bool {
+        didSet {
+            if (highlighted) {
+                label.textColor = .whiteColor()
+                self.selectedView.hidden = false
+            }
+            else {
+                label.textColor = labelColor
+                self.selectedView.hidden = true
+            }
+        }
     }
     
     @IBInspectable var text: String = "tap" {

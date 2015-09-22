@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,6 +27,7 @@
                 <outlet property="nameLabel" destination="KcH-Xh-Aog" id="CiC-wB-Q9d"/>
                 <outlet property="positionLabel" destination="biX-Vx-Jha" id="Fd4-kK-YiH"/>
                 <outlet property="salaryLabel" destination="JMP-HY-kYS" id="VZX-Yy-rAj"/>
+                <outlet property="selectedView" destination="v8T-NO-nh4" id="b4r-Hi-v8m"/>
                 <outlet property="topBorderView" destination="bhE-mQ-tq1" id="qRv-6t-4ff"/>
             </connections>
         </placeholder>
@@ -34,6 +36,13 @@
             <rect key="frame" x="0.0" y="0.0" width="301" height="63"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8T-NO-nh4" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="-1" y="0.0" width="302" height="63"/>
+                    <color key="backgroundColor" red="0.92156863212585449" green="0.92941176891326904" blue="0.94901961088180542" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hidden" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K. Korver - DET" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-Xh-Aog" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="87" y="17" width="134" height="15"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
@@ -107,7 +116,9 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="v8T-NO-nh4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4fE-TY-o8k"/>
                 <constraint firstItem="Esd-Fy-OQR" firstAttribute="leading" secondItem="biX-Vx-Jha" secondAttribute="trailing" constant="5" id="59n-GG-qOK"/>
+                <constraint firstItem="v8T-NO-nh4" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="67t-sO-0PG"/>
                 <constraint firstItem="biX-Vx-Jha" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="8t5-pZ-iNT"/>
                 <constraint firstAttribute="bottom" secondItem="wCF-pc-2Cx" secondAttribute="bottom" id="9gV-1D-nLP"/>
                 <constraint firstItem="bhE-mQ-tq1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BZ6-Ok-MdW"/>
@@ -115,8 +126,10 @@
                 <constraint firstItem="wCF-pc-2Cx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="CYu-cJ-cm2"/>
                 <constraint firstItem="JMP-HY-kYS" firstAttribute="leading" secondItem="Esd-Fy-OQR" secondAttribute="trailing" constant="10" id="Dta-z1-U18"/>
                 <constraint firstItem="KcH-Xh-Aog" firstAttribute="leading" secondItem="Esd-Fy-OQR" secondAttribute="trailing" constant="10" id="EjC-wo-dGo"/>
+                <constraint firstItem="v8T-NO-nh4" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="GwP-aW-bYZ"/>
                 <constraint firstAttribute="trailing" secondItem="wCF-pc-2Cx" secondAttribute="trailing" id="Huq-HZ-Gge"/>
                 <constraint firstAttribute="trailing" secondItem="wBI-S0-PoW" secondAttribute="trailing" constant="14" id="J0x-io-nE7"/>
+                <constraint firstItem="v8T-NO-nh4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="UeA-bz-IO9"/>
                 <constraint firstItem="wBI-S0-PoW" firstAttribute="top" secondItem="H9k-8w-azu" secondAttribute="bottom" constant="2" id="Yeo-Zu-Abf"/>
                 <constraint firstAttribute="trailing" secondItem="H9k-8w-azu" secondAttribute="trailing" constant="14" id="Yvv-ed-Mye"/>
                 <constraint firstAttribute="trailing" secondItem="KcH-Xh-Aog" secondAttribute="trailing" constant="80" id="aeb-Tr-9eT"/>

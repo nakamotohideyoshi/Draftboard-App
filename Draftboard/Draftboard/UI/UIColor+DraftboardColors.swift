@@ -37,4 +37,9 @@ extension UIColor {
     class func draftboardLightGray() -> UIColor {
         return UIColor(0xEBEDF2)
     }
+    
+    class func draftboardSelected() -> UIColor {
+        //return draftboardLightGray()
+        return .yellowColor()
+    }
 }

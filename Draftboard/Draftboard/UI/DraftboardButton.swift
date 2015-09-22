@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class DraftboardButton: DraftboardNibView {
+class DraftboardButton: DraftboardNibControl {
 
     @IBOutlet weak var label: DraftboardLabel!
     

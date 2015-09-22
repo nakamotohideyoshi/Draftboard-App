@@ -8,8 +8,8 @@
 
 import UIKit
 
-@IBDesignable class LineupEmptyCellView: DraftboardNibView {
-
+@IBDesignable
+class LineupEmptyCellView: DraftboardNibView {
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var abbrvLabel: DraftboardLabel!

@@ -9,13 +9,30 @@
 import UIKit
 
 @IBDesignable
-class DraftboardIconButton: DraftboardNibView {
+class DraftboardIconButton: DraftboardNibControl {
     
     @IBOutlet weak var borderImageView: UIImageView!
     @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var selectedView: DraftboardView!
+    
+    var iconColor: UIColor?
     
     override func awakeFromNib() {
-        // nothing here
+        iconColor = iconImageView.tintColor
+        _selectedView = selectedView
+    }
+    
+    override var highlighted: Bool {
+        didSet {
+            if (highlighted) {
+                self.iconImageView.tintColor = .whiteColor()
+                self.selectedView.hidden = false
+            }
+            else {
+                self.iconImageView.tintColor = iconColor
+                self.selectedView.hidden = true
+            }
+        }
     }
     
     @IBInspectable var iconImage: UIImage? {

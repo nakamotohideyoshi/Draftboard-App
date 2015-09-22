@@ -8,8 +8,7 @@
 
 import UIKit
 
-@IBDesignable
-public class DraftboardNibView: UIView {
+class DraftboardNibView: UIView {
     var nibView: UIView!
     
     override init(frame: CGRect) {
@@ -17,12 +16,12 @@ public class DraftboardNibView: UIView {
         self.setupNib()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupNib()
     }
     
-    private func setupNib() {
+    func setupNib() {
         nibView = self.loadNib()
         nibView.frame = self.bounds
         nibView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
@@ -30,13 +29,13 @@ public class DraftboardNibView: UIView {
         self.awakeFromNib()
     }
     
-    public func loadNib() -> UIView {
+    func loadNib() -> UIView {
         let bundle = NSBundle(forClass: self.dynamicType)
         let views = bundle.loadNibNamed(self.nibName(), owner: self, options: nil)
         return views.first as! UIView
     }
 
-    public func nibName() -> String {
+    func nibName() -> String {
         return self.dynamicType.description().componentsSeparatedByString(".").last!
     }
 }

@@ -13,6 +13,7 @@ class LineupNewViewController: UIViewController {
     @IBOutlet weak var saveButton: DraftboardRoundedButton!
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
+    @IBOutlet weak var nameTextField: UITextField!
     
     weak var listViewController: LineupsListController?
     
