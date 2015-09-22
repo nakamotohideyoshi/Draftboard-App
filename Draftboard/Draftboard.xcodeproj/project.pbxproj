@@ -60,6 +60,8 @@
 		934931651BB080A7005738D4 /* ContestsListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934931641BB080A7005738D4 /* ContestsListLayout.swift */; };
 		934931721BB0C6FC005738D4 /* ContestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934931701BB0C6FC005738D4 /* ContestsListController.swift */; };
 		934931731BB0C6FC005738D4 /* ContestsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934931711BB0C6FC005738D4 /* ContestsListController.xib */; };
+		934931751BB201E6005738D4 /* DraftboardContestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934931741BB201E6005738D4 /* DraftboardContestsCell.xib */; };
+		934931771BB2068E005738D4 /* DraftboardContestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934931761BB2068E005738D4 /* DraftboardContestsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,6 +133,8 @@
 		934931641BB080A7005738D4 /* ContestsListLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContestsListLayout.swift; path = Contests/ContestsListLayout.swift; sourceTree = "<group>"; };
 		934931701BB0C6FC005738D4 /* ContestsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContestsListController.swift; path = Contests/ContestsListController.swift; sourceTree = "<group>"; };
 		934931711BB0C6FC005738D4 /* ContestsListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContestsListController.xib; path = Contests/ContestsListController.xib; sourceTree = "<group>"; };
+		934931741BB201E6005738D4 /* DraftboardContestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DraftboardContestsCell.xib; path = Contests/DraftboardContestsCell.xib; sourceTree = "<group>"; };
+		934931761BB2068E005738D4 /* DraftboardContestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DraftboardContestsCell.swift; path = Contests/DraftboardContestsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +266,8 @@
 			children = (
 				934931701BB0C6FC005738D4 /* ContestsListController.swift */,
 				934931711BB0C6FC005738D4 /* ContestsListController.xib */,
+				934931761BB2068E005738D4 /* DraftboardContestsCell.swift */,
+				934931741BB201E6005738D4 /* DraftboardContestsCell.xib */,
 				934931641BB080A7005738D4 /* ContestsListLayout.swift */,
 				932737271BACB5AF00198AA9 /* ContestsFilterButton.swift */,
 				932737251BACA53100198AA9 /* ContestModel.swift */,
@@ -339,7 +345,6 @@
 				5D9C2FCF1BAC68910076355D /* LineupListController.xib in Resources */,
 				5D81D3711BA8D1AD003BEEC2 /* LineupEmptyCellView.xib in Resources */,
 				934931731BB0C6FC005738D4 /* ContestsListController.xib in Resources */,
-				5D6FB02C1BAA676E0071A753 /* DraftboardButton.xib in Resources */,
 				5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */,
 				5D4E63421BAB75D80033C4C2 /* Oswald-Light.ttf in Resources */,
 				5D4E63431BAB75D80033C4C2 /* Oswald-Regular.ttf in Resources */,
@@ -356,6 +361,7 @@
 				5D4E634B1BAB75D80033C4C2 /* OpenSans-Regular.ttf in Resources */,
 				5D4E634C1BAB75D80033C4C2 /* OpenSans-Semibold.ttf in Resources */,
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				934931751BB201E6005738D4 /* DraftboardContestsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +375,7 @@
 				934931721BB0C6FC005738D4 /* ContestsListController.swift in Sources */,
 				3E7860E71B9FB1E2004013AB /* LineupsNavigationController.swift in Sources */,
 				5D6AAA5E1BA7870A00CEACE7 /* LineupCellView.swift in Sources */,
+				934931771BB2068E005738D4 /* DraftboardContestsCell.swift in Sources */,
 				5D4412181BAA163700A86111 /* Closures.swift in Sources */,
 				5D6FB0281BAA4C890071A753 /* DraftboardView.swift in Sources */,
 				5D9C2FD31BAC83510076355D /* DraftboardImageView.swift in Sources */,
