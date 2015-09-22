@@ -9,40 +9,35 @@
 import UIKit
 
 class LineupNewViewController: UIViewController {
-    
-    // Header
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
-    
-    // Content area (items)
-    @IBOutlet weak var contentView: UIView!
-    
-    // Footer
-    @IBOutlet weak var footerView: UIView!
+    @IBOutlet weak var editButton: DraftboardIconButton!
+    @IBOutlet weak var saveButton: DraftboardRoundedButton!
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     
+    weak var listViewController: LineupsListController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let sv = self.view as! UIScrollView
+        sv.alwaysBounceVertical = true
+        
+        let saveTapRecognizer = UITapGestureRecognizer()
+        saveTapRecognizer.addTarget(self, action: "didTapSave:")
+        saveButton.addGestureRecognizer(saveTapRecognizer)
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func didTapSave(gestureRecognizer: UITapGestureRecognizer) {
+        listViewController?.didSaveLineup()
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            // nothing here
+        })
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

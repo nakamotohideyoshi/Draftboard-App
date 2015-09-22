@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable class LineupEmptyCellView: DraftboardNibView {
 
+    @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var abbrvLabel: DraftboardLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var bottomBorderView: UIView!
@@ -18,6 +20,8 @@ import UIKit
     
     override func awakeFromNib() {
         bottomBorderView.hidden = true
+        topBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
+        bottomBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
     }
     
     @IBInspectable var topBorder: Bool = true {

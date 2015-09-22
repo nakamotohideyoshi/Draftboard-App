@@ -8,8 +8,8 @@
 
 import UIKit
 
-@IBDesignable class DraftboardLabel: UILabel {
-    
+@IBDesignable
+class DraftboardLabel: UILabel {
     func updateAttributedString() {
         var str = self.text
         if (str == nil) {

@@ -12,12 +12,12 @@ class LineupCellView: DraftboardNibView {
     
     @IBOutlet weak var topBorderView: UIView!
     @IBOutlet weak var bottomBorderView: UIView!
-    @IBOutlet weak var positionLabel: UILabel!
+    @IBOutlet weak var positionLabel: DraftboardLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var salaryLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var avgLabel: UILabel!
-    @IBOutlet weak var avgValueLabel: UILabel!
+    @IBOutlet weak var salaryLabel: DraftboardLabel!
+    @IBOutlet weak var nameLabel: DraftboardLabel!
+    @IBOutlet weak var avgLabel: DraftboardLabel!
+    @IBOutlet weak var avgValueLabel: DraftboardLabel!
     
     var onTap:DraftClosure?
     var pressRecognizer = UILongPressGestureRecognizer()

@@ -9,17 +9,18 @@
 import UIKit
 
 @IBDesignable
-class DraftboardButton: DraftboardNibView {
-
-    @IBOutlet weak var label: DraftboardLabel!
+class DraftboardIconButton: DraftboardNibView {
+    
+    @IBOutlet weak var borderImageView: UIImageView!
+    @IBOutlet weak var iconImageView: UIImageView!
     
     override func awakeFromNib() {
         // nothing here
     }
     
-    @IBInspectable var text: String = "Button" {
+    @IBInspectable var iconImage: UIImage? {
         didSet {
-            label.text = text
+            iconImageView.image = iconImage
         }
     }
 }
