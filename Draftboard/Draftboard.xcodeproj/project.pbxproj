@@ -32,6 +32,12 @@
 		5DC589431BA1DC0E00B9D134 /* LineupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC589421BA1DC0E00B9D134 /* LineupCardView.swift */; };
 		5DEFAE021BA9C48E00A9AFC1 /* DraftboardLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEFAE011BA9C48E00A9AFC1 /* DraftboardLabel.swift */; };
 		5DEFAE041BAA0B4000A9AFC1 /* LineupNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEFAE031BAA0B4000A9AFC1 /* LineupNewViewController.swift */; };
+		932737201BAC9D5E00198AA9 /* ContestsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327371F1BAC9D5E00198AA9 /* ContestsNavigationController.swift */; };
+		932737261BACA53100198AA9 /* ContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932737251BACA53100198AA9 /* ContestModel.swift */; };
+		932737281BACB5AF00198AA9 /* ContestsFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932737271BACB5AF00198AA9 /* ContestsFilterButton.swift */; };
+		934931651BB080A7005738D4 /* ContestsListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934931641BB080A7005738D4 /* ContestsListLayout.swift */; };
+		934931721BB0C6FC005738D4 /* ContestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934931701BB0C6FC005738D4 /* ContestsListController.swift */; };
+		934931731BB0C6FC005738D4 /* ContestsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934931711BB0C6FC005738D4 /* ContestsListController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +81,12 @@
 		5DC589421BA1DC0E00B9D134 /* LineupCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCardView.swift; sourceTree = "<group>"; };
 		5DEFAE011BA9C48E00A9AFC1 /* DraftboardLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardLabel.swift; sourceTree = "<group>"; };
 		5DEFAE031BAA0B4000A9AFC1 /* LineupNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupNewViewController.swift; sourceTree = "<group>"; };
+		9327371F1BAC9D5E00198AA9 /* ContestsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsNavigationController.swift; sourceTree = "<group>"; };
+		932737251BACA53100198AA9 /* ContestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContestModel.swift; path = Contests/ContestModel.swift; sourceTree = "<group>"; };
+		932737271BACB5AF00198AA9 /* ContestsFilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContestsFilterButton.swift; path = Contests/ContestsFilterButton.swift; sourceTree = "<group>"; };
+		934931641BB080A7005738D4 /* ContestsListLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContestsListLayout.swift; path = Contests/ContestsListLayout.swift; sourceTree = "<group>"; };
+		934931701BB0C6FC005738D4 /* ContestsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContestsListController.swift; path = Contests/ContestsListController.swift; sourceTree = "<group>"; };
+		934931711BB0C6FC005738D4 /* ContestsListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContestsListController.xib; path = Contests/ContestsListController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,11 +121,13 @@
 			children = (
 				5DEFAE001BA9C43100A9AFC1 /* UI */,
 				5DC589411BA1DBDB00B9D134 /* Lineup */,
+				9327371E1BAC9CFB00198AA9 /* Contests */,
 				3E7860E01B9FB195004013AB /* AppDelegate.swift */,
 				3E7860E21B9FB1B4004013AB /* TabController.swift */,
 				3E7860E41B9FB1CF004013AB /* ResultsViewController.swift */,
 				3E7860E61B9FB1E2004013AB /* LineupsNavigationController.swift */,
 				3E7860EA1B9FB204004013AB /* LineupsDetailController.swift */,
+				9327371F1BAC9D5E00198AA9 /* ContestsNavigationController.swift */,
 				3E7860EC1B9FB216004013AB /* ContestsViewController.swift */,
 				3E7860EE1B9FB225004013AB /* AccountViewController.swift */,
 				3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */,
@@ -159,6 +173,18 @@
 				5D6FB02F1BAA837D0071A753 /* DraftboardNibView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		9327371E1BAC9CFB00198AA9 /* Contests */ = {
+			isa = PBXGroup;
+			children = (
+				934931701BB0C6FC005738D4 /* ContestsListController.swift */,
+				934931711BB0C6FC005738D4 /* ContestsListController.xib */,
+				934931641BB080A7005738D4 /* ContestsListLayout.swift */,
+				932737271BACB5AF00198AA9 /* ContestsFilterButton.swift */,
+				932737251BACA53100198AA9 /* ContestModel.swift */,
+			);
+			name = Contests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +252,7 @@
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D81D3771BA8D56B003BEEC2 /* LineupNewViewController.xib in Resources */,
 				5D81D3711BA8D1AD003BEEC2 /* LineupEmptyCellView.xib in Resources */,
+				934931731BB0C6FC005738D4 /* ContestsListController.xib in Resources */,
 				5D6FB02C1BAA676E0071A753 /* DraftboardButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				934931721BB0C6FC005738D4 /* ContestsListController.swift in Sources */,
 				3E7860E71B9FB1E2004013AB /* LineupsNavigationController.swift in Sources */,
 				5D6AAA5E1BA7870A00CEACE7 /* LineupCellView.swift in Sources */,
 				5D4412181BAA163700A86111 /* Closures.swift in Sources */,
@@ -247,12 +275,16 @@
 				5DC589431BA1DC0E00B9D134 /* LineupCardView.swift in Sources */,
 				5D6FB0301BAA837D0071A753 /* DraftboardNibView.swift in Sources */,
 				5DEFAE021BA9C48E00A9AFC1 /* DraftboardLabel.swift in Sources */,
+				932737261BACA53100198AA9 /* ContestModel.swift in Sources */,
+				932737281BACB5AF00198AA9 /* ContestsFilterButton.swift in Sources */,
+				934931651BB080A7005738D4 /* ContestsListLayout.swift in Sources */,
 				3E7860E31B9FB1B4004013AB /* TabController.swift in Sources */,
 				3E7860EB1B9FB204004013AB /* LineupsDetailController.swift in Sources */,
 				5D81D3731BA8D1BC003BEEC2 /* LineupEmptyCellView.swift in Sources */,
 				5D81D3751BA8D54F003BEEC2 /* LineupsListController.swift in Sources */,
 				3E7860ED1B9FB216004013AB /* ContestsViewController.swift in Sources */,
 				3E7860E51B9FB1CF004013AB /* ResultsViewController.swift in Sources */,
+				932737201BAC9D5E00198AA9 /* ContestsNavigationController.swift in Sources */,
 				3EA8B5AB1BA7ABC1002EEC32 /* LayoutRancor.swift in Sources */,
 				5D6FB02A1BAA4C9A0071A753 /* DraftboardButton.swift in Sources */,
 			);

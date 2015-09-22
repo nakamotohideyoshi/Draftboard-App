@@ -12,7 +12,7 @@ class TabController: UITabBarController {
     
     let results = ResultsViewController()
     let lineups = LineupsNavigationController()
-    let contests = ContestsViewController()
+    let contests = ContestsNavigationController()
     let account = AccountViewController()
     
     override func loadView() {

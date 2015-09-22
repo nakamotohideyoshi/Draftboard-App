@@ -325,7 +325,7 @@
                 <constraint firstItem="aXc-jI-WMJ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="wwz-I1-c9D"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="-226.5" y="102.5"/>
+            <point key="canvasLocation" x="-197.5" y="57.5"/>
         </view>
     </objects>
     <resources>
