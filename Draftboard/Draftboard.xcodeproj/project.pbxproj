@@ -62,6 +62,10 @@
 		934931731BB0C6FC005738D4 /* ContestsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934931711BB0C6FC005738D4 /* ContestsListController.xib */; };
 		934931751BB201E6005738D4 /* DraftboardContestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934931741BB201E6005738D4 /* DraftboardContestsCell.xib */; };
 		934931771BB2068E005738D4 /* DraftboardContestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934931761BB2068E005738D4 /* DraftboardContestsCell.swift */; };
+		9349317A1BB30D4C005738D4 /* ContestsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934931781BB30D4C005738D4 /* ContestsHeaderCell.swift */; };
+		9349317B1BB30D4C005738D4 /* ContestsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934931791BB30D4C005738D4 /* ContestsHeaderCell.xib */; };
+		9349317E1BB33969005738D4 /* DraftboardFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9349317C1BB33969005738D4 /* DraftboardFilterButton.swift */; };
+		9349317F1BB33969005738D4 /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9349317D1BB33969005738D4 /* DraftboardFilterButton.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -135,6 +139,10 @@
 		934931711BB0C6FC005738D4 /* ContestsListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContestsListController.xib; path = Contests/ContestsListController.xib; sourceTree = "<group>"; };
 		934931741BB201E6005738D4 /* DraftboardContestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DraftboardContestsCell.xib; path = Contests/DraftboardContestsCell.xib; sourceTree = "<group>"; };
 		934931761BB2068E005738D4 /* DraftboardContestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DraftboardContestsCell.swift; path = Contests/DraftboardContestsCell.swift; sourceTree = "<group>"; };
+		934931781BB30D4C005738D4 /* ContestsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContestsHeaderCell.swift; path = Contests/ContestsHeaderCell.swift; sourceTree = "<group>"; };
+		934931791BB30D4C005738D4 /* ContestsHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContestsHeaderCell.xib; path = Contests/ContestsHeaderCell.xib; sourceTree = "<group>"; };
+		9349317C1BB33969005738D4 /* DraftboardFilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardFilterButton.swift; sourceTree = "<group>"; };
+		9349317D1BB33969005738D4 /* DraftboardFilterButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardFilterButton.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +265,8 @@
 				5D96FBE31BAB8723000CBBC4 /* DraftboardIconButton.swift */,
 				5D9C2FD21BAC83510076355D /* DraftboardImageView.swift */,
 				5D9C2FD41BAC97570076355D /* UIColor+DraftboardColors.swift */,
+				9349317D1BB33969005738D4 /* DraftboardFilterButton.xib */,
+				9349317C1BB33969005738D4 /* DraftboardFilterButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -264,10 +274,12 @@
 		9327371E1BAC9CFB00198AA9 /* Contests */ = {
 			isa = PBXGroup;
 			children = (
-				934931701BB0C6FC005738D4 /* ContestsListController.swift */,
 				934931711BB0C6FC005738D4 /* ContestsListController.xib */,
-				934931761BB2068E005738D4 /* DraftboardContestsCell.swift */,
+				934931701BB0C6FC005738D4 /* ContestsListController.swift */,
 				934931741BB201E6005738D4 /* DraftboardContestsCell.xib */,
+				934931761BB2068E005738D4 /* DraftboardContestsCell.swift */,
+				934931791BB30D4C005738D4 /* ContestsHeaderCell.xib */,
+				934931781BB30D4C005738D4 /* ContestsHeaderCell.swift */,
 				934931641BB080A7005738D4 /* ContestsListLayout.swift */,
 				932737271BACB5AF00198AA9 /* ContestsFilterButton.swift */,
 				932737251BACA53100198AA9 /* ContestModel.swift */,
@@ -350,6 +362,7 @@
 				5D4E63431BAB75D80033C4C2 /* Oswald-Regular.ttf in Resources */,
 				5D96FBE01BAB863F000CBBC4 /* DraftboardRoundedButton.xib in Resources */,
 				5D4E63441BAB75D80033C4C2 /* OpenSans-Bold.ttf in Resources */,
+				9349317F1BB33969005738D4 /* DraftboardFilterButton.xib in Resources */,
 				5D96FBE21BAB870C000CBBC4 /* DraftboardIconButton.xib in Resources */,
 				5D4E63451BAB75D80033C4C2 /* OpenSans-BoldItalic.ttf in Resources */,
 				5D4E63461BAB75D80033C4C2 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -362,6 +375,7 @@
 				5D4E634C1BAB75D80033C4C2 /* OpenSans-Semibold.ttf in Resources */,
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				934931751BB201E6005738D4 /* DraftboardContestsCell.xib in Resources */,
+				9349317B1BB30D4C005738D4 /* ContestsHeaderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9349317E1BB33969005738D4 /* DraftboardFilterButton.swift in Sources */,
 				934931721BB0C6FC005738D4 /* ContestsListController.swift in Sources */,
 				3E7860E71B9FB1E2004013AB /* LineupsNavigationController.swift in Sources */,
 				5D6AAA5E1BA7870A00CEACE7 /* LineupCellView.swift in Sources */,
@@ -379,6 +394,7 @@
 				5D4412181BAA163700A86111 /* Closures.swift in Sources */,
 				5D6FB0281BAA4C890071A753 /* DraftboardView.swift in Sources */,
 				5D9C2FD31BAC83510076355D /* DraftboardImageView.swift in Sources */,
+				9349317A1BB30D4C005738D4 /* ContestsHeaderCell.swift in Sources */,
 				5DEFAE041BAA0B4000A9AFC1 /* LineupNewViewController.swift in Sources */,
 				3E7860E11B9FB195004013AB /* AppDelegate.swift in Sources */,
 				3E7860EF1B9FB225004013AB /* AccountViewController.swift in Sources */,

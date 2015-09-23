@@ -12,6 +12,9 @@ import UIKit
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
+    @IBOutlet weak var lineView: UIView!
+    @IBOutlet weak var sportImage: UIImageView!
+    @IBOutlet weak var entryNumbers: UILabel!
 
     var nibView: UIView!
     
@@ -29,7 +32,17 @@ import UIKit
         nibView = self.loadNib()
         nibView.frame = self.bounds
         nibView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        self.addSubview(nibView)
+        self.contentView.addSubview(nibView)
+        lineView.backgroundColor = UIColor(red: 0.901, green: 0.909, blue: 0.929, alpha: 0.1)
+        title.textColor = .whiteColor()
+        subtitle.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+        entryNumbers.textColor = .whiteColor()
+        entryNumbers.text = ""
+        contentView.backgroundColor = UIColor(red: 0.0549, green: 0.0901, blue: 0.137, alpha: 0.65)
+        backgroundColor = UIColor.clearColor()
+        sportImage.tintColor = UIColor(red: 0.69, green: 0.698, blue: 0.756, alpha: 1)
+        
+        
         self.awakeFromNib()
     }
     
@@ -41,6 +54,18 @@ import UIKit
     
     internal func nibName() -> String {
         return self.dynamicType.description().componentsSeparatedByString(".").last!
+    }
+    
+    func setEntries(number: Int) {
+        entryNumbers.textColor = UIColor.funkyGreen()
+        entryNumbers.text = "\(number)"
+        sportImage.tintColor = UIColor.funkyGreen()
+    }
+    
+    func noEntries() {
+        entryNumbers.textColor = .whiteColor()
+        entryNumbers.text = ""
+        sportImage.tintColor = .whiteColor()
     }
 
 }
