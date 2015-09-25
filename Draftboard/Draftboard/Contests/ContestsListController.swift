@@ -12,12 +12,7 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
     
     let normalContestCellReuseIdentifier   = "normalContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
-    
-//    @IBOutlet weak var lineupFilterButton: UIButton!
-//    @IBOutlet weak var gametypeFilterButton: UIButton!
-    
-    // Content area (items)
-//    @IBOutlet weak var contentView: UIView!
+
     @IBOutlet weak var tableView: UITableView!    
     @IBOutlet weak var lineupButton: DraftboardFilterButton!
     @IBOutlet weak var gametypeButton: DraftboardFilterButton!
@@ -39,6 +34,15 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
         return array
         }()
     
+    var lineups: Array<LineupModel> = {
+        var array = [LineupModel]()
+        array.append(LineupModel())
+        array.append(LineupModel())
+        array.append(LineupModel())
+        array.append(LineupModel())
+        return array
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,16 +51,36 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
         tableView.registerClass(DraftboardContestsCell.self, forCellReuseIdentifier: normalContestCellReuseIdentifier)
         tableView.registerClass(ContestsHeaderCell.self, forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 46, 0)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        lineupButton.text = lineups[0].name
+        let lineupTapGesture = UITapGestureRecognizer(target: self, action: "switchLineup:")
+        lineupButton.addGestureRecognizer(lineupTapGesture)
+        let gameTypeTapGesture = UITapGestureRecognizer(target: self, action: "switchGameType:")
+        gametypeButton.addGestureRecognizer(gameTypeTapGesture)
     }
     
-    /*
-        UITableViewDelegate
-    */
+    func switchLineup(gesture: UITapGestureRecognizer) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let numberOfLineups = lineups.count
+        for index in 0..<numberOfLineups {
+            alert.addAction(UIAlertAction(title: lineups[index].name, style: UIAlertActionStyle.Default, handler: {
+                (alert: UIAlertAction!) in
+                self.lineupButton.text = self.lineups[index].name
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
+            (alert: UIAlertAction!) in
+            print("Cancel")
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: {})
+    }
+    
+    func switchGameType(gesture: UITapGestureRecognizer) {
+        let location = gesture.locationInView(gesture.view?.superview)
+        print("tap location x:\(location.x) y:\(location.y)")
+    }
     
     /*
         UITableViewDatasource
@@ -77,11 +101,15 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
         cell.subtitle?.text = contests[indexPath.row].feeDescription()
         
         if contests[indexPath.row].multientry == true {
-            print("true")
             cell.setEntries(contests[indexPath.row].entries)
         } else {
-            print("false")
             cell.noEntries()
+        }
+        
+        if contests[indexPath.row].guaranteed == true {
+            cell.setGuaranteed()
+        } else {
+            cell.setNotGuaranteed()
         }
 
         return cell
@@ -107,17 +135,3 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

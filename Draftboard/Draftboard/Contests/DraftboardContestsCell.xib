@@ -11,12 +11,14 @@
         </mutableArray>
         <mutableArray key="Oswald-Regular.ttf">
             <string>Oswald-Regular</string>
+            <string>Oswald-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DraftboardContestsCell" customModule="Draftboard" customModuleProvider="target">
             <connections>
                 <outlet property="entryNumbers" destination="b1z-5h-dFe" id="MBs-a7-Gu4"/>
+                <outlet property="guaranteedLabel" destination="LvA-pf-AyX" id="s38-nh-6rM"/>
                 <outlet property="lineView" destination="maG-oM-fJ3" id="kkU-Ny-iYr"/>
                 <outlet property="sportImage" destination="4Vx-rf-7yq" id="zun-xc-CEA"/>
                 <outlet property="subtitle" destination="13k-de-wRH" id="ckS-lF-a30"/>
@@ -70,8 +72,19 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvA-pf-AyX" userLabel="Guaranteed Label" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                        <rect key="frame" x="570" y="36" width="16" height="16"/>
+                        <color key="backgroundColor" red="0.0" green="0.26320064510000002" blue="0.87888652150000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="7CO-DW-2Pz"/>
+                            <constraint firstAttribute="width" constant="16" id="k3S-7g-dN7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="10"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="What up?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9A-sV-IqA" userLabel="Title">
-                        <rect key="frame" x="83" y="26" width="464" height="15"/>
+                        <rect key="frame" x="83" y="26" width="477" height="15"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="caC-EH-QpK"/>
@@ -89,6 +102,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="l9A-sV-IqA" secondAttribute="trailing" constant="49" id="92Z-nG-Zyy"/>
                     <constraint firstItem="maG-oM-fJ3" firstAttribute="leading" secondItem="sYf-HX-yBZ" secondAttribute="leadingMargin" constant="10" id="9Ls-I4-AP8"/>
                     <constraint firstAttribute="bottomMargin" secondItem="maG-oM-fJ3" secondAttribute="bottom" constant="-8" id="Fg1-Gj-j04"/>
+                    <constraint firstItem="LvA-pf-AyX" firstAttribute="leading" secondItem="l9A-sV-IqA" secondAttribute="trailing" constant="10" id="JXv-5H-wig"/>
                     <constraint firstAttribute="bottomMargin" secondItem="13k-de-wRH" secondAttribute="bottom" constant="10" id="Juj-RD-cbF"/>
                     <constraint firstAttribute="bottomMargin" secondItem="13k-de-wRH" secondAttribute="bottom" constant="10" id="Mt3-UG-O5q"/>
                     <constraint firstItem="l9A-sV-IqA" firstAttribute="centerY" secondItem="sYf-HX-yBZ" secondAttribute="centerY" constant="-10" id="NTc-Xx-0jp"/>
@@ -98,14 +112,18 @@
                     <constraint firstItem="4Vx-rf-7yq" firstAttribute="leading" secondItem="sYf-HX-yBZ" secondAttribute="leadingMargin" constant="10" id="baj-4z-rLj"/>
                     <constraint firstItem="13k-de-wRH" firstAttribute="centerY" secondItem="sYf-HX-yBZ" secondAttribute="centerY" constant="10" id="bvn-hr-9CM"/>
                     <constraint firstItem="l9A-sV-IqA" firstAttribute="top" secondItem="sYf-HX-yBZ" secondAttribute="topMargin" constant="10" id="dPT-ZS-Vyf"/>
+                    <constraint firstItem="LvA-pf-AyX" firstAttribute="centerY" secondItem="sYf-HX-yBZ" secondAttribute="centerY" id="duX-fY-Y7h"/>
                     <constraint firstItem="13k-de-wRH" firstAttribute="leading" secondItem="sYf-HX-yBZ" secondAttribute="leadingMargin" constant="48" id="foj-XG-D9h"/>
                     <constraint firstItem="13k-de-wRH" firstAttribute="leading" secondItem="b1z-5h-dFe" secondAttribute="trailing" constant="10" id="g90-ad-6pI"/>
+                    <constraint firstItem="LvA-pf-AyX" firstAttribute="centerY" secondItem="l9A-sV-IqA" secondAttribute="centerY" id="hgJ-Kf-gVj"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LvA-pf-AyX" secondAttribute="trailing" constant="10" id="mMh-nF-Kur"/>
                     <constraint firstItem="l9A-sV-IqA" firstAttribute="leading" secondItem="sYf-HX-yBZ" secondAttribute="leadingMargin" constant="48" id="mg9-aL-afE"/>
                     <constraint firstAttribute="bottomMargin" secondItem="13k-de-wRH" secondAttribute="bottom" constant="10" id="p8m-ud-mI3"/>
                     <constraint firstAttribute="trailingMargin" secondItem="13k-de-wRH" secondAttribute="trailing" constant="49" id="xR5-1b-j4y"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="92Z-nG-Zyy"/>
                         <exclude reference="dPT-ZS-Vyf"/>
                         <exclude reference="mg9-aL-afE"/>
                         <exclude reference="8J6-lC-aYU"/>
@@ -113,6 +131,7 @@
                         <exclude reference="Mt3-UG-O5q"/>
                         <exclude reference="foj-XG-D9h"/>
                         <exclude reference="p8m-ud-mI3"/>
+                        <exclude reference="hgJ-Kf-gVj"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

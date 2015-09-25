@@ -8,6 +8,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContestsListController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="gametypeButton" destination="jZd-at-Vdj" id="5TU-pK-ftX"/>
+                <outlet property="lineupButton" destination="CN4-uq-OFV" id="TUQ-uJ-mCQ"/>
                 <outlet property="tableView" destination="6hd-Dh-Uf8" id="F9M-NI-f3U"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

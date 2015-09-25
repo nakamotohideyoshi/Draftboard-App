@@ -15,6 +15,7 @@ import UIKit
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var sportImage: UIImageView!
     @IBOutlet weak var entryNumbers: UILabel!
+    @IBOutlet weak var guaranteedLabel: DraftboardLabel!
 
     var nibView: UIView!
     
@@ -41,7 +42,7 @@ import UIKit
         contentView.backgroundColor = UIColor(red: 0.0549, green: 0.0901, blue: 0.137, alpha: 0.65)
         backgroundColor = UIColor.clearColor()
         sportImage.tintColor = UIColor(red: 0.69, green: 0.698, blue: 0.756, alpha: 1)
-        
+        setNotGuaranteed()
         
         self.awakeFromNib()
     }
@@ -66,6 +67,16 @@ import UIKit
         entryNumbers.textColor = .whiteColor()
         entryNumbers.text = ""
         sportImage.tintColor = .whiteColor()
+    }
+    
+    func setGuaranteed() {
+        guaranteedLabel.backgroundColor = .funkyGreen()
+        guaranteedLabel.text = "G"
+    }
+    
+    func setNotGuaranteed() {
+        guaranteedLabel.backgroundColor = .clearColor()
+        guaranteedLabel.text = ""
     }
 
 }
