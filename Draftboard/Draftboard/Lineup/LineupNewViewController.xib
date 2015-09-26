@@ -166,7 +166,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-Dy-gf9">
                             <rect key="frame" x="187" y="0.0" width="188" height="177"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG / PLAYER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTL-Us-lUQ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="AVG / PLAYER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTL-Us-lUQ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="76" width="148" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="9Wo-Z0-P0q"/>
@@ -180,7 +180,7 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-R4-jaA" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$5,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-R4-jaA" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="90" width="148" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="Kva-Rl-gaE"/>
@@ -209,7 +209,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05r-wB-Ldd">
                             <rect key="frame" x="0.0" y="0.0" width="188" height="177"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REM. SALARY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UE-FZ-aBF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="REM. SALARY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UE-FZ-aBF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="76" width="148" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="iEM-C5-Nt1"/>
@@ -223,7 +223,7 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$50,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9y-QJ-0SU" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$50,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9y-QJ-0SU" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="90" width="148" height="30"/>
                                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
                                     <color key="textColor" red="0.27450980390000002" green="0.28627450980000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -270,7 +270,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lineup 02" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-pS-ZdO">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lineup 02" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-pS-ZdO">
                             <rect key="frame" x="15" y="31" width="211" height="28"/>
                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                             <textInputTraits key="textInputTraits"/>

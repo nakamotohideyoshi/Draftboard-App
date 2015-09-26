@@ -20,24 +20,25 @@ class ContestModel: NSObject {
     override init() {
         super.init()
         
-        let a = Int(arc4random_uniform(2)) + 1
+        let a = Int(arc4random_uniform(2))
         if a > 0 {
             guaranteed = true
         }
         
-        let b = Int(arc4random_uniform(2)) + 1
+        let b = Int(arc4random_uniform(2))
+        print(b)
         if b > 0 {
             multientry = true
         }
         
-        title = "$100 Free Roll"
-        fee = 10
-        prizes = 100
+        fee = Int(arc4random_uniform(10)) + 1
+        prizes = Int(arc4random_uniform(100)) + 10
+        title = "$\(prizes) Free Roll"
         entries = Int(arc4random_uniform(5)) + 1
     }
     
     func feeDescription() -> String {
-        return "\(fee) / \(prizes)"
+        return "$\(fee) FEE / $\(prizes) PRIZES"
     }
     
 }

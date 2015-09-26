@@ -18,6 +18,7 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
     
     var vcs: [DraftboardViewController]!
     let list = LineupsListController(nibName: "LineupListController", bundle: nil)
+    let contests = ContestsListController(nibName: "ContestsListController", bundle: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +68,28 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
         nvc!.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
     }
     
+    func changeSections(vc: DraftboardViewController?) {
+        for (_, vc) in vcs.enumerate() {
+            vc.view.removeFromSuperview()
+        }
+        
+        vcs = [DraftboardViewController]()
+        
+        if (vc != nil) {
+            self.pushViewController(vc!)
+        }
+    }
+    
     func didTapTabButtonAtIndex(index: Int) {
-        print(index)
+        if (index == 0) {
+            self.changeSections(list)
+        }
+        else if (index == 1) {
+            self.changeSections(contests)
+        }
+        else {
+            self.changeSections(nil)
+        }
     }
     
     override func didTapTitlebarButton(index: Int) {

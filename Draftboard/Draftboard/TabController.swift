@@ -19,6 +19,6 @@ class TabController: UITabBarController {
         super.loadView()
         self.view.backgroundColor = UIColor.whiteColor()
         self.viewControllers = [self.results, self.lineups, self.contests, self.account]
-        self.selectedViewController = self.lineups
+        self.selectedViewController = self.contests
     }
 }

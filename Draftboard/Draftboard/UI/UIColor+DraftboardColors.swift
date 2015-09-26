@@ -17,6 +17,16 @@ extension UIColor {
         self.init(red:r, green:g, blue:b, alpha:alpha)
     }
     
+//    convenience init(photoshopRed red: Int, green: Int, blue: Int, alpha: Int) {
+//        
+//        let red   = CGFloat(Float(red)/255)
+//        let green = CGFloat(Float(green)/255)
+//        let blue  = CGFloat(Float(blue)/255)
+//        let alpha = CGFloat(Float(alpha)/255)
+//        
+//        self.init(red:red, green:green, blue: blue, alpha: alpha)
+//    }
+    
     class func draftboardDarkText() -> UIColor {
         return UIColor(0x46495E)
     }
@@ -44,4 +54,9 @@ extension UIColor {
     class func draftboardSelected() -> UIColor {
         return .yellowColor()
     }
+
+    class func funkyGreen() -> UIColor {
+        return .yellowColor()
+    }
+    
 }
