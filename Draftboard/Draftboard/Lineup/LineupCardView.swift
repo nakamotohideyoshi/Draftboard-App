@@ -15,14 +15,12 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var iconView: DraftboardView!
-    @IBOutlet weak var iconImageView: DraftboardImageView!
     
     let itemCount = Int(arc4random_uniform(12)) + 1
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
     
-    override func awakeFromNib() {
+    override func willAwakeFromNib() {
         contentHeight = (CGFloat(itemCount + 1) * 60.0)
         totalHeight = 66.0 + contentHeight + 46.0
         

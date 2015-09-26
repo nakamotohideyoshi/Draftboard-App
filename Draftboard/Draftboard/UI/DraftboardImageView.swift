@@ -12,13 +12,9 @@ import UIKit
 class DraftboardImageView: UIImageView {
     
     override func didMoveToSuperview() {
-        let tintColor = self.tintColor
-        self.tintColor = nil
-        self.tintColor = tintColor
-        
-        if (self.backgroundColor == .redColor()) {
-            self.backgroundColor = nil
-        }
+        let image = self.image
+        self.image = nil
+        self.image = image
         
         super.didMoveToSuperview()
     }

@@ -8,19 +8,20 @@
 
 import UIKit
 
-class LineupsListController: UIViewController, UINavigationControllerDelegate, UIActionSheetDelegate {
+class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     
     @IBOutlet weak var createView: UIView!
-    @IBOutlet weak var createViewButton: DraftboardRoundedButton!
-    @IBOutlet weak var floorImageView: UIImageView!
+    @IBOutlet weak var createViewButton: DraftboardRoundButton!
     @IBOutlet weak var createImageView: UIImageView!
     @IBOutlet weak var createIconImageView: UIImageView!
     
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
+    var newLineupVc: LineupNewViewController?
     let scrollView = UIScrollView()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         // Properties for navigation
         self.title = "Lineups"
@@ -34,36 +35,40 @@ class LineupsListController: UIViewController, UINavigationControllerDelegate, U
         tapRecognizer.addTarget(self, action: "didTapCreateView:")
         self.createView.addGestureRecognizer(tapRecognizer)
         
-        // Interface builder sucks
-        self.createView.sendSubviewToBack(createImageView)
-        
-        // Configure scrollView
+        // Scroll view
         view.addSubview(scrollView)
-        view.bringSubviewToFront(self.createView)
-        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         scrollView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         scrollView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         scrollView.topRancor.constraintEqualToRancor(view.topRancor).active = true
-        scrollView.contentInset = UIEdgeInsetsMake(84, 0, 48, 0)
         scrollView.alwaysBounceVertical = true
+        
+        scrollView.contentInset = UIEdgeInsetsMake(56 + 20, 0, 0, 0)
+        
+        // Create goes on top
+        view.bringSubviewToFront(self.createView)
     }
     
     func didTapCreateView(gestureRecognizer: UITapGestureRecognizer) {
         createNewLineup()
     }
+
+    override func didTapTitlebarButton(index: Int) {
+        if (index == 1) {
+            createNewLineup()
+        }
+    }
     
     func createNewLineup() {
         let nvc = LineupNewViewController(nibName: "LineupNewViewController", bundle: nil)
         nvc.listViewController = self
-        self.presentViewController(nvc, animated: true) { () -> Void in
-
-        }
+        newLineupVc = nvc
+        
+        RootViewController.sharedInstance.pushViewController(nvc)
     }
     
     func didSaveLineup() {
-        self.scrollView.hidden = false
         self.createView.hidden = true
         addLineup()
     }

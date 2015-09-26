@@ -29,7 +29,11 @@ class DraftboardNibControl: UIControl {
         nibView.userInteractionEnabled = false
         
         self.addSubview(nibView)
-        self.awakeFromNib()
+        self.willAwakeFromNib()
+    }
+    
+    func willAwakeFromNib() {
+        // subclass
     }
     
     func loadNib() -> UIView {

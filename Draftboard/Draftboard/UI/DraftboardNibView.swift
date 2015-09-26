@@ -26,7 +26,11 @@ class DraftboardNibView: UIView {
         nibView.frame = self.bounds
         nibView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.addSubview(nibView)
-        self.awakeFromNib()
+        self.willAwakeFromNib()
+    }
+    
+    func willAwakeFromNib() {
+        // subclass
     }
     
     func loadNib() -> UIView {

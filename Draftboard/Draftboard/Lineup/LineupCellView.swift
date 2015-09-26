@@ -19,7 +19,7 @@ class LineupCellView: DraftboardNibControl {
     @IBOutlet weak var avgValueLabel: DraftboardLabel!
     @IBOutlet weak var selectedView: DraftboardView!
     
-    override func awakeFromNib() {
+    override func willAwakeFromNib() {
         bottomBorderView.hidden = true
         _selectedView = selectedView
     }

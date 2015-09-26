@@ -33,18 +33,18 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="301" height="63"/>
+            <rect key="frame" x="0.0" y="0.0" width="307" height="63"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8T-NO-nh4" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="-1" y="0.0" width="302" height="63"/>
+                    <rect key="frame" x="0.0" y="0.0" width="307" height="63"/>
                     <color key="backgroundColor" red="0.92156863212585449" green="0.92941176891326904" blue="0.94901961088180542" alpha="1" colorSpace="calibratedRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="hidden" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K. Korver - DET" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-Xh-Aog" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="87" y="17" width="134" height="15"/>
+                    <rect key="frame" x="87" y="17" width="140" height="15"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
                     <color key="textColor" red="0.27450980392156865" green="0.28627450980392155" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36.8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBI-S0-PoW" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="242" y="33" width="45" height="17"/>
+                    <rect key="frame" x="248" y="33" width="45" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="45" id="7Ey-kR-7Fx"/>
                     </constraints>
@@ -85,13 +85,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMP-HY-kYS" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="87" y="34" width="134" height="14"/>
+                    <rect key="frame" x="87" y="34" width="140" height="14"/>
                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                     <color key="textColor" red="0.69019607839999997" green="0.69803921570000005" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9k-8w-azu" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="242" y="18" width="45" height="13"/>
+                    <rect key="frame" x="248" y="18" width="45" height="13"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="45" id="ETf-FX-H4B"/>
                     </constraints>
@@ -100,14 +100,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCF-pc-2Cx">
-                    <rect key="frame" x="15" y="62" width="286" height="1"/>
+                    <rect key="frame" x="15" y="62" width="292" height="1"/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="ypB-iF-A6u"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-mQ-tq1">
-                    <rect key="frame" x="15" y="0.0" width="286" height="1"/>
+                    <rect key="frame" x="15" y="0.0" width="292" height="1"/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="jnO-fx-ukd"/>
@@ -145,7 +145,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-134.5" y="-209.5"/>
+            <point key="canvasLocation" x="-131.5" y="-209.5"/>
         </view>
     </objects>
     <resources>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContestsListController: UIViewController {
+class ContestsListController: DraftboardViewController {
     
     @IBOutlet weak var lineupFilterButton: UIButton!
     @IBOutlet weak var gametypeFilterButton: UIButton!

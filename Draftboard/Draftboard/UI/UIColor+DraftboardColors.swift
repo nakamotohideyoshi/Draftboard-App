@@ -10,12 +10,11 @@ import UIKit
 
 extension UIColor {
     
-    convenience init(_ hex:Int, alpha:CGFloat) {
-        self.init(red:CGFloat((hex >> 16) & 0xff), green:CGFloat((hex >> 8) & 0xff), blue:CGFloat(hex & 0xff), alpha: alpha)
-    }
-    
-    convenience init(_ hex:Int) {
-        self.init(red:CGFloat((hex >> 16) & 0xff), green:CGFloat((hex >> 8) & 0xff), blue:CGFloat(hex & 0xff), alpha: 1.0)
+    convenience init(_ hex:UInt32, alpha:CGFloat = 1.0) {
+        let r = CGFloat((hex & 0xFF0000) >> 16) / 256.0
+        let g = CGFloat((hex & 0xFF00) >> 8) / 256.0
+        let b = CGFloat(hex & 0xFF) / 256.0
+        self.init(red:r, green:g, blue:b, alpha:alpha)
     }
     
     class func draftboardDarkText() -> UIColor {
@@ -27,7 +26,11 @@ extension UIColor {
     }
     
     class func draftboardGreen() -> UIColor {
-        return UIColor(0x34CC68)
+        return UIColor(0x00C68C)
+    }
+    
+    class func draftboardDarkGreen() -> UIColor {
+        return UIColor(0x00b47f)
     }
     
     class func draftboardDarkGray() -> UIColor {
@@ -39,7 +42,6 @@ extension UIColor {
     }
     
     class func draftboardSelected() -> UIColor {
-        //return draftboardLightGray()
         return .yellowColor()
     }
 }
