@@ -16,7 +16,17 @@ import UIKit
     @IBOutlet weak var sportImage: UIImageView!
     @IBOutlet weak var entryNumbers: UILabel!
     @IBOutlet weak var guaranteedLabel: DraftboardLabel!
-
+    
+    @IBInspectable var titleText: String {
+        get {
+            return title.text!
+        }
+        set {
+            title.text = newValue
+        }
+    
+    }
+    
     var nibView: UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -29,7 +39,7 @@ import UIKit
         self.setupNib()
     }
     
-    private func setupNib() {
+    func setupNib() {
         nibView = self.loadNib()
         nibView.frame = self.bounds
         nibView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]

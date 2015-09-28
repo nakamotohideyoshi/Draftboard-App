@@ -65,6 +65,12 @@
 		9349317E1BB33969005738D4 /* DraftboardFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9349317C1BB33969005738D4 /* DraftboardFilterButton.swift */; };
 		9349317F1BB33969005738D4 /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9349317D1BB33969005738D4 /* DraftboardFilterButton.xib */; };
 		934B5EDD1BB4AFFA00502FC6 /* LineupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934B5EDC1BB4AFFA00502FC6 /* LineupModel.swift */; };
+		934B5EE01BB5B42C00502FC6 /* DraftboardEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934B5EDF1BB5B42C00502FC6 /* DraftboardEnums.swift */; };
+		934B5EE31BB5BFD000502FC6 /* DraftboardLiveContestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934B5EE11BB5BFD000502FC6 /* DraftboardLiveContestCell.swift */; };
+		934B5EE41BB5BFD000502FC6 /* DraftboardLiveContestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934B5EE21BB5BFD000502FC6 /* DraftboardLiveContestCell.xib */; };
+		935EC2221BB5C92200FD1F18 /* MoneyBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EC2211BB5C92200FD1F18 /* MoneyBar.swift */; };
+		935EC2241BB5E4B400FD1F18 /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EC2231BB5E4B400FD1F18 /* LineupMoneyPoint.swift */; };
+		935EC22A1BB6178D00FD1F18 /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EC2291BB6178D00FD1F18 /* PieChart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -141,6 +147,12 @@
 		9349317C1BB33969005738D4 /* DraftboardFilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardFilterButton.swift; sourceTree = "<group>"; };
 		9349317D1BB33969005738D4 /* DraftboardFilterButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardFilterButton.xib; sourceTree = "<group>"; };
 		934B5EDC1BB4AFFA00502FC6 /* LineupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupModel.swift; sourceTree = "<group>"; };
+		934B5EDF1BB5B42C00502FC6 /* DraftboardEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DraftboardEnums.swift; path = Models/DraftboardEnums.swift; sourceTree = "<group>"; };
+		934B5EE11BB5BFD000502FC6 /* DraftboardLiveContestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DraftboardLiveContestCell.swift; path = Contests/DraftboardLiveContestCell.swift; sourceTree = "<group>"; };
+		934B5EE21BB5BFD000502FC6 /* DraftboardLiveContestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DraftboardLiveContestCell.xib; path = Contests/DraftboardLiveContestCell.xib; sourceTree = "<group>"; };
+		935EC2211BB5C92200FD1F18 /* MoneyBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoneyBar.swift; path = UI/MoneyBar.swift; sourceTree = "<group>"; };
+		935EC2231BB5E4B400FD1F18 /* LineupMoneyPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineupMoneyPoint.swift; path = Contests/LineupMoneyPoint.swift; sourceTree = "<group>"; };
+		935EC2291BB6178D00FD1F18 /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChart.swift; path = Contests/PieChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +185,7 @@
 		3E7860BD1B9FB0E7004013AB /* Draftboard */ = {
 			isa = PBXGroup;
 			children = (
+				934B5EDE1BB5B3FF00502FC6 /* Models */,
 				5D9C2FCB1BAC681D0076355D /* Photos */,
 				5D4E63331BAB74AD0033C4C2 /* Fonts */,
 				5DEFAE001BA9C43100A9AFC1 /* UI */,
@@ -277,11 +290,24 @@
 				934931701BB0C6FC005738D4 /* ContestsListController.swift */,
 				934931741BB201E6005738D4 /* DraftboardContestsCell.xib */,
 				934931761BB2068E005738D4 /* DraftboardContestsCell.swift */,
+				934B5EE21BB5BFD000502FC6 /* DraftboardLiveContestCell.xib */,
+				934B5EE11BB5BFD000502FC6 /* DraftboardLiveContestCell.swift */,
 				934931791BB30D4C005738D4 /* ContestsHeaderCell.xib */,
 				934931781BB30D4C005738D4 /* ContestsHeaderCell.swift */,
 				932737251BACA53100198AA9 /* ContestModel.swift */,
+				935EC2211BB5C92200FD1F18 /* MoneyBar.swift */,
+				935EC2231BB5E4B400FD1F18 /* LineupMoneyPoint.swift */,
+				935EC2291BB6178D00FD1F18 /* PieChart.swift */,
 			);
 			name = Contests;
+			sourceTree = "<group>";
+		};
+		934B5EDE1BB5B3FF00502FC6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				934B5EDF1BB5B42C00502FC6 /* DraftboardEnums.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +389,7 @@
 				5D96FBE21BAB870C000CBBC4 /* DraftboardIconButton.xib in Resources */,
 				5D4E63451BAB75D80033C4C2 /* OpenSans-BoldItalic.ttf in Resources */,
 				5D4E63461BAB75D80033C4C2 /* OpenSans-ExtraBold.ttf in Resources */,
+				934B5EE41BB5BFD000502FC6 /* DraftboardLiveContestCell.xib in Resources */,
 				5D4E63471BAB75D80033C4C2 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				5D4E63481BAB75D80033C4C2 /* OpenSans-Italic.ttf in Resources */,
 				5D4E63491BAB75D80033C4C2 /* OpenSans-Light.ttf in Resources */,
@@ -384,14 +411,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9349317E1BB33969005738D4 /* DraftboardFilterButton.swift in Sources */,
+				935EC22A1BB6178D00FD1F18 /* PieChart.swift in Sources */,
 				934931721BB0C6FC005738D4 /* ContestsListController.swift in Sources */,
 				3E7860E71B9FB1E2004013AB /* LineupsNavigationController.swift in Sources */,
 				5D6AAA5E1BA7870A00CEACE7 /* LineupCellView.swift in Sources */,
 				934931771BB2068E005738D4 /* DraftboardContestsCell.swift in Sources */,
 				5D4412181BAA163700A86111 /* Closures.swift in Sources */,
+				935EC2221BB5C92200FD1F18 /* MoneyBar.swift in Sources */,
 				5D6FB0281BAA4C890071A753 /* DraftboardView.swift in Sources */,
 				5D9C2FD31BAC83510076355D /* DraftboardImageView.swift in Sources */,
 				9349317A1BB30D4C005738D4 /* ContestsHeaderCell.swift in Sources */,
+				935EC2241BB5E4B400FD1F18 /* LineupMoneyPoint.swift in Sources */,
 				5DEFAE041BAA0B4000A9AFC1 /* LineupNewViewController.swift in Sources */,
 				3E7860E11B9FB195004013AB /* AppDelegate.swift in Sources */,
 				3E7860EF1B9FB225004013AB /* AccountViewController.swift in Sources */,
@@ -401,6 +431,7 @@
 				5DEFAE021BA9C48E00A9AFC1 /* DraftboardLabel.swift in Sources */,
 				932737261BACA53100198AA9 /* ContestModel.swift in Sources */,
 				5D7AA19B1BAB82D40043DE95 /* DraftboardButton.swift in Sources */,
+				934B5EE31BB5BFD000502FC6 /* DraftboardLiveContestCell.swift in Sources */,
 				934B5EDD1BB4AFFA00502FC6 /* LineupModel.swift in Sources */,
 				5D96FBE41BAB8723000CBBC4 /* DraftboardIconButton.swift in Sources */,
 				3E7860E31B9FB1B4004013AB /* TabController.swift in Sources */,
@@ -410,6 +441,7 @@
 				3E7860ED1B9FB216004013AB /* ContestsViewController.swift in Sources */,
 				3E7860E51B9FB1CF004013AB /* ResultsViewController.swift in Sources */,
 				932737201BAC9D5E00198AA9 /* ContestsNavigationController.swift in Sources */,
+				934B5EE01BB5B42C00502FC6 /* DraftboardEnums.swift in Sources */,
 				3EA8B5AB1BA7ABC1002EEC32 /* LayoutRancor.swift in Sources */,
 				5D6FB02A1BAA4C9A0071A753 /* DraftboardRoundedButton.swift in Sources */,
 			);

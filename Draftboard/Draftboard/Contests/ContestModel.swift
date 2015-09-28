@@ -16,6 +16,7 @@ class ContestModel: NSObject {
     var fee: Int = 10
     var prizes: Int = 100
     var entries: Int = 0
+    var live: Bool = false
     
     override init() {
         super.init()
@@ -26,7 +27,6 @@ class ContestModel: NSObject {
         }
         
         let b = Int(arc4random_uniform(2))
-        print(b)
         if b > 0 {
             multientry = true
         }
@@ -35,6 +35,13 @@ class ContestModel: NSObject {
         prizes = Int(arc4random_uniform(100)) + 10
         title = "$\(prizes) Free Roll"
         entries = Int(arc4random_uniform(5)) + 1
+    }
+    
+    convenience init(isLive: Bool?) {
+        self.init()
+        if isLive != nil {
+            live = isLive!
+        }
     }
     
     func feeDescription() -> String {

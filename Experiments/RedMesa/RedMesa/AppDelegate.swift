@@ -40,8 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let attributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().titleTextAttributes = attributes
         
+        
+        let pievc = PieChartViewController()
+        
         // Add all screens to the Tab Bar
-        tabber.setViewControllers([contestsNavigationController], animated: true)
+        tabber.setViewControllers([pievc, contestsNavigationController], animated: true)
         
         // setup window
         window!.rootViewController = tabber

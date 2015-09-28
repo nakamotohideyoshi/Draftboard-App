@@ -17,6 +17,18 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var lineupButton: DraftboardFilterButton!
     @IBOutlet weak var gametypeButton: DraftboardFilterButton!
     
+    var liveContests: Array<ContestModel> = {
+        var array = [ContestModel]()
+        array.append(ContestModel(isLive: true))
+        array.append(ContestModel(isLive: true))
+        array.append(ContestModel(isLive: true))
+        array.append(ContestModel(isLive: true))
+        array.append(ContestModel(isLive: true))
+        array.append(ContestModel(isLive: true))
+        return array
+    }()
+    
+    
     var contests: Array<ContestModel> = {
         var array = [ContestModel]()
         array.append(ContestModel())
@@ -55,6 +67,7 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
         lineupButton.text = lineups[0].name
         let lineupTapGesture = UITapGestureRecognizer(target: self, action: "switchLineup:")
         lineupButton.addGestureRecognizer(lineupTapGesture)
+        gametypeButton.text = GameType.Standard.rawValue
         let gameTypeTapGesture = UITapGestureRecognizer(target: self, action: "switchGameType:")
         gametypeButton.addGestureRecognizer(gameTypeTapGesture)
     }
@@ -71,45 +84,107 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
             (alert: UIAlertAction!) in
-            print("Cancel")
         }))
         
         self.presentViewController(alert, animated: true, completion: {})
     }
     
     func switchGameType(gesture: UITapGestureRecognizer) {
-        let location = gesture.locationInView(gesture.view?.superview)
-        print("tap location x:\(location.x) y:\(location.y)")
+
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+
+        let arrayOfGametypes = GameType.asArray
+        for index in 0..<arrayOfGametypes.count {
+            alert.addAction(UIAlertAction(title: arrayOfGametypes[index].rawValue, style: UIAlertActionStyle.Default, handler: {
+                (alert: UIAlertAction!) in
+                self.gametypeButton.text = arrayOfGametypes[index].rawValue
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
+            (alert: UIAlertAction!) in
+        }))
+        self.presentViewController(alert, animated: true, completion: {})
     }
     
     /*
         UITableViewDatasource
     */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        
+        var liveContestsCount = 0
+        var contestsCount = 0
+        
+        if liveContests.count > 0 {
+            liveContestsCount = 1
+        }
+        
+        if contests.count > 0 {
+            contestsCount = 1
+        }
+        
+        return liveContestsCount + contestsCount
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contests.count
+        
+        if section == 0 {
+            return liveContests.count
+        } else {
+            return contests.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
         
-        cell.title?.text = contests[indexPath.row].title
-        cell.subtitle?.text = contests[indexPath.row].feeDescription()
+        // check to see if it is in the live section or not
+        if indexPath.section == 0 {
         
-        if contests[indexPath.row].multientry == true {
-            cell.setEntries(contests[indexPath.row].entries)
+            cell.title?.text = liveContests[indexPath.row].title
+            cell.subtitle?.text = liveContests[indexPath.row].feeDescription()
+            
+            if liveContests[indexPath.row].multientry == true {
+                cell.setEntries(contests[indexPath.row].entries)
+            } else {
+                cell.noEntries()
+            }
+            
+            if liveContests[indexPath.row].guaranteed == true {
+                cell.setGuaranteed()
+            } else {
+                cell.setNotGuaranteed()
+            }
+            
+            if indexPath.row == (liveContests.count - 1) {
+                cell.lineView.removeFromSuperview()
+            } else {
+                cell.addSubview(cell.lineView)
+            }
+            
         } else {
-            cell.noEntries()
-        }
         
-        if contests[indexPath.row].guaranteed == true {
-            cell.setGuaranteed()
-        } else {
-            cell.setNotGuaranteed()
+            cell.title?.text = contests[indexPath.row].title
+            cell.subtitle?.text = contests[indexPath.row].feeDescription()
+            
+            if contests[indexPath.row].multientry == true {
+                cell.setEntries(contests[indexPath.row].entries)
+            } else {
+                cell.noEntries()
+            }
+            
+            if contests[indexPath.row].guaranteed == true {
+                cell.setGuaranteed()
+            } else {
+                cell.setNotGuaranteed()
+            }
+            
+            if indexPath.row == (contests.count - 1) {
+                cell.lineView.removeFromSuperview()
+            } else {
+                cell.addSubview(cell.lineView)
+            }
+        
         }
 
         return cell

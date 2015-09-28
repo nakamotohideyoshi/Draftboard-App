@@ -8,25 +8,10 @@
 
 import UIKit
 
-enum Sport: String {
-    
-    case basketball
-    case soccer
-    case baseball
-    case football
-    case lacross
-    case hockey
-    case golf
-    case parcheesy
-    case superSmashBrothers
-    case inPoint
-    
-}
-
 class LineupModel: NSObject {
 
     var name: String = "Warriors Stack"
-    var sport: Sport = .basketball
+    var sport: Sport = .Basketball
     
     override init() {
         super.init()
