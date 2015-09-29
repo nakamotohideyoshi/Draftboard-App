@@ -16,16 +16,7 @@ import UIKit
     @IBOutlet weak var sportImage: UIImageView!
     @IBOutlet weak var entryNumbers: UILabel!
     @IBOutlet weak var guaranteedLabel: DraftboardLabel!
-    
-    @IBInspectable var titleText: String {
-        get {
-            return title.text!
-        }
-        set {
-            title.text = newValue
-        }
-    
-    }
+    @IBOutlet weak var moneyBar: MoneyBar!
     
     var nibView: UIView!
     

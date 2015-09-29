@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9046"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DraftboardTabBar" customModule="Draftboard" customModuleProvider="target">
+            <connections>
+                <outlet property="contestsButton" destination="EFh-Gs-LJb" id="KbO-yU-51r"/>
+                <outlet property="lineLeadingConstraint" destination="Ynu-oi-zDp" id="IhR-qo-I46"/>
+                <outlet property="lineTrailingConstraint" destination="c06-zT-9eK" id="nZi-d6-OT7"/>
+                <outlet property="lineupsButton" destination="v5g-qQ-5ty" id="ojp-ic-GB4"/>
+                <outlet property="profileButton" destination="bI7-sM-IMf" id="FLw-5q-Y7N"/>
+                <outlet property="selectionLine" destination="t7O-z5-lkA" id="gXU-FC-Pas"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="558" height="73"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5g-qQ-5ty" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="184" height="73"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="tab-icon-jersey"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bI7-sM-IMf" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="374" y="0.0" width="184" height="73"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="tab-icon-profile"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7O-z5-lkA">
+                    <rect key="frame" x="0.0" y="71" width="184" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="FOZ-jQ-M6L"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFh-Gs-LJb" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="184" y="0.0" width="190" height="73"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="tab-icon-trophy"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="v5g-qQ-5ty" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.33" id="Axl-Xl-gT4"/>
+                <constraint firstAttribute="bottom" secondItem="t7O-z5-lkA" secondAttribute="bottom" id="DC4-i4-TUW"/>
+                <constraint firstAttribute="trailing" secondItem="bI7-sM-IMf" secondAttribute="trailing" id="LaA-x9-D8d"/>
+                <constraint firstItem="bI7-sM-IMf" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.33" id="Ldg-3S-DMB"/>
+                <constraint firstItem="bI7-sM-IMf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NuT-la-eyJ"/>
+                <constraint firstItem="EFh-Gs-LJb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PIs-iA-9AV"/>
+                <constraint firstItem="v5g-qQ-5ty" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="Wkn-Ic-tdi"/>
+                <constraint firstItem="t7O-z5-lkA" firstAttribute="leading" secondItem="v5g-qQ-5ty" secondAttribute="leading" id="Ynu-oi-zDp"/>
+                <constraint firstItem="v5g-qQ-5ty" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZQG-2W-rwE"/>
+                <constraint firstItem="EFh-Gs-LJb" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="aQk-MV-gkP"/>
+                <constraint firstItem="t7O-z5-lkA" firstAttribute="trailing" secondItem="v5g-qQ-5ty" secondAttribute="trailing" id="c06-zT-9eK"/>
+                <constraint firstItem="v5g-qQ-5ty" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jCz-eG-w37"/>
+                <constraint firstItem="bI7-sM-IMf" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="npW-h3-wtO"/>
+                <constraint firstItem="EFh-Gs-LJb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tDE-tY-htw"/>
+                <constraint firstItem="EFh-Gs-LJb" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.34" id="tQ5-Lh-R3O"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="489" y="-89.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="tab-icon-jersey" width="12" height="22"/>
+        <image name="tab-icon-profile" width="22" height="22"/>
+        <image name="tab-icon-trophy" width="22" height="22"/>
+    </resources>
+</document>

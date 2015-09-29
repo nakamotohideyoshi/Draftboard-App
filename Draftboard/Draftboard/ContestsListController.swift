@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ContestsListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ContestsListController: DraftboardViewController, UITableViewDelegate, UITableViewDataSource {
     
     let normalContestCellReuseIdentifier   = "normalContestCell"
+    let liveContestCellReuseIdentifier     = "liveContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
 
     @IBOutlet weak var tableView: UITableView!    
@@ -26,8 +27,7 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
         array.append(ContestModel(isLive: true))
         array.append(ContestModel(isLive: true))
         return array
-    }()
-    
+        }()
     
     var contests: Array<ContestModel> = {
         var array = [ContestModel]()
@@ -53,16 +53,18 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
         array.append(LineupModel())
         array.append(LineupModel())
         return array
-    }()
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         self.automaticallyAdjustsScrollViewInsets = false
 
         tableView.registerClass(DraftboardContestsCell.self, forCellReuseIdentifier: normalContestCellReuseIdentifier)
+        tableView.registerClass(DraftboardContestsCell.self, forCellReuseIdentifier: liveContestCellReuseIdentifier)
         tableView.registerClass(ContestsHeaderCell.self, forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 46, 0)
         
         lineupButton.text = lineups[0].name
         let lineupTapGesture = UITapGestureRecognizer(target: self, action: "switchLineup:")
@@ -136,16 +138,17 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
-        
         // check to see if it is in the live section or not
         if indexPath.section == 0 {
-        
+
+            let cell = tableView.dequeueReusableCellWithIdentifier(liveContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
+
             cell.title?.text = liveContests[indexPath.row].title
-            cell.subtitle?.text = liveContests[indexPath.row].feeDescription()
+            cell.subtitle.hidden = true
+            cell.moneyBar.hidden = false
             
             if liveContests[indexPath.row].multientry == true {
-                cell.setEntries(contests[indexPath.row].entries)
+                cell.setEntries(liveContests[indexPath.row].entries)
             } else {
                 cell.noEntries()
             }
@@ -156,16 +159,22 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
                 cell.setNotGuaranteed()
             }
             
+            cell.lineView.hidden = false
             if indexPath.row == (liveContests.count - 1) {
-                cell.lineView.removeFromSuperview()
-            } else {
-                cell.addSubview(cell.lineView)
+                cell.lineView.hidden = true
             }
             
+            cell.moneyBar.layoutIfNeeded()
+            
+            return cell
         } else {
-        
+
+            let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
+
             cell.title?.text = contests[indexPath.row].title
             cell.subtitle?.text = contests[indexPath.row].feeDescription()
+            cell.subtitle.hidden = false
+            cell.moneyBar.hidden = true
             
             if contests[indexPath.row].multientry == true {
                 cell.setEntries(contests[indexPath.row].entries)
@@ -179,15 +188,12 @@ class ContestsListController: UIViewController, UITableViewDelegate, UITableView
                 cell.setNotGuaranteed()
             }
             
+            cell.lineView.hidden = false
             if indexPath.row == (contests.count - 1) {
-                cell.lineView.removeFromSuperview()
-            } else {
-                cell.addSubview(cell.lineView)
+                cell.lineView.hidden = true
             }
-        
+            return cell
         }
-
-        return cell
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

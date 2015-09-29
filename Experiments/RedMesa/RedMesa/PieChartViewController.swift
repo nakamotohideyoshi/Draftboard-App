@@ -13,6 +13,8 @@ class PieChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Pie"
+        
         self.view.backgroundColor = UIColor.whiteColor()
         
 //        let frame = CGRectMake(50, 50, 100, 100)

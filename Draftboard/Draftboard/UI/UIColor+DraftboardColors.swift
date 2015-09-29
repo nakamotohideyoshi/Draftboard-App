@@ -10,12 +10,11 @@ import UIKit
 
 extension UIColor {
     
-    convenience init(_ hex:Int, alpha:CGFloat) {
-        self.init(red:CGFloat((hex >> 16) & 0xff), green:CGFloat((hex >> 8) & 0xff), blue:CGFloat(hex & 0xff), alpha: alpha)
-    }
-    
-    convenience init(_ hex:Int) {
-        self.init(red:CGFloat((hex >> 16) & 0xff), green:CGFloat((hex >> 8) & 0xff), blue:CGFloat(hex & 0xff), alpha: 1.0)
+    convenience init(_ hex:UInt32, alpha:CGFloat = 1.0) {
+        let r = CGFloat((hex & 0xFF0000) >> 16) / 256.0
+        let g = CGFloat((hex & 0xFF00) >> 8) / 256.0
+        let b = CGFloat(hex & 0xFF) / 256.0
+        self.init(red:r, green:g, blue:b, alpha:alpha)
     }
     
     convenience init(photoshopRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
@@ -37,7 +36,11 @@ extension UIColor {
     }
     
     class func draftboardGreen() -> UIColor {
-        return UIColor(0x34CC68)
+        return UIColor(0x00C68C)
+    }
+    
+    class func draftboardDarkGreen() -> UIColor {
+        return UIColor(0x00b47f)
     }
     
     class func draftboardDarkGray() -> UIColor {
@@ -48,6 +51,10 @@ extension UIColor {
         return UIColor(0xEBEDF2)
     }
     
+    class func draftboardSelected() -> UIColor {
+        return .yellowColor()
+    }
+
     class func funkyGreen() -> UIColor {
         return UIColor(photoshopRed: 0, green: 198, blue: 140, alpha: 1)
     }

@@ -27,45 +27,53 @@ class MoneyBar: UIView {
             setupView()
         }
     }
-
+    @IBInspectable var cornerRadius: CGFloat = 4.0 {
+        didSet{
+            setupView()
+        }
+    }
+    
+    override func layoutSubviews() {
+        setupView()
+    }
     
     private func setupView() {
-    
+        
+        backgroundColor = .clearColor()
+        
         // Setup the stuff
-        let width = frame.width
-        let height = frame.height / 5
-        let yOffset = (frame.height / 2) - (height / 2)
+        let width = bounds.width
+        let height = bounds.height / 5
+        let yOffset = (bounds.height / 2) - (height / 2)
         let winningWidth = (width / CGFloat(entries)) * CGFloat(winningEntries)
         let leftMargin = width - winningWidth
         let cornerRadius = height / 2
-
+        
+        entryBar.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         entryBar.frame = CGRectMake(0, yOffset, width, height)
         entryBar.layer.cornerRadius = cornerRadius
         entryBar.backgroundColor = barColor
-        entryBar.removeFromSuperview()
+//        entryBar.removeFromSuperview()
         self.addSubview(entryBar)
         
         // Add winning bar
+        moneyBar.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         moneyBar.frame = CGRectMake(leftMargin, yOffset, winningWidth, height)
         moneyBar.backgroundColor = moneyBarColor
         moneyBar.layer.cornerRadius = cornerRadius
-        moneyBar.removeFromSuperview()
+//        moneyBar.removeFromSuperview()
         self.addSubview(moneyBar)
         
         
         // Add a pie chart
+        pieChartOne.backgroundColor = .blueColor()
         pieChartOne.frame = CGRectMake(30, 0, frame.height, frame.height)
-        pieChartOne.removeFromSuperview()
+//        pieChartOne.removeFromSuperview()
         self.addSubview(pieChartOne)
-        
     }
     
     
     // MARK: Overrides ******************************************
-    
-    override class func layerClass()->AnyClass{
-        return CAGradientLayer.self
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

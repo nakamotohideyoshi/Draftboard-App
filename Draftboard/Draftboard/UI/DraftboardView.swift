@@ -11,6 +11,15 @@ import UIKit
 @IBDesignable
 class DraftboardView: UIView {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.layer.rasterizationScale = UIScreen.mainScreen().scale
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
         didSet {
             layer.borderColor = borderColor.CGColor
@@ -27,6 +36,7 @@ class DraftboardView: UIView {
         didSet {
             layer.cornerRadius = cornerRadius
             layer.masksToBounds = cornerRadius > 0
+            layer.shouldRasterize = cornerRadius > 0
         }
     }
 }

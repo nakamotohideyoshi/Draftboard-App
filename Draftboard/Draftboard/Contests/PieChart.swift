@@ -16,26 +16,9 @@ enum pieStatusColor: String {
     
 }
 
-//extension UIColor {
-//    
-//    class func funkyGreen() -> UIColor {
-//        return UIColor(photoshopRed: 0, green: 198, blue: 140, alpha: 255)
-//    }
-//
-////    convenience init(photoshopRed red: Int, green: Int, blue: Int, alpha: Int) {
-////        
-////        let red   = CGFloat(Float(red)/255)
-////        let green = CGFloat(Float(green)/255)
-////        let blue  = CGFloat(Float(blue)/255)
-////        let alpha = CGFloat(Float(alpha)/255)
-////        
-////        self.init(red:red, green:green, blue: blue, alpha: alpha)
-////    }
-//
-//}
-
 let π:CGFloat = CGFloat(M_PI)
 
+@IBDesignable
 class PieChart: UIView {
     
     var percentComplete: CGFloat = 0.35
@@ -49,8 +32,11 @@ class PieChart: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = UIColor.clearColor()
         
-        self.backgroundColor = UIColor.whiteColor()
+        print("init(frame:) called")
+        print(frame)
+        setupViews()
     }
     
     convenience init(frame: CGRect, border: CGFloat, margin: CGFloat) {
@@ -58,6 +44,16 @@ class PieChart: UIView {
         
         self.borderWidth = border
         self.pieMargin = margin
+        setupViews()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        setupViews()
+    }
+    
+    override func layoutSubviews() {
+        setupViews()
     }
     
     func setColors(colors: pieStatusColor, inMoney: Bool) {
@@ -83,8 +79,22 @@ class PieChart: UIView {
         }
     
     }
-    
+
     override func drawRect(rect: CGRect) {
+        print("drawRect called")
+        setupViews()   
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        print("prepareForInterfaceBuilder called")
+//        setupViews()
+    }
+    
+    func setupViews() {
+    
+        print("setupViews called")
+        print("bounds: \(bounds.width) \(bounds.height)")
+        print("frame: \(frame.origin.x), \(frame.origin.y), \(frame.width), \(frame.height)")
         
         func degreesToRadians(degrees: CGFloat) -> CGFloat {
             // 1 = π/180
@@ -105,13 +115,14 @@ class PieChart: UIView {
         func percentToEndAngle(start: CGFloat, percent: CGFloat) -> CGFloat {
             var result = floatToRadians(percent)
             result = start - result
-            print("percentToEndAngle: \(result)")
             return result
         }
         
         // all circles
         let center = CGPoint(x:bounds.width/2, y: bounds.height/2)
         let radius: CGFloat = max(bounds.width, bounds.height)
+//        let center = CGPoint(x:frame.width/2, y:frame.height/2)
+//        let radius: CGFloat = max(frame.width, frame.height)
         
         // BackgroundCircle
         let backgroundCirclePath = UIBezierPath(arcCenter: center,
@@ -162,13 +173,6 @@ class PieChart: UIView {
         pieColor.setStroke()
         path.stroke()
         
-    }
-    
-    // MARK: Overrides ******************************************
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-//        setupView()
     }
     
 }

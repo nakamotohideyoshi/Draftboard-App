@@ -8,17 +8,16 @@
 
 import UIKit
 
-class LineupNewViewController: UIViewController {
-    @IBOutlet weak var editButton: DraftboardIconButton!
-    @IBOutlet weak var saveButton: DraftboardRoundedButton!
+class LineupNewViewController: DraftboardModalViewController {
+    @IBOutlet weak var editButton: DraftboardRoundButton!
+    @IBOutlet weak var saveButton: DraftboardRoundButton!
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
+    @IBOutlet weak var nameTextField: UITextField!
     
     weak var listViewController: LineupsListController?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         let sv = self.view as! UIScrollView
         sv.alwaysBounceVertical = true
         
@@ -26,14 +25,15 @@ class LineupNewViewController: UIViewController {
         saveTapRecognizer.addTarget(self, action: "didTapSave:")
         saveButton.addGestureRecognizer(saveTapRecognizer)
         
+        let app = UIApplication.sharedApplication()
+        app.setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+        
         // Do any additional setup after loading the view.
     }
     
     func didTapSave(gestureRecognizer: UITapGestureRecognizer) {
         listViewController?.didSaveLineup()
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
-            // nothing here
-        })
+        RootViewController.sharedInstance.popViewController()
     }
     
     override func didReceiveMemoryWarning() {

@@ -20,6 +20,7 @@
                 <outlet property="entryNumbers" destination="b1z-5h-dFe" id="MBs-a7-Gu4"/>
                 <outlet property="guaranteedLabel" destination="LvA-pf-AyX" id="s38-nh-6rM"/>
                 <outlet property="lineView" destination="maG-oM-fJ3" id="kkU-Ny-iYr"/>
+                <outlet property="moneyBar" destination="5VO-9p-8Ja" id="K7t-Mm-PME"/>
                 <outlet property="sportImage" destination="4Vx-rf-7yq" id="zun-xc-CEA"/>
                 <outlet property="subtitle" destination="13k-de-wRH" id="ckS-lF-a30"/>
                 <outlet property="title" destination="l9A-sV-IqA" id="wkl-Bh-UiC"/>
@@ -93,14 +94,35 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VO-9p-8Ja" customClass="MoneyBar" customModule="Draftboard" customModuleProvider="target">
+                        <rect key="frame" x="83" y="48" width="503" height="24"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Kdt-xh-V6i"/>
+                            <constraint firstAttribute="height" constant="24" id="Lm2-hn-cYV"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="barColor">
+                                <color key="value" red="0.26912452860000002" green="0.36128866790000003" blue="0.35010836919999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="moneyBarColor">
+                                <color key="value" red="0.0" green="1" blue="0.028106128130000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="5VO-9p-8Ja" firstAttribute="top" secondItem="l9A-sV-IqA" secondAttribute="bottom" constant="7" id="4R4-XM-lID"/>
                     <constraint firstAttribute="trailingMargin" secondItem="maG-oM-fJ3" secondAttribute="trailing" constant="10" id="5bJ-e8-gFP"/>
                     <constraint firstItem="13k-de-wRH" firstAttribute="top" secondItem="l9A-sV-IqA" secondAttribute="bottom" constant="5" id="8J6-lC-aYU"/>
                     <constraint firstItem="b1z-5h-dFe" firstAttribute="leading" secondItem="4Vx-rf-7yq" secondAttribute="trailing" constant="5" id="8rj-Ut-a77"/>
                     <constraint firstAttribute="trailingMargin" secondItem="l9A-sV-IqA" secondAttribute="trailing" constant="49" id="92Z-nG-Zyy"/>
                     <constraint firstItem="maG-oM-fJ3" firstAttribute="leading" secondItem="sYf-HX-yBZ" secondAttribute="leadingMargin" constant="10" id="9Ls-I4-AP8"/>
+                    <constraint firstItem="5VO-9p-8Ja" firstAttribute="leading" secondItem="b1z-5h-dFe" secondAttribute="trailing" constant="10" id="9mQ-UL-GNy"/>
                     <constraint firstAttribute="bottomMargin" secondItem="maG-oM-fJ3" secondAttribute="bottom" constant="-8" id="Fg1-Gj-j04"/>
                     <constraint firstItem="LvA-pf-AyX" firstAttribute="leading" secondItem="l9A-sV-IqA" secondAttribute="trailing" constant="10" id="JXv-5H-wig"/>
                     <constraint firstAttribute="bottomMargin" secondItem="13k-de-wRH" secondAttribute="bottom" constant="10" id="Juj-RD-cbF"/>
@@ -118,6 +140,7 @@
                     <constraint firstItem="LvA-pf-AyX" firstAttribute="centerY" secondItem="l9A-sV-IqA" secondAttribute="centerY" id="hgJ-Kf-gVj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="LvA-pf-AyX" secondAttribute="trailing" constant="10" id="mMh-nF-Kur"/>
                     <constraint firstItem="l9A-sV-IqA" firstAttribute="leading" secondItem="sYf-HX-yBZ" secondAttribute="leadingMargin" constant="48" id="mg9-aL-afE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5VO-9p-8Ja" secondAttribute="trailing" constant="10" id="niR-H0-h7B"/>
                     <constraint firstAttribute="bottomMargin" secondItem="13k-de-wRH" secondAttribute="bottom" constant="10" id="p8m-ud-mI3"/>
                     <constraint firstAttribute="trailingMargin" secondItem="13k-de-wRH" secondAttribute="trailing" constant="49" id="xR5-1b-j4y"/>
                 </constraints>

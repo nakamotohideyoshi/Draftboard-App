@@ -15,7 +15,7 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
     var lineView: UIView = UIView()
     var lineWidth: CGFloat = 0.0
     let leftMargin: CGFloat = 24.0
-    let veritcalMargins: CGFloat = 20.0
+    let verticalMargins: CGFloat = 20.0
     let fontSize: CGFloat = 13.0
     let subFontSize: CGFloat = 13.0
     
@@ -34,14 +34,14 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
         lineWidth = contentView.frame.width - leftMargin
         self.backgroundColor = .whiteColor()
         
-        titleLabel = UILabel(frame: CGRectMake(leftMargin, veritcalMargins, self.bounds.size.width, 16.0))
+        titleLabel = UILabel(frame: CGRectMake(leftMargin, verticalMargins, self.bounds.size.width, 16.0))
         titleLabel.autoresizingMask = .FlexibleWidth
         titleLabel.font = .systemFontOfSize(fontSize)
         titleLabel.textColor = .draftColorTextBlue()
         titleLabel.textAlignment = .Left
         contentView.addSubview(titleLabel)
         
-        subLabel = UILabel(frame: CGRectMake(leftMargin, self.bounds.size.height-veritcalMargins-subFontSize, self.bounds.size.width, 13.0))
+        subLabel = UILabel(frame: CGRectMake(leftMargin, self.bounds.size.height-verticalMargins-subFontSize, self.bounds.size.width, 13.0))
         subLabel.autoresizingMask = .FlexibleWidth
         subLabel.font = .systemFontOfSize(subFontSize)
         subLabel.textColor = .draftColorTextLightBlue()
@@ -55,6 +55,11 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
         squareView.backgroundColor = .blueColor()
         squareView.frame = CGRectMake(contentView.frame.size.width, contentView.frame.origin.y, contentView.frame.size.width, contentView.frame.size.height)
         contentView.addSubview(squareView)
+        
+        let pieOne = PieChart()
+        pieOne.frame = CGRectMake(leftMargin, self.bounds.size.height-verticalMargins-subFontSize, 24.0, 24.0)
+        contentView.addSubview(pieOne)
+        
         
         // react to swiping.
         leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "didSwipeLeft:")
@@ -83,8 +88,8 @@ class CellOne: UICollectionViewCell, UIGestureRecognizerDelegate {
 //        print("layoutSubViewsCalled: width:\(contentView.frame.size.width), height:\(contentView.frame.size.height)")
         
         lineWidth = contentView.frame.width - leftMargin
-        titleLabel.frame = CGRectMake(leftMargin, veritcalMargins, self.bounds.size.width, 16.0)
-        subLabel.frame = CGRectMake(leftMargin, self.bounds.size.height-veritcalMargins-fontSize, self.bounds.size.width, 13.0)
+        titleLabel.frame = CGRectMake(leftMargin, verticalMargins, self.bounds.size.width, 16.0)
+        subLabel.frame = CGRectMake(leftMargin, self.bounds.size.height-verticalMargins-fontSize, self.bounds.size.width, 13.0)
         lineView.frame = CGRectMake(leftMargin, self.bounds.size.height - 1, lineWidth, 0.5)
         
         if buttonsExposed {
