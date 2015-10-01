@@ -23,13 +23,6 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Properties for navigation
-        self.title = "Lineups"
-        let filterButton = UIBarButtonItem(title: "Sport: All", style: .Plain, target: self, action: "filterLineups")
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "createNewLineup")
-        self.navigationItem.leftBarButtonItem = filterButton
-        self.navigationItem.rightBarButtonItem = addButton
-        
         // Tap recognizer
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: "didTapCreateView:")
@@ -44,8 +37,6 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         scrollView.topRancor.constraintEqualToRancor(view.topRancor).active = true
         scrollView.alwaysBounceVertical = true
         
-        scrollView.contentInset = UIEdgeInsetsMake(56 + 20, 0, 0, 0)
-        
         // Create goes on top
         view.bringSubviewToFront(self.createView)
     }
@@ -54,8 +45,8 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         createNewLineup()
     }
 
-    override func didTapTitlebarButton(index: Int) {
-        if (index == 1) {
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if (buttonType == .Plus) {
             createNewLineup()
         }
     }
@@ -115,5 +106,17 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Store card
         self.lineupCardViews.append(cardView)
+    }
+    
+    override func titlebarTitle() -> String {
+        return "Lineups".uppercaseString
+    }
+    
+    override func titlebarLeftButtonType() -> TitlebarButtonType {
+        return .Menu
+    }
+    
+    override func titlebarRightButtonType() -> TitlebarButtonType {
+        return .Plus
     }
 }

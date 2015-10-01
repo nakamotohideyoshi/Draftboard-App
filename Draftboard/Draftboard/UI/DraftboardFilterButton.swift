@@ -12,8 +12,8 @@ import UIKit
 
     @IBOutlet weak var label: DraftboardLabel!
     
-    override func awakeFromNib() {
-//        super.awakeFromNib()
+    override func willAwakeFromNib() {
+        super.willAwakeFromNib()
         // Initialization code
     }
     
@@ -22,5 +22,4 @@ import UIKit
             label.text = text
         }
     }
-    
 }

@@ -14,10 +14,10 @@ class DraftboardRoundButton: DraftboardButton {
         super.willAwakeFromNib()
         
         self.cornerRadius = 4.0
-        self.borderColor = .draftboardGreen()
+        self.borderColor = .draftboardAccentColor()
         self.borderWidth = 1.3
         self.bgColor = .clearColor()
-        self.textColor = .draftboardGreen()
+        self.textColor = .draftboardAccentColor()
         self.textHighlightColor = .whiteColor()
     }
 

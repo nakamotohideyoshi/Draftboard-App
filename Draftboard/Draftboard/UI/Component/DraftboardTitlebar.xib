@@ -23,8 +23,8 @@
             <rect key="frame" x="0.0" y="0.0" width="454" height="77"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE HERE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC5-RU-zug" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="83" y="27" width="288" height="23"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE HERE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC5-RU-zug" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="114" y="30" width="227" height="18"/>
                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -32,53 +32,35 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
                             <real key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeightMultiple">
+                            <real key="value" value="0.80000000000000004"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wea-6W-Ll3" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wea-6W-Ll3" customClass="DraftboardTitlebarButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="73" height="77"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="95" id="fOc-JY-5Gs"/>
-                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="titlebar-icon-menu"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="fOc-JY-5Gs"/>
-                        </mask>
-                    </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBb-pO-uoO" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBb-pO-uoO" customClass="DraftboardTitlebarButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="381" y="0.0" width="73" height="77"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="titlebar-icon-plus"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <constraints>
                 <constraint firstItem="lC5-RU-zug" firstAttribute="leading" secondItem="Wea-6W-Ll3" secondAttribute="trailing" constant="10" id="FN4-1X-nzd"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HJr-9P-khl"/>
-                <constraint firstItem="Wea-6W-Ll3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OLc-ld-jx7"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PsP-w3-iSP"/>
+                <constraint firstItem="lC5-RU-zug" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="R4P-u7-DYp"/>
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="leading" secondItem="lC5-RU-zug" secondAttribute="trailing" constant="10" id="TVz-TY-rTh"/>
-                <constraint firstAttribute="bottom" secondItem="Wea-6W-Ll3" secondAttribute="bottom" id="dE8-Ie-xBV"/>
+                <constraint firstItem="lC5-RU-zug" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VKp-cB-GpT"/>
                 <constraint firstAttribute="trailing" secondItem="NBb-pO-uoO" secondAttribute="trailing" id="dHo-Yc-U4m"/>
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="ggJ-lt-PQe"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.16" id="jRE-bL-mde"/>
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kIM-u8-53E"/>
-                <constraint firstItem="lC5-RU-zug" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="koj-iM-b0Z"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="mr8-pS-f1o"/>
                 <constraint firstItem="lC5-RU-zug" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nDl-IL-ZkO"/>
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.16" id="tgd-ug-oFA"/>
@@ -87,9 +69,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="OLc-ld-jx7"/>
-                    <exclude reference="dE8-Ie-xBV"/>
-                    <exclude reference="koj-iM-b0Z"/>
+                    <exclude reference="FN4-1X-nzd"/>
+                    <exclude reference="TVz-TY-rTh"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="218" y="6.5"/>

@@ -38,7 +38,8 @@ class DraftboardNibControl: UIControl {
     
     func loadNib() -> UIView {
         let bundle = NSBundle(forClass: self.dynamicType)
-        let views = bundle.loadNibNamed(self.nibName(), owner: self, options: nil)
+        let nib = UINib(nibName: self.nibName(), bundle: bundle)
+        let views = nib.instantiateWithOwner(self, options: nil)
         return views.first as! UIView
     }
     

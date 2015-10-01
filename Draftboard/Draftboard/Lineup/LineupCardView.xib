@@ -90,7 +90,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="sh4-bV-UG2" secondAttribute="trailing" id="2JK-iA-8ZN"/>
                 <constraint firstItem="fD3-nh-e49" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="9bH-Ta-pfQ"/>
@@ -105,24 +105,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <point key="canvasLocation" x="-542" y="-43"/>
-        </view>
-        <view contentMode="scaleToFill" id="Mz0-G9-3WP">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="29" y="61"/>
-        </view>
-        <view contentMode="scaleToFill" id="fpU-Hq-jIm">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="64" y="93"/>
-        </view>
-        <view contentMode="scaleToFill" id="itn-WH-vYb">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="-30" y="169"/>
         </view>
     </objects>
 </document>

@@ -21,28 +21,16 @@
             <rect key="frame" x="0.0" y="0.0" width="558" height="73"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5g-qQ-5ty" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5g-qQ-5ty" customClass="DraftboardTabBarButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="184" height="73"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="tab-icon-jersey"/>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
-                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bI7-sM-IMf" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bI7-sM-IMf" customClass="DraftboardTabBarButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="374" y="0.0" width="184" height="73"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="tab-icon-profile"/>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
-                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7O-z5-lkA">
@@ -55,16 +43,10 @@
                         <constraint firstAttribute="height" constant="2" id="FOZ-jQ-M6L"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFh-Gs-LJb" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFh-Gs-LJb" customClass="DraftboardTabBarButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="184" y="0.0" width="190" height="73"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="tab-icon-trophy"/>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
-                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>

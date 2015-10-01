@@ -36,6 +36,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Z0Y-aA-pK4" firstAttribute="width" relation="lessThanOrEqual" secondItem="uzI-Vo-ooj" secondAttribute="width" constant="-56" id="KZw-Bc-Thn"/>
                 <constraint firstItem="Z0Y-aA-pK4" firstAttribute="leading" secondItem="hS4-ez-ytB" secondAttribute="trailing" constant="10" id="feU-d4-tdg"/>
                 <constraint firstItem="hS4-ez-ytB" firstAttribute="centerY" secondItem="uzI-Vo-ooj" secondAttribute="centerY" constant="1" id="h1n-YB-ao3"/>
                 <constraint firstItem="Z0Y-aA-pK4" firstAttribute="centerX" secondItem="uzI-Vo-ooj" secondAttribute="centerX" id="ltu-Hy-Apk"/>

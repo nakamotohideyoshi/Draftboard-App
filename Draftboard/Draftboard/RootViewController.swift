@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class RootViewController: DraftboardViewController, DraftboardTabBarDelegate, DraftboardTitlebarDelegate {
+final class RootViewController: DraftboardViewController, DraftboardTabBarDelegate {
     
     static let sharedInstance = RootViewController(nibName: "RootViewController", bundle: nil)
     
@@ -22,10 +22,13 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.delegate = self
-        titlebar.delegate = self
+        
         vcs = [DraftboardViewController]()
         self.pushViewController(list)
+        
+        tabBar.delegate = self
+        titlebar.delegate = self
+        titlebar.dataSource = self
     }
     
     func pushViewController(vc: DraftboardViewController) {
@@ -75,25 +78,38 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
         
         vcs = [DraftboardViewController]()
         
-        if (vc != nil) {
-            self.pushViewController(vc!)
+        if let newvc = vc {
+            self.pushViewController(newvc)
+            titlebar.dataSource = newvc
         }
     }
     
-    func didTapTabButtonAtIndex(index: Int) {
-        if (index == 0) {
+    func didTapTabButton(buttonType: TabBarButtonType) {
+        if (buttonType == .Lineups) {
             self.changeSections(list)
         }
-        else if (index == 1) {
+        else if (buttonType == .Contests) {
             self.changeSections(contests)
         }
-        else {
+        else if (buttonType == .Profile) {
             self.changeSections(nil)
         }
     }
     
-    override func didTapTitlebarButton(index: Int) {
-        vcs.last?.didTapTitlebarButton(index)
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        vcs.last?.didTapTitlebarButton(buttonType)
+    }
+    
+    override func titlebarTitle() -> String? {
+        return vcs.last?.titlebarTitle()
+    }
+    
+    override func titlebarLeftButtonType() -> TitlebarButtonType? {
+        return vcs.last?.titlebarLeftButtonType()
+    }
+    
+    override func titlebarRightButtonType() -> TitlebarButtonType? {
+        return vcs.last?.titlebarRightButtonType()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

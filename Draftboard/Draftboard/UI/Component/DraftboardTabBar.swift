@@ -9,35 +9,40 @@
 import UIKit
 
 protocol DraftboardTabBarDelegate {
-    func didTapTabButtonAtIndex(index: Int)
+    func didTapTabButton(buttonType: TabBarButtonType)
 }
 
 @IBDesignable
 class DraftboardTabBar: DraftboardNibView {
     
-    @IBOutlet weak var lineupsButton: DraftboardButton!
-    @IBOutlet weak var contestsButton: DraftboardButton!
-    @IBOutlet weak var profileButton: DraftboardButton!
+    @IBOutlet weak var lineupsButton: DraftboardTabBarButton!
+    @IBOutlet weak var contestsButton: DraftboardTabBarButton!
+    @IBOutlet weak var profileButton: DraftboardTabBarButton!
     
     @IBOutlet weak var lineLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var lineTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var selectionLine: UIView!
     
     var delegate: DraftboardTabBarDelegate?
-    var buttons: [DraftboardButton]!
+    var buttons: [DraftboardTabBarButton]!
     var selectedIndex = 0
     
     override func willAwakeFromNib() {
         buttons = [lineupsButton, contestsButton, profileButton]
         
+        lineupsButton.buttonType = .Lineups
+        contestsButton.buttonType = .Contests
+        profileButton.buttonType = .Profile
+        
+        iconColor = .whiteColor()
+        selectedColor = .draftboardAccentColor()
+        
         for (_, button) in buttons.enumerate() {
             button.addTarget(self, action: "buttonTap:", forControlEvents: .TouchUpInside)
-            button.iconHighlightColor = selectedColor
-            button.iconColor = iconColor
         }
     }
     
-    func buttonTap(button: DraftboardButton) {
+    func buttonTap(button: DraftboardTabBarButton) {
         let index = buttons.indexOf(button)
         if (index != nil) {
             selectButtonAtIndex(index!, animated: true)
@@ -67,7 +72,7 @@ class DraftboardTabBar: DraftboardNibView {
         self.updateSelectionLine(index, animated: animated)
         
         // Inform delegate
-        self.delegate?.didTapTabButtonAtIndex(index)
+        self.delegate?.didTapTabButton(button.buttonType!)
     }
     
     func updateSelectionLine(index: Int, animated: Bool) {
@@ -109,13 +114,13 @@ class DraftboardTabBar: DraftboardNibView {
     }
     
     @IBInspectable
-    var selectedColor: UIColor = .draftboardGreen() {
+    var selectedColor: UIColor = .draftboardAccentColor() {
         didSet {
             for (_, button) in buttons.enumerate() {
                 button.iconHighlightColor = selectedColor
             }
             
-            lineupsButton.iconColor = selectedColor
+            buttons[selectedIndex].iconColor = selectedColor
             selectionLine.backgroundColor = selectedColor
         }
     }
@@ -126,6 +131,8 @@ class DraftboardTabBar: DraftboardNibView {
             for (_, button) in buttons.enumerate() {
                 button.iconColor = iconColor
             }
+            
+            buttons[selectedIndex].iconColor = selectedColor
         }
     }
 }

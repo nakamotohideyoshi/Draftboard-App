@@ -57,10 +57,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        self.automaticallyAdjustsScrollViewInsets = false
 
         tableView.registerClass(DraftboardContestsCell.self, forCellReuseIdentifier: normalContestCellReuseIdentifier)
         tableView.registerClass(DraftboardContestsCell.self, forCellReuseIdentifier: liveContestCellReuseIdentifier)

@@ -27,27 +27,29 @@ extension UIColor {
         self.init(red:red, green:green, blue: blue, alpha: alpha)
     }
     
-    class func draftboardDarkText() -> UIColor {
+    // MARK: Draftboard palette
+    
+    class func draftboardTextDarkColor() -> UIColor {
         return UIColor(0x46495E)
     }
     
-    class func draftboardLightText() -> UIColor {
+    class func draftboardTextLightColor() -> UIColor {
         return UIColor(0xB0B2C1)
     }
     
-    class func draftboardGreen() -> UIColor {
+    class func draftboardAccentColor() -> UIColor {
         return UIColor(0x00C68C)
     }
     
-    class func draftboardDarkGreen() -> UIColor {
+    class func draftboardAccentDarkColor() -> UIColor {
         return UIColor(0x00b47f)
     }
     
-    class func draftboardDarkGray() -> UIColor {
+    class func draftboardBgDarkColor() -> UIColor {
         return UIColor(0x0A0D13)
     }
     
-    class func draftboardLightGray() -> UIColor {
+    class func draftboardBgLightColor() -> UIColor {
         return UIColor(0xEBEDF2)
     }
     
@@ -59,9 +61,8 @@ extension UIColor {
         return UIColor(photoshopRed: 0, green: 198, blue: 140, alpha: 1)
     }
     
-    /*
-        Colors for the pie charts
-    */
+    // MARK: Pie chart colors
+    
     class func moneyRangeBackground() -> UIColor {
         return UIColor(photoshopRed: 94, green: 106, blue: 127, alpha: 0.2)
     }
@@ -109,5 +110,4 @@ extension UIColor {
     class func moneyDarkRed() -> UIColor {
         return UIColor(photoshopRed: 255, green: 30, blue: 109, alpha: 0.2)
     }
-    
 }

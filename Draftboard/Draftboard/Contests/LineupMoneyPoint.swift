@@ -31,9 +31,8 @@ class LineupMoneyPoint: UIView {
         //
         
         self.frame = frame
-        var width  = frame.width
-        var height = frame.height
-        
+        let width  = frame.width
+        let height = frame.height
         
         circleView.frame = CGRectMake(0,0, width, height)
         circleView.backgroundColor = UIColor.greenColor()

@@ -37,6 +37,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd7-dN-DKs">
                     <rect key="frame" x="0.0" y="90" width="375" height="400"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGy-1h-eLE" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="350" width="375" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="J3Y-dM-WXc"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Utility"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="UTL"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpe-2j-Rd4" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <constraints>
@@ -100,17 +111,6 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Point Guard"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="PG"/>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGy-1h-eLE" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="350" width="375" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="J3Y-dM-WXc"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Utility"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="UTL"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QfC-KD-NHA" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">

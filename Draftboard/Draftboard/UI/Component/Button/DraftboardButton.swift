@@ -16,27 +16,29 @@ class DraftboardButton: DraftboardNibControl {
     
     override func willAwakeFromNib() {
         super.willAwakeFromNib()
-
-        nibView.layer.rasterizationScale = UIScreen.mainScreen().scale
         
-//        self.textHighlightColor = .whiteColor()
-//        self.textColor = .whiteColor()
-//        self.textSize = 10.0
-//        self.textValue = "BUTTON"
-//        self.textBold = false
-//        self.textLetterSpacing = 0.5
-//        self.borderHighlightColor = .draftboardGreen()
-//        self.borderColor = .draftboardGreen()
-//        self.borderWidth = 0.0
-//        self.cornerRadius = 0.0
-//        self.bgHighlightColor = .draftboardDarkGreen()
-//        self.bgColor = .draftboardGreen()
-//        self.iconColor = .whiteColor()
-//        self.iconHighlightColor = .whiteColor()
-//        self.selectedState = false
+        // Defaults
+        textHighlightColor = .whiteColor()
+        textColor = .whiteColor()
+        textSize = 10.0
+        textValue = "BUTTON"
+        textBold = false
+        textLetterSpacing = 0.5
+        borderHighlightColor = .draftboardAccentColor()
+        borderColor = .draftboardAccentColor()
+        borderWidth = 0.0
+        cornerRadius = 0.0
+        bgHighlightColor = .draftboardAccentDarkColor()
+        bgColor = .draftboardAccentColor()
+        iconColor = .whiteColor()
+        iconHighlightColor = .whiteColor()
+        selectedState = false
+        
+        // Needed for rounded corners
+        nibView.layer.rasterizationScale = UIScreen.mainScreen().scale
     }
     
-    // Mark: UIControl
+    // MARK: UIControl
     
     override var highlighted: Bool {
         didSet {
@@ -56,7 +58,7 @@ class DraftboardButton: DraftboardNibControl {
         }
     }
     
-    // Mark: Button state
+    // MARK: Button state
     
     @IBInspectable
     var selectedState: Bool = false {
@@ -69,7 +71,7 @@ class DraftboardButton: DraftboardNibControl {
         }
     }
     
-    // Mark: Text styling
+    // MARK: Text styling
     
     @IBInspectable
     var textHighlightColor: UIColor = .whiteColor()
@@ -116,10 +118,10 @@ class DraftboardButton: DraftboardNibControl {
     // MARK: Border
     
     @IBInspectable
-    var borderHighlightColor: UIColor = .draftboardGreen()
+    var borderHighlightColor: UIColor = .draftboardAccentColor()
     
     @IBInspectable
-    var borderColor: UIColor = .draftboardGreen() {
+    var borderColor: UIColor = .draftboardAccentColor() {
         didSet {
             nibView.layer.borderColor = borderColor.CGColor
         }
@@ -135,10 +137,10 @@ class DraftboardButton: DraftboardNibControl {
     // MARK: Bg
     
     @IBInspectable
-    var bgHighlightColor: UIColor = .draftboardDarkGreen()
+    var bgHighlightColor: UIColor = .draftboardAccentDarkColor()
     
     @IBInspectable
-    var bgColor: UIColor = .draftboardGreen() {
+    var bgColor: UIColor = .draftboardAccentColor() {
         didSet {
             nibView.backgroundColor = bgColor
         }
@@ -161,7 +163,7 @@ class DraftboardButton: DraftboardNibControl {
     var iconHighlightColor: UIColor = .whiteColor()
     
     @IBInspectable
-    var iconColor: UIColor? {
+    var iconColor: UIColor = .draftboardAccentColor() {
         didSet {
             nibView.tintColor = iconColor
         }

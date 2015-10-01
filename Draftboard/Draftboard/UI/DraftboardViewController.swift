@@ -8,8 +8,29 @@
 
 import UIKit
 
-class DraftboardViewController: UIViewController {
-    func didTapTitlebarButton(index: Int) {
-        print(index)
+class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, DraftboardTitlebarDataSource {
+    
+    func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        print("didTapTilebarButton:", buttonType)
+    }
+    
+    func titlebarTitle() -> String? {
+        return "No Title".uppercaseString
+    }
+    
+    func titlebarLeftButtonType() -> TitlebarButtonType? {
+        return .Menu
+    }
+    
+    func titlebarRightButtonType() -> TitlebarButtonType? {
+        return nil
+    }
+    
+    func titlebarLeftButtonText() -> String? {
+        return nil
+    }
+    
+    func titlebarRightButtonText() -> String? {
+        return nil
     }
 }
