@@ -45,6 +45,8 @@ class MoneyBar: UIView {
         let width = bounds.width
         let height = bounds.height / 5
         let yOffset = (bounds.height / 2) - (height / 2)
+        let pieHeight: CGFloat = 20.0
+        let pieYOffset = (bounds.height / 2) - (pieHeight / 2)
         let winningWidth = (width / CGFloat(entries)) * CGFloat(winningEntries)
         let leftMargin = width - winningWidth
         let cornerRadius = height / 2
@@ -53,7 +55,6 @@ class MoneyBar: UIView {
         entryBar.frame = CGRectMake(0, yOffset, width, height)
         entryBar.layer.cornerRadius = cornerRadius
         entryBar.backgroundColor = barColor
-//        entryBar.removeFromSuperview()
         self.addSubview(entryBar)
         
         // Add winning bar
@@ -61,15 +62,18 @@ class MoneyBar: UIView {
         moneyBar.frame = CGRectMake(leftMargin, yOffset, winningWidth, height)
         moneyBar.backgroundColor = moneyBarColor
         moneyBar.layer.cornerRadius = cornerRadius
-//        moneyBar.removeFromSuperview()
         self.addSubview(moneyBar)
         
         
         // Add a pie chart
-        pieChartOne.backgroundColor = .blueColor()
-        pieChartOne.frame = CGRectMake(30, 0, frame.height, frame.height)
-//        pieChartOne.removeFromSuperview()
+        pieChartOne.frame = CGRectMake(100, pieYOffset, pieHeight, pieHeight)
+        pieChartOne.setColors(pieStatusColor.Yellow, inMoney: true)
         self.addSubview(pieChartOne)
+        
+        /*
+            Needs to iterate over a series of entries and place them correctly
+            and set their colors correctly.
+        */
     }
     
     

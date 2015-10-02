@@ -24,6 +24,13 @@ class PieChart: UIView {
     var borderWidth: CGFloat = 5
     var pieMargin: CGFloat = 5
     
+    var contentView: UIView = UIView()
+    var pieLayer1: CAShapeLayer = CAShapeLayer()
+    var pieLayer2: CAShapeLayer = CAShapeLayer()
+    var pieLayer3: CAShapeLayer = CAShapeLayer()
+    var pieLayer4: CAShapeLayer = CAShapeLayer()
+
+    
     @IBInspectable var baseColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var borderColor: UIColor = UIColor.greenColor()
     @IBInspectable var pieColor: UIColor = UIColor.blueColor()
@@ -34,6 +41,7 @@ class PieChart: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.whiteColor()
+        drawPie()
     }
     
     convenience init(frame: CGRect, border: CGFloat, margin: CGFloat) {
@@ -41,9 +49,15 @@ class PieChart: UIView {
         
         self.borderWidth = border
         self.pieMargin = margin
+        drawPie()
     }
     
-    override func drawRect(rect: CGRect) {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        drawPie()
+    }
+    
+    func drawPie() {
         
         func degreesToRadians(degrees: CGFloat) -> CGFloat {
             // 1 = π/180
@@ -68,6 +82,16 @@ class PieChart: UIView {
             return result
         }
         
+        
+        // setup a contentView first
+        contentView.removeFromSuperview()
+        contentView = UIView(frame: self.bounds)
+        self.addSubview(contentView)
+        pieLayer1 = CAShapeLayer(layer: layer)
+        pieLayer2 = CAShapeLayer(layer: layer)
+        pieLayer3 = CAShapeLayer(layer: layer)
+        pieLayer4 = CAShapeLayer(layer: layer)
+        
         // all circles
         let center = CGPoint(x:bounds.width/2, y: bounds.height/2)
         let radius: CGFloat = max(bounds.width, bounds.height)
@@ -78,20 +102,19 @@ class PieChart: UIView {
             startAngle:floatToRadians(0),
             endAngle: floatToRadians(1),
             clockwise: true)
-        backgroundCirclePath.lineWidth = borderWidth
-        baseColor.setFill()
-        backgroundCirclePath.fill()
+//        backgroundCirclePath.lineWidth = borderWidth
+        pieLayer1.path = backgroundCirclePath.CGPath
+        pieLayer1.fillColor = baseColor.CGColor
         
         // BorderCircle
-        let BorderCirclePath = UIBezierPath(arcCenter: center,
+        let borderCirclePath = UIBezierPath(arcCenter: center,
             radius: radius/2 - borderWidth/2,
             startAngle:floatToRadians(0),
             endAngle: floatToRadians(1),
             clockwise: true)
-        BorderCirclePath.lineWidth = borderWidth
-        borderColor.setStroke()
-        BorderCirclePath.stroke()
-        
+        pieLayer2.path = borderCirclePath.CGPath
+        pieLayer2.lineWidth = borderWidth
+        pieLayer2.strokeColor = borderColor.CGColor
         
         // inner circle stuff
         let pieRadius: CGFloat = max(bounds.width-(2*(borderWidth+pieMargin)), bounds.height-(2*(borderWidth+pieMargin)))
@@ -103,10 +126,9 @@ class PieChart: UIView {
             startAngle:floatToRadians(0),
             endAngle: floatToRadians(1),
             clockwise: true)
-        
-        innerBackgroundCirclePath.lineWidth = arcWidth
-        pieBaseColor.setFill()
-        innerBackgroundCirclePath.fill()
+        pieLayer3.path = innerBackgroundCirclePath.CGPath
+        pieLayer3.lineWidth = arcWidth
+        pieLayer3.fillColor = pieBaseColor.CGColor
         
         // add the pie chart thing
         let startAngle: CGFloat = floatToRadians(0.75)
@@ -117,10 +139,15 @@ class PieChart: UIView {
             startAngle:startAngle,
             endAngle: endAngle,
             clockwise: false)
+        pieLayer4.path = path.CGPath
+        pieLayer4.lineWidth = arcWidth
+        pieLayer4.strokeColor = pieColor.CGColor
         
-        path.lineWidth = arcWidth
-        pieColor.setStroke()
-        path.stroke()
+
+        contentView.layer.addSublayer(pieLayer1)
+        contentView.layer.addSublayer(pieLayer2)
+        contentView.layer.addSublayer(pieLayer3)
+        contentView.layer.addSublayer(pieLayer4)
         
     }
     
