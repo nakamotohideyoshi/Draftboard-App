@@ -59,9 +59,9 @@ import UIKit
     }
     
     func setEntries(number: Int) {
-        entryNumbers.textColor = .draftboardAccentColor()
+        entryNumbers.textColor = UIColor.moneyGreen()
         entryNumbers.text = "\(number)"
-        sportImage.tintColor = .draftboardAccentColor()
+        sportImage.tintColor = UIColor.moneyGreen()
     }
     
     func noEntries() {
@@ -71,7 +71,7 @@ import UIKit
     }
     
     func setGuaranteed() {
-        guaranteedLabel.backgroundColor = .draftboardAccentColor()
+        guaranteedLabel.backgroundColor = .moneyGreen()
         guaranteedLabel.text = "G"
     }
     

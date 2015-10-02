@@ -30,10 +30,8 @@ class PieChartViewController: UIViewController {
         let pie4 = PieChart(frame: CGRectMake(200, 200, 100, 100))
         self.view.addSubview(pie4)
         
-        
 //        let π:CGFloat = CGFloat(M_PI)
 //        pie.transform = CGAffineTransformMakeRotation(90 * (2 * π))
-        
 
     }
 

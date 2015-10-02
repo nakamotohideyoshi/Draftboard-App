@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 enum pieStatusColor: String {
     
@@ -21,14 +22,20 @@ let π:CGFloat = CGFloat(M_PI)
 @IBDesignable
 class PieChart: UIView {
     
-    var percentComplete: CGFloat = 0.35
-    var borderWidth: CGFloat = 5
-    var pieMargin: CGFloat = 5
+    var percentComplete: CGFloat = 0.4
+    var borderWidth: CGFloat = 1
+    var pieMargin: CGFloat = 2
+    
+    var contentView: UIView = UIView()
+    var pieLayer1: CAShapeLayer = CAShapeLayer()
+    var pieLayer2: CAShapeLayer = CAShapeLayer()
+    var pieLayer3: CAShapeLayer = CAShapeLayer()
+    var pieLayer4: CAShapeLayer = CAShapeLayer()
     
     @IBInspectable var baseColor: UIColor = UIColor.moneyDarkBackground()
     @IBInspectable var borderColor: UIColor = UIColor.moneyGray()
-    @IBInspectable var pieColor: UIColor = UIColor.moneyBlue()
     @IBInspectable var pieBaseColor: UIColor = UIColor.moneyDarkBlue()
+    @IBInspectable var pieColor: UIColor = UIColor.moneyBlue()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,14 +87,14 @@ class PieChart: UIView {
     
     }
 
-    override func drawRect(rect: CGRect) {
-        print("drawRect called")
-        setupViews()   
-    }
+//    override func drawRect(rect: CGRect) {
+//        print("drawRect called")
+//        setupViews()   
+//    }
     
     override func prepareForInterfaceBuilder() {
         print("prepareForInterfaceBuilder called")
-//        setupViews()
+        setupViews()
     }
     
     func setupViews() {
@@ -117,12 +124,20 @@ class PieChart: UIView {
             result = start - result
             return result
         }
+
+        layer.masksToBounds = true
+        
+        // setup a contentView first
+        contentView.removeFromSuperview()
+        contentView = UIView(frame: self.bounds)
+        self.addSubview(contentView)
+        pieLayer1 = CAShapeLayer(layer: layer)
+        pieLayer2 = CAShapeLayer(layer: layer)
+        pieLayer3 = CAShapeLayer(layer: layer)
         
         // all circles
         let center = CGPoint(x:bounds.width/2, y: bounds.height/2)
         let radius: CGFloat = max(bounds.width, bounds.height)
-//        let center = CGPoint(x:frame.width/2, y:frame.height/2)
-//        let radius: CGFloat = max(frame.width, frame.height)
         
         // BackgroundCircle
         let backgroundCirclePath = UIBezierPath(arcCenter: center,
@@ -130,19 +145,18 @@ class PieChart: UIView {
             startAngle:floatToRadians(0),
             endAngle: floatToRadians(1),
             clockwise: true)
-        backgroundCirclePath.lineWidth = borderWidth
-        baseColor.setFill()
-        backgroundCirclePath.fill()
+        pieLayer1.path = backgroundCirclePath.CGPath
+        pieLayer1.fillColor = baseColor.CGColor
 
-        // BorderCircle
-        let BorderCirclePath = UIBezierPath(arcCenter: center,
+        // borderCircle
+        let borderCirclePath = UIBezierPath(arcCenter: center,
             radius: radius/2 - borderWidth/2,
             startAngle:floatToRadians(0),
             endAngle: floatToRadians(1),
             clockwise: true)
-        BorderCirclePath.lineWidth = borderWidth
-        borderColor.setStroke()
-        BorderCirclePath.stroke()
+        pieLayer2.path = borderCirclePath.CGPath
+        pieLayer2.lineWidth = borderWidth
+        pieLayer2.strokeColor = borderColor.CGColor
 
         // inner circle stuff
         let pieRadius: CGFloat = max(bounds.width-(2*(borderWidth+pieMargin)), bounds.height-(2*(borderWidth+pieMargin)))
@@ -150,29 +164,36 @@ class PieChart: UIView {
         
         // BackgroundCircle
         let innerBackgroundCirclePath = UIBezierPath(arcCenter: center,
-            radius: arcWidth,
+            radius: arcWidth/2 + (arcWidth / 4),
             startAngle:floatToRadians(0),
             endAngle: floatToRadians(1),
             clockwise: true)
-        
-        innerBackgroundCirclePath.lineWidth = arcWidth
-        pieBaseColor.setFill()
-        innerBackgroundCirclePath.fill()
+//        pieLayer3.fillColor = pieBaseColor.CGColor
+        pieLayer3.fillColor = UIColor.clearColor().CGColor
+        pieLayer3.strokeColor = pieBaseColor.CGColor
+        pieLayer3.lineWidth = arcWidth / 2
+        pieLayer3.path = innerBackgroundCirclePath.CGPath
+
         
         // add the pie chart thing
+        pieLayer4 = CAShapeLayer(layer: layer)
         let startAngle: CGFloat = floatToRadians(0.75)
         let endAngle: CGFloat = percentToEndAngle(startAngle, percent: percentComplete)
         
         let path = UIBezierPath(arcCenter: center,
-            radius: pieRadius/2 - arcWidth/2,
+            radius: arcWidth/2 + (arcWidth / 4),
             startAngle:startAngle,
             endAngle: endAngle,
             clockwise: false)
-        
-        path.lineWidth = arcWidth
-        pieColor.setStroke()
-        path.stroke()
-        
+        pieLayer4.fillColor = UIColor.clearColor().CGColor
+        pieLayer4.strokeColor = pieColor.CGColor
+        pieLayer4.lineWidth = arcWidth / 2
+        pieLayer4.path = path.CGPath
+
+        contentView.layer.addSublayer(pieLayer1)
+        contentView.layer.addSublayer(pieLayer2)
+        contentView.layer.addSublayer(pieLayer3)
+        contentView.layer.addSublayer(pieLayer4)
     }
     
 }

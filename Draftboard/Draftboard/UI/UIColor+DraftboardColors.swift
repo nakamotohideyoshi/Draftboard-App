@@ -19,10 +19,9 @@ extension UIColor {
     
     convenience init(photoshopRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
         
-        let red   = CGFloat(Float(red)/255)
-        let green = CGFloat(Float(green)/255)
-        let blue  = CGFloat(Float(blue)/255)
-        let alpha = CGFloat(Float(alpha)/255)
+        let red   = CGFloat(Float(red)/255.0)
+        let green = CGFloat(Float(green)/255.0)
+        let blue  = CGFloat(Float(blue)/255.0)
         
         self.init(red:red, green:green, blue: blue, alpha: alpha)
     }
