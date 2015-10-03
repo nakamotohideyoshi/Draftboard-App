@@ -15,7 +15,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupListController">
             <connections>
-                <outlet property="createIconImageView" destination="cw1-Md-SXf" id="aoa-PN-5Lt"/>
                 <outlet property="createImageView" destination="wEd-ga-bn1" id="I2d-ov-Dbi"/>
                 <outlet property="createView" destination="OQe-Dq-RT6" id="fA9-U8-C9i"/>
                 <outlet property="createViewButton" destination="KIh-Wp-jOB" id="yir-Yi-LnF"/>
@@ -31,18 +30,12 @@
                     <rect key="frame" x="30" y="5" width="315" height="632"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basketball-lineup.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wEd-ga-bn1">
-                            <rect key="frame" x="0.0" y="0.0" width="315" height="632"/>
+                            <rect key="frame" x="0.0" y="0.0" width="315" height="587"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a Lineup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G09-aq-qUZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="30" y="299" width="255" height="35"/>
-                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="25"/>
-                            <color key="textColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GET IN THE ACTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REV-yZ-qef" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="30" y="285" width="255" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GET IN THE ACTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REV-yZ-qef" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="22" y="22" width="271" height="14"/>
                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                            <color key="textColor" red="0.69019609689712524" green="0.69803923368453979" blue="0.75686275959014893" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
@@ -50,18 +43,10 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-basketball" translatesAutoresizingMaskIntoConstraints="NO" id="cw1-Md-SXf" customClass="DraftboardImageView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="151" y="339" width="14" height="14"/>
-                            <color key="tintColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIh-Wp-jOB" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="587" width="315" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="14" id="W5Q-HY-zAe"/>
-                                <constraint firstAttribute="height" constant="14" id="vhx-Lh-9Sz"/>
-                            </constraints>
-                        </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIh-Wp-jOB" customClass="DraftboardRoundButton" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="30" y="562" width="255" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="RJX-IT-x6n"/>
+                                <constraint firstAttribute="height" constant="45" id="RJX-IT-x6n"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -71,25 +56,57 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CREATE"/>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a Lineup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G09-aq-qUZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="20" y="36" width="273" height="41"/>
+                            <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="30"/>
+                            <color key="textColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="wEd-ga-bn1" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" id="00g-YD-FJm"/>
                         <constraint firstItem="wEd-ga-bn1" firstAttribute="centerY" secondItem="OQe-Dq-RT6" secondAttribute="centerY" id="15E-ag-hum"/>
-                        <constraint firstItem="KIh-Wp-jOB" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="30" id="4ZA-KO-rwN"/>
+                        <constraint firstItem="KIh-Wp-jOB" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" id="4ZA-KO-rwN"/>
+                        <constraint firstAttribute="trailing" secondItem="REV-yZ-qef" secondAttribute="trailing" constant="22" id="9wy-4a-x6O"/>
+                        <constraint firstAttribute="trailing" secondItem="wEd-ga-bn1" secondAttribute="trailing" id="H8P-6h-4ce"/>
                         <constraint firstAttribute="trailing" secondItem="G09-aq-qUZ" secondAttribute="trailing" constant="30" id="HiO-cN-8Yd"/>
-                        <constraint firstAttribute="trailing" secondItem="KIh-Wp-jOB" secondAttribute="trailing" constant="30" id="Of1-JP-yM4"/>
+                        <constraint firstItem="REV-yZ-qef" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="22" id="Mxi-aD-GHA"/>
+                        <constraint firstAttribute="trailing" secondItem="KIh-Wp-jOB" secondAttribute="trailing" id="Of1-JP-yM4"/>
                         <constraint firstItem="wEd-ga-bn1" firstAttribute="height" secondItem="OQe-Dq-RT6" secondAttribute="height" id="P5P-Sl-HQX"/>
                         <constraint firstItem="wEd-ga-bn1" firstAttribute="width" secondItem="OQe-Dq-RT6" secondAttribute="width" id="SvX-W6-9aD"/>
                         <constraint firstItem="REV-yZ-qef" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="30" id="VKb-ps-MUF"/>
                         <constraint firstItem="G09-aq-qUZ" firstAttribute="centerY" secondItem="OQe-Dq-RT6" secondAttribute="centerY" id="Vbp-OU-pAT"/>
+                        <constraint firstItem="G09-aq-qUZ" firstAttribute="top" secondItem="REV-yZ-qef" secondAttribute="bottom" id="WqV-Bi-vPH"/>
+                        <constraint firstItem="REV-yZ-qef" firstAttribute="top" secondItem="OQe-Dq-RT6" secondAttribute="top" constant="22" id="YVh-18-qA2"/>
+                        <constraint firstAttribute="bottom" secondItem="wEd-ga-bn1" secondAttribute="bottom" constant="45" id="ZQE-wD-EK0"/>
                         <constraint firstItem="wEd-ga-bn1" firstAttribute="centerX" secondItem="OQe-Dq-RT6" secondAttribute="centerX" id="bN4-gQ-tjz"/>
                         <constraint firstItem="G09-aq-qUZ" firstAttribute="top" secondItem="REV-yZ-qef" secondAttribute="bottom" id="gPC-HM-r5P"/>
                         <constraint firstItem="G09-aq-qUZ" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="30" id="gwv-Pk-Eo4"/>
-                        <constraint firstItem="cw1-Md-SXf" firstAttribute="centerX" secondItem="OQe-Dq-RT6" secondAttribute="centerX" id="kmF-wo-lNu"/>
+                        <constraint firstItem="wEd-ga-bn1" firstAttribute="top" secondItem="OQe-Dq-RT6" secondAttribute="top" id="hGN-5T-DUj"/>
+                        <constraint firstItem="G09-aq-qUZ" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="20" id="jh7-Tk-h5I"/>
+                        <constraint firstItem="G09-aq-qUZ" firstAttribute="leading" secondItem="REV-yZ-qef" secondAttribute="leading" id="ok8-sC-kFH"/>
                         <constraint firstAttribute="trailing" secondItem="REV-yZ-qef" secondAttribute="trailing" constant="30" id="qi3-Pv-uXd"/>
-                        <constraint firstItem="cw1-Md-SXf" firstAttribute="top" secondItem="G09-aq-qUZ" secondAttribute="bottom" constant="5" id="vYB-iL-oec"/>
-                        <constraint firstAttribute="bottom" secondItem="KIh-Wp-jOB" secondAttribute="bottom" constant="30" id="xvj-tw-jui"/>
+                        <constraint firstAttribute="trailing" secondItem="G09-aq-qUZ" secondAttribute="trailing" constant="22" id="wnb-gL-pGP"/>
+                        <constraint firstItem="G09-aq-qUZ" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="22" id="wz7-jx-EeQ"/>
+                        <constraint firstAttribute="bottom" secondItem="KIh-Wp-jOB" secondAttribute="bottom" id="xvj-tw-jui"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="15E-ag-hum"/>
+                            <exclude reference="P5P-Sl-HQX"/>
+                            <exclude reference="SvX-W6-9aD"/>
+                            <exclude reference="bN4-gQ-tjz"/>
+                            <exclude reference="VKb-ps-MUF"/>
+                            <exclude reference="qi3-Pv-uXd"/>
+                            <exclude reference="HiO-cN-8Yd"/>
+                            <exclude reference="Vbp-OU-pAT"/>
+                            <exclude reference="gPC-HM-r5P"/>
+                            <exclude reference="gwv-Pk-Eo4"/>
+                            <exclude reference="ok8-sC-kFH"/>
+                            <exclude reference="wz7-jx-EeQ"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <constraints>
@@ -103,7 +120,6 @@
         </view>
     </objects>
     <resources>
-        <image name="basketball-lineup.jpg" width="572" height="906"/>
-        <image name="icon-basketball" width="64" height="64"/>
+        <image name="basketball-lineup.jpg" width="592" height="914"/>
     </resources>
 </document>

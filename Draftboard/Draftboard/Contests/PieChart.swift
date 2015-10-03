@@ -14,7 +14,7 @@ enum pieStatusColor: String {
     case Red = "Red"
     case Yellow = "Yellow"
     case Blue = "Blue"
-    
+
 }
 
 let π:CGFloat = CGFloat(M_PI)
@@ -41,8 +41,8 @@ class PieChart: UIView {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clearColor()
         
-        print("init(frame:) called")
-        print(frame)
+//        print("init(frame:) called")
+//        print(frame)
         setupViews()
     }
     
@@ -93,15 +93,15 @@ class PieChart: UIView {
 //    }
     
     override func prepareForInterfaceBuilder() {
-        print("prepareForInterfaceBuilder called")
+//        print("prepareForInterfaceBuilder called")
         setupViews()
     }
     
     func setupViews() {
     
-        print("setupViews called")
-        print("bounds: \(bounds.width) \(bounds.height)")
-        print("frame: \(frame.origin.x), \(frame.origin.y), \(frame.width), \(frame.height)")
+//        print("setupViews called")
+//        print("bounds: \(bounds.width) \(bounds.height)")
+//        print("frame: \(frame.origin.x), \(frame.origin.y), \(frame.width), \(frame.height)")
         
         func degreesToRadians(degrees: CGFloat) -> CGFloat {
             // 1 = π/180

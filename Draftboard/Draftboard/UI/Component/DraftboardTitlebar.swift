@@ -38,6 +38,7 @@ class DraftboardTitlebar: DraftboardNibView {
     var titleLabelChanged = false
     
     var loaded = false
+    var completionHandler:(()->Void)?
     
     override func willAwakeFromNib() {
         super.willAwakeFromNib()
@@ -48,6 +49,8 @@ class DraftboardTitlebar: DraftboardNibView {
         
         // Set values
         willSet {
+            stopAnimating()
+            
             let newLeftButtonType = newValue?.titlebarLeftButtonType()
             let newRightButtonType = newValue?.titlebarRightButtonType()
             let newTitleText = newValue?.titlebarTitle()
@@ -110,15 +113,20 @@ class DraftboardTitlebar: DraftboardNibView {
         }
     }
     
+    func stopAnimating() {
+        completionHandler?()
+        completionHandler = nil
+
+        self.leftButton?.layer.removeAllAnimations()
+        self.rightButton?.layer.removeAllAnimations()
+        self.titleLabel?.layer.removeAllAnimations()
+    }
+    
     // MARK: Animation
     
     func changeElementsAnimated(animated: Bool) {
         
-        self.leftButton?.layer.removeAllAnimations()
-        self.rightButton?.layer.removeAllAnimations()
-        self.titleLabel?.layer.removeAllAnimations()
-        
-        let onComplete = { () -> Void in
+        completionHandler = { () -> Void in
             if (self.leftButtonChanged) {
                 self.leftButton?.removeFromSuperview()
                 self.leftButton = self.newLeftButton
@@ -138,7 +146,7 @@ class DraftboardTitlebar: DraftboardNibView {
         
         // Finish immediately
         if (!animated) {
-            onComplete()
+            completionHandler?()
             return
         }
         
@@ -163,7 +171,8 @@ class DraftboardTitlebar: DraftboardNibView {
             }
             
         }) { (complete) -> Void in
-            onComplete()
+            self.completionHandler?()
+            self.completionHandler = nil
         }
     }
     

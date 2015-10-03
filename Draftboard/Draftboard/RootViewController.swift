@@ -19,6 +19,7 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
     var vcs: [DraftboardViewController]!
     let list = LineupsListController(nibName: "LineupListController", bundle: nil)
     let contests = ContestsListController(nibName: "ContestsListController", bundle: nil)
+    let account = AccountViewController(nibName: "AccountViewController", bundle: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,8 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
         vc.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
         vc.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
         vc.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
+        
+        self.view.bringSubviewToFront(tabBar)
     }
     
     func popViewController() {
@@ -92,7 +95,7 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
             self.changeSections(contests)
         }
         else if (buttonType == .Profile) {
-            self.changeSections(nil)
+            self.changeSections(account)
         }
     }
     

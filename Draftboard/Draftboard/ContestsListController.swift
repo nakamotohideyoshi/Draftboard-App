@@ -210,5 +210,8 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
-
+    
+    override func titlebarTitle() -> String? {
+        return "Contests".uppercaseString
+    }
 }
