@@ -16,7 +16,8 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
     
-    let itemCount = Int(arc4random_uniform(12)) + 1
+//    let itemCount = Int(arc4random_uniform(12)) + 1
+    let itemCount = 4
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
     

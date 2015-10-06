@@ -31,11 +31,15 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         // Scroll view
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
-        scrollView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
-        scrollView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
-        scrollView.topRancor.constraintEqualToRancor(view.topRancor).active = true
-        scrollView.alwaysBounceVertical = true
+        scrollView.leftRancor.constraintEqualToRancor(view.leftRancor, constant: 20).active = true
+        scrollView.rightRancor.constraintEqualToRancor(view.rightRancor, constant: -20).active = true
+        scrollView.bottomRancor.constraintEqualToRancor(view.bottomRancor, constant: -20).active = true
+        scrollView.topRancor.constraintEqualToRancor(view.topRancor, constant: 20).active = true
+        scrollView.clipsToBounds = false
+        scrollView.delegate = self
+        scrollView.pagingEnabled = true
+        scrollView.alwaysBounceHorizontal = true
+        scrollView.showsHorizontalScrollIndicator = false
         
         // Create goes on top
         view.bringSubviewToFront(self.createView)
@@ -87,25 +91,28 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Set card dimensions
         cardView.translatesAutoresizingMaskIntoConstraints = false
-        cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor, multiplier: 0.9).active = true
-        cardView.centerXRancor.constraintEqualToRancor(scrollView.centerXRancor).active = true
-        cardView.heightRancor.constraintEqualToConstant(cardView.totalHeight).active = true
+        cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor).active = true
+        cardView.heightRancor.constraintEqualToRancor(scrollView.heightRancor).active = true
+        cardView.topRancor.constraintEqualToRancor(scrollView.topRancor).active = true
         
-        // Position card vertically
-        let lastCardView = lineupCardViews.last
-        if (lastCardView == nil) {
-            cardView.topRancor.constraintEqualToRancor(scrollView.topRancor).active = true
+        // Position card horizontally
+        if let lastCardView = lineupCardViews.last {
+            cardView.leftRancor.constraintEqualToRancor(lastCardView.rightRancor).active = true
         } else {
-            cardView.topRancor.constraintEqualToRancor(lastCardView!.bottomRancor, constant: 20).active = true
+            cardView.leftRancor.constraintEqualToRancor(scrollView.leftRancor).active = true
         }
         
-        // Attach to bottom of scrollView
+        // Attach to right edge / end of scrollView
         lastConstraint?.active = false
-        lastConstraint = cardView.bottomRancor.constraintEqualToRancor(scrollView.bottomRancor)
+        lastConstraint = cardView.rightRancor.constraintEqualToRancor(scrollView.rightRancor)
         lastConstraint?.active = true
         
         // Store card
         self.lineupCardViews.append(cardView)
+        
+        // Scroll to card
+        view.layoutIfNeeded()
+        scrollView.setContentOffset(cardView.frame.origin, animated: false)
     }
     
     override func titlebarTitle() -> String {
@@ -118,5 +125,25 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     
     override func titlebarRightButtonType() -> TitlebarButtonType {
         return .Plus
+    }
+}
+
+extension LineupsListController: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let page = scrollView.contentOffset.x / scrollView.frame.size.width
+        let pageIndex = Int(page)
+        let pageFraction = page - CGFloat(pageIndex)
+        for (i, card) in lineupCardViews.enumerate() {
+            if i == pageIndex {
+                card.alpha = 1.0 - (pageFraction * 0.75)
+            }
+            else if i == pageIndex + 1 {
+                card.alpha = (pageFraction * 0.75) + 0.25
+            }
+            else {
+                card.alpha = 0.25
+            }
+
+        }
     }
 }
