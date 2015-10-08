@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DraftboardTitlebar" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="bgView" destination="9x0-kL-hT6" id="eSW-LL-j7O"/>
                 <outlet property="leftButton" destination="Wea-6W-Ll3" id="ZtC-0X-A33"/>
                 <outlet property="rightButton" destination="NBb-pO-uoO" id="Gf0-JN-zxJ"/>
                 <outlet property="titleLabel" destination="lC5-RU-zug" id="nIa-KQ-VZE"/>
@@ -23,6 +24,10 @@
             <rect key="frame" x="0.0" y="0.0" width="454" height="77"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9x0-kL-hT6" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="454" height="77"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE HERE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lC5-RU-zug" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="114" y="30" width="227" height="18"/>
                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
@@ -51,8 +56,10 @@
                 </view>
             </subviews>
             <constraints>
+                <constraint firstItem="9x0-kL-hT6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8p2-xu-Mw2"/>
                 <constraint firstItem="lC5-RU-zug" firstAttribute="leading" secondItem="Wea-6W-Ll3" secondAttribute="trailing" constant="10" id="FN4-1X-nzd"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HJr-9P-khl"/>
+                <constraint firstAttribute="trailing" secondItem="9x0-kL-hT6" secondAttribute="trailing" id="NdP-vE-sir"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PsP-w3-iSP"/>
                 <constraint firstItem="lC5-RU-zug" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="R4P-u7-DYp"/>
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="leading" secondItem="lC5-RU-zug" secondAttribute="trailing" constant="10" id="TVz-TY-rTh"/>
@@ -61,8 +68,10 @@
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="ggJ-lt-PQe"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.16" id="jRE-bL-mde"/>
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kIM-u8-53E"/>
+                <constraint firstAttribute="bottom" secondItem="9x0-kL-hT6" secondAttribute="bottom" id="kdO-cH-N4K"/>
                 <constraint firstItem="Wea-6W-Ll3" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="mr8-pS-f1o"/>
                 <constraint firstItem="lC5-RU-zug" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nDl-IL-ZkO"/>
+                <constraint firstItem="9x0-kL-hT6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sPZ-kZ-Nhm"/>
                 <constraint firstItem="NBb-pO-uoO" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.16" id="tgd-ug-oFA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

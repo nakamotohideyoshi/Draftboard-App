@@ -16,28 +16,18 @@ struct TabBarButtonType : OptionSetType {
 }
 
 class DraftboardTabBarButton: DraftboardButton {
-    var buttonType: TabBarButtonType?
     
-    class func iconForType(type: TabBarButtonType?) -> UIImage? {
-        if (type == .Lineups) {
-            return UIImage(named: "tab-icon-jersey")
-        } else if (type == .Profile) {
-            return UIImage(named: "tab-icon-profile")
-        } else if (type == .Contests) {
-            return UIImage(named: "tab-icon-trophy")
-        }
-        
-        return nil
-    }
+    var buttonType: TabBarButtonType?
     
     convenience init(type: TabBarButtonType) {
         self.init(frame: CGRectMake(0, 0, 50, 50))
+        
         buttonType = type
-        iconImage = DraftboardTabBarButton.iconForType(type)
+        iconImage = iconForType(buttonType)
     }
     
-    override func willAwakeFromNib() {
-        super.willAwakeFromNib()
+    override func setDefaults() {
+        super.setDefaults()
         
         bgColor = .clearColor()
         bgHighlightColor = .clearColor()
@@ -46,7 +36,18 @@ class DraftboardTabBarButton: DraftboardButton {
         iconHighlightColor = .whiteColor()
     }
     
-    override func nibName() -> String {
-        return "DraftboardButton"
+    func iconForType(type: TabBarButtonType?) -> UIImage? {
+        var imgPath = ""
+        if (type == .Lineups) {
+            imgPath = "tab-icon-jersey"
+        } else if (type == .Profile) {
+            imgPath = "tab-icon-profile"
+        } else if (type == .Contests) {
+            imgPath = "tab-icon-trophy"
+        }
+        
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let img = UIImage(named: imgPath, inBundle: bundle, compatibleWithTraitCollection: self.traitCollection)
+        return img
     }
 }

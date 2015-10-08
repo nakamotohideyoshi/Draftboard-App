@@ -42,8 +42,8 @@ class AccountViewController: DraftboardViewController {
         return "Account".uppercaseString
     }
     
-    override func titlebarLeftButtonType() -> TitlebarButtonType {
-        return .Menu
+    override func titlebarLeftButtonType() -> TitlebarButtonType? {
+        return nil
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType? {

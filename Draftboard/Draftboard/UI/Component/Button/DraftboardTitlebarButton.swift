@@ -39,19 +39,13 @@ class DraftboardTitlebarButton: DraftboardButton {
     convenience init(type: TitlebarButtonType) {
         self.init(frame: CGRectMake(0, 0, 50, 50))
         buttonType = type
-        iconImage = DraftboardTitlebarButton.iconForType(type)
+        iconImage = DraftboardTitlebarButton.iconForType(buttonType)
     }
     
-    override func willAwakeFromNib() {
-        super.willAwakeFromNib()
-        
+    override func setDefaults() {
+        super.setDefaults()
         bgColor = .clearColor()
         bgHighlightColor = .clearColor()
-        
         iconHighlightColor = .draftboardAccentColor()
-    }
-    
-    override func nibName() -> String {
-        return "DraftboardButton"
     }
 }

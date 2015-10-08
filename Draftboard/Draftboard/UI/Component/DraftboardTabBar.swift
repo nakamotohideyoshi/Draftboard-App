@@ -12,34 +12,85 @@ protocol DraftboardTabBarDelegate {
     func didTapTabButton(buttonType: TabBarButtonType)
 }
 
+protocol DraftboardTabBarDataSource {
+    func tabBarButtons() -> TabBarButtonType
+}
+
 @IBDesignable
-class DraftboardTabBar: DraftboardNibView {
+class DraftboardTabBar: UIView {
     
-    @IBOutlet weak var lineupsButton: DraftboardTabBarButton!
-    @IBOutlet weak var contestsButton: DraftboardTabBarButton!
-    @IBOutlet weak var profileButton: DraftboardTabBarButton!
-    
-    @IBOutlet weak var lineLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var lineTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var selectionLine: UIView!
+    var lineLeftConstraint: NSLayoutConstraint?
+    var lineRightConstraint: NSLayoutConstraint?
+    var selectionLine: UIView!
     
     var delegate: DraftboardTabBarDelegate?
-    var buttons: [DraftboardTabBarButton]!
+    var dataSource: DraftboardTabBarDataSource?
+    
+    var buttons = [DraftboardTabBarButton]()
     var selectedIndex = 0
     
-    override func willAwakeFromNib() {
-        buttons = [lineupsButton, contestsButton, profileButton]
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.createButtons([.Lineups, .Contests, .Profile])
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.createButtons([.Lineups, .Contests, .Profile])
+    }
+    
+    func createButtons(buttonTypes: TabBarButtonType) {
         
-        lineupsButton.buttonType = .Lineups
-        contestsButton.buttonType = .Contests
-        profileButton.buttonType = .Profile
+        // Create buttons
+        if (buttonTypes.contains(.Lineups)) {
+            buttons.append(DraftboardTabBarButton(type: .Lineups))
+        }
+        if (buttonTypes.contains(.Contests)) {
+            buttons.append(DraftboardTabBarButton(type: .Contests))
+        }
+        if (buttonTypes.contains(.Profile)) {
+            buttons.append(DraftboardTabBarButton(type: .Profile))
+        }
         
+        // Constrain buttons
+        let buttonWidthRatio = 1.0 / CGFloat(buttons.count)
+        
+        for (i, button) in buttons.enumerate() {
+            self.addSubview(button)
+            button.addTarget(self, action: "buttonTap:", forControlEvents: .TouchUpInside)
+            
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.topRancor.constraintEqualToRancor(self.topRancor).active = true
+            button.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: buttonWidthRatio).active = true
+            button.heightRancor.constraintEqualToRancor(self.heightRancor).active = true
+            
+            if (i == 0) { // First button
+                button.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+            }
+            else if (i > 0 && i < buttons.count-1) { // Middle buttons
+                let previousButton = buttons[i-1]
+                button.leftRancor.constraintEqualToRancor(previousButton.rightRancor).active = true
+            }
+            else if (i == buttons.count-1) { // Last button
+                button.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+            }
+        }
+        
+        // Create selection line
+        selectionLine = UIView()
+        self.addSubview(selectionLine)
+        
+        // Constrain selection line
+        selectionLine.translatesAutoresizingMaskIntoConstraints = false
+        selectionLine.heightRancor.constraintEqualToConstant(2.0).active = true
+        selectionLine.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+        
+        // Move selected line
+        updateSelectionLine(selectedIndex, animated: false)
+        
+        // Set default colors
         iconColor = .whiteColor()
         selectedColor = .draftboardAccentColor()
-        
-        for (_, button) in buttons.enumerate() {
-            button.addTarget(self, action: "buttonTap:", forControlEvents: .TouchUpInside)
-        }
     }
     
     func buttonTap(button: DraftboardTabBarButton) {
@@ -81,16 +132,16 @@ class DraftboardTabBar: DraftboardNibView {
         let button = buttons[index]
         
         // Remove old line constraints
-        lineLeadingConstraint.active = false
-        lineTrailingConstraint.active = false
+        lineLeftConstraint?.active = false
+        lineRightConstraint?.active = false
         
         // Create new line constraints
-        lineLeadingConstraint = selectionLine.leadingRancor.constraintEqualToRancor(button.leadingRancor)
-        lineTrailingConstraint = selectionLine.trailingRancor.constraintEqualToRancor(button.trailingRancor)
+        lineLeftConstraint = selectionLine.leftRancor.constraintEqualToRancor(button.leftRancor)
+        lineRightConstraint = selectionLine.rightRancor.constraintEqualToRancor(button.rightRancor)
         
         // Activate new line constraints
-        lineTrailingConstraint.active = true
-        lineLeadingConstraint.active = true
+        lineLeftConstraint!.active = true
+        lineRightConstraint!.active = true
         
         // Animate the change?
         if (animated) {
@@ -105,7 +156,7 @@ class DraftboardTabBar: DraftboardNibView {
             anim.duration = 0.25
             anim.fromValue = fromValue
             anim.toValue = toValue
-            anim.timingFunction = CAMediaTimingFunction(controlPoints: 0.390, 0.575, 0.565, 1.000)
+            anim.timingFunction = CAMediaTimingFunction(controlPoints: 0.175, 0.885, 0.320, 1.275)
             
             // Apply animation
             selectionLine.layer.removeAllAnimations()

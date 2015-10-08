@@ -37,7 +37,6 @@
 		5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */; };
 		5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */; };
 		5D4B87101BB305CF00B58EDF /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B870F1BB305CF00B58EDF /* RootViewController.xib */; };
-		5D4B87351BB31AA800B58EDF /* DraftboardTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B87291BB31AA800B58EDF /* DraftboardTabBar.xib */; };
 		5D4B87461BB338BB00B58EDF /* DraftboardTitlebar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B87451BB338BB00B58EDF /* DraftboardTitlebar.xib */; };
 		5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633E1BAB750F0033C4C2 /* Oswald-Bold.ttf */; };
 		5D4E63421BAB75D80033C4C2 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633F1BAB750F0033C4C2 /* Oswald-Light.ttf */; };
@@ -97,7 +96,6 @@
 		5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */; };
 		5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */; };
 		5D9C2FD11BAC69BF0076355D /* court-floor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FD01BAC69BF0076355D /* court-floor.jpg */; };
-		5D9D68751BB5B59E00855501 /* DraftboardButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D9D68701BB5B59E00855501 /* DraftboardButton.xib */; };
 		5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */; };
 		9349317F1BB33969005738D4 /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9349317D1BB33969005738D4 /* DraftboardFilterButton.xib */; };
 		934B5EE01BB5B42C00502FC6 /* DraftboardEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934B5EDF1BB5B42C00502FC6 /* DraftboardEnums.swift */; };
@@ -193,7 +191,6 @@
 		5D4412171BAA163700A86111 /* Closures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 		5D4B870F1BB305CF00B58EDF /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTabBar.swift; sourceTree = "<group>"; };
-		5D4B87291BB31AA800B58EDF /* DraftboardTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardTabBar.xib; sourceTree = "<group>"; };
 		5D4B87371BB31AC800B58EDF /* UIColor+DraftboardColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DraftboardColors.swift"; sourceTree = "<group>"; };
 		5D4B87391BB31B0100B58EDF /* DraftboardImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardImageView.swift; sourceTree = "<group>"; };
 		5D4B873A1BB31B0100B58EDF /* DraftboardLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardLabel.swift; sourceTree = "<group>"; };
@@ -242,7 +239,6 @@
 		5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "basketball-lineup.jpg"; sourceTree = "<group>"; };
 		5D9C2FD01BAC69BF0076355D /* court-floor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "court-floor.jpg"; sourceTree = "<group>"; };
 		5D9D686F1BB5B59E00855501 /* DraftboardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardButton.swift; sourceTree = "<group>"; };
-		5D9D68701BB5B59E00855501 /* DraftboardButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardButton.xib; sourceTree = "<group>"; };
 		5D9D68731BB5B59E00855501 /* DraftboardRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardRoundButton.swift; sourceTree = "<group>"; };
 		5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalViewController.swift; sourceTree = "<group>"; };
 		5D9E99531BB615590017E332 /* DraftboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardViewController.swift; sourceTree = "<group>"; };
@@ -420,7 +416,6 @@
 			children = (
 				5D9D686E1BB5B52200855501 /* Button */,
 				5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */,
-				5D4B87291BB31AA800B58EDF /* DraftboardTabBar.xib */,
 				5D4B87431BB3388E00B58EDF /* DraftboardTitlebar.swift */,
 				5D4B87451BB338BB00B58EDF /* DraftboardTitlebar.xib */,
 			);
@@ -460,7 +455,6 @@
 			isa = PBXGroup;
 			children = (
 				5D9D686F1BB5B59E00855501 /* DraftboardButton.swift */,
-				5D9D68701BB5B59E00855501 /* DraftboardButton.xib */,
 				5D9D68731BB5B59E00855501 /* DraftboardRoundButton.swift */,
 				5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */,
 				5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */,
@@ -601,8 +595,6 @@
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D4B87101BB305CF00B58EDF /* RootViewController.xib in Resources */,
-				5D9D68751BB5B59E00855501 /* DraftboardButton.xib in Resources */,
-				5D4B87351BB31AA800B58EDF /* DraftboardTabBar.xib in Resources */,
 				5D6237C01BB61F7B0007E62A /* LineupCellView.xib in Resources */,
 				5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */,
 				5D4E63421BAB75D80033C4C2 /* Oswald-Light.ttf in Resources */,

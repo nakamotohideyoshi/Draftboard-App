@@ -33,4 +33,8 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
     func titlebarRightButtonText() -> String? {
         return nil
     }
+    
+    func titlebarBgHidden() -> Bool {
+        return true
+    }
 }

@@ -9,19 +9,40 @@
 import UIKit
 
 @IBDesignable
-class DraftboardButton: DraftboardNibControl {
+class DraftboardButton: UIControl {
+    var label: DraftboardLabel!
+    var iconImageView: UIImageView!
     
-    @IBOutlet weak var label: DraftboardLabel!
-    @IBOutlet weak var iconImageView: UIImageView!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
     
-    override func willAwakeFromNib() {
-        super.willAwakeFromNib()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func setup() {
+        self.layer.rasterizationScale = UIScreen.mainScreen().scale
         
-        // Defaults
+        label = DraftboardLabel()
+        self.addSubview(label)
+        constrainLabel()
+        
+        iconImageView = UIImageView()
+        iconImageView.contentMode = .Center
+        self.addSubview(iconImageView)
+        constrainIconImageView()
+        
+        setDefaults()
+    }
+    
+    func setDefaults() {
         textHighlightColor = .whiteColor()
         textColor = .whiteColor()
         textSize = 10.0
-        textValue = "BUTTON"
+        textValue = "button".uppercaseString
         textBold = false
         textLetterSpacing = 0.5
         borderHighlightColor = .draftboardAccentColor()
@@ -33,9 +54,20 @@ class DraftboardButton: DraftboardNibControl {
         iconColor = .whiteColor()
         iconHighlightColor = .whiteColor()
         selectedState = false
-        
-        // Needed for rounded corners
-        nibView.layer.rasterizationScale = UIScreen.mainScreen().scale
+    }
+    
+    func constrainLabel() {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXRancor.constraintEqualToRancor(self.centerXRancor).active = true
+        label.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
+    }
+    
+    func constrainIconImageView() {
+        iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+        iconImageView.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+        iconImageView.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+        iconImageView.topRancor.constraintEqualToRancor(self.topRancor).active = true
     }
     
     // MARK: UIControl
@@ -44,16 +76,16 @@ class DraftboardButton: DraftboardNibControl {
         didSet {
             if (highlighted) {
                 label.textColor = textHighlightColor
-                nibView.layer.borderColor = borderHighlightColor.CGColor
-                nibView.backgroundColor = bgHighlightColor
-                nibView.tintColor = iconHighlightColor
+                self.tintColor = iconHighlightColor
+                self.layer.borderColor = borderHighlightColor.CGColor
+                self.backgroundColor = bgHighlightColor
 
             }
             else {
                 label.textColor = textColor
-                nibView.layer.borderColor = borderColor.CGColor
-                nibView.backgroundColor = bgColor
-                nibView.tintColor = iconColor
+                self.tintColor = iconColor
+                self.layer.borderColor = borderColor.CGColor
+                self.backgroundColor = bgColor
             }
         }
     }
@@ -91,7 +123,7 @@ class DraftboardButton: DraftboardNibControl {
     }
     
     @IBInspectable
-    var textValue: String = "BUTTON" {
+    var textValue: String = "button".uppercaseString {
         didSet {
             label.text = textValue
         }
@@ -123,18 +155,18 @@ class DraftboardButton: DraftboardNibControl {
     @IBInspectable
     var borderColor: UIColor = .draftboardAccentColor() {
         didSet {
-            nibView.layer.borderColor = borderColor.CGColor
+            self.layer.borderColor = borderColor.CGColor
         }
     }
     
     @IBInspectable
     var borderWidth: CGFloat = 0.0 {
         didSet {
-            nibView.layer.borderWidth = borderWidth
+            self.layer.borderWidth = borderWidth
         }
     }
     
-    // MARK: Bg
+    // MARK: Background
     
     @IBInspectable
     var bgHighlightColor: UIColor = .draftboardAccentDarkColor()
@@ -142,7 +174,7 @@ class DraftboardButton: DraftboardNibControl {
     @IBInspectable
     var bgColor: UIColor = .draftboardAccentColor() {
         didSet {
-            nibView.backgroundColor = bgColor
+            self.backgroundColor = bgColor
         }
     }
     
@@ -151,9 +183,9 @@ class DraftboardButton: DraftboardNibControl {
     @IBInspectable
     var cornerRadius: CGFloat = 0.0 {
         didSet {
-            nibView.layer.cornerRadius = cornerRadius
-            nibView.layer.masksToBounds = cornerRadius > 0
-            nibView.layer.shouldRasterize = cornerRadius > 0
+            self.layer.cornerRadius = cornerRadius
+            self.layer.masksToBounds = cornerRadius > 0
+            self.layer.shouldRasterize = cornerRadius > 0
         }
     }
     
@@ -165,7 +197,7 @@ class DraftboardButton: DraftboardNibControl {
     @IBInspectable
     var iconColor: UIColor = .draftboardAccentColor() {
         didSet {
-            nibView.tintColor = iconColor
+            self.tintColor = iconColor
         }
     }
     
@@ -179,12 +211,55 @@ class DraftboardButton: DraftboardNibControl {
             } else {
                 label.hidden = true
             }
-            
-            if (selectedState) {
-                nibView.tintColor = iconHighlightColor
-            } else {
-                nibView.tintColor = iconColor
-            }
         }
+    }
+    
+    // MARK: Interface builder sucks
+    
+    override func prepareForInterfaceBuilder() {
+        let _textHighlightColor = textHighlightColor
+        textHighlightColor = _textHighlightColor
+        
+        let _textColor = textColor
+        textColor = _textColor
+        
+        let _textSize = textSize
+        textSize = _textSize
+        
+        let _textValue = textValue
+        textValue = _textValue
+        
+        let _textBold = textBold
+        textBold = _textBold
+        
+        let _textLetterSpacing = textLetterSpacing
+        textLetterSpacing = _textLetterSpacing
+        
+        let _borderHighlightColor = borderHighlightColor
+        borderHighlightColor = _borderHighlightColor
+        
+        let _borderColor = borderColor
+        borderColor = _borderColor
+        
+        let _borderWidth = borderWidth
+        borderWidth = _borderWidth
+        
+        let _bgHighlightColor = bgHighlightColor
+        bgHighlightColor = _bgHighlightColor
+        
+        let _bgColor = bgColor
+        bgColor = _bgColor
+        
+        let _iconColor = iconColor
+        iconColor = _iconColor
+        
+        let _iconHighlightColor = iconHighlightColor
+        iconHighlightColor = _iconHighlightColor
+        
+        let _selectedState = selectedState
+        selectedState = _selectedState
+        
+        let _cornerRadius = cornerRadius
+        cornerRadius = _cornerRadius
     }
 }

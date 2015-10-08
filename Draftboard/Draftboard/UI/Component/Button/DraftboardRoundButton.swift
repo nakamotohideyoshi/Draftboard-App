@@ -10,18 +10,13 @@ import UIKit
 
 class DraftboardRoundButton: DraftboardButton {
     
-    override func willAwakeFromNib() {
-        super.willAwakeFromNib()
-        
+    override func setDefaults() {
+        super.setDefaults()
         self.cornerRadius = 4.0
         self.borderColor = .draftboardAccentColor()
         self.borderWidth = 1.3
         self.bgColor = .clearColor()
         self.textColor = .draftboardAccentColor()
         self.textHighlightColor = .whiteColor()
-    }
-
-    override func nibName() -> String {
-        return "DraftboardButton"
     }
 }

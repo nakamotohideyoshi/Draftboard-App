@@ -13,7 +13,7 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     let normalContestCellReuseIdentifier   = "normalContestCell"
     let liveContestCellReuseIdentifier     = "liveContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
-
+    
     @IBOutlet weak var tableView: UITableView!    
     @IBOutlet weak var lineupButton: DraftboardFilterButton!
     @IBOutlet weak var gametypeButton: DraftboardFilterButton!
@@ -213,5 +213,11 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     
     override func titlebarTitle() -> String? {
         return "Contests".uppercaseString
+    }
+    
+    // TODO: remove this
+    
+    override func titlebarBgHidden() -> Bool {
+        return false
     }
 }

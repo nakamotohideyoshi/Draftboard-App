@@ -23,6 +23,8 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .clearColor()
+        
         // Tap recognizer
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: "didTapCreateView:")

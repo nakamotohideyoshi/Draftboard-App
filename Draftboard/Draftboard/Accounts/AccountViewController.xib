@@ -72,6 +72,7 @@
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CHANGE PASSWORD"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="selectedState" value="NO"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeW-Om-3WA" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
@@ -157,12 +158,12 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svS-wD-9kL" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="41" y="682" width="332" height="52"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="haN-Rb-wVO"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="SAVE CHANGES"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="selectedState" value="NO"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
@@ -242,7 +243,7 @@
                     <exclude reference="ppo-SB-s05"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="432" y="366"/>
+            <point key="canvasLocation" x="-49" y="322"/>
         </view>
     </objects>
 </document>
