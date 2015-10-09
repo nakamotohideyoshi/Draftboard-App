@@ -52,20 +52,22 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     }
 
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
-        
+
         // Test pop
         createView.pop_removeAllAnimations()
         
+        /*
         let anim = POPSpringAnimation(propertyNamed: kPOPLayerCornerRadius)
         anim.toValue = 50
         anim.velocity = 500
         anim.springSpeed = 0.5
         anim.springBounciness = 20
         createView.layer.pop_addAnimation(anim, forKey: "test")
-
-//        if (buttonType == .Plus) {
-//            createNewLineup()
-//        }
+        */
+        
+        if (buttonType == .Plus) {
+            createNewLineup()
+        }
     }
     
     func createNewLineup() {
@@ -143,19 +145,38 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
 
 extension LineupsListController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let page = scrollView.contentOffset.x / scrollView.frame.size.width
-        let pageIndex = Int(page)
-        let pageFraction = page - CGFloat(pageIndex)
+        let page = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
+        let pageIndex = Int(floor(page))
+        let pageFraction = page - floor(page)
+        
         for (i, card) in lineupCardViews.enumerate() {
+            
+            var alpha: CGFloat = 0.25
+            var transform: CATransform3D = CATransform3DIdentity
+            
+            // Alpha
             if i == pageIndex {
-                card.alpha = 1.0 - (pageFraction * 0.75)
+                alpha = CGFloat(1.0 - (pageFraction * 0.75))
+            } else if i == pageIndex + 1 {
+                alpha = CGFloat(0.25 + (pageFraction * 0.75))
             }
-            else if i == pageIndex + 1 {
-                card.alpha = (pageFraction * 0.75) + 0.25
+            
+            // Transform
+            transform.m34 = -1/500
+            let direction = (i <= pageIndex) ? -1.0 : 1.0
+            var rotation = CGFloat(M_PI_4 * 0.5 * direction)
+            let translation = card.bounds.size.width / 2 * CGFloat(direction)
+            if i == pageIndex {
+                rotation *= CGFloat(pageFraction)
+            } else if i == pageIndex + 1 {
+                rotation *= CGFloat(1 - pageFraction)
             }
-            else {
-                card.alpha = 0.25
-            }
+            transform = CATransform3DTranslate(transform, -translation, 0, 0)
+            transform = CATransform3DRotate(transform, rotation, 0, 1, 0)
+            transform = CATransform3DTranslate(transform, translation, 0, 0)
+            
+            card.alpha = alpha
+            card.layer.transform = transform
 
         }
     }
