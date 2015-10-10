@@ -133,7 +133,7 @@ class DraftboardButton: UIControl {
     var textBold: Bool = false {
         didSet {
             if (textBold) {
-                label.font = UIFont(name: "OpenSans-Semibold", size: textSize)
+                label.font = UIFont(name: "OpenSans-Bold", size: textSize)
             } else {
                 label.font = UIFont(name: "OpenSans", size: textSize)
             }

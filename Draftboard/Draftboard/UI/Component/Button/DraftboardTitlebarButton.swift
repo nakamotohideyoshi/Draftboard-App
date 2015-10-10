@@ -38,14 +38,21 @@ class DraftboardTitlebarButton: DraftboardButton {
     
     convenience init(type: TitlebarButtonType) {
         self.init(frame: CGRectMake(0, 0, 50, 50))
+        
         buttonType = type
         iconImage = DraftboardTitlebarButton.iconForType(buttonType)
-    }
-    
-    override func setDefaults() {
-        super.setDefaults()
-        bgColor = .clearColor()
-        bgHighlightColor = .clearColor()
         iconHighlightColor = .draftboardAccentColor()
+        textBold = true
+        textSize = 11.0
+        textLetterSpacing = 1.2
+        
+        if (type == .Value) {
+            bgColor = UIColor(0x424f68)
+            bgHighlightColor = UIColor(0x8b90af)
+        }
+        else {
+            bgColor = .clearColor()
+            bgHighlightColor = .clearColor()
+        }
     }
 }

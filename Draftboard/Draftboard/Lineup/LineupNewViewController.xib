@@ -12,8 +12,11 @@
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
         </mutableArray>
         <mutableArray key="Oswald-Regular.ttf">
+            <string>Oswald-Regular</string>
+            <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
         </mutableArray>
@@ -22,113 +25,174 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupNewViewController">
             <connections>
                 <outlet property="avgSalaryLabel" destination="7g1-R4-jaA" id="Lcs-OI-Sfm"/>
-                <outlet property="editButton" destination="hyv-eW-Nx5" id="Q2Y-QS-nRO"/>
                 <outlet property="nameTextField" destination="a6t-pS-ZdO" id="You-im-hRr"/>
                 <outlet property="remSalaryLabel" destination="U9y-QJ-0SU" id="MY7-pA-6hp"/>
-                <outlet property="saveButton" destination="w28-HT-0Ss" id="rOr-BX-LFC"/>
                 <outlet property="view" destination="iN0-l3-epB" id="2ba-oL-nF8"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UIScrollView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd7-dN-DKs">
-                    <rect key="frame" x="0.0" y="90" width="375" height="400"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qyx-jm-zkB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGy-1h-eLE" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="350" width="375" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="J3Y-dM-WXc"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Utility"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="UTL"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My new lineup" placeholder="My new lineup" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-pS-ZdO">
+                            <rect key="frame" x="34" y="24" width="99" height="20"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LINEUP NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpS-Yp-C5i" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="278" y="25" width="63" height="18"/>
+                            <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="rpS-Yp-C5i" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="Kaj-L1-3i6"/>
+                        <constraint firstAttribute="height" constant="90" id="MiR-TB-Ca0"/>
+                        <constraint firstItem="a6t-pS-ZdO" firstAttribute="leading" secondItem="qyx-jm-zkB" secondAttribute="leading" constant="34" id="b9x-P2-33h"/>
+                        <constraint firstItem="a6t-pS-ZdO" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="bVJ-ky-0wG"/>
+                        <constraint firstAttribute="trailing" secondItem="rpS-Yp-C5i" secondAttribute="trailing" constant="34" id="qOG-pn-65Z"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="MiR-TB-Ca0"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd7-dN-DKs">
+                    <rect key="frame" x="0.0" y="67" width="375" height="507"/>
+                    <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fpe-2j-Rd4" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="PXs-UN-CC0"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Point Guard"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="PG"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="PXs-UN-CC0"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zim-pa-BpW" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="50" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="63" width="375" height="63"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="aIo-8w-AAF"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Shooting Guard"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="SG"/>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="aIo-8w-AAF"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wz2-bj-aD8" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="100" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="126" width="375" height="63"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="wA7-VK-yit"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Small Forward"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="SF"/>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="wA7-VK-yit"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7s-Nf-5gr" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="150" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="189" width="375" height="63"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="JzT-UO-h7W"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Power Forward"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="PF"/>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="JzT-UO-h7W"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jem-b6-SSY" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="200" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="252" width="375" height="63"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Lrn-uz-9g0"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Center"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="C"/>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Lrn-uz-9g0"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4GV-2p-Vl7" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="250" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="315" width="375" height="63"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="p9K-H2-pRk"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Point Guard"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="PG"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="G"/>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="p9K-H2-pRk"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QfC-KD-NHA" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="300" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="378" width="375" height="63"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="oys-tB-w2s"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value="Forward"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="F"/>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="oys-tB-w2s"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGy-1h-eLE" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="441" width="375" height="63"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="J3Y-dM-WXc"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="positionText" value=" "/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="abbrvText" value="UTL"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="J3Y-dM-WXc"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="AGy-1h-eLE" firstAttribute="centerX" secondItem="zd7-dN-DKs" secondAttribute="centerX" id="1Mg-yd-Gv1"/>
                         <constraint firstItem="u7s-Nf-5gr" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="3I8-Cd-vr3"/>
+                        <constraint firstItem="u7s-Nf-5gr" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="3hf-Sl-9ui"/>
                         <constraint firstItem="Wz2-bj-aD8" firstAttribute="centerX" secondItem="zd7-dN-DKs" secondAttribute="centerX" id="6bj-Fm-1ez"/>
                         <constraint firstItem="4GV-2p-Vl7" firstAttribute="top" secondItem="Jem-b6-SSY" secondAttribute="bottom" id="7AI-34-KBH"/>
                         <constraint firstItem="QfC-KD-NHA" firstAttribute="centerX" secondItem="zd7-dN-DKs" secondAttribute="centerX" id="7u6-Vt-ygw"/>
@@ -137,42 +201,42 @@
                         <constraint firstItem="zim-pa-BpW" firstAttribute="top" secondItem="Fpe-2j-Rd4" secondAttribute="bottom" id="DGV-hk-4V8"/>
                         <constraint firstItem="Jem-b6-SSY" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="DkO-QT-Ga4"/>
                         <constraint firstItem="Fpe-2j-Rd4" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="FvF-Ng-Bfq"/>
-                        <constraint firstAttribute="height" constant="500" id="IWZ-bO-s80"/>
+                        <constraint firstItem="QfC-KD-NHA" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="Ks1-77-o0L"/>
                         <constraint firstItem="zim-pa-BpW" firstAttribute="centerX" secondItem="zd7-dN-DKs" secondAttribute="centerX" id="NH3-Nk-TbO"/>
                         <constraint firstItem="zim-pa-BpW" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="Nrg-B8-naq"/>
                         <constraint firstItem="QfC-KD-NHA" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="PIt-z0-1r2"/>
-                        <constraint firstAttribute="bottom" secondItem="AGy-1h-eLE" secondAttribute="bottom" id="QkP-oF-n0n"/>
                         <constraint firstItem="u7s-Nf-5gr" firstAttribute="centerX" secondItem="zd7-dN-DKs" secondAttribute="centerX" id="Rdf-PB-yNB"/>
                         <constraint firstItem="AGy-1h-eLE" firstAttribute="top" secondItem="QfC-KD-NHA" secondAttribute="bottom" id="VNZ-JV-L0a"/>
+                        <constraint firstItem="Wz2-bj-aD8" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="bhr-Yd-BgC"/>
                         <constraint firstItem="Wz2-bj-aD8" firstAttribute="top" secondItem="zim-pa-BpW" secondAttribute="bottom" id="buP-DR-CqJ"/>
                         <constraint firstItem="Fpe-2j-Rd4" firstAttribute="top" secondItem="zd7-dN-DKs" secondAttribute="top" id="cAE-wD-hlN"/>
                         <constraint firstItem="Wz2-bj-aD8" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="fhz-FS-Pey"/>
+                        <constraint firstItem="AGy-1h-eLE" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="heS-1x-6dV"/>
                         <constraint firstItem="Jem-b6-SSY" firstAttribute="centerX" secondItem="zd7-dN-DKs" secondAttribute="centerX" id="ik4-Vy-P3a"/>
                         <constraint firstItem="AGy-1h-eLE" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="jsC-ah-9a1"/>
+                        <constraint firstItem="Fpe-2j-Rd4" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="m2d-5m-uSf"/>
                         <constraint firstItem="4GV-2p-Vl7" firstAttribute="width" secondItem="zd7-dN-DKs" secondAttribute="width" id="ne0-mh-vIB"/>
                         <constraint firstItem="QfC-KD-NHA" firstAttribute="top" secondItem="4GV-2p-Vl7" secondAttribute="bottom" id="o5L-IM-rCx"/>
+                        <constraint firstItem="zim-pa-BpW" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="s9r-wK-25G"/>
+                        <constraint firstItem="Jem-b6-SSY" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="sVf-gr-bTo"/>
                         <constraint firstItem="Jem-b6-SSY" firstAttribute="top" secondItem="u7s-Nf-5gr" secondAttribute="bottom" id="tkl-dd-ha7"/>
+                        <constraint firstItem="4GV-2p-Vl7" firstAttribute="height" secondItem="zd7-dN-DKs" secondAttribute="height" multiplier="0.125" id="w3G-iB-9ZW"/>
                         <constraint firstItem="4GV-2p-Vl7" firstAttribute="centerX" secondItem="zd7-dN-DKs" secondAttribute="centerX" id="wUV-P8-3yB"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="IWZ-bO-s80"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXc-jI-WMJ">
-                    <rect key="frame" x="0.0" y="490" width="375" height="177"/>
+                    <rect key="frame" x="0.0" y="574" width="375" height="93"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-Dy-gf9">
-                            <rect key="frame" x="187" y="0.0" width="188" height="177"/>
+                            <rect key="frame" x="251" y="0.0" width="124" height="93"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="AVG / PLAYER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTL-Us-lUQ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="76" width="148" height="14"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG / PLAYER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTL-Us-lUQ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="26" width="84" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="9Wo-Z0-P0q"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                    <color key="textColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -180,13 +244,13 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$5,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-R4-jaA" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="90" width="148" height="30"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-R4-jaA" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="40" width="84" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="Kva-Rl-gaE"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
-                                    <color key="textColor" red="0.27450980390000002" green="0.28627450980000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -195,27 +259,62 @@
                                     </variation>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.070588235289999995" green="0.10980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="7g1-R4-jaA" firstAttribute="top" secondItem="rTL-Us-lUQ" secondAttribute="bottom" id="6Bl-hB-PXo"/>
                                 <constraint firstItem="7g1-R4-jaA" firstAttribute="leading" secondItem="fhT-Dy-gf9" secondAttribute="leading" constant="20" id="94g-Xq-G2P"/>
                                 <constraint firstAttribute="trailing" secondItem="rTL-Us-lUQ" secondAttribute="trailing" constant="20" id="BJg-ss-KCt"/>
-                                <constraint firstItem="7g1-R4-jaA" firstAttribute="centerY" secondItem="fhT-Dy-gf9" secondAttribute="centerY" constant="16" id="Dd9-fs-HcB"/>
+                                <constraint firstItem="7g1-R4-jaA" firstAttribute="centerY" secondItem="fhT-Dy-gf9" secondAttribute="centerY" constant="8" id="Dd9-fs-HcB"/>
                                 <constraint firstItem="7g1-R4-jaA" firstAttribute="centerX" secondItem="fhT-Dy-gf9" secondAttribute="centerX" id="KoX-uw-463"/>
                                 <constraint firstAttribute="trailing" secondItem="7g1-R4-jaA" secondAttribute="trailing" constant="20" id="TwZ-IK-WUN"/>
                                 <constraint firstItem="rTL-Us-lUQ" firstAttribute="leading" secondItem="fhT-Dy-gf9" secondAttribute="leading" constant="20" id="tnt-rd-dNG"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05r-wB-Ldd">
-                            <rect key="frame" x="0.0" y="0.0" width="188" height="177"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBe-dk-dip">
+                            <rect key="frame" x="0.0" y="0.0" width="124" height="93"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="REM. SALARY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UE-FZ-aBF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="76" width="148" height="14"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIVE IN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loN-Ao-KUN" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="26" width="84" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="Piy-sR-H9X"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Piy-sR-H9X"/>
+                                        </mask>
+                                    </variation>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:38:12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyo-8E-8TF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="40" width="84" height="30"/>
+                                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.070588235294117646" green="0.10980392156862745" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="loN-Ao-KUN" secondAttribute="trailing" constant="20" id="A41-KW-gyd"/>
+                                <constraint firstItem="Lyo-8E-8TF" firstAttribute="centerX" secondItem="IBe-dk-dip" secondAttribute="centerX" id="Ocp-dO-5Lh"/>
+                                <constraint firstItem="loN-Ao-KUN" firstAttribute="leading" secondItem="IBe-dk-dip" secondAttribute="leading" constant="20" id="TAN-OQ-uhs"/>
+                                <constraint firstItem="Lyo-8E-8TF" firstAttribute="leading" secondItem="IBe-dk-dip" secondAttribute="leading" constant="20" id="c2b-rh-egx"/>
+                                <constraint firstItem="Lyo-8E-8TF" firstAttribute="centerY" secondItem="IBe-dk-dip" secondAttribute="centerY" constant="8" id="c4P-7b-YKp"/>
+                                <constraint firstAttribute="trailing" secondItem="Lyo-8E-8TF" secondAttribute="trailing" constant="20" id="crm-1O-3dx"/>
+                                <constraint firstItem="Lyo-8E-8TF" firstAttribute="top" secondItem="loN-Ao-KUN" secondAttribute="bottom" id="yEg-6y-3fp"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05r-wB-Ldd">
+                            <rect key="frame" x="123" y="0.0" width="128" height="93"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REM. SALARY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UE-FZ-aBF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="26" width="88" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="iEM-C5-Nt1"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                    <color key="textColor" red="0.61176470589999998" green="0.62352941179999999" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -223,19 +322,19 @@
                                         </mask>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$50,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9y-QJ-0SU" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="90" width="148" height="30"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$50,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9y-QJ-0SU" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="40" width="88" height="30"/>
                                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
-                                    <color key="textColor" red="0.27450980390000002" green="0.28627450980000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.070588235289999995" green="0.10980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="9UE-FZ-aBF" firstAttribute="leading" secondItem="05r-wB-Ldd" secondAttribute="leading" constant="20" id="C0N-l9-TJP"/>
                                 <constraint firstAttribute="trailing" secondItem="U9y-QJ-0SU" secondAttribute="trailing" constant="20" id="GY0-iE-ghB"/>
                                 <constraint firstItem="U9y-QJ-0SU" firstAttribute="leading" secondItem="05r-wB-Ldd" secondAttribute="leading" constant="20" id="fnQ-Od-E28"/>
-                                <constraint firstItem="U9y-QJ-0SU" firstAttribute="centerY" secondItem="05r-wB-Ldd" secondAttribute="centerY" constant="16" id="i1a-fT-W5C"/>
+                                <constraint firstItem="U9y-QJ-0SU" firstAttribute="centerY" secondItem="05r-wB-Ldd" secondAttribute="centerY" constant="8" id="i1a-fT-W5C"/>
                                 <constraint firstItem="U9y-QJ-0SU" firstAttribute="centerX" secondItem="05r-wB-Ldd" secondAttribute="centerX" id="kdl-aU-qkD"/>
                                 <constraint firstAttribute="trailing" secondItem="9UE-FZ-aBF" secondAttribute="trailing" constant="20" id="r0u-X8-if7"/>
                                 <constraint firstItem="U9y-QJ-0SU" firstAttribute="top" secondItem="9UE-FZ-aBF" secondAttribute="bottom" id="vMa-cC-NcI"/>
@@ -245,84 +344,63 @@
                     <constraints>
                         <constraint firstItem="05r-wB-Ldd" firstAttribute="leading" secondItem="aXc-jI-WMJ" secondAttribute="leading" id="784-e8-PSG"/>
                         <constraint firstAttribute="trailing" secondItem="fhT-Dy-gf9" secondAttribute="trailing" id="CTu-hC-4ZC"/>
+                        <constraint firstItem="IBe-dk-dip" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.33" id="Cei-ml-51j"/>
+                        <constraint firstItem="IBe-dk-dip" firstAttribute="leading" secondItem="aXc-jI-WMJ" secondAttribute="leading" id="Dmx-N8-jG2"/>
                         <constraint firstItem="05r-wB-Ldd" firstAttribute="top" secondItem="aXc-jI-WMJ" secondAttribute="top" id="Egq-zS-jCG"/>
+                        <constraint firstItem="IBe-dk-dip" firstAttribute="height" secondItem="aXc-jI-WMJ" secondAttribute="height" id="H1D-uT-gYd"/>
+                        <constraint firstItem="IBe-dk-dip" firstAttribute="centerY" secondItem="aXc-jI-WMJ" secondAttribute="centerY" id="Jjb-d8-578"/>
                         <constraint firstItem="fhT-Dy-gf9" firstAttribute="height" secondItem="aXc-jI-WMJ" secondAttribute="height" id="NJr-Ff-LVP"/>
                         <constraint firstItem="05r-wB-Ldd" firstAttribute="height" secondItem="aXc-jI-WMJ" secondAttribute="height" id="Wkk-au-3vx"/>
                         <constraint firstItem="fhT-Dy-gf9" firstAttribute="top" secondItem="aXc-jI-WMJ" secondAttribute="top" id="Yvh-uA-X1A"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="ecc-fQ-j1g"/>
-                        <constraint firstItem="fhT-Dy-gf9" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.5" id="s1q-T9-kcr"/>
-                        <constraint firstItem="05r-wB-Ldd" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.5" id="wGP-GE-ogs"/>
+                        <constraint firstItem="05r-wB-Ldd" firstAttribute="centerX" secondItem="aXc-jI-WMJ" secondAttribute="centerX" id="ph7-2c-m0n"/>
+                        <constraint firstItem="fhT-Dy-gf9" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.33" id="s1q-T9-kcr"/>
+                        <constraint firstItem="05r-wB-Ldd" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.34" id="wGP-GE-ogs"/>
                     </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qyx-jm-zkB">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w28-HT-0Ss" customClass="DraftboardRoundButton" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="280" y="30" width="80" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="80" id="2Jq-yb-c6y"/>
-                                <constraint firstAttribute="height" constant="30" id="TzT-qn-j8W"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="SAVE"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lineup 02" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-pS-ZdO">
-                            <rect key="frame" x="15" y="31" width="211" height="28"/>
-                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyv-eW-Nx5" customClass="DraftboardRoundButton" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="236" y="30" width="34" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="34" id="GQo-cC-Jt9"/>
-                                <constraint firstAttribute="height" constant="30" id="YoR-2o-9LJ"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="icon-pencil"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
-                                    <color key="value" red="0.0" green="0.77647058820000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="w28-HT-0Ss" firstAttribute="leading" secondItem="hyv-eW-Nx5" secondAttribute="trailing" constant="10" id="7CE-q7-1zc"/>
-                        <constraint firstItem="hyv-eW-Nx5" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="Kad-Ya-qci"/>
-                        <constraint firstAttribute="height" constant="90" id="MiR-TB-Ca0"/>
-                        <constraint firstItem="a6t-pS-ZdO" firstAttribute="leading" secondItem="qyx-jm-zkB" secondAttribute="leading" constant="15" id="b9x-P2-33h"/>
-                        <constraint firstItem="a6t-pS-ZdO" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="bVJ-ky-0wG"/>
-                        <constraint firstItem="w28-HT-0Ss" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="bq9-TH-OWO"/>
-                        <constraint firstAttribute="trailing" secondItem="w28-HT-0Ss" secondAttribute="trailing" constant="15" id="iAI-5e-5m0"/>
-                        <constraint firstItem="hyv-eW-Nx5" firstAttribute="leading" secondItem="a6t-pS-ZdO" secondAttribute="trailing" constant="10" id="wrw-Cz-SnA"/>
-                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ecc-fQ-j1g"/>
+                            <exclude reference="784-e8-PSG"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.92156863212585449" green="0.92941176891326904" blue="0.94901961088180542" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.039215687662363052" green="0.050980392843484879" blue="0.074509806931018829" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="aXc-jI-WMJ" secondAttribute="bottom" id="66L-6B-9Zl"/>
                 <constraint firstItem="aXc-jI-WMJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="96X-TK-OGT"/>
+                <constraint firstItem="zd7-dN-DKs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="C2F-Kp-DYq"/>
+                <constraint firstItem="qyx-jm-zkB" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.1" id="FiD-CC-ufa"/>
                 <constraint firstItem="qyx-jm-zkB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="L38-o5-PSY"/>
+                <constraint firstItem="aXc-jI-WMJ" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.14" id="eYy-86-Hyt"/>
+                <constraint firstItem="zd7-dN-DKs" firstAttribute="bottom" secondItem="aXc-jI-WMJ" secondAttribute="bottom" id="i2O-fi-ylJ"/>
                 <constraint firstItem="aXc-jI-WMJ" firstAttribute="top" secondItem="zd7-dN-DKs" secondAttribute="bottom" id="ilh-ui-zhU"/>
+                <constraint firstAttribute="trailing" secondItem="zd7-dN-DKs" secondAttribute="trailing" id="imG-RY-Bxo"/>
                 <constraint firstItem="zd7-dN-DKs" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="k7k-mA-iYf"/>
                 <constraint firstItem="qyx-jm-zkB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="km1-qM-3vq"/>
+                <constraint firstItem="zd7-dN-DKs" firstAttribute="top" secondItem="qyx-jm-zkB" secondAttribute="bottom" id="mSg-OS-Yea"/>
                 <constraint firstItem="zd7-dN-DKs" firstAttribute="top" secondItem="qyx-jm-zkB" secondAttribute="bottom" id="moH-CH-ygc"/>
                 <constraint firstItem="zd7-dN-DKs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="n3x-JL-HUj"/>
                 <constraint firstItem="qyx-jm-zkB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qGX-e6-Qm3"/>
+                <constraint firstItem="aXc-jI-WMJ" firstAttribute="top" secondItem="zd7-dN-DKs" secondAttribute="bottom" id="ucT-LC-VPW"/>
+                <constraint firstItem="aXc-jI-WMJ" firstAttribute="top" secondItem="zd7-dN-DKs" secondAttribute="bottom" id="upv-Dn-o6u"/>
                 <constraint firstItem="aXc-jI-WMJ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="wwz-I1-c9D"/>
+                <constraint firstItem="zd7-dN-DKs" firstAttribute="top" secondItem="qyx-jm-zkB" secondAttribute="bottom" id="xAV-n6-Q0p"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="i2O-fi-ylJ"/>
+                    <exclude reference="k7k-mA-iYf"/>
+                    <exclude reference="mSg-OS-Yea"/>
+                    <exclude reference="moH-CH-ygc"/>
+                    <exclude reference="n3x-JL-HUj"/>
+                    <exclude reference="ilh-ui-zhU"/>
+                    <exclude reference="ucT-LC-VPW"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="-592.5" y="63.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="icon-pencil" width="12" height="12"/>
-    </resources>
 </document>

@@ -11,45 +11,44 @@ import UIKit
 class LineupCardView: DraftboardNibView {
     
     @IBOutlet weak var editButton: DraftboardButton!
-    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
     
 //    let itemCount = Int(arc4random_uniform(12)) + 1
-    let itemCount = 4
+    let itemCount = 12
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
     
     override func willAwakeFromNib() {
-        contentHeight = (CGFloat(itemCount + 1) * 60.0)
-        totalHeight = 66.0 + contentHeight + 46.0
-        
-        contentHeightConstraint.active = false
-        contentView.heightRancor.constraintEqualToConstant(contentHeight).active = true
-        
         layoutCellViews()
     }
     
     func layoutCellViews() {
-        var lastCellView: LineupCellView?
-        for _ in 0...itemCount {
+        var previousCell: LineupCellView?
+        
+        for i in 0...itemCount {
             let cellView = LineupCellView()
             contentView.addSubview(cellView)
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
-            cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
-            cellView.heightRancor.constraintEqualToConstant(60.0).active = true
+            cellView.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+            cellView.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+            cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / 8.0).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
-            if (lastCellView == nil) {
+            if (previousCell == nil) {
                 cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
             }
             else {
-                cellView.topRancor.constraintEqualToRancor(lastCellView!.bottomRancor).active = true
+                cellView.topRancor.constraintEqualToRancor(previousCell!.bottomRancor).active = true
             }
             
-            lastCellView = cellView
+            if (i == itemCount) {
+                cellView.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
+            }
+            
+            previousCell = cellView
         }
     }
 }

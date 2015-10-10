@@ -18,7 +18,7 @@ protocol DraftboardTabBarDataSource {
 
 @IBDesignable
 class DraftboardTabBar: UIView {
-    
+
     var lineLeftConstraint: NSLayoutConstraint?
     var lineRightConstraint: NSLayoutConstraint?
     var selectionLine: UIView!

@@ -8,9 +8,7 @@
 
 import UIKit
 
-class LineupNewViewController: DraftboardModalViewController {
-    @IBOutlet weak var editButton: DraftboardRoundButton!
-    @IBOutlet weak var saveButton: DraftboardRoundButton!
+class LineupNewViewController: DraftboardViewController {
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -18,12 +16,11 @@ class LineupNewViewController: DraftboardModalViewController {
     weak var listViewController: LineupsListController?
     
     override func viewDidLoad() {
-        let sv = self.view as! UIScrollView
-        sv.alwaysBounceVertical = true
+        view.backgroundColor = .clearColor()
         
         let saveTapRecognizer = UITapGestureRecognizer()
         saveTapRecognizer.addTarget(self, action: "didTapSave:")
-        saveButton.addGestureRecognizer(saveTapRecognizer)
+        //saveButton.addGestureRecognizer(saveTapRecognizer)
         
         let app = UIApplication.sharedApplication()
         app.setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
@@ -31,13 +28,30 @@ class LineupNewViewController: DraftboardModalViewController {
         // Do any additional setup after loading the view.
     }
     
-    func didTapSave(gestureRecognizer: UITapGestureRecognizer) {
-        listViewController?.didSaveLineup()
-        RootViewController.sharedInstance.popViewController()
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if (buttonType == .Value) {
+            listViewController?.didSaveLineup()
+            RootViewController.sharedInstance.popViewController()
+        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func titlebarTitle() -> String {
+        return "Create Lineup".uppercaseString
+    }
+    
+    override func titlebarLeftButtonType() -> TitlebarButtonType {
+        return .Menu
+    }
+    
+    override func titlebarRightButtonType() -> TitlebarButtonType {
+        return .Value
+    }
+    
+    override func titlebarRightButtonText() -> String? {
+        return "Save".uppercaseString
+    }
+    
+    override func titlebarBgHidden() -> Bool {
+        return false
     }
 }

@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum TitlebarTransitionStyle {
+    case Forward
+    case Back
+    case None
+}
+
 protocol DraftboardTitlebarDelegate {
     func didTapTitlebarButton(buttonType: TitlebarButtonType)
 }
@@ -22,14 +28,15 @@ protocol DraftboardTitlebarDataSource {
 }
 
 @IBDesignable
-class DraftboardTitlebar: DraftboardNibView {
+class DraftboardTitlebar: UIView {
     
-    @IBOutlet weak var titleLabel: DraftboardLabel?
-    @IBOutlet weak var rightButton: DraftboardTitlebarButton?
-    @IBOutlet weak var leftButton: DraftboardTitlebarButton?
-    @IBOutlet weak var bgView: DraftboardView!
+    var titleLabel: DraftboardLabel?
+    var rightButton: DraftboardTitlebarButton?
+    var leftButton: DraftboardTitlebarButton?
+    var bgView: UIView!
     
     var delegate: DraftboardTitlebarDelegate?
+    var dataSource: DraftboardTitlebarDataSource?
     
     var newLeftButton: DraftboardTitlebarButton?
     var newRightButton: DraftboardTitlebarButton?
@@ -42,181 +49,177 @@ class DraftboardTitlebar: DraftboardNibView {
     var bgHiddenChanged = false
     
     var bgHidden = false
-    
-    var loaded = false
     var completionHandler:((Bool)->Void)?
     
-    override func willAwakeFromNib() {
-        super.willAwakeFromNib()
-        titleLabel?.textColor = .whiteColor()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func setup() {
+        bgView = UIView()
         bgView.backgroundColor = UIColor(0x25344c, alpha:0.4)
-    }
-    
-    var dataSource: DraftboardTitlebarDataSource? {
+        self.addSubview(bgView)
         
-        // Set values
-        willSet {
-            stopAnimating()
-            
-            let newLeftButtonType = newValue?.titlebarLeftButtonType()
-            let newRightButtonType = newValue?.titlebarRightButtonType()
-            let newTitleText = newValue?.titlebarTitle()
-            
-            // Background value
-            if let nv = newValue {
-                newBgHidden = nv.titlebarBgHidden()
-            } else {
-                newBgHidden = true
-            }
-            
-            // Different left button
-            leftButtonChanged = newLeftButtonType != leftButton?.buttonType
-            if (leftButtonChanged) {
-
-                // Create new left button
-                if let buttonType = newLeftButtonType {
-                    newLeftButton = DraftboardTitlebarButton(type: buttonType)
-                    newLeftButton?.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
-                    
-                    if (buttonType == .Value) {
-                        if let textValue = dataSource?.titlebarLeftButtonText() {
-                            newLeftButton!.textValue = textValue
-                        }
-                    }
-                    
-                    // Position button
-                    addSubview(newLeftButton!)
-                    constrainLeftButton(newLeftButton!)
-                }
-            }
-            
-            // Different right button
-            rightButtonChanged = newRightButtonType != rightButton?.buttonType
-            if (rightButtonChanged) {
-                
-                // Create new right button
-                if let buttonType = newRightButtonType {
-                    newRightButton = DraftboardTitlebarButton(type: buttonType)
-                    newRightButton?.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
-                    
-                    if (buttonType == .Value) {
-                        if let textValue = dataSource?.titlebarRightButtonText() {
-                            newRightButton!.textValue = textValue
-                        }
-                    }
-                    
-                    // Position button
-                    addSubview(newRightButton!)
-                    constrainRightButton(newRightButton!)
-                }
-            }
-            
-            // Different title
-            titleLabelChanged = newTitleText != titleLabel?.text
-            if (titleLabelChanged) {
-                newTitleLabel = titleLabelWithText(newValue?.titlebarTitle())
-                addSubview(newTitleLabel!)
-                constrainLabel(newTitleLabel!)
-            }
-            
-            // Different bg state
-            bgHiddenChanged = newBgHidden != bgHidden
-        }
-        didSet {
-            
-            // Animate
-            changeElementsAnimated(loaded)
-            loaded = true
-        }
+        bgView.translatesAutoresizingMaskIntoConstraints = false
+        bgView.leftRancor.constraintEqualToRancor(leftRancor).active = true
+        bgView.rightRancor.constraintEqualToRancor(rightRancor).active = true
+        bgView.bottomRancor.constraintEqualToRancor(bottomRancor).active = true
+        bgView.topRancor.constraintEqualToRancor(topRancor).active = true
     }
     
-    func stopAnimating() {
+    func updateElements() {
         completionHandler?(false)
         completionHandler = nil
         
-        self.leftButton?.layer.removeAllAnimations()
-        self.rightButton?.layer.removeAllAnimations()
-        self.titleLabel?.layer.removeAllAnimations()
-        self.bgView.layer.removeAllAnimations()
+        let newLeftButtonType = dataSource?.titlebarLeftButtonType()
+        let newRightButtonType = dataSource?.titlebarRightButtonType()
+        let newTitleText = dataSource?.titlebarTitle()
+        
+        // Background value
+        if let ds = dataSource {
+            newBgHidden = ds.titlebarBgHidden()
+        } else {
+            newBgHidden = true
+        }
+        
+        // Different title
+        leftButtonChanged = newLeftButtonType != leftButton?.buttonType
+        rightButtonChanged = newRightButtonType != rightButton?.buttonType
+        titleLabelChanged = newTitleText != titleLabel?.text
+        bgHiddenChanged = newBgHidden != bgHidden
+        
+        // Different left button
+        if (leftButtonChanged) {
+            
+            // Create new left button
+            if let buttonType = newLeftButtonType {
+                newLeftButton = DraftboardTitlebarButton(type: buttonType)
+                newLeftButton!.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
+                
+                if (buttonType == .Value) {
+                    if let textValue = dataSource?.titlebarLeftButtonText() {
+                        newLeftButton!.textValue = textValue
+                    }
+                }
+                
+                // Position button
+                addSubview(newLeftButton!)
+                constrainLeftButton(newLeftButton!)
+            }
+        }
+        
+        // Different right button
+        if (rightButtonChanged) {
+            
+            // Create new right button
+            if let buttonType = newRightButtonType {
+                newRightButton = DraftboardTitlebarButton(type: buttonType)
+                newRightButton?.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
+                
+                if (buttonType == .Value) {
+                    if let textValue = dataSource?.titlebarRightButtonText() {
+                        newRightButton!.textValue = textValue
+                    }
+                }
+                
+                // Position button
+                addSubview(newRightButton!)
+                constrainRightButton(newRightButton!)
+            }
+        }
+        
+        // Different title
+        if (titleLabelChanged) {
+            newTitleLabel = titleLabelWithText(newTitleText)
+            addSubview(newTitleLabel!)
+            constrainLabel(newTitleLabel!)
+        }
+    }
+    
+    func removeAnimations() {
+        leftButton?.layer.removeAllAnimations()
+        rightButton?.layer.removeAllAnimations()
+        titleLabel?.layer.removeAllAnimations()
+        bgView.layer.removeAllAnimations()
     }
     
     // MARK: Animation
     
-    func changeElementsAnimated(animated: Bool) {
-        
-        completionHandler = { (completed: Bool) -> Void in
-            if (self.leftButtonChanged) {
-                self.leftButton?.removeFromSuperview()
-                self.leftButton = self.newLeftButton
-                self.newLeftButton = nil
-            }
-            if (self.rightButtonChanged) {
-                self.rightButton?.removeFromSuperview()
-                self.rightButton = self.newRightButton
-                self.newRightButton = nil
-            }
-            if (self.titleLabelChanged) {
-                self.titleLabel?.removeFromSuperview()
-                self.titleLabel = self.newTitleLabel
-                self.newTitleLabel = nil
-            }
-            if (self.bgHiddenChanged) {
-                if (completed) {
-                    if (self.newBgHidden) {
-                         self.bgView.layer.transform = CATransform3DMakeScale(0.0, 1.0, 1.0)
-                    } else {
-                         self.bgView.layer.transform = CATransform3DIdentity
-                    }
-                }
-                
-                self.bgHidden = self.newBgHidden
-            }
-        }
+    func pushElements(animated: Bool = true) {
+        self.updateElements()
+        let style: TitlebarTransitionStyle = (animated) ? .Forward : .None
+        transitionElements(style)
+    }
+    
+    func popElements(animated: Bool = true) {
+        self.updateElements()
+        let style: TitlebarTransitionStyle = (animated) ? .Back : .None
+        transitionElements(style)
+    }
+    
+    func transitionElements(style: TitlebarTransitionStyle, duration: NSTimeInterval = 0.25) {
         
         // Finish immediately
-        if (!animated) {
-            completionHandler?(true)
+        if (style == .None) {
+            completeTransition(true)
             completionHandler = nil
             return
         }
         
         // Layer transforms
-        let outTrans = CATransform3DMakeTranslation(40.0, 0.0, 0.0)
-        let inTrans = CATransform3DMakeTranslation(-40.0, 0.0, 0.0)
+        let dir: CGFloat = (style == .Forward) ? 1.0 : -1.0
+        
+        // Transforms
+        let ouT = CATransform3DMakeTranslation(40.0 * dir, 0.0, 0.0)
+        let inT = CATransform3DMakeTranslation(-40.0 * dir, 0.0, 0.0)
+        let idT = CATransform3DIdentity
         
         // Start hidden
-        self.newLeftButton?.alpha = 0.0
-        //self.newLeftButton?.layer.transform = inTrans
+        newLeftButton?.alpha = 0.0
+        //newLeftButton?.layer.transform = inT
         
-        self.newRightButton?.alpha = 0.0
-        //self.newRightButton?.layer.transform = inTrans
+        newRightButton?.alpha = 0.0
+        //newRightButton?.layer.transform = inT
         
-        self.newTitleLabel?.alpha = 0.0
-        self.newTitleLabel?.layer.transform = inTrans
+        newTitleLabel?.alpha = 0.0
+        newTitleLabel?.layer.transform = inT
         
-        // Crossfade
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
+        // Completion handler
+        completionHandler = { (complete: Bool) in
+            self.completeTransition(complete)
+        }
+        
+        UIView.animateWithDuration(duration, animations: { () -> Void in
             if (self.leftButtonChanged) {
                 self.leftButton?.alpha = 0
-                //self.leftButton?.layer.transform = outTrans
+                //self.leftButton?.layer.transform = ouT
                 
                 self.newLeftButton?.alpha = 1.0
-                //self.newLeftButton?.layer.transform = CATransform3DIdentity
+                //self.newLeftButton?.layer.transform = idT
             }
+            
             if (self.rightButtonChanged) {
                 self.rightButton?.alpha = 0
-                //self.rightButton?.layer.transform = outTrans
+                //self.rightButton?.layer.transform = ouT
                 
                 self.newRightButton?.alpha = 1.0
-                //self.newRightButton?.layer.transform = CATransform3DIdentity
+                //self.newRightButton?.layer.transform = idT
             }
+            
             if (self.titleLabelChanged) {
                 self.titleLabel?.alpha = 0
-                self.titleLabel?.layer.transform = outTrans
+                self.titleLabel?.layer.transform = ouT
                 
                 self.newTitleLabel?.alpha = 1.0
-                self.newTitleLabel?.layer.transform = CATransform3DIdentity
+                self.newTitleLabel?.layer.transform = idT
             }
+            
             if (self.bgHiddenChanged) {
                 var bgTrans = CATransform3DIdentity
                 if (self.newBgHidden) {
@@ -228,6 +231,40 @@ class DraftboardTitlebar: DraftboardNibView {
         }) { (complete) -> Void in
             self.completionHandler?(complete)
             self.completionHandler = nil
+        }
+    }
+    
+    func completeTransition(complete: Bool) {
+        removeAnimations()
+        
+        if (leftButtonChanged) {
+            leftButton?.removeFromSuperview()
+            leftButton = newLeftButton
+            newLeftButton = nil
+        }
+        
+        if (rightButtonChanged) {
+            rightButton?.removeFromSuperview()
+            rightButton = newRightButton
+            newRightButton = nil
+        }
+        
+        if (self.titleLabelChanged) {
+            titleLabel?.removeFromSuperview()
+            titleLabel = newTitleLabel
+            newTitleLabel = nil
+        }
+        
+        if (self.bgHiddenChanged) {
+            if (complete) {
+                if (newBgHidden) {
+                    bgView.layer.transform = CATransform3DMakeScale(0.0, 1.0, 1.0)
+                } else {
+                    bgView.layer.transform = CATransform3DIdentity
+                }
+            }
+            
+            bgHidden = newBgHidden
         }
     }
     
@@ -265,9 +302,15 @@ class DraftboardTitlebar: DraftboardNibView {
     // MARK: Buttons
     
     func constrainButton(button: DraftboardTitlebarButton) {
-        button.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
-        button.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 0.16).active = true
-        button.heightRancor.constraintEqualToRancor(self.heightRancor).active = true
+        if (button.buttonType == .Value) {
+            button.topRancor.constraintEqualToRancor(self.topRancor, constant: 10.0).active = true
+            button.bottomRancor.constraintEqualToRancor(self.bottomRancor, constant: -10.0).active = true
+            button.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 0.16).active = true
+        } else {
+            button.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
+            button.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 0.16).active = true
+            button.heightRancor.constraintEqualToRancor(self.heightRancor).active = true
+        }
     }
     
     func constrainLeftButton(button: DraftboardTitlebarButton) {
@@ -278,7 +321,13 @@ class DraftboardTitlebar: DraftboardNibView {
     
     func constrainRightButton(button: DraftboardTitlebarButton) {
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+        
+        if (button.buttonType == .Value) {
+            button.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -10.0).active = true
+        } else {
+            button.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+        }
+            
         self.constrainButton(button)
     }
 }

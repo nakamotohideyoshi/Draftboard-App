@@ -25,34 +25,36 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
         super.viewDidLoad()
         
         vcs = [DraftboardViewController]()
-        self.pushViewController(list)
+        self.pushViewController(list, animated: false)
         
         tabBar.delegate = self
-        titlebar.delegate = self
-        titlebar.dataSource = self
     }
     
-    func pushViewController(vc: DraftboardViewController) {
+    func pushViewController(nvc: DraftboardViewController, animated: Bool = true) {
         let cvc = vcs.last
         cvc?.view.removeFromSuperview()
         
-        vcs.append(vc)
+        vcs.append(nvc)
         var parentView = contentView
-        if (vc is DraftboardModalViewController) {
+        if (nvc is DraftboardModalViewController) {
             parentView = view
         }
         
-        parentView.addSubview(vc.view)
-        vc.view.translatesAutoresizingMaskIntoConstraints = false
-        vc.view.leftRancor.constraintEqualToRancor(parentView.leftRancor).active = true
-        vc.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
-        vc.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
-        vc.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
+        parentView.addSubview(nvc.view)
+        nvc.view.translatesAutoresizingMaskIntoConstraints = false
+        nvc.view.leftRancor.constraintEqualToRancor(parentView.leftRancor).active = true
+        nvc.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
+        nvc.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
+        nvc.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
         
         self.view.bringSubviewToFront(tabBar)
+        
+        titlebar.delegate = nvc
+        titlebar.dataSource = nvc
+        titlebar.pushElements(animated)
     }
     
-    func popViewController() {
+    func popViewController(animated: Bool = true) {
         let cvc = vcs.popLast()
         cvc?.view.removeFromSuperview()
         
@@ -72,6 +74,10 @@ final class RootViewController: DraftboardViewController, DraftboardTabBarDelega
         nvc!.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
         nvc!.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
         nvc!.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
+        
+        titlebar.delegate = nvc
+        titlebar.dataSource = nvc
+        titlebar.popElements(animated)
     }
     
     func changeSections(vc: DraftboardViewController?) {

@@ -19,6 +19,7 @@ class LineupEmptyCellView: DraftboardNibView {
     @IBOutlet weak var positionLabel: DraftboardLabel!
     
     override func willAwakeFromNib() {
+        nibView.backgroundColor = .clearColor()
         bottomBorderView.hidden = true
         topBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
         bottomBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale

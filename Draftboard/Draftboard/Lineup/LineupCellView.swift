@@ -13,14 +13,14 @@ class LineupCellView: DraftboardNibControl {
     @IBOutlet weak var bottomBorderView: UIView!
     @IBOutlet weak var positionLabel: DraftboardLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var salaryLabel: DraftboardLabel!
     @IBOutlet weak var nameLabel: DraftboardLabel!
     @IBOutlet weak var avgLabel: DraftboardLabel!
-    @IBOutlet weak var avgValueLabel: DraftboardLabel!
     @IBOutlet weak var selectedView: DraftboardView!
     
     override func willAwakeFromNib() {
         bottomBorderView.hidden = true
+        topBorderView.hidden = true
+        nibView.backgroundColor = .clearColor()
         _selectedView = selectedView
     }
 }

@@ -29,6 +29,8 @@
 		3E80C2A61BC5F5010031CE3F /* POPSpringAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E80C28B1BC5F5010031CE3F /* POPSpringAnimation.mm */; };
 		3E80C2A71BC5F5010031CE3F /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E80C28F1BC5F5010031CE3F /* POPVector.mm */; };
 		3E80C2A81BC5F5010031CE3F /* TransformationMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E80C2921BC5F5010031CE3F /* TransformationMatrix.cpp */; };
+		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
+		5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
 		5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */; };
 		5D26FC701BBEE0BD00ACF127 /* LabeledField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */; };
 		5D26FC721BBEE77300ACF127 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC711BBEE77300ACF127 /* AccountViewController.xib */; };
@@ -181,6 +183,8 @@
 		3E80C2941BC5F5010031CE3F /* UnitBezier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitBezier.h; sourceTree = "<group>"; };
 		3E80C2A91BC5F51C0031CE3F /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutRancor.swift; sourceTree = "<group>"; };
+		5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardArrowButton.swift; sourceTree = "<group>"; };
+		5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "card-bg.png"; sourceTree = "<group>"; };
 		5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledField.swift; sourceTree = "<group>"; };
 		5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabeledField.xib; sourceTree = "<group>"; };
 		5D26FC711BBEE77300ACF127 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
@@ -445,6 +449,7 @@
 		5D9C2FCB1BAC681D0076355D /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */,
 				5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */,
 				5D9C2FD01BAC69BF0076355D /* court-floor.jpg */,
 			);
@@ -459,6 +464,7 @@
 				5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */,
 				5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */,
 				5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */,
+				5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -620,6 +626,7 @@
 				3E80C2951BC5F5010031CE3F /* pop-ios-Info.plist in Resources */,
 				5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */,
 				5D6237BE1BB61F7B0007E62A /* LineupCardView.xib in Resources */,
+				5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */,
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				5D6237C61BB61F7B0007E62A /* LineupNewViewController.xib in Resources */,
 				5D6237A61BB61E000007E62A /* ContestsHeaderCell.xib in Resources */,
@@ -665,6 +672,7 @@
 				5D6237D61BB61FE70007E62A /* TabController.swift in Sources */,
 				5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */,
 				5D6237D41BB61FD60007E62A /* ResultsViewController.swift in Sources */,
+				5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */,
 				3E80C29F1BC5F5010031CE3F /* POPCGUtils.mm in Sources */,
 				5D6237D51BB61FD60007E62A /* RootViewController.swift in Sources */,
 				5D6237BD1BB61F7B0007E62A /* LineupCardView.swift in Sources */,
