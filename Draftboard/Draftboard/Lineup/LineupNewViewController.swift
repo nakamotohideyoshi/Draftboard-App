@@ -17,21 +17,12 @@ class LineupNewViewController: DraftboardViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = .clearColor()
-        
-        let saveTapRecognizer = UITapGestureRecognizer()
-        saveTapRecognizer.addTarget(self, action: "didTapSave:")
-        //saveButton.addGestureRecognizer(saveTapRecognizer)
-        
-        let app = UIApplication.sharedApplication()
-        app.setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Value) {
             listViewController?.didSaveLineup()
-            RootViewController.sharedInstance.popViewController()
+            navController?.popViewController()
         }
     }
     

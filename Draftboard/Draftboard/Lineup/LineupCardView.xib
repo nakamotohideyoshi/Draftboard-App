@@ -46,8 +46,6 @@
                             <rect key="frame" x="347" y="15" width="80" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="dI0-sJ-hIp" secondAttribute="height" multiplier="16:9" id="Fa5-b5-Xeh"/>
-                                <constraint firstAttribute="width" constant="50" id="Jbt-NF-C06"/>
-                                <constraint firstAttribute="height" constant="30" id="mFn-4I-oo2"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="EDIT"/>
@@ -59,15 +57,9 @@
                                     <real key="value" value="11"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="textLetterSpacing">
-                                    <real key="value" value="1.2"/>
+                                    <real key="value" value="1"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="Jbt-NF-C06"/>
-                                    <exclude reference="mFn-4I-oo2"/>
-                                </mask>
-                            </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warriors stack" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMg-Mc-19H" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="15" y="19" width="103" height="22"/>
@@ -229,7 +221,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-bV-UG2" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-bV-UG2" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="532" width="442" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="46" id="Yzv-Az-8Lh"/>
@@ -249,6 +241,9 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="textLetterSpacing">
                             <real key="value" value="1.2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                            <color key="value" red="0.0" green="0.77647058820000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <variation key="default">

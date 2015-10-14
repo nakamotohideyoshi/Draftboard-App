@@ -10,6 +10,8 @@ import UIKit
 
 class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, DraftboardTitlebarDataSource {
     
+    var navController: DraftboardNavController?
+    
     func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         print("didTapTilebarButton:", buttonType)
     }

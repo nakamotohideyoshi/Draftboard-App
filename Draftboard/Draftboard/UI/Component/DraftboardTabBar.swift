@@ -40,6 +40,7 @@ class DraftboardTabBar: UIView {
     }
     
     func createButtons(buttonTypes: TabBarButtonType) {
+        self.backgroundColor = UIColor(0x192436)
         
         // Create buttons
         if (buttonTypes.contains(.Lineups)) {

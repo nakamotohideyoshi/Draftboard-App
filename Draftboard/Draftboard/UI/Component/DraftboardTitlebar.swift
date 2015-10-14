@@ -173,7 +173,7 @@ class DraftboardTitlebar: UIView {
         }
         
         // Layer transforms
-        let dir: CGFloat = (style == .Forward) ? 1.0 : -1.0
+        let dir: CGFloat = (style == .Forward) ? -1.0 : 1.0
         
         // Transforms
         let ouT = CATransform3DMakeTranslation(40.0 * dir, 0.0, 0.0)

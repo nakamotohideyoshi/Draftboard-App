@@ -164,9 +164,9 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
             
             return cell
         } else {
-
+            
             let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
-
+            
             cell.title?.text = contests[indexPath.row].title
             cell.subtitle?.text = contests[indexPath.row].feeDescription()
             cell.subtitle.hidden = false
@@ -213,11 +213,5 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     
     override func titlebarTitle() -> String? {
         return "Contests".uppercaseString
-    }
-    
-    // TODO: remove this
-    
-    override func titlebarBgHidden() -> Bool {
-        return false
     }
 }

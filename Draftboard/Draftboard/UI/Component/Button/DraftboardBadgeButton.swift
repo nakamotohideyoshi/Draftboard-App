@@ -8,19 +8,18 @@
 
 import UIKit
 
-class DraftboardArrowButton: DraftboardButton {
+class DraftboardBadgeButton: DraftboardButton {
     
     override func setDefaults() {
         super.setDefaults()
-        
         let bundle = NSBundle(forClass: self.dynamicType)
-        let img = UIImage(named: "icon-arrow", inBundle: bundle, compatibleWithTraitCollection: self.traitCollection)
+        let img = UIImage(named: "icon-arrow-down", inBundle: bundle, compatibleWithTraitCollection: self.traitCollection)
         iconImage = img
     }
-
+    
     override func constrainIconImageView() {
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        iconImageView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -16.0).active = true
+        iconImageView.rightRancor.constraintEqualToRancor(label.leftRancor).active = true
         iconImageView.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
     }
     

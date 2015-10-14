@@ -22,10 +22,9 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .clearColor()
         
-        // Tap recognizer
+        // Create view tap
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: "didTapCreateView:")
         self.createView.addGestureRecognizer(tapRecognizer)
@@ -45,10 +44,6 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Create goes on top
         view.bringSubviewToFront(self.createView)
-    }
-    
-    func didTapCreateView(gestureRecognizer: UITapGestureRecognizer) {
-        createNewLineup()
     }
 
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
@@ -70,34 +65,21 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         }
     }
     
+    func didTapCreateView(gestureRecognizer: UITapGestureRecognizer) {
+        createNewLineup()
+    }
+    
     func createNewLineup() {
         let nvc = LineupNewViewController(nibName: "LineupNewViewController", bundle: nil)
         nvc.listViewController = self
         newLineupVc = nvc
         
-        RootViewController.sharedInstance.pushViewController(nvc)
+        navController?.pushViewController(nvc)
     }
     
     func didSaveLineup() {
         self.createView.hidden = true
         addLineup()
-    }
-    
-    func filterLineups() {
-        let sheet = UIAlertController(title: "Filter by sport:", message:"", preferredStyle: .ActionSheet)
-        let options = ["All sports", "NBA", "NFL"]
-        
-        for (i, option) in options.enumerate() {
-            let selected = (i == 0)
-            let title = (selected ? "    " + option + " ✔︎" : option)
-            sheet.addAction(UIAlertAction(title: title, style: .Default, handler: { (action) -> Void in
-                // TODO: select the sport
-            }))
-        }
-        
-        self.presentViewController(sheet, animated: true) { () -> Void in
-            // TODO: anything?
-        }
     }
     
     func addLineup() {
@@ -177,7 +159,6 @@ extension LineupsListController: UIScrollViewDelegate {
             
             card.alpha = alpha
             card.layer.transform = transform
-
         }
     }
 }
