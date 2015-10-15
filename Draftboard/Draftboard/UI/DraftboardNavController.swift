@@ -20,10 +20,10 @@ class DraftboardNavController: UIViewController {
         rvc = rootViewController
     }
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        titlebar = DraftboardTitlebar(frame: CGRectMake(0.0, 0.0, 50.0, 50.0))
+        titlebar = DraftboardTitlebar()
         view.addSubview(titlebar)
         
         titlebar.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ class DraftboardNavController: UIViewController {
         titlebar.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         titlebar.heightRancor.constraintEqualToConstant(56.0).active = true
         
-        contentView = UIView(frame: CGRectMake(0.0, 0.0, 50.0, 50.0))
+        contentView = UIView()
         view.addSubview(contentView)
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,7 @@ class DraftboardNavController: UIViewController {
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
-        titlebar.pushElements(animated)
+        titlebar.pushElements(animated: animated)
     }
     
     func popViewController(animated: Bool = true) {
@@ -88,7 +88,7 @@ class DraftboardNavController: UIViewController {
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
-        titlebar.popElements(animated)
+        titlebar.popElements(animated: animated)
     }
     
     func popToRootViewController(animated: Bool = true) {
@@ -115,7 +115,7 @@ class DraftboardNavController: UIViewController {
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
-        titlebar.popElements(animated)
+        titlebar.popElements(animated: animated)
         
         vcs = [nvc]
     }

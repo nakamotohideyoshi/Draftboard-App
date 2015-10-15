@@ -51,17 +51,9 @@ class DraftboardTitlebar: UIView {
     var bgHidden = false
     var completionHandler:((Bool)->Void)?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    func setup() {
+    convenience init() {
+        self.init(frame: CGRectZero)
+        
         bgView = UIView()
         bgView.backgroundColor = UIColor(0x25344c, alpha:0.4)
         self.addSubview(bgView)
@@ -151,13 +143,13 @@ class DraftboardTitlebar: UIView {
     
     // MARK: Animation
     
-    func pushElements(animated: Bool = true) {
+    func pushElements(animated animated: Bool = true) {
         self.updateElements()
         let style: TitlebarTransitionStyle = (animated) ? .Forward : .None
         transitionElements(style)
     }
     
-    func popElements(animated: Bool = true) {
+    func popElements(animated animated: Bool = true) {
         self.updateElements()
         let style: TitlebarTransitionStyle = (animated) ? .Back : .None
         transitionElements(style)

@@ -50,10 +50,10 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         
         cnc = lineupNC
-        switchViewController(cnc)
+        switchNavController(cnc)
     }
     
-    func switchViewController(nc: DraftboardNavController, animated: Bool = true) {
+    func switchNavController(nc: DraftboardNavController, animated: Bool = true) {
         cnc?.view.removeFromSuperview()
         contentView.addSubview(nc.view)
         cnc = nc
@@ -67,13 +67,13 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
     
     func didTapTabButton(buttonType: TabBarButtonType) {
         if (buttonType == .Lineups) {
-            self.switchViewController(lineupNC)
+            self.switchNavController(lineupNC)
         }
         else if (buttonType == .Contests) {
-           self.switchViewController(contestNC)
+           self.switchNavController(contestNC)
         }
         else if (buttonType == .Profile) {
-            self.switchViewController(profileNC)
+            self.switchNavController(profileNC)
         }
     }
     

@@ -45,7 +45,7 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         // Create goes on top
         view.bringSubviewToFront(self.createView)
     }
-
+    
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
 
         // Test pop

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -185,13 +185,7 @@
                                 <constraint firstItem="xlJ-qA-6bM" firstAttribute="top" secondItem="uOZ-ly-4ma" secondAttribute="bottom" id="KhZ-lt-nfb"/>
                                 <constraint firstItem="xlJ-qA-6bM" firstAttribute="centerX" secondItem="xTt-uy-B8J" secondAttribute="centerX" id="Lq7-wg-3Dh"/>
                                 <constraint firstItem="xlJ-qA-6bM" firstAttribute="centerY" secondItem="xTt-uy-B8J" secondAttribute="centerY" constant="5" id="eFz-Pq-C6e"/>
-                                <constraint firstItem="uOZ-ly-4ma" firstAttribute="centerX" secondItem="xlJ-qA-6bM" secondAttribute="centerX" id="i99-fG-DA0"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="i99-fG-DA0"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -204,7 +198,6 @@
                         <constraint firstAttribute="bottom" secondItem="IcF-oT-2Ip" secondAttribute="bottom" id="U3b-rJ-PX5"/>
                         <constraint firstItem="N4l-U0-E02" firstAttribute="width" secondItem="wVh-Sh-VIp" secondAttribute="width" multiplier="0.8" id="VVW-3L-zxu"/>
                         <constraint firstItem="KLb-w2-xhc" firstAttribute="width" secondItem="wVh-Sh-VIp" secondAttribute="width" multiplier="0.33" id="XeU-c9-WA2"/>
-                        <constraint firstAttribute="height" constant="68" id="Xlt-rB-OHv"/>
                         <constraint firstAttribute="trailing" secondItem="ZcS-DT-Had" secondAttribute="trailing" id="eho-42-MeX"/>
                         <constraint firstItem="xTt-uy-B8J" firstAttribute="height" secondItem="wVh-Sh-VIp" secondAttribute="height" id="fZZ-Sm-DiD"/>
                         <constraint firstItem="ZcS-DT-Had" firstAttribute="height" secondItem="wVh-Sh-VIp" secondAttribute="height" id="l2d-im-OjP"/>
@@ -215,16 +208,10 @@
                         <constraint firstItem="KLb-w2-xhc" firstAttribute="height" secondItem="wVh-Sh-VIp" secondAttribute="height" id="wRk-zQ-nxP"/>
                         <constraint firstItem="KLb-w2-xhc" firstAttribute="leading" secondItem="wVh-Sh-VIp" secondAttribute="leading" id="yrn-mr-1Jx"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Xlt-rB-OHv"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-bV-UG2" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="532" width="442" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="46" id="Yzv-Az-8Lh"/>
                         <constraint firstAttribute="height" constant="44" id="eLb-LI-fUq"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -246,17 +233,11 @@
                             <color key="value" red="0.0" green="0.77647058820000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Yzv-Az-8Lh"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.054901960780000002" green="0.090196078430000007" blue="0.13725490200000001" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="sh4-bV-UG2" secondAttribute="trailing" id="2JK-iA-8ZN"/>
-                <constraint firstItem="sh4-bV-UG2" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.09" id="3Dc-ck-csc"/>
                 <constraint firstItem="wVh-Sh-VIp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="80q-li-9yK"/>
                 <constraint firstItem="fD3-nh-e49" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="9bH-Ta-pfQ"/>
                 <constraint firstAttribute="bottom" secondItem="sh4-bV-UG2" secondAttribute="bottom" id="Fc3-cF-ngP"/>
@@ -265,26 +246,15 @@
                 <constraint firstItem="fD3-nh-e49" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.13" id="Iwv-sU-nLV"/>
                 <constraint firstItem="wVh-Sh-VIp" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.12" id="KnC-zi-tNr"/>
                 <constraint firstItem="yyN-4n-oTH" firstAttribute="top" secondItem="fD3-nh-e49" secondAttribute="bottom" id="MZr-M7-Dy2"/>
-                <constraint firstItem="yyN-4n-oTH" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="N1o-sM-Yiv"/>
                 <constraint firstItem="fD3-nh-e49" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ogx-Xg-jHo"/>
                 <constraint firstItem="fD3-nh-e49" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="U19-cV-AxM"/>
                 <constraint firstAttribute="trailing" secondItem="yyN-4n-oTH" secondAttribute="trailing" id="h6g-yz-8bK"/>
-                <constraint firstItem="wVh-Sh-VIp" firstAttribute="top" secondItem="yyN-4n-oTH" secondAttribute="bottom" id="hYr-Jn-Bkz"/>
-                <constraint firstItem="yyN-4n-oTH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="it8-eb-2PX"/>
                 <constraint firstItem="yyN-4n-oTH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pfb-fr-dQn"/>
                 <constraint firstItem="sh4-bV-UG2" firstAttribute="top" secondItem="wVh-Sh-VIp" secondAttribute="bottom" id="uLS-E2-Ebg"/>
                 <constraint firstItem="sh4-bV-UG2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uiG-P1-hcs"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="N1o-sM-Yiv"/>
-                    <exclude reference="it8-eb-2PX"/>
-                    <exclude reference="hYr-Jn-Bkz"/>
-                    <exclude reference="3Dc-ck-csc"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="-528" y="-123"/>
         </view>
     </objects>

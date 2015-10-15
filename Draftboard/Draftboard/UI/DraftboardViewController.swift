@@ -13,7 +13,7 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
     var navController: DraftboardNavController?
     
     func didTapTitlebarButton(buttonType: TitlebarButtonType) {
-        print("didTapTilebarButton:", buttonType)
+        print("didTapTitlebarButton:", buttonType)
     }
     
     func titlebarTitle() -> String? {
