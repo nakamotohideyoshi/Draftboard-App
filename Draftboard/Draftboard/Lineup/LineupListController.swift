@@ -17,7 +17,7 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
-    var newLineupVc: LineupNewViewController?
+    var newLineupVc: LineupEditViewController?
     let scrollView = UIScrollView()
     
     override func viewDidLoad() {
@@ -59,6 +59,7 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         anim.springBounciness = 20
         createView.layer.pop_addAnimation(anim, forKey: "test")
         */
+
         
         if (buttonType == .Plus) {
             createNewLineup()
@@ -70,7 +71,7 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     func createNewLineup() {
-        let nvc = LineupNewViewController(nibName: "LineupNewViewController", bundle: nil)
+        let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.listViewController = self
         newLineupVc = nvc
         

@@ -62,8 +62,8 @@
 		5D6237C21BB61F7B0007E62A /* LineupEmptyCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B51BB61F7B0007E62A /* LineupEmptyCellView.xib */; };
 		5D6237C31BB61F7B0007E62A /* LineupListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B61BB61F7B0007E62A /* LineupListController.xib */; };
 		5D6237C41BB61F7B0007E62A /* LineupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B71BB61F7B0007E62A /* LineupModel.swift */; };
-		5D6237C51BB61F7B0007E62A /* LineupNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B81BB61F7B0007E62A /* LineupNewViewController.swift */; };
-		5D6237C61BB61F7B0007E62A /* LineupNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B91BB61F7B0007E62A /* LineupNewViewController.xib */; };
+		5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */; };
+		5D6237C61BB61F7B0007E62A /* LineupEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */; };
 		5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237BA1BB61F7B0007E62A /* LineupsDetailController.swift */; };
 		5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237BB1BB61F7B0007E62A /* LineupListController.swift */; };
 		5D6237CB1BB61F9B0007E62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860E01B9FB195004013AB /* AppDelegate.swift */; };
@@ -228,8 +228,8 @@
 		5D6237B51BB61F7B0007E62A /* LineupEmptyCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupEmptyCellView.xib; sourceTree = "<group>"; };
 		5D6237B61BB61F7B0007E62A /* LineupListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupListController.xib; sourceTree = "<group>"; };
 		5D6237B71BB61F7B0007E62A /* LineupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupModel.swift; sourceTree = "<group>"; };
-		5D6237B81BB61F7B0007E62A /* LineupNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupNewViewController.swift; sourceTree = "<group>"; };
-		5D6237B91BB61F7B0007E62A /* LineupNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupNewViewController.xib; sourceTree = "<group>"; };
+		5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEditViewController.swift; sourceTree = "<group>"; };
+		5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupEditViewController.xib; sourceTree = "<group>"; };
 		5D6237BA1BB61F7B0007E62A /* LineupsDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupsDetailController.swift; sourceTree = "<group>"; };
 		5D6237BB1BB61F7B0007E62A /* LineupListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListController.swift; sourceTree = "<group>"; };
 		5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTabBarButton.swift; sourceTree = "<group>"; };
@@ -480,8 +480,8 @@
 				5D6237BB1BB61F7B0007E62A /* LineupListController.swift */,
 				5D6237B61BB61F7B0007E62A /* LineupListController.xib */,
 				5D6237B71BB61F7B0007E62A /* LineupModel.swift */,
-				5D6237B81BB61F7B0007E62A /* LineupNewViewController.swift */,
-				5D6237B91BB61F7B0007E62A /* LineupNewViewController.xib */,
+				5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */,
+				5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */,
 				5D6237BA1BB61F7B0007E62A /* LineupsDetailController.swift */,
 			);
 			path = Lineup;
@@ -631,7 +631,7 @@
 				5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */,
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */,
-				5D6237C61BB61F7B0007E62A /* LineupNewViewController.xib in Resources */,
+				5D6237C61BB61F7B0007E62A /* LineupEditViewController.xib in Resources */,
 				5D6237A61BB61E000007E62A /* ContestsHeaderCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,7 +687,7 @@
 				3E80C2971BC5F5010031CE3F /* POPAnimatableProperty.mm in Sources */,
 				5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */,
 				3E80C2A01BC5F5010031CE3F /* POPCustomAnimation.mm in Sources */,
-				5D6237C51BB61F7B0007E62A /* LineupNewViewController.swift in Sources */,
+				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
 				5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */,
 				3E80C2991BC5F5010031CE3F /* POPAnimationEvent.mm in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,

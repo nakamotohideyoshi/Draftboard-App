@@ -22,7 +22,7 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupNewViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupEditViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
                 <outlet property="avgSalaryLabel" destination="7g1-R4-jaA" id="Lcs-OI-Sfm"/>
                 <outlet property="nameTextField" destination="a6t-pS-ZdO" id="You-im-hRr"/>
