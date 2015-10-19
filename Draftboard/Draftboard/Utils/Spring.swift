@@ -116,8 +116,13 @@ final class Springs: NSObject {
         let time = CACurrentMediaTime();
         timeSinceLastUpdate = time - lastUpdateTime;
         lastUpdateTime = time;
-        accumulatedTime += timeSinceLastUpdate
         
+        for (_, spring) in springs.enumerate() {
+            spring.integrate(physicsTimeInterval)
+        }
+        
+        /*
+        accumulatedTime += timeSinceLastUpdate
         while (accumulatedTime > physicsTimeInterval) {
             for (_, spring) in springs.enumerate() {
                 spring.integrate(physicsTimeInterval)
@@ -125,6 +130,7 @@ final class Springs: NSObject {
 
             accumulatedTime -= physicsTimeInterval
         }
+        */
     }
     
     func uniqueId() -> UInt {

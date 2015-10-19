@@ -90,7 +90,10 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
                 nc.view.layer.transform = CATransform3DIdentity
                 self.completionHandler?(completed)
             }
+            
+            self.view.layoutIfNeeded()
             spring!.start()
+            
         } else {
             completionHandler!(true)
             completionHandler = nil

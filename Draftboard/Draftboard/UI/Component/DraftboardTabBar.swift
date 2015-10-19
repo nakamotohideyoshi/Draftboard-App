@@ -29,6 +29,8 @@ class DraftboardTabBar: UIView {
     var buttons = [DraftboardTabBarButton]()
     var selectedIndex = 0
     
+    var spring: Spring?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.createButtons([.Lineups, .Contests, .Profile])
@@ -146,22 +148,23 @@ class DraftboardTabBar: UIView {
         
         // Animate the change?
         if (animated) {
+            spring?.stop()
+            spring = nil
             
             // Apply constraints
-            let fromValue = NSValue(CGPoint: selectionLine.layer.position)
+            let startPos = NSValue(CGPoint: selectionLine.layer.position).CGPointValue()
             self.layoutIfNeeded()
-            let toValue = NSValue(CGPoint: selectionLine.layer.position)
+            let endPos = NSValue(CGPoint: selectionLine.layer.position).CGPointValue()
+            let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
             
-            // Create animation
-            let anim = CABasicAnimation(keyPath: "position")
-            anim.duration = 0.25
-            anim.fromValue = fromValue
-            anim.toValue = toValue
-            anim.timingFunction = CAMediaTimingFunction(controlPoints: 0.175, 0.885, 0.320, 1.275)
-            
-            // Apply animation
-            selectionLine.layer.removeAllAnimations()
-            selectionLine.layer.addAnimation(anim, forKey: "position")
+            // Spring
+            self.selectionLine.layer.position = startPos
+            spring = Spring(stiffness: 4.0, mass: 2.0, damping: 0.84, velocity: 0.0)
+            spring!.updateBlock = { (value) -> Void in
+                self.selectionLine.layer.position = CGPointMake(startPos.x + (deltaPos.x * value), startPos.y + (deltaPos.y * value))
+            }
+
+            spring!.start()
         }
     }
     
