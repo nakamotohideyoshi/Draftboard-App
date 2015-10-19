@@ -31,7 +31,7 @@ final class Springs: NSObject {
         let time = CACurrentMediaTime()
         lastUpdateTime = time
         
-        physicsTimer = NSTimer(timeInterval: 1.0 / 90.0, target: self, selector: Selector("integrate"), userInfo: nil, repeats: true)
+        physicsTimer = NSTimer(timeInterval: 1.0 / 60.0, target: self, selector: Selector("integrate"), userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(physicsTimer!, forMode: NSRunLoopCommonModes)
     }
     
