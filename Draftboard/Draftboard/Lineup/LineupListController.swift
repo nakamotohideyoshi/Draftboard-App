@@ -41,20 +41,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
-
-        // Test pop
-        createView.pop_removeAllAnimations()
-        
-        /*
-        let anim = POPSpringAnimation(propertyNamed: kPOPLayerCornerRadius)
-        anim.toValue = 50
-        anim.velocity = 500
-        anim.springSpeed = 0.5
-        anim.springBounciness = 20
-        createView.layer.pop_addAnimation(anim, forKey: "test")
-        */
-
-        
         if (buttonType == .Plus) {
             createNewLineup()
         }
