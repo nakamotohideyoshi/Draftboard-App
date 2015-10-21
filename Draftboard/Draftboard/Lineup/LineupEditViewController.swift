@@ -13,7 +13,7 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var nameTextField: UITextField!
     
-    weak var listViewController: LineupsListController?
+    weak var listViewController: LineupListController?
     
     override func viewDidLoad() {
         view.backgroundColor = .clearColor()

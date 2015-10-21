@@ -8,17 +8,17 @@
 
 import UIKit
 
-class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
+class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     @IBOutlet weak var createView: UIView!
     @IBOutlet weak var createViewButton: DraftboardRoundButton!
     @IBOutlet weak var createImageView: UIImageView!
     @IBOutlet weak var createIconImageView: UIImageView!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
+
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
     var newLineupVc: LineupEditViewController?
-    let scrollView = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +30,6 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         self.createView.addGestureRecognizer(tapRecognizer)
         
         // Scroll view
-        view.addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.leftRancor.constraintEqualToRancor(view.leftRancor, constant: 20).active = true
-        scrollView.rightRancor.constraintEqualToRancor(view.rightRancor, constant: -20).active = true
-        scrollView.bottomRancor.constraintEqualToRancor(view.bottomRancor, constant: -20).active = true
-        scrollView.topRancor.constraintEqualToRancor(view.topRancor, constant: 20).active = true
         scrollView.clipsToBounds = false
         scrollView.delegate = self
         scrollView.pagingEnabled = true
@@ -111,6 +105,7 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         // Scroll to card
         view.layoutIfNeeded()
         scrollView.setContentOffset(cardView.frame.origin, animated: false)
+//        cardView.contentView.flashScrollIndicators() // TODO: Maybe someday...
     }
     
     override func titlebarTitle() -> String {
@@ -126,13 +121,16 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     }
 }
 
-extension LineupsListController: UIScrollViewDelegate {
+// MARK: - UIScrollViewDelegate
+
+extension LineupListController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let page = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
         let pageIndex = Int(floor(page))
         let pageFraction = page - floor(page)
         
-        for (i, card) in lineupCardViews.enumerate() {
+        let views: [UIView] = (lineupCardViews.count > 0) ? lineupCardViews : [createView]
+        for (i, card) in views.enumerate() {
             
             var alpha: CGFloat = 0.25
             var transform: CATransform3D = CATransform3DIdentity

@@ -25,7 +25,7 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let lineupRvc = LineupsListController(nibName: "LineupListController", bundle: nil)
+        let lineupRvc = LineupListController(nibName: "LineupListController", bundle: nil)
         let contestRvc = ContestsListController(nibName: "ContestsListController", bundle: nil)
         let profileRvc = AccountViewController(nibName: "AccountViewController", bundle: nil)
         
