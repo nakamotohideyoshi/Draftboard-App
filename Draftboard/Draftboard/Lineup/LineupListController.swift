@@ -18,7 +18,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
 
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
-    var newLineupVc: LineupEditViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +51,16 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     func createNewLineup() {
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
-        nvc.listViewController = self
-        newLineupVc = nvc
+        nvc.saveLineupAction = {
+            self.didSaveLineup()
+            self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
+        }
         
-        navController?.pushViewController(nvc)
+        if lineupCardViews.count > 0 {
+            navController?.pushViewController(nvc, fromCardView: self.lineupCardViews.last!, animated: true)
+        } else {
+            navController?.pushViewController(nvc)
+        }
     }
     
     func didSaveLineup() {

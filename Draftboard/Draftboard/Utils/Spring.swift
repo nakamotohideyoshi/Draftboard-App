@@ -6,6 +6,8 @@
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
 
+import UIKit
+
 final class Springs: NSObject {
     static let sharedInstance = Springs()
     

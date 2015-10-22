@@ -13,7 +13,7 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var nameTextField: UITextField!
     
-    weak var listViewController: LineupListController?
+    var saveLineupAction: (() -> Void)?
     
     override func viewDidLoad() {
         view.backgroundColor = .clearColor()
@@ -21,8 +21,7 @@ class LineupEditViewController: DraftboardViewController {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Value) {
-            listViewController?.didSaveLineup()
-            navController?.popViewController()
+            saveLineupAction?()
         }
     }
     

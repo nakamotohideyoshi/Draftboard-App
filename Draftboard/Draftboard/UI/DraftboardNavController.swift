@@ -119,4 +119,101 @@ class DraftboardNavController: UIViewController {
         
         vcs = [nvc]
     }
+
+    func pushViewController(nvc: DraftboardViewController, fromCardView cardView: LineupCardView, animated: Bool = true) {
+        let cvc = vcs.last!
+//        cvc?.view.removeFromSuperview()
+        
+        vcs.append(nvc)
+        nvc.navController = self
+        contentView.addSubview(nvc.view)
+        nvc.view.alpha = 0
+        
+        nvc.view.translatesAutoresizingMaskIntoConstraints = false
+        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+        nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+        nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
+        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+        
+        titlebar.delegate = nvc
+        titlebar.dataSource = nvc
+        titlebar.pushElements(animated: animated)
+        
+        //////
+        
+        let sx = cvc.view.bounds.size.width / cardView.bounds.size.width - 1
+        let sy = cvc.view.bounds.size.height / cardView.bounds.size.height - 1
+        
+        let sx2 = 1 - cardView.bounds.size.width / cvc.view.bounds.size.width
+        let sy2 = 1 - cardView.bounds.size.height / cvc.view.bounds.size.height
+        
+        let spring = Spring(stiffness: 3.0, mass: 1.0, damping: 0.8, velocity: 10.0)
+        spring.updateBlock = { (value) -> Void in
+            cardView.layer.transform = CATransform3DMakeScale(1.0 + (sx * value), 1.0 + (sy * value), 1.0)
+            nvc.view.layer.transform = CATransform3DMakeScale(1.0 - sx2 + (sx2 * value), 1.0 - sy2 + (sy2 * value), 1.0)
+        }
+        spring.completeBlock = { (completed) -> Void in
+            cvc.view.removeFromSuperview()
+            nvc.view.layer.transform = CATransform3DIdentity
+        }
+        UIView.animateWithDuration(0.2, animations: {
+            cvc.view.alpha = 0
+            nvc.view.alpha = 1
+        })
+        
+        spring.start()
+    }
+    
+    func popViewControllerToCardView(cardView: LineupCardView, animated: Bool = true) {
+        let cvc = vcs.popLast()!
+//        cvc?.view.removeFromSuperview()
+        
+        if vcs.last == nil {
+            return
+        }
+        
+        let nvc = vcs.last!
+        nvc.view.alpha = 0
+        
+        var parentView = contentView
+        if (nvc is DraftboardModalViewController) {
+            parentView = view
+        }
+        
+        parentView.addSubview(nvc.view)
+        nvc.view.translatesAutoresizingMaskIntoConstraints = false
+        nvc.view.leftRancor.constraintEqualToRancor(parentView.leftRancor).active = true
+        nvc.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
+        nvc.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
+        nvc.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
+        
+        titlebar.delegate = nvc
+        titlebar.dataSource = nvc
+        titlebar.popElements(animated: animated)
+        
+        //////
+        
+        let sx = cvc.view.bounds.size.width / cardView.bounds.size.width - 1
+        let sy = cvc.view.bounds.size.height / cardView.bounds.size.height - 1
+        
+        let sx2 = 1 - cardView.bounds.size.width / cvc.view.bounds.size.width
+        let sy2 = 1 - cardView.bounds.size.height / cvc.view.bounds.size.height
+        
+        let spring = Spring(stiffness: 3.0, mass: 1.0, damping: 0.8, velocity: 10.0)
+        spring.updateBlock = { (value) -> Void in
+            cardView.layer.transform = CATransform3DMakeScale(1.0 + sx - (sx * value), 1.0 + sy - (sy * value), 1.0)
+            cvc.view.layer.transform = CATransform3DMakeScale(1.0 - (sx2 * value), 1.0 - (sy2 * value), 1.0)
+        }
+        spring.completeBlock = { (completed) -> Void in
+            cvc.view.removeFromSuperview()
+            cardView.layer.transform = CATransform3DIdentity
+        }
+        UIView.animateWithDuration(0.2, animations: {
+            cvc.view.alpha = 0
+            nvc.view.alpha = 1
+        })
+        
+        spring.start()
+    }
+
 }
