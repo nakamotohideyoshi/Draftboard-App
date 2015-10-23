@@ -9,7 +9,6 @@
 import UIKit
 
 class ContestsListController: DraftboardViewController, UITableViewDelegate, UITableViewDataSource {
-    
     let normalContestCellReuseIdentifier   = "normalContestCell"
     let liveContestCellReuseIdentifier     = "liveContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"

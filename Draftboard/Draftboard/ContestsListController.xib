@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9052" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -19,9 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="court-floor.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ILf-4s-wNF">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CN4-uq-OFV" customClass="DraftboardFilterButton" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="188" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -56,20 +53,16 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ILf-4s-wNF" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="4ar-b1-HpK"/>
                 <constraint firstItem="jZd-at-Vdj" firstAttribute="leading" secondItem="CN4-uq-OFV" secondAttribute="trailing" constant="-1" id="8xs-VF-AaC"/>
                 <constraint firstAttribute="bottom" secondItem="6hd-Dh-Uf8" secondAttribute="bottom" id="Bw2-gq-uYJ"/>
-                <constraint firstItem="ILf-4s-wNF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="G9K-NW-RSB"/>
                 <constraint firstItem="jZd-at-Vdj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JsB-Jp-vzs"/>
                 <constraint firstItem="6hd-Dh-Uf8" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="Q6I-X7-UVD"/>
-                <constraint firstItem="ILf-4s-wNF" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="RS1-Dr-dM6"/>
                 <constraint firstItem="CN4-uq-OFV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="WqL-gj-VLN"/>
                 <constraint firstItem="6hd-Dh-Uf8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="104" id="bZO-g1-7lI"/>
                 <constraint firstItem="6hd-Dh-Uf8" firstAttribute="top" secondItem="CN4-uq-OFV" secondAttribute="bottom" id="brm-ZV-v3b"/>
                 <constraint firstItem="jZd-at-Vdj" firstAttribute="width" secondItem="CN4-uq-OFV" secondAttribute="width" id="fFe-wK-BPO"/>
                 <constraint firstItem="CN4-uq-OFV" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="hZp-Xr-Lvi"/>
                 <constraint firstAttribute="trailing" secondItem="6hd-Dh-Uf8" secondAttribute="trailing" id="mEN-vU-Lof"/>
-                <constraint firstItem="ILf-4s-wNF" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="oZR-Dd-vcn"/>
                 <constraint firstItem="CN4-uq-OFV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qyx-Dd-MhU"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -81,7 +74,4 @@
             <point key="canvasLocation" x="219.5" y="481.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="court-floor.jpg" width="750" height="1300"/>
-    </resources>
 </document>

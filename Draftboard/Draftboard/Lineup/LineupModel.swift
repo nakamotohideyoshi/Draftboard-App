@@ -11,7 +11,7 @@ import UIKit
 class LineupModel: NSObject {
 
     var name: String = "Warriors Stack"
-    var sport: Sport = .Basketball
+    var sport: SportType = .Basketball
     
     override init() {
         super.init()

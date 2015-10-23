@@ -121,16 +121,14 @@ final class Springs: NSObject {
             spring.integrate(physicsTimeInterval)
         }
         
-        /*
-        accumulatedTime += timeSinceLastUpdate
-        while (accumulatedTime > physicsTimeInterval) {
-            for (_, spring) in springs.enumerate() {
-                spring.integrate(physicsTimeInterval)
-            }
-
-            accumulatedTime -= physicsTimeInterval
-        }
-        */
+//        accumulatedTime += timeSinceLastUpdate
+//        while (accumulatedTime > physicsTimeInterval) {
+//            for (_, spring) in springs.enumerate() {
+//                spring.integrate(physicsTimeInterval)
+//            }
+//
+//            accumulatedTime -= physicsTimeInterval
+//        }
     }
     
     func uniqueId() -> UInt {
@@ -145,7 +143,6 @@ class Spring {
     var completeBlock:((Bool)->Void)?
     
     var stiffness: CGFloat
-    var mass: CGFloat
     var damping: CGFloat
     var velocity: CGFloat
     
@@ -155,10 +152,9 @@ class Spring {
     var val: CGFloat
     var complete = false
     
-    init(stiffness s: CGFloat = 0.0, mass m: CGFloat = 1.0, damping d: CGFloat = 0.9, velocity v: CGFloat = 0.0) {
+    init(stiffness s: CGFloat = 0.0, damping d: CGFloat = 0.9, velocity v: CGFloat = 0.0) {
         id = Springs.sharedInstance.uniqueId()
         stiffness = s
-        mass = m
         damping = d
         velocity = v * CGFloat(1.0 / 60.0)
         val = 0
@@ -181,7 +177,7 @@ class Spring {
     func integrate(deltaTime: NSTimeInterval) {
         let force = stiffness * (1.0 - val) * CGFloat(deltaTime)
         
-        velocity += force * (1.0 / mass)
+        velocity += force
         val += velocity
         velocity *= damping
         

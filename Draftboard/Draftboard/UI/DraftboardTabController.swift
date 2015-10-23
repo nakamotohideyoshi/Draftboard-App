@@ -81,7 +81,7 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
             
             let startScale: CGFloat = 1.2
             let scaleDelta: CGFloat = 1.0 - startScale
-            spring = Spring(stiffness: 4.0, mass: 2.0, damping: 0.8, velocity: 10.0)
+            spring = Spring(stiffness: 2.0, damping: 0.8, velocity: 10.0)
             spring!.updateBlock = { (value) -> Void in
                 let scale = startScale + scaleDelta * value
                 nc.view.layer.transform = CATransform3DMakeScale(scale, scale, 1.0)

@@ -45,5 +45,4 @@ import UIKit
     internal func nibName() -> String {
         return self.dynamicType.description().componentsSeparatedByString(".").last!
     }
-    
 }

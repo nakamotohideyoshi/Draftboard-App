@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LineupCardViewDelegate {
+    func didTap(buttonType: TabBarButtonType)
+}
+
 class LineupCardView: DraftboardNibView {
     
     @IBOutlet weak var editButton: DraftboardButton!

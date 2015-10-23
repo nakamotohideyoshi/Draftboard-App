@@ -79,5 +79,4 @@ import UIKit
         guaranteedLabel.backgroundColor = .clearColor()
         guaranteedLabel.text = ""
     }
-
 }

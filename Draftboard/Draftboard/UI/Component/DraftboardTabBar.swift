@@ -159,7 +159,7 @@ class DraftboardTabBar: UIView {
             
             // Spring
             self.selectionLine.layer.position = startPos
-            spring = Spring(stiffness: 4.0, mass: 2.0, damping: 0.84, velocity: 0.0)
+            spring = Spring(stiffness: 2.0, damping: 0.84, velocity: 0.0)
             spring!.updateBlock = { (value) -> Void in
                 self.selectionLine.layer.position = CGPointMake(startPos.x + (deltaPos.x * value), startPos.y + (deltaPos.y * value))
             }

@@ -8,8 +8,7 @@
 
 import UIKit
 
-enum Sport: String {
-    
+enum SportType: String {
     case Basketball = "Basketball"
     case Soccer = "Soccer"
     case Baseball = "Baseball"
@@ -19,11 +18,9 @@ enum Sport: String {
     case Golf = "Golf"
     case Parcheesy = "Parcheesy"
     case SuperSmashBrothers = "Super Smash Brothers"
-    
 }
 
 enum GameType: String {
-    
     case Standard = "Standard"
     case DoubleUp = "Double Up"
     case HeadsUp = "Heads Up"
@@ -37,5 +34,4 @@ enum GameType: String {
         vals.append(GameType.HeadsUp)
         return vals
     }
-    
 }
