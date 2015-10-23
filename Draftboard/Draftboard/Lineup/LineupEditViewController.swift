@@ -1,5 +1,5 @@
 //
-//  LineupNewViewController.swift
+//  LineupEditViewController.swift
 //  Draftboard
 //
 //  Created by Wes Pearce on 9/16/15.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class LineupNewViewController: DraftboardViewController {
+class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentView: UIScrollView!
     
-    weak var listViewController: LineupsListController?
+    var saveLineupAction: (() -> Void)?
     
     var positions = [String]()
     
@@ -68,8 +68,7 @@ class LineupNewViewController: DraftboardViewController {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Value) {
-            listViewController?.didSaveLineup()
-            navController?.popViewController()
+            saveLineupAction?()
         }
     }
     

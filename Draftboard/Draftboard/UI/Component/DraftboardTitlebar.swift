@@ -11,6 +11,7 @@ import UIKit
 enum TitlebarTransitionStyle {
     case Forward
     case Back
+    case Directionless
     case None
 }
 
@@ -143,15 +144,22 @@ class DraftboardTitlebar: UIView {
     
     // MARK: Animation
     
-    func pushElements(animated animated: Bool = true) {
+    func pushElements(directionless directionless: Bool = false, animated: Bool = true) {
         self.updateElements()
-        let style: TitlebarTransitionStyle = (animated) ? .Forward : .None
+        var style: TitlebarTransitionStyle = .None
+        if (animated) {
+            style = (directionless) ? .Directionless : .Forward
+        }
         transitionElements(style)
+
     }
     
-    func popElements(animated animated: Bool = true) {
+    func popElements(directionless directionless: Bool = false, animated: Bool = true) {
         self.updateElements()
-        let style: TitlebarTransitionStyle = (animated) ? .Back : .None
+        var style: TitlebarTransitionStyle = .None
+        if (animated) {
+            style = (directionless) ? .Directionless : .Back
+        }
         transitionElements(style)
     }
     
@@ -165,7 +173,10 @@ class DraftboardTitlebar: UIView {
         }
         
         // Layer transforms
-        let dir: CGFloat = (style == .Forward) ? -1.0 : 1.0
+        var dir: CGFloat = 0.0
+        if (style != .Directionless) {
+            dir = (style == .Forward) ? -1.0 : 1.0
+        }
         
         // Transforms
         let ouT = CATransform3DMakeTranslation(40.0 * dir, 0.0, 0.0)

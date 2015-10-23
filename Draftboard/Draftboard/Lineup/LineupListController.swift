@@ -8,17 +8,16 @@
 
 import UIKit
 
-class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
+class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     @IBOutlet weak var createView: UIView!
     @IBOutlet weak var createViewButton: DraftboardRoundButton!
     @IBOutlet weak var createImageView: UIImageView!
     @IBOutlet weak var createIconImageView: UIImageView!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
+
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
-    var newLineupVc: LineupNewViewController?
-    let scrollView = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +29,6 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         self.createView.addGestureRecognizer(tapRecognizer)
         
         // Scroll view
-        view.addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.leftRancor.constraintEqualToRancor(view.leftRancor, constant: 20).active = true
-        scrollView.rightRancor.constraintEqualToRancor(view.rightRancor, constant: -20).active = true
-        scrollView.bottomRancor.constraintEqualToRancor(view.bottomRancor, constant: -20).active = true
-        scrollView.topRancor.constraintEqualToRancor(view.topRancor, constant: 20).active = true
         scrollView.clipsToBounds = false
         scrollView.delegate = self
         scrollView.pagingEnabled = true
@@ -47,19 +40,6 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
-
-        // Test pop
-        createView.pop_removeAllAnimations()
-        
-        /*
-        let anim = POPSpringAnimation(propertyNamed: kPOPLayerCornerRadius)
-        anim.toValue = 50
-        anim.velocity = 500
-        anim.springSpeed = 0.5
-        anim.springBounciness = 20
-        createView.layer.pop_addAnimation(anim, forKey: "test")
-        */
-        
         if (buttonType == .Plus) {
             createNewLineup()
         }
@@ -70,11 +50,17 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     func createNewLineup() {
-        let nvc = LineupNewViewController(nibName: "LineupNewViewController", bundle: nil)
-        nvc.listViewController = self
-        newLineupVc = nvc
+        let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
+        nvc.saveLineupAction = {
+            self.didSaveLineup()
+            self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
+        }
         
-        navController?.pushViewController(nvc)
+        if lineupCardViews.count > 0 {
+            navController?.pushViewController(nvc, fromCardView: self.lineupCardViews.last!, animated: true)
+        } else {
+            navController?.pushViewController(nvc)
+        }
     }
     
     func didSaveLineup() {
@@ -110,6 +96,7 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
         // Scroll to card
         view.layoutIfNeeded()
         scrollView.setContentOffset(cardView.frame.origin, animated: false)
+//        cardView.contentView.flashScrollIndicators() // TODO: Maybe someday...
     }
     
     override func titlebarTitle() -> String {
@@ -125,13 +112,16 @@ class LineupsListController: DraftboardViewController, UIActionSheetDelegate {
     }
 }
 
-extension LineupsListController: UIScrollViewDelegate {
+// MARK: - UIScrollViewDelegate
+
+extension LineupListController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let page = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
         let pageIndex = Int(floor(page))
         let pageFraction = page - floor(page)
         
-        for (i, card) in lineupCardViews.enumerate() {
+        let views: [UIView] = (lineupCardViews.count > 0) ? lineupCardViews : [createView]
+        for (i, card) in views.enumerate() {
             
             var alpha: CGFloat = 0.25
             var transform: CATransform3D = CATransform3DIdentity

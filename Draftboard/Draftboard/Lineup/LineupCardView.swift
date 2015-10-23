@@ -17,7 +17,7 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var editButton: DraftboardButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentView: UIScrollView!
     
 //    let itemCount = Int(arc4random_uniform(12)) + 1
     let itemCount = 12
@@ -25,6 +25,7 @@ class LineupCardView: DraftboardNibView {
     var totalHeight: CGFloat!
     
     override func willAwakeFromNib() {
+        contentView.indicatorStyle = .White
         layoutCellViews()
     }
     

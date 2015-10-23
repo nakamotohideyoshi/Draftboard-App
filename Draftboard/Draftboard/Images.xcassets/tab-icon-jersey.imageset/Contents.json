@@ -2,7 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icon-jersey.pdf"
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Tab Icon Jersey 2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Tab Icon Jersey 3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class LineupSearchViewController: DraftboardViewController, UITableViewDataSource {
+class LineupSearchViewController: DraftboardViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     let searchCellIdentifier = "searchCellIdentifier"
+    var pickPlayerAction: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +27,16 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         tableView.registerNib(nib, forCellReuseIdentifier: searchCellIdentifier)
         tableView.separatorStyle = .None
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.backgroundColor = .clearColor()
         tableView.separatorInset = UIEdgeInsetsZero
         
         tableView.setContentOffset(CGPointMake(0, searchBar.bounds.size.height), animated: false)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        print("You selected cell number: \(indexPath.row)!")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -44,14 +51,6 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         let cell = tableView.dequeueReusableCellWithIdentifier(searchCellIdentifier, forIndexPath: indexPath)
         cell.backgroundColor = .clearColor()
         return cell
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44.0
     }
     
     override func titlebarTitle() -> String? {
