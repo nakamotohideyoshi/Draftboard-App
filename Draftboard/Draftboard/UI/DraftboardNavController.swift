@@ -127,7 +127,7 @@ class DraftboardNavController: UIViewController {
         vcs.append(nvc)
         nvc.navController = self
         contentView.addSubview(nvc.view)
-        nvc.view.alpha = 0
+        nvc.view.layer.opacity = 0
         
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
         nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
@@ -137,7 +137,7 @@ class DraftboardNavController: UIViewController {
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
-        titlebar.pushElements(animated: animated)
+        titlebar.pushElements(directionless: true, animated: animated)
         
         //////
         
@@ -147,18 +147,30 @@ class DraftboardNavController: UIViewController {
         let sx2 = 1 - cardView.bounds.size.width / cvc.view.bounds.size.width
         let sy2 = 1 - cardView.bounds.size.height / cvc.view.bounds.size.height
         
-        let spring = Spring(stiffness: 3.0, mass: 1.0, damping: 0.8, velocity: 10.0)
+        let spring = Spring(stiffness: 4.0, mass: 1.0, damping: 0.65, velocity: 0.0)
         spring.updateBlock = { (value) -> Void in
             cardView.layer.transform = CATransform3DMakeScale(1.0 + (sx * value), 1.0 + (sy * value), 1.0)
+            cardView.layer.transform.m34 = -1/500
+            cardView.layer.transform = CATransform3DRotate(cardView.layer.transform, CGFloat(M_PI) * value, 0, 1, 0)
+            if value >= 0.5 {
+                cardView.layer.opacity = 0
+            }
             nvc.view.layer.transform = CATransform3DMakeScale(1.0 - sx2 + (sx2 * value), 1.0 - sy2 + (sy2 * value), 1.0)
+            nvc.view.layer.transform.m34 = -1/500
+            nvc.view.layer.transform = CATransform3DRotate(nvc.view.layer.transform, -CGFloat(M_PI) + CGFloat(M_PI) * value, 0, 1, 0)
+            if value >= 0.5 {
+                nvc.view.layer.opacity = 1
+            }
+
         }
         spring.completeBlock = { (completed) -> Void in
-            cvc.view.removeFromSuperview()
+//            cvc.view.removeFromSuperview()
+            cvc.view.hidden = true
             nvc.view.layer.transform = CATransform3DIdentity
         }
         UIView.animateWithDuration(0.2, animations: {
-            cvc.view.alpha = 0
-            nvc.view.alpha = 1
+            cvc.view.layer.opacity = 0
+//            nvc.view.alpha = 1
         })
         
         spring.start()
@@ -173,7 +185,9 @@ class DraftboardNavController: UIViewController {
         }
         
         let nvc = vcs.last!
-        nvc.view.alpha = 0
+        nvc.view.layer.opacity = 0
+        cardView.layer.opacity = 0
+        nvc.view.hidden = false
         
         var parentView = contentView
         if (nvc is DraftboardModalViewController) {
@@ -189,7 +203,7 @@ class DraftboardNavController: UIViewController {
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
-        titlebar.popElements(animated: animated)
+        titlebar.popElements(directionless: true, animated: animated)
         
         //////
         
@@ -199,18 +213,29 @@ class DraftboardNavController: UIViewController {
         let sx2 = 1 - cardView.bounds.size.width / cvc.view.bounds.size.width
         let sy2 = 1 - cardView.bounds.size.height / cvc.view.bounds.size.height
         
-        let spring = Spring(stiffness: 3.0, mass: 1.0, damping: 0.8, velocity: 10.0)
+        let spring = Spring(stiffness: 10.0, mass: 1.0, damping: 0.0, velocity: 0.0)
         spring.updateBlock = { (value) -> Void in
             cardView.layer.transform = CATransform3DMakeScale(1.0 + sx - (sx * value), 1.0 + sy - (sy * value), 1.0)
+            cardView.layer.transform.m34 = -1/500
+            cardView.layer.transform = CATransform3DRotate(cardView.layer.transform, -CGFloat(M_PI) + CGFloat(M_PI) * -value, 0, 1, 0)
+            if value >= 0.5 {
+                cardView.layer.opacity = 1
+            }
             cvc.view.layer.transform = CATransform3DMakeScale(1.0 - (sx2 * value), 1.0 - (sy2 * value), 1.0)
+            cvc.view.layer.transform.m34 = -1/500
+            cvc.view.layer.transform = CATransform3DRotate(cvc.view.layer.transform, CGFloat(M_PI) * -value, 0, 1, 0)
+            if value >= 0.5 {
+                cvc.view.layer.opacity = 0
+            }
+
         }
         spring.completeBlock = { (completed) -> Void in
             cvc.view.removeFromSuperview()
             cardView.layer.transform = CATransform3DIdentity
         }
         UIView.animateWithDuration(0.2, animations: {
-            cvc.view.alpha = 0
-            nvc.view.alpha = 1
+//            cvc.view.alpha = 0
+            nvc.view.layer.opacity = 1
         })
         
         spring.start()
