@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
@@ -11,15 +11,20 @@
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
         </mutableArray>
+        <mutableArray key="Oswald-Regular.ttf">
+            <string>Oswald-Regular</string>
+        </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
             <connections>
-                <outlet property="abbrvLabel" destination="biX-Vx-Jha" id="2mH-Xa-3To"/>
+                <outlet property="abbrLabel" destination="biX-Vx-Jha" id="ZdX-Rb-CP2"/>
                 <outlet property="avatarImageView" destination="Esd-Fy-OQR" id="eNE-hR-UuY"/>
                 <outlet property="bottomBorderHeightConstraint" destination="ypB-iF-A6u" id="45M-82-k5H"/>
                 <outlet property="bottomBorderView" destination="wCF-pc-2Cx" id="6aF-3d-Urp"/>
-                <outlet property="positionLabel" destination="KcH-Xh-Aog" id="H5K-yt-UEO"/>
+                <outlet property="nameLabel" destination="KcH-Xh-Aog" id="eSq-2V-o8t"/>
+                <outlet property="salaryLabel" destination="WzK-wL-hS3" id="nAF-eW-iTr"/>
+                <outlet property="teamLabel" destination="q9C-8j-2hg" id="bbS-zn-Maq"/>
                 <outlet property="topBorderHeightConstraint" destination="Jcg-pO-GBH" id="WSn-tG-EnW"/>
                 <outlet property="topBorderView" destination="bhE-mQ-tq1" id="yLj-Ze-1Uk"/>
             </connections>
@@ -43,8 +48,8 @@
                         <constraint firstAttribute="height" constant="1" id="Jcg-pO-GBH"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="K. Korver - DET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-Xh-Aog" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="97" y="19" width="238" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K. Korver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-Xh-Aog" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="97" y="19" width="60" height="20"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -54,13 +59,13 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="15" y="22" width="24" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="huW-Fe-Xz6"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                    <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
@@ -75,21 +80,38 @@
                         <constraint firstAttribute="height" constant="1" id="ypB-iF-A6u"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- DET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9C-8j-2hg" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="157" y="24" width="31" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.61176470588235299" green="0.62352941176470589" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WzK-wL-hS3" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="295" y="20" width="35" height="18"/>
+                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.039215687662363052" green="0.050980392843484879" blue="0.074509806931018829" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="wCF-pc-2Cx" secondAttribute="trailing" id="2as-yO-bj0"/>
                 <constraint firstItem="biX-Vx-Jha" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8t5-pZ-iNT"/>
                 <constraint firstAttribute="bottom" secondItem="wCF-pc-2Cx" secondAttribute="bottom" id="9gV-1D-nLP"/>
+                <constraint firstItem="q9C-8j-2hg" firstAttribute="baseline" secondItem="KcH-Xh-Aog" secondAttribute="baseline" id="AFq-aK-5ud"/>
                 <constraint firstItem="bhE-mQ-tq1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BZ6-Ok-MdW"/>
                 <constraint firstItem="KcH-Xh-Aog" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="CPB-zq-7J9"/>
                 <constraint firstItem="KcH-Xh-Aog" firstAttribute="leading" secondItem="Esd-Fy-OQR" secondAttribute="trailing" constant="20" id="EjC-wo-dGo"/>
+                <constraint firstItem="q9C-8j-2hg" firstAttribute="leading" secondItem="KcH-Xh-Aog" secondAttribute="trailing" id="Hpu-DX-yql"/>
                 <constraint firstAttribute="trailing" secondItem="KcH-Xh-Aog" secondAttribute="trailing" constant="10" id="Pm6-cD-5xM"/>
+                <constraint firstAttribute="trailing" secondItem="WzK-wL-hS3" secondAttribute="trailing" constant="15" id="cfe-vf-2F6"/>
                 <constraint firstAttribute="trailing" secondItem="bhE-mQ-tq1" secondAttribute="trailing" id="eWb-4a-4BO"/>
                 <constraint firstItem="biX-Vx-Jha" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gOH-jn-fNA"/>
                 <constraint firstItem="biX-Vx-Jha" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="hvh-Mx-snK"/>
                 <constraint firstItem="bhE-mQ-tq1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="kfa-7j-XBw"/>
                 <constraint firstItem="Esd-Fy-OQR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="n7C-WP-6we"/>
+                <constraint firstItem="WzK-wL-hS3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ta0-If-Vw6"/>
+                <constraint firstItem="q9C-8j-2hg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uhL-El-RC2"/>
                 <constraint firstItem="wCF-pc-2Cx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="vTe-M5-bgV"/>
                 <constraint firstItem="Esd-Fy-OQR" firstAttribute="leading" secondItem="biX-Vx-Jha" secondAttribute="trailing" constant="5" id="wGh-y4-lVQ"/>
             </constraints>
@@ -100,6 +122,8 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="8t5-pZ-iNT"/>
+                    <exclude reference="Pm6-cD-5xM"/>
+                    <exclude reference="uhL-El-RC2"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="-344.5" y="-223"/>

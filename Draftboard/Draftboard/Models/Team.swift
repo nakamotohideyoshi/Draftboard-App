@@ -15,7 +15,7 @@ class Team: Model {
     let abbr: String
     
     init(data: NSDictionary) {
-        id = data["team_id"] as! Int
+        id = data["id"] as! Int
         name = data["name"] as! String
         short_name = data["short_name"] as! String
         abbr = data["abbr"] as! String

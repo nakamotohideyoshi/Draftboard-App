@@ -12,11 +12,16 @@ import UIKit
 class LineupEmptyCellView: DraftboardNibControl {
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var abbrvLabel: DraftboardLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var bottomBorderView: UIView!
     @IBOutlet weak var topBorderView: UIView!
-    @IBOutlet weak var positionLabel: DraftboardLabel!
+    
+    @IBOutlet weak var teamLabel: DraftboardLabel!
+    @IBOutlet weak var nameLabel: DraftboardLabel!
+    @IBOutlet weak var abbrLabel: DraftboardLabel!
+    @IBOutlet weak var salaryLabel: DraftboardLabel!
+    
+    var index: Int = 0
     
     override func willAwakeFromNib() {
         nibView.backgroundColor = .clearColor()
@@ -37,15 +42,27 @@ class LineupEmptyCellView: DraftboardNibControl {
         }
     }
     
-    @IBInspectable var positionText: String = "Forward" {
+    @IBInspectable var nameText: String = "" {
         didSet {
-            positionLabel.text = positionText
+            nameLabel.text = nameText
         }
     }
     
-    @IBInspectable var abbrvText: String = "F" {
+    @IBInspectable var abbrText: String = "" {
         didSet {
-            abbrvLabel.text = abbrvText
+            abbrLabel.text = abbrText
+        }
+    }
+    
+    @IBInspectable var teamText: String = "" {
+        didSet {
+            teamLabel.text = teamText
+        }
+    }
+    
+    @IBInspectable var salaryText: String = "" {
+        didSet {
+            salaryLabel.text = salaryText
         }
     }
     

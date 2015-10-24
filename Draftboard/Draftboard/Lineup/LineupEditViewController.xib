@@ -54,16 +54,10 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="rpS-Yp-C5i" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="Kaj-L1-3i6"/>
-                        <constraint firstAttribute="height" constant="90" id="MiR-TB-Ca0"/>
                         <constraint firstItem="a6t-pS-ZdO" firstAttribute="leading" secondItem="qyx-jm-zkB" secondAttribute="leading" constant="34" id="b9x-P2-33h"/>
                         <constraint firstItem="a6t-pS-ZdO" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="bVJ-ky-0wG"/>
                         <constraint firstAttribute="trailing" secondItem="rpS-Yp-C5i" secondAttribute="trailing" constant="34" id="qOG-pn-65Z"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="MiR-TB-Ca0"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd7-dN-DKs" customClass="UIScrollView">
                     <rect key="frame" x="0.0" y="67" width="375" height="507"/>
@@ -76,31 +70,15 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG / PLAYER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTL-Us-lUQ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="26" width="84" height="14"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="9Wo-Z0-P0q"/>
-                                    </constraints>
                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="9Wo-Z0-P0q"/>
-                                        </mask>
-                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7g1-R4-jaA" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="40" width="84" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="Kva-Rl-gaE"/>
-                                    </constraints>
                                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Kva-Rl-gaE"/>
-                                        </mask>
-                                    </variation>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" red="0.070588235289999995" green="0.10980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -186,7 +164,6 @@
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="05r-wB-Ldd" firstAttribute="leading" secondItem="aXc-jI-WMJ" secondAttribute="leading" id="784-e8-PSG"/>
                         <constraint firstAttribute="trailing" secondItem="fhT-Dy-gf9" secondAttribute="trailing" id="CTu-hC-4ZC"/>
                         <constraint firstItem="IBe-dk-dip" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.33" id="Cei-ml-51j"/>
                         <constraint firstItem="IBe-dk-dip" firstAttribute="leading" secondItem="aXc-jI-WMJ" secondAttribute="leading" id="Dmx-N8-jG2"/>
@@ -196,17 +173,10 @@
                         <constraint firstItem="fhT-Dy-gf9" firstAttribute="height" secondItem="aXc-jI-WMJ" secondAttribute="height" id="NJr-Ff-LVP"/>
                         <constraint firstItem="05r-wB-Ldd" firstAttribute="height" secondItem="aXc-jI-WMJ" secondAttribute="height" id="Wkk-au-3vx"/>
                         <constraint firstItem="fhT-Dy-gf9" firstAttribute="top" secondItem="aXc-jI-WMJ" secondAttribute="top" id="Yvh-uA-X1A"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="ecc-fQ-j1g"/>
                         <constraint firstItem="05r-wB-Ldd" firstAttribute="centerX" secondItem="aXc-jI-WMJ" secondAttribute="centerX" id="ph7-2c-m0n"/>
                         <constraint firstItem="fhT-Dy-gf9" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.33" id="s1q-T9-kcr"/>
                         <constraint firstItem="05r-wB-Ldd" firstAttribute="width" secondItem="aXc-jI-WMJ" secondAttribute="width" multiplier="0.34" id="wGP-GE-ogs"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="ecc-fQ-j1g"/>
-                            <exclude reference="784-e8-PSG"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.039215687662363052" green="0.050980392843484879" blue="0.074509806931018829" alpha="1" colorSpace="calibratedRGB"/>

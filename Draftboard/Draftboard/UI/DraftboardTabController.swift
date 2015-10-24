@@ -19,7 +19,6 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
     
     var cnc: DraftboardNavController!
     var completionHandler:((Bool)->Void)?
-    
     var spring: Spring?
     
     override func viewDidLoad() {

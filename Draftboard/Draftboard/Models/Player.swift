@@ -21,26 +21,24 @@ class Player: Model {
     let salary: CGFloat
     let status: PlayerStatus
     
-//    _ = [
-//        "name": "Kevin Korver",
-//        "fppg": 25.10,
-//        "status": 100,
-//        "salary": 25.10,
-//        "fppg": 25.10
-//    ]
-    
     init(data: NSDictionary) {
-        id = data["player_id"] as! UInt
+        id = data["id"] as! UInt
         first_name = data["first_name"] as! String
         last_name = data["last_name"] as! String
-        fppg = data["fppg"] as! CGFloat
-        //team = data["team_id"] as! String
-        team = nil
-        salary = data["salary"] as! CGFloat
-        status = Player.statusForString(data["status"] as! Int)
+        fppg = 10.0
+        
+        team = Team(data: [
+            "id": 17,
+            "abbr": "GSW",
+            "short_name": "Warriors",
+            "name": "Golden State Warriors"
+        ])
+        
+        salary = 6000.0
+        status = Player.statusForCode(100)
     }
     
-    class func statusForString(status: Int) -> PlayerStatus {
+    class func statusForCode(status: Int) -> PlayerStatus {
         switch (status) {
             case 100:
                 return .Injured

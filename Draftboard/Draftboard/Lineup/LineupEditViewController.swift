@@ -15,8 +15,9 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var contentView: UIScrollView!
     
     var saveLineupAction: (() -> Void)?
-    
     var positions = [String]()
+    var cellViews = [LineupEmptyCellView]()
+    var cellIndex = 0
     
     override func viewDidLoad() {
         view.backgroundColor = .clearColor()
@@ -24,17 +25,16 @@ class LineupEditViewController: DraftboardViewController {
         layoutCellViews()
     }
     
-    func didTapEmptyCellView(cellView: LineupEmptyCellView) {
-        print(cellView)
-    }
-    
     func layoutCellViews() {
         var previousCell: LineupEmptyCellView?
         
         for (i, position) in positions.enumerate() {
             let cellView = LineupEmptyCellView()
-            cellView.abbrvText = position
-            cellView.positionText = ""
+            cellView.abbrText = position
+            cellView.nameText = ""
+            cellView.salaryText = ""
+            cellView.teamText = ""
+                
             contentView.addSubview(cellView)
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,11 +58,24 @@ class LineupEditViewController: DraftboardViewController {
             }
             
             previousCell = cellView
+            cellViews.append(cellView)
+            cellView.index = i
         }
     }
     
     func didTapCell(sender: LineupEmptyCellView) {
+        cellIndex = sender.index
         let svc = LineupSearchViewController(nibName: "LineupSearchViewController", bundle: nil)
+        
+        svc.playerSelectedAction = {(player: Player) in
+            self.navController?.popViewController()
+            let cellView = self.cellViews[self.cellIndex]
+            cellView.avatarImageView.image = UIImage(named: "sample-avatar")
+            cellView.nameText = "Kevin Korver"
+            cellView.salaryText = "$6,000"
+            cellView.teamText = " - DET"
+        }
+        
         navController?.pushViewController(svc)
     }
     

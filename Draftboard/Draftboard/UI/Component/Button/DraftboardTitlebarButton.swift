@@ -15,6 +15,7 @@ struct TitlebarButtonType : OptionSetType {
     static let Value = TitlebarButtonType(rawValue: 1 << 1)
     static let Back = TitlebarButtonType(rawValue: 1 << 2)
     static let Close = TitlebarButtonType(rawValue: 1 << 3)
+    static let Search = TitlebarButtonType(rawValue: 1 << 4)
 }
 
 class DraftboardTitlebarButton: DraftboardButton {
@@ -29,6 +30,8 @@ class DraftboardTitlebarButton: DraftboardButton {
             return UIImage(named: "titlebar-icon-back")
         } else if (type == .Close) {
             return UIImage(named: "titlebar-icon-close")
+        } else if (type == .Search) {
+            return UIImage(named: "titlebar-icon-search")
         } else if (type == .Value) {
             return nil
         }
@@ -47,8 +50,8 @@ class DraftboardTitlebarButton: DraftboardButton {
         textLetterSpacing = 1.2
         
         if (type == .Value) {
-            bgColor = UIColor(0x424f68)
-            bgHighlightColor = UIColor(0x8b90af)
+//            bgColor = UIColor(0x424f68)
+//            bgHighlightColor = UIColor(0x8b90af)
         }
         else {
             bgColor = .clearColor()

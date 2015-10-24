@@ -91,12 +91,10 @@
 		5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */; };
 		5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */; };
-		5DE6C5951BD0405D005A4DC6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6C5971BD052FE005A4DC6 /* Spring.swift */; settings = {ASSET_TAGS = (); }; };
-		5DFABC411BD9AFE200009CF3 /* nba_players.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DFABC401BD9AFE200009CF3 /* nba_players.json */; settings = {ASSET_TAGS = (); }; };
 		5DE6C5951BD0405D005A4DC6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */; };
 		5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6C5971BD052FE005A4DC6 /* Spring.swift */; };
-		934B5EE01BB5B42C00502FC6 /* DraftboardEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934B5EDF1BB5B42C00502FC6 /* DraftboardEnums.swift */; };
+		5DFABC411BD9AFE200009CF3 /* nba_players.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DFABC401BD9AFE200009CF3 /* nba_players.json */; settings = {ASSET_TAGS = (); }; };
+		934B5EE01BB5B42C00502FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		935EC2221BB5C92200FD1F18 /* MoneyBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EC2211BB5C92200FD1F18 /* MoneyBar.swift */; };
 		935EC2241BB5E4B400FD1F18 /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EC2231BB5E4B400FD1F18 /* LineupMoneyPoint.swift */; };
 		935EC22A1BB6178D00FD1F18 /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EC2291BB6178D00FD1F18 /* PieChart.swift */; };
@@ -483,7 +481,7 @@
 				TargetAttributes = {
 					3E7860BA1B9FB0E7004013AB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = C62KGZ35B8;
+						DevelopmentTeam = 7S97C3YSZ2;
 					};
 				};
 			};
@@ -522,7 +520,6 @@
 				5D6237C21BB61F7B0007E62A /* LineupEmptyCellView.xib in Resources */,
 				5D4E63441BAB75D80033C4C2 /* OpenSans-Bold.ttf in Resources */,
 				5D3611F41BD6DC7D0068E868 /* LineupSearchCellView.xib in Resources */,
-				3E80C2961BC5F5010031CE3F /* pop-osx-Info.plist in Resources */,
 				5D6237AA1BB61E000007E62A /* DraftboardContestsCell.xib in Resources */,
 				5D4E63451BAB75D80033C4C2 /* OpenSans-BoldItalic.ttf in Resources */,
 				5D4E63461BAB75D80033C4C2 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -560,8 +557,7 @@
 				935EC22A1BB6178D00FD1F18 /* PieChart.swift in Sources */,
 				935EC2221BB5C92200FD1F18 /* MoneyBar.swift in Sources */,
 				935EC2241BB5E4B400FD1F18 /* LineupMoneyPoint.swift in Sources */,
-				3E80C29A1BC5F5010031CE3F /* POPAnimationExtras.mm in Sources */,
-				934B5EE01BB5B42C00502FC6 /* DraftboardEnums.swift in Sources */,
+				934B5EE01BB5B42C00502FC6 /* (null) in Sources */,
 				5D6237E21BB620320007E62A /* DraftboardButton.swift in Sources */,
 				5D783ACD1BD97C54000D8494 /* DraftboardEnums.swift in Sources */,
 				5D783ACC1BD97C54000D8494 /* Model.swift in Sources */,
@@ -575,8 +571,6 @@
 				5D6237DF1BB6200B0007E62A /* DraftboardNibView.swift in Sources */,
 				5D6237E01BB6200B0007E62A /* DraftboardView.swift in Sources */,
 				5D783AD31BD97D23000D8494 /* Sport.swift in Sources */,
-				3E80C2A21BC5F5010031CE3F /* POPGeometry.mm in Sources */,
-				3E80C2A51BC5F5010031CE3F /* POPPropertyAnimation.mm in Sources */,
 				5D6237E11BB6200B0007E62A /* DraftboardViewController.swift in Sources */,
 				5D6237D71BB61FFB0007E62A /* UIColor+DraftboardColors.swift in Sources */,
 				5D6237D81BB61FFB0007E62A /* DraftboardTabBar.swift in Sources */,
@@ -608,7 +602,6 @@
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
 				5D6237CF1BB61FA80007E62A /* ContestsListController.swift in Sources */,
 				5D3611F21BD6DC330068E868 /* LineupSearchCellView.swift in Sources */,
-				3E80C2A81BC5F5010031CE3F /* TransformationMatrix.cpp in Sources */,
 				5D9A32211BCD72A0006C758B /* DraftboardNavController.swift in Sources */,
 				5D6237D11BB61FA80007E62A /* ContestsViewController.swift in Sources */,
 				5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */,

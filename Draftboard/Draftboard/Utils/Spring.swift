@@ -17,34 +17,9 @@ final class Springs: NSObject {
     var lastUpdateTime: CFAbsoluteTime = 0.0
     var timeSinceLastUpdate: NSTimeInterval = 0.0
     var accumulatedTime: NSTimeInterval = 0.0
-    
-    let physicsTimeInterval: NSTimeInterval = 1.0 / 60.0
-    
     var displayLink: CADisplayLink?
-    var physicsTimer: NSTimer?
     
     override init() {}
-    
-    func createPhysicsTimer() {
-        if (physicsTimer != nil) {
-            return
-        }
-        
-        let time = CACurrentMediaTime()
-        lastUpdateTime = time
-        
-        physicsTimer = NSTimer(timeInterval: 1.0 / 60.0, target: self, selector: Selector("integrate"), userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(physicsTimer!, forMode: NSRunLoopCommonModes)
-    }
-    
-    func destroyPhysicsTimer() {
-        if (physicsTimer == nil) {
-            return
-        }
-        
-        physicsTimer?.invalidate()
-        physicsTimer = nil
-    }
     
     func createDisplayLink() {
         if (displayLink != nil) {
@@ -67,7 +42,6 @@ final class Springs: NSObject {
     
     func add(spring: Spring) -> Bool {
         createDisplayLink()
-        createPhysicsTimer()
         
         if (springs.contains(spring)) {
             return false
@@ -83,7 +57,6 @@ final class Springs: NSObject {
             
             if (springs.count == 0) {
                 destroyDisplayLink()
-                destroyPhysicsTimer()
             }
             
             return true
@@ -93,44 +66,28 @@ final class Springs: NSObject {
     }
     
     func update() {
-        var completeSprings = [Int]()
+        var completeSprings = [Spring]()
         
-        for (i, spring) in springs.enumerate() {
+        for (_, spring) in springs.enumerate() {
+            spring.integrate(1.0 / 60.0)
             spring.updateBlock?(spring.val)
             
             if (spring.complete) {
-                completeSprings.append(i)
+                completeSprings.append(spring)
                 spring.completeBlock?(true)
             }
         }
         
-        for (_, idx) in completeSprings.enumerate() {
-            springs.removeAtIndex(idx)
+        for (_, spring) in completeSprings.enumerate() {
+            let idx = springs.indexOf(spring)
+            if (idx != nil) {
+                springs.removeAtIndex(idx!)
+            }
         }
         
         if (springs.count == 0) {
             destroyDisplayLink()
-            destroyPhysicsTimer()
         }
-    }
-    
-    func integrate() {
-        let time = CACurrentMediaTime();
-        timeSinceLastUpdate = time - lastUpdateTime;
-        lastUpdateTime = time;
-        
-        for (_, spring) in springs.enumerate() {
-            spring.integrate(physicsTimeInterval)
-        }
-        
-//        accumulatedTime += timeSinceLastUpdate
-//        while (accumulatedTime > physicsTimeInterval) {
-//            for (_, spring) in springs.enumerate() {
-//                spring.integrate(physicsTimeInterval)
-//            }
-//
-//            accumulatedTime -= physicsTimeInterval
-//        }
     }
     
     func uniqueId() -> UInt {

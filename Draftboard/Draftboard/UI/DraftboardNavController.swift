@@ -15,6 +15,11 @@ class DraftboardNavController: UIViewController {
     var vcs = [DraftboardViewController]()
     var rvc: DraftboardViewController!
     
+    var inSpring: Spring?
+    var outSpring: Spring?
+    
+    var completionHandler:((Bool)->Void)?
+    
     convenience init(rootViewController: DraftboardViewController) {
         self.init()
         rvc = rootViewController
@@ -47,8 +52,13 @@ class DraftboardNavController: UIViewController {
     }
     
     func pushViewController(nvc: DraftboardViewController, animated: Bool = true) {
+        inSpring?.cancel()
+        inSpring = nil
+        
+        outSpring?.cancel()
+        outSpring = nil
+        
         let cvc = vcs.last
-        cvc?.view.removeFromSuperview()
         
         vcs.append(nvc)
         nvc.navController = self
@@ -63,32 +73,71 @@ class DraftboardNavController: UIViewController {
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
         titlebar.pushElements(animated: animated)
+        
+        completionHandler = { (complete: Bool) in
+            cvc?.view.removeFromSuperview()
+        }
+        
+        self.view.layoutIfNeeded()
+    
+        if (animated) {
+            inSpring = animateViewControllerIn(nvc)
+            inSpring!.start()
+            
+            if let vc = cvc {
+                outSpring = animateViewControllerOut(vc)
+                outSpring?.completeBlock = completionHandler
+                outSpring!.start()
+            }
+        } else {
+            completionHandler!(true)
+            completionHandler = nil
+        }
     }
     
     func popViewController(animated: Bool = true) {
-        let cvc = vcs.popLast()
-        cvc?.view.removeFromSuperview()
+        inSpring?.cancel()
+        inSpring = nil
         
+        outSpring?.cancel()
+        outSpring = nil
+        
+        let cvc = vcs.popLast()
         let nvc = vcs.last
         if (nvc == nil) {
             return
         }
         
-        var parentView = contentView
-        if (nvc is DraftboardModalViewController) {
-            parentView = view
-        }
-        
-        parentView.addSubview(nvc!.view)
+        contentView.addSubview(nvc!.view)
         nvc!.view.translatesAutoresizingMaskIntoConstraints = false
-        nvc!.view.leftRancor.constraintEqualToRancor(parentView.leftRancor).active = true
-        nvc!.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
-        nvc!.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
-        nvc!.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
+        nvc!.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+        nvc!.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+        nvc!.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
+        nvc!.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
         titlebar.popElements(animated: animated)
+        
+        completionHandler = { (complete: Bool) in
+            cvc?.view.removeFromSuperview()
+        }
+        
+        self.view.layoutIfNeeded()
+        
+        if (animated) {
+            inSpring = animateViewControllerIn(nvc!, dir: -1.0)
+            inSpring!.start()
+            
+            if let vc = cvc {
+                outSpring = animateViewControllerOut(vc, dir: 1.0)
+                outSpring?.completeBlock = completionHandler
+                outSpring!.start()
+            }
+        } else {
+            completionHandler!(true)
+            completionHandler = nil
+        }
     }
     
     func popToRootViewController(animated: Bool = true) {
@@ -240,5 +289,43 @@ class DraftboardNavController: UIViewController {
         
         spring.start()
     }
-
+    
+    func animateViewControllerIn(vc: DraftboardViewController, dir: CGFloat = 1.0) -> Spring {
+        let sw = UIScreen.mainScreen().bounds.width
+        
+        let endPos = vc.view.layer.position
+        let startPos = CGPointMake(endPos.x + (sw * dir), endPos.y)
+        let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
+        
+        vc.view.hidden = true // TODO: fix this
+        
+        let spring = Spring(stiffness: 3.5, damping: 0.65, velocity: 0.0)
+        spring.updateBlock = { (value) -> Void in
+            vc.view.hidden = false
+            vc.view.layer.position = CGPointMake(
+                startPos.x + (deltaPos.x * value),
+                startPos.y + (deltaPos.y * value)
+            )
+        }
+        
+        return spring
+    }
+    
+    func animateViewControllerOut(vc: DraftboardViewController, dir: CGFloat = -1.0) -> Spring {
+        let sw = UIScreen.mainScreen().bounds.width
+        
+        let startPos = vc.view.layer.position
+        let endPos = CGPointMake(startPos.x + (sw * dir), startPos.y)
+        let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
+        
+        let spring = Spring(stiffness: 3.5, damping: 0.65, velocity: 0.0)
+        spring.updateBlock = { (value) -> Void in
+            vc.view.layer.position = CGPointMake(
+                startPos.x + (deltaPos.x * value),
+                startPos.y + (deltaPos.y * value)
+            )
+        }
+        
+        return spring
+    }
 }

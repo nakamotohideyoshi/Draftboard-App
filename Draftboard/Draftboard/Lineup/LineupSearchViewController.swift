@@ -15,7 +15,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     @IBOutlet weak var searchBar: UISearchBar!
     
     let searchCellIdentifier = "searchCellIdentifier"
-    var pickPlayerAction: (() -> Void)?
+    var playerSelectedAction:((Player) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +35,14 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let player = Player(data: [
+            "first_name": "Steven",
+            "last_name": "Adams",
+            "id": 2,
+            "team_id": 2
+        ])
         
-        print("You selected cell number: \(indexPath.row)!")
+        playerSelectedAction?(player)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -64,6 +70,9 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         else if(buttonType == .Back) {
             navController?.popViewController()
         }
+        else if (buttonType == .Search) {
+            self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
+        }
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -71,11 +80,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType {
-        return .Value
-    }
-    
-    override func titlebarRightButtonText() -> String? {
-        return "Save".uppercaseString
+        return .Search
     }
     
     override func titlebarBgHidden() -> Bool {
