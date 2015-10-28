@@ -93,7 +93,7 @@ class DraftboardTabBar: UIView {
         
         // Set default colors
         iconColor = .whiteColor()
-        selectedColor = .draftboardAccentColor()
+        selectedColor = .greenDraftboard()
     }
     
     func buttonTap(button: DraftboardTabBarButton) {
@@ -169,7 +169,7 @@ class DraftboardTabBar: UIView {
     }
     
     @IBInspectable
-    var selectedColor: UIColor = .draftboardAccentColor() {
+    var selectedColor: UIColor = .greenDraftboard() {
         didSet {
             for (_, button) in buttons.enumerate() {
                 button.iconHighlightColor = selectedColor

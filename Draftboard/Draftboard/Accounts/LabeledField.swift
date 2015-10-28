@@ -31,7 +31,7 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
         textField.textColor = .whiteColor()
         textField.delegate = self
         
-        label.textColor = .draftboardTextLightColor()
+        label.textColor = .blueMediumDark()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

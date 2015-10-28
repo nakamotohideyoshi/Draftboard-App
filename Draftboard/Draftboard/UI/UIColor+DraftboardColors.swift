@@ -11,102 +11,133 @@ import UIKit
 extension UIColor {
     
     convenience init(_ hex:UInt32, alpha:CGFloat = 1.0) {
-        let r = CGFloat((hex & 0xFF0000) >> 16) / 256.0
-        let g = CGFloat((hex & 0xFF00) >> 8) / 256.0
-        let b = CGFloat(hex & 0xFF) / 256.0
+        let r = CGFloat((hex & 0xFF0000) >> 16) / 255.0
+        let g = CGFloat((hex & 0xFF00) >> 8) / 255.0
+        let b = CGFloat(hex & 0xFF) / 255.0
         self.init(red:r, green:g, blue:b, alpha:alpha)
     }
     
-    convenience init(photoshopRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
-        
-        let red   = CGFloat(Float(red)/255.0)
-        let green = CGFloat(Float(green)/255.0)
-        let blue  = CGFloat(Float(blue)/255.0)
-        
-        self.init(red:red, green:green, blue: blue, alpha: alpha)
+    //
+    // MARK: New and updated Draftboard colors
+    //
+    
+    // Reference "DB Style guide.psd" for further color examples and explanation
+    
+    // Used for grey type across the app that isn't
+    // white with an alpha component
+    class func greyCool() -> UIColor {
+        return UIColor(0x6D718A)
     }
     
-    // MARK: Draftboard palette
-    
-    class func draftboardTextDarkColor() -> UIColor {
-        return UIColor(0x46495E)
+    // The brand green for draftboard This is used as an accent color
+    // AND represents money
+    class func greenDraftboard() -> UIColor {
+        return UIColor(0x26C661)
     }
     
-    class func draftboardTextLightColor() -> UIColor {
-        return UIColor(0xB0B2C1)
+    // The brand green in a less bright state to be used ONLY for highlight and selected states
+    class func greenDraftboardDarker() -> UIColor {
+        return UIColor(0x21A250)
     }
     
-    class func draftboardAccentColor() -> UIColor {
-        return UIColor(0x00C68C)
+    // Hight saturation accent blue that is sparingly used to represent LIVE games and PMR
+    class func blueAccent() -> UIColor {
+        return UIColor(0x3381FF)
     }
     
-    class func draftboardAccentDarkColor() -> UIColor {
-        return UIColor(0x00b47f)
+    // Background blue color used on the sticky header background and the lineup card background
+    class func blueMediumDark() -> UIColor {
+        return UIColor(0x1f2d47)
     }
     
-    class func draftboardBgDarkColor() -> UIColor {
-        return UIColor(0x0A0D13)
+    // Background blue color used on the tab bar
+    class func blueDark() -> UIColor {
+        return UIColor(0x1f2d47)
     }
     
-    class func draftboardBgLightColor() -> UIColor {
-        return UIColor(0xEBEDF2)
+    // Background blue color used on the background of table views
+    class func blueDarker() -> UIColor {
+        return UIColor(0x152133)
     }
     
-    class func draftboardSelected() -> UIColor {
-        return .yellowColor()
+    //
+    // MARK: Opacities
+    //
+    
+    // Only used for certain typographic situations
+    class func whiteHighOpacity() -> UIColor {
+        return UIColor.whiteColor().colorWithAlphaComponent(0.8)
     }
-
-    class func funkyGreen() -> UIColor {
-        return UIColor(photoshopRed: 0, green: 198, blue: 140, alpha: 1)
+    
+    // Only used for certain typographic situations (most common)
+    class func whiteMediumOpacity() -> UIColor {
+        return UIColor.whiteColor().colorWithAlphaComponent(0.6)
     }
+    
+    // Only used for certain typography situations (most rare)
+    class func whiteLowOpacity() -> UIColor {
+        return UIColor.whiteColor().colorWithAlphaComponent(0.4)
+    }
+    
+    // Only used for horizontal table cell dividers and 1px highlights
+    class func whiteLowestOpacity() -> UIColor {
+        return UIColor.whiteColor().colorWithAlphaComponent(0.1)
+    }
+    
+    //
+    // TODO: Remove extraneous money graph colors
+    //
+    //  - Only blue on PMR pie chart
+    //  - Only greenDraftboard when "in the money"
+    //
     
     // MARK: Pie chart colors
     
     class func moneyRangeBackground() -> UIColor {
-        return UIColor(photoshopRed: 94, green: 106, blue: 127, alpha: 0.2)
+        return UIColor(red: 94/255, green: 106/255, blue: 127/255, alpha: 0.2)
     }
     
     class func moneyBrightBackground() -> UIColor {
-        return UIColor(photoshopRed: 36, green: 48, blue: 67, alpha: 1)
+        return UIColor(red: 36/255, green: 48/255, blue: 67/255, alpha: 1)
     }
     
     class func moneyDarkBackground() -> UIColor {
-        return UIColor(photoshopRed: 19, green: 29, blue: 43, alpha: 1)
+        return UIColor(red: 19/255, green: 29/255, blue: 43/255, alpha: 1)
     }
-    
+
     class func moneyGray() -> UIColor {
-        return UIColor(photoshopRed: 94, green: 106, blue: 127, alpha: 1)
+        return UIColor(red: 94/255, green: 106/255, blue: 127/255, alpha: 1)
     }
-    
+
     class func moneyBlue() -> UIColor {
-        return UIColor(photoshopRed: 0, green: 162, blue: 255, alpha: 1)
+        return UIColor.blueAccent()
     }
     
     class func moneyDarkBlue() -> UIColor {
-        return UIColor(photoshopRed: 0, green: 162, blue: 255, alpha: 0.2)
+        return UIColor(red: 0, green: 162/255, blue: 255/255, alpha: 0.2)
     }
 
     class func moneyGreen() -> UIColor {
-        return UIColor(photoshopRed: 0, green: 198, blue: 140, alpha: 1)
+        return UIColor.greenDraftboard()
     }
     
     class func moneyDarkGreen() -> UIColor {
-        return UIColor(photoshopRed: 0, green: 198, blue: 140, alpha: 0.2)
+        return UIColor.greenDraftboard().colorWithAlphaComponent(0.1)
     }
     
     class func moneyYellow() -> UIColor {
-        return UIColor(photoshopRed: 230, green: 202, blue: 26, alpha: 1)
+        return UIColor.greenDraftboard()
     }
     
     class func moneyDarkYellow() -> UIColor {
-        return UIColor(photoshopRed: 230, green: 202, blue: 26, alpha: 0.1)
+        return UIColor.greenDraftboard().colorWithAlphaComponent(0.1)
     }
 
     class func moneyRed() -> UIColor {
-        return UIColor(photoshopRed: 255, green: 30, blue: 109, alpha: 1)
+        return UIColor.greenDraftboard()
     }
     
     class func moneyDarkRed() -> UIColor {
-        return UIColor(photoshopRed: 255, green: 30, blue: 109, alpha: 0.2)
+        return UIColor.greenDraftboard().colorWithAlphaComponent(0.1)
     }
 }

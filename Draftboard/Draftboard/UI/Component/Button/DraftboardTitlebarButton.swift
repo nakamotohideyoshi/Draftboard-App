@@ -44,7 +44,7 @@ class DraftboardTitlebarButton: DraftboardButton {
         
         buttonType = type
         iconImage = DraftboardTitlebarButton.iconForType(buttonType)
-        iconHighlightColor = .draftboardAccentColor()
+        iconHighlightColor = .greenDraftboard()
         textBold = true
         textSize = 11.0
         textLetterSpacing = 1.2

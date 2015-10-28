@@ -45,12 +45,12 @@ class DraftboardButton: UIControl {
         textValue = "button".uppercaseString
         textBold = false
         textLetterSpacing = 0.5
-        borderHighlightColor = .draftboardAccentColor()
-        borderColor = .draftboardAccentColor()
+        borderHighlightColor = .greenDraftboard()
+        borderColor = .greenDraftboard()
         borderWidth = 0.0
         cornerRadius = 0.0
-        bgHighlightColor = .draftboardAccentDarkColor()
-        bgColor = .draftboardAccentColor()
+        bgHighlightColor = .greenDraftboardDarker()
+        bgColor = .greenDraftboard()
         iconColor = .whiteColor()
         iconHighlightColor = .whiteColor()
         selectedState = false
@@ -150,10 +150,10 @@ class DraftboardButton: UIControl {
     // MARK: Border
     
     @IBInspectable
-    var borderHighlightColor: UIColor = .draftboardAccentColor()
+    var borderHighlightColor: UIColor = .greenDraftboard()
     
     @IBInspectable
-    var borderColor: UIColor = .draftboardAccentColor() {
+    var borderColor: UIColor = .greenDraftboard() {
         didSet {
             self.layer.borderColor = borderColor.CGColor
         }
@@ -169,10 +169,10 @@ class DraftboardButton: UIControl {
     // MARK: Background
     
     @IBInspectable
-    var bgHighlightColor: UIColor = .draftboardAccentDarkColor()
+    var bgHighlightColor: UIColor = .greenDraftboardDarker()
     
     @IBInspectable
-    var bgColor: UIColor = .draftboardAccentColor() {
+    var bgColor: UIColor = .greenDraftboard() {
         didSet {
             self.backgroundColor = bgColor
         }
@@ -195,7 +195,7 @@ class DraftboardButton: UIControl {
     var iconHighlightColor: UIColor = .whiteColor()
     
     @IBInspectable
-    var iconColor: UIColor = .draftboardAccentColor() {
+    var iconColor: UIColor = .greenDraftboard() {
         didSet {
             self.tintColor = iconColor
         }

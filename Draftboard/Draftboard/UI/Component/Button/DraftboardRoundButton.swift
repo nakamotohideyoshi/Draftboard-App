@@ -13,10 +13,10 @@ class DraftboardRoundButton: DraftboardButton {
     override func setDefaults() {
         super.setDefaults()
         self.cornerRadius = 4.0
-        self.borderColor = .draftboardAccentColor()
+        self.borderColor = .greenDraftboard()
         self.borderWidth = 1.3
         self.bgColor = .clearColor()
-        self.textColor = .draftboardAccentColor()
+        self.textColor = .greenDraftboard()
         self.textHighlightColor = .whiteColor()
     }
 }
