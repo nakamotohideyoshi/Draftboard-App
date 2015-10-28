@@ -31,9 +31,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6D-7K-oPo">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6D-7K-oPo" userLabel="Top">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="330"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-contest" translatesAutoresizingMaskIntoConstraints="NO" id="BQ1-j1-7HI">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="330"/>
+                            <animations/>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOVEMBER 11TH, 12PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvk-ux-bv1" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="130" y="151" width="115" height="14"/>
                             <animations/>
@@ -41,7 +45,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BT-b7-qWp">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BT-b7-qWp" userLabel="ThickDivider">
                             <rect key="frame" x="138" y="193" width="100" height="2"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -200,12 +204,16 @@
                         <constraint firstItem="KCm-MQ-gHp" firstAttribute="centerY" secondItem="u6D-7K-oPo" secondAttribute="centerY" constant="-60" id="7CA-cW-Yre"/>
                         <constraint firstAttribute="trailing" secondItem="Ztl-Th-Qn5" secondAttribute="trailing" constant="15" id="9jz-9v-mXv"/>
                         <constraint firstItem="Ztl-Th-Qn5" firstAttribute="top" secondItem="KCm-MQ-gHp" secondAttribute="bottom" constant="76" id="AXT-hR-DYE"/>
+                        <constraint firstItem="BQ1-j1-7HI" firstAttribute="top" secondItem="u6D-7K-oPo" secondAttribute="top" id="KJW-tV-eVP"/>
                         <constraint firstItem="Vvk-ux-bv1" firstAttribute="top" secondItem="KCm-MQ-gHp" secondAttribute="bottom" constant="1" id="MSh-Q2-c0o"/>
                         <constraint firstItem="nzb-c2-OkM" firstAttribute="centerX" secondItem="u6D-7K-oPo" secondAttribute="centerX" id="McN-q9-fr2"/>
                         <constraint firstItem="9BT-b7-qWp" firstAttribute="top" secondItem="Vvk-ux-bv1" secondAttribute="bottom" constant="28" id="O8I-vo-tPE"/>
                         <constraint firstItem="9BT-b7-qWp" firstAttribute="centerX" secondItem="u6D-7K-oPo" secondAttribute="centerX" id="Spe-RP-kxa"/>
                         <constraint firstItem="Ztl-Th-Qn5" firstAttribute="leading" secondItem="u6D-7K-oPo" secondAttribute="leading" constant="15" id="T1f-fE-Ftl"/>
+                        <constraint firstItem="BQ1-j1-7HI" firstAttribute="leading" secondItem="u6D-7K-oPo" secondAttribute="leading" id="Yfr-Cf-fPE"/>
+                        <constraint firstAttribute="trailing" secondItem="BQ1-j1-7HI" secondAttribute="trailing" id="ayt-Vc-fGH"/>
                         <constraint firstItem="KCm-MQ-gHp" firstAttribute="centerX" secondItem="u6D-7K-oPo" secondAttribute="centerX" id="bMH-jl-qd6"/>
+                        <constraint firstAttribute="bottom" secondItem="BQ1-j1-7HI" secondAttribute="bottom" id="erM-92-kWU"/>
                         <constraint firstAttribute="height" constant="330" id="jSh-pq-pT6"/>
                         <constraint firstItem="Vvk-ux-bv1" firstAttribute="centerX" secondItem="u6D-7K-oPo" secondAttribute="centerX" id="mkw-41-ysD"/>
                     </constraints>
@@ -276,6 +284,7 @@
         </view>
     </objects>
     <resources>
+        <image name="background-contest" width="375" height="400"/>
         <image name="icon-guaranteed" width="18" height="18"/>
     </resources>
 </document>
