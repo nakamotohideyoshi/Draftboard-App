@@ -67,6 +67,8 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         gametypeButton.text = GameType.Standard.rawValue
         let gameTypeTapGesture = UITapGestureRecognizer(target: self, action: "switchGameType:")
         gametypeButton.addGestureRecognizer(gameTypeTapGesture)
+        
+        tableView.delegate = self
     }
     
     func switchLineup(gesture: UITapGestureRecognizer) {
@@ -208,6 +210,10 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.row)
     }
     
     override func titlebarTitle() -> String? {

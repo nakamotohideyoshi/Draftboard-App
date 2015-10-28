@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -36,6 +36,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-basketball" translatesAutoresizingMaskIntoConstraints="NO" id="4Vx-rf-7yq">
                         <rect key="frame" x="18" y="34" width="20" height="20"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="PU0-aq-k8u"/>
                             <constraint firstAttribute="width" constant="20" id="yRP-IJ-2sQ"/>
@@ -43,6 +44,7 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="How Are you?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13k-de-wRH" userLabel="Sub Title">
                         <rect key="frame" x="83" y="48" width="464" height="12"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="XH8-gw-eL1"/>
@@ -59,6 +61,7 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maG-oM-fJ3" userLabel="LineView">
                         <rect key="frame" x="18" y="86" width="568" height="1"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="OH5-9n-luU"/>
@@ -66,6 +69,7 @@
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0233" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-5h-dFe">
                         <rect key="frame" x="43" y="37" width="30" height="14"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="KrS-gf-euO"/>
                         </constraints>
@@ -75,6 +79,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvA-pf-AyX" userLabel="Guaranteed Label" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                         <rect key="frame" x="570" y="36" width="16" height="16"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.0" green="0.26320064510000002" blue="0.87888652150000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="7CO-DW-2Pz"/>
@@ -86,6 +91,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="What up?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9A-sV-IqA" userLabel="Title">
                         <rect key="frame" x="83" y="26" width="477" height="15"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="caC-EH-QpK"/>
@@ -96,6 +102,7 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VO-9p-8Ja" customClass="MoneyBar" customModule="Draftboard" customModuleProvider="target">
                         <rect key="frame" x="83" y="48" width="503" height="24"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Kdt-xh-V6i"/>
@@ -108,6 +115,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="5VO-9p-8Ja" firstAttribute="top" secondItem="l9A-sV-IqA" secondAttribute="bottom" constant="7" id="4R4-XM-lID"/>
@@ -152,6 +160,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="117" y="-169"/>
         </tableViewCell>
