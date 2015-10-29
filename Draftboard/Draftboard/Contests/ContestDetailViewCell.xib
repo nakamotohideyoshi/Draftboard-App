@@ -38,7 +38,7 @@
                     <rect key="frame" x="30" y="33" width="62" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" red="0.096235401928424835" green="0.13966953754425049" blue="0.21438547968864441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVH-dh-XQe" userLabel="TopDivider">

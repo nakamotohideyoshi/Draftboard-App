@@ -21,6 +21,8 @@
 		3C74CA4F1BE051A00077DF0C /* DraftboardContestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */; };
 		3C74CA511BE051D90077DF0C /* MoneyBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA501BE051D90077DF0C /* MoneyBar.swift */; };
 		3C74CA531BE0528D0077DF0C /* ContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA521BE0528D0077DF0C /* ContestModel.swift */; };
+		3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */; };
+		3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
@@ -131,6 +133,8 @@
 		3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardContestsCell.xib; sourceTree = "<group>"; };
 		3C74CA501BE051D90077DF0C /* MoneyBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyBar.swift; sourceTree = "<group>"; };
 		3C74CA521BE0528D0077DF0C /* ContestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestModel.swift; sourceTree = "<group>"; };
+		3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewController.swift; sourceTree = "<group>"; };
+		3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailViewController.xib; sourceTree = "<group>"; };
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7860BF1B9FB0E7004013AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E7860C71B9FB0E7004013AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 				5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */,
 				5D63D0A81BD6B711000215DF /* LineupSearchViewController.swift */,
 				5D783AC21BD9439C000D8494 /* LineupBar.xib */,
+				3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */,
+				3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */,
 			);
 			path = Lineup;
 			sourceTree = "<group>";
@@ -538,6 +544,7 @@
 				5DFABC411BD9AFE200009CF3 /* nba_players.json in Resources */,
 				3C74CA4F1BE051A00077DF0C /* DraftboardContestsCell.xib in Resources */,
 				3C74CA3F1BE051070077DF0C /* ContestDetailViewController.xib in Resources */,
+				3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */,
 				5D4E63481BAB75D80033C4C2 /* OpenSans-Italic.ttf in Resources */,
 				5D783AC31BD9439C000D8494 /* LineupBar.xib in Resources */,
 				5D4E63491BAB75D80033C4C2 /* OpenSans-Light.ttf in Resources */,
@@ -606,6 +613,7 @@
 				5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */,
 				5D6237C41BB61F7B0007E62A /* LineupModel.swift in Sources */,
 				5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */,
+				3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */,
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
 				5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,
