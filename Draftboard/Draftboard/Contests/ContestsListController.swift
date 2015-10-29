@@ -56,10 +56,14 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.registerClass(DraftboardContestsCell.self, forCellReuseIdentifier: normalContestCellReuseIdentifier)
-        tableView.registerClass(DraftboardContestsCell.self, forCellReuseIdentifier: liveContestCellReuseIdentifier)
-        tableView.registerClass(ContestsHeaderCell.self, forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
+        
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let contestCellNib = UINib(nibName: "DraftboardContestsCell", bundle: bundle)
+        let contestHeaderNib = UINib(nibName: "ContestsHeaderCell", bundle: bundle)
+        
+        tableView.registerNib(contestCellNib, forCellReuseIdentifier: normalContestCellReuseIdentifier)
+        tableView.registerNib(contestCellNib, forCellReuseIdentifier: liveContestCellReuseIdentifier)
+        tableView.registerNib(contestHeaderNib, forCellReuseIdentifier: normalContestHeaderReuseIdentifier)
         
         lineupButton.text = lineups[0].name
         let lineupTapGesture = UITapGestureRecognizer(target: self, action: "switchLineup:")
@@ -140,55 +144,56 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
 
             let cell = tableView.dequeueReusableCellWithIdentifier(liveContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
 
-            cell.title?.text = liveContests[indexPath.row].title
-            cell.subtitle.hidden = true
-            cell.moneyBar.hidden = false
-            
-            if liveContests[indexPath.row].multientry == true {
-                cell.setEntries(liveContests[indexPath.row].entries)
-            } else {
-                cell.noEntries()
-            }
-            
-            if liveContests[indexPath.row].guaranteed == true {
-                cell.setGuaranteed()
-            } else {
-                cell.setNotGuaranteed()
-            }
-            
-            cell.lineView.hidden = false
-            if indexPath.row == (liveContests.count - 1) {
-                cell.lineView.hidden = true
-            }
-            
-            cell.moneyBar.layoutIfNeeded()
+//            cell.title?.text = liveContests[indexPath.row].title
+//            cell.subtitle.hidden = true
+//            cell.moneyBar.hidden = false
+//            
+//            if liveContests[indexPath.row].multientry == true {
+//                cell.setEntries(liveContests[indexPath.row].entries)
+//            } else {
+//                cell.noEntries()
+//            }
+//            
+//            if liveContests[indexPath.row].guaranteed == true {
+//                cell.setGuaranteed()
+//            } else {
+//                cell.setNotGuaranteed()
+//            }
+//            
+//            cell.lineView.hidden = false
+//            if indexPath.row == (liveContests.count - 1) {
+//                cell.lineView.hidden = true
+//            }
+//            
+//            cell.moneyBar.layoutIfNeeded()
             
             return cell
         } else {
             
             let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
             
-            cell.title?.text = contests[indexPath.row].title
-            cell.subtitle?.text = contests[indexPath.row].feeDescription()
-            cell.subtitle.hidden = false
-            cell.moneyBar.hidden = true
+//            cell.title?.text = contests[indexPath.row].title
+//            cell.subtitle?.text = contests[indexPath.row].feeDescription()
+//            cell.subtitle.hidden = false
+//            cell.moneyBar.hidden = true
+//            
+//            if contests[indexPath.row].multientry == true {
+//                cell.setEntries(contests[indexPath.row].entries)
+//            } else {
+//                cell.noEntries()
+//            }
+//            
+//            if contests[indexPath.row].guaranteed == true {
+//                cell.setGuaranteed()
+//            } else {
+//                cell.setNotGuaranteed()
+//            }
+//            
+//            cell.lineView.hidden = false
+//            if indexPath.row == (contests.count - 1) {
+//                cell.lineView.hidden = true
+//            }
             
-            if contests[indexPath.row].multientry == true {
-                cell.setEntries(contests[indexPath.row].entries)
-            } else {
-                cell.noEntries()
-            }
-            
-            if contests[indexPath.row].guaranteed == true {
-                cell.setGuaranteed()
-            } else {
-                cell.setNotGuaranteed()
-            }
-            
-            cell.lineView.hidden = false
-            if indexPath.row == (contests.count - 1) {
-                cell.lineView.hidden = true
-            }
             return cell
         }
     }
