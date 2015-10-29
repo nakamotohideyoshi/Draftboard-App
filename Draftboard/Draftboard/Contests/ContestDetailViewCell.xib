@@ -27,14 +27,14 @@
                         <constraint firstAttribute="height" constant="1" id="0lW-2X-Pcb"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87F-tQ-DTM" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87F-tQ-DTM" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="445" y="32" width="30" height="23"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
                     <color key="textColor" red="0.096235401928424835" green="0.13966953754425049" blue="0.21438547968864441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1st Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C6-9e-mMa" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1st Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C6-9e-mMa" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="30" y="33" width="62" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>

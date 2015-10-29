@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class DraftboardContestsCell: UITableViewCell {
+class DraftboardContestsCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var lineView: UIView!

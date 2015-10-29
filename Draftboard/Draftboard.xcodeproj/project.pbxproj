@@ -23,6 +23,8 @@
 		3C74CA531BE0528D0077DF0C /* ContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA521BE0528D0077DF0C /* ContestModel.swift */; };
 		3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */; };
 		3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */; };
+		3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */; };
+		3CB058721BE2CA01002343BD /* GlobalFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
@@ -135,6 +137,8 @@
 		3C74CA521BE0528D0077DF0C /* ContestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestModel.swift; sourceTree = "<group>"; };
 		3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewController.swift; sourceTree = "<group>"; };
 		3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailViewController.xib; sourceTree = "<group>"; };
+		3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFilterViewController.swift; sourceTree = "<group>"; };
+		3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlobalFilterViewController.xib; sourceTree = "<group>"; };
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7860BF1B9FB0E7004013AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E7860C71B9FB0E7004013AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -423,6 +427,8 @@
 				5D9E99531BB615590017E332 /* DraftboardViewController.swift */,
 				5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */,
 				5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */,
+				3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */,
+				3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -536,6 +542,7 @@
 				5DE6C5951BD0405D005A4DC6 /* RootViewController.xib in Resources */,
 				5D6237C21BB61F7B0007E62A /* LineupEmptyCellView.xib in Resources */,
 				5D4E63441BAB75D80033C4C2 /* OpenSans-Bold.ttf in Resources */,
+				3CB058721BE2CA01002343BD /* GlobalFilterViewController.xib in Resources */,
 				5D3611F41BD6DC7D0068E868 /* LineupSearchCellView.xib in Resources */,
 				5D4E63451BAB75D80033C4C2 /* OpenSans-BoldItalic.ttf in Resources */,
 				5D4E63461BAB75D80033C4C2 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -576,6 +583,7 @@
 				5D6237E21BB620320007E62A /* DraftboardButton.swift in Sources */,
 				5D783ACD1BD97C54000D8494 /* DraftboardEnums.swift in Sources */,
 				5D783ACC1BD97C54000D8494 /* Model.swift in Sources */,
+				3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */,
 				5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */,
 				5D26FC741BBEE78700ACF127 /* AccountViewController.swift in Sources */,
 				5D6237DB1BB6200B0007E62A /* DraftboardImageView.swift in Sources */,
