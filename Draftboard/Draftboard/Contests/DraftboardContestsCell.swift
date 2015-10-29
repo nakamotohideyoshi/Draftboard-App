@@ -14,10 +14,14 @@ class DraftboardContestsCell: UITableViewCell {
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var sportImage: UIImageView!
     @IBOutlet weak var guaranteedLabel: DraftboardLabel!
-    @IBOutlet weak var moneyBar: MoneyBar!
+//    @IBOutlet weak var moneyBar: MoneyBar!
     @IBOutlet weak var entryNumbers: UILabel!
     
     override func awakeFromNib() {
+        self.backgroundColor = .clearColor()
+        self.selectedBackgroundView = UIView()
+        self.selectedBackgroundView?.backgroundColor = UIColor(0x0, alpha: 0.05)
+        
 //        lineView.backgroundColor = UIColor(red: 0.901, green: 0.909, blue: 0.929, alpha: 0.1)
 //        title.textColor = .whiteColor()
 //        subtitle.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)

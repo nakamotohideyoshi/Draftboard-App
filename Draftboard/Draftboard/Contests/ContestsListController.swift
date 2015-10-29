@@ -9,8 +9,8 @@
 import UIKit
 
 class ContestsListController: DraftboardViewController, UITableViewDelegate, UITableViewDataSource {
-    let normalContestCellReuseIdentifier   = "normalContestCell"
-    let liveContestCellReuseIdentifier     = "liveContestCell"
+    let normalContestCellReuseIdentifier = "normalContestCell"
+    let liveContestCellReuseIdentifier = "liveContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
     
     @IBOutlet weak var tableView: UITableView!    
@@ -65,18 +65,19 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         tableView.registerNib(contestCellNib, forCellReuseIdentifier: liveContestCellReuseIdentifier)
         tableView.registerNib(contestHeaderNib, forCellReuseIdentifier: normalContestHeaderReuseIdentifier)
         
+        /*
         lineupButton.text = lineups[0].name
         let lineupTapGesture = UITapGestureRecognizer(target: self, action: "switchLineup:")
         lineupButton.addGestureRecognizer(lineupTapGesture)
         gametypeButton.text = GameType.Standard.rawValue
         let gameTypeTapGesture = UITapGestureRecognizer(target: self, action: "switchGameType:")
         gametypeButton.addGestureRecognizer(gameTypeTapGesture)
+        */
         
         tableView.delegate = self
     }
     
     func switchLineup(gesture: UITapGestureRecognizer) {
-        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let numberOfLineups = lineups.count
         for index in 0..<numberOfLineups {
@@ -93,7 +94,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     }
     
     func switchGameType(gesture: UITapGestureRecognizer) {
-
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
 
         let arrayOfGametypes = GameType.asArray
@@ -113,7 +113,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         UITableViewDatasource
     */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         var liveContestsCount = 0
         var contestsCount = 0
         
@@ -129,7 +128,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if section == 0 {
             return liveContests.count
         } else {
@@ -141,7 +139,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         
         // check to see if it is in the live section or not
         if indexPath.section == 0 {
-
             let cell = tableView.dequeueReusableCellWithIdentifier(liveContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
 
 //            cell.title?.text = liveContests[indexPath.row].title
@@ -169,7 +166,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
             
             return cell
         } else {
-            
             let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
             
 //            cell.title?.text = contests[indexPath.row].title
@@ -199,7 +195,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         var header: ContestsHeaderCell? = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as? ContestsHeaderCell
         
         if (header == nil)  {
@@ -217,8 +212,9 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         return 44.0
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
+        self.navController?.pushViewController(cdvc)
     }
     
     override func titlebarTitle() -> String? {
