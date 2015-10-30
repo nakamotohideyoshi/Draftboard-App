@@ -10,10 +10,10 @@ import UIKit
 
 @IBDesignable class ContestsHeaderCell: UITableViewHeaderFooterView {
 
-    @IBOutlet weak var headerTitle: UILabel!
-    @IBOutlet weak var texture: UIImageView!
-
+    @IBOutlet weak var topBorderView: UIView!
+    @IBOutlet weak var titleLabel: DraftboardLabel!
+    
     override func awakeFromNib() {
-
+        self.backgroundColor = .redColor()
     }
 }

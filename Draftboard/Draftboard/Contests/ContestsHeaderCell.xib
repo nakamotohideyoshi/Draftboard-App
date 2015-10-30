@@ -10,11 +10,7 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
-            <connections>
-                <outlet property="headerTitle" destination="7dP-On-Msa" id="pTq-pJ-4JW"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="dQW-0E-ttv" customClass="ContestsHeaderCell" customModule="Draftboard" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
@@ -47,7 +43,6 @@
                 </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" red="0.1191246435046196" green="0.17414075136184692" blue="0.28203010559082031" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="eHo-fW-KMh" secondAttribute="trailing" id="2lH-jH-bJz"/>
                 <constraint firstItem="7dP-On-Msa" firstAttribute="centerX" secondItem="dQW-0E-ttv" secondAttribute="centerX" id="8hD-vS-hYG"/>
@@ -61,6 +56,11 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backgroundView" destination="EMb-Vo-hOD" id="oXU-zj-htP"/>
+                <outlet property="titleLabel" destination="7dP-On-Msa" id="rWF-ON-lVO"/>
+                <outlet property="topBorderView" destination="eHo-fW-KMh" id="cFN-wx-uqK"/>
+            </connections>
             <point key="canvasLocation" x="-510" y="-472"/>
         </view>
     </objects>

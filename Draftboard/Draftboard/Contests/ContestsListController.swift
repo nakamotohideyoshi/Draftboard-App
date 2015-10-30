@@ -63,7 +63,7 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         
         tableView.registerNib(contestCellNib, forCellReuseIdentifier: normalContestCellReuseIdentifier)
         tableView.registerNib(contestCellNib, forCellReuseIdentifier: liveContestCellReuseIdentifier)
-        tableView.registerNib(contestHeaderNib, forCellReuseIdentifier: normalContestHeaderReuseIdentifier)
+        tableView.registerNib(contestHeaderNib, forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
         
         /*
         lineupButton.text = lineups[0].name
@@ -140,7 +140,7 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         // check to see if it is in the live section or not
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(liveContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
-
+            
 //            cell.title?.text = liveContests[indexPath.row].title
 //            cell.subtitle.hidden = true
 //            cell.moneyBar.hidden = false
@@ -195,17 +195,13 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var header: ContestsHeaderCell? = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as? ContestsHeaderCell
+        let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as! ContestsHeaderCell
         
-        if (header == nil)  {
-            header = ContestsHeaderCell(reuseIdentifier: normalContestHeaderReuseIdentifier)
-        }
+//        header.headerTitle?.text = "TODAY"
+//        header!.headerTitle?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+//        header!.contentView.backgroundColor = UIColor(red: 0.098, green: 0.141, blue: 0.211, alpha: 1)
         
-        header!.headerTitle?.text = "TODAY"
-        header!.headerTitle?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
-        header!.contentView.backgroundColor = UIColor(red: 0.098, green: 0.141, blue: 0.211, alpha: 1)
-        
-        return header!
+        return header
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -214,7 +210,7 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
-        self.navController?.pushViewController(cdvc)
+        //self.navController?.pushViewController(cdvc)
     }
     
     override func titlebarTitle() -> String? {

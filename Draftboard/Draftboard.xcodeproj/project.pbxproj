@@ -40,6 +40,7 @@
 		5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */; };
 		5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */; };
 		5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */; };
+		5D3214951BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */; settings = {ASSET_TAGS = (); }; };
 		5D3611F21BD6DC330068E868 /* LineupSearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */; };
 		5D3611F41BD6DC7D0068E868 /* LineupSearchCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */; };
 		5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633E1BAB750F0033C4C2 /* Oswald-Bold.ttf */; };
@@ -163,6 +164,7 @@
 		5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentedView.swift; sourceTree = "<group>"; };
 		5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardSegmentedView.xib; sourceTree = "<group>"; };
 		5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentedButton.swift; sourceTree = "<group>"; };
+		5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardContestsUpcomingCell.xib; sourceTree = "<group>"; };
 		5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupSearchCellView.swift; sourceTree = "<group>"; };
 		5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupSearchCellView.xib; sourceTree = "<group>"; };
 		5D4412171BAA163700A86111 /* Closures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				3C74CA461BE0516C0077DF0C /* ContestsListController.swift */,
 				3C74CA481BE0517B0077DF0C /* ContestsListController.xib */,
 				3C74CA4A1BE051A00077DF0C /* ContestsViewController.swift */,
+				5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */,
 				3C74CA4B1BE051A00077DF0C /* DraftboardContestsCell.swift */,
 				3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */,
 				3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */,
@@ -573,6 +576,7 @@
 				5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */,
 				5D6237BE1BB61F7B0007E62A /* LineupCardView.xib in Resources */,
 				5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */,
+				5D3214951BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib in Resources */,
 				5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */,
 				3C74CA451BE051530077DF0C /* ContestsHeaderCell.xib in Resources */,
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
