@@ -95,6 +95,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomBorderView" destination="uFH-JC-6aI" id="pBs-Dl-Kvl"/>
+                <outlet property="contestInfo" destination="hpR-w7-dMX" id="her-Yx-Obl"/>
                 <outlet property="iconImageView" destination="gby-6s-OnB" id="mEX-1v-M3j"/>
                 <outlet property="titleLabel" destination="XN2-ts-hAb" id="RHo-fG-Yh4"/>
                 <outlet property="topBorderView" destination="MS8-yH-5ca" id="VeT-Ws-FwC"/>
