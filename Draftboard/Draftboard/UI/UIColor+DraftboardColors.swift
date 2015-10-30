@@ -18,7 +18,7 @@ extension UIColor {
     }
     
     //
-    // MARK: New and updated Draftboard colors
+    // MARK: - Draftboard colors
     //
     
     // Reference "DB Style guide.psd" for further color examples and explanation
@@ -40,7 +40,7 @@ extension UIColor {
         return UIColor(0x21A250)
     }
     
-    // Hight saturation accent blue that is sparingly used to represent LIVE games and PMR
+    // High saturation accent blue that is sparingly used to represent LIVE games and PMR
     class func blueAccent() -> UIColor {
         return UIColor(0x3381FF)
     }
@@ -55,23 +55,37 @@ extension UIColor {
         return UIColor(0x1f2d47)
     }
     
-    // Background color for table cells
-    class func cellColorDark() -> UIColor {
-        return blueDarker()
-    }
-    
-    // Background color for table cells
-    class func headerColorDark() -> UIColor {
-        return blueMediumDark()
-    }
-    
     // Background blue color used on the background of table views
     class func blueDarker() -> UIColor {
         return UIColor(0x152133)
     }
     
     //
-    // MARK: Opacities
+    // MARK: - Specific color implementations
+    //
+    
+    // Background color for table cells
+    class func cellColorDark() -> UIColor {
+        return blueDarker()
+    }
+    
+    // Background color for table sticky header cells
+    class func headerColorDark() -> UIColor {
+        return blueMediumDark()
+    }
+    
+    // Tab bar background color
+    class func tabBarColor() -> UIColor {
+        return blueDark()
+    }
+    
+    // Lineup card background color
+    class func cardColor() -> UIColor {
+        return blueMediumDark()
+    }
+    
+    //
+    // MARK: - Opacities
     //
     
     // Only used for certain typographic situations
@@ -101,7 +115,7 @@ extension UIColor {
     //  - Only greenDraftboard when "in the money"
     //
     
-    // MARK: Pie chart colors
+    // MARK: - Pie chart colors
     
     class func moneyRangeBackground() -> UIColor {
         return UIColor(red: 94/255, green: 106/255, blue: 127/255, alpha: 0.2)
