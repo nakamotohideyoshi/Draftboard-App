@@ -25,6 +25,8 @@
 		3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */; };
 		3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */; };
 		3CB058721BE2CA01002343BD /* GlobalFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */; };
+		3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */; };
+		3CDCF9C21BE411BB00F75BF2 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
@@ -140,6 +142,8 @@
 		3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailViewController.xib; sourceTree = "<group>"; };
 		3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFilterViewController.swift; sourceTree = "<group>"; };
 		3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlobalFilterViewController.xib; sourceTree = "<group>"; };
+		3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7860BF1B9FB0E7004013AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E7860C71B9FB0E7004013AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 				5D26FC711BBEE77300ACF127 /* AccountViewController.xib */,
 				5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */,
 				5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */,
+				3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */,
+				3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */,
 			);
 			name = Account;
 			path = Accounts;
@@ -572,6 +578,7 @@
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */,
 				5D6237C61BB61F7B0007E62A /* LineupEditViewController.xib in Resources */,
+				3CDCF9C21BE411BB00F75BF2 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +637,7 @@
 				5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,
 				5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */,
+				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
 				3C74CA531BE0528D0077DF0C /* ContestModel.swift in Sources */,
 				3C74CA471BE0516C0077DF0C /* ContestsListController.swift in Sources */,
