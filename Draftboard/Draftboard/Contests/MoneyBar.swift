@@ -17,12 +17,12 @@ class MoneyBar: UIView {
     var entries: Int = 10
     var winningEntries: Int = 3
 
-    @IBInspectable var barColor: UIColor = UIColor.moneyDarkBackground() {
+    @IBInspectable var barColor: UIColor = .moneyDarkBackground() {
         didSet{
             setupView()
         }
     }
-    @IBInspectable var moneyBarColor: UIColor = UIColor.moneyGreen() {
+    @IBInspectable var moneyBarColor: UIColor = .moneyGreen() {
         didSet{
             setupView()
         }
@@ -45,7 +45,7 @@ class MoneyBar: UIView {
         let width = bounds.width
         let height = bounds.height / 5
         let yOffset = (bounds.height / 2) - (height / 2)
-        let pieHeight: CGFloat = 20.0
+        let pieHeight: CGFloat = 16.0
         let pieYOffset = (bounds.height / 2) - (pieHeight / 2)
         let winningWidth = (width / CGFloat(entries)) * CGFloat(winningEntries)
         let leftMargin = width - winningWidth

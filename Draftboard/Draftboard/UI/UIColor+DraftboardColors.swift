@@ -55,6 +55,16 @@ extension UIColor {
         return UIColor(0x1f2d47)
     }
     
+    // Background color for table cells
+    class func cellColorDark() -> UIColor {
+        return blueDarker()
+    }
+    
+    // Background color for table cells
+    class func headerColorDark() -> UIColor {
+        return blueMediumDark()
+    }
+    
     // Background blue color used on the background of table views
     class func blueDarker() -> UIColor {
         return UIColor(0x152133)
@@ -66,22 +76,22 @@ extension UIColor {
     
     // Only used for certain typographic situations
     class func whiteHighOpacity() -> UIColor {
-        return UIColor.whiteColor().colorWithAlphaComponent(0.8)
+        return whiteColor().colorWithAlphaComponent(0.8)
     }
     
     // Only used for certain typographic situations (most common)
     class func whiteMediumOpacity() -> UIColor {
-        return UIColor.whiteColor().colorWithAlphaComponent(0.6)
+        return whiteColor().colorWithAlphaComponent(0.6)
     }
     
     // Only used for certain typography situations (most rare)
     class func whiteLowOpacity() -> UIColor {
-        return UIColor.whiteColor().colorWithAlphaComponent(0.4)
+        return whiteColor().colorWithAlphaComponent(0.4)
     }
     
     // Only used for horizontal table cell dividers and 1px highlights
     class func whiteLowestOpacity() -> UIColor {
-        return UIColor.whiteColor().colorWithAlphaComponent(0.1)
+        return whiteColor().colorWithAlphaComponent(0.1)
     }
     
     //
@@ -102,7 +112,7 @@ extension UIColor {
     }
     
     class func moneyDarkBackground() -> UIColor {
-        return UIColor(red: 19/255, green: 29/255, blue: 43/255, alpha: 1)
+        return whiteLowestOpacity()
     }
 
     class func moneyGray() -> UIColor {
