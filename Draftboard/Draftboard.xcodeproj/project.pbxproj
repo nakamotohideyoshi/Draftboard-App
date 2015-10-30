@@ -27,6 +27,7 @@
 		3CB058721BE2CA01002343BD /* GlobalFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */; };
 		3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */; };
 		3CDCF9C21BE411BB00F75BF2 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */; };
+		3CDCF9C41BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
@@ -40,7 +41,7 @@
 		5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */; };
 		5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */; };
 		5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */; };
-		5D3214951BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */; settings = {ASSET_TAGS = (); }; };
+		5D3214951BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */; };
 		5D3611F21BD6DC330068E868 /* LineupSearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */; };
 		5D3611F41BD6DC7D0068E868 /* LineupSearchCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */; };
 		5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633E1BAB750F0033C4C2 /* Oswald-Bold.ttf */; };
@@ -145,6 +146,7 @@
 		3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlobalFilterViewController.xib; sourceTree = "<group>"; };
 		3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardContestsUpcomingCell.swift; sourceTree = "<group>"; };
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7860BF1B9FB0E7004013AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E7860C71B9FB0E7004013AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				3C74CA461BE0516C0077DF0C /* ContestsListController.swift */,
 				3C74CA481BE0517B0077DF0C /* ContestsListController.xib */,
 				3C74CA4A1BE051A00077DF0C /* ContestsViewController.swift */,
+				3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */,
 				5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */,
 				3C74CA4B1BE051A00077DF0C /* DraftboardContestsCell.swift */,
 				3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */,
@@ -629,6 +632,7 @@
 				3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */,
 				5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */,
 				5D783AD11BD97D09000D8494 /* Contest.swift in Sources */,
+				3CDCF9C41BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift in Sources */,
 				3C74CA4E1BE051A00077DF0C /* DraftboardContestsCell.swift in Sources */,
 				5D6237BF1BB61F7B0007E62A /* LineupCellView.swift in Sources */,
 				5D6237C11BB61F7B0007E62A /* LineupEmptyCellView.swift in Sources */,
