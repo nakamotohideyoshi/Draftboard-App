@@ -26,14 +26,21 @@ class LineupCardView: DraftboardNibView {
     
     override func willAwakeFromNib() {
         contentView.indicatorStyle = .White
-        layoutCellViews()
+//        layoutCellViews()
+    }
+    
+    var lineup: [Player]? {
+        didSet {
+            layoutCellViews()
+        }
     }
     
     func layoutCellViews() {
         var previousCell: LineupCellView?
         
-        for i in 0...itemCount {
+        for (i, player) in (lineup?.enumerate())! {
             let cellView = LineupCellView()
+            cellView.player = player
             contentView.addSubview(cellView)
             
             cellView.translatesAutoresizingMaskIntoConstraints = false

@@ -31,6 +31,16 @@ class LineupSearchCellView: UITableViewCell {
         self.selectedBackgroundView?.backgroundColor = UIColor(0x0, alpha: 0.05)
     }
     
+    var player: Player? {
+        didSet {
+            nameLabel.text = (player?.name)!
+            positionLabel.text = (player?.position)!
+            ppgLabel.text = String(format: "%.2f FPPG", (player?.fppg)!)
+            leagueLabel.text = " - " + (player?.team)!
+            salaryLabel.text = String(format: "$%.0f", (player?.salary)!)
+        }
+    }
+
     @IBInspectable var topBorder: Bool = true {
         didSet {
             topBorderView.hidden = !topBorder
@@ -42,4 +52,5 @@ class LineupSearchCellView: UITableViewCell {
             bottomBorderView.hidden = !bottomBorder
         }
     }
+    
 }

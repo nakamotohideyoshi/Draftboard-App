@@ -13,7 +13,9 @@ class LineupCellView: DraftboardNibControl {
     @IBOutlet weak var bottomBorderView: UIView!
     @IBOutlet weak var positionLabel: DraftboardLabel!
     @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet weak var nameLabel: DraftboardLabel!
+    @IBOutlet weak var teamLabel: DraftboardLabel!
     @IBOutlet weak var avgLabel: DraftboardLabel!
     @IBOutlet weak var selectedView: DraftboardView!
     
@@ -23,4 +25,13 @@ class LineupCellView: DraftboardNibControl {
         nibView.backgroundColor = .clearColor()
         _selectedView = selectedView
     }
+    
+    var player: Player? {
+        didSet {
+            nameLabel.text = (player?.name)!
+            teamLabel.text = " - " + (player?.team)!
+            rightLabel.text = String(format: "$%.0f", (player?.salary)!)
+        }
+    }
+
 }

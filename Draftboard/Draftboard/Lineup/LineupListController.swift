@@ -51,8 +51,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     func createNewLineup() {
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
-        nvc.saveLineupAction = {
-            self.didSaveLineup()
+        nvc.saveLineupAction = { (lineup: [Player]) in
+            self.didSaveLineup(lineup)
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }
         
@@ -63,13 +63,14 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         }
     }
     
-    func didSaveLineup() {
+    func didSaveLineup(lineup: [Player]) {
         self.createView.hidden = true
-        addLineup()
+        addLineup(lineup)
     }
     
-    func addLineup() {
+    func addLineup(lineup: [Player]) {
         let cardView = LineupCardView()
+        cardView.lineup = lineup
         scrollView.addSubview(cardView)
         
         // Set card dimensions

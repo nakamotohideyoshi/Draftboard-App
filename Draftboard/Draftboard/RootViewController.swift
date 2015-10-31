@@ -27,7 +27,7 @@ final class RootViewController: UIViewController {
         v.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         v.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         
-//        DDM.playersForSport(0)
+        DDM.requestPlayers()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

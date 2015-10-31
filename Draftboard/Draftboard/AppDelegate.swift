@@ -18,10 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = RootViewController.sharedInstance
         self.window!.makeKeyAndVisible()
         
-        API.draftGroup(id: 1) { json in
-            print(json)
-        }
-        
         return true
     }
 
