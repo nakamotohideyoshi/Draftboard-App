@@ -29,6 +29,8 @@ class LineupSearchCellView: UITableViewCell {
         
         self.selectedBackgroundView = UIView()
         self.selectedBackgroundView?.backgroundColor = UIColor(0x0, alpha: 0.05)
+        
+        contentView.userInteractionEnabled = false;
     }
     
     @IBInspectable var topBorder: Bool = true {

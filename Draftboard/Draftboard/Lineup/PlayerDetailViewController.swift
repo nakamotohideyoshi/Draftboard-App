@@ -27,4 +27,8 @@ class PlayerDetailViewController: DraftboardViewController {
     override func titlebarLeftButtonType() -> TitlebarButtonType? {
         return .Back
     }
+    
+    override func titlebarBgHidden() -> Bool {
+        return false
+    }
 }

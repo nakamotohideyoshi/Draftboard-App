@@ -13,13 +13,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="dQW-0E-ttv" customClass="ContestsHeaderCell" customModule="Draftboard" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMb-Vo-hOD" userLabel="backgroundColor">
-                    <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="40"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.1191246435046196" green="0.17414075136184692" blue="0.28203010559082031" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.12156862745098039" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHo-fW-KMh" userLabel="topDivider">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="1"/>
@@ -30,7 +30,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LABEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dP-On-Msa" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="186" y="25" width="28" height="15"/>
+                    <rect key="frame" x="186" y="13" width="28" height="15"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,7 +61,7 @@
                 <outlet property="titleLabel" destination="7dP-On-Msa" id="rWF-ON-lVO"/>
                 <outlet property="topBorderView" destination="eHo-fW-KMh" id="cFN-wx-uqK"/>
             </connections>
-            <point key="canvasLocation" x="-510" y="-472"/>
+            <point key="canvasLocation" x="-510" y="-484"/>
         </view>
     </objects>
 </document>

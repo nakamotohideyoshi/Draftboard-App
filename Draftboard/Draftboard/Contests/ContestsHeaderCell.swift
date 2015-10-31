@@ -9,7 +9,6 @@
 import UIKit
 
 @IBDesignable class ContestsHeaderCell: UITableViewHeaderFooterView {
-
     @IBOutlet weak var topBorderView: UIView!
     @IBOutlet weak var titleLabel: DraftboardLabel!
     

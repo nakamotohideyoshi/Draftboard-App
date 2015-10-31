@@ -27,7 +27,7 @@
                         <constraint firstAttribute="height" constant="44" id="bM6-dF-QKe"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="text" value="I'm fine"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="text" value="ALL LINEUPS"/>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZd-at-Vdj" customClass="DraftboardFilterButton" customModule="Draftboard" customModuleProvider="target">
@@ -38,7 +38,7 @@
                         <constraint firstAttribute="height" constant="44" id="rbg-Mg-XXQ"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="text" value="How are you"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="text" value="ALL GAMETYPES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6hd-Dh-Uf8">
@@ -47,7 +47,6 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="2M0-uY-fos"/>
                         <outlet property="delegate" destination="-1" id="BVB-WC-exW"/>
@@ -55,7 +54,6 @@
                 </tableView>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jZd-at-Vdj" firstAttribute="leading" secondItem="CN4-uq-OFV" secondAttribute="trailing" constant="-1" id="8xs-VF-AaC"/>
                 <constraint firstAttribute="bottom" secondItem="6hd-Dh-Uf8" secondAttribute="bottom" id="Bw2-gq-uYJ"/>

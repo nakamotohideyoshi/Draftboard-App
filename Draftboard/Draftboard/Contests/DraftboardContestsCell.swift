@@ -17,7 +17,13 @@ class DraftboardContestsCell: UITableViewCell {
     @IBOutlet weak var titleLabel: DraftboardLabel!
     @IBOutlet weak var moneyBar: MoneyBar!
     
+    @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
+        let heightConstant = 1.0 / UIScreen.mainScreen().scale
+        topBorderHeightConstraint.constant = heightConstant
+        bottomBorderHeightConstraint.constant = heightConstant
         self.backgroundColor = .cellColorDark()
         
         self.selectedBackgroundView = UIView()
