@@ -43,6 +43,12 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
         textField.text = textField.placeholder
     }
     
+    @IBInspectable var secureEntry: Bool = false {
+        didSet {
+            textField.secureTextEntry = secureEntry
+        }
+    }
+    
     @IBInspectable var borderColor: UIColor = UIColor(0xFFFFFF, alpha: 0.2) {
         didSet {
             borderTopView.backgroundColor = borderColor

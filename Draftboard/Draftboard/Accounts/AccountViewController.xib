@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9059"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -30,6 +30,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKC-Bk-t1b" customClass="DraftboardSegmentedView" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="46" id="a2s-Lx-GdP"/>
                     </constraints>
@@ -39,6 +40,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJL-iE-oH8">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="TsO-hj-s1g"/>
@@ -46,6 +48,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-eQ-CDv" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="40" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="rew-d5-BhN"/>
                             </constraints>
@@ -56,6 +59,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ny-wq-KIu" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="92" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="pAe-Xv-kDB"/>
                             </constraints>
@@ -67,6 +71,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoI-BA-fgu" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="41" y="168" width="332" height="50"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="41G-BL-Ie9"/>
                             </constraints>
@@ -77,6 +82,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeW-Om-3WA" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="242" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="evY-ML-hjX"/>
                             </constraints>
@@ -87,6 +93,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVa-Ds-y9a" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="294" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="Br4-cb-Htm"/>
                             </constraints>
@@ -97,6 +104,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-UH-Ie3" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="346" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="Tvz-Sv-uO7"/>
                             </constraints>
@@ -107,6 +115,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQA-iF-DIW" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="398" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="cNU-Ee-AIJ"/>
                             </constraints>
@@ -117,6 +126,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9b3-hC-Z0d" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="502" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="CMv-2e-gmJ"/>
                             </constraints>
@@ -127,6 +137,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSc-ga-ZmK" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="450" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="Eve-DG-Uwq"/>
                             </constraints>
@@ -137,6 +148,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcA-PP-zZJ" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="554" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="4eR-7X-HwY"/>
                             </constraints>
@@ -147,6 +159,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxJ-zr-o9i" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="16" y="606" width="382" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="UHz-fo-9sg"/>
                             </constraints>
@@ -158,6 +171,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svS-wD-9kL" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="41" y="682" width="332" height="52"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="haN-Rb-wVO"/>
                             </constraints>
@@ -167,7 +181,8 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.054901960784313725" green="0.090196078431372548" blue="0.13725490196078433" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.080329649150371552" green="0.12788945436477661" blue="0.20260888338088989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="CVa-Ds-y9a" firstAttribute="top" secondItem="aeW-Om-3WA" secondAttribute="bottom" id="2nl-t0-zlw"/>
                         <constraint firstAttribute="trailing" secondItem="CQh-UH-Ie3" secondAttribute="trailing" constant="16" id="3gE-TF-nIf"/>
@@ -214,12 +229,14 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qg-1E-XJ9">
                     <rect key="frame" x="0.0" y="46" width="414" height="1"/>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="2lM-cS-8yv"/>
                     </constraints>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="2qg-1E-XJ9" firstAttribute="top" secondItem="WKC-Bk-t1b" secondAttribute="bottom" id="OQP-Vb-3mq"/>
