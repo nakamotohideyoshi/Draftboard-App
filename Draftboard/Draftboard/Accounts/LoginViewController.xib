@@ -19,10 +19,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bR-3r-Aib" userLabel="loginContainer">
-                    <rect key="frame" x="0.0" y="284" width="375" height="100"/>
+                    <rect key="frame" x="15" y="284" width="345" height="100"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kz-Pv-XKj" userLabel="loginField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="hSr-wF-efb"/>
@@ -33,7 +33,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb0-JJ-cIu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="50" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="50" width="345" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="oCH-H5-V60"/>
@@ -95,12 +95,12 @@
                 <constraint firstAttribute="trailing" secondItem="aQP-3X-iJG" secondAttribute="trailing" id="BBJ-yF-AXk"/>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="bottom" secondItem="4bR-3r-Aib" secondAttribute="top" id="GJK-wO-ZNJ"/>
                 <constraint firstItem="1XO-l8-dAf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="OHx-wf-MyR"/>
-                <constraint firstAttribute="trailing" secondItem="4bR-3r-Aib" secondAttribute="trailing" id="R3U-mT-XVJ"/>
+                <constraint firstAttribute="trailing" secondItem="4bR-3r-Aib" secondAttribute="trailing" constant="15" id="R3U-mT-XVJ"/>
                 <constraint firstAttribute="trailing" secondItem="1XO-l8-dAf" secondAttribute="trailing" constant="45" id="jiO-sa-FFS"/>
                 <constraint firstAttribute="bottom" secondItem="1XO-l8-dAf" secondAttribute="bottom" constant="40" id="tJH-W2-lO3"/>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tpb-rc-SDo"/>
                 <constraint firstItem="4bR-3r-Aib" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="u3L-dx-eRl"/>
-                <constraint firstItem="4bR-3r-Aib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yxz-In-1XA"/>
+                <constraint firstItem="4bR-3r-Aib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="yxz-In-1XA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
