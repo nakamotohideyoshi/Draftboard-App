@@ -23,6 +23,7 @@ class AccountViewController: DraftboardViewController {
     @IBOutlet weak var ssnField: LabeledField!
     @IBOutlet weak var saveButton: DraftboardButton!
     @IBOutlet weak var stateField: LabeledField!
+    @IBOutlet var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
