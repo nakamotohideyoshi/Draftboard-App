@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="loginField" destination="2kz-Pv-XKj" id="9ql-hV-q0i"/>
+                <outlet property="passwordField" destination="qb0-JJ-cIu" id="Cgq-uT-jJ5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,9 +19,41 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bR-3r-Aib" userLabel="loginContainer">
                     <rect key="frame" x="0.0" y="270" width="375" height="128"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kz-Pv-XKj" userLabel="loginField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="hSr-wF-efb"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="username"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="username@draftboard.com"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb0-JJ-cIu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="50" width="375" height="50"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="oCH-H5-V60"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Password"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="password"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="secureEntry" value="YES"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
                     <animations/>
                     <constraints>
+                        <constraint firstItem="2kz-Pv-XKj" firstAttribute="top" secondItem="4bR-3r-Aib" secondAttribute="top" id="6hl-1j-FYU"/>
+                        <constraint firstItem="2kz-Pv-XKj" firstAttribute="leading" secondItem="4bR-3r-Aib" secondAttribute="leading" id="CV3-Uo-5eT"/>
                         <constraint firstAttribute="height" constant="128" id="Gmk-Tb-PQU"/>
+                        <constraint firstAttribute="trailing" secondItem="2kz-Pv-XKj" secondAttribute="trailing" id="M3D-br-pFg"/>
+                        <constraint firstItem="qb0-JJ-cIu" firstAttribute="leading" secondItem="4bR-3r-Aib" secondAttribute="leading" id="fV0-NT-Pih"/>
+                        <constraint firstItem="qb0-JJ-cIu" firstAttribute="top" secondItem="2kz-Pv-XKj" secondAttribute="bottom" id="jKA-WT-Nvq"/>
+                        <constraint firstAttribute="trailing" secondItem="qb0-JJ-cIu" secondAttribute="trailing" id="tNl-hK-cFJ"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQP-3X-iJG" userLabel="logoContainer">
