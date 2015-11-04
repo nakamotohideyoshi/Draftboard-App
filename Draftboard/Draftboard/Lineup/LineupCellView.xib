@@ -82,7 +82,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAX-yR-zSa" userLabel="PMR Graph">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAX-yR-zSa" userLabel="PMR Graph" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="43" y="13" width="38" height="38"/>
                     <animations/>
                     <color key="backgroundColor" red="0.1384664922952652" green="0.38695406913757324" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -90,6 +90,11 @@
                         <constraint firstAttribute="height" constant="38" id="grt-ue-lBg"/>
                         <constraint firstAttribute="width" constant="38" id="mo3-dZ-S6P"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="19"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-avatar-big" translatesAutoresizingMaskIntoConstraints="NO" id="Esd-Fy-OQR">
                     <rect key="frame" x="44" y="14" width="36" height="36"/>

@@ -45,11 +45,6 @@ class LineupCardView: DraftboardNibView {
         dividerHeight.constant = onePixel
         containerDividerHeight.constant = onePixel
         
-        // add rounded corners to selectors in toggle selector
-        pointsBackgroundShape.layer.cornerRadius = 10
-        averageBackgroundShape.layer.cornerRadius = 10
-        salaryBackgroundShape.layer.cornerRadius = 10
-        
 //        UIGraphicsBeginImageContextWithOptions(contentView.bounds.size, true, 1)
 //        drawViewHierarchyInRect(contentView.bounds, afterScreenUpdates: true)
 //        let screenshot = UIGraphicsGetImageFromCurrentImageContext()

@@ -25,7 +25,6 @@ class LineupCellView: DraftboardNibControl {
         topBorderView.hidden = true
         nibView.backgroundColor = .clearColor()
         _selectedView = selectedView
-        pmrGraph.layer.cornerRadius = pmrGraph.bounds.height / 2
     }
     
     var player: Player? {

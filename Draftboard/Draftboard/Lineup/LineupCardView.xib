@@ -53,13 +53,18 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bap-XH-3jk">
                                             <rect key="frame" x="0.0" y="0.0" width="83" height="48"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nxw-r0-uv7" userLabel="backgroundShape">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nxw-r0-uv7" userLabel="backgroundShape" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="14" width="83" height="20"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.13333333333333333" green="0.20784313725490194" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="soV-CE-PGF"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POINTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHt-gi-ecv" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="19" width="35" height="11"/>
@@ -86,13 +91,18 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iwA-jp-hwr">
                                             <rect key="frame" x="85" y="0.0" width="89" height="48"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK5-65-dDy" userLabel="backgroundShape">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK5-65-dDy" userLabel="backgroundShape" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="14" width="89" height="20"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.1333333333" green="0.20784313730000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="td0-TC-RAl"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG FPPG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XJ-cC-HdD" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                                     <rect key="frame" x="22" y="19" width="45" height="11"/>
@@ -119,13 +129,18 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBe-BY-HQU">
                                             <rect key="frame" x="177" y="0.0" width="83" height="48"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrL-44-AIY" userLabel="backgroundShape">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrL-44-AIY" userLabel="backgroundShape" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="14" width="83" height="20"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.1333333333" green="0.20784313730000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="3ex-Wv-WVg"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SALARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1G-Ll-XRT" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="19" width="35" height="11"/>
