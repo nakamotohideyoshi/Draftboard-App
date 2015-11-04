@@ -80,9 +80,8 @@ class LineupCardView: DraftboardNibView {
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             // this is the constraint for the first cell
-            // will need to be set to bottom of toggle
             if (previousCell == nil) {
-//                cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+                // let's anchor to the bottom of the toggle selector
                 cellView.topRancor.constraintEqualToRancor(toggleSelector.bottomRancor).active = true
             }
             else {
