@@ -14,7 +14,7 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentView: UIScrollView!
     
-    var saveLineupAction: (() -> Void)?
+    var saveLineupAction: (([Player]) -> Void)?
     var positions = [String]()
     var cellViews = [LineupEmptyCellView]()
     var cellIndex = 0
@@ -71,9 +71,7 @@ class LineupEditViewController: DraftboardViewController {
             self.navController?.popViewController()
             let cellView = self.cellViews[self.cellIndex]
             cellView.avatarImageView.image = UIImage(named: "sample-avatar")
-            cellView.nameText = "Kevin Korver"
-            cellView.salaryText = "$6,000"
-            cellView.teamText = " - DET"
+            cellView.player = player
         }
         
         navController?.pushViewController(svc)
@@ -81,7 +79,13 @@ class LineupEditViewController: DraftboardViewController {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Value) {
-            saveLineupAction?()
+            var players = [Player]()
+            for cell in cellViews {
+                if let player = cell.player {
+                    players.append(player)
+                }
+            }
+            saveLineupAction?(players)
         }
     }
     

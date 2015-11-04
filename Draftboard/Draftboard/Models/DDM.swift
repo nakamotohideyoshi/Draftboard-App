@@ -25,6 +25,17 @@ final class DDM {
     var nbaPlayers = [Player]()
     var currentSport: Sport
     
+    static var players: [Player] = []
+    class func requestPlayers() {
+        API.draftGroup(id: 1) { json in
+            let dict = json as! NSDictionary
+            let playerArray = dict["players"] as! NSArray
+            for playerDict in playerArray {
+                DDM.players.append(Player(data: playerDict as! NSDictionary))
+            }
+        }
+    }
+    
     init() {
         let sportData = DDM.sharedInstance.loadJsonFromBundle("sports")
         let nbaTeamData = DDM.sharedInstance.loadJsonFromBundle("nba_teams")
@@ -44,13 +55,15 @@ final class DDM {
         for (_, data) in nbaPlayersArray.enumerate() {
             nbaPlayers.append(Player(data: data as! NSDictionary))
         }
-        
+    
         currentSport = sports[0]
     }
     
+    /*
     class func players() -> [Player]? {
         return DDM.sharedInstance.nbaPlayers
     }
+    */
     
     class func teams() -> [Team]? {
         return DDM.sharedInstance.nbaTeams
@@ -80,6 +93,12 @@ final class DDM {
         }
         
         return nil
+    }
+    
+    class func getDraftGroup() {
+        API.draftGroup(id: 1) { json in
+            print(json)
+        }
     }
     
     class func playersForContest(contest: Contest, completion: (result: DDMResult<[Model], DDMError>) -> Void) {

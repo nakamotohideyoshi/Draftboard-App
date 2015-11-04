@@ -30,6 +30,14 @@ class LineupEmptyCellView: DraftboardNibControl {
         bottomBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
     }
     
+    var player: Player? {
+        didSet {
+            nameLabel.text = (player?.name)!
+            teamLabel.text = " - " + (player?.team)!
+            salaryLabel.text = String(format: "$%.0f", (player?.salary)!)
+        }
+    }
+    
     @IBInspectable var topBorder: Bool = true {
         didSet {
             topBorderView.hidden = !topBorder

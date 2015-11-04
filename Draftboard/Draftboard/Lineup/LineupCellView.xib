@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
@@ -23,7 +23,9 @@
                 <outlet property="bottomBorderView" destination="wCF-pc-2Cx" id="lWq-h1-X2G"/>
                 <outlet property="nameLabel" destination="KcH-Xh-Aog" id="CiC-wB-Q9d"/>
                 <outlet property="positionLabel" destination="biX-Vx-Jha" id="Fd4-kK-YiH"/>
+                <outlet property="rightLabel" destination="OiN-qF-zEh" id="GaG-jq-WnP"/>
                 <outlet property="selectedView" destination="v8T-NO-nh4" id="b4r-Hi-v8m"/>
+                <outlet property="teamLabel" destination="4CZ-Lr-I6Q" id="dDF-B2-DVY"/>
                 <outlet property="topBorderView" destination="bhE-mQ-tq1" id="qRv-6t-4ff"/>
             </connections>
         </placeholder>
@@ -49,6 +51,17 @@
                     <rect key="frame" x="76" y="24" width="50" height="15"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- ATL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Lr-I6Q" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="126" y="24" width="26" height="15"/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
+                    <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
@@ -91,17 +104,6 @@
                         <constraint firstAttribute="height" constant="1" id="jnO-fx-ukd"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- ATL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Lr-I6Q" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="126" y="24" width="26" height="15"/>
-                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
-                    <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </label>
             </subviews>
             <color key="backgroundColor" red="0.039215687662363052" green="0.050980392843484879" blue="0.074509806931018829" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>

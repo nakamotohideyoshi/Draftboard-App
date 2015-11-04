@@ -33,6 +33,16 @@ class LineupSearchCellView: UITableViewCell {
         contentView.userInteractionEnabled = false;
     }
     
+    var player: Player? {
+        didSet {
+            nameLabel.text = (player?.name)!
+            positionLabel.text = (player?.position)!
+            ppgLabel.text = String(format: "%.2f FPPG", (player?.fppg)!)
+            leagueLabel.text = " - " + (player?.team)!
+            salaryLabel.text = String(format: "$%.0f", (player?.salary)!)
+        }
+    }
+
     @IBInspectable var topBorder: Bool = true {
         didSet {
             topBorderView.hidden = !topBorder
@@ -44,4 +54,5 @@ class LineupSearchCellView: UITableViewCell {
             bottomBorderView.hidden = !bottomBorder
         }
     }
+    
 }

@@ -10,10 +10,13 @@ import Foundation
 
 final class API {
     
-    static var session = NSURLSession.sharedSession()
-    static let baseURL = "http://" +
+    private static var session = NSURLSession.sharedSession()
+    private static let baseURL = "http://" +
 //        "noodle.local:8080/"
         "rio-dfs.herokuapp.com/"
+    
+    // Do not instantiate
+    private init() {}
     
     private class func http(path: String, method: String, parameters: NSDictionary, completion: (data: NSData, response: NSHTTPURLResponse) -> Void) {
 

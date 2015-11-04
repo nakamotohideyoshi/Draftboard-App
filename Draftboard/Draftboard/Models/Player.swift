@@ -13,28 +13,21 @@ enum PlayerStatus {
 }
 
 class Player: Model {
-    let id: UInt
-    let first_name: String
-    let last_name: String
-    let fppg: CGFloat
-    let team: Team?
-    let salary: CGFloat
-    let status: PlayerStatus
+    var id: UInt?
+    var name: String?
+    var position: String?
+    var fppg: CGFloat?
+    var team: String?
+    var salary: CGFloat?
+    var status: PlayerStatus?
     
     init(data: NSDictionary) {
-        id = data["id"] as! UInt
-        first_name = data["first_name"] as! String
-        last_name = data["last_name"] as! String
-        fppg = 10.0
-        
-        team = Team(data: [
-            "id": 17,
-            "abbr": "GSW",
-            "short_name": "Warriors",
-            "name": "Golden State Warriors"
-        ])
-        
-        salary = 6000.0
+        id = data["player_id"] as! UInt?
+        name = data["name"] as! String?
+        position = data["position"] as! String?
+        fppg = data["fppg"] as! CGFloat?
+        team = data["team_alias"] as! String?
+        salary = data["salary"] as! CGFloat?
         status = Player.statusForCode(100)
     }
     

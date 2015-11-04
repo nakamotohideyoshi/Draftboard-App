@@ -30,18 +30,13 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         tableView.delegate = self
         tableView.backgroundColor = .clearColor()
         tableView.separatorInset = UIEdgeInsetsZero
+        tableView.indicatorStyle = .White
         
         tableView.setContentOffset(CGPointMake(0, searchBar.bounds.size.height), animated: false)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let player = Player(data: [
-            "first_name": "Steven",
-            "last_name": "Adams",
-            "id": 2,
-            "team_id": 2
-        ])
-        
+        let player = DDM.players[indexPath.row]
         playerSelectedAction?(player)
     }
     
@@ -50,12 +45,13 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 32
+        return DDM.players.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(searchCellIdentifier, forIndexPath: indexPath) as! LineupSearchCellView
         cell.infoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
+        cell.player = DDM.players[indexPath.row]
         cell.backgroundColor = .clearColor()
         return cell
     }
