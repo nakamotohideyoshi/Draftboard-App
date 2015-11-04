@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -14,6 +14,7 @@
         </mutableArray>
         <mutableArray key="Oswald-Regular.ttf">
             <string>Oswald-Regular</string>
+            <string>Oswald-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -22,6 +23,7 @@
                 <outlet property="avatarImageView" destination="Esd-Fy-OQR" id="vqs-Fi-wOt"/>
                 <outlet property="bottomBorderView" destination="wCF-pc-2Cx" id="lWq-h1-X2G"/>
                 <outlet property="nameLabel" destination="KcH-Xh-Aog" id="CiC-wB-Q9d"/>
+                <outlet property="pmrGraph" destination="pAX-yR-zSa" id="KGJ-If-nyM"/>
                 <outlet property="positionLabel" destination="biX-Vx-Jha" id="Fd4-kK-YiH"/>
                 <outlet property="rightLabel" destination="OiN-qF-zEh" id="GaG-jq-WnP"/>
                 <outlet property="selectedView" destination="v8T-NO-nh4" id="b4r-Hi-v8m"/>
@@ -36,20 +38,30 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8T-NO-nh4" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="307" height="63"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="hidden" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiN-qF-zEh">
-                    <rect key="frame" x="269" y="24" width="23" height="15"/>
-                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="10"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiN-qF-zEh">
+                    <rect key="frame" x="270" y="23" width="6" height="17"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="11"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjp-H9-6El" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="278" y="25" width="14" height="14"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="9"/>
+                    <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K. Korver " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-Xh-Aog" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="76" y="24" width="50" height="15"/>
-                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
+                    <rect key="frame" x="90" y="23" width="59" height="18"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
@@ -58,9 +70,10 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- ATL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Lr-I6Q" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="126" y="24" width="26" height="15"/>
-                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ATL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Lr-I6Q" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="151" y="28" width="16" height="11"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="8"/>
                     <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
@@ -69,20 +82,31 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Esd-Fy-OQR">
-                    <rect key="frame" x="44" y="21" width="22" height="22"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAX-yR-zSa" userLabel="PMR Graph">
+                    <rect key="frame" x="43" y="13" width="38" height="38"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.1384664922952652" green="0.38695406913757324" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="22" id="MTn-DL-GfC"/>
-                        <constraint firstAttribute="width" constant="22" id="pqN-Ba-iHs"/>
+                        <constraint firstAttribute="height" constant="38" id="grt-ue-lBg"/>
+                        <constraint firstAttribute="width" constant="38" id="mo3-dZ-S6P"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-avatar-big" translatesAutoresizingMaskIntoConstraints="NO" id="Esd-Fy-OQR">
+                    <rect key="frame" x="44" y="14" width="36" height="36"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="MTn-DL-GfC"/>
+                        <constraint firstAttribute="width" constant="36" id="pqN-Ba-iHs"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="15" y="25" width="24" height="14"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="6Hm-Uo-36I"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                    <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
@@ -92,6 +116,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCF-pc-2Cx">
                     <rect key="frame" x="15" y="62" width="292" height="1"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="ypB-iF-A6u"/>
@@ -99,17 +124,21 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-mQ-tq1">
                     <rect key="frame" x="15" y="0.0" width="292" height="1"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="jnO-fx-ukd"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.039215687662363052" green="0.050980392843484879" blue="0.074509806931018829" alpha="1" colorSpace="calibratedRGB"/>
+            <animations/>
+            <color key="backgroundColor" red="0.12156862745098039" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="yjp-H9-6El" secondAttribute="trailing" constant="15" id="4DX-V0-dTk"/>
                 <constraint firstItem="v8T-NO-nh4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4fE-TY-o8k"/>
                 <constraint firstItem="Esd-Fy-OQR" firstAttribute="leading" secondItem="biX-Vx-Jha" secondAttribute="trailing" constant="5" id="59n-GG-qOK"/>
                 <constraint firstItem="v8T-NO-nh4" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="67t-sO-0PG"/>
+                <constraint firstItem="OiN-qF-zEh" firstAttribute="trailing" secondItem="yjp-H9-6El" secondAttribute="leading" constant="-2" id="8ZN-wD-YbQ"/>
                 <constraint firstItem="biX-Vx-Jha" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="8t5-pZ-iNT"/>
                 <constraint firstAttribute="bottom" secondItem="wCF-pc-2Cx" secondAttribute="bottom" id="9gV-1D-nLP"/>
                 <constraint firstItem="bhE-mQ-tq1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BZ6-Ok-MdW"/>
@@ -118,13 +147,15 @@
                 <constraint firstItem="KcH-Xh-Aog" firstAttribute="leading" secondItem="Esd-Fy-OQR" secondAttribute="trailing" constant="10" id="EjC-wo-dGo"/>
                 <constraint firstItem="v8T-NO-nh4" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="GwP-aW-bYZ"/>
                 <constraint firstAttribute="trailing" secondItem="wCF-pc-2Cx" secondAttribute="trailing" id="Huq-HZ-Gge"/>
+                <constraint firstItem="yjp-H9-6El" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Jev-hz-EKP"/>
                 <constraint firstItem="OiN-qF-zEh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SfV-5P-s6Y"/>
                 <constraint firstItem="v8T-NO-nh4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="UeA-bz-IO9"/>
-                <constraint firstAttribute="trailing" secondItem="OiN-qF-zEh" secondAttribute="trailing" constant="15" id="ZIv-cA-0xl"/>
-                <constraint firstItem="4CZ-Lr-I6Q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="b3N-jC-5vQ"/>
-                <constraint firstItem="4CZ-Lr-I6Q" firstAttribute="leading" secondItem="KcH-Xh-Aog" secondAttribute="trailing" id="cCk-YN-HwL"/>
+                <constraint firstItem="4CZ-Lr-I6Q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="2" id="b3N-jC-5vQ"/>
+                <constraint firstItem="4CZ-Lr-I6Q" firstAttribute="leading" secondItem="KcH-Xh-Aog" secondAttribute="trailing" constant="2" id="cCk-YN-HwL"/>
+                <constraint firstItem="pAX-yR-zSa" firstAttribute="centerX" secondItem="Esd-Fy-OQR" secondAttribute="centerX" id="g6W-uy-0aw"/>
                 <constraint firstItem="biX-Vx-Jha" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gOH-jn-fNA"/>
                 <constraint firstItem="Esd-Fy-OQR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="n7C-WP-6we"/>
+                <constraint firstItem="pAX-yR-zSa" firstAttribute="centerY" secondItem="Esd-Fy-OQR" secondAttribute="centerY" id="nhf-9t-fCL"/>
                 <constraint firstItem="bhE-mQ-tq1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="rcs-Xo-hKu"/>
                 <constraint firstAttribute="trailing" secondItem="bhE-mQ-tq1" secondAttribute="trailing" id="vyl-bI-DuI"/>
             </constraints>
@@ -136,6 +167,6 @@
         </view>
     </objects>
     <resources>
-        <image name="sample-avatar" width="22" height="22"/>
+        <image name="sample-avatar-big" width="127" height="127"/>
     </resources>
 </document>
