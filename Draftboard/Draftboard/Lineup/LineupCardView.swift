@@ -23,6 +23,11 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var containerDividerHeight: NSLayoutConstraint!
     @IBOutlet weak var pmrGraph: UIView!
     
+    @IBOutlet weak var toggleSelector: UIView!
+    @IBOutlet weak var pointsBackgroundShape: UIView!
+    @IBOutlet weak var averageBackgroundShape: UIView!
+    @IBOutlet weak var salaryBackgroundShape: UIView!
+    
 //    let itemCount = Int(arc4random_uniform(12)) + 1
     let itemCount = 12
     var contentHeight: CGFloat!
@@ -39,6 +44,11 @@ class LineupCardView: DraftboardNibView {
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
         containerDividerHeight.constant = onePixel
+        
+        // add rounded corners to selectors in toggle selector
+        pointsBackgroundShape.layer.cornerRadius = 10
+        averageBackgroundShape.layer.cornerRadius = 10
+        salaryBackgroundShape.layer.cornerRadius = 10
         
 //        UIGraphicsBeginImageContextWithOptions(contentView.bounds.size, true, 1)
 //        drawViewHierarchyInRect(contentView.bounds, afterScreenUpdates: true)
@@ -72,7 +82,8 @@ class LineupCardView: DraftboardNibView {
             // this is the constraint for the first cell
             // will need to be set to bottom of toggle
             if (previousCell == nil) {
-                cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+//                cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+                cellView.topRancor.constraintEqualToRancor(toggleSelector.bottomRancor).active = true
             }
             else {
                 cellView.topRancor.constraintEqualToRancor(previousCell!.bottomRancor).active = true
