@@ -117,39 +117,20 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
 
 extension LineupListController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let page = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
-        let pageIndex = Int(floor(page))
-        let pageFraction = page - floor(page)
         
+        let pageOffset = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
         let views: [UIView] = (lineupCardViews.count > 0) ? lineupCardViews : [createView]
-        for (i, card) in views.enumerate() {
-            
-            var alpha: CGFloat = 0.25
-            var transform: CATransform3D = CATransform3DIdentity
-            
-            // Alpha
-            if i == pageIndex {
-                alpha = CGFloat(1.0 - (pageFraction * 0.75))
-            } else if i == pageIndex + 1 {
-                alpha = CGFloat(0.25 + (pageFraction * 0.75))
-            }
-            
-            // Transform
-            transform.m34 = -1/500
-            let direction = (i <= pageIndex) ? -1.0 : 1.0
-            var rotation = CGFloat(M_PI_4 * 0.5 * direction)
-            let translation = card.bounds.size.width / 2 * CGFloat(direction)
-            if i == pageIndex {
-                rotation *= CGFloat(pageFraction)
-            } else if i == pageIndex + 1 {
-                rotation *= CGFloat(1 - pageFraction)
-            }
-            transform = CATransform3DTranslate(transform, -translation, 0, 0)
-            transform = CATransform3DRotate(transform, rotation, 0, 1, 0)
-            transform = CATransform3DTranslate(transform, translation, 0, 0)
-            
-            card.alpha = alpha
-            card.layer.transform = transform
+        
+        for (pageIndex, card) in views.enumerate() {
+            // Page delta is number of pages from perfect center and can be negative
+            let pageDelta = Double(pageIndex) - pageOffset
+            // Clamp values from -1.0 to 1.0
+            let magnitude = min(Double.abs(pageDelta), 1.0)
+            let direction = (pageDelta < 0) ? -1.0 : 1.0
+            // Rotate and fade
+            card.rotate(magnitude * direction)
+            card.fade(magnitude)
         }
+        
     }
 }
