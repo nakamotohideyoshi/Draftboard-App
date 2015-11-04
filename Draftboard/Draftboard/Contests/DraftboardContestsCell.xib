@@ -38,7 +38,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-basketball" translatesAutoresizingMaskIntoConstraints="NO" id="gby-6s-OnB">
                     <rect key="frame" x="15" y="33" width="14" height="14"/>
                     <animations/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.20000000000000001" green="0.50588235294117645" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="0kN-Yc-f9c"/>
                         <constraint firstAttribute="width" constant="14" id="ezf-Ma-Hfb"/>
@@ -95,10 +95,12 @@
             </variation>
             <connections>
                 <outlet property="amountLabel" destination="xwu-gC-EnK" id="AIm-JW-gtX"/>
+                <outlet property="bottomBorderHeightConstraint" destination="U8w-AN-OaS" id="w2d-J1-Tzg"/>
                 <outlet property="bottomBorderView" destination="uFH-JC-6aI" id="pBs-Dl-Kvl"/>
                 <outlet property="iconImageView" destination="gby-6s-OnB" id="mEX-1v-M3j"/>
                 <outlet property="moneyBar" destination="tXd-Ss-jPW" id="gx9-1m-N1t"/>
                 <outlet property="titleLabel" destination="XN2-ts-hAb" id="RHo-fG-Yh4"/>
+                <outlet property="topBorderHeightConstraint" destination="C55-QP-dno" id="raS-ux-nFG"/>
                 <outlet property="topBorderView" destination="MS8-yH-5ca" id="VeT-Ws-FwC"/>
             </connections>
             <point key="canvasLocation" x="-402" y="-402.5"/>
