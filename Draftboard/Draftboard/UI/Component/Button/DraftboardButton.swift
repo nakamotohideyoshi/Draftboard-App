@@ -192,6 +192,13 @@ class DraftboardButton: UIControl {
     // MARK: Icon
     
     @IBInspectable
+    var iconHidden: Bool = false {
+        didSet {
+            iconImageView.hidden = iconHidden
+        }
+    }
+    
+    @IBInspectable
     var iconHighlightColor: UIColor = .whiteColor()
     
     @IBInspectable
