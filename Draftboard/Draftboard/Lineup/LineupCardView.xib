@@ -30,6 +30,7 @@
                 <outlet property="contentView" destination="J1c-D5-t47" id="Jlx-hA-Bnk"/>
                 <outlet property="contentViewContainer" destination="yyN-4n-oTH" id="quf-nd-kIj"/>
                 <outlet property="dividerHeight" destination="MiH-Rg-KtN" id="ytm-xw-Ngx"/>
+                <outlet property="editButton" destination="1Uy-5Q-cBS" id="aPQ-Ma-lLR"/>
                 <outlet property="pmrGraph" destination="JLz-iu-41F" id="HxZ-l0-uZd"/>
                 <outlet property="pointsBackgroundShape" destination="Nxw-r0-uv7" id="zuW-9b-aGI"/>
                 <outlet property="salaryBackgroundShape" destination="rrL-44-AIY" id="0BM-e3-Q5T"/>

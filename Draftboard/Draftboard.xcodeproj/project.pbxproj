@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C245CD51BEAD4EA00A24F43 /* DraftboardModalItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItem.xib */; };
 		3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */; };
 		3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */; };
 		3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA3A1BE050D50077DF0C /* PieChart.swift */; };
@@ -126,6 +127,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C245CD41BEAD4EA00A24F43 /* DraftboardModalItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalItem.xib; sourceTree = "<group>"; };
 		3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupMoneyPoint.swift; sourceTree = "<group>"; };
 		3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailViewController.swift; sourceTree = "<group>"; };
 		3C74CA3A1BE050D50077DF0C /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 				5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */,
 				5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */,
 				5D4B873D1BB31B0100B58EDF /* DraftboardView.swift */,
+				3C245CD41BEAD4EA00A24F43 /* DraftboardModalItem.xib */,
 				5D9E99531BB615590017E332 /* DraftboardViewController.swift */,
 				5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */,
 				5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */,
@@ -580,6 +583,7 @@
 				5D6237BE1BB61F7B0007E62A /* LineupCardView.xib in Resources */,
 				5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */,
 				5D3214951BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib in Resources */,
+				3C245CD51BEAD4EA00A24F43 /* DraftboardModalItem.xib in Resources */,
 				5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */,
 				3C74CA451BE051530077DF0C /* ContestsHeaderCell.xib in Resources */,
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,

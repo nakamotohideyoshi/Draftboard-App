@@ -15,8 +15,6 @@ protocol LineupCardViewDelegate {
 class LineupCardView: DraftboardNibView {
     
     @IBOutlet weak var editButton: DraftboardButton!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIScrollView!
     @IBOutlet weak var contentViewContainer: UIView!
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
