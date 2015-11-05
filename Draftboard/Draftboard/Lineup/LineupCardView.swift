@@ -31,6 +31,8 @@ class LineupCardView: DraftboardNibView {
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
     
+    let curtain = UIView()
+    
     override func willAwakeFromNib() {
         contentView.indicatorStyle = .White
         contentView.alwaysBounceVertical = true
@@ -42,6 +44,16 @@ class LineupCardView: DraftboardNibView {
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
         containerDividerHeight.constant = onePixel
+        
+        addSubview(curtain)
+        curtain.backgroundColor = UIColor.blueDarker()
+        curtain.translatesAutoresizingMaskIntoConstraints = false
+        curtain.topRancor.constraintEqualToRancor(self.topRancor).active = true
+        curtain.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+        curtain.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+        curtain.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+        curtain.alpha = 0
+        curtain.userInteractionEnabled = false
         
 //        UIGraphicsBeginImageContextWithOptions(contentView.bounds.size, true, 1)
 //        drawViewHierarchyInRect(contentView.bounds, afterScreenUpdates: true)
@@ -96,7 +108,11 @@ class LineupCardView: DraftboardNibView {
 extension UIView {
     
     func fade(amount: Double) {
-        self.alpha = CGFloat(1 - amount * 0.75)
+        self.alpha = 1 // dumb, fix later
+        if self.isKindOfClass(LineupCardView) {
+            let lcv = self as! LineupCardView
+            lcv.curtain.alpha = CGFloat(amount * 0.8)
+        }
     }
     
     func rotate(amount: Double) {

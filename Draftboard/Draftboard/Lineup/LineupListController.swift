@@ -127,8 +127,9 @@ extension LineupListController: UIScrollViewDelegate {
             // Clamp values from -1.0 to 1.0
             let magnitude = min(Double.abs(pageDelta), 1.0)
             let direction = (pageDelta < 0) ? -1.0 : 1.0
-            // Rotate and fade
-            card.rotate(magnitude * direction)
+            // Lame attempt to fix a visual glitch in fake carousel rotation
+            let m = max(magnitude - 0.05, 0.0) * 1.1
+            card.rotate(m * direction)
             card.fade(magnitude)
         }
         
