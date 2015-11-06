@@ -149,18 +149,13 @@ class DraftboardNavController: UIViewController {
         let nvc = vcs.first!
         
         cvc.view.removeFromSuperview()
+        contentView.addSubview(nvc.view)
         
-        var parentView = contentView
-        if (nvc is DraftboardModalViewController) {
-            parentView = view
-        }
-        
-        parentView.addSubview(nvc.view)
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
-        nvc.view.leftRancor.constraintEqualToRancor(parentView.leftRancor).active = true
-        nvc.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
-        nvc.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
-        nvc.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
+        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+        nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+        nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
+        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
@@ -238,17 +233,12 @@ class DraftboardNavController: UIViewController {
         cardView.layer.opacity = 0
         nvc.view.hidden = false
         
-        var parentView = contentView
-        if (nvc is DraftboardModalViewController) {
-            parentView = view
-        }
-        
-        parentView.addSubview(nvc.view)
+        contentView.addSubview(nvc.view)
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
-        nvc.view.leftRancor.constraintEqualToRancor(parentView.leftRancor).active = true
-        nvc.view.rightRancor.constraintEqualToRancor(parentView.rightRancor).active = true
-        nvc.view.bottomRancor.constraintEqualToRancor(parentView.bottomRancor).active = true
-        nvc.view.topRancor.constraintEqualToRancor(parentView.topRancor).active = true
+        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+        nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+        nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
+        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         
         titlebar.delegate = nvc
         titlebar.dataSource = nvc

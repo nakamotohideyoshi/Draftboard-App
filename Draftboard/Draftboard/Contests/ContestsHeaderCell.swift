@@ -13,6 +13,6 @@ import UIKit
     @IBOutlet weak var titleLabel: DraftboardLabel!
     
     override func awakeFromNib() {
-        self.backgroundColor = .redColor()
+
     }
 }
