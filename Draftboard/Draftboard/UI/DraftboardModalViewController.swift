@@ -8,6 +8,10 @@
 
 import UIKit
 
-class DraftboardModalViewController: DraftboardViewController {
-
+class DraftboardModalViewController: UIViewController {
+    var navController: DraftboardModalNavController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

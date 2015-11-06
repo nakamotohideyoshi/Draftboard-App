@@ -56,6 +56,10 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         return cell
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 52.0
+    }
+    
     func didTapPlayerInfo(sender: DraftboardButton) {
         let pdvc = PlayerDetailViewController(nibName: "PlayerDetailViewController", bundle: nil)
         self.navController?.pushViewController(pdvc)

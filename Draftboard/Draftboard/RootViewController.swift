@@ -12,20 +12,37 @@ import GLKit
 final class RootViewController: UIViewController {
     
     static let sharedInstance = RootViewController(nibName: "RootViewController", bundle: nil)
-    var tabController = DraftboardTabController()
     var topConstraint: NSLayoutConstraint!
+    
+    var tabController = DraftboardTabController()
+    var modalController = DraftboardModalNavController()
     
     @IBOutlet weak var bgView: UIView!
     
     override func viewDidLoad() {
-        let v = tabController.view
-        view.addSubview(v)
         
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.topRancor.constraintEqualToRancor(view.topRancor, constant: 20.0).active = true
-        v.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
-        v.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
-        v.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
+        // Create tab controller
+        let tabControllerView = tabController.view
+        view.addSubview(tabControllerView)
+        
+        // Constrain tab controller
+        tabControllerView.translatesAutoresizingMaskIntoConstraints = false
+        tabControllerView.topRancor.constraintEqualToRancor(view.topRancor, constant: 20.0).active = true
+        tabControllerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
+        tabControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
+        tabControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
+        
+        // Create modal controller
+        let modalControllerView = modalController.view
+        view.addSubview(modalControllerView)
+        
+        // Constraint modal controller
+        modalControllerView.translatesAutoresizingMaskIntoConstraints = false
+        modalControllerView.topRancor.constraintEqualToRancor(view.topRancor).active = true
+        modalControllerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
+        modalControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
+        modalControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
+        modalControllerView.hidden = true;
         
         setAppearanceProperties()
         
@@ -39,7 +56,52 @@ final class RootViewController: UIViewController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return tabController.preferredStatusBarStyle()
     }
-
+    
+    func pushModalViewController(nvc: DraftboardModalViewController, animated: Bool = true) {
+        modalController.pushViewController(nvc, animated: animated)
+        if (modalController.vcs.count == 1) {
+            showModalViewController()
+        }
+    }
+    
+    func popModalViewController(animated: Bool = true) {
+//        modalController.popViewController(animated)
+//        if (modalController.vcs.count == 0) {
+//            hideModalViewController()
+//        }
+        
+        modalController.popOutViewController()
+        hideModalViewController()
+    }
+    
+    func showModalViewController() {
+        modalController.view.layer.removeAllAnimations()
+        modalController.view.hidden = false
+        modalController.view.alpha = 0.0
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
+            self.modalController.view.alpha = 1.0
+        }) { (completed) -> Void in
+            // nuffin' fer now
+        }
+    }
+    
+    func hideModalViewController() {
+        modalController.view.layer.removeAllAnimations()
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
+            self.modalController.view.alpha = 0.0
+        }) { (completed) -> Void in
+            self.modalController.view.hidden = true
+        }
+    }
+    
+    func didSelectModalChoice(index: Int) {
+        tabController.cnc.vcs.first?.didSelectModalChoice(index)
+    }
+    
+    func didCancelModal() {
+        tabController.cnc.vcs.first?.didCancelModal()
+    }
+    
     /*
     var updateHandler:(()->Void)?
 

@@ -19,6 +19,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
     
+    var sportIndex: Int?
+    var timeIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clearColor()
@@ -41,8 +44,42 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Plus) {
-            createNewLineup()
+            let mcc = DraftboardModalChoiceController(title: "Choose a Sport", choices: [
+                ["title": "NBA", "subtitle": "52 Contests"],
+                ["title": "NHL", "subtitle": "46 Contests"],
+            ])
+            
+            RootViewController.sharedInstance.pushModalViewController(mcc)
         }
+    }
+    
+    override func didSelectModalChoice(index: Int) {
+        if (sportIndex == nil) {
+            sportIndex = index
+            
+            let mvc = DraftboardModalChoiceController(title: "Choose a Contest Time", choices: [
+                ["title": "Tonight", "subtitle": "32 Contests"],
+                ["title": "Tomorrow", "subtitle": "28 Contests"],
+            ])
+            
+            RootViewController.sharedInstance.pushModalViewController(mvc)
+        }
+        
+        else if (sportIndex != nil && timeIndex == nil) {
+            timeIndex = index
+            RootViewController.sharedInstance.popModalViewController()
+            createNewLineup()
+            
+            // TODO: remove these when data is connected
+            sportIndex = nil
+            timeIndex = nil
+        }
+    }
+    
+    override func didCancelModal() {
+        RootViewController.sharedInstance.popModalViewController()
+        sportIndex = nil
+        timeIndex = nil
     }
     
     func didTapCreateView(gestureRecognizer: UITapGestureRecognizer) {

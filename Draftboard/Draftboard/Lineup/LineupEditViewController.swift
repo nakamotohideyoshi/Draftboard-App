@@ -13,6 +13,9 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentView: UIScrollView!
+    @IBOutlet weak var statContainer: UIView!
+    @IBOutlet weak var dividerHeight: NSLayoutConstraint!
+    @IBOutlet weak var nameDividerHeight: NSLayoutConstraint!
     
     var lineup: Lineup!
     var saveLineupAction: (([Player]) -> Void)?
@@ -21,8 +24,12 @@ class LineupEditViewController: DraftboardViewController {
     var cellIndex = 0
     
     override func viewDidLoad() {
-        view.backgroundColor = .clearColor()
         positions = ["PG", "SG", "SF", "PF", "C", "G", "F", "UTL"]
+        contentView.alwaysBounceVertical = true
+//        statContainer.backgroundColor = UIColor(0x152133, alpha: 0.96)
+        let onePixel = 1 / UIScreen.mainScreen().scale
+        dividerHeight.constant = onePixel
+        nameDividerHeight.constant = onePixel
         layoutCellViews()
         nameTextField.delegate = self
         if lineup == nil {
@@ -50,6 +57,7 @@ class LineupEditViewController: DraftboardViewController {
             
             cellView.addTarget(self, action: Selector("didTapCell:"), forControlEvents: .TouchUpInside)
             cellView.bottomBorder = true
+            cellView.topBorder = false
             
             if (previousCell == nil) { // First cell
                 cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
@@ -98,12 +106,13 @@ class LineupEditViewController: DraftboardViewController {
             for cell in cellViews {
                 if let player = cell.player {
                     players.append(player)
-                } else {
-                    print("You can't save an empty lineup")
-                    return
                 }
             }
-            saveLineupAction?(players)
+            if players.count > 0 {
+                saveLineupAction?(players)
+            } else {
+                print("You can't save a completely empty lineup")
+            }
         }
     }
     

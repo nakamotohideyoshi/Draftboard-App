@@ -85,7 +85,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAX-yR-zSa" userLabel="PMR Graph" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="43" y="13" width="38" height="38"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.1384664922952652" green="0.38695406913757324" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.50588235294117645" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="grt-ue-lBg"/>
                         <constraint firstAttribute="width" constant="38" id="mo3-dZ-S6P"/>
@@ -120,7 +120,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCF-pc-2Cx">
-                    <rect key="frame" x="15" y="62" width="292" height="1"/>
+                    <rect key="frame" x="15" y="62" width="277" height="1"/>
                     <animations/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -128,7 +128,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-mQ-tq1">
-                    <rect key="frame" x="15" y="0.0" width="292" height="1"/>
+                    <rect key="frame" x="15" y="0.0" width="277" height="1"/>
                     <animations/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92941176469999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -151,7 +151,7 @@
                 <constraint firstItem="wCF-pc-2Cx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="CYu-cJ-cm2"/>
                 <constraint firstItem="KcH-Xh-Aog" firstAttribute="leading" secondItem="Esd-Fy-OQR" secondAttribute="trailing" constant="10" id="EjC-wo-dGo"/>
                 <constraint firstItem="v8T-NO-nh4" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="GwP-aW-bYZ"/>
-                <constraint firstAttribute="trailing" secondItem="wCF-pc-2Cx" secondAttribute="trailing" id="Huq-HZ-Gge"/>
+                <constraint firstAttribute="trailing" secondItem="wCF-pc-2Cx" secondAttribute="trailing" constant="15" id="Huq-HZ-Gge"/>
                 <constraint firstItem="yjp-H9-6El" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Jev-hz-EKP"/>
                 <constraint firstItem="OiN-qF-zEh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SfV-5P-s6Y"/>
                 <constraint firstItem="v8T-NO-nh4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="UeA-bz-IO9"/>
@@ -162,7 +162,7 @@
                 <constraint firstItem="Esd-Fy-OQR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="n7C-WP-6we"/>
                 <constraint firstItem="pAX-yR-zSa" firstAttribute="centerY" secondItem="Esd-Fy-OQR" secondAttribute="centerY" id="nhf-9t-fCL"/>
                 <constraint firstItem="bhE-mQ-tq1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="rcs-Xo-hKu"/>
-                <constraint firstAttribute="trailing" secondItem="bhE-mQ-tq1" secondAttribute="trailing" id="vyl-bI-DuI"/>
+                <constraint firstAttribute="trailing" secondItem="bhE-mQ-tq1" secondAttribute="trailing" constant="15" id="vyl-bI-DuI"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

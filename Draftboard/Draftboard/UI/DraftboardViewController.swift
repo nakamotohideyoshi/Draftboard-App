@@ -12,6 +12,14 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
     
     var navController: DraftboardNavController?
     
+    func didSelectModalChoice(index: Int) {
+        print(index)
+    }
+    
+    func didCancelModal() {
+        print("modal cancelled")
+    }
+    
     func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         print("didTapTitlebarButton:", buttonType)
     }
