@@ -27,7 +27,13 @@ final class RootViewController: UIViewController {
         v.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         v.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         
+        setAppearanceProperties()
+        
         DDM.requestPlayers()
+    }
+    
+    func setAppearanceProperties() {
+        UITextField.appearance().tintColor = UIColor.greenDraftboard()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

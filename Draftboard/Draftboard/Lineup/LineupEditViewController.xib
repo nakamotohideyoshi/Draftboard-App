@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -40,10 +40,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My new lineup" placeholder="My new lineup" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-pS-ZdO">
-                            <rect key="frame" x="34" y="24" width="99" height="20"/>
+                            <rect key="frame" x="34" y="24" width="214" height="20"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LINEUP NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpS-Yp-C5i" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="278" y="25" width="63" height="18"/>
@@ -56,6 +56,7 @@
                         <constraint firstItem="rpS-Yp-C5i" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="Kaj-L1-3i6"/>
                         <constraint firstItem="a6t-pS-ZdO" firstAttribute="leading" secondItem="qyx-jm-zkB" secondAttribute="leading" constant="34" id="b9x-P2-33h"/>
                         <constraint firstItem="a6t-pS-ZdO" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="bVJ-ky-0wG"/>
+                        <constraint firstItem="rpS-Yp-C5i" firstAttribute="leading" secondItem="a6t-pS-ZdO" secondAttribute="trailing" constant="30" id="btc-b5-dVT"/>
                         <constraint firstAttribute="trailing" secondItem="rpS-Yp-C5i" secondAttribute="trailing" constant="34" id="qOG-pn-65Z"/>
                     </constraints>
                 </view>

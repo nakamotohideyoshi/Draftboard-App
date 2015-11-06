@@ -328,4 +328,8 @@ class DraftboardNavController: UIViewController {
         
         return spring
     }
+    
+    func updateTitlebar() {
+        titlebar.pushElements(directionless: true, animated: false)
+    }
 }

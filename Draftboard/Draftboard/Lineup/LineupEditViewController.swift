@@ -14,6 +14,7 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentView: UIScrollView!
     
+    var lineup: Lineup!
     var saveLineupAction: (([Player]) -> Void)?
     var positions = [String]()
     var cellViews = [LineupEmptyCellView]()
@@ -23,6 +24,10 @@ class LineupEditViewController: DraftboardViewController {
         view.backgroundColor = .clearColor()
         positions = ["PG", "SG", "SF", "PF", "C", "G", "F", "UTL"]
         layoutCellViews()
+        nameTextField.delegate = self
+        if lineup == nil {
+            lineup = Lineup()
+        }
     }
     
     func layoutCellViews() {
@@ -64,6 +69,8 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func didTapCell(sender: LineupEmptyCellView) {
+        nameTextField.resignFirstResponder()
+        
         cellIndex = sender.index
         let svc = LineupSearchViewController(nibName: "LineupSearchViewController", bundle: nil)
         
@@ -72,6 +79,14 @@ class LineupEditViewController: DraftboardViewController {
             let cellView = self.cellViews[self.cellIndex]
             cellView.avatarImageView.image = UIImage(named: "sample-avatar")
             cellView.player = player
+            
+            self.nameTextField.returnKeyType = .Done
+            for cell in self.cellViews {
+                if cell.player == nil {
+                    self.nameTextField.returnKeyType = .Next
+                    break
+                }
+            }
         }
         
         navController?.pushViewController(svc)
@@ -83,6 +98,9 @@ class LineupEditViewController: DraftboardViewController {
             for cell in cellViews {
                 if let player = cell.player {
                     players.append(player)
+                } else {
+                    print("You can't save an empty lineup")
+                    return
                 }
             }
             saveLineupAction?(players)
@@ -90,7 +108,15 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String {
-        return "Create Lineup".uppercaseString
+        if nameTextField.text == "My new lineup" {
+            return "Create Lineup".uppercaseString
+        }
+        else if lineup.name == "" {
+            return "Create Lineup".uppercaseString
+        }
+        else {
+            return lineup.name.uppercaseString
+        }
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -108,4 +134,30 @@ class LineupEditViewController: DraftboardViewController {
     override func titlebarBgHidden() -> Bool {
         return false
     }
+}
+
+extension LineupEditViewController: UITextFieldDelegate {
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let oldString = textField.text! as NSString
+        if oldString == "My new lineup" {
+            lineup.name = ""
+        } else {
+            lineup.name = oldString.stringByReplacingCharactersInRange(range, withString: string)
+        }
+        self.navController?.updateTitlebar()
+        return true
+    }
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        for cell in self.cellViews {
+            if cell.player == nil {
+                self.didTapCell(cell)
+                return true
+            }
+        }
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
