@@ -34,5 +34,4 @@ class LineupCellView: DraftboardNibControl {
             rightLabel.text = String(format: "$%.0f", (player?.salary)!)
         }
     }
-
 }

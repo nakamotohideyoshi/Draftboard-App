@@ -13,6 +13,9 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentView: UIScrollView!
+    @IBOutlet weak var statContainer: UIView!
+    @IBOutlet weak var dividerHeight: NSLayoutConstraint!
+    @IBOutlet weak var nameDividerHeight: NSLayoutConstraint!
     
     var saveLineupAction: (([Player]) -> Void)?
     var positions = [String]()
@@ -20,8 +23,12 @@ class LineupEditViewController: DraftboardViewController {
     var cellIndex = 0
     
     override func viewDidLoad() {
-        view.backgroundColor = .clearColor()
         positions = ["PG", "SG", "SF", "PF", "C", "G", "F", "UTL"]
+        contentView.alwaysBounceVertical = true
+//        statContainer.backgroundColor = UIColor(0x152133, alpha: 0.96)
+        let onePixel = 1 / UIScreen.mainScreen().scale
+        dividerHeight.constant = onePixel
+        nameDividerHeight.constant = onePixel
         layoutCellViews()
     }
     
@@ -45,6 +52,7 @@ class LineupEditViewController: DraftboardViewController {
             
             cellView.addTarget(self, action: Selector("didTapCell:"), forControlEvents: .TouchUpInside)
             cellView.bottomBorder = true
+            cellView.topBorder = false
             
             if (previousCell == nil) { // First cell
                 cellView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
