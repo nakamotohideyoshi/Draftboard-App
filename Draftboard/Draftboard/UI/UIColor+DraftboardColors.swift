@@ -60,6 +60,11 @@ extension UIColor {
         return UIColor(0x152133)
     }
     
+    // Only used for injured status
+    class func redDraftboard() -> UIColor {
+        return UIColor(0xe42e2f)
+    }
+    
     //
     // MARK: - Specific color implementations
     //
@@ -82,6 +87,10 @@ extension UIColor {
     // Lineup card background color
     class func cardColor() -> UIColor {
         return blueMediumDark()
+    }
+    
+    class func injuredColor() -> UIColor {
+        return redDraftboard()
     }
     
     //

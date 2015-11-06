@@ -13,13 +13,20 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var statsDividerHeight: NSLayoutConstraint!
     
     let searchCellIdentifier = "searchCellIdentifier"
     var playerSelectedAction:((Player) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clearColor()
+        view.backgroundColor = .blueDarker()
+        
+        let onePixel = 1 / UIScreen.mainScreen().scale
+        statsDividerHeight.constant = onePixel
+        
+        searchBar.barTintColor = UIColor(0x192436)
+//        searchBar.backgroundColor = .blueDarker()
         
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "LineupSearchCellView", bundle: bundle)
@@ -53,6 +60,10 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         cell.infoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
         cell.player = DDM.players[indexPath.row]
         cell.backgroundColor = .clearColor()
+        cell.topBorder = true
+        if indexPath.row == 0 {
+            cell.topBorder = false
+        }
         return cell
     }
     
