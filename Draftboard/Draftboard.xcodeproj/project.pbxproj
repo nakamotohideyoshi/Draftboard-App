@@ -89,8 +89,8 @@
 		5D6237E21BB620320007E62A /* DraftboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D686F1BB5B59E00855501 /* DraftboardButton.swift */; };
 		5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D68731BB5B59E00855501 /* DraftboardRoundButton.swift */; };
 		5D63D0A91BD6B711000215DF /* LineupSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D63D0A81BD6B711000215DF /* LineupSearchViewController.swift */; };
-		5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */; settings = {ASSET_TAGS = (); }; };
-		5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */; settings = {ASSET_TAGS = (); }; };
+		5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */; };
+		5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */; };
 		5D783AC31BD9439C000D8494 /* LineupBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D783AC21BD9439C000D8494 /* LineupBar.xib */; };
 		5D783AC91BD94847000D8494 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AC81BD94847000D8494 /* Player.swift */; };
 		5D783ACC1BD97C54000D8494 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783ACA1BD97C54000D8494 /* Model.swift */; };
@@ -100,8 +100,8 @@
 		5D783AD31BD97D23000D8494 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AD21BD97D23000D8494 /* Sport.swift */; };
 		5D783AD61BD9AA4F000D8494 /* nba_teams.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D783AD51BD9AA4F000D8494 /* nba_teams.json */; };
 		5D783AD81BD9AAD2000D8494 /* sports.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D783AD71BD9AAD2000D8494 /* sports.json */; };
-		5D7A6BBE1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D7A6BBD1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib */; settings = {ASSET_TAGS = (); }; };
-		5D7A6BC01BEC306600F1BCA6 /* DraftboardModalCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7A6BBF1BEC306600F1BCA6 /* DraftboardModalCancelView.swift */; settings = {ASSET_TAGS = (); }; };
+		5D7A6BBE1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D7A6BBD1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib */; };
+		5D7A6BC01BEC306600F1BCA6 /* DraftboardModalCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7A6BBF1BEC306600F1BCA6 /* DraftboardModalCancelView.swift */; };
 		5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */; };
 		5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */; };
 		5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */; };
@@ -110,7 +110,7 @@
 		5D9A32211BCD72A0006C758B /* DraftboardNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */; };
 		5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */; };
 		5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */; };
-		5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */; settings = {ASSET_TAGS = (); }; };
+		5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */; };
 		5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */; };
 		5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */; };
 		5DE6C5951BD0405D005A4DC6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */; };
@@ -441,27 +441,27 @@
 		5DEFAE001BA9C43100A9AFC1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */,
 				5D4B871C1BB31A3800B58EDF /* Color */,
 				5D4B871D1BB31A5F00B58EDF /* Component */,
-				5D7A6BBD1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib */,
-				5D7A6BBF1BEC306600F1BCA6 /* DraftboardModalCancelView.swift */,
 				5D4B87391BB31B0100B58EDF /* DraftboardImageView.swift */,
 				5D4B873A1BB31B0100B58EDF /* DraftboardLabel.swift */,
+				5D7A6BBF1BEC306600F1BCA6 /* DraftboardModalCancelView.swift */,
+				5D7A6BBD1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib */,
+				5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */,
+				5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */,
+				3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */,
+				5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */,
+				5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */,
+				5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */,
 				5D4B873B1BB31B0100B58EDF /* DraftboardNibControl.swift */,
 				5D4B873C1BB31B0100B58EDF /* DraftboardNibView.swift */,
 				5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */,
 				5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */,
+				5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */,
 				5D4B873D1BB31B0100B58EDF /* DraftboardView.swift */,
 				5D9E99531BB615590017E332 /* DraftboardViewController.swift */,
-				5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */,
-				5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */,
 				3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */,
 				3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */,
-				5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */,
-				5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */,
-				3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */,
-				5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";

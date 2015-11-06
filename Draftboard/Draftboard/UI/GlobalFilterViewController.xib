@@ -36,23 +36,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="l3Y-sM-SRI">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="7zU-bN-4oI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.85999999999999999" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFa-nd-dnD" userLabel="BackgroundColor">
-                                <rect key="frame" x="-90" y="-78" width="84" height="49"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.096235401928424835" green="0.13966953754425049" blue="0.21438547968864441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                        </subviews>
-                        <animations/>
-                    </view>
-                    <animations/>
-                    <blurEffect style="dark"/>
-                </visualEffectView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etk-FJ-2Sa" userLabel="textContainer">
                     <rect key="frame" x="0.0" y="116" width="375" height="436"/>
                     <subviews>
@@ -191,19 +174,46 @@
                         <constraint firstAttribute="trailing" secondItem="z5o-32-isg" secondAttribute="trailing" id="w4U-lm-Nz4"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpI-ui-QaV" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="15" y="0.0" width="60" height="56"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="RSj-xj-ihY"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="textValue" value=" "/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="icon-close"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="iconHighlightColor">
+                            <color key="value" red="0.14901960780000001" green="0.77647058820000003" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <animations/>
+            <color key="backgroundColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="hpI-ui-QaV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="AZU-u4-n93"/>
                 <constraint firstItem="Etk-FJ-2Sa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="BEN-Ir-jgU"/>
-                <constraint firstItem="l3Y-sM-SRI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="EXR-hr-1rY"/>
-                <constraint firstAttribute="bottom" secondItem="l3Y-sM-SRI" secondAttribute="bottom" id="Hv4-At-37a"/>
                 <constraint firstItem="Etk-FJ-2Sa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Hy3-Ij-1x1"/>
+                <constraint firstItem="hpI-ui-QaV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KFY-Kl-b6q"/>
                 <constraint firstAttribute="trailing" secondItem="Etk-FJ-2Sa" secondAttribute="trailing" id="flf-JB-Hnj"/>
-                <constraint firstItem="l3Y-sM-SRI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kRO-xg-YzP"/>
-                <constraint firstAttribute="trailing" secondItem="l3Y-sM-SRI" secondAttribute="trailing" id="ygm-2X-OeC"/>
+                <constraint firstItem="hpI-ui-QaV" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.16" id="pzH-bJ-ako"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon-close" width="14" height="14"/>
+    </resources>
 </document>
