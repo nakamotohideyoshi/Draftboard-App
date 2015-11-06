@@ -90,6 +90,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.saveLineupAction = { (lineup: [Player]) in
             self.didSaveLineup(lineup)
+            nvc.nameTextField.resignFirstResponder()
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }
         
@@ -98,6 +99,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         } else {
             navController?.pushViewController(nvc)
         }
+        
+        // This belongs in LineupEditViewController, but a bug makes a delay necessary
+        nvc.nameTextField.becomeFirstResponder()
+        nvc.nameTextField.selectAll(nil)
     }
     
     func didSaveLineup(lineup: [Player]) {

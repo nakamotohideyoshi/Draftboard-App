@@ -44,7 +44,13 @@ final class RootViewController: UIViewController {
         modalControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         modalControllerView.hidden = true;
         
+        setAppearanceProperties()
+        
         DDM.requestPlayers()
+    }
+    
+    func setAppearanceProperties() {
+        UITextField.appearance().tintColor = UIColor.greenDraftboard()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
