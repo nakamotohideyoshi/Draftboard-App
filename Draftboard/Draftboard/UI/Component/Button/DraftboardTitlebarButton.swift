@@ -16,6 +16,7 @@ struct TitlebarButtonType : OptionSetType {
     static let Back = TitlebarButtonType(rawValue: 1 << 2)
     static let Close = TitlebarButtonType(rawValue: 1 << 3)
     static let Search = TitlebarButtonType(rawValue: 1 << 4)
+    static let DisabledValue = TitlebarButtonType(rawValue: 1 << 5)
 }
 
 class DraftboardTitlebarButton: DraftboardButton {
@@ -34,8 +35,10 @@ class DraftboardTitlebarButton: DraftboardButton {
             return UIImage(named: "titlebar-icon-search")
         } else if (type == .Value) {
             return nil
+        } else if (type == .DisabledValue) {
+            return nil
         }
-        
+    
         return nil
     }
     
@@ -44,7 +47,7 @@ class DraftboardTitlebarButton: DraftboardButton {
         
         buttonType = type
         iconImage = DraftboardTitlebarButton.iconForType(buttonType)
-        iconHighlightColor = .greenDraftboard()
+        iconHighlightColor = (type == .DisabledValue) ? .greyCool() : .greenDraftboard()
         textBold = true
         textSize = 11.0
         textLetterSpacing = 1.2
@@ -52,6 +55,10 @@ class DraftboardTitlebarButton: DraftboardButton {
         if (type == .Value) {
 //            bgColor = UIColor(0x424f68)
 //            bgHighlightColor = UIColor(0x8b90af)
+        }
+        else if (type == .DisabledValue) {
+            bgColor = .greyCool()
+            bgHighlightColor = .greyCool()
         }
         else {
             bgColor = .clearColor()
