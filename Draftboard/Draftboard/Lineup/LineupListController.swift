@@ -51,6 +51,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             
             RootViewController.sharedInstance.pushModalViewController(mcc)
         }
+        else if(buttonType == .Menu) {
+            let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
+            RootViewController.sharedInstance.pushModalViewController(gfvc)
+        }
     }
     
     override func didSelectModalChoice(index: Int) {

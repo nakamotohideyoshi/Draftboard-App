@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,9 +21,9 @@
             <connections>
                 <outlet property="allLabel" destination="AJ7-pc-yCm" id="R21-tN-Gtr"/>
                 <outlet property="allLabelHeight" destination="QjH-yW-Inw" id="rTg-EV-dud"/>
+                <outlet property="closeButton" destination="hpI-ui-QaV" id="nff-Nu-vi0"/>
                 <outlet property="containerHeight" destination="6T7-Ua-N3N" id="ZgX-kQ-QDK"/>
-                <outlet property="filterLabel" destination="Izw-Zf-qdo" id="xzH-xf-gI4"/>
-                <outlet property="labelHeight" destination="QjH-yW-Inw" id="0Od-Ro-ecN"/>
+                <outlet property="filterLabel" destination="Izw-Zf-qdo" id="rgV-QO-1ny"/>
                 <outlet property="mlbLabel" destination="SmX-H7-igc" id="bc3-LR-5Yh"/>
                 <outlet property="nbaLabel" destination="jtI-4v-uGE" id="zhK-XZ-jud"/>
                 <outlet property="nflLabel" destination="TRQ-Wc-9B3" id="JEx-vA-AsJ"/>
@@ -37,7 +37,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etk-FJ-2Sa" userLabel="textContainer">
-                    <rect key="frame" x="0.0" y="116" width="375" height="436"/>
+                    <rect key="frame" x="0.0" y="126" width="375" height="436"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8z2-X8-AdB" userLabel="selectedLine">
                             <rect key="frame" x="40" y="79" width="138" height="3"/>
@@ -141,7 +141,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILTER BY SPORT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izw-Zf-qdo" userLabel="filterLabel" customClass="FilterLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="284" y="149" width="14" height="139"/>
+                            <rect key="frame" x="349" y="149" width="14" height="139"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -156,7 +156,7 @@
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" secondItem="z5o-32-isg" secondAttribute="height" multiplier="4" id="6T7-Ua-N3N"/>
-                        <constraint firstAttribute="trailing" secondItem="Izw-Zf-qdo" secondAttribute="trailing" constant="15" id="EWf-6g-WJO"/>
+                        <constraint firstAttribute="trailing" secondItem="Izw-Zf-qdo" secondAttribute="trailing" constant="-50" id="EWf-6g-WJO"/>
                         <constraint firstItem="Uor-qd-VSt" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" id="JbN-ui-X0c"/>
                         <constraint firstItem="8z2-X8-AdB" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" constant="40" id="Nre-PT-3dk"/>
                         <constraint firstItem="8k4-5M-egF" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" id="SII-24-gH6"/>
@@ -175,7 +175,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpI-ui-QaV" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="15" y="0.0" width="60" height="56"/>
+                    <rect key="frame" x="0.0" y="20" width="60" height="56"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -183,7 +183,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="textValue" value=" "/>
-                        <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="icon-close"/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="titlebar-icon-close"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
                             <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
@@ -202,10 +202,10 @@
             <animations/>
             <color key="backgroundColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="hpI-ui-QaV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="AZU-u4-n93"/>
-                <constraint firstItem="Etk-FJ-2Sa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="BEN-Ir-jgU"/>
+                <constraint firstItem="hpI-ui-QaV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AZU-u4-n93"/>
+                <constraint firstItem="Etk-FJ-2Sa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="10" id="BEN-Ir-jgU"/>
                 <constraint firstItem="Etk-FJ-2Sa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Hy3-Ij-1x1"/>
-                <constraint firstItem="hpI-ui-QaV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KFY-Kl-b6q"/>
+                <constraint firstItem="hpI-ui-QaV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="KFY-Kl-b6q"/>
                 <constraint firstAttribute="trailing" secondItem="Etk-FJ-2Sa" secondAttribute="trailing" id="flf-JB-Hnj"/>
                 <constraint firstItem="hpI-ui-QaV" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.16" id="pzH-bJ-ako"/>
             </constraints>
@@ -214,6 +214,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon-close" width="14" height="14"/>
+        <image name="titlebar-icon-close" width="19" height="19"/>
     </resources>
 </document>

@@ -31,6 +31,18 @@ class Player: Model {
         status = Player.statusForCode(100)
     }
     
+    func shortName() -> String {
+        if let fullName = name {
+            let nameArr = fullName.characters.split{$0 == " "}.map(String.init)
+            let firstName = nameArr[0]
+            let lastName = nameArr[1]
+            let firstChar = firstName[firstName.startIndex]
+            return String(firstChar).uppercaseString + ". " + lastName
+        }
+        
+        return ""
+    }
+    
     class func statusForCode(status: Int) -> PlayerStatus {
         switch (status) {
             case 100:

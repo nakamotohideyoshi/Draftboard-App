@@ -73,6 +73,15 @@ class LineupCardView: DraftboardNibView {
     func layoutCellViews() {
         var previousCell: LineupCellView?
         
+        var divisor: CGFloat = 5.0
+        let screenHeight = UIScreen.mainScreen().bounds.height
+        if (screenHeight > 568) {
+            divisor = 8.0
+        }
+        else if (screenHeight > 480.0) {
+            divisor = 6.0
+        }
+        
         for (i, player) in (lineup?.enumerate())! {
             let cellView = LineupCellView()
             cellView.player = player
@@ -81,26 +90,24 @@ class LineupCardView: DraftboardNibView {
             cellView.translatesAutoresizingMaskIntoConstraints = false
             cellView.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
             cellView.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
-            cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / 8.0).active = true
+            cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / divisor).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
-            // this is the constraint for the first cell
             if (previousCell == nil) {
-                // let's anchor to the bottom of the toggle selector
                 cellView.topRancor.constraintEqualToRancor(toggleSelector.bottomRancor).active = true
             }
             else {
                 cellView.topRancor.constraintEqualToRancor(previousCell!.bottomRancor).active = true
             }
-            
-            if (i == itemCount) {
+
+            if (i == (lineup?.count)! - 1) {
                 cellView.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
             }
             
             previousCell = cellView
         }
     }
-    
+
 }
 
 // TODO: This should really be restricted to LineupCardView, but the

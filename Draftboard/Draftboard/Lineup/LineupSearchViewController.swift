@@ -17,6 +17,16 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     let searchCellIdentifier = "searchCellIdentifier"
     var playerSelectedAction:((Player) -> Void)?
+    var positionText: String!
+    
+    init(titleText: String, nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        positionText = titleText
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +87,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     override func titlebarTitle() -> String? {
-        return "Search".uppercaseString
+        return positionText.uppercaseString
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {

@@ -40,6 +40,16 @@ class LineupEditViewController: DraftboardViewController {
     func layoutCellViews() {
         var previousCell: LineupEmptyCellView?
         
+        var divisor: CGFloat = 5.0 // iPhone 4S
+        let screenHeight = UIScreen.mainScreen().bounds.height
+        
+        if (screenHeight > 568) { // iPhone 6 and up
+            divisor = 8.0
+        }
+        else if (screenHeight > 480.0) { // iPhone 5 and up
+            divisor = 7.0
+        }
+        
         for (i, position) in positions.enumerate() {
             let cellView = LineupEmptyCellView()
             cellView.abbrText = position
@@ -52,7 +62,7 @@ class LineupEditViewController: DraftboardViewController {
             cellView.translatesAutoresizingMaskIntoConstraints = false
             cellView.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
             cellView.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
-            cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / 8.0).active = true
+            cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / divisor).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             cellView.addTarget(self, action: Selector("didTapCell:"), forControlEvents: .TouchUpInside)
@@ -76,16 +86,43 @@ class LineupEditViewController: DraftboardViewController {
         }
     }
     
+    func positionTextForAbbr(abbr: String) -> String? {
+        if (abbr == "PG") {
+            return "Power Guard"
+        } else if (abbr == "SG") {
+            return "Shooting Guard"
+        } else if (abbr == "SF") {
+            return "Small Forward"
+        } else if (abbr == "PF") {
+            return "Power Forward"
+        } else if (abbr == "C") {
+            return "Center"
+        } else if (abbr == "G") {
+            return "Guard"
+        } else if (abbr == "F") {
+            return "Forward"
+        } else if (abbr == "UTL"){
+            return "Utility"
+        }
+        
+        return nil
+    }
+    
     func didTapCell(sender: LineupEmptyCellView) {
         nameTextField.resignFirstResponder()
         
         cellIndex = sender.index
-        let svc = LineupSearchViewController(nibName: "LineupSearchViewController", bundle: nil)
+        
+        var titleText = self.cellViews[cellIndex].abbrLabel.text
+        titleText = positionTextForAbbr(titleText!)
+        titleText = (titleText == nil) ? "Empty" : titleText
+        
+        let svc = LineupSearchViewController(titleText: titleText!, nibName: "LineupSearchViewController", bundle: nil)
         
         svc.playerSelectedAction = {(player: Player) in
             self.navController?.popViewController()
             let cellView = self.cellViews[self.cellIndex]
-            cellView.avatarImageView.image = UIImage(named: "sample-avatar")
+            cellView.avatarImageView.image = UIImage(named: "sample-avatar-big")
             cellView.player = player
             
             self.nameTextField.returnKeyType = .Done
@@ -114,6 +151,9 @@ class LineupEditViewController: DraftboardViewController {
                 print("You can't save a completely empty lineup")
             }
         }
+        else if (buttonType == .Close) {
+            self.navController?.popViewController()
+        }
     }
     
     override func titlebarTitle() -> String {
@@ -129,7 +169,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
-        return .Menu
+        return .Close
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType {

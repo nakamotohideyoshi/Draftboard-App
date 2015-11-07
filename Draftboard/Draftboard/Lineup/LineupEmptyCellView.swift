@@ -32,8 +32,8 @@ class LineupEmptyCellView: DraftboardNibControl {
     
     var player: Player? {
         didSet {
-            nameLabel.text = (player?.name)!
-            teamLabel.text = " - " + (player?.team)!
+            nameLabel.text = player?.shortName()
+            teamLabel.text = " " + (player?.team)!
             salaryLabel.text = String(format: "$%.0f", (player?.salary)!)
         }
     }

@@ -215,7 +215,7 @@ class DraftboardModalNavController: UIViewController {
     }
     
     func animateViewControllerOutBounce(vc: DraftboardModalViewController) -> Spring {
-        let endScale: CGFloat = 0.5
+        let endScale: CGFloat = 1.1
         let startScale: CGFloat = 1.0
         let deltaScale: CGFloat = endScale - startScale
         

@@ -19,7 +19,7 @@ class LineupSearchCellView: UITableViewCell {
     @IBOutlet weak var statusLabel: DraftboardLabel!
     @IBOutlet weak var ppgLabel: UILabel!
     @IBOutlet weak var infoButton: DraftboardButton!
-    @IBOutlet weak var infoButtonImage: UIImageView!
+//    @IBOutlet weak var infoButtonImage: UIImageView!
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
     
@@ -27,7 +27,7 @@ class LineupSearchCellView: UITableViewCell {
         bottomBorderView.hidden = true
         topBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
         bottomBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
-        infoButtonImage.tintColor = .greenDraftboard()
+//        infoButtonImage.tintColor = .greenDraftboard()
         
         self.selectedBackgroundView = UIView()
         self.selectedBackgroundView?.backgroundColor = UIColor(0x0, alpha: 0.05)
@@ -37,7 +37,7 @@ class LineupSearchCellView: UITableViewCell {
     
     var player: Player? {
         didSet {
-            nameLabel.text = (player?.name)!
+            nameLabel.text = player?.shortName()
             positionLabel.text = (player?.position)!
             ppgLabel.text = String(format: "%.2f FPPG", (player?.fppg)!)
             leagueLabel.text = (player?.team)!

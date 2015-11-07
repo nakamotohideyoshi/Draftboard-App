@@ -8,12 +8,14 @@
 
 import UIKit
 
-class GlobalFilterViewController: DraftboardViewController {
+class GlobalFilterViewController: DraftboardModalViewController {
 
     @IBOutlet var allLabel: DraftboardLabel!
     @IBOutlet var mlbLabel: DraftboardLabel!
     @IBOutlet var nbaLabel: DraftboardLabel!
     @IBOutlet var nflLabel: DraftboardLabel!
+    @IBOutlet weak var filterLabel: FilterLabel!
+    @IBOutlet weak var closeButton: DraftboardButton!
     
     // the textContainer that contains all labels
     @IBOutlet var textContainer: UIView!
@@ -42,27 +44,11 @@ class GlobalFilterViewController: DraftboardViewController {
         nbaLabel.textColor = UIColor.whiteLowOpacity()
         nflLabel.textColor = UIColor.whiteLowOpacity()
         
-        // the height of textContainer needs to be a multiple of the items
-        // that are inside of it for it to center correctly
-        let heightMultiplier = CGFloat(filterItems.count)
-        containerHeight = textContainer.heightRancor
-            .constraintEqualToRancor(allLabel.heightRancor, multiplier: heightMultiplier, constant: 4)
-        containerHeight.active = true
-    }
+        closeButton.addTarget(self, action: Selector("didTapClose:"), forControlEvents: .TouchUpInside)
+   }
     
-    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
-        if (buttonType == .Close) {
-            self.navController?.popViewController()
-        }
-    }
-    
-    override func titlebarTitle() -> String? {
-        // The global filters view doesn't have a title
-        return ""
-    }
-    
-    override func titlebarLeftButtonType() -> TitlebarButtonType? {
-        return .Close
+    func didTapClose(sender: DraftboardButton) {
+        RootViewController.sharedInstance.popModalViewController()
     }
 }
 
@@ -70,11 +56,16 @@ class GlobalFilterViewController: DraftboardViewController {
 class FilterLabel: DraftboardLabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func setup() {
         self.textColor = UIColor.whiteLowOpacity()
         self.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 2))
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
