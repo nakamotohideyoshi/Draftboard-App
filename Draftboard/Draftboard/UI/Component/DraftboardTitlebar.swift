@@ -95,7 +95,7 @@ class DraftboardTitlebar: UIView {
                 newLeftButton = DraftboardTitlebarButton(type: buttonType)
                 newLeftButton!.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
                 
-                if (buttonType == .Value) {
+                if (buttonType == .Value || buttonType == .DisabledValue) {
                     if let textValue = dataSource?.titlebarLeftButtonText() {
                         newLeftButton!.textValue = textValue
                     }
@@ -115,7 +115,7 @@ class DraftboardTitlebar: UIView {
                 newRightButton = DraftboardTitlebarButton(type: buttonType)
                 newRightButton?.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
                 
-                if (buttonType == .Value) {
+                if (buttonType == .Value || buttonType == .DisabledValue) {
                     if let textValue = dataSource?.titlebarRightButtonText() {
                         newRightButton!.textValue = textValue
                     }
@@ -305,7 +305,7 @@ class DraftboardTitlebar: UIView {
     // MARK: Buttons
     
     func constrainButton(button: DraftboardTitlebarButton) {
-        if (button.buttonType == .Value) {
+        if (button.buttonType == .Value || button.buttonType == .DisabledValue) {
             button.topRancor.constraintEqualToRancor(self.topRancor, constant: 10.0).active = true
             button.bottomRancor.constraintEqualToRancor(self.bottomRancor, constant: -10.0).active = true
             button.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 0.16).active = true
@@ -325,7 +325,7 @@ class DraftboardTitlebar: UIView {
     func constrainRightButton(button: DraftboardTitlebarButton) {
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        if (button.buttonType == .Value) {
+        if (button.buttonType == .Value || button.buttonType == .DisabledValue) {
             button.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -10.0).active = true
         } else {
             button.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
