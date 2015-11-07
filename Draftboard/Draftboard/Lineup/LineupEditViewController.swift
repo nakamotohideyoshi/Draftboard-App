@@ -125,6 +125,8 @@ class LineupEditViewController: DraftboardViewController {
             cellView.avatarImageView.image = UIImage(named: "sample-avatar-big")
             cellView.player = player
             
+            self.navController?.updateTitlebar()
+            
             self.nameTextField.returnKeyType = .Done
             for cell in self.cellViews {
                 if cell.player == nil {
@@ -138,6 +140,11 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if (buttonType == .DisabledValue) {
+            print("You can't save a completely empty lineup")
+            return
+        }
+
         if (buttonType == .Value) {
             var players = [Player]()
             for cell in cellViews {
@@ -145,11 +152,11 @@ class LineupEditViewController: DraftboardViewController {
                     players.append(player)
                 }
             }
-            if players.count > 0 {
-                saveLineupAction?(players)
-            } else {
-                print("You can't save a completely empty lineup")
+            // Make a full lineup even when they didn't pick all 8
+            while players.count < 8 {
+                players.append(players[0])
             }
+            saveLineupAction?(players)
         }
         else if (buttonType == .Close) {
             self.navController?.popViewController()
@@ -173,7 +180,12 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType {
-        return .Value
+        for cell in self.cellViews {
+            if cell.player != nil {
+                return .Value
+            }
+        }
+        return .DisabledValue
     }
     
     override func titlebarRightButtonText() -> String? {
@@ -194,7 +206,7 @@ extension LineupEditViewController: UITextFieldDelegate {
         } else {
             lineup.name = oldString.stringByReplacingCharactersInRange(range, withString: string)
         }
-        self.navController?.updateTitlebar()
+        self.navController?.updateTitlebar(animated: false)
         return true
     }
 
