@@ -93,6 +93,10 @@ extension UIColor {
         return redDraftboard()
     }
     
+    class func buttonDisabledBackground() -> UIColor {
+        return greyCool()
+    }
+    
     //
     // MARK: - Opacities
     //
