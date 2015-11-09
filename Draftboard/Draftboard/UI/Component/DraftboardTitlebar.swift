@@ -35,7 +35,7 @@ class DraftboardTitlebar: UIView {
     var titleLabel: UILabel?
     var rightButton: DraftboardTitlebarButton?
     var leftButton: DraftboardTitlebarButton?
-    var bgView: UIView!
+    var bgView: UIImageView!
     
     var delegate: DraftboardTitlebarDelegate?
     var dataSource: DraftboardTitlebarDataSource?
@@ -56,7 +56,7 @@ class DraftboardTitlebar: UIView {
     convenience init() {
         self.init(frame: CGRectZero)
         
-        bgView = UIView()
+        bgView = UIImageView(image: UIImage(named: "photographic-bg"))
         bgView.backgroundColor = UIColor(0x25344c, alpha:0.4)
         self.addSubview(bgView)
         
