@@ -79,6 +79,7 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CHANGE PASSWORD"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="selectedState" value="NO"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeW-Om-3WA" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
