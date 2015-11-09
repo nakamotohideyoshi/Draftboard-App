@@ -46,6 +46,7 @@
 		5D3214951BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */; };
 		5D3611F21BD6DC330068E868 /* LineupSearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */; };
 		5D3611F41BD6DC7D0068E868 /* LineupSearchCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */; };
+		5D3C726C1BF11EE3005A27B1 /* GlobalFilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C726B1BF11EE3005A27B1 /* GlobalFilterItem.swift */; settings = {ASSET_TAGS = (); }; };
 		5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633E1BAB750F0033C4C2 /* Oswald-Bold.ttf */; };
 		5D4E63421BAB75D80033C4C2 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633F1BAB750F0033C4C2 /* Oswald-Light.ttf */; };
 		5D4E63431BAB75D80033C4C2 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63401BAB750F0033C4C2 /* Oswald-Regular.ttf */; };
@@ -178,6 +179,7 @@
 		5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardContestsUpcomingCell.xib; sourceTree = "<group>"; };
 		5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupSearchCellView.swift; sourceTree = "<group>"; };
 		5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupSearchCellView.xib; sourceTree = "<group>"; };
+		5D3C726B1BF11EE3005A27B1 /* GlobalFilterItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFilterItem.swift; sourceTree = "<group>"; };
 		5D4412171BAA163700A86111 /* Closures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 		5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTabBar.swift; sourceTree = "<group>"; };
 		5D4B87371BB31AC800B58EDF /* UIColor+DraftboardColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DraftboardColors.swift"; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				5D9E99531BB615590017E332 /* DraftboardViewController.swift */,
 				3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */,
 				3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */,
+				5D3C726B1BF11EE3005A27B1 /* GlobalFilterItem.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */,
 				5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */,
 				5D6237C41BB61F7B0007E62A /* LineupModel.swift in Sources */,
+				5D3C726C1BF11EE3005A27B1 /* GlobalFilterItem.swift in Sources */,
 				5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */,
 				3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */,
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,

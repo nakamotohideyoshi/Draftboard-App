@@ -13,4 +13,8 @@ extension UIFont {
     class func draftboardTitlebarTitleFont() -> UIFont? {
         return UIFont(name: "Oswald-Regular", size: 15.0)
     }
+    
+    class func draftboardGlobalFilterFont() -> UIFont? {
+        return UIFont(name: "OpenSans-Light", size: 65.0)
+    }
 }

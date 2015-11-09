@@ -83,6 +83,12 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     }
     
     override func titlebarTitle() -> String? {
-        return "Contests".uppercaseString
+        return "All Contests".uppercaseString
+    }
+    
+    override func titlebarAttributedTitle() -> NSMutableAttributedString? {
+        let attrStr = super.titlebarAttributedTitle()
+        attrStr?.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenDraftboard(), range: NSMakeRange(0, 3))
+        return attrStr
     }
 }

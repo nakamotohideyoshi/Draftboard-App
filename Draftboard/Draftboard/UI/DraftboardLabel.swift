@@ -44,21 +44,19 @@ class DraftboardLabel: UILabel {
         self.attributedText = attrStr
     }
     
+    override func prepareForInterfaceBuilder() {
+        updateAttributedString()
+    }
+    
     override var text: String? {
         didSet {
             updateAttributedString()
         }
     }
     
-    @IBInspectable var letterSpacing: CGFloat = 0.0 {
-        didSet {
-            updateAttributedString()
-        }
-    }
+    @IBInspectable
+    var letterSpacing: CGFloat = 0.0
     
-    @IBInspectable var lineHeightMultiple: CGFloat = 1.0 {
-        didSet {
-            updateAttributedString()
-        }
-    }
+    @IBInspectable
+    var lineHeightMultiple: CGFloat = 1.0
 }

@@ -21,6 +21,7 @@ protocol DraftboardTitlebarDelegate {
 
 protocol DraftboardTitlebarDataSource {
     func titlebarTitle() -> String?
+    func titlebarAttributedTitle() -> NSMutableAttributedString?
     func titlebarLeftButtonType() -> TitlebarButtonType?
     func titlebarRightButtonType() -> TitlebarButtonType?
     func titlebarLeftButtonText() -> String?
@@ -31,7 +32,7 @@ protocol DraftboardTitlebarDataSource {
 @IBDesignable
 class DraftboardTitlebar: UIView {
     
-    var titleLabel: DraftboardLabel?
+    var titleLabel: UILabel?
     var rightButton: DraftboardTitlebarButton?
     var leftButton: DraftboardTitlebarButton?
     var bgView: UIView!
@@ -41,7 +42,7 @@ class DraftboardTitlebar: UIView {
     
     var newLeftButton: DraftboardTitlebarButton?
     var newRightButton: DraftboardTitlebarButton?
-    var newTitleLabel: DraftboardLabel?
+    var newTitleLabel: UILabel?
     var newBgHidden: Bool = false
     
     var leftButtonChanged = false
@@ -279,23 +280,17 @@ class DraftboardTitlebar: UIView {
     
     // MARK: Title
     
-    func titleLabelWithText(text: String?) -> DraftboardLabel {
-        let label = DraftboardLabel()
+    func titleLabelWithText(text: String?) -> UILabel {
+        let label = UILabel()
         
         label.textAlignment = .Center
-        label.textColor = .whiteColor()
-        label.font = .draftboardTitlebarTitleFont()
-        label.lineBreakMode = .ByTruncatingTail
         label.numberOfLines = 2
-        
-        label.letterSpacing = 0.0
-        label.lineHeightMultiple = 0.9
-        label.text = text
+        label.attributedText = dataSource?.titlebarAttributedTitle()
         
         return label
     }
     
-    func constrainLabel(label: DraftboardLabel) {
+    func constrainLabel(label: UILabel) {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
         label.centerXRancor.constraintEqualToRancor(self.centerXRancor).active = true
