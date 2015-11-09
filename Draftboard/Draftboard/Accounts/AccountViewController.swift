@@ -32,6 +32,9 @@ class AccountViewController: DraftboardViewController {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         tapRecognizer.cancelsTouchesInView = false
         
+        // Set the scrollView bottom so that it can scroll
+        scrollView.bottomRancor.constraintEqualToRancor(saveButton.bottomRancor, constant: 30).active = true
+        
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
