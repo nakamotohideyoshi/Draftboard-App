@@ -9,42 +9,61 @@
 import UIKit
 
 class GlobalFilterViewController: DraftboardModalViewController {
-    @IBOutlet var allLabel: DraftboardLabel!
-    @IBOutlet var mlbLabel: DraftboardLabel!
-    @IBOutlet var nbaLabel: DraftboardLabel!
-    @IBOutlet var nflLabel: DraftboardLabel!
-    @IBOutlet weak var filterLabel: FilterLabel!
-    @IBOutlet weak var closeButton: DraftboardButton!
-
-    // the textContainer that contains all labels
     @IBOutlet var textContainer: UIView!
-    @IBOutlet var containerHeight: NSLayoutConstraint!
-
-    // all will always be present, let's reference it's height
-    @IBOutlet var allLabelHeight: NSLayoutConstraint!
-
-    var filterItems = [DraftboardLabel]()
+    @IBOutlet weak var closeButton: DraftboardButton!
+    @IBOutlet weak var allControl: GlobalFilterItem!
+    @IBOutlet weak var nbaControl: GlobalFilterItem!
+    @IBOutlet weak var mlbControl: GlobalFilterItem!
+    @IBOutlet weak var nflControl: GlobalFilterItem!
+    
+    var filterControls = [GlobalFilterItem]()
+    var currentControl: GlobalFilterItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clearColor()
-
-        filterItems = [
-            allLabel,
-            mlbLabel,
-            nbaLabel,
-            nflLabel
+        
+        filterControls = [
+            allControl,
+            nbaControl,
+            nflControl,
+            mlbControl,
         ]
-
-        // items that are selected are whiteColor
-        allLabel.textColor = UIColor.whiteColor()
-
-        // items that aren't selected get whiteLowOpacity
-        mlbLabel.textColor = UIColor.whiteLowOpacity()
-        nbaLabel.textColor = UIColor.whiteLowOpacity()
-        nflLabel.textColor = UIColor.whiteLowOpacity()
-
+        
+        self.view.layoutIfNeeded()
+        
+        for (i, control) in filterControls.enumerate() {
+            control.addTarget(self, action: Selector("didTapControl:"), forControlEvents: .TouchUpInside)
+            control.underlined(false, animated: false)
+            control.index = i
+        }
+        
+        currentControl = filterControls[0]
+        currentControl.underlined(true, animated: false)
+        currentControl.selected = true
+        
         closeButton.addTarget(self, action: Selector("didTapClose:"), forControlEvents: .TouchUpInside)
+    }
+    
+    func didTapControl(sender: GlobalFilterItem) {
+        if (sender == currentControl) {
+            return
+        }
+        
+        RootViewController.sharedInstance.didSelectGlobalFilter(sender.index)
+        currentControl.underlined(false)
+        currentControl.selected = false
+        
+        currentControl = sender
+        currentControl.underlined(true)
+        currentControl.selected = true
+        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.20 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            dispatch_async(dispatch_get_main_queue(),{
+                RootViewController.sharedInstance.popModalViewController()
+            })
+        }
     }
     
     func didTapClose(sender: DraftboardButton) {

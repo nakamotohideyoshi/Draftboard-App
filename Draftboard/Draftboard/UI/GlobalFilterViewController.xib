@@ -2,31 +2,17 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8191"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="OpenSans-Light.ttf">
-            <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
-        </mutableArray>
-        <mutableArray key="OpenSans-Regular.ttf">
-            <string>OpenSans</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GlobalFilterViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
-                <outlet property="allLabel" destination="AJ7-pc-yCm" id="R21-tN-Gtr"/>
-                <outlet property="allLabelHeight" destination="QjH-yW-Inw" id="rTg-EV-dud"/>
+                <outlet property="allControl" destination="z5o-32-isg" id="WjN-lw-5RO"/>
                 <outlet property="closeButton" destination="hpI-ui-QaV" id="nff-Nu-vi0"/>
-                <outlet property="containerHeight" destination="6T7-Ua-N3N" id="ZgX-kQ-QDK"/>
-                <outlet property="filterLabel" destination="Izw-Zf-qdo" id="rgV-QO-1ny"/>
-                <outlet property="mlbLabel" destination="SmX-H7-igc" id="bc3-LR-5Yh"/>
-                <outlet property="nbaLabel" destination="jtI-4v-uGE" id="zhK-XZ-jud"/>
-                <outlet property="nflLabel" destination="TRQ-Wc-9B3" id="JEx-vA-AsJ"/>
+                <outlet property="mlbControl" destination="Tlr-CJ-JTZ" id="aKM-2M-hwW"/>
+                <outlet property="nbaControl" destination="Uor-qd-VSt" id="u92-WF-YvZ"/>
+                <outlet property="nflControl" destination="8k4-5M-egF" id="En5-M7-cQI"/>
                 <outlet property="textContainer" destination="Etk-FJ-2Sa" id="v6w-eQ-xjm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,141 +23,70 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etk-FJ-2Sa" userLabel="textContainer">
-                    <rect key="frame" x="0.0" y="126" width="375" height="436"/>
+                    <rect key="frame" x="0.0" y="111" width="375" height="466"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8z2-X8-AdB" userLabel="selectedLine">
-                            <rect key="frame" x="40" y="79" width="138" height="3"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5o-32-isg" userLabel="labelContainer" customClass="GlobalFilterItem" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                             <animations/>
-                            <color key="backgroundColor" red="0.11862074583768845" green="0.75475335121154785" blue="0.29064974188804626" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="3" id="14W-rg-L2M"/>
-                                <constraint firstAttribute="width" constant="138" id="jKi-4u-iG5"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5o-32-isg" userLabel="labelContainer">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJ7-pc-yCm" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="40" y="0.0" width="100" height="89"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="65"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                                            <real key="value" value="-2"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                            </subviews>
-                            <animations/>
-                            <constraints>
-                                <constraint firstItem="AJ7-pc-yCm" firstAttribute="top" secondItem="z5o-32-isg" secondAttribute="top" id="45i-ST-gPt"/>
-                                <constraint firstAttribute="height" secondItem="AJ7-pc-yCm" secondAttribute="height" constant="20" id="QjH-yW-Inw"/>
-                                <constraint firstItem="AJ7-pc-yCm" firstAttribute="leading" secondItem="z5o-32-isg" secondAttribute="leading" constant="40" id="Y07-PM-cVf"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uor-qd-VSt" userLabel="labelContainer">
-                            <rect key="frame" x="0.0" y="109" width="375" height="109"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MLB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmX-H7-igc" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="40" y="0.0" width="125" height="89"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="65"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                                            <real key="value" value="-2"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                            </subviews>
-                            <animations/>
-                            <constraints>
-                                <constraint firstItem="SmX-H7-igc" firstAttribute="leading" secondItem="Uor-qd-VSt" secondAttribute="leading" constant="40" id="Pfo-Ll-hF3"/>
-                                <constraint firstItem="SmX-H7-igc" firstAttribute="top" secondItem="Uor-qd-VSt" secondAttribute="top" id="Ylk-Tq-84P"/>
-                                <constraint firstAttribute="height" secondItem="SmX-H7-igc" secondAttribute="height" constant="20" id="bKq-K3-Q8o"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8k4-5M-egF" userLabel="labelContainer">
-                            <rect key="frame" x="0.0" y="218" width="375" height="109"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NBA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtI-4v-uGE" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="40" y="0.0" width="120" height="89"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="65"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                                            <real key="value" value="-2"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                            </subviews>
-                            <animations/>
-                            <constraints>
-                                <constraint firstItem="jtI-4v-uGE" firstAttribute="leading" secondItem="8k4-5M-egF" secondAttribute="leading" constant="40" id="bNI-j4-DDa"/>
-                                <constraint firstItem="jtI-4v-uGE" firstAttribute="top" secondItem="8k4-5M-egF" secondAttribute="top" id="iZ8-6I-R3A"/>
-                                <constraint firstAttribute="height" secondItem="jtI-4v-uGE" secondAttribute="height" constant="20" id="zhK-xz-du9"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlr-CJ-JTZ" userLabel="labelContainer">
-                            <rect key="frame" x="0.0" y="327" width="375" height="109"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NFL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRQ-Wc-9B3" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="40" y="0.0" width="107" height="89"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="65"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                                            <real key="value" value="-2"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                            </subviews>
-                            <animations/>
-                            <constraints>
-                                <constraint firstItem="TRQ-Wc-9B3" firstAttribute="top" secondItem="Tlr-CJ-JTZ" secondAttribute="top" id="Nui-Fm-OPO"/>
-                                <constraint firstItem="TRQ-Wc-9B3" firstAttribute="leading" secondItem="Tlr-CJ-JTZ" secondAttribute="leading" constant="40" id="Rxb-xU-4k2"/>
-                                <constraint firstAttribute="height" secondItem="TRQ-Wc-9B3" secondAttribute="height" constant="20" id="XgX-HS-sTX"/>
-                            </constraints>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILTER BY SPORT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izw-Zf-qdo" userLabel="filterLabel" customClass="FilterLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="349" y="149" width="14" height="139"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                                    <real key="value" value="4"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="text" value="ALL "/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="adjustment">
+                                    <real key="value" value="0.0"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                        </label>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uor-qd-VSt" userLabel="labelContainer" customClass="GlobalFilterItem" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="117" width="375" height="117"/>
+                            <animations/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="text" value="NBA "/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="adjustment">
+                                    <real key="value" value="-6"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8k4-5M-egF" userLabel="labelContainer" customClass="GlobalFilterItem" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="234" width="375" height="117"/>
+                            <animations/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="text" value="NFL "/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="adjustment">
+                                    <real key="value" value="-6"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlr-CJ-JTZ" userLabel="labelContainer" customClass="GlobalFilterItem" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="351" width="375" height="117"/>
+                            <animations/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="text" value="MLB "/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="adjustment">
+                                    <real key="value" value="-6"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" secondItem="z5o-32-isg" secondAttribute="height" multiplier="4" id="6T7-Ua-N3N"/>
-                        <constraint firstAttribute="trailing" secondItem="Izw-Zf-qdo" secondAttribute="trailing" constant="-50" id="EWf-6g-WJO"/>
                         <constraint firstItem="Uor-qd-VSt" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" id="JbN-ui-X0c"/>
-                        <constraint firstItem="8z2-X8-AdB" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" constant="40" id="Nre-PT-3dk"/>
+                        <constraint firstItem="8k4-5M-egF" firstAttribute="height" secondItem="Etk-FJ-2Sa" secondAttribute="height" multiplier="0.25" id="PX0-er-cnD"/>
                         <constraint firstItem="8k4-5M-egF" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" id="SII-24-gH6"/>
                         <constraint firstItem="Tlr-CJ-JTZ" firstAttribute="top" secondItem="8k4-5M-egF" secondAttribute="bottom" id="VTf-tY-l7k"/>
                         <constraint firstAttribute="trailing" secondItem="Tlr-CJ-JTZ" secondAttribute="trailing" id="VZD-tl-0Up"/>
+                        <constraint firstItem="Uor-qd-VSt" firstAttribute="height" secondItem="Etk-FJ-2Sa" secondAttribute="height" multiplier="0.25" id="Wv1-FW-NOS"/>
+                        <constraint firstItem="Uor-qd-VSt" firstAttribute="width" secondItem="Etk-FJ-2Sa" secondAttribute="width" id="XOh-fF-i6d"/>
                         <constraint firstItem="8k4-5M-egF" firstAttribute="top" secondItem="Uor-qd-VSt" secondAttribute="bottom" id="YRq-G8-xoq"/>
                         <constraint firstAttribute="trailing" secondItem="Uor-qd-VSt" secondAttribute="trailing" id="ceb-iK-UQ9"/>
                         <constraint firstItem="Tlr-CJ-JTZ" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" id="fft-Fo-6Vd"/>
                         <constraint firstItem="z5o-32-isg" firstAttribute="top" secondItem="Etk-FJ-2Sa" secondAttribute="top" id="gva-qn-pMP"/>
-                        <constraint firstItem="8z2-X8-AdB" firstAttribute="top" secondItem="z5o-32-isg" secondAttribute="bottom" constant="-30" id="hSH-5W-vtp"/>
                         <constraint firstItem="Uor-qd-VSt" firstAttribute="top" secondItem="z5o-32-isg" secondAttribute="bottom" id="hia-m8-sgX"/>
                         <constraint firstItem="z5o-32-isg" firstAttribute="leading" secondItem="Etk-FJ-2Sa" secondAttribute="leading" id="lWX-Uu-u3v"/>
-                        <constraint firstItem="Izw-Zf-qdo" firstAttribute="centerY" secondItem="Etk-FJ-2Sa" secondAttribute="centerY" id="olj-qR-Jab"/>
+                        <constraint firstItem="Tlr-CJ-JTZ" firstAttribute="height" secondItem="Etk-FJ-2Sa" secondAttribute="height" multiplier="0.25" id="rc1-Tn-l3i"/>
+                        <constraint firstItem="8k4-5M-egF" firstAttribute="width" secondItem="Etk-FJ-2Sa" secondAttribute="width" id="svk-zQ-Jio"/>
                         <constraint firstAttribute="trailing" secondItem="8k4-5M-egF" secondAttribute="trailing" id="vAy-dv-I5E"/>
+                        <constraint firstItem="Tlr-CJ-JTZ" firstAttribute="width" secondItem="Etk-FJ-2Sa" secondAttribute="width" id="vLU-wa-yoj"/>
                         <constraint firstAttribute="trailing" secondItem="z5o-32-isg" secondAttribute="trailing" id="w4U-lm-Nz4"/>
+                        <constraint firstItem="z5o-32-isg" firstAttribute="height" secondItem="Etk-FJ-2Sa" secondAttribute="height" multiplier="0.25" id="wgz-Vy-omN"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpI-ui-QaV" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
@@ -202,6 +117,7 @@
             <animations/>
             <color key="backgroundColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="Etk-FJ-2Sa" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="84n-6I-lsE"/>
                 <constraint firstItem="hpI-ui-QaV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AZU-u4-n93"/>
                 <constraint firstItem="Etk-FJ-2Sa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="10" id="BEN-Ir-jgU"/>
                 <constraint firstItem="Etk-FJ-2Sa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Hy3-Ij-1x1"/>

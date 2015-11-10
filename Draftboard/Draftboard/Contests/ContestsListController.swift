@@ -82,6 +82,13 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         self.navController?.pushViewController(cdvc)
     }
     
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if(buttonType == .Menu) {
+            let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
+            RootViewController.sharedInstance.pushModalViewController(gfvc)
+        }
+    }
+    
     override func titlebarTitle() -> String? {
         return "All Contests".uppercaseString
     }

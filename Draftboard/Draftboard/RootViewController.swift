@@ -49,6 +49,10 @@ final class RootViewController: UIViewController {
         DDM.requestPlayers()
     }
     
+    func didSelectGlobalFilter(index: Int) {
+        print("RootViewController::didSelectGlobalFilter", index)
+    }
+    
     func setAppearanceProperties() {
         UITextField.appearance().tintColor = UIColor.greenDraftboard()
     }
