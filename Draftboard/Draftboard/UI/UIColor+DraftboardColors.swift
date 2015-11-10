@@ -74,6 +74,11 @@ extension UIColor {
         return blueDarker()
     }
     
+    // Selected color for dark blue table cells
+    class func cellColorDarkSelected() -> UIColor {
+        return UIColor(0x1a2537)
+    }
+    
     // Background color for table sticky header cells
     class func headerColorDark() -> UIColor {
         return blueMediumDark()

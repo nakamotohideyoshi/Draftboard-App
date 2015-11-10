@@ -26,21 +26,21 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="820"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKC-Bk-t1b" customClass="DraftboardSegmentedView" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="a2s-Lx-GdP"/>
                     </constraints>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLj-Kp-2bb" customClass="UIScrollView">
-                    <rect key="frame" x="0.0" y="50" width="375" height="617"/>
+                    <rect key="frame" x="0.0" y="50" width="320" height="770"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJL-iE-oH8">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -48,7 +48,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tjw-eQ-CDv" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="40" width="343" height="50"/>
+                            <rect key="frame" x="15" y="40" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="rew-d5-BhN"/>
@@ -59,7 +59,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ny-wq-KIu" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="90" width="343" height="50"/>
+                            <rect key="frame" x="15" y="90" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="pAe-Xv-kDB"/>
@@ -71,7 +71,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoI-BA-fgu" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="38" y="164" width="300" height="50"/>
+                            <rect key="frame" x="32" y="164" width="256" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="41G-BL-Ie9"/>
@@ -79,10 +79,11 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CHANGE PASSWORD"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="selectedState" value="NO"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeW-Om-3WA" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="238" width="343" height="50"/>
+                            <rect key="frame" x="15" y="238" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="evY-ML-hjX"/>
@@ -93,7 +94,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVa-Ds-y9a" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="288" width="343" height="50"/>
+                            <rect key="frame" x="15" y="288" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Br4-cb-Htm"/>
@@ -104,7 +105,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-UH-Ie3" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="338" width="343" height="50"/>
+                            <rect key="frame" x="15" y="338" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Tvz-Sv-uO7"/>
@@ -115,7 +116,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQA-iF-DIW" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="388" width="343" height="50"/>
+                            <rect key="frame" x="15" y="388" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="cNU-Ee-AIJ"/>
@@ -126,7 +127,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9b3-hC-Z0d" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="488" width="343" height="50"/>
+                            <rect key="frame" x="15" y="488" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="CMv-2e-gmJ"/>
@@ -137,7 +138,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSc-ga-ZmK" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="438" width="343" height="50"/>
+                            <rect key="frame" x="15" y="438" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Eve-DG-Uwq"/>
@@ -148,7 +149,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcA-PP-zZJ" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="538" width="343" height="50"/>
+                            <rect key="frame" x="15" y="538" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="4eR-7X-HwY"/>
@@ -159,7 +160,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxJ-zr-o9i" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="16" y="588" width="343" height="50"/>
+                            <rect key="frame" x="15" y="588" width="290" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="UHz-fo-9sg"/>
@@ -171,7 +172,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svS-wD-9kL" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="38" y="662" width="300" height="50"/>
+                            <rect key="frame" x="32" y="662" width="256" height="50"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="haN-Rb-wVO"/>
@@ -179,6 +180,7 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="SAVE CHANGES"/>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="selectedState" value="NO"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
@@ -186,49 +188,49 @@
                     <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="CVa-Ds-y9a" firstAttribute="top" secondItem="aeW-Om-3WA" secondAttribute="bottom" id="2nl-t0-zlw"/>
-                        <constraint firstAttribute="trailing" secondItem="CQh-UH-Ie3" secondAttribute="trailing" constant="16" id="3gE-TF-nIf"/>
-                        <constraint firstAttribute="trailing" secondItem="CVa-Ds-y9a" secondAttribute="trailing" constant="16" id="4BW-QK-HK8"/>
-                        <constraint firstItem="9b3-hC-Z0d" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="6Oz-as-kqT"/>
-                        <constraint firstAttribute="trailing" secondItem="KxJ-zr-o9i" secondAttribute="trailing" constant="16" id="7ak-Bm-OXh"/>
+                        <constraint firstAttribute="trailing" secondItem="CQh-UH-Ie3" secondAttribute="trailing" constant="15" id="3gE-TF-nIf"/>
+                        <constraint firstAttribute="trailing" secondItem="CVa-Ds-y9a" secondAttribute="trailing" constant="15" id="4BW-QK-HK8"/>
+                        <constraint firstItem="9b3-hC-Z0d" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="6Oz-as-kqT"/>
+                        <constraint firstAttribute="trailing" secondItem="KxJ-zr-o9i" secondAttribute="trailing" constant="15" id="7ak-Bm-OXh"/>
                         <constraint firstItem="lJL-iE-oH8" firstAttribute="top" secondItem="uLj-Kp-2bb" secondAttribute="top" id="83v-9M-QmY"/>
-                        <constraint firstItem="KxJ-zr-o9i" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="8qt-zB-34O"/>
-                        <constraint firstItem="aeW-Om-3WA" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="GwQ-Ku-gcA"/>
+                        <constraint firstItem="KxJ-zr-o9i" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="8qt-zB-34O"/>
+                        <constraint firstItem="aeW-Om-3WA" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="GwQ-Ku-gcA"/>
                         <constraint firstItem="xoI-BA-fgu" firstAttribute="centerX" secondItem="uLj-Kp-2bb" secondAttribute="centerX" id="LTU-Qd-kME"/>
                         <constraint firstItem="svS-wD-9kL" firstAttribute="centerX" secondItem="uLj-Kp-2bb" secondAttribute="centerX" id="NML-5q-R2e"/>
                         <constraint firstItem="KxJ-zr-o9i" firstAttribute="top" secondItem="CcA-PP-zZJ" secondAttribute="bottom" id="NiU-td-4N5"/>
                         <constraint firstItem="aeW-Om-3WA" firstAttribute="top" secondItem="xoI-BA-fgu" secondAttribute="bottom" constant="24" id="NrC-TH-8CB"/>
                         <constraint firstItem="RSc-ga-ZmK" firstAttribute="top" secondItem="DQA-iF-DIW" secondAttribute="bottom" id="OnN-h6-inM"/>
                         <constraint firstItem="xoI-BA-fgu" firstAttribute="width" secondItem="uLj-Kp-2bb" secondAttribute="width" multiplier="0.8" id="OzP-Qk-zRY"/>
-                        <constraint firstAttribute="trailing" secondItem="9b3-hC-Z0d" secondAttribute="trailing" constant="16" id="V8F-aY-Nqy"/>
-                        <constraint firstItem="RSc-ga-ZmK" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="WvN-sw-kci"/>
+                        <constraint firstAttribute="trailing" secondItem="9b3-hC-Z0d" secondAttribute="trailing" constant="15" id="V8F-aY-Nqy"/>
+                        <constraint firstItem="RSc-ga-ZmK" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="WvN-sw-kci"/>
                         <constraint firstAttribute="trailing" secondItem="lJL-iE-oH8" secondAttribute="trailing" id="XBr-Hu-811"/>
-                        <constraint firstAttribute="trailing" secondItem="RSc-ga-ZmK" secondAttribute="trailing" constant="16" id="bAg-w5-fEd"/>
-                        <constraint firstAttribute="trailing" secondItem="7Ny-wq-KIu" secondAttribute="trailing" constant="16" id="bE1-uj-auW"/>
-                        <constraint firstAttribute="trailing" secondItem="Tjw-eQ-CDv" secondAttribute="trailing" constant="16" id="bHT-2y-rbn"/>
+                        <constraint firstAttribute="trailing" secondItem="RSc-ga-ZmK" secondAttribute="trailing" constant="15" id="bAg-w5-fEd"/>
+                        <constraint firstAttribute="trailing" secondItem="7Ny-wq-KIu" secondAttribute="trailing" constant="15" id="bE1-uj-auW"/>
+                        <constraint firstAttribute="trailing" secondItem="Tjw-eQ-CDv" secondAttribute="trailing" constant="15" id="bHT-2y-rbn"/>
                         <constraint firstItem="DQA-iF-DIW" firstAttribute="top" secondItem="CQh-UH-Ie3" secondAttribute="bottom" id="bP5-mP-nf4"/>
-                        <constraint firstItem="DQA-iF-DIW" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="crx-4R-YZV"/>
+                        <constraint firstItem="DQA-iF-DIW" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="crx-4R-YZV"/>
                         <constraint firstItem="Tjw-eQ-CDv" firstAttribute="top" secondItem="uLj-Kp-2bb" secondAttribute="top" constant="40" id="daZ-Th-830"/>
                         <constraint firstItem="svS-wD-9kL" firstAttribute="width" secondItem="uLj-Kp-2bb" secondAttribute="width" multiplier="0.8" id="fJs-rj-Ndh"/>
                         <constraint firstItem="CcA-PP-zZJ" firstAttribute="top" secondItem="9b3-hC-Z0d" secondAttribute="bottom" id="ffy-9H-AL3"/>
-                        <constraint firstItem="CcA-PP-zZJ" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="heT-nu-p4u"/>
-                        <constraint firstAttribute="trailing" secondItem="CcA-PP-zZJ" secondAttribute="trailing" constant="16" id="i5F-Yj-FMU"/>
-                        <constraint firstAttribute="trailing" secondItem="aeW-Om-3WA" secondAttribute="trailing" constant="16" id="iQ6-h6-bxz"/>
+                        <constraint firstItem="CcA-PP-zZJ" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="heT-nu-p4u"/>
+                        <constraint firstAttribute="trailing" secondItem="CcA-PP-zZJ" secondAttribute="trailing" constant="15" id="i5F-Yj-FMU"/>
+                        <constraint firstAttribute="trailing" secondItem="aeW-Om-3WA" secondAttribute="trailing" constant="15" id="iQ6-h6-bxz"/>
                         <constraint firstItem="lJL-iE-oH8" firstAttribute="width" secondItem="uLj-Kp-2bb" secondAttribute="width" id="jCL-Yb-Sti"/>
                         <constraint firstItem="9b3-hC-Z0d" firstAttribute="top" secondItem="RSc-ga-ZmK" secondAttribute="bottom" id="jpu-dv-EAQ"/>
                         <constraint firstItem="lJL-iE-oH8" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" id="kwL-7M-GnN"/>
                         <constraint firstItem="svS-wD-9kL" firstAttribute="top" secondItem="KxJ-zr-o9i" secondAttribute="bottom" constant="24" id="lEm-Kw-DSD"/>
-                        <constraint firstItem="7Ny-wq-KIu" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="lNG-Co-LdP"/>
-                        <constraint firstItem="CQh-UH-Ie3" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="noT-TM-eod"/>
-                        <constraint firstAttribute="trailing" secondItem="DQA-iF-DIW" secondAttribute="trailing" constant="16" id="qSJ-Rj-ZRt"/>
+                        <constraint firstItem="7Ny-wq-KIu" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="lNG-Co-LdP"/>
+                        <constraint firstItem="CQh-UH-Ie3" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="noT-TM-eod"/>
+                        <constraint firstAttribute="trailing" secondItem="DQA-iF-DIW" secondAttribute="trailing" constant="15" id="qSJ-Rj-ZRt"/>
                         <constraint firstItem="xoI-BA-fgu" firstAttribute="top" secondItem="7Ny-wq-KIu" secondAttribute="bottom" constant="24" id="v3c-SW-7SA"/>
-                        <constraint firstItem="Tjw-eQ-CDv" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="vFQ-k5-QJG"/>
+                        <constraint firstItem="Tjw-eQ-CDv" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="vFQ-k5-QJG"/>
                         <constraint firstItem="7Ny-wq-KIu" firstAttribute="top" secondItem="Tjw-eQ-CDv" secondAttribute="bottom" id="vQd-z8-OAV"/>
-                        <constraint firstItem="CVa-Ds-y9a" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="16" id="xd7-z1-IdS"/>
+                        <constraint firstItem="CVa-Ds-y9a" firstAttribute="leading" secondItem="uLj-Kp-2bb" secondAttribute="leading" constant="15" id="xd7-z1-IdS"/>
                         <constraint firstItem="CQh-UH-Ie3" firstAttribute="top" secondItem="CVa-Ds-y9a" secondAttribute="bottom" id="y6u-Zb-dTl"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qg-1E-XJ9">
-                    <rect key="frame" x="0.0" y="50" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="50" width="320" height="1"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -253,14 +255,14 @@
                 <constraint firstAttribute="bottom" secondItem="uLj-Kp-2bb" secondAttribute="bottom" id="ppo-SB-s05"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="fFD-2n-NoC"/>
                     <exclude reference="ppo-SB-s05"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-49" y="322"/>
+            <point key="canvasLocation" x="-49.5" y="398"/>
         </view>
     </objects>
 </document>

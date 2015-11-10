@@ -24,14 +24,14 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
         topBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
         bottomBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
         
-        let bc = UIColor(0xFFFFFF, alpha: 0.05)
+        let bc = UIColor(0xFFFFFF, alpha: 0.1)
         borderTopView.backgroundColor = bc
         borderBottomView.backgroundColor = bc
         
         textField.textColor = .whiteColor()
         textField.delegate = self
         
-        label.textColor = .blueMediumDark()
+        label.textColor = .whiteLowOpacity()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
