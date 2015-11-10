@@ -19,9 +19,11 @@ protocol DraftboardTabBarDataSource {
 @IBDesignable
 class DraftboardTabBar: UIView {
 
+    var topBorderView = UIView()
+    
     var lineLeftConstraint: NSLayoutConstraint?
     var lineRightConstraint: NSLayoutConstraint?
-    var selectionLine: UIView!
+    var selectionLineView: UIView!
     
     var delegate: DraftboardTabBarDelegate?
     var dataSource: DraftboardTabBarDataSource?
@@ -33,16 +35,48 @@ class DraftboardTabBar: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.createButtons([.Lineups, .Contests, .Profile])
+        self.setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.setup()
+    }
+    
+    func setup() {
         self.createButtons([.Lineups, .Contests, .Profile])
+        
+        // Create selection line
+        selectionLineView = UIView()
+        self.addSubview(selectionLineView)
+        
+        // Constrain selection line
+        selectionLineView.translatesAutoresizingMaskIntoConstraints = false
+        selectionLineView.heightRancor.constraintEqualToConstant(2.0).active = true
+        selectionLineView.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+        
+        // Move selected line
+        updateSelectionLine(selectedIndex, animated: false)
+        
+        // Set colors
+        iconColor = .whiteColor()
+        selectedColor = .greenDraftboard()
+        self.backgroundColor = UIColor(0x192436)
+        
+        // Create top border
+        topBorderView = UIView()
+        topBorderView.backgroundColor = .whiteLowestOpacity()
+        self.addSubview(topBorderView)
+        
+        // Constrain top border
+        let onePixel = 1 / UIScreen.mainScreen().scale
+        topBorderView.translatesAutoresizingMaskIntoConstraints = false
+        topBorderView.heightRancor.constraintEqualToConstant(onePixel).active = true
+        topBorderView.widthRancor.constraintEqualToRancor(self.widthRancor).active = true
+        topBorderView.topRancor.constraintEqualToRancor(self.topRancor).active = true
     }
     
     func createButtons(buttonTypes: TabBarButtonType) {
-        self.backgroundColor = UIColor(0x192436)
         
         // Create buttons
         if (buttonTypes.contains(.Lineups)) {
@@ -78,22 +112,6 @@ class DraftboardTabBar: UIView {
                 button.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
             }
         }
-        
-        // Create selection line
-        selectionLine = UIView()
-        self.addSubview(selectionLine)
-        
-        // Constrain selection line
-        selectionLine.translatesAutoresizingMaskIntoConstraints = false
-        selectionLine.heightRancor.constraintEqualToConstant(2.0).active = true
-        selectionLine.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        
-        // Move selected line
-        updateSelectionLine(selectedIndex, animated: false)
-        
-        // Set default colors
-        iconColor = .whiteColor()
-        selectedColor = .greenDraftboard()
     }
     
     func buttonTap(button: DraftboardTabBarButton) {
@@ -139,8 +157,8 @@ class DraftboardTabBar: UIView {
         lineRightConstraint?.active = false
         
         // Create new line constraints
-        lineLeftConstraint = selectionLine.leftRancor.constraintEqualToRancor(button.leftRancor)
-        lineRightConstraint = selectionLine.rightRancor.constraintEqualToRancor(button.rightRancor)
+        lineLeftConstraint = selectionLineView.leftRancor.constraintEqualToRancor(button.leftRancor)
+        lineRightConstraint = selectionLineView.rightRancor.constraintEqualToRancor(button.rightRancor)
         
         // Activate new line constraints
         lineLeftConstraint!.active = true
@@ -152,16 +170,16 @@ class DraftboardTabBar: UIView {
             spring = nil
             
             // Apply constraints
-            let startPos = NSValue(CGPoint: selectionLine.layer.position).CGPointValue()
+            let startPos = NSValue(CGPoint: selectionLineView.layer.position).CGPointValue()
             self.layoutIfNeeded()
-            let endPos = NSValue(CGPoint: selectionLine.layer.position).CGPointValue()
+            let endPos = NSValue(CGPoint: selectionLineView.layer.position).CGPointValue()
             let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
             
             // Spring
-            self.selectionLine.layer.position = startPos
+            selectionLineView.layer.position = startPos
             spring = Spring(stiffness: 2.0, damping: 0.84, velocity: 0.0)
             spring!.updateBlock = { (value) -> Void in
-                self.selectionLine.layer.position = CGPointMake(startPos.x + (deltaPos.x * value), startPos.y + (deltaPos.y * value))
+                self.selectionLineView.layer.position = CGPointMake(startPos.x + (deltaPos.x * value), startPos.y + (deltaPos.y * value))
             }
 
             spring!.start()
@@ -176,7 +194,7 @@ class DraftboardTabBar: UIView {
             }
             
             buttons[selectedIndex].iconColor = selectedColor
-            selectionLine.backgroundColor = selectedColor
+            selectionLineView.backgroundColor = selectedColor
         }
     }
     
