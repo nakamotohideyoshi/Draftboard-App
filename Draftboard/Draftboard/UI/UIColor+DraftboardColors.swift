@@ -69,6 +69,15 @@ extension UIColor {
     // MARK: - Specific color implementations
     //
     
+    // PMR color
+    class func PMRColorFG() -> UIColor {
+        return blueAccent()
+    }
+    
+    class func PMRColorBG() -> UIColor {
+        return UIColor(0x273956)
+    }
+    
     // Background color for table cells
     class func cellColorDark() -> UIColor {
         return blueDarker()
@@ -99,6 +108,18 @@ extension UIColor {
     }
     
     class func buttonDisabledBackground() -> UIColor {
+        return greyCool()
+    }
+    
+    class func lineupStatTitleColor() -> UIColor {
+        return greyCool()
+    }
+    
+    class func lineupStatValueColor() -> UIColor {
+        return whiteColor()
+    }
+    
+    class func lineupStatTimeColor() -> UIColor {
         return greyCool()
     }
     

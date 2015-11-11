@@ -64,6 +64,8 @@
 		5D4E634B1BAB75D80033C4C2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633B1BAB75010033C4C2 /* OpenSans-Regular.ttf */; };
 		5D4E634C1BAB75D80033C4C2 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633C1BAB75010033C4C2 /* OpenSans-Semibold.ttf */; };
 		5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633D1BAB75010033C4C2 /* OpenSans-SemiboldItalic.ttf */; };
+		5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4341BF29AF2005BB87F /* LineupStatView.swift */; settings = {ASSET_TAGS = (); }; };
+		5D5829D61BF2894700FFA7D8 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5829D51BF2894700FFA7D8 /* CircleProgressView.swift */; settings = {ASSET_TAGS = (); }; };
 		5D6237BD1BB61F7B0007E62A /* LineupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B01BB61F7B0007E62A /* LineupCardView.swift */; };
 		5D6237BE1BB61F7B0007E62A /* LineupCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B11BB61F7B0007E62A /* LineupCardView.xib */; };
 		5D6237BF1BB61F7B0007E62A /* LineupCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B21BB61F7B0007E62A /* LineupCellView.swift */; };
@@ -118,6 +120,8 @@
 		5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */; };
 		5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */; };
 		5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */; };
+		5DE1D63E1BF2A5FC00C796ED /* LineupStatPMRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */; settings = {ASSET_TAGS = (); }; };
+		5DE1D6401BF2BC0F00C796ED /* LineupStatTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */; settings = {ASSET_TAGS = (); }; };
 		5DE6C5951BD0405D005A4DC6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */; };
 		5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6C5971BD052FE005A4DC6 /* Spring.swift */; };
 		5DFABC411BD9AFE200009CF3 /* nba_players.json in Resources */ = {isa = PBXBuildFile; fileRef = 5DFABC401BD9AFE200009CF3 /* nba_players.json */; };
@@ -210,6 +214,8 @@
 		5D4E633E1BAB750F0033C4C2 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		5D4E633F1BAB750F0033C4C2 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
 		5D4E63401BAB750F0033C4C2 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
+		5D54F4341BF29AF2005BB87F /* LineupStatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupStatView.swift; sourceTree = "<group>"; };
+		5D5829D51BF2894700FFA7D8 /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		5D6237B01BB61F7B0007E62A /* LineupCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCardView.swift; sourceTree = "<group>"; };
 		5D6237B11BB61F7B0007E62A /* LineupCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupCardView.xib; sourceTree = "<group>"; };
 		5D6237B21BB61F7B0007E62A /* LineupCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCellView.swift; sourceTree = "<group>"; };
@@ -251,6 +257,8 @@
 		5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalChoiceController.swift; sourceTree = "<group>"; };
 		5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupSearchViewController.xib; sourceTree = "<group>"; };
 		5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTitlebarButton.swift; sourceTree = "<group>"; };
+		5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupStatPMRView.swift; sourceTree = "<group>"; };
+		5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupStatTimeView.swift; sourceTree = "<group>"; };
 		5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		5DE6C5971BD052FE005A4DC6 /* Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spring.swift; sourceTree = "<group>"; };
 		5DF14B3D1BB21A4200C3F07C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -355,6 +363,7 @@
 				5D9D686E1BB5B52200855501 /* Button */,
 				5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */,
 				5D4B87431BB3388E00B58EDF /* DraftboardTitlebar.swift */,
+				5D5829D51BF2894700FFA7D8 /* CircleProgressView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -436,6 +445,9 @@
 				5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */,
 				3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */,
 				3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */,
+				5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */,
+				5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */,
+				5D54F4341BF29AF2005BB87F /* LineupStatView.swift */,
 			);
 			path = Lineup;
 			sourceTree = "<group>";
@@ -649,6 +661,7 @@
 				3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */,
 				5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */,
 				5D6237DC1BB6200B0007E62A /* DraftboardLabel.swift in Sources */,
+				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
 				5D6237DD1BB6200B0007E62A /* DraftboardModalViewController.swift in Sources */,
 				5D6237DE1BB6200B0007E62A /* DraftboardNibControl.swift in Sources */,
 				3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */,
@@ -664,6 +677,7 @@
 				5D9A321D1BCD6591006C758B /* DraftboardFilterButton.swift in Sources */,
 				5D6237D91BB61FFB0007E62A /* DraftboardTitlebar.swift in Sources */,
 				5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */,
+				5DE1D63E1BF2A5FC00C796ED /* LineupStatPMRView.swift in Sources */,
 				5D783AC91BD94847000D8494 /* Player.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
@@ -680,6 +694,7 @@
 				5D6237BF1BB61F7B0007E62A /* LineupCellView.swift in Sources */,
 				3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */,
 				5D6237C11BB61F7B0007E62A /* LineupEmptyCellView.swift in Sources */,
+				5D5829D61BF2894700FFA7D8 /* CircleProgressView.swift in Sources */,
 				5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */,
 				5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */,
 				3CDC73601BF1472B00DDF60E /* ContestLiveDetailViewController.swift in Sources */,
@@ -695,6 +710,7 @@
 				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
 				3C74CA531BE0528D0077DF0C /* ContestModel.swift in Sources */,
+				5DE1D6401BF2BC0F00C796ED /* LineupStatTimeView.swift in Sources */,
 				3C74CA471BE0516C0077DF0C /* ContestsListController.swift in Sources */,
 				3C74CA511BE051D90077DF0C /* MoneyBar.swift in Sources */,
 				5D3611F21BD6DC330068E868 /* LineupSearchCellView.swift in Sources */,

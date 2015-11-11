@@ -260,20 +260,22 @@ class DraftboardNavController: UIViewController {
             if value >= 0.5 {
                 cardView.layer.opacity = 1
             }
+            
             cvc.view.layer.transform = CATransform3DMakeScale(1.0 - (sx2 * value), 1.0 - (sy2 * value), 1.0)
             cvc.view.layer.transform.m34 = -1/500
             cvc.view.layer.transform = CATransform3DRotate(cvc.view.layer.transform, CGFloat(M_PI) * -value, 0, 1, 0)
             if value >= 0.5 {
                 cvc.view.layer.opacity = 0
             }
-
         }
+        
         spring.completeBlock = { (completed) -> Void in
             cvc.view.removeFromSuperview()
             cardView.layer.transform = CATransform3DIdentity
         }
+        
         UIView.animateWithDuration(0.2, animations: {
-//            cvc.view.alpha = 0
+//          cvc.view.alpha = 0
             nvc.view.layer.opacity = 1
         })
         
@@ -287,11 +289,10 @@ class DraftboardNavController: UIViewController {
         let startPos = CGPointMake(endPos.x + (sw * dir), endPos.y)
         let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
         
-        vc.view.hidden = true // TODO: fix this
-        
+        vc.view.hidden = true // TODO: this shouldn't be necessary, needs a fix
         let spring = Spring(stiffness: 3.5, damping: 0.65, velocity: 0.0)
         spring.updateBlock = { (value) -> Void in
-            vc.view.hidden = false
+            vc.view.hidden = false // TODO: this shouldn't be necessary, needs a fix
             vc.view.layer.position = CGPointMake(
                 startPos.x + (deltaPos.x * value),
                 startPos.y + (deltaPos.y * value)

@@ -26,7 +26,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         choiceData = choices
         titleText = title
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

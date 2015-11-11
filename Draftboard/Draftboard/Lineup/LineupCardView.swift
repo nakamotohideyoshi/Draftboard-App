@@ -14,36 +14,36 @@ protocol LineupCardViewDelegate {
 
 class LineupCardView: DraftboardNibView {
     
-    @IBOutlet weak var editButton: DraftboardButton!
+    @IBOutlet weak var clipView: UIView!
     @IBOutlet weak var contentView: UIScrollView!
-    @IBOutlet weak var contentViewContainer: UIView!
+    
+    @IBOutlet weak var editButton: DraftboardButton!
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
-    @IBOutlet weak var containerDividerHeight: NSLayoutConstraint!
-    @IBOutlet weak var pmrGraph: UIView!
+    @IBOutlet weak var buttonDividerHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var toggleSelector: UIView!
-    @IBOutlet weak var pointsBackgroundShape: UIView!
-    @IBOutlet weak var averageBackgroundShape: UIView!
-    @IBOutlet weak var salaryBackgroundShape: UIView!
+    @IBOutlet weak var toggleSelectorView: UIView!
+//    @IBOutlet weak var pointsBackgroundShape: UIView!
+//    @IBOutlet weak var averageBackgroundShape: UIView!
+//    @IBOutlet weak var salaryBackgroundShape: UIView!
     
-//    let itemCount = Int(arc4random_uniform(12)) + 1
-    let itemCount = 12
+    @IBOutlet weak var leftStatContainerView: UIView!
+    @IBOutlet weak var centerStatContainerView: UIView!
+    @IBOutlet weak var rightStatContainerView: UIView!
+    
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
+    var pmrStatView: LineupStatPMRView!
     
     let curtain = UIView()
     
     override func willAwakeFromNib() {
         contentView.indicatorStyle = .White
         contentView.alwaysBounceVertical = true
-
-        contentViewContainer.clipsToBounds = true
-        contentView.clipsToBounds = false
         
         // set dividers to real 1px height
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
-        containerDividerHeight.constant = onePixel
+        buttonDividerHeight.constant = onePixel
         
         addSubview(curtain)
         curtain.backgroundColor = UIColor.blueDarker()
@@ -54,14 +54,34 @@ class LineupCardView: DraftboardNibView {
         curtain.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
         curtain.alpha = 0
         curtain.userInteractionEnabled = false
+
+        createStats()
         
-//        UIGraphicsBeginImageContextWithOptions(contentView.bounds.size, true, 1)
-//        drawViewHierarchyInRect(contentView.bounds, afterScreenUpdates: true)
-//        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        blurImageOverlay.image = screenshot
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            dispatch_async(dispatch_get_main_queue(),{
+                self.pmrStatView.graphView.setProgress(0.75)
+            })
+        }
+    }
+    
+    func createStats() {
+        let leftStatView = LineupStatTimeView(titleText: "Time", valueText: "00:00:00")
+        pmrStatView = LineupStatPMRView(titleText: "Pts", valueText: "100")
+        let rightStatView = LineupStatView(titleText: "Fees", valueText: "$10")
         
-//        layoutCellViews()
+        addStatToContainerView(leftStatView, containerView: leftStatContainerView)
+        addStatToContainerView(pmrStatView, containerView: centerStatContainerView)
+        addStatToContainerView(rightStatView, containerView: rightStatContainerView)
+    }
+    
+    func addStatToContainerView(statView: LineupStatView, containerView: UIView) {
+        containerView.addSubview(statView)
+        statView.translatesAutoresizingMaskIntoConstraints = false
+        statView.leftRancor.constraintEqualToRancor(containerView.leftRancor).active = true
+        statView.rightRancor.constraintEqualToRancor(containerView.rightRancor).active = true
+        statView.topRancor.constraintEqualToRancor(containerView.topRancor).active = true
+        statView.bottomRancor.constraintEqualToRancor(containerView.bottomRancor).active = true
     }
     
     var lineup: [Player]? {
@@ -94,7 +114,7 @@ class LineupCardView: DraftboardNibView {
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             if (previousCell == nil) {
-                cellView.topRancor.constraintEqualToRancor(toggleSelector.bottomRancor).active = true
+                cellView.topRancor.constraintEqualToRancor(toggleSelectorView.bottomRancor).active = true
             }
             else {
                 cellView.topRancor.constraintEqualToRancor(previousCell!.bottomRancor).active = true
@@ -107,7 +127,6 @@ class LineupCardView: DraftboardNibView {
             previousCell = cellView
         }
     }
-
 }
 
 // TODO: This should really be restricted to LineupCardView, but the

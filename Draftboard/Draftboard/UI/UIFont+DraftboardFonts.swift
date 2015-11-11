@@ -17,4 +17,12 @@ extension UIFont {
     class func draftboardGlobalFilterFont() -> UIFont? {
         return UIFont(name: "OpenSans-Light", size: 65.0)
     }
+    
+    class func draftboardLineupStatTitleFont() -> UIFont? {
+        return UIFont(name: "OpenSans-Semibold", size: 8.0)
+    }
+    
+    class func draftboardLineupStatValueFont() -> UIFont? {
+        return UIFont(name: "Oswald-Regular", size: 12.0)
+    }
 }

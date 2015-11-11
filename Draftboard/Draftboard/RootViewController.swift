@@ -45,7 +45,6 @@ final class RootViewController: UIViewController {
         modalControllerView.hidden = true;
         
         setAppearanceProperties()
-        
         DDM.requestPlayers()
     }
     

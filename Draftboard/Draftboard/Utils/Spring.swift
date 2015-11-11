@@ -158,3 +158,27 @@ extension Spring: Equatable {}
 func ==(lhs: Spring, rhs: Spring) -> Bool {
     return lhs.id == rhs.id
 }
+
+extension CALayer {
+    func killImplicitAnimations() {
+        let na = NullAction()
+        self.actions = [
+            "onOrderIn": na,
+            "onOrderOut": na,
+            "sublayers": na,
+            "contents": na,
+            "bounds": na,
+            "position": na,
+            "transform": na,
+            "opacity": na,
+            "path": na,
+        ];
+    }
+}
+
+class NullAction: CAAction {
+    @objc
+    func runActionForKey(event: String, object anObject: AnyObject, arguments dict: [NSObject : AnyObject]?) {
+        // Do nothing.
+    }
+}
