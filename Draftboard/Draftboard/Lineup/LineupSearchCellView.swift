@@ -27,7 +27,6 @@ class LineupSearchCellView: UITableViewCell {
         bottomBorderView.hidden = true
         topBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
         bottomBorderHeightConstraint.constant = 1.0 / UIScreen.mainScreen().scale
-//        infoButtonImage.tintColor = .greenDraftboard()
         
         self.selectedBackgroundView = UIView()
         self.selectedBackgroundView?.backgroundColor = UIColor(0x0, alpha: 0.05)
