@@ -10,9 +10,10 @@ import UIKit
 
 @IBDesignable class ContestsHeaderCell: UITableViewHeaderFooterView {
     @IBOutlet weak var topBorderView: UIView!
+    @IBOutlet weak var topBorderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: DraftboardLabel!
     
     override func awakeFromNib() {
-
+        topBorderViewHeight.constant = 1 / UIScreen.mainScreen().scale
     }
 }

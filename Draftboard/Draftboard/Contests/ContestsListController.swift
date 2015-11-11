@@ -17,6 +17,12 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     @IBOutlet weak var lineupButton: DraftboardFilterButton!
     @IBOutlet weak var gametypeButton: DraftboardFilterButton!
     
+    let tempSections = [
+        "Live",
+        "Upcoming",
+        "Completed"
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +51,7 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         UITableViewDatasource
     */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return tempSections.count
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,8 +74,18 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         }
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+
+    }
+    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as! ContestsHeaderCell
+        if section > 0 {
+            header.titleLabel.textColor = .whiteMediumOpacity()
+        } else {
+            header.titleLabel.textColor = .whiteColor()
+        }
+        header.titleLabel.text = tempSections[section].uppercaseString
         return header
     }
     
