@@ -32,6 +32,7 @@ class LineupEmptyCellView: DraftboardNibControl {
     
     var player: Player? {
         didSet {
+            nameLabel.textColor = .whiteColor()
             nameLabel.text = player?.shortName()
             teamLabel.text = " " + (player?.team)!
             salaryLabel.text = String(format: "$%.0f", (player?.salary)!)

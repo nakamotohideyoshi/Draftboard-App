@@ -20,11 +20,22 @@ class LineupEditViewController: DraftboardViewController {
     var lineup: Lineup!
     var saveLineupAction: (([Player]) -> Void)?
     var positions = [String]()
+    var positionPlaceholders = [String]()
     var cellViews = [LineupEmptyCellView]()
     var cellIndex = 0
     
     override func viewDidLoad() {
-        positions = ["PG", "SG", "SF", "PF", "C", "G", "F", "UTL"]
+        positions = ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"]
+        positionPlaceholders = [
+            "Select Point Guard",
+            "Select Shooting Guard",
+            "Select Small Forward",
+            "Select Power Forward",
+            "Select Center",
+            "Select Flex Player",
+            "Select Flex Player",
+            "Select Flex Player"
+        ]
         contentView.alwaysBounceVertical = true
 //        statContainer.backgroundColor = UIColor(0x152133, alpha: 0.96)
         let onePixel = 1 / UIScreen.mainScreen().scale
@@ -53,7 +64,7 @@ class LineupEditViewController: DraftboardViewController {
         for (i, position) in positions.enumerate() {
             let cellView = LineupEmptyCellView()
             cellView.abbrText = position
-            cellView.nameText = ""
+            cellView.nameText = positionPlaceholders[i]
             cellView.salaryText = ""
             cellView.teamText = ""
                 
@@ -101,8 +112,8 @@ class LineupEditViewController: DraftboardViewController {
             return "Guard"
         } else if (abbr == "F") {
             return "Forward"
-        } else if (abbr == "UTL"){
-            return "Utility"
+        } else if (abbr == "FX"){
+            return "Flex"
         }
         
         return nil
