@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -39,6 +39,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="CMP-Rl-0u5" firstAttribute="centerX" secondItem="ui6-2o-GIQ" secondAttribute="centerX" id="c3a-I1-C8L"/>
@@ -141,6 +142,14 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <animations/>
                         </imageView>
+                        <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="418-sN-hBc" userLabel="Divider">
+                            <rect key="frame" x="160" y="0.0" width="1" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="1" id="9VY-x1-ey9"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-bV-UG2" userLabel="Contests Button" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="160" y="0.0" width="160" height="44"/>
                             <animations/>
@@ -153,7 +162,7 @@
                                     <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                    <color key="value" red="0.094117647058823528" green="0.15294117647058825" blue="0.23529411764705882" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="textSize">
@@ -180,9 +189,6 @@
                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                     <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                    <color key="value" red="0.094117647060000004" green="0.1529411765" blue="0.23529411759999999" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="textSize">
                                     <real key="value" value="11"/>
@@ -194,9 +200,13 @@
                                     <color key="value" red="0.0" green="0.77647058820000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="iconHidden" value="YES"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" multiplier="0.5" id="0uJ-6u-S4a"/>
@@ -206,10 +216,13 @@
                         <constraint firstItem="JII-2d-qyX" firstAttribute="centerX" secondItem="oiB-9s-vtL" secondAttribute="centerX" id="PkT-zg-Zmd"/>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="leading" secondItem="oiB-9s-vtL" secondAttribute="leading" id="Rwq-1P-GSP"/>
                         <constraint firstItem="JII-2d-qyX" firstAttribute="height" secondItem="oiB-9s-vtL" secondAttribute="height" id="Z47-gL-J8l"/>
+                        <constraint firstItem="418-sN-hBc" firstAttribute="centerY" secondItem="oiB-9s-vtL" secondAttribute="centerY" id="a66-ke-aLs"/>
+                        <constraint firstItem="418-sN-hBc" firstAttribute="height" secondItem="oiB-9s-vtL" secondAttribute="height" id="c6p-7W-baD"/>
                         <constraint firstAttribute="trailing" secondItem="sh4-bV-UG2" secondAttribute="trailing" id="epd-hU-h98"/>
                         <constraint firstItem="sh4-bV-UG2" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" multiplier="0.5" id="jjh-6T-8MQ"/>
                         <constraint firstItem="sh4-bV-UG2" firstAttribute="centerY" secondItem="oiB-9s-vtL" secondAttribute="centerY" id="k7e-Vh-o7H"/>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="height" secondItem="oiB-9s-vtL" secondAttribute="height" id="mfP-Jd-jIs"/>
+                        <constraint firstItem="418-sN-hBc" firstAttribute="centerX" secondItem="oiB-9s-vtL" secondAttribute="centerX" id="peW-Nk-Km2"/>
                         <constraint firstItem="JII-2d-qyX" firstAttribute="centerY" secondItem="oiB-9s-vtL" secondAttribute="centerY" id="r5C-IL-y6K"/>
                         <constraint firstItem="JII-2d-qyX" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" id="zPw-LL-Ni1"/>
                     </constraints>
