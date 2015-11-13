@@ -67,8 +67,13 @@ final class Springs: NSObject {
     
     func update() {
         var completeSprings = [Spring]()
+        let now = CFAbsoluteTimeGetCurrent()
         
         for (_, spring) in springs.enumerate() {
+            if (now - spring.startTime < spring.startDelay) {
+                continue
+            }
+            
             spring.integrate(1.0 / 60.0)
             spring.updateBlock?(spring.val)
             
@@ -111,15 +116,22 @@ class Spring {
     var val: CGFloat
     var complete = false
     
+    var startTime: CFAbsoluteTime
+    var startDelay: CFTimeInterval
+    
     init(stiffness s: CGFloat = 0.0, damping d: CGFloat = 0.9, velocity v: CGFloat = 0.0) {
         id = Springs.sharedInstance.uniqueId()
         stiffness = s
         damping = d
         velocity = v * CGFloat(1.0 / 60.0)
+        startDelay = 0
+        startTime = 0
         val = 0
     }
     
-    func start() {
+    func start(delay: CFTimeInterval = 0) {
+        startDelay = delay
+        startTime = CFAbsoluteTimeGetCurrent()
         Springs.sharedInstance.add(self)
     }
     

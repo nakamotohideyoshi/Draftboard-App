@@ -21,7 +21,11 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
     @IBOutlet weak var buttonDividerHeight: NSLayoutConstraint!
     
+    @IBOutlet var contestWidth: NSLayoutConstraint!
+    @IBOutlet var liveContestWidth: NSLayoutConstraint!
+    
     @IBOutlet weak var toggleSelectorView: UIView!
+    @IBOutlet weak var toggleHeight: NSLayoutConstraint!
 //    @IBOutlet weak var pointsBackgroundShape: UIView!
 //    @IBOutlet weak var averageBackgroundShape: UIView!
 //    @IBOutlet weak var salaryBackgroundShape: UIView!
@@ -32,9 +36,19 @@ class LineupCardView: DraftboardNibView {
     
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
-    var pmrStatView: LineupStatPMRView!
     
+    var pmrStatView: LineupStatPMRView!
+    var liveStatView: LineupStatTimeView!
+    var feesStatView: LineupStatFeesView!
+    var salaryStatView: LineupStatView!
+    var winningsStatView: LineupStatView!
+    
+    var cellViews = [LineupCellView]()
     let curtain = UIView()
+    
+    var liveDate: NSDate!
+    var liveTimer: NSTimer!
+    var live = false
     
     override func willAwakeFromNib() {
         contentView.indicatorStyle = .White
@@ -45,34 +59,71 @@ class LineupCardView: DraftboardNibView {
         dividerHeight.constant = onePixel
         buttonDividerHeight.constant = onePixel
         
+        toggleHeight.constant = 0.0
+        toggleSelectorView.clipsToBounds = true
+        
         addSubview(curtain)
-        curtain.backgroundColor = UIColor.blueDarker()
+        curtain.backgroundColor = .blueDarker()
         curtain.translatesAutoresizingMaskIntoConstraints = false
         curtain.topRancor.constraintEqualToRancor(self.topRancor).active = true
         curtain.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
         curtain.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
         curtain.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        curtain.alpha = 0
         curtain.userInteractionEnabled = false
-
-        createStats()
+        curtain.alpha = 0
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            dispatch_async(dispatch_get_main_queue(),{
-                self.pmrStatView.graphView.setProgress(0.75)
-            })
-        }
+        createStats()
+        startTimer()
+    }
+    
+    func startTimer() {
+        let now = NSDate()
+        let cal = NSCalendar.currentCalendar()
+        liveDate = cal.dateByAddingUnit(.Second, value: 15, toDate: now, options: [])
+        liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime:"), userInfo: nil, repeats: true)
+        updateTime(liveTimer)
     }
     
     func createStats() {
-        let leftStatView = LineupStatTimeView(titleText: "Time", valueText: "00:00:00")
-        pmrStatView = LineupStatPMRView(titleText: "Pts", valueText: "100")
-        let rightStatView = LineupStatView(titleText: "Fees", valueText: "$10")
+        feesStatView = LineupStatFeesView(titleText: "Fees", valueText: "$10/4")
+        liveStatView = LineupStatTimeView(titleText: "Time", valueText: "00:00:00")
+        salaryStatView = LineupStatView(titleText: "Salary Rem.", valueText: "$10,000")
+        pmrStatView = LineupStatPMRView(titleText: "Pts", valueText: "0")
+        winningsStatView = LineupStatView(titleText: "Winnings", valueText: "$5.00")
         
-        addStatToContainerView(leftStatView, containerView: leftStatContainerView)
+        addStatToContainerView(feesStatView, containerView: leftStatContainerView)
+        addStatToContainerView(liveStatView, containerView: centerStatContainerView)
+        addStatToContainerView(salaryStatView, containerView: rightStatContainerView)
+    }
+    
+    func makeLive() {
+        live = true
+        
+//        feesStatView.removeFromSuperview()
+        liveStatView.removeFromSuperview()
+        salaryStatView.removeFromSuperview()
+        
         addStatToContainerView(pmrStatView, containerView: centerStatContainerView)
-        addStatToContainerView(rightStatView, containerView: rightStatContainerView)
+        addStatToContainerView(winningsStatView, containerView: rightStatContainerView)
+        
+        for (i, cellView) in cellViews.enumerate() {
+            cellView.avatarView.PMRView.setProgress(1.0, animated: true, delay: Double(i) * 0.1)
+            cellView.avatarView.PMRView.hidden = false
+            cellView.rightLabel.text = "0"
+            cellView.unitLabel.text = "PTS"
+        }
+        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            dispatch_async(dispatch_get_main_queue(),{
+                self.pmrStatView.graphView.setProgress(1.0)
+            })
+        }
+        
+        contestWidth.active = false
+        liveContestWidth.active = true
+        
+        editButton.removeFromSuperview()
     }
     
     func addStatToContainerView(statView: LineupStatView, containerView: UIView) {
@@ -86,31 +137,41 @@ class LineupCardView: DraftboardNibView {
     
     var lineup: [Player]? {
         didSet {
-            layoutCellViews()
+            self.layoutCellViews()
+        }
+    }
+    
+    func cellHeight() -> CGFloat {
+        let h = UIScreen.mainScreen().bounds.height
+        
+        if (h > 568) { // 6, 6S, 6+, 6S+
+            return 58.0
+        } else if (h > 480.0) { // 5, 5C, 5S
+            return 51.0
+        } else { // 4, 4S
+            return 44.0
         }
     }
     
     func layoutCellViews() {
+        guard let theLineup = lineup else {
+            return
+        }
+        
         var previousCell: LineupCellView?
+        let height = cellHeight()
         
-        var divisor: CGFloat = 5.0
-        let screenHeight = UIScreen.mainScreen().bounds.height
-        if (screenHeight > 568) {
-            divisor = 8.0
-        }
-        else if (screenHeight > 480.0) {
-            divisor = 6.0
-        }
-        
-        for (i, player) in (lineup?.enumerate())! {
+        for (i, player) in theLineup.enumerate() {
             let cellView = LineupCellView()
+            cellView.unitLabel.text = ""
             cellView.player = player
+            
             contentView.addSubview(cellView)
+            cellViews.append(cellView)
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
-            cellView.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
-            cellView.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
-            cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / divisor).active = true
+            cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
+            cellView.heightRancor.constraintEqualToConstant(height).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             if (previousCell == nil) {
@@ -119,12 +180,40 @@ class LineupCardView: DraftboardNibView {
             else {
                 cellView.topRancor.constraintEqualToRancor(previousCell!.bottomRancor).active = true
             }
-
-            if (i == (lineup?.count)! - 1) {
+            
+            if (i == theLineup.count - 1) {
                 cellView.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
             }
             
             previousCell = cellView
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+//        if (live) {
+//            contestWidth.active = false
+//            liveContestWidth.active = true
+//        }
+    }
+    
+    func updateTime(timer: NSTimer) {
+        let now = NSDate()
+        if (liveDate.earlierDate(now) == liveDate) {
+            liveTimer.invalidate()
+            makeLive()
+        }
+        else {
+            let cal = NSCalendar.currentCalendar()
+            let components = cal.components(
+                [.Hour, .Minute, .Second],
+                fromDate: now,
+                toDate: liveDate,
+                options: []
+            )
+            
+            liveStatView.text = String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
         }
     }
 }
@@ -153,5 +242,4 @@ extension UIView {
         transform = CATransform3DTranslate(transform, CGFloat(translation), 0, 0)
         self.layer.transform = transform
     }
-
 }

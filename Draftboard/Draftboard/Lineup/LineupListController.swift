@@ -15,7 +15,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     @IBOutlet weak var createImageView: UIImageView!
     @IBOutlet weak var createIconImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
-
+    
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
     
@@ -40,6 +40,27 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Create goes on top
         view.bringSubviewToFront(self.createView)
+        
+//        // Fake lineup
+//        let playerData = [
+//            "player_id": 0,
+//            "name": "Kyle Korver",
+//            "position": "PG",
+//            "fppg": 0.25,
+//            "team_alias": "ABC",
+//            "salary": 5000.0
+//        ]
+//        
+//        self.didSaveLineup([
+//            Player(data: playerData),
+//            Player(data: playerData),
+//            Player(data: playerData),
+//            Player(data: playerData),
+//            Player(data: playerData),
+//            Player(data: playerData),
+//            Player(data: playerData),
+//            Player(data: playerData),
+//        ])
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
@@ -98,15 +119,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }
         
-        if lineupCardViews.count > 0 {
-            navController?.pushViewController(nvc, fromCardView: self.lineupCardViews.last!, animated: true)
-        } else {
-            navController?.pushViewController(nvc)
-        }
-        
-        // This belongs in LineupEditViewController, but a bug makes a delay necessary
-        nvc.nameTextField.becomeFirstResponder()
-        nvc.nameTextField.selectAll(nil)
+        navController?.pushViewController(nvc)
+//        // This belongs in LineupEditViewController, but a bug makes a delay necessary
+//        nvc.nameTextField.becomeFirstResponder()
+//        nvc.nameTextField.selectAll(nil)
     }
     
     func didSaveLineup(lineup: [Player]) {
@@ -141,9 +157,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         self.lineupCardViews.append(cardView)
         
         // Scroll to card
-        view.layoutIfNeeded()
+        self.view.layoutIfNeeded()
         scrollView.setContentOffset(cardView.frame.origin, animated: false)
-//        cardView.contentView.flashScrollIndicators() // TODO: Maybe someday...
+        cardView.contentView.flashScrollIndicators() // TODO: Maybe someday...
     }
     
     override func titlebarTitle() -> String {

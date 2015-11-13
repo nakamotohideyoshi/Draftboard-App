@@ -12,10 +12,13 @@
                 <outlet property="centerStatContainerView" destination="xTt-uy-B8J" id="X7f-M9-Lek"/>
                 <outlet property="clipView" destination="J1c-D5-t47" id="Tda-f8-BKl"/>
                 <outlet property="contentView" destination="ui6-2o-GIQ" id="2HU-TK-XKK"/>
+                <outlet property="contestWidth" destination="jjh-6T-8MQ" id="nlL-CD-6Bw"/>
                 <outlet property="dividerHeight" destination="MiH-Rg-KtN" id="ytm-xw-Ngx"/>
                 <outlet property="editButton" destination="1Uy-5Q-cBS" id="aPQ-Ma-lLR"/>
                 <outlet property="leftStatContainerView" destination="KLb-w2-xhc" id="VpY-uu-qcb"/>
+                <outlet property="liveContestWidth" destination="bUq-uc-f8k" id="6Zs-Uh-hel"/>
                 <outlet property="rightStatContainerView" destination="ZcS-DT-Had" id="TUL-DQ-wCa"/>
+                <outlet property="toggleHeight" destination="OSh-7t-Fp8" id="D7Q-g5-b0t"/>
                 <outlet property="toggleSelectorView" destination="CMP-Rl-0u5" id="4qL-fk-Oa5"/>
             </connections>
         </placeholder>
@@ -33,7 +36,6 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMP-Rl-0u5" userLabel="Toggle Selector View">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                                     <animations/>
-                                    <color key="backgroundColor" red="0.20000000000000001" green="0.50588235290000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="OSh-7t-Fp8"/>
                                     </constraints>
@@ -144,9 +146,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-bV-UG2" userLabel="Contests Button" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="160" y="0.0" width="160" height="44"/>
                             <animations/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="eLb-LI-fUq"/>
-                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CONTESTS"/>
                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -166,11 +165,6 @@
                                     <color key="value" red="0.11862074583768845" green="0.75475335121154785" blue="0.29064974188804626" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="eLb-LI-fUq"/>
-                                </mask>
-                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Uy-5Q-cBS" userLabel="Edit Button" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
@@ -206,6 +200,7 @@
                         <constraint firstItem="JII-2d-qyX" firstAttribute="centerX" secondItem="oiB-9s-vtL" secondAttribute="centerX" id="PkT-zg-Zmd"/>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="leading" secondItem="oiB-9s-vtL" secondAttribute="leading" id="Rwq-1P-GSP"/>
                         <constraint firstItem="JII-2d-qyX" firstAttribute="height" secondItem="oiB-9s-vtL" secondAttribute="height" id="Z47-gL-J8l"/>
+                        <constraint firstItem="sh4-bV-UG2" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" id="bUq-uc-f8k"/>
                         <constraint firstAttribute="trailing" secondItem="sh4-bV-UG2" secondAttribute="trailing" id="epd-hU-h98"/>
                         <constraint firstItem="sh4-bV-UG2" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" multiplier="0.5" id="jjh-6T-8MQ"/>
                         <constraint firstItem="sh4-bV-UG2" firstAttribute="centerY" secondItem="oiB-9s-vtL" secondAttribute="centerY" id="k7e-Vh-o7H"/>
@@ -213,6 +208,11 @@
                         <constraint firstItem="JII-2d-qyX" firstAttribute="centerY" secondItem="oiB-9s-vtL" secondAttribute="centerY" id="r5C-IL-y6K"/>
                         <constraint firstItem="JII-2d-qyX" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" id="zPw-LL-Ni1"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="bUq-uc-f8k"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <animations/>
@@ -225,9 +225,9 @@
                 <constraint firstAttribute="trailing" secondItem="oiB-9s-vtL" secondAttribute="trailing" id="IWH-mp-QDD"/>
                 <constraint firstAttribute="bottom" secondItem="oiB-9s-vtL" secondAttribute="bottom" id="V1w-iY-82s"/>
                 <constraint firstItem="J1c-D5-t47" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XvZ-wy-JDo"/>
-                <constraint firstItem="wVh-Sh-VIp" firstAttribute="top" secondItem="ui6-2o-GIQ" secondAttribute="bottom" id="gpz-Ft-2A5"/>
+                <constraint firstItem="wVh-Sh-VIp" firstAttribute="top" secondItem="ui6-2o-GIQ" secondAttribute="bottom" priority="750" id="gpz-Ft-2A5"/>
                 <constraint firstAttribute="trailing" secondItem="J1c-D5-t47" secondAttribute="trailing" id="nlh-0V-NCk"/>
-                <constraint firstItem="oiB-9s-vtL" firstAttribute="top" secondItem="J1c-D5-t47" secondAttribute="bottom" id="nvz-XL-z3y"/>
+                <constraint firstItem="oiB-9s-vtL" firstAttribute="top" secondItem="J1c-D5-t47" secondAttribute="bottom" priority="750" id="nvz-XL-z3y"/>
                 <constraint firstItem="oiB-9s-vtL" firstAttribute="top" secondItem="wVh-Sh-VIp" secondAttribute="bottom" id="s5U-SP-cJL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

@@ -45,7 +45,7 @@ class DraftboardNavController: UIViewController {
         contentView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         contentView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         contentView.topRancor.constraintEqualToRancor(titlebar.bottomRancor).active = true
-
+        
         if (vcs.count == 0) {
             self.pushViewController(rvc, animated: false)
         }
@@ -78,9 +78,9 @@ class DraftboardNavController: UIViewController {
             cvc?.view.removeFromSuperview()
         }
         
-        self.view.layoutIfNeeded()
-    
         if (animated) {
+            view.layoutIfNeeded()
+            
             inSpring = animateViewControllerIn(nvc)
             inSpring!.start()
             
@@ -123,9 +123,9 @@ class DraftboardNavController: UIViewController {
             cvc?.view.removeFromSuperview()
         }
         
-        self.view.layoutIfNeeded()
-        
         if (animated) {
+            view.layoutIfNeeded()
+            
             inSpring = animateViewControllerIn(nvc!, dir: -1.0)
             inSpring!.start()
             
@@ -244,6 +244,8 @@ class DraftboardNavController: UIViewController {
         titlebar.dataSource = nvc
         titlebar.popElements(directionless: true, animated: animated)
         
+        self.view.layoutIfNeeded()
+        
         //////
         
         let sx = cvc.view.bounds.size.width / cardView.bounds.size.width - 1
@@ -252,7 +254,7 @@ class DraftboardNavController: UIViewController {
         let sx2 = 1 - cardView.bounds.size.width / cvc.view.bounds.size.width
         let sy2 = 1 - cardView.bounds.size.height / cvc.view.bounds.size.height
         
-        let spring = Spring(stiffness: 10.0, damping: 0.0, velocity: 0.0)
+        let spring = Spring(stiffness: 6.0, damping: 0.0, velocity: 4.0)
         spring.updateBlock = { (value) -> Void in
             cardView.layer.transform = CATransform3DMakeScale(1.0 + sx - (sx * value), 1.0 + sy - (sy * value), 1.0)
             cardView.layer.transform.m34 = -1/500
@@ -264,6 +266,7 @@ class DraftboardNavController: UIViewController {
             cvc.view.layer.transform = CATransform3DMakeScale(1.0 - (sx2 * value), 1.0 - (sy2 * value), 1.0)
             cvc.view.layer.transform.m34 = -1/500
             cvc.view.layer.transform = CATransform3DRotate(cvc.view.layer.transform, CGFloat(M_PI) * -value, 0, 1, 0)
+            
             if value >= 0.5 {
                 cvc.view.layer.opacity = 0
             }

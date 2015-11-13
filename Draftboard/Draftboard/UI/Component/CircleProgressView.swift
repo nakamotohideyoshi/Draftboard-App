@@ -57,6 +57,12 @@ class CircleProgressView: UIView {
         ringFg = createRing(colorFg)
         ringFg.path = getArcPath(1.0)
         self.layer.addSublayer(ringFg)
+        
+//        ringFg.shadowColor = UIColor.blackColor().CGColor
+//        ringFg.shadowRadius = 1.0
+//        ringFg.shadowOffset = CGSizeMake(0, 0.5);
+//        ringFg.shadowOpacity = 0.45;
+//        ringFg.masksToBounds = false
     }
     
     func createRing(color: UIColor) -> CAShapeLayer {
@@ -80,14 +86,14 @@ class CircleProgressView: UIView {
             arcCenter: center,
             radius: radius,
             startAngle: startAngle,
-            endAngle: startAngle + TAU * progress,
-            clockwise: true
+            endAngle: startAngle - TAU * progress,
+            clockwise: false
         )
-
+        
         return path.CGPath;
     }
     
-    func setProgress(newProgress: CGFloat, animated: Bool = true) {
+    func setProgress(newProgress: CGFloat, animated: Bool = true, delay: CFTimeInterval = 0.0) {
         spring?.cancel()
         spring = nil
         
@@ -96,12 +102,12 @@ class CircleProgressView: UIView {
             let endProgress = newProgress
             let progressDelta = endProgress - startProgress
             
-            spring = Spring(stiffness: 5.0, damping: 0.0, velocity: 0.0)
+            spring = Spring(stiffness: 4.0, damping: 0.2, velocity: 4.0)
             spring!.updateBlock = { value in
                 self.currentProgress = startProgress + (progressDelta * value)
                 self.ringFg.path = self.getArcPath(self.currentProgress)
             }
-            spring!.start()
+            spring!.start(delay)
         }
         else {
             ringFg.path = getArcPath(newProgress)
