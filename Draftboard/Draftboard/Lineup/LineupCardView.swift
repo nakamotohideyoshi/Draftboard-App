@@ -20,6 +20,8 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var editButton: DraftboardButton!
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
     @IBOutlet weak var buttonDividerHeight: NSLayoutConstraint!
+    @IBOutlet weak var horizontalDivider: UIView!
+    @IBOutlet weak var horizontalDividerWidth: NSLayoutConstraint!
     
     @IBOutlet var contestWidth: NSLayoutConstraint!
     @IBOutlet var liveContestWidth: NSLayoutConstraint!
@@ -58,6 +60,7 @@ class LineupCardView: DraftboardNibView {
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
         buttonDividerHeight.constant = onePixel
+        horizontalDividerWidth.constant = onePixel
         
         toggleHeight.constant = 0.0
         toggleSelectorView.clipsToBounds = true
@@ -123,6 +126,7 @@ class LineupCardView: DraftboardNibView {
         contestWidth.active = false
         liveContestWidth.active = true
         
+        horizontalDivider.removeFromSuperview()
         editButton.removeFromSuperview()
     }
     
