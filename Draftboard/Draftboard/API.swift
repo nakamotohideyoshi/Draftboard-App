@@ -120,7 +120,7 @@ extension API {
 extension API {
 
     class func draftGroup(id id: Int, completion: (AnyObject) -> Void) {
-        API.get("draft-group/\(id)/", completion: completion)
+        API.get("api/draft-group/\(id)/", completion: completion)
     }
 
 }

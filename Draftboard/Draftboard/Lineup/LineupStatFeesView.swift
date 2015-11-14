@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LineupStatTimeView: LineupStatView {
+class LineupStatFeesView: LineupStatView {
     
     override func setup() {
         titleLabel.font = .draftboardLineupStatTitleFont()
@@ -23,7 +23,7 @@ class LineupStatTimeView: LineupStatView {
         constrainLabels()
     }
     
-    var text: String = "00:00:00" {
+    var text: String = "$0/0" {
         didSet {
             valueLabel.attributedText = attributedText(text)
         }
@@ -45,7 +45,7 @@ class LineupStatTimeView: LineupStatView {
         
         // Colors
         attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatValueColor(), range: wholeStr)
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatTimeColor(), range: NSMakeRange(0, 3))
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatTimeColor(), range: NSMakeRange(attrStr.length-2, 2))
         
         // Done
         return attrStr

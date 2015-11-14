@@ -27,31 +27,31 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         let lineupRvc = LineupListController(nibName: "LineupListController", bundle: nil)
         let contestRvc = ContestsListController(nibName: "ContestsListController", bundle: nil)
         let profileRvc = AccountViewController(nibName: "AccountViewController", bundle: nil)
-        
+
         lineupNC = DraftboardNavController(rootViewController: lineupRvc)
         contestNC = DraftboardNavController(rootViewController: contestRvc)
         profileNC = DraftboardNavController(rootViewController: profileRvc)
-        
+
         tabBar = DraftboardTabBar()
         tabBar.delegate = self
         view.addSubview(tabBar)
-        
+
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         tabBar.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         tabBar.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         tabBar.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         tabBar.heightRancor.constraintEqualToConstant(50.0).active = true
-        
+
         contentView = UIView()
         view.addSubview(contentView)
-        
+
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.topRancor.constraintEqualToRancor(view.topRancor).active = true
         contentView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         contentView.bottomRancor.constraintEqualToRancor(tabBar.topRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         contentView.clipsToBounds = true
-        
+
         switchNavController(lineupNC, animated: false)
     }
     
@@ -90,10 +90,9 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
                 self.completionHandler?(completed)
             }
             
-            self.view.layoutIfNeeded()
             spring!.start()
-            
-        } else {
+        }
+        else {
             completionHandler!(true)
             completionHandler = nil
         }
