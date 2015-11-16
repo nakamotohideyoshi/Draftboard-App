@@ -11,11 +11,9 @@ import UIKit
 class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
     @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
-    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentView: UIScrollView!
     @IBOutlet weak var statContainer: UIView!
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
-    @IBOutlet weak var nameDividerHeight: NSLayoutConstraint!
     
     var lineup: Lineup!
     var saveLineupAction: (([Player]) -> Void)?
@@ -40,9 +38,8 @@ class LineupEditViewController: DraftboardViewController {
 //        statContainer.backgroundColor = UIColor(0x152133, alpha: 0.96)
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
-        nameDividerHeight.constant = onePixel
         layoutCellViews()
-        nameTextField.delegate = self
+
         if lineup == nil {
             lineup = Lineup()
         }
@@ -120,8 +117,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func didTapCell(sender: LineupEmptyCellView) {
-        nameTextField.resignFirstResponder()
-        
+
         cellIndex = sender.index
         
         var titleText = self.cellViews[cellIndex].abbrLabel.text
@@ -135,16 +131,6 @@ class LineupEditViewController: DraftboardViewController {
             let cellView = self.cellViews[self.cellIndex]
             cellView.avatarImageView.image = UIImage(named: "sample-avatar-big")
             cellView.player = player
-            
-            self.navController?.updateTitlebar()
-            
-            self.nameTextField.returnKeyType = .Done
-            for cell in self.cellViews {
-                if cell.player == nil {
-                    self.nameTextField.returnKeyType = .Next
-                    break
-                }
-            }
         }
         
         navController?.pushViewController(svc)
@@ -175,15 +161,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String {
-        if nameTextField.text == "My new lineup" {
-            return "Create Lineup".uppercaseString
-        }
-        else if lineup.name == "" {
-            return "Create Lineup".uppercaseString
-        }
-        else {
-            return lineup.name.uppercaseString
-        }
+        return "Create Lineup".uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -206,30 +184,4 @@ class LineupEditViewController: DraftboardViewController {
     override func titlebarBgHidden() -> Bool {
         return false
     }
-}
-
-extension LineupEditViewController: UITextFieldDelegate {
-
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let oldString = textField.text! as NSString
-        if oldString == "My new lineup" {
-            lineup.name = ""
-        } else {
-            lineup.name = oldString.stringByReplacingCharactersInRange(range, withString: string)
-        }
-        self.navController?.updateTitlebar(animated: false)
-        return true
-    }
-
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        for cell in self.cellViews {
-            if cell.player == nil {
-                self.didTapCell(cell)
-                return true
-            }
-        }
-        textField.resignFirstResponder()
-        return true
-    }
-    
 }

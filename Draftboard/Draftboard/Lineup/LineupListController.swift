@@ -115,14 +115,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.saveLineupAction = { (lineup: [Player]) in
             self.didSaveLineup(lineup)
-            nvc.nameTextField.resignFirstResponder()
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }
         
         navController?.pushViewController(nvc)
-//        // This belongs in LineupEditViewController, but a bug makes a delay necessary
-//        nvc.nameTextField.becomeFirstResponder()
-//        nvc.nameTextField.selectAll(nil)
     }
     
     func didSaveLineup(lineup: [Player]) {
@@ -194,6 +190,5 @@ extension LineupListController: UIScrollViewDelegate {
             card.rotate(m * direction)
             card.fade(magnitude)
         }
-        
     }
 }

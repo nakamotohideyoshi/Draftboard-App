@@ -45,7 +45,7 @@ class LineupStatTimeView: LineupStatView {
         
         // Colors
         attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatValueColor(), range: wholeStr)
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatTimeColor(), range: NSMakeRange(0, 3))
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatTimeColor(), range: NSMakeRange(0, 6))
         
         // Done
         return attrStr

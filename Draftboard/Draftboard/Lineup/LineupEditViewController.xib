@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="OpenSans-Regular.ttf">
-            <string>OpenSans</string>
-        </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
         </mutableArray>
         <mutableArray key="Oswald-Regular.ttf">
-            <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
@@ -27,8 +23,6 @@
                 <outlet property="avgSalaryLabel" destination="7g1-R4-jaA" id="Lcs-OI-Sfm"/>
                 <outlet property="contentView" destination="zd7-dN-DKs" id="9TO-c7-MZQ"/>
                 <outlet property="dividerHeight" destination="jb1-oX-jXH" id="c7L-JR-xFW"/>
-                <outlet property="nameDividerHeight" destination="rpd-Q2-ZqP" id="hCM-eI-AKe"/>
-                <outlet property="nameTextField" destination="a6t-pS-ZdO" id="You-im-hRr"/>
                 <outlet property="remSalaryLabel" destination="U9y-QJ-0SU" id="MY7-pA-6hp"/>
                 <outlet property="statContainer" destination="aXc-jI-WMJ" id="dhS-4h-25K"/>
                 <outlet property="view" destination="iN0-l3-epB" id="2ba-oL-nF8"/>
@@ -43,7 +37,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd7-dN-DKs" customClass="UIScrollView">
-                            <rect key="frame" x="0.0" y="58" width="375" height="549"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                             <animations/>
                             <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
@@ -53,47 +47,7 @@
                         <constraint firstAttribute="bottom" secondItem="zd7-dN-DKs" secondAttribute="bottom" constant="60" id="2hu-3Y-mdY"/>
                         <constraint firstItem="zd7-dN-DKs" firstAttribute="leading" secondItem="JBe-mP-5Fl" secondAttribute="leading" id="Lbc-lQ-3us"/>
                         <constraint firstAttribute="trailing" secondItem="zd7-dN-DKs" secondAttribute="trailing" id="jiH-Vc-RfN"/>
-                        <constraint firstItem="zd7-dN-DKs" firstAttribute="top" secondItem="JBe-mP-5Fl" secondAttribute="top" constant="58" id="oAd-uy-ar4"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qyx-jm-zkB" userLabel="Name View">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
-                    <subviews>
-                        <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vq-E5-aXY" userLabel="topDivider">
-                            <rect key="frame" x="15" y="57" width="345" height="1"/>
-                            <animations/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="rpd-Q2-ZqP"/>
-                            </constraints>
-                        </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My new lineup" placeholder="My new lineup" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-pS-ZdO">
-                            <rect key="frame" x="34" y="19" width="224" height="20"/>
-                            <animations/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LINEUP NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpS-Yp-C5i" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="278" y="20" width="63" height="18"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="12"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <animations/>
-                    <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.20000000000000001" alpha="0.95999999999999996" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="1vq-E5-aXY" secondAttribute="trailing" constant="15" id="453-kR-SZD"/>
-                        <constraint firstAttribute="bottom" secondItem="1vq-E5-aXY" secondAttribute="bottom" id="7t7-2s-C3z"/>
-                        <constraint firstAttribute="height" constant="58" id="JQm-RY-7R7"/>
-                        <constraint firstItem="rpS-Yp-C5i" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="Kaj-L1-3i6"/>
-                        <constraint firstItem="a6t-pS-ZdO" firstAttribute="leading" secondItem="qyx-jm-zkB" secondAttribute="leading" constant="34" id="b9x-P2-33h"/>
-                        <constraint firstItem="a6t-pS-ZdO" firstAttribute="centerY" secondItem="qyx-jm-zkB" secondAttribute="centerY" id="bVJ-ky-0wG"/>
-                        <constraint firstItem="a6t-pS-ZdO" firstAttribute="trailing" secondItem="rpS-Yp-C5i" secondAttribute="leading" constant="-20" id="cYp-jW-2XP"/>
-                        <constraint firstItem="1vq-E5-aXY" firstAttribute="leading" secondItem="qyx-jm-zkB" secondAttribute="leading" constant="15" id="lxR-kB-6Sd"/>
-                        <constraint firstAttribute="trailing" secondItem="rpS-Yp-C5i" secondAttribute="trailing" constant="34" id="qOG-pn-65Z"/>
+                        <constraint firstItem="zd7-dN-DKs" firstAttribute="top" secondItem="JBe-mP-5Fl" secondAttribute="top" id="oAd-uy-ar4"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXc-jI-WMJ">
@@ -239,13 +193,10 @@
                 <constraint firstAttribute="bottom" secondItem="aXc-jI-WMJ" secondAttribute="bottom" id="66L-6B-9Zl"/>
                 <constraint firstItem="aXc-jI-WMJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="96X-TK-OGT"/>
                 <constraint firstAttribute="trailing" secondItem="JBe-mP-5Fl" secondAttribute="trailing" id="EUW-EC-l04"/>
-                <constraint firstItem="JBe-mP-5Fl" firstAttribute="top" secondItem="qyx-jm-zkB" secondAttribute="top" id="Fww-5C-PUf"/>
-                <constraint firstItem="qyx-jm-zkB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="L38-o5-PSY"/>
-                <constraint firstItem="qyx-jm-zkB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="km1-qM-3vq"/>
-                <constraint firstItem="qyx-jm-zkB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qGX-e6-Qm3"/>
                 <constraint firstItem="JBe-mP-5Fl" firstAttribute="bottom" secondItem="aXc-jI-WMJ" secondAttribute="bottom" id="qvN-Of-S9E"/>
                 <constraint firstItem="JBe-mP-5Fl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vIy-w6-2pf"/>
                 <constraint firstItem="aXc-jI-WMJ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="wwz-I1-c9D"/>
+                <constraint firstItem="JBe-mP-5Fl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yGK-3O-Y7G"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
