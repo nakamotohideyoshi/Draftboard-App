@@ -11,10 +11,12 @@ import UIKit
 @IBDesignable class DraftboardFilterButton: DraftboardNibView {
 
     @IBOutlet weak var label: DraftboardLabel!
+    @IBOutlet weak var downArrow: UIImageView!
     
     override func willAwakeFromNib() {
         super.willAwakeFromNib()
         // Initialization code
+        downArrow.tintColor = .greenDraftboard()
     }
     
     @IBInspectable var text: String = "Button" {
