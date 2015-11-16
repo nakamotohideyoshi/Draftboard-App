@@ -26,6 +26,8 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.backgroundColor = .blueDarker()
+        
         let bundle = NSBundle(forClass: self.dynamicType)
         let contestCellNib = UINib(nibName: "DraftboardContestsCell", bundle: bundle)
         let contestUpcomingCellNib = UINib(nibName: "DraftboardContestsUpcomingCell", bundle: bundle)
@@ -50,6 +52,7 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     /*
         UITableViewDatasource
     */
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return tempSections.count
     }
@@ -72,10 +75,6 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
             cell.topBorderView.hidden = (indexPath.row == 0)
             return cell
         }
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
