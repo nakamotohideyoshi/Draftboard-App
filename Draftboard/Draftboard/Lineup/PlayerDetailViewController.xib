@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="OpenSans-Regular.ttf">
-            <string>OpenSans</string>
-        </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -24,35 +21,26 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerDetailViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="bottomInfoView" destination="kQy-CP-V1d" id="oKR-0G-ZTM"/>
+                <outlet property="infoList" destination="v6e-ea-sYW" id="RDa-O2-DHt"/>
+                <outlet property="scrollView" destination="i5M-Pr-FkT" id="ifs-vb-Vfd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="UIScrollView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQy-CP-V1d" userLabel="Bottom">
-                    <rect key="frame" x="0.0" y="330" width="375" height="500"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQy-CP-V1d" userLabel="BottomInfoView">
+                    <rect key="frame" x="0.0" y="330" width="375" height="400"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6e-ea-sYW" userLabel="InfoList">
-                            <rect key="frame" x="15" y="126" width="345" height="374"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyk-2Z-a4P" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="0.0" width="285" height="60"/>
-                                    <animations/>
-                                    <string key="text">Sale was cruising through six innings, but allowed three consecutive hits in the seventh including a three-run bomb to Mark Trumbo. His FIP now sits at 2.36, which makes his 3.32 ERA seem a bit unfair.</string>
-                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
-                                    <color key="textColor" red="0.42661195993423462" green="0.44114261865615845" blue="0.54481643438339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
+                            <rect key="frame" x="15" y="126" width="345" height="274"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Pyk-2Z-a4P" secondAttribute="trailing" constant="30" id="4Cl-kB-OA0"/>
-                                <constraint firstItem="Pyk-2Z-a4P" firstAttribute="leading" secondItem="v6e-ea-sYW" secondAttribute="leading" constant="30" id="M7n-pX-0g1"/>
-                                <constraint firstItem="Pyk-2Z-a4P" firstAttribute="top" secondItem="v6e-ea-sYW" secondAttribute="top" id="ZAZ-Kp-3eA"/>
+                                <constraint firstAttribute="height" constant="274" id="iUI-E8-RZz"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="piU-wx-9RY" userLabel="TogglePlaceholder">
@@ -63,20 +51,24 @@
                                 <constraint firstAttribute="height" constant="22" id="1We-fd-zf9"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DoA-28-wmp" customClass="ContestDetailViewCell" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="67" y="144" width="240" height="128"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="500" id="AR5-ki-Cp9"/>
+                        <constraint firstAttribute="height" constant="400" id="AR5-ki-Cp9"/>
                         <constraint firstItem="piU-wx-9RY" firstAttribute="centerX" secondItem="kQy-CP-V1d" secondAttribute="centerX" id="LEG-7G-DBJ"/>
-                        <constraint firstAttribute="bottom" secondItem="v6e-ea-sYW" secondAttribute="bottom" id="PC0-yv-l37"/>
                         <constraint firstItem="piU-wx-9RY" firstAttribute="top" secondItem="kQy-CP-V1d" secondAttribute="top" constant="64" id="ZjX-sA-S26"/>
                         <constraint firstItem="v6e-ea-sYW" firstAttribute="top" secondItem="piU-wx-9RY" secondAttribute="bottom" constant="40" id="emy-Yi-EmX"/>
                         <constraint firstItem="v6e-ea-sYW" firstAttribute="width" secondItem="kQy-CP-V1d" secondAttribute="width" constant="-30" id="vgA-EF-Kos"/>
                         <constraint firstItem="v6e-ea-sYW" firstAttribute="centerX" secondItem="kQy-CP-V1d" secondAttribute="centerX" id="zch-ha-MdC"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csw-7X-Hpg" userLabel="Top">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csw-7X-Hpg" userLabel="TopView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="330"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-contest" translatesAutoresizingMaskIntoConstraints="NO" id="1FR-sd-kIU">
@@ -98,7 +90,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaO-A5-tm9" userLabel="Fee">
                                     <rect key="frame" x="0.0" y="0.0" width="110" height="48"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sr-vz-kzi" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sr-vz-kzi" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="45" y="3" width="20" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -129,7 +121,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pkm-Dg-mdG" userLabel="Prizes">
                                     <rect key="frame" x="114" y="0.0" width="117" height="48"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIb-IH-zeV" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIb-IH-zeV" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="39" y="3" width="39" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -170,7 +162,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKe-tL-5Ao">
                                     <rect key="frame" x="235" y="0.0" width="110" height="48"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ENTRIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmk-gm-6Y5" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENTRIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmk-gm-6Y5" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="32" y="3" width="47" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -224,7 +216,7 @@
                                 <constraint firstAttribute="height" constant="127" id="lIN-9u-n6K"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHI @ BOS — TONIGHT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-Ah-UYF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHI @ BOS — TONIGHT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-Ah-UYF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="132" y="188" width="112" height="14"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -273,7 +265,9 @@
                 <constraint firstItem="piU-wx-9RY" firstAttribute="width" secondItem="8AN-La-Gsk" secondAttribute="width" id="PTg-oN-9FD"/>
                 <constraint firstItem="8AN-La-Gsk" firstAttribute="bottom" secondItem="csw-7X-Hpg" secondAttribute="bottom" constant="24" id="UAo-AY-cJX"/>
                 <constraint firstAttribute="trailing" secondItem="8AN-La-Gsk" secondAttribute="trailing" constant="45" id="VEl-UX-DzF"/>
+                <constraint firstItem="kQy-CP-V1d" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="YVR-an-mZK"/>
                 <constraint firstAttribute="trailing" secondItem="csw-7X-Hpg" secondAttribute="trailing" id="b3t-Tl-1sa"/>
+                <constraint firstItem="csw-7X-Hpg" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="c0N-D3-f2c"/>
                 <constraint firstItem="kQy-CP-V1d" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fCL-YZ-UFB"/>
                 <constraint firstItem="csw-7X-Hpg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fLb-UK-lyJ"/>
                 <constraint firstItem="csw-7X-Hpg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nb2-mX-89N"/>

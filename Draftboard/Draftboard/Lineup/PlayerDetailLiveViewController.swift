@@ -1,20 +1,19 @@
 //
-//  PlayerDetailViewController.swift
+//  PlayerDetailLiveViewController.swift
 //  Draftboard
 //
-//  Created by Geof Crowl on 10/29/15.
+//  Created by Geof Crowl on 11/18/15.
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
 
 import UIKit
 
 @IBDesignable
-class PlayerDetailViewController: DraftboardViewController {
+class PlayerDetailLiveViewController: DraftboardViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var bottomInfoView: UIView!
-    @IBOutlet weak var infoList: UIView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

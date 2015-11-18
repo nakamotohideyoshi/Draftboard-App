@@ -10,6 +10,14 @@ import UIKit
 
 extension UIFont {
     
+    class func oswaldRegular() -> UIFont? {
+        return UIFont(name: "Oswald-Regular", size: 15)
+    }
+    
+    class func openSansRegular() -> UIFont? {
+        return UIFont(name: "OpenSans-Regular", size: 15)
+    }
+    
     class func draftboardTitlebarTitleFont() -> UIFont? {
         return UIFont(name: "Oswald-Regular", size: 15.0)
     }
