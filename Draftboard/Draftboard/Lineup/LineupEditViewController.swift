@@ -96,7 +96,7 @@ class LineupEditViewController: DraftboardViewController {
     
     func positionTextForAbbr(abbr: String) -> String? {
         if (abbr == "PG") {
-            return "Power Guard"
+            return "Point Guard"
         } else if (abbr == "SG") {
             return "Shooting Guard"
         } else if (abbr == "SF") {
