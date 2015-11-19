@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0068471BFE412700789B53 /* DraftboardDetailListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0068461BFE412700789B53 /* DraftboardDetailListItem.swift */; };
 		3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */; };
 		3C0EDA891BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */; };
 		3C245CD51BEAD4EA00A24F43 /* DraftboardModalItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */; };
@@ -146,6 +147,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C0068461BFE412700789B53 /* DraftboardDetailListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardDetailListItem.swift; sourceTree = "<group>"; };
 		3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailLiveViewController.swift; sourceTree = "<group>"; };
 		3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailLiveViewController.xib; sourceTree = "<group>"; };
 		3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalItemView.xib; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		5D4B871D1BB31A5F00B58EDF /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				3C0068461BFE412700789B53 /* DraftboardDetailListItem.swift */,
 				5D9D686E1BB5B52200855501 /* Button */,
 				5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */,
 				5D4B87431BB3388E00B58EDF /* DraftboardTitlebar.swift */,
@@ -702,6 +705,7 @@
 				5D6237BD1BB61F7B0007E62A /* LineupCardView.swift in Sources */,
 				3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */,
 				5DAF71761BF3C00F00CB972F /* AvatarPMRView.swift in Sources */,
+				3C0068471BFE412700789B53 /* DraftboardDetailListItem.swift in Sources */,
 				5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */,
 				5D783AD11BD97D09000D8494 /* Contest.swift in Sources */,
 				3CDCF9C41BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift in Sources */,

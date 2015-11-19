@@ -36,6 +36,8 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var centerStatContainerView: UIView!
     @IBOutlet weak var rightStatContainerView: UIView!
     
+    var showPlayerDetailAction: ((Player, isLive: Bool, isDraftable: Bool) -> Void)?
+    
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
     
@@ -149,11 +151,11 @@ class LineupCardView: DraftboardNibView {
         let h = UIScreen.mainScreen().bounds.height
         
         if (h > 568) { // 6, 6S, 6+, 6S+
-            return 58.0
-        } else if (h > 480.0) { // 5, 5C, 5S
             return 51.0
+        } else if (h > 480.0) { // 5, 5C, 5S
+            return 45.0
         } else { // 4, 4S
-            return 44.0
+            return 42.0
         }
     }
     
@@ -189,8 +191,19 @@ class LineupCardView: DraftboardNibView {
                 cellView.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
             }
             
+            cellView.addTarget(self, action: "didTapPlayerCell:", forControlEvents: .TouchUpInside)
             previousCell = cellView
         }
+    }
+    
+    func didTapPlayerCell(playerCell: LineupCellView) {
+        if let showPlayerDetail = showPlayerDetailAction {
+            if playerCell.player == nil {
+                return
+            }
+            showPlayerDetail(playerCell.player!, isLive: live, isDraftable: false)
+        }
+        
     }
     
     override func layoutSubviews() {

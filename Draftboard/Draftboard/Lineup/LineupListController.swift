@@ -131,6 +131,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         cardView.lineup = lineup
         scrollView.addSubview(cardView)
         
+        // Set player detail action
+        cardView.showPlayerDetailAction = showPlayerDetail
+        
         // Set card dimensions
         cardView.translatesAutoresizingMaskIntoConstraints = false
         cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor).active = true
@@ -156,6 +159,19 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         self.view.layoutIfNeeded()
         scrollView.setContentOffset(cardView.frame.origin, animated: false)
         cardView.contentView.flashScrollIndicators() // TODO: Maybe someday...
+    }
+    
+    func showPlayerDetail(player: Player, isLive: Bool, isDraftable: Bool = false) {
+        if isLive {
+            let nvc = PlayerDetailLiveViewController()
+            nvc.player = player
+            self.navController?.pushViewController(nvc)
+        } else {
+            let nvc = PlayerDetailViewController()
+            nvc.player = player
+            nvc.draftable = false
+            self.navController?.pushViewController(nvc)
+        }
     }
     
     override func titlebarTitle() -> String {

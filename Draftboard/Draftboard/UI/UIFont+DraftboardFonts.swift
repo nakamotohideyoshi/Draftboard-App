@@ -15,7 +15,7 @@ extension UIFont {
     }
     
     class func openSansRegular() -> UIFont? {
-        return UIFont(name: "OpenSans-Regular", size: 15)
+        return UIFont(name: "OpenSans", size: 15)
     }
     
     class func draftboardTitlebarTitleFont() -> UIFont? {

@@ -69,6 +69,11 @@ extension UIColor {
     // MARK: - Specific color implementations
     //
     
+    // Dividers on white color
+    class func dividerOnWhiteColor() -> UIColor {
+        return UIColor(0xe6e8ed)
+    }
+    
     // PMR color
     class func PMRColorFG() -> UIColor {
         return blueAccent()
