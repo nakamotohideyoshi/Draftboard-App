@@ -85,6 +85,9 @@ class PlayerDetailViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String? {
+        if player == nil {
+            return "Kyle Korver".uppercaseString
+        }
         return player?.name?.uppercaseString
     }
     
