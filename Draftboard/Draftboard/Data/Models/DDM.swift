@@ -28,11 +28,11 @@ final class DDM {
     static var players: [Player] = []
     class func requestPlayers() {
         API.draftGroup(id: 1) { json in
-            let dict = json as! NSDictionary
-            let playerArray = dict["players"] as! NSArray
-            for playerDict in playerArray {
-                DDM.players.append(Player(data: playerDict as! NSDictionary))
-            }
+//            let dict = json as! NSDictionary
+//            let playerArray = dict["players"] as! NSArray
+//            for playerDict in playerArray {
+//                DDM.players.append(Player(data: playerDict as! NSDictionary))
+//            }
         }
     }
     
