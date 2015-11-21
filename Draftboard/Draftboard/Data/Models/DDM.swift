@@ -5,6 +5,8 @@
 //  Created by Wes Pearce on 10/22/15.
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
+
+/*
 import UIKit
 
 enum DDMError: ErrorType {
@@ -59,12 +61,6 @@ final class DDM {
         currentSport = sports[0]
     }
     
-    /*
-    class func players() -> [Player]? {
-        return DDM.sharedInstance.nbaPlayers
-    }
-    */
-    
     class func teams() -> [Team]? {
         return DDM.sharedInstance.nbaTeams
     }
@@ -116,3 +112,5 @@ final class DDM {
 //        }
     }
 }
+
+*/

@@ -41,6 +41,8 @@
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
 		3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
 		3EB2CB671BFE473B00579F1B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB661BFE473B00579F1B /* Data.swift */; };
+		3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB731BFE763400579F1B /* DraftGroup.swift */; };
+		3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */; };
 		3EE452061BFBBCE70085FB6D /* OMGHTTPURLRQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */; };
 		3EE452071BFBBCE70085FB6D /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452051BFBBCE70085FB6D /* PromiseKit.framework */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
@@ -185,6 +187,8 @@
 		3E96695D1BED5C8B005179E0 /* Lineup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lineup.swift; sourceTree = "<group>"; };
 		3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutRancor.swift; sourceTree = "<group>"; };
 		3EB2CB661BFE473B00579F1B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		3EB2CB731BFE763400579F1B /* DraftGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftGroup.swift; sourceTree = "<group>"; };
+		3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLConnection+Promise.swift"; sourceTree = "<group>"; };
 		3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		3EE452051BFBBCE70085FB6D /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
 		5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardArrowButton.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 		3E80C25C1BC5F5010031CE3F /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				3EB2CB751BFE813500579F1B /* PromiseKit */,
 				3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */,
 				3EE452051BFBBCE70085FB6D /* PromiseKit.framework */,
 			);
@@ -351,6 +356,30 @@
 				3EB2CB661BFE473B00579F1B /* Data.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		3EB2CB751BFE813500579F1B /* PromiseKit */ = {
+			isa = PBXGroup;
+			children = (
+				3EB2CB761BFE813500579F1B /* Categories */,
+			);
+			path = PromiseKit;
+			sourceTree = "<group>";
+		};
+		3EB2CB761BFE813500579F1B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				3EB2CB771BFE813500579F1B /* Foundation */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		3EB2CB771BFE813500579F1B /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		5D26FC6C1BBEE02D00ACF127 /* Account */ = {
@@ -539,6 +568,7 @@
 				5D783AD01BD97D09000D8494 /* Contest.swift */,
 				5D783AD21BD97D23000D8494 /* Sport.swift */,
 				5D1CBFD01BDA8E7D006746B2 /* Team.swift */,
+				3EB2CB731BFE763400579F1B /* DraftGroup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -707,6 +737,7 @@
 				5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */,
 				5DE1D63E1BF2A5FC00C796ED /* LineupStatPMRView.swift in Sources */,
 				5D783AC91BD94847000D8494 /* Player.swift in Sources */,
+				3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
 				5D6237D41BB61FD60007E62A /* ResultsViewController.swift in Sources */,
@@ -746,6 +777,7 @@
 				3C74CA511BE051D90077DF0C /* MoneyBar.swift in Sources */,
 				5D3611F21BD6DC330068E868 /* LineupSearchCellView.swift in Sources */,
 				5D9A32211BCD72A0006C758B /* DraftboardNavController.swift in Sources */,
+				3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */,
 				5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */,
 				5D6237CB1BB61F9B0007E62A /* AppDelegate.swift in Sources */,
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
@@ -881,8 +913,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

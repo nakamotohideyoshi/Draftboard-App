@@ -24,6 +24,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let _ = Data.draftGroupUpcoming
+        
         self.view.backgroundColor = .clearColor()
         
         // Create view tap
@@ -65,12 +68,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Plus) {
-            let mcc = DraftboardModalChoiceController(title: "Choose a Sport", choices: [
-                ["title": "NBA", "subtitle": "52 Contests"],
-                ["title": "NHL", "subtitle": "46 Contests"],
-            ])
-            
-            RootViewController.sharedInstance.pushModalViewController(mcc)
+            promptCreate()
         }
         else if(buttonType == .Menu) {
             let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
@@ -82,22 +80,60 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         if (sportIndex == nil) {
             sportIndex = index
             
-            let mvc = DraftboardModalChoiceController(title: "Choose a Contest Time", choices: [
-                ["title": "Tonight", "subtitle": "32 Contests"],
-                ["title": "Tomorrow", "subtitle": "28 Contests"],
-            ])
-            
-            RootViewController.sharedInstance.pushModalViewController(mvc)
+            Data.draftGroupUpcoming.then { draftGroups -> Void in
+                var choices = [[String: String]]()
+                var sports = [String]()
+                for draftGroup in draftGroups {
+                    let s = draftGroup.sport.name
+                    if !sports.contains(s) {
+                        sports.append(s)
+                    }
+                }
+                let sport = sports[index]
+                for draftGroup in draftGroups {
+                    let df = NSDateFormatter()
+                    df.dateFormat = "MMM dd, h:mm a"
+                    let t = df.stringFromDate(draftGroup.start)
+                    
+                    if draftGroup.sport.name == sport {
+                        choices.append(["title": "\(t)", "subtitle": "X Contests"])
+                    }
+                }
+                let mvc = DraftboardModalChoiceController(title: "Choose a Contest Time", choices: choices)
+                RootViewController.sharedInstance.pushModalViewController(mvc)
+            }
         }
-        
+            
         else if (sportIndex != nil && timeIndex == nil) {
             timeIndex = index
-            RootViewController.sharedInstance.popModalViewController()
-            createNewLineup()
             
-            // TODO: remove these when data is connected
-            sportIndex = nil
-            timeIndex = nil
+            Data.draftGroupUpcoming.then { draftGroups -> Void in
+                var sports = [String]()
+                var times = [NSDate]()
+                for draftGroup in draftGroups {
+                    let s = draftGroup.sport.name
+                    if !sports.contains(s) {
+                        sports.append(s)
+                    }
+                }
+                let sport = sports[index]
+                for draftGroup in draftGroups {
+                    if draftGroup.sport.name == sport {
+                        let t = draftGroup.start
+                        times.append(t)
+                        if times.count == index + 1 {
+                            RootViewController.sharedInstance.popModalViewController()
+                            self.createNewLineup(draftGroup: draftGroup)
+                            
+                            // TODO: remove these when data is connected
+                            self.sportIndex = nil
+                            self.timeIndex = nil
+                            break
+                        }
+                    }
+                }
+            }
+
         }
     }
     
@@ -108,11 +144,29 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     func didTapCreateView(gestureRecognizer: UITapGestureRecognizer) {
-        createNewLineup()
+        promptCreate()
     }
     
-    func createNewLineup() {
+    func promptCreate() {
+        Data.draftGroupUpcoming.then { draftGroups -> Void in
+            var choices = [[String: String]]()
+            var sports = [String]()
+            for draftGroup in draftGroups {
+                let s = draftGroup.sport.name
+                if !sports.contains(s) {
+                    sports.append(s)
+                    choices.append(["title": s, "subtitle": "X Contests"])
+                }
+            }
+            let mcc = DraftboardModalChoiceController(title: "Choose a Sport", choices: choices)
+            RootViewController.sharedInstance.pushModalViewController(mcc)
+        }
+    }
+    
+    func createNewLineup(draftGroup draftGroup: DraftGroup) {
+        let _ = Data.draftGroup(id: draftGroup.id)
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
+        nvc.draftGroup = draftGroup
         nvc.saveLineupAction = { (lineup: [Player]) in
             self.didSaveLineup(lineup)
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)

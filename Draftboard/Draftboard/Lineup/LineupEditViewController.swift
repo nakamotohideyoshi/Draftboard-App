@@ -15,6 +15,7 @@ class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var statContainer: UIView!
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
     
+    var draftGroup: DraftGroup!
     var lineup: Lineup!
     var saveLineupAction: (([Player]) -> Void)?
     var positions = [String]()
@@ -23,6 +24,8 @@ class LineupEditViewController: DraftboardViewController {
     var cellIndex = 0
     
     override func viewDidLoad() {
+        let _ = Data.draftGroup(id: draftGroup.id)
+        
         positions = ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"]
         positionPlaceholders = [
             "Select Point Guard",
@@ -39,10 +42,27 @@ class LineupEditViewController: DraftboardViewController {
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
         layoutCellViews()
-
-        if lineup == nil {
-            lineup = Lineup()
+        
+        /*
+        var players = [Player]()
+        for i in 0..<8 {
+            let playerDict = [
+                "player_id": i,
+                "name": "Koral Karver",
+                "salary": 5000,
+                "position": "PG",
+                "fppg": 25.5,
+                "team_alias": "MEM"
+            ]
+            players.append(Player(data: playerDict)!)
         }
+        lineup = Lineup(data: [
+            "id": 100,
+            "name": "Warriors Stack",
+            "sport": "nba",
+            "draft_group": 1
+        ])
+        */
     }
     
     func layoutCellViews() {
@@ -125,6 +145,7 @@ class LineupEditViewController: DraftboardViewController {
         titleText = (titleText == nil) ? "Empty" : titleText
         
         let svc = LineupSearchViewController(titleText: titleText!, nibName: "LineupSearchViewController", bundle: nil)
+        svc.draftGroup = draftGroup
         
         svc.playerSelectedAction = {(player: Player) in
             self.navController?.popViewController()
@@ -161,7 +182,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String {
-        return "Create Lineup".uppercaseString
+        return "Create \(draftGroup.sport.name) Lineup".uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {

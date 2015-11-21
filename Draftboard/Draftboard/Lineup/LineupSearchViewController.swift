@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class LineupSearchViewController: DraftboardViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var remSalaryLabel: DraftboardLabel!
@@ -16,6 +17,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     @IBOutlet weak var statsDividerHeight: NSLayoutConstraint!
     
     let searchCellIdentifier = "searchCellIdentifier"
+    var draftGroup: DraftGroup!
     var playerSelectedAction:((Player) -> Void)?
     var positionText: String!
     
@@ -30,6 +32,9 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Data.draftGroup(id: draftGroup.id).then(self.gotDraftGroup)
+        
         view.backgroundColor = .blueDarker()
         
         let onePixel = 1 / UIScreen.mainScreen().scale
@@ -52,9 +57,16 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         tableView.setContentOffset(CGPointMake(0, searchBar.bounds.size.height), animated: false)
     }
     
+    func gotDraftGroup(draftGroup: DraftGroup) {
+        self.draftGroup = draftGroup
+        self.tableView.reloadData()
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let player = DDM.players[indexPath.row]
-        playerSelectedAction?(player)
+        if let players = draftGroup.players {
+            let player = players[indexPath.row]
+            playerSelectedAction?(player)
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -62,13 +74,17 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DDM.players.count
+        if let players = draftGroup.players {
+            return players.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(searchCellIdentifier, forIndexPath: indexPath) as! LineupSearchCellView
         cell.infoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
-        cell.player = DDM.players[indexPath.row]
+        cell.player = draftGroup.players?[indexPath.row]
         cell.backgroundColor = .clearColor()
         cell.topBorder = true
         if indexPath.row == 0 {

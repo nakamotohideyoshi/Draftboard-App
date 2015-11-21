@@ -45,7 +45,7 @@ final class RootViewController: UIViewController {
         modalControllerView.hidden = true;
         
         setAppearanceProperties()
-        DDM.requestPlayers()
+        let _ = Data.draftGroupUpcoming
     }
     
     func didSelectGlobalFilter(index: Int) {
