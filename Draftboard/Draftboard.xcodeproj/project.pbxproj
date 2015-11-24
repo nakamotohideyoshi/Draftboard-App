@@ -36,6 +36,7 @@
 		3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */; };
 		3CDCF9C21BE411BB00F75BF2 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */; };
 		3CDCF9C41BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */; };
+		3E19DA1D1C03B75000E6B53F /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19DA1C1C03B75000E6B53F /* LoaderView.swift */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
@@ -176,6 +177,7 @@
 		3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardContestsUpcomingCell.swift; sourceTree = "<group>"; };
+		3E19DA1C1C03B75000E6B53F /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7860BF1B9FB0E7004013AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E7860C71B9FB0E7004013AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */,
 				5D4B87431BB3388E00B58EDF /* DraftboardTitlebar.swift */,
 				5D5829D51BF2894700FFA7D8 /* CircleProgressView.swift */,
+				3E19DA1C1C03B75000E6B53F /* LoaderView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
 				5D6237DD1BB6200B0007E62A /* DraftboardModalViewController.swift in Sources */,
 				5D6237DE1BB6200B0007E62A /* DraftboardNibControl.swift in Sources */,
+				3E19DA1D1C03B75000E6B53F /* LoaderView.swift in Sources */,
 				3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */,
 				5D63D0A91BD6B711000215DF /* LineupSearchViewController.swift in Sources */,
 				5D6237DF1BB6200B0007E62A /* DraftboardNibView.swift in Sources */,
