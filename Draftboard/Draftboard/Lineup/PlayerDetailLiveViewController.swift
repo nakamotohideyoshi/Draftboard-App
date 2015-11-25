@@ -21,6 +21,8 @@ class PlayerDetailLiveViewController: DraftboardViewController {
     @IBOutlet weak var infoListDividerHeight: NSLayoutConstraint!
     @IBOutlet weak var statsDividerHeight: NSLayoutConstraint!
     
+    var topViewHeightBase = CGFloat()
+    
     var player: Player?
     var draftable = false
     
@@ -30,8 +32,9 @@ class PlayerDetailLiveViewController: DraftboardViewController {
         super.viewDidLoad()
         scrollView.delegate = self
         
-        topView.backgroundColor = .clearColor()
+        topViewHeightBase = topViewHeight.constant
         
+        topView.backgroundColor = .clearColor()
         infoListDividerHeight.constant = 1 / UIScreen.mainScreen().scale
         statsDividerHeight.constant = infoListDividerHeight.constant
         
@@ -103,8 +106,8 @@ class PlayerDetailLiveViewController: DraftboardViewController {
 // MARK: - UIScrollViewDelegate
 extension PlayerDetailLiveViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if(scrollView.contentOffset.y < 0) {
-            topViewTopConstraint.constant = abs(scrollView.contentOffset.y / 2)
+        if scrollView.contentOffset.y < 0 {
+            topViewHeight.constant = topViewHeightBase + abs(scrollView.contentOffset.y)
         } else {
             topView.alpha = min(1 - (scrollView.contentOffset.y / 320), 1)
         }

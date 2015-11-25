@@ -21,6 +21,13 @@ class PlayerDetailViewController: DraftboardViewController {
     @IBOutlet weak var topViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var infoListDividerHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomInfoTopConstraint: NSLayoutConstraint!
+    
+    var topViewHeightBase = CGFloat()
+    
     var player: Player?
     var draftable = true
     
@@ -29,6 +36,8 @@ class PlayerDetailViewController: DraftboardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        
+        topViewHeightBase = topViewHeight.constant
         
         topView.backgroundColor = .clearColor()
         infoListDividerHeight.constant = 1 / UIScreen.mainScreen().scale
@@ -103,10 +112,37 @@ class PlayerDetailViewController: DraftboardViewController {
 // MARK: - UIScrollViewDelegate
 extension PlayerDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if(scrollView.contentOffset.y < 0) {
-            topViewTopConstraint.constant = abs(scrollView.contentOffset.y / 2)
+//        if(scrollView.contentOffset.y < 0) {
+//            topViewTopConstraint.constant = abs(scrollView.contentOffset.y / 2)
+//        } else {
+//            topView.alpha = min(1 - (scrollView.contentOffset.y / 320), 1)
+//        }
+        if scrollView.contentOffset.y < 0 {
+            topViewHeight.constant = topViewHeightBase + abs(scrollView.contentOffset.y)
         } else {
             topView.alpha = min(1 - (scrollView.contentOffset.y / 320), 1)
+        }
+        
+        if draftable {
+            if scrollView.contentOffset.y > topViewHeightBase - 24 {
+                buttonTopConstraint.constant = -(scrollView.contentOffset.y - bottomInfoTopConstraint.constant)
+                
+                self.view.layoutIfNeeded()
+                buttonLeadingConstraint.constant = 0
+                buttonTrailingConstraint.constant = 0
+                UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                    }, completion: nil)
+            } else {
+                buttonTopConstraint.constant = 24
+                
+                self.view.layoutIfNeeded()
+                buttonLeadingConstraint.constant = 45
+                buttonTrailingConstraint.constant = -45
+                UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                    }, completion: nil)
+            }
         }
     }
 }

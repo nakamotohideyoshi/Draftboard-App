@@ -94,6 +94,7 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
+        cdvc.contestName = "$100k Slam Dunk"
         self.navController?.pushViewController(cdvc)
     }
     
