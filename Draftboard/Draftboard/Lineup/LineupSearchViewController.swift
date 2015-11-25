@@ -20,6 +20,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     var draftGroup: DraftGroup!
     var playerSelectedAction:((Player) -> Void)?
     var positionText: String!
+    var loaderView: LoaderView!
     
     init(titleText: String, nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -33,6 +34,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.showSpinner()
         Data.draftGroup(id: draftGroup.id).then(self.gotDraftGroup)
         
         view.backgroundColor = .blueDarker()
@@ -57,8 +59,18 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         tableView.setContentOffset(CGPointMake(0, searchBar.bounds.size.height), animated: false)
     }
     
+    func showSpinner() {
+        loaderView = LoaderView(frame: CGRectMake(0, 0, 64, 64))
+        loaderView.center = view.center
+        loaderView.center.y -= 100
+        view.addSubview(loaderView)
+        loaderView.spinning = true
+    }
+    
     func gotDraftGroup(draftGroup: DraftGroup) {
         self.draftGroup = draftGroup
+        self.loaderView.spinning = false
+        self.loaderView.removeFromSuperview()
         self.tableView.reloadData()
     }
     
