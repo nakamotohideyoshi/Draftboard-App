@@ -74,6 +74,10 @@ extension UIColor {
         return UIColor(0xe6e8ed)
     }
     
+    class func dividerOnDarkColor() -> UIColor {
+        return dividerOnWhiteColor().colorWithAlphaComponent(0.1)
+    }
+    
     // PMR color
     class func PMRColorFG() -> UIColor {
         return blueAccent()

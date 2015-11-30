@@ -25,8 +25,10 @@
                 <outlet property="avgPmrLabel" destination="Bwe-xy-Ij8" id="aNN-Cv-EyK"/>
                 <outlet property="entryLabel" destination="MEq-f0-ql3" id="8ha-Gb-faF"/>
                 <outlet property="feeLabel" destination="k6K-2s-P46" id="QSI-Tm-w2G"/>
-                <outlet property="prizeLabel" destination="8De-y0-gFT" id="2EV-0G-K7n"/>
-                <outlet property="prizesLabel" destination="8De-y0-gFT" id="Z1g-3o-WqD"/>
+                <outlet property="prizeLabel" destination="8De-y0-gFT" id="hdc-Bk-FNd"/>
+                <outlet property="topView" destination="TjU-ey-ygx" id="xD3-pl-EYr"/>
+                <outlet property="topViewHeight" destination="zah-Qv-WRa" id="ZaN-xB-ANk"/>
+                <outlet property="view" destination="iN0-l3-epB" id="htm-x4-nvI"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -34,20 +36,20 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TjU-ey-ygx" userLabel="Top">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TjU-ey-ygx" userLabel="Top">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-contest" translatesAutoresizingMaskIntoConstraints="NO" id="Y2W-M0-Hie">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-contest" translatesAutoresizingMaskIntoConstraints="NO" id="Y2W-M0-Hie">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
                             <animations/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbo-WV-Km1" userLabel="Stats">
-                            <rect key="frame" x="15" y="222" width="290" height="48"/>
+                            <rect key="frame" x="15" y="221" width="290" height="48"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Zb-eE-Nan" userLabel="Fee">
                                     <rect key="frame" x="0.0" y="0.0" width="72" height="48"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T25-hk-f8E" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T25-hk-f8E" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="26" y="3" width="20" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -59,7 +61,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6K-2s-P46" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6K-2s-P46" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="16" y="19" width="40" height="30"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
@@ -78,7 +80,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pur-U8-e3n" userLabel="Prizes">
                                     <rect key="frame" x="72" y="0.0" width="73" height="48"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lE-y6-seo" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lE-y6-seo" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="17" y="3" width="39" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -90,7 +92,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8De-y0-gFT" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8De-y0-gFT" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="11" y="19" width="50" height="30"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
@@ -109,7 +111,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Dw-vq-ZNT" userLabel="Entries">
                                     <rect key="frame" x="145" y="0.0" width="73" height="48"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ENTRIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ob7-NH-u7X" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENTRIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ob7-NH-u7X" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="13" y="3" width="47" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -121,7 +123,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEq-f0-ql3" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEq-f0-ql3" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="23" y="19" width="28" height="30"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
@@ -140,7 +142,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VzM-CP-qwq" userLabel="Avg PMR">
                                     <rect key="frame" x="218" y="0.0" width="72" height="48"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="AVG PMR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvz-RG-1BJ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVG PMR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvz-RG-1BJ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="11" y="3" width="51" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
@@ -152,7 +154,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="280" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwe-xy-Ij8" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="280" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwe-xy-Ij8" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="21" y="19" width="31" height="30"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="20"/>
@@ -190,16 +192,26 @@
                                 <constraint firstItem="4Zb-eE-Nan" firstAttribute="width" secondItem="mbo-WV-Km1" secondAttribute="width" multiplier="0.25" id="xu7-RH-r7o"/>
                             </constraints>
                         </view>
+                        <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="temp-contest-money-line" translatesAutoresizingMaskIntoConstraints="NO" id="73T-MG-Ns9" userLabel="Money Line">
+                            <rect key="frame" x="0.0" y="-5" width="320" height="240"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="240" id="7rW-5P-CQA"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <animations/>
                     <constraints>
                         <constraint firstItem="Y2W-M0-Hie" firstAttribute="leading" secondItem="TjU-ey-ygx" secondAttribute="leading" id="0x2-Qw-H5N"/>
-                        <constraint firstAttribute="bottom" secondItem="mbo-WV-Km1" secondAttribute="bottom" constant="60" id="E5e-sm-fnp"/>
+                        <constraint firstAttribute="trailing" secondItem="73T-MG-Ns9" secondAttribute="trailing" id="39R-7S-d70"/>
+                        <constraint firstItem="mbo-WV-Km1" firstAttribute="centerY" secondItem="TjU-ey-ygx" secondAttribute="centerY" constant="80" id="6S6-x1-kW0"/>
+                        <constraint firstItem="73T-MG-Ns9" firstAttribute="centerY" secondItem="TjU-ey-ygx" secondAttribute="centerY" constant="-50" id="DU8-SL-Qhp"/>
                         <constraint firstItem="mbo-WV-Km1" firstAttribute="leading" secondItem="TjU-ey-ygx" secondAttribute="leading" constant="15" id="dRS-dA-DXD"/>
                         <constraint firstAttribute="bottom" secondItem="Y2W-M0-Hie" secondAttribute="bottom" id="iQ9-OO-2Zt"/>
                         <constraint firstItem="Y2W-M0-Hie" firstAttribute="top" secondItem="TjU-ey-ygx" secondAttribute="top" id="jIM-7N-ZXS"/>
                         <constraint firstAttribute="trailing" secondItem="mbo-WV-Km1" secondAttribute="trailing" constant="15" id="obs-Qo-FtV"/>
                         <constraint firstAttribute="trailing" secondItem="Y2W-M0-Hie" secondAttribute="trailing" id="pru-fI-dER"/>
+                        <constraint firstItem="73T-MG-Ns9" firstAttribute="leading" secondItem="TjU-ey-ygx" secondAttribute="leading" id="uSj-hB-I1h"/>
                         <constraint firstAttribute="height" constant="330" id="zah-Qv-WRa"/>
                     </constraints>
                 </view>
@@ -217,5 +229,6 @@
     </objects>
     <resources>
         <image name="background-contest" width="375" height="400"/>
+        <image name="temp-contest-money-line" width="375" height="233"/>
     </resources>
 </document>

@@ -93,9 +93,19 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
-        cdvc.contestName = "$100k Slam Dunk"
-        self.navController?.pushViewController(cdvc)
+        
+        // TODO: Actual logic for selecting section
+        
+        if indexPath.section == 0 {
+            let cdvc = ContestLiveDetailViewController(nibName: "ContestLiveDetailViewController", bundle: nil)
+            cdvc.contestName = "$100k Slam Dunk"
+            self.navController?.pushViewController(cdvc)
+        } else {
+            let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
+            cdvc.contestName = "$100k Slam Dunk"
+            self.navController?.pushViewController(cdvc)
+        }
+        
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {

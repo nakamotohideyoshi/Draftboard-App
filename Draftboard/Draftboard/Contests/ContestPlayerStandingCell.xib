@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
@@ -89,6 +89,13 @@
                 <constraint firstAttribute="trailing" secondItem="kmQ-45-91i" secondAttribute="trailing" constant="92" id="uaJ-e8-Wjj"/>
             </constraints>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="lineupPMR" destination="SFP-Y5-nGO" id="5Xi-DJ-bhn"/>
+                <outlet property="lineupPlace" destination="GlK-34-jis" id="AC9-mr-B2Z"/>
+                <outlet property="lineupPoints" destination="etd-ho-8Gk" id="STf-s6-GNt"/>
+                <outlet property="lineupWinnings" destination="kmQ-45-91i" id="ENk-g9-j67"/>
+                <outlet property="playerName" destination="MPP-Vm-UxC" id="yDM-2y-BSw"/>
+            </connections>
             <point key="canvasLocation" x="372.5" y="593.5"/>
         </tableViewCell>
     </objects>
