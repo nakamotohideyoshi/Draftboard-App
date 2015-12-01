@@ -92,6 +92,10 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         return 24.0
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 76.0
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         // TODO: Actual logic for selecting section
