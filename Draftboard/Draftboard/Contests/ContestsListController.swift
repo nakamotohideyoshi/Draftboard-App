@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContestsListController: DraftboardViewController, UITableViewDelegate, UITableViewDataSource {
+class ContestsListController: DraftboardViewController{
     let normalContestCellReuseIdentifier = "normalContestCell"
     let liveContestCellReuseIdentifier = "liveContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
@@ -49,14 +49,34 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
         tableView.delegate = self
     }
     
-    /*
-        UITableViewDatasource
-    */
+    
+    
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if(buttonType == .Menu) {
+            let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
+            RootViewController.sharedInstance.pushModalViewController(gfvc)
+        }
+    }
+    
+    override func titlebarTitle() -> String? {
+        return "All Contests".uppercaseString
+    }
+    
+    override func titlebarAttributedTitle() -> NSMutableAttributedString? {
+        let attrStr = super.titlebarAttributedTitle()
+        attrStr?.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenDraftboard(), range: NSMakeRange(0, 3))
+        return attrStr
+    }
+}
+
+// MARK: - UITableViewDelegate functions
+
+extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return tempSections.count
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 4
@@ -110,22 +130,5 @@ class ContestsListController: DraftboardViewController, UITableViewDelegate, UIT
             self.navController?.pushViewController(cdvc)
         }
         
-    }
-    
-    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
-        if(buttonType == .Menu) {
-            let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
-            RootViewController.sharedInstance.pushModalViewController(gfvc)
-        }
-    }
-    
-    override func titlebarTitle() -> String? {
-        return "All Contests".uppercaseString
-    }
-    
-    override func titlebarAttributedTitle() -> NSMutableAttributedString? {
-        let attrStr = super.titlebarAttributedTitle()
-        attrStr?.addAttribute(NSForegroundColorAttributeName, value: UIColor.greenDraftboard(), range: NSMakeRange(0, 3))
-        return attrStr
     }
 }
