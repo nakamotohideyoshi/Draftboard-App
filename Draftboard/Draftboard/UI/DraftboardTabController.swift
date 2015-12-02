@@ -71,22 +71,25 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         }
 
         if (animated) {
-            self.cnc?.view.removeFromSuperview()
-            
+//            self.cnc?.view.removeFromSuperview()
             var inT = CATransform3DIdentity
             inT.m34 = -1.0 / 500.0
-            inT = CATransform3DScale(inT, 1.2, 1.2, 1.0)
+            inT = CATransform3DScale(inT, 1.1, 1.1, 1.0)
             nc.view.layer.transform = inT
             
-            let startScale: CGFloat = 1.2
+            let startScale: CGFloat = 1.1
             let scaleDelta: CGFloat = 1.0 - startScale
-            spring = Spring(stiffness: 2.0, damping: 0.8, velocity: 10.0)
+            spring = Spring(stiffness: 4.0, damping: 0.4, velocity: 8.0)
             spring!.updateBlock = { (value) -> Void in
                 let scale = startScale + scaleDelta * value
                 nc.view.layer.transform = CATransform3DMakeScale(scale, scale, 1.0)
+                nc.view.alpha = value
+                // have the old view fade out faster
+                self.cnc?.view.alpha = abs(value - 1) - 0.4
             }
             spring!.completeBlock = { (completed) -> Void in
                 nc.view.layer.transform = CATransform3DIdentity
+                self.cnc?.view.removeFromSuperview()
                 self.completionHandler?(completed)
             }
             

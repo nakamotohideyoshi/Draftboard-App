@@ -291,15 +291,17 @@ class DraftboardNavController: UIViewController {
         let endPos = vc.view.layer.position
         let startPos = CGPointMake(endPos.x + (sw * dir), endPos.y)
         let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
+        self.view.bringSubviewToFront(vc.view)
         
         vc.view.hidden = true // TODO: this shouldn't be necessary, needs a fix
-        let spring = Spring(stiffness: 3.5, damping: 0.65, velocity: 0.0)
+        let spring = Spring(stiffness: 3.4, damping: 0.63, velocity: 0.0)
         spring.updateBlock = { (value) -> Void in
             vc.view.hidden = false // TODO: this shouldn't be necessary, needs a fix
             vc.view.layer.position = CGPointMake(
                 startPos.x + (deltaPos.x * value),
                 startPos.y + (deltaPos.y * value)
             )
+            vc.view.alpha = min(value + 0.6, 1)
         }
         
         return spring
@@ -312,12 +314,13 @@ class DraftboardNavController: UIViewController {
         let endPos = CGPointMake(startPos.x + (sw * dir), startPos.y)
         let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
         
-        let spring = Spring(stiffness: 3.5, damping: 0.65, velocity: 0.0)
+        let spring = Spring(stiffness: 3.4, damping: 0.63, velocity: 0.0)
         spring.updateBlock = { (value) -> Void in
             vc.view.layer.position = CGPointMake(
                 startPos.x + (deltaPos.x * value),
                 startPos.y + (deltaPos.y * value)
             )
+            vc.view.alpha = max(abs(value - 1), 0.6)
         }
         
         return spring

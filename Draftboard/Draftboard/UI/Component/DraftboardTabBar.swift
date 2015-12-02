@@ -31,7 +31,8 @@ class DraftboardTabBar: UIView {
     var buttons = [DraftboardTabBarButton]()
     var selectedIndex = 0
     
-    var spring: Spring?
+    var selectionSpring: Spring?
+    var iconSpring: Spring?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,7 +95,7 @@ class DraftboardTabBar: UIView {
         
         for (i, button) in buttons.enumerate() {
             self.addSubview(button)
-            button.addTarget(self, action: "buttonTap:", forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: "buttonTap:", forControlEvents: .TouchDown)
             
             button.translatesAutoresizingMaskIntoConstraints = false
             button.topRancor.constraintEqualToRancor(self.topRancor).active = true
@@ -166,8 +167,11 @@ class DraftboardTabBar: UIView {
         
         // Animate the change?
         if (animated) {
-            spring?.stop()
-            spring = nil
+            selectionSpring?.stop()
+            selectionSpring = nil
+            
+            iconSpring?.stop()
+            selectionSpring = nil
             
             // Apply constraints
             let startPos = NSValue(CGPoint: selectionLineView.layer.position).CGPointValue()
@@ -177,12 +181,22 @@ class DraftboardTabBar: UIView {
             
             // Spring
             selectionLineView.layer.position = startPos
-            spring = Spring(stiffness: 2.0, damping: 0.84, velocity: 0.0)
-            spring!.updateBlock = { (value) -> Void in
+            selectionSpring = Spring(stiffness: 3.0, damping: 0.74, velocity: 0.0)
+            selectionSpring!.updateBlock = { (value) -> Void in
                 self.selectionLineView.layer.position = CGPointMake(startPos.x + (deltaPos.x * value), startPos.y + (deltaPos.y * value))
             }
-
-            spring!.start()
+            selectionSpring!.start()
+            
+            iconSpring = Spring(stiffness: 2.0, damping: 0.9, velocity: 0.0)
+            iconSpring!.updateBlock = { (value) -> Void in
+                let iconScale = 0.75 + (value * 0.25)
+                button.iconImageView.transform = CGAffineTransformMakeScale(iconScale, iconScale)
+            }
+            iconSpring!.completeBlock = { (completed) -> Void in
+                // ensure that it's reset to the right scale
+                button.iconImageView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            }
+            iconSpring!.start()
         }
     }
     
