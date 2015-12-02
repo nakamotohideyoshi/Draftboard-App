@@ -201,10 +201,10 @@ class DraftboardModalNavController: UIViewController {
     
     func animateViewControllerInBounce(vc: DraftboardModalViewController) -> Spring {
         let endScale: CGFloat = 1.0
-        let startScale: CGFloat = 0.5
+        let startScale: CGFloat = 1.1
         let deltaScale: CGFloat = endScale - startScale
         
-        let spring = Spring(stiffness: 3.0, damping: 0.75, velocity: 0.0)
+        let spring = Spring(stiffness: 4.0, damping: 0.4, velocity: 10.0)
         spring.updateBlock = { (value) -> Void in
             let scale = startScale + (deltaScale * value)
             vc.view.layer.transform = CATransform3DMakeScale(scale, scale, 1.0)
@@ -219,7 +219,7 @@ class DraftboardModalNavController: UIViewController {
         let startScale: CGFloat = 1.0
         let deltaScale: CGFloat = endScale - startScale
         
-        let spring = Spring(stiffness: 3.5, damping: 0.65, velocity: 0.0)
+        let spring = Spring(stiffness: 4.0, damping: 0.4, velocity: 0)
         spring.updateBlock = { (value) -> Void in
             let scale = startScale + (deltaScale * value)
             vc.view.layer.transform = CATransform3DMakeScale(scale, scale, 1.0)
