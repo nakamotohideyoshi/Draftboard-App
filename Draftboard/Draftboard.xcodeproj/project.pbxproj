@@ -113,8 +113,6 @@
 		5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783ACE1BD97CAA000D8494 /* DDM.swift */; };
 		5D783AD11BD97D09000D8494 /* Contest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AD01BD97D09000D8494 /* Contest.swift */; };
 		5D783AD31BD97D23000D8494 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AD21BD97D23000D8494 /* Sport.swift */; };
-		5D7A6BBE1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D7A6BBD1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib */; };
-		5D7A6BC01BEC306600F1BCA6 /* DraftboardModalCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7A6BBF1BEC306600F1BCA6 /* DraftboardModalCancelView.swift */; };
 		5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */; };
 		5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */; };
 		5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */; };
@@ -252,8 +250,6 @@
 		5D783ACE1BD97CAA000D8494 /* DDM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDM.swift; sourceTree = "<group>"; };
 		5D783AD01BD97D09000D8494 /* Contest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contest.swift; sourceTree = "<group>"; };
 		5D783AD21BD97D23000D8494 /* Sport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
-		5D7A6BBD1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalCancelView.xib; sourceTree = "<group>"; };
-		5D7A6BBF1BEC306600F1BCA6 /* DraftboardModalCancelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalCancelView.swift; sourceTree = "<group>"; };
 		5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTabBarButton.swift; sourceTree = "<group>"; };
 		5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+DraftboardFonts.swift"; sourceTree = "<group>"; };
 		5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardFilterButton.xib; sourceTree = "<group>"; };
@@ -511,8 +507,6 @@
 				5D4B871D1BB31A5F00B58EDF /* Component */,
 				5D4B87391BB31B0100B58EDF /* DraftboardImageView.swift */,
 				5D4B873A1BB31B0100B58EDF /* DraftboardLabel.swift */,
-				5D7A6BBF1BEC306600F1BCA6 /* DraftboardModalCancelView.swift */,
-				5D7A6BBD1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib */,
 				5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */,
 				5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */,
 				3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */,
@@ -641,7 +635,6 @@
 				5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */,
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3C74CA411BE051290077DF0C /* ContestDetailViewCell.xib in Resources */,
-				5D7A6BBE1BEC2F6400F1BCA6 /* DraftboardModalCancelView.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D6237C01BB61F7B0007E62A /* LineupCellView.xib in Resources */,
 				5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */,
@@ -771,7 +764,6 @@
 				5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,
 				5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */,
-				5D7A6BC01BEC306600F1BCA6 /* DraftboardModalCancelView.swift in Sources */,
 				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
 				3EB2CB671BFE473B00579F1B /* Data.swift in Sources */,

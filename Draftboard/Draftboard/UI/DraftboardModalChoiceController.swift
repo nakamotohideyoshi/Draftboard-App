@@ -16,7 +16,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
     var delegate: DraftboardModalChoiceDelegate?
     var scrollView: UIScrollView!
     var titleLabel: DraftboardLabel!
-    var cancelView: DraftboardModalCancelView!
+    var closeButton: DraftboardButton!
     var choiceData: [Dictionary<String, String>]!
     var choiceViews: [DraftboardModalItemView]!
     var titleText: String!
@@ -60,28 +60,27 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         // Add choices
         self.addChoiceViews()
         
-        // Create cancel view
-        cancelView = DraftboardModalCancelView()
-        view.addSubview(cancelView)
+        // Create close button
+        closeButton = DraftboardButton()
+        view.addSubview(closeButton)
 
-        cancelView.translatesAutoresizingMaskIntoConstraints = false
-        cancelView.widthRancor.constraintEqualToConstant(275.0).active = true
-        cancelView.heightRancor.constraintEqualToConstant(77.0).active = true
-        cancelView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
-        cancelView.bottomRancor.constraintEqualToRancor(view.bottomRancor, constant: -30.0).active = true
+        closeButton.bgColor = .clearColor()
+        closeButton.bgHighlightColor = .clearColor()
+        closeButton.iconHighlightColor = .greenDraftboard()
+        closeButton.iconColor = .whiteColor()
+        closeButton.textValue = ""
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.leadingRancor.constraintEqualToRancor(view.leadingRancor).active = true
+        closeButton.widthRancor.constraintEqualToRancor(view.widthRancor, multiplier: 0.16).active = true
+        closeButton.topRancor.constraintEqualToRancor(view.topRancor, constant: 20).active = true
+        closeButton.heightRancor.constraintEqualToConstant(56).active = true
+        closeButton.iconImageView.image = UIImage(named: "titlebar-icon-close")
+
         
-        cancelView.layer.shadowColor = UIColor.blackColor().CGColor
-        cancelView.layer.shadowRadius = 10.0
-        cancelView.layer.shadowOffset = CGSizeMake(0, 0);
-        cancelView.layer.shadowOpacity = 0.5;
-        cancelView.layer.masksToBounds = false
-        cancelView.layer.shouldRasterize = true
-        cancelView.layer.rasterizationScale = UIScreen.mainScreen().scale
-        
-        cancelView.addTarget(self, action: Selector("didTapCancel:"), forControlEvents: .TouchUpInside)
+        closeButton.addTarget(self, action: Selector("didTapCancel:"), forControlEvents: .TouchUpInside)
     }
     
-    func didTapCancel(sender: DraftboardModalCancelView) {
+    func didTapCancel(sender: DraftboardButton) {
         RootViewController.sharedInstance.didCancelModal()
     }
     
