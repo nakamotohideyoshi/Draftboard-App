@@ -95,14 +95,14 @@
                                             <rect key="frame" x="31" y="14" width="22" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.35160541534423828" green="0.36195579171180725" blue="0.47066652774810791" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-F0-EBp" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="26" y="28" width="33" height="23"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -122,14 +122,14 @@
                                             <rect key="frame" x="29" y="14" width="34" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.35160541534423828" green="0.36195579171180725" blue="0.47066652774810791" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59:59:59" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X87-EW-M7U" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="19" y="28" width="54" height="23"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -149,14 +149,14 @@
                                             <rect key="frame" x="26" y="14" width="33" height="14"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.35160541534423828" green="0.36195579171180725" blue="0.47066652774810791" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy1-f8-MfW" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="26" y="28" width="33" height="23"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
