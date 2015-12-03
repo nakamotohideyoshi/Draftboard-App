@@ -33,6 +33,7 @@
 		3CB058721BE2CA01002343BD /* GlobalFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */; };
 		3CB630A81C10A19000ACEAD3 /* DepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */; };
 		3CB630A91C10A19000ACEAD3 /* DepositViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630A71C10A19000ACEAD3 /* DepositViewController.xib */; };
+		3CB630AB1C10E85F00ACEAD3 /* ContestConfirmationModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */; };
 		3CDC735E1BF12E0600DDF60E /* ContestLiveDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */; };
 		3CDC73601BF1472B00DDF60E /* ContestLiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */; };
 		3CDC73631BF1499E00DDF60E /* ContestPlayerStandingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */; };
@@ -176,6 +177,7 @@
 		3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlobalFilterViewController.xib; sourceTree = "<group>"; };
 		3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositViewController.swift; sourceTree = "<group>"; };
 		3CB630A71C10A19000ACEAD3 /* DepositViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositViewController.xib; sourceTree = "<group>"; };
+		3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestConfirmationModal.xib; sourceTree = "<group>"; };
 		3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestLiveDetailViewController.xib; sourceTree = "<group>"; };
 		3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestLiveDetailViewController.swift; sourceTree = "<group>"; };
 		3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestPlayerStandingCell.swift; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 				3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */,
 				3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */,
 				3C74CA521BE0528D0077DF0C /* ContestModel.swift */,
+				3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */,
 				3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */,
 				3CDC73621BF1499E00DDF60E /* ContestPlayerStandingCell.xib */,
 				3C74CA421BE0513A0077DF0C /* ContestsHeaderCell.swift */,
@@ -644,6 +647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C74CA491BE0517B0077DF0C /* ContestsListController.xib in Resources */,
+				3CB630AB1C10E85F00ACEAD3 /* ContestConfirmationModal.xib in Resources */,
 				5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */,
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3C74CA411BE051290077DF0C /* ContestDetailViewCell.xib in Resources */,
