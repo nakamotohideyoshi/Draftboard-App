@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9059"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9060"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -26,18 +26,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="820"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="764"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKC-Bk-t1b" customClass="DraftboardSegmentedView" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <animations/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="a2s-Lx-GdP"/>
-                    </constraints>
-                </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLj-Kp-2bb" customClass="UIScrollView">
-                    <rect key="frame" x="0.0" y="50" width="320" height="770"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="764"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJL-iE-oH8">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
@@ -230,7 +223,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qg-1E-XJ9">
-                    <rect key="frame" x="0.0" y="50" width="320" height="1"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -241,18 +234,15 @@
             <animations/>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="2qg-1E-XJ9" firstAttribute="top" secondItem="WKC-Bk-t1b" secondAttribute="bottom" id="OQP-Vb-3mq"/>
+                <constraint firstItem="2qg-1E-XJ9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5zS-fM-hhq"/>
+                <constraint firstAttribute="trailing" secondItem="2qg-1E-XJ9" secondAttribute="trailing" id="8wd-Jn-SGP"/>
                 <constraint firstAttribute="bottom" secondItem="uLj-Kp-2bb" secondAttribute="bottom" id="UMh-Zq-Wtp"/>
-                <constraint firstItem="WKC-Bk-t1b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Uek-8q-oFK"/>
-                <constraint firstItem="WKC-Bk-t1b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VGp-iO-Er0"/>
-                <constraint firstItem="2qg-1E-XJ9" firstAttribute="width" secondItem="WKC-Bk-t1b" secondAttribute="width" id="X2s-DV-pMs"/>
-                <constraint firstItem="WKC-Bk-t1b" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="dno-fZ-VyB"/>
+                <constraint firstItem="uLj-Kp-2bb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ahA-zw-98W"/>
                 <constraint firstItem="uLj-Kp-2bb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fFD-2n-NoC"/>
-                <constraint firstItem="2qg-1E-XJ9" firstAttribute="centerX" secondItem="WKC-Bk-t1b" secondAttribute="centerX" id="k4d-TT-0Md"/>
-                <constraint firstItem="uLj-Kp-2bb" firstAttribute="top" secondItem="WKC-Bk-t1b" secondAttribute="bottom" id="kaf-lR-guf"/>
                 <constraint firstAttribute="trailing" secondItem="uLj-Kp-2bb" secondAttribute="trailing" id="o7L-Bu-Akw"/>
                 <constraint firstItem="uLj-Kp-2bb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pBk-dV-WBd"/>
                 <constraint firstAttribute="bottom" secondItem="uLj-Kp-2bb" secondAttribute="bottom" id="ppo-SB-s05"/>
+                <constraint firstItem="2qg-1E-XJ9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rBp-dB-hk1"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -262,7 +252,7 @@
                     <exclude reference="ppo-SB-s05"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-49.5" y="398"/>
+            <point key="canvasLocation" x="-50" y="370"/>
         </view>
     </objects>
 </document>
