@@ -43,9 +43,22 @@ final class RootViewController: UIViewController {
         modalControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         modalControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         modalControllerView.hidden = true;
-        
+
         setAppearanceProperties()
         let _ = Data.draftGroupUpcoming
+        
+//        let dsc = DraftboardSegmentedControl(
+//            choices: ["One", "Two", "Three"],
+//            textColor: .whiteLowOpacity(),
+//            textSelectedColor: .whiteColor()
+//        )
+//        
+//        self.view.addSubview(dsc)
+//        dsc.translatesAutoresizingMaskIntoConstraints = false
+//        dsc.topRancor.constraintEqualToRancor(view.topRancor, constant: 50.0).active = true
+//        dsc.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
+//        dsc.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
+//        dsc.heightRancor.constraintEqualToConstant(50.0).active = true
     }
     
     func didSelectGlobalFilter(index: Int) {
