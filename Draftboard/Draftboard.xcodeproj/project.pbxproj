@@ -34,6 +34,8 @@
 		3CB630A81C10A19000ACEAD3 /* DepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */; };
 		3CB630A91C10A19000ACEAD3 /* DepositViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630A71C10A19000ACEAD3 /* DepositViewController.xib */; };
 		3CB630AB1C10E85F00ACEAD3 /* ContestConfirmationModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */; };
+		3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */; };
+		3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */; };
 		3CDC735E1BF12E0600DDF60E /* ContestLiveDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */; };
 		3CDC73601BF1472B00DDF60E /* ContestLiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */; };
 		3CDC73631BF1499E00DDF60E /* ContestPlayerStandingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */; };
@@ -178,6 +180,8 @@
 		3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositViewController.swift; sourceTree = "<group>"; };
 		3CB630A71C10A19000ACEAD3 /* DepositViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositViewController.xib; sourceTree = "<group>"; };
 		3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestConfirmationModal.xib; sourceTree = "<group>"; };
+		3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestLiveDetailViewController.xib; sourceTree = "<group>"; };
 		3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestLiveDetailViewController.swift; sourceTree = "<group>"; };
 		3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestPlayerStandingCell.swift; sourceTree = "<group>"; };
@@ -395,6 +399,8 @@
 			children = (
 				5D26FC731BBEE78700ACF127 /* AccountViewController.swift */,
 				5D26FC711BBEE77300ACF127 /* AccountViewController.xib */,
+				3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */,
+				3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */,
 				3C6FBAE11C0FA8D4009C3287 /* WithdrawViewController.swift */,
 				3C6FBAE21C0FA8D4009C3287 /* WithdrawViewController.xib */,
 				3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */,
@@ -668,6 +674,7 @@
 				5D4E63471BAB75D80033C4C2 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				3C74CA4F1BE051A00077DF0C /* DraftboardContestsCell.xib in Resources */,
 				3C74CA3F1BE051070077DF0C /* ContestDetailViewController.xib in Resources */,
+				3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */,
 				3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */,
 				5D4E63481BAB75D80033C4C2 /* OpenSans-Italic.ttf in Resources */,
 				5D783AC31BD9439C000D8494 /* LineupBar.xib in Resources */,
@@ -732,6 +739,7 @@
 				3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */,
 				5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */,
 				5D6237DC1BB6200B0007E62A /* DraftboardLabel.swift in Sources */,
+				3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */,
 				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
 				5D6237DD1BB6200B0007E62A /* DraftboardModalViewController.swift in Sources */,
 				5D6237DE1BB6200B0007E62A /* DraftboardNibControl.swift in Sources */,
