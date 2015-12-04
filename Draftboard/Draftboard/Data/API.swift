@@ -122,13 +122,12 @@ extension API {
     class func draftGroupUpcomingPromise() -> Promise<[DraftGroup]> {
         return Promise { fulfill, reject in
             API.get("api/draft-group/upcoming/") { json in
-                guard let data = json as? NSDictionary,
-                    results = data["results"] as? [NSDictionary]
+                guard let data = json as? [NSDictionary]
                 else { return }
                 
                 var draftGroups = [DraftGroup]()
-                for result in results {
-                    draftGroups.append(DraftGroup(data: result))
+                for draftGroupDict in data {
+                    draftGroups.append(DraftGroup(data: draftGroupDict))
                 }
                 fulfill(draftGroups)
             }
