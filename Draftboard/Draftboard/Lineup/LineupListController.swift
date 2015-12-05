@@ -156,8 +156,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         }
     }
     
-    // TODO: rename to presentLineupCard
-    func didSaveLineup(lineup: [Player]) {
+    func presentLineupCard(lineup: [Player]) {
         self.createView.hidden = true
 
         let cardView = LineupCardView()
@@ -191,7 +190,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         // Scroll to card
         self.view.layoutIfNeeded()
         scrollView.setContentOffset(cardView.frame.origin, animated: false)
-        cardView.contentView.flashScrollIndicators() // TODO: Maybe someday...
+//        cardView.contentView.flashScrollIndicators()
     }
     
     // MARK: - DraftGroup selection
@@ -229,11 +228,12 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         selectedSport = nil
         selectedDraftGroup = nil
         
+        // Pre-fetch data required for player selection
         let _ = Data.draftGroup(id: draftGroup.id)
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.draftGroup = draftGroup
         nvc.saveLineupAction = { (lineup: [Player]) in
-            self.didSaveLineup(lineup)
+            self.presentLineupCard(lineup)
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }
         
