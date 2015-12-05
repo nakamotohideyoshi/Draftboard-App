@@ -209,10 +209,10 @@ class LineupCardView: DraftboardNibView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-//        if (live) {
-//            contestWidth.active = false
-//            liveContestWidth.active = true
-//        }
+        if (live) {
+            contestWidth.active = false
+            liveContestWidth.active = true
+        }
     }
     
     func updateTime(timer: NSTimer) {

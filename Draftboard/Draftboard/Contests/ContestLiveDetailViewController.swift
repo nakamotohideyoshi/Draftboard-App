@@ -81,7 +81,6 @@ class ContestLiveDetailViewController: DraftboardViewController {
         tableView.tableHeaderView = headerView
         
         topViewHeightBase = topViewHeight.constant
-    
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {

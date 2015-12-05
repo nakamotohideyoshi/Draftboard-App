@@ -11,8 +11,8 @@
 		3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */; };
 		3C0EDA891BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */; };
 		3C245CD51BEAD4EA00A24F43 /* DraftboardModalItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */; };
-		3C6FBAE31C0FA8D4009C3287 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE11C0FA8D4009C3287 /* WithdrawViewController.swift */; };
-		3C6FBAE41C0FA8D4009C3287 /* WithdrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawViewController.xib */; };
+		3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE11C0FA8D4009C3287 /* WithdrawView.swift */; };
+		3C6FBAE41C0FA8D4009C3287 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */; };
 		3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */; };
 		3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */; };
 		3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA3A1BE050D50077DF0C /* PieChart.swift */; };
@@ -31,8 +31,8 @@
 		3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */; };
 		3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */; };
 		3CB058721BE2CA01002343BD /* GlobalFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */; };
-		3CB630A81C10A19000ACEAD3 /* DepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */; };
-		3CB630A91C10A19000ACEAD3 /* DepositViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630A71C10A19000ACEAD3 /* DepositViewController.xib */; };
+		3CB630A81C10A19000ACEAD3 /* DepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB630A61C10A19000ACEAD3 /* DepositView.swift */; };
+		3CB630A91C10A19000ACEAD3 /* DepositView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630A71C10A19000ACEAD3 /* DepositView.xib */; };
 		3CB630AB1C10E85F00ACEAD3 /* ContestConfirmationModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */; };
 		3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */; };
 		3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */; };
@@ -52,14 +52,12 @@
 		3EB2CB671BFE473B00579F1B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB661BFE473B00579F1B /* Data.swift */; };
 		3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB731BFE763400579F1B /* DraftGroup.swift */; };
 		3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */; };
-		3EE452061BFBBCE70085FB6D /* OMGHTTPURLRQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */; };
-		3EE452071BFBBCE70085FB6D /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452051BFBBCE70085FB6D /* PromiseKit.framework */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
 		5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
 		5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CBFD01BDA8E7D006746B2 /* Team.swift */; };
 		5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */; };
 		5D26FC701BBEE0BD00ACF127 /* LabeledField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */; };
-		5D26FC721BBEE77300ACF127 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC711BBEE77300ACF127 /* AccountViewController.xib */; };
+		5D26FC721BBEE77300ACF127 /* AccountSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */; };
 		5D26FC741BBEE78700ACF127 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC731BBEE78700ACF127 /* AccountViewController.swift */; };
 		5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */; };
 		5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */; };
@@ -130,11 +128,17 @@
 		5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */; };
 		5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */; };
 		5DAF71761BF3C00F00CB972F /* AvatarPMRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */; };
+		5DB14BF51C1218CD008E14A4 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */; };
+		5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */; };
+		5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */; };
 		5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */; };
 		5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */; };
 		5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */; };
 		5DE1D63E1BF2A5FC00C796ED /* LineupStatPMRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */; };
 		5DE1D6401BF2BC0F00C796ED /* LineupStatTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */; };
+		5DE2D6331C0F915F0023D4DB /* DraftboardSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2D6321C0F915F0023D4DB /* DraftboardSegmentedControl.swift */; };
+		5DE2D6341C0F969D0023D4DB /* OMGHTTPURLRQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */; };
+		5DE2D6351C0F96A50023D4DB /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452051BFBBCE70085FB6D /* PromiseKit.framework */; };
 		5DE6C5951BD0405D005A4DC6 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */; };
 		5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6C5971BD052FE005A4DC6 /* Spring.swift */; };
 		934B5EE01BB5B42C00502FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -158,8 +162,8 @@
 		3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailLiveViewController.swift; sourceTree = "<group>"; };
 		3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailLiveViewController.xib; sourceTree = "<group>"; };
 		3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalItemView.xib; sourceTree = "<group>"; };
-		3C6FBAE11C0FA8D4009C3287 /* WithdrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
-		3C6FBAE21C0FA8D4009C3287 /* WithdrawViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawViewController.xib; sourceTree = "<group>"; };
+		3C6FBAE11C0FA8D4009C3287 /* WithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
+		3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
 		3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupMoneyPoint.swift; sourceTree = "<group>"; };
 		3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailViewController.swift; sourceTree = "<group>"; };
 		3C74CA3A1BE050D50077DF0C /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
@@ -178,8 +182,8 @@
 		3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailViewController.xib; sourceTree = "<group>"; };
 		3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFilterViewController.swift; sourceTree = "<group>"; };
 		3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlobalFilterViewController.xib; sourceTree = "<group>"; };
-		3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositViewController.swift; sourceTree = "<group>"; };
-		3CB630A71C10A19000ACEAD3 /* DepositViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositViewController.xib; sourceTree = "<group>"; };
+		3CB630A61C10A19000ACEAD3 /* DepositView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositView.swift; sourceTree = "<group>"; };
+		3CB630A71C10A19000ACEAD3 /* DepositView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositView.xib; sourceTree = "<group>"; };
 		3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestConfirmationModal.xib; sourceTree = "<group>"; };
 		3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
@@ -212,7 +216,7 @@
 		5D1CBFD01BDA8E7D006746B2 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledField.swift; sourceTree = "<group>"; };
 		5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabeledField.xib; sourceTree = "<group>"; };
-		5D26FC711BBEE77300ACF127 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSettingsView.xib; sourceTree = "<group>"; };
 		5D26FC731BBEE78700ACF127 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentedView.swift; sourceTree = "<group>"; };
 		5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardSegmentedView.xib; sourceTree = "<group>"; };
@@ -279,11 +283,15 @@
 		5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalViewController.swift; sourceTree = "<group>"; };
 		5D9E99531BB615590017E332 /* DraftboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardViewController.swift; sourceTree = "<group>"; };
 		5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPMRView.swift; sourceTree = "<group>"; };
+		5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestConfirmationModal.swift; sourceTree = "<group>"; };
 		5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalChoiceController.swift; sourceTree = "<group>"; };
 		5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupSearchViewController.xib; sourceTree = "<group>"; };
 		5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTitlebarButton.swift; sourceTree = "<group>"; };
 		5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupStatPMRView.swift; sourceTree = "<group>"; };
 		5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupStatTimeView.swift; sourceTree = "<group>"; };
+		5DE2D6321C0F915F0023D4DB /* DraftboardSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentedControl.swift; sourceTree = "<group>"; };
 		5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		5DE6C5971BD052FE005A4DC6 /* Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spring.swift; sourceTree = "<group>"; };
 		5DF14B3D1BB21A4200C3F07C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -294,8 +302,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EE452061BFBBCE70085FB6D /* OMGHTTPURLRQ.framework in Frameworks */,
-				3EE452071BFBBCE70085FB6D /* PromiseKit.framework in Frameworks */,
+				5DE2D6341C0F969D0023D4DB /* OMGHTTPURLRQ.framework in Frameworks */,
+				5DE2D6351C0F96A50023D4DB /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,13 +408,15 @@
 			isa = PBXGroup;
 			children = (
 				5D26FC731BBEE78700ACF127 /* AccountViewController.swift */,
-				5D26FC711BBEE77300ACF127 /* AccountViewController.xib */,
+				5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */,
+				5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */,
+				5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */,
 				3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */,
 				3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */,
-				3C6FBAE11C0FA8D4009C3287 /* WithdrawViewController.swift */,
-				3C6FBAE21C0FA8D4009C3287 /* WithdrawViewController.xib */,
-				3CB630A61C10A19000ACEAD3 /* DepositViewController.swift */,
-				3CB630A71C10A19000ACEAD3 /* DepositViewController.xib */,
+				3C6FBAE11C0FA8D4009C3287 /* WithdrawView.swift */,
+				3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */,
+				3CB630A61C10A19000ACEAD3 /* DepositView.swift */,
+				3CB630A71C10A19000ACEAD3 /* DepositView.xib */,
 				5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */,
 				5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */,
 				3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */,
@@ -546,6 +556,7 @@
 				3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */,
 				5D3C726B1BF11EE3005A27B1 /* GlobalFilterItem.swift */,
 				5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */,
+				5DE2D6321C0F915F0023D4DB /* DraftboardSegmentedControl.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -559,6 +570,7 @@
 				3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */,
 				3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */,
 				3C74CA521BE0528D0077DF0C /* ContestModel.swift */,
+				5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */,
 				3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */,
 				3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */,
 				3CDC73621BF1499E00DDF60E /* ContestPlayerStandingCell.xib */,
@@ -660,7 +672,7 @@
 				5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */,
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3C74CA411BE051290077DF0C /* ContestDetailViewCell.xib in Resources */,
-				3C6FBAE41C0FA8D4009C3287 /* WithdrawViewController.xib in Resources */,
+				3C6FBAE41C0FA8D4009C3287 /* WithdrawView.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D6237C01BB61F7B0007E62A /* LineupCellView.xib in Resources */,
 				5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */,
@@ -677,14 +689,15 @@
 				5D4E63471BAB75D80033C4C2 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				3C74CA4F1BE051A00077DF0C /* DraftboardContestsCell.xib in Resources */,
 				3C74CA3F1BE051070077DF0C /* ContestDetailViewController.xib in Resources */,
+				5DB14BF51C1218CD008E14A4 /* AccountViewController.xib in Resources */,
 				3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */,
 				3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */,
 				5D4E63481BAB75D80033C4C2 /* OpenSans-Italic.ttf in Resources */,
 				5D783AC31BD9439C000D8494 /* LineupBar.xib in Resources */,
-				3CB630A91C10A19000ACEAD3 /* DepositViewController.xib in Resources */,
+				3CB630A91C10A19000ACEAD3 /* DepositView.xib in Resources */,
 				5D4E63491BAB75D80033C4C2 /* OpenSans-Light.ttf in Resources */,
 				5D26FC701BBEE0BD00ACF127 /* LabeledField.xib in Resources */,
-				5D26FC721BBEE77300ACF127 /* AccountViewController.xib in Resources */,
+				5D26FC721BBEE77300ACF127 /* AccountSettingsView.xib in Resources */,
 				5D4E634A1BAB75D80033C4C2 /* OpenSans-LightItalic.ttf in Resources */,
 				5D4E634B1BAB75D80033C4C2 /* OpenSans-Regular.ttf in Resources */,
 				5D6237C31BB61F7B0007E62A /* LineupListController.xib in Resources */,
@@ -756,15 +769,17 @@
 				3E1870E81C05410F006641F8 /* Roster.swift in Sources */,
 				5D6237D71BB61FFB0007E62A /* UIColor+DraftboardColors.swift in Sources */,
 				5D6237D81BB61FFB0007E62A /* DraftboardTabBar.swift in Sources */,
+				5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */,
 				3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */,
 				5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */,
 				5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */,
 				5D9A321D1BCD6591006C758B /* DraftboardFilterButton.swift in Sources */,
 				5D6237D91BB61FFB0007E62A /* DraftboardTitlebar.swift in Sources */,
-				3CB630A81C10A19000ACEAD3 /* DepositViewController.swift in Sources */,
+				3CB630A81C10A19000ACEAD3 /* DepositView.swift in Sources */,
 				5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */,
 				5DE1D63E1BF2A5FC00C796ED /* LineupStatPMRView.swift in Sources */,
 				5D783AC91BD94847000D8494 /* Player.swift in Sources */,
+				5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */,
 				3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
@@ -783,6 +798,7 @@
 				5D6237BF1BB61F7B0007E62A /* LineupCellView.swift in Sources */,
 				3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */,
 				5D6237C11BB61F7B0007E62A /* LineupEmptyCellView.swift in Sources */,
+				5DE2D6331C0F915F0023D4DB /* DraftboardSegmentedControl.swift in Sources */,
 				5D5829D61BF2894700FFA7D8 /* CircleProgressView.swift in Sources */,
 				5D5386DA1BF534CF002CDAF3 /* LineupStatFeesView.swift in Sources */,
 				5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */,
@@ -793,7 +809,7 @@
 				3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */,
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
 				5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */,
-				3C6FBAE31C0FA8D4009C3287 /* WithdrawViewController.swift in Sources */,
+				3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,
 				5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */,
 				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
@@ -941,8 +957,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

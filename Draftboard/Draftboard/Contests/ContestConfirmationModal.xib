@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -20,19 +20,46 @@
             <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
+            <string>Oswald-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContestConfirmationModal" customModule="Draftboard" customModuleProvider="target">
+            <connections>
+                <outlet property="confirmIcon" destination="dI8-qq-XHk" id="oHS-6D-dab"/>
+                <outlet property="contentView" destination="PNn-70-YaW" id="Eua-AM-Qrb"/>
+                <outlet property="enterContestButton" destination="H2Y-3m-9z6" id="NdH-Ts-cIN"/>
+                <outlet property="loaderContainerView" destination="5Om-au-IjJ" id="RN9-ap-kxh"/>
+                <outlet property="loaderLabel" destination="ctP-gH-NYb" id="IQx-VX-pdC"/>
+                <outlet property="titleView" destination="o7F-Kc-hLh" id="pO5-c3-ffE"/>
+                <outlet property="view" destination="iN0-l3-epB" id="y0x-Jk-y1R"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bec-Mb-TrU" userLabel="Temp Cover">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-confirmed" translatesAutoresizingMaskIntoConstraints="NO" id="dI8-qq-XHk">
+                    <rect key="frame" x="141" y="265" width="38" height="38"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="SeL-Ri-Tha"/>
+                        <constraint firstAttribute="height" constant="38" id="WiG-ix-CSN"/>
+                    </constraints>
+                </imageView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ENTERING CONTEST…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctP-gH-NYb" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="104" y="211" width="113" height="23"/>
+                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Om-au-IjJ">
+                    <rect key="frame" x="120" y="244" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="2OJ-nd-W6X"/>
+                        <constraint firstAttribute="height" constant="80" id="b8Z-vh-Jzb"/>
+                    </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONFIRM ENTRY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7F-Kc-hLh" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="113" y="56" width="94" height="23"/>
@@ -253,19 +280,25 @@
                 </view>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             <constraints>
-                <constraint firstItem="Bec-Mb-TrU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2Af-X4-nRd"/>
-                <constraint firstAttribute="bottom" secondItem="Bec-Mb-TrU" secondAttribute="bottom" id="8hw-kh-6pB"/>
-                <constraint firstAttribute="trailing" secondItem="Bec-Mb-TrU" secondAttribute="trailing" id="CPI-94-cdS"/>
+                <constraint firstItem="5Om-au-IjJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0vk-2n-m6t"/>
+                <constraint firstItem="5Om-au-IjJ" firstAttribute="top" secondItem="ctP-gH-NYb" secondAttribute="bottom" constant="10" id="46B-ah-YF1"/>
+                <constraint firstItem="ctP-gH-NYb" firstAttribute="centerX" secondItem="5Om-au-IjJ" secondAttribute="centerX" id="9UU-oM-eYp"/>
                 <constraint firstItem="o7F-Kc-hLh" firstAttribute="centerX" secondItem="PNn-70-YaW" secondAttribute="centerX" id="UYd-Jh-AcJ"/>
                 <constraint firstItem="PNn-70-YaW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bse-zl-dXO"/>
-                <constraint firstItem="Bec-Mb-TrU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nPG-KX-udI"/>
+                <constraint firstItem="dI8-qq-XHk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ke8-IU-5P7"/>
                 <constraint firstItem="o7F-Kc-hLh" firstAttribute="bottom" secondItem="PNn-70-YaW" secondAttribute="top" constant="-16" id="nYg-ER-6yN"/>
                 <constraint firstItem="PNn-70-YaW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="oug-eg-38e"/>
+                <constraint firstItem="dI8-qq-XHk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pJi-1p-duR"/>
+                <constraint firstItem="5Om-au-IjJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uX0-ty-pwG"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="661" y="402"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon-confirmed" width="38" height="38"/>
+    </resources>
 </document>

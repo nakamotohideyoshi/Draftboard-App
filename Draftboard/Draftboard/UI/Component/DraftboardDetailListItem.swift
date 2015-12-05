@@ -18,6 +18,7 @@ class DraftboardDetailListItem: UIView {
     
     convenience init(showRightArrow: Bool) {
         self.init()
+        
         if showRightArrow {
             rightArrow = UIImageView(image: UIImage(named: "icon-arrow"))
             rightArrow.translatesAutoresizingMaskIntoConstraints = false

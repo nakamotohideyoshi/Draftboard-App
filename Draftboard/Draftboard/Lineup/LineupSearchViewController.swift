@@ -36,7 +36,6 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showSpinner()
         Data.draftGroup(id: draftGroup.id).then(self.gotDraftGroup)
         
         view.backgroundColor = .blueDarker()
@@ -59,13 +58,20 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         tableView.indicatorStyle = .White
         
         tableView.setContentOffset(CGPointMake(0, searchBar.bounds.size.height), animated: false)
+        
+        self.showSpinner()
     }
     
     func showSpinner() {
         loaderView = LoaderView(frame: CGRectMake(0, 0, 64, 64))
-        loaderView.center = view.center
-        loaderView.center.y -= 100
+        
         view.addSubview(loaderView)
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: -30.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(64.0).active = true
+        loaderView.widthRancor.constraintEqualToConstant(64.0).active = true
+        
         loaderView.spinning = true
     }
     
