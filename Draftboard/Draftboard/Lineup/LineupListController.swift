@@ -230,6 +230,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Pre-fetch data required for player selection
         let _ = Data.draftGroup(id: draftGroup.id)
+        
+        // Creating a lineup is editing an empty lineup
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.draftGroup = draftGroup
         nvc.saveLineupAction = { (lineup: [Player]) in

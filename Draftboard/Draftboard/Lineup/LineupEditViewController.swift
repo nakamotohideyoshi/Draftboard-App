@@ -42,27 +42,6 @@ class LineupEditViewController: DraftboardViewController {
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
         layoutCellViews()
-        
-        /*
-        var players = [Player]()
-        for i in 0..<8 {
-            let playerDict = [
-                "player_id": i,
-                "name": "Koral Karver",
-                "salary": 5000,
-                "position": "PG",
-                "fppg": 25.5,
-                "team_alias": "MEM"
-            ]
-            players.append(Player(data: playerDict)!)
-        }
-        lineup = Lineup(data: [
-            "id": 100,
-            "name": "Warriors Stack",
-            "sport": "nba",
-            "draft_group": 1
-        ])
-        */
     }
     
     func layoutCellViews() {
@@ -146,7 +125,7 @@ class LineupEditViewController: DraftboardViewController {
         
         let svc = LineupSearchViewController(titleText: titleText!, nibName: "LineupSearchViewController", bundle: nil)
         svc.draftGroup = draftGroup
-        
+        svc.filterBy = positions[cellIndex]
         svc.playerSelectedAction = {(player: Player) in
             self.navController?.popViewController()
             let cellView = self.cellViews[self.cellIndex]
