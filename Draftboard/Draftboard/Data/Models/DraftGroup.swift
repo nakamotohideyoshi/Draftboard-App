@@ -12,17 +12,20 @@ class DraftGroup {
     var id: UInt!
     var sport: Sport!
     var start: NSDate!
+    var numGames: Int!
     var players: [Player]?
     
     init(data: NSDictionary) {
         guard let pk = data["pk"] as? UInt,
             sport = data["sport"] as? String,
-            start = data["start"] as? String
+            start = data["start"] as? String,
+            numGames = data["num_games"] as? Int
         else { return }
         
         self.id = pk
         self.sport = Sport.sportWithName(sport)
         self.start = NSDate.dateFromRFC3339String(start)
+        self.numGames = numGames
     }
 }
 

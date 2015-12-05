@@ -17,11 +17,11 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
     var scrollView: UIScrollView!
     var titleLabel: DraftboardLabel!
     var closeButton: DraftboardButton!
-    var choiceData: [Dictionary<String, String>]!
+    var choiceData: [NSDictionary]!
     var choiceViews: [DraftboardModalItemView]!
     var titleText: String!
     
-    init(title: String, choices: [Dictionary<String, String>]) {
+    init(title: String, choices: [NSDictionary]) {
         super.init(nibName: nil, bundle: nil)
         choiceData = choices
         titleText = title
@@ -100,7 +100,9 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
          for (i, data) in choiceData.enumerate() {
             
             // Choice view
-            let choiceView = DraftboardModalItemView(title: data["title"]!, subtitle: data["subtitle"]!)
+            let title = data["title"] as? String ?? ""
+            let subtitle = data["subtitle"] as? String ?? ""
+            let choiceView = DraftboardModalItemView(title: title, subtitle: subtitle)
             choiceViews.append(choiceView)
             
             // Add choice to scroll view
