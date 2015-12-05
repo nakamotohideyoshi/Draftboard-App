@@ -119,7 +119,7 @@ extension API {
 // MARK: - General accessors
 
 extension API {
-    class func draftGroupUpcomingPromise() -> Promise<[DraftGroup]> {
+    class func draftGroupUpcoming() -> Promise<[DraftGroup]> {
         return Promise { fulfill, reject in
             API.get("api/draft-group/upcoming/") { json in
                 guard let data = json as? [NSDictionary]
@@ -133,9 +133,8 @@ extension API {
             }
         }
     }
-    
 
-    class func draftGroupPromise(id id: UInt) -> Promise<DraftGroup> {
+    class func draftGroup(id id: UInt) -> Promise<DraftGroup> {
         return Promise { fulfill, reject in
             API.get("api/draft-group/\(id)/") { json in
                 guard let data = json as? NSDictionary,
@@ -153,35 +152,24 @@ extension API {
             }
         }
     }
-
-    /*
-    class func draftGroupUpcoming(completion completion: ([DraftGroup]) -> Void) {
-        API.get("api/draft-group/upcoming/") { json in
-            guard let data = json as? NSDictionary,
-                results = data["results"] as? [NSDictionary]
-            else { return }
-            
-            var draftGroups = [DraftGroup]()
-            for result in results {
-                draftGroups.append(DraftGroup(data: result))
+    
+    class func contestLobby() -> Promise<[Contest]> {
+        return Promise { fulfill, reject in
+            API.get("api/contest/lobby/") { json in
+                guard let data = json as? [NSDictionary]
+                else { return }
+                
+                var contests = [Contest]()
+                for contestDict in data {
+                    if let contest = Contest(data: contestDict) {
+                        contests.append(contest)
+                    } else {
+                        // Reject promise
+                        // This needs to happen in a lot of other places too
+                    }
+                }
+                fulfill(contests)
             }
-            completion(draftGroups)
         }
     }
-
-    class func draftGroup(id id: UInt, completion: (DBDraftGroup) -> Void) {
-        API.get("api/draft-group/\(id)/") { json in
-            guard let data = json as? NSDictionary,
-                players = data["players"] as? [NSDictionary]
-            else { return }
-            
-            let draftGroup = DBDraftGroup(data: data)
-            draftGroup.players = [DBPlayer]()
-            for player in players {
-                draftGroup.players?.append(DBPlayer(data: player))
-            }
-            completion(draftGroup)
-        }
-    }
-    */
 }
