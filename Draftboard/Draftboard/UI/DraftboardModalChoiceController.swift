@@ -75,7 +75,6 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         closeButton.topRancor.constraintEqualToRancor(view.topRancor, constant: 20).active = true
         closeButton.heightRancor.constraintEqualToConstant(56).active = true
         closeButton.iconImageView.image = UIImage(named: "titlebar-icon-close")
-
         
         closeButton.addTarget(self, action: Selector("didTapCancel:"), forControlEvents: .TouchUpInside)
     }
@@ -132,21 +131,18 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
             lastChoiceView = choiceView
         }
         
-        // Center content if shorter than scroll view
         self.view.layoutIfNeeded()
         let titleHeight = titleLabel.bounds.size.height
-        let totalHeight = CGFloat(choiceViews.count) * itemHeight + titleHeight + 77.0 + 30.0 + 30.0
+        let totalHeight = CGFloat(choiceViews.count) * itemHeight + (titleHeight * 2)
         let scrollViewHeight = scrollView.bounds.size.height
         
-        // Total height
+        // Center content if shorter than scroll view
         if (totalHeight < scrollViewHeight) {
             let heightDelta = scrollViewHeight - totalHeight
             scrollView.contentInset = UIEdgeInsetsMake(heightDelta * 0.5, 0.0, 0.0, 0.0)
             scrollView.delaysContentTouches = false
-        } else {
-            scrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 77.0 + 30.0 + 30.0, 0.0) // 137 is 77 + 30 + 30
-            scrollView.contentOffset = CGPointMake(0.0, 0.0)
-            
+        }
+        else { // Let it scroll
             let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(0.25 * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 self.scrollView.flashScrollIndicators()

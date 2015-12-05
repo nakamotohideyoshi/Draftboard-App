@@ -8,27 +8,20 @@
 
 import UIKit
 
-class WithdrawViewController: DraftboardViewController {
+class WithdrawView: DraftboardNibView {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var currentBalanceLabel: DraftboardLabel!
     @IBOutlet weak var pendingBonusLabel: DraftboardLabel!
     
     @IBOutlet weak var withdrawAmountField: LabeledField!
     @IBOutlet weak var paypalAddressField: LabeledField!
-    
     @IBOutlet weak var ssnField: LabeledField!
     
     @IBOutlet weak var withdrawBtn: DraftboardButton!
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func willAwakeFromNib() {
+        super.willAwakeFromNib()
+        scrollView.bottomRancor.constraintEqualToRancor(withdrawBtn.bottomRancor, constant: 30).active = true
     }
 }

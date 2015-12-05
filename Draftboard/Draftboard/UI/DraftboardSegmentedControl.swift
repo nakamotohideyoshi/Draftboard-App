@@ -15,11 +15,11 @@ class DraftboardSegmentedControl: UIView {
     
     var lineConstraint: NSLayoutConstraint?
     var selectionSpring: Spring?
-    var labelSpring: Spring?
     
     var textColor: UIColor!
     var textSelectedColor: UIColor!
     
+    var indexChangedHandler:((Int)->Void)?
     var currentIndex = 0
     
     init(choices _choices: [String], textColor _textColor: UIColor, textSelectedColor _textSelectedColor: UIColor) {
@@ -135,9 +135,6 @@ class DraftboardSegmentedControl: UIView {
         selectionSpring?.stop()
         selectionSpring = nil
         
-        labelSpring?.stop()
-        labelSpring = nil
-        
         // Animate the change?
         if (animated) {
             
@@ -155,18 +152,10 @@ class DraftboardSegmentedControl: UIView {
                 self.lineView.layer.position = CGPointMake(startPos.x + (deltaPos.x * value), startPos.y + (deltaPos.y * value))
             }
             selectionSpring!.start()
-            
-            // Label bounce
-            labelSpring = Spring(stiffness: 2.0, damping: 0.9, velocity: 0.0)
-            labelSpring!.updateBlock = { (value) -> Void in
-                let iconScale = 0.75 + (value * 0.25)
-                control.label.transform = CGAffineTransformMakeScale(iconScale, iconScale)
-            }
-            labelSpring!.completeBlock = { (completed) -> Void in
-                control.label.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            }
-            labelSpring!.start()
         }
+        
+        // Fire off handler
+        indexChangedHandler?(currentIndex);
     }
 }
 

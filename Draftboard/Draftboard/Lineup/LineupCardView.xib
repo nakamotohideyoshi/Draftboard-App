@@ -203,7 +203,6 @@
                         </view>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" multiplier="0.5" id="0uJ-6u-S4a"/>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="centerY" secondItem="oiB-9s-vtL" secondAttribute="centerY" id="9Hc-HZ-AeY"/>

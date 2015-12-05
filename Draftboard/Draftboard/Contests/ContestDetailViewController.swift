@@ -26,6 +26,9 @@ class ContestDetailViewController: DraftboardViewController {
     var contestName: String?
     var contestEntered = false
     var topViewHeightBase = CGFloat()
+    var lineupSelected: Int?
+    
+    var confirmationModal: ContestConfirmationModal?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,10 +101,51 @@ class ContestDetailViewController: DraftboardViewController {
     // MARK: Handle the tap when someone wants to enter the contest
     // TODO: Actual logic...
     
-    func handleButtonTap(sender: UIGestureRecognizer) {
-        enterContestBtn.backgroundColor = .blueMediumDark()
-        enterContestBtn.label.text = "Contest Entered"
+    func handleButtonTap(sender: DraftboardButton) {
+        var choices = [[String: String]]()
+        choices.append(["title": "Warriors Stack", "subtitle": "In 3 Contests"])
+        choices.append(["title": "Optimal", "subtitle": "In 0 Contests"])
+        choices.append(["title": "Bulls Stack", "subtitle": "In 0 Contests"])
+        
+        let mcc = DraftboardModalChoiceController(title: "Choose an Eligible Lineup", choices: choices)
+        RootViewController.sharedInstance.pushModalViewController(mcc)
+    }
+    
+    override func didSelectModalChoice(index: Int) {
+        confirmationModal = ContestConfirmationModal(nibName: "ContestConfirmationModal", bundle: nil)
+        RootViewController.sharedInstance.pushModalViewController(confirmationModal!)
+        confirmationModal!.enterContestButton.addTarget(self, action: "enterContestTap:", forControlEvents: .TouchUpInside)
+    }
+    
+    func enterContestTap(sender: DraftboardButton) {
+        confirmationModal?.showSpinner()
+        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            dispatch_async(dispatch_get_main_queue(),{
+                self.confirmationModal?.showConfirmed()
+                
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.8 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    dispatch_async(dispatch_get_main_queue(),{
+                        RootViewController.sharedInstance.popModalViewController()
+                        self.didEnterContest()
+                    })
+                }
+            })
+        }
+    }
+    
+    func didEnterContest() {
+        enterContestBtn.userInteractionEnabled = false
+        enterContestBtn.backgroundColor = .greyCool()
+        enterContestBtn.label.text = "Contest Entered".uppercaseString
         enterContestBtn.iconImageView.alpha = 0
+    }
+    
+    override func didCancelModal() {
+        RootViewController.sharedInstance.popModalViewController()
+        lineupSelected = nil
     }
 }
 

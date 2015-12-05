@@ -46,19 +46,6 @@ final class RootViewController: UIViewController {
 
         setAppearanceProperties()
         let _ = Data.draftGroupUpcoming
-        
-//        let dsc = DraftboardSegmentedControl(
-//            choices: ["One", "Two", "Three"],
-//            textColor: .whiteLowOpacity(),
-//            textSelectedColor: .whiteColor()
-//        )
-//        
-//        self.view.addSubview(dsc)
-//        dsc.translatesAutoresizingMaskIntoConstraints = false
-//        dsc.topRancor.constraintEqualToRancor(view.topRancor, constant: 50.0).active = true
-//        dsc.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
-//        dsc.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
-//        dsc.heightRancor.constraintEqualToConstant(50.0).active = true
     }
     
     func didSelectGlobalFilter(index: Int) {
@@ -111,11 +98,11 @@ final class RootViewController: UIViewController {
     }
     
     func didSelectModalChoice(index: Int) {
-        tabController.cnc.vcs.first?.didSelectModalChoice(index)
+        tabController.cnc.vcs.last?.didSelectModalChoice(index)
     }
     
     func didCancelModal() {
-        tabController.cnc.vcs.first?.didCancelModal()
+        tabController.cnc.vcs.last?.didCancelModal()
     }
     
     /*

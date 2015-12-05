@@ -8,8 +8,9 @@
 
 import UIKit
 
-class DepositViewController: DraftboardViewController {
+class DepositView: DraftboardNibView {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var currentBalanceLabel: DraftboardLabel!
     @IBOutlet weak var pendingBonusLabel: DraftboardLabel!
     
@@ -30,15 +31,8 @@ class DepositViewController: DraftboardViewController {
     
     @IBOutlet weak var depositBtn: DraftboardButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func willAwakeFromNib() {
+        super.willAwakeFromNib()
+        scrollView.bottomRancor.constraintEqualToRancor(depositBtn.bottomRancor, constant: 30).active = true
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
