@@ -9,11 +9,12 @@
 import UIKit
 
 class LineupEditViewController: DraftboardViewController {
-    @IBOutlet weak var remSalaryLabel: DraftboardLabel!
-    @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
     @IBOutlet weak var contentView: UIScrollView!
     @IBOutlet weak var statContainer: UIView!
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
+    @IBOutlet weak var statLiveIn: DraftboardLabel!
+    @IBOutlet weak var statRemSalary: DraftboardLabel!
+    @IBOutlet weak var statAvgPerPlayer: DraftboardLabel!
     
     var draftGroup: DraftGroup!
     var lineup: Lineup!
@@ -25,6 +26,8 @@ class LineupEditViewController: DraftboardViewController {
     
     override func viewDidLoad() {
         let _ = Data.draftGroup(id: draftGroup.id)
+        // Temp
+        draftGroup.start = NSDate(timeIntervalSinceNow: 3600 * 12)
         
         positions = ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"]
         positionPlaceholders = [
@@ -42,6 +45,8 @@ class LineupEditViewController: DraftboardViewController {
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
         layoutCellViews()
+        
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateStatLiveIn", userInfo: nil, repeats: true)
     }
     
     func layoutCellViews() {
@@ -127,13 +132,57 @@ class LineupEditViewController: DraftboardViewController {
         svc.draftGroup = draftGroup
         svc.filterBy = positions[cellIndex]
         svc.playerSelectedAction = {(player: Player) in
-            self.navController?.popViewController()
             let cellView = self.cellViews[self.cellIndex]
             cellView.avatarImageView.image = UIImage(named: "sample-avatar-big")
             cellView.player = player
+            self.updateStats()
+            self.navController?.popViewController()
         }
         
         navController?.pushViewController(svc)
+    }
+    
+    func updateStats() {
+        // Lame
+        var lineupSalary: Double = 0
+        var playersRemaining: Int = 0
+        for cell in cellViews {
+            if let player = cell.player {
+                lineupSalary += player.salary
+            } else {
+                playersRemaining += 1
+            }
+        }
+        let remaining = draftGroup.sport.salary - lineupSalary
+        let remainingPerPlayer = remaining / Double(playersRemaining)
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        formatter.maximumFractionDigits = 0
+        statRemSalary.text = formatter.stringFromNumber(remaining)
+        statAvgPerPlayer.text = formatter.stringFromNumber(remainingPerPlayer)
+        if remaining >= 0 {
+            statRemSalary.textColor = .whiteColor()
+            statAvgPerPlayer.textColor = .whiteColor()
+        } else {
+            statRemSalary.textColor = .redDraftboard()
+            statAvgPerPlayer.textColor = .redDraftboard()
+            statAvgPerPlayer.text = "$0"
+        }
+        if playersRemaining == 0 {
+            statAvgPerPlayer.text = "--"
+        }
+    }
+    
+    func updateStatLiveIn() {
+        // http://stackoverflow.com/questions/4933075/nstimeinterval-to-hhmmss
+        
+//        abs
+        let interval = Int(draftGroup.start.timeIntervalSinceNow)
+        let seconds = abs(interval) % 60
+        let minutes = abs(interval / 60) % 60
+        let hours = abs(interval / 3600)
+        let sign = (interval < 0) ? "-" : ""
+        statLiveIn.text = String(format: "%@%02d:%02d:%02d", sign, hours, minutes, seconds)
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
