@@ -197,7 +197,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     func selectSport() {
         let choices = sportChoices!
-        let mcc = DraftboardModalChoiceController(title: "Choose a Sport", choices: choices)
+        let title = (choices.count) > 0 ? "Choose a Sport" : "No DraftGroups Available!"
+        let mcc = DraftboardModalChoiceController(title: title, choices: choices)
         RootViewController.sharedInstance.pushModalViewController(mcc)
     }
     
