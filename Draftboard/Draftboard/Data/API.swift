@@ -14,7 +14,8 @@ final class API {
     private static var session = NSURLSession.sharedSession()
     private static let baseURL = "http://" +
 //        "noodle.local:8080/"
-        "rio-dfs.herokuapp.com/"
+//        "rio-dfs.herokuapp.com/"
+        "draftboard-ios-sandbox.herokuapp.com/"
     
     // Do not instantiate
     private init() {}
