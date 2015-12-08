@@ -205,6 +205,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     func didSelectSport(index: Int) {
         let sportChoice = sportChoices![index]
         selectedSport = sportChoice["object"] as? Sport
+        // Pre-fetch data required for showing player injury status
+        _ = Data.sportsInjuries(selectedSport!.name)
         selectDraftGroup()
     }
     

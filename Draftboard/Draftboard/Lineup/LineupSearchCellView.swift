@@ -41,6 +41,7 @@ class LineupSearchCellView: UITableViewCell {
             ppgLabel.text = String(format: "%.2f FPPG", (player?.fppg)!)
             leagueLabel.text = (player?.team)!
             salaryLabel.text = String(format: "$%.0f", (player?.salary)!)
+            statusLabel.text = player?.injury ?? ""
         }
     }
 

@@ -36,7 +36,10 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Data.draftGroup(id: draftGroup.id).then(self.gotDraftGroup)
+        let draftGroupPromise = Data.draftGroup(id: draftGroup.id)
+        let injuriesPromise = Data.sportsInjuries(draftGroup.sport.name)
+        draftGroupPromise.then(self.gotDraftGroup)
+        when(draftGroupPromise, injuriesPromise).then(self.addInjuryInfo)
         
         view.backgroundColor = .blueDarker()
         
@@ -83,6 +86,15 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         }
         self.loaderView.spinning = false
         self.loaderView.removeFromSuperview()
+        self.tableView.reloadData()
+    }
+    
+    func addInjuryInfo(draftGroup: DraftGroup, injuries: [UInt: String]) {
+        for player in draftGroup.players! {
+            if let injury = injuries[player.id] {
+                player.injury = injury
+            }
+        }
         self.tableView.reloadData()
     }
     

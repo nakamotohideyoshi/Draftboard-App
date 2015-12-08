@@ -16,6 +16,7 @@ class Player: Model {
     var team: String!
     var image: UIImage!
     var points: Double = 0
+    var injury: String?
     
     init?(data: NSDictionary) {
         super.init()

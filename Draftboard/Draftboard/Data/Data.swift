@@ -27,5 +27,17 @@ class Data {
     
     // Contests, all upcoming
     static var contestLobby = API.contestLobby()
+    
+    // Sports injuries by id
+    private static var _sportsInjuries = [String: Promise<[UInt: String]>]()
+    class func sportsInjuries(sportName: String) -> Promise<[UInt: String]> {
+        if let injuries = _sportsInjuries[sportName] {
+            return injuries
+        } else {
+            let injuries = API.sportsInjuries(sportName)
+            _sportsInjuries[sportName] = injuries
+            return injuries
+        }
+    }
 }
 

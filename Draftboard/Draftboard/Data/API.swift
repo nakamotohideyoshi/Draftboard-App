@@ -173,4 +173,22 @@ extension API {
             }
         }
     }
+    
+    class func sportsInjuries(sportName: String) -> Promise<[UInt: String]> {
+        return Promise { fulfill, reject in
+            API.get("api/sports/injuries/\(sportName)") { json in
+                guard let data = json as? [NSDictionary]
+                else { return }
+                
+                var injuries = [UInt: String]()
+                for injuryDict in data {
+                    guard let playerId = injuryDict["player_id"] as? UInt,
+                        status = injuryDict["status"] as? String
+                    else { continue }
+                    injuries[playerId] = status
+                }
+                fulfill(injuries)
+            }
+        }
+    }
 }
