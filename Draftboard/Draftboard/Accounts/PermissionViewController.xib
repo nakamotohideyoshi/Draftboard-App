@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </mutableArray>
+        <mutableArray key="Oswald-Regular.ttf">
+            <string>Oswald-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PermissionViewController" customModule="Draftboard" customModuleProvider="target">
+            <connections>
+                <outlet property="bigIconView" destination="2hO-po-NfI" id="lDg-a4-yJN"/>
+                <outlet property="descriptionLabel" destination="t2b-ak-6ey" id="M1h-jX-CER"/>
+                <outlet property="grantBtn" destination="Qhp-NJ-SHt" id="VB7-De-9Vd"/>
+                <outlet property="titleLabel" destination="4ie-Ex-Fcu" id="Vom-Yf-zWT"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muH-EZ-ssD" userLabel="Top Container">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WE NEED TO CHECK YOUR LOCATION" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ie-Ex-Fcu" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="80" y="109" width="160" height="45"/>
+                            <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="4ie-Ex-Fcu" firstAttribute="centerX" secondItem="muH-EZ-ssD" secondAttribute="centerX" id="dqE-WI-jp7"/>
+                        <constraint firstAttribute="bottom" secondItem="4ie-Ex-Fcu" secondAttribute="bottom" constant="16" id="wOA-Qf-Qo9"/>
+                        <constraint firstItem="4ie-Ex-Fcu" firstAttribute="width" secondItem="muH-EZ-ssD" secondAttribute="width" multiplier="0.5" id="yIO-Y0-hlt"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-big-location" translatesAutoresizingMaskIntoConstraints="NO" id="2hO-po-NfI" customClass="DraftboardImageView" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="170" width="320" height="114"/>
+                    <color key="tintColor" red="0.3516054153" green="0.36195579169999997" blue="0.4706665277" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1w-Gx-VeP" userLabel="Bottom Container">
+                    <rect key="frame" x="0.0" y="284" width="320" height="284"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2b-ak-6ey" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="40" y="8" width="240" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="Ug5-pm-lcW"/>
+                            </constraints>
+                            <string key="text">Due to current legislation, we are required to verify that you are located in a state where daily fantasy is legal.We are going to ask that you share your location with the Draftboard app.</string>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
+                            <color key="textColor" red="0.35160541534423828" green="0.36195579171180725" blue="0.47066652774810791" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="t2b-ak-6ey" firstAttribute="width" secondItem="Z1w-Gx-VeP" secondAttribute="width" multiplier="0.8" priority="900" id="R8p-Ys-zst"/>
+                        <constraint firstItem="t2b-ak-6ey" firstAttribute="top" secondItem="Z1w-Gx-VeP" secondAttribute="top" constant="8" id="ZGJ-6N-1Yn"/>
+                        <constraint firstItem="t2b-ak-6ey" firstAttribute="centerX" secondItem="Z1w-Gx-VeP" secondAttribute="centerX" id="exk-lR-RBu"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhp-NJ-SHt" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="45" y="479" width="230" height="49"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="1gd-yZ-SPJ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="GRANT PERMISSION"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Z1w-Gx-VeP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5OX-zl-Awh"/>
+                <constraint firstAttribute="trailing" secondItem="muH-EZ-ssD" secondAttribute="trailing" id="9DB-BT-lN4"/>
+                <constraint firstItem="muH-EZ-ssD" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.3" id="BCg-Zy-TjF"/>
+                <constraint firstItem="muH-EZ-ssD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HXt-fN-D3q"/>
+                <constraint firstAttribute="trailing" secondItem="2hO-po-NfI" secondAttribute="trailing" id="M2p-Wm-LRy"/>
+                <constraint firstItem="Qhp-NJ-SHt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="QIl-Dm-7ZB"/>
+                <constraint firstAttribute="bottom" secondItem="Qhp-NJ-SHt" secondAttribute="bottom" constant="40" id="V1P-my-Ncc"/>
+                <constraint firstItem="muH-EZ-ssD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iwP-Pl-0bl"/>
+                <constraint firstAttribute="bottom" secondItem="Z1w-Gx-VeP" secondAttribute="bottom" id="k6p-5o-Dxy"/>
+                <constraint firstItem="Z1w-Gx-VeP" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="kqE-V5-3L7"/>
+                <constraint firstItem="2hO-po-NfI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n52-4s-EzP"/>
+                <constraint firstAttribute="trailing" secondItem="Qhp-NJ-SHt" secondAttribute="trailing" constant="45" id="oed-N2-b7X"/>
+                <constraint firstItem="Z1w-Gx-VeP" firstAttribute="top" secondItem="2hO-po-NfI" secondAttribute="bottom" id="qTH-5h-Wlv"/>
+                <constraint firstAttribute="trailing" secondItem="Z1w-Gx-VeP" secondAttribute="trailing" id="rCk-Il-dt0"/>
+                <constraint firstItem="2hO-po-NfI" firstAttribute="top" secondItem="muH-EZ-ssD" secondAttribute="bottom" id="z37-6T-QNW"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon-big-location" width="66" height="86"/>
+    </resources>
+</document>

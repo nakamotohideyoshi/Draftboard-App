@@ -11,6 +11,8 @@
 		3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */; };
 		3C0EDA891BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */; };
 		3C245CD51BEAD4EA00A24F43 /* DraftboardModalItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */; };
+		3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */; };
+		3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */; };
 		3C6FBAE31C0FA8D4009C3287 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE11C0FA8D4009C3287 /* WithdrawViewController.swift */; };
 		3C6FBAE41C0FA8D4009C3287 /* WithdrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawViewController.xib */; };
 		3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */; };
@@ -158,6 +160,8 @@
 		3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailLiveViewController.swift; sourceTree = "<group>"; };
 		3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailLiveViewController.xib; sourceTree = "<group>"; };
 		3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalItemView.xib; sourceTree = "<group>"; };
+		3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
+		3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionViewController.xib; sourceTree = "<group>"; };
 		3C6FBAE11C0FA8D4009C3287 /* WithdrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
 		3C6FBAE21C0FA8D4009C3287 /* WithdrawViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawViewController.xib; sourceTree = "<group>"; };
 		3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupMoneyPoint.swift; sourceTree = "<group>"; };
@@ -401,6 +405,8 @@
 			children = (
 				5D26FC731BBEE78700ACF127 /* AccountViewController.swift */,
 				5D26FC711BBEE77300ACF127 /* AccountViewController.xib */,
+				3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */,
+				3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */,
 				3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */,
 				3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */,
 				3C6FBAE11C0FA8D4009C3287 /* WithdrawViewController.swift */,
@@ -660,6 +666,7 @@
 				5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */,
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3C74CA411BE051290077DF0C /* ContestDetailViewCell.xib in Resources */,
+				3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */,
 				3C6FBAE41C0FA8D4009C3287 /* WithdrawViewController.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D6237C01BB61F7B0007E62A /* LineupCellView.xib in Resources */,
@@ -739,6 +746,7 @@
 				5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */,
 				5D26FC741BBEE78700ACF127 /* AccountViewController.swift in Sources */,
 				5D6237DB1BB6200B0007E62A /* DraftboardImageView.swift in Sources */,
+				3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */,
 				3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */,
 				5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */,
 				5D6237DC1BB6200B0007E62A /* DraftboardLabel.swift in Sources */,
