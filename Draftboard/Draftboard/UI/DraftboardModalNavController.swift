@@ -134,7 +134,8 @@ class DraftboardModalNavController: UIViewController {
                 outSpring?.completeBlock = completionHandler
                 outSpring!.start()
             }
-        } else {
+        }
+        else {
             completionHandler!(true)
             completionHandler = nil
         }

@@ -18,6 +18,8 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     let searchCellIdentifier = "searchCellIdentifier"
     var draftGroup: DraftGroup!
+    var players: [Player]!
+    var filterBy: String?
     var playerSelectedAction:((Player) -> Void)?
     var positionText: String!
     var loaderView: LoaderView!
@@ -34,8 +36,10 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showSpinner()
-        Data.draftGroup(id: draftGroup.id).then(self.gotDraftGroup)
+        let draftGroupPromise = Data.draftGroup(id: draftGroup.id)
+        let injuriesPromise = Data.sportsInjuries(draftGroup.sport.name)
+        draftGroupPromise.then(self.gotDraftGroup)
+        when(draftGroupPromise, injuriesPromise).then(self.addInjuryInfo)
         
         view.backgroundColor = .blueDarker()
         
@@ -57,25 +61,54 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         tableView.indicatorStyle = .White
         
         tableView.setContentOffset(CGPointMake(0, searchBar.bounds.size.height), animated: false)
+        
+        self.showSpinner()
     }
     
     func showSpinner() {
         loaderView = LoaderView(frame: CGRectMake(0, 0, 64, 64))
-        loaderView.center = view.center
-        loaderView.center.y -= 100
+        
         view.addSubview(loaderView)
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: -30.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(64.0).active = true
+        loaderView.widthRancor.constraintEqualToConstant(64.0).active = true
+        
         loaderView.spinning = true
     }
     
     func gotDraftGroup(draftGroup: DraftGroup) {
         self.draftGroup = draftGroup
+        self.players = draftGroup.players
+        if filterBy != "FX" {
+            self.players = self.players.filter { p in p.position == filterBy }
+        }
+        self.players.sortInPlace { p1, p2 in
+            if p1.salary != p2.salary {
+                return p1.salary > p2.salary
+            }
+            if p1.fppg != p2.fppg {
+                return p1.fppg > p2.fppg
+            }
+            return p1.lastName < p2.lastName
+        }
         self.loaderView.spinning = false
         self.loaderView.removeFromSuperview()
         self.tableView.reloadData()
     }
     
+    func addInjuryInfo(draftGroup: DraftGroup, injuries: [UInt: String]) {
+        for player in draftGroup.players! {
+            if let injury = injuries[player.id] {
+                player.injury = injury
+            }
+        }
+        self.tableView.reloadData()
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let players = draftGroup.players {
+        if let players = self.players {
             let player = players[indexPath.row]
             playerSelectedAction?(player)
         }
@@ -86,7 +119,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let players = draftGroup.players {
+        if let players = self.players {
             return players.count
         } else {
             return 0
@@ -96,7 +129,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(searchCellIdentifier, forIndexPath: indexPath) as! LineupSearchCellView
         cell.infoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
-        cell.player = draftGroup.players?[indexPath.row]
+        cell.player = self.players?[indexPath.row]
         cell.backgroundColor = .clearColor()
         cell.topBorder = true
         if indexPath.row == 0 {

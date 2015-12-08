@@ -156,8 +156,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         }
     }
     
-    // TODO: rename to presentLineupCard
-    func didSaveLineup(lineup: [Player]) {
+    func presentLineupCard(lineup: [Player]) {
         self.createView.hidden = true
 
         let cardView = LineupCardView()
@@ -191,20 +190,23 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         // Scroll to card
         self.view.layoutIfNeeded()
         scrollView.setContentOffset(cardView.frame.origin, animated: false)
-        cardView.contentView.flashScrollIndicators() // TODO: Maybe someday...
+//        cardView.contentView.flashScrollIndicators()
     }
     
     // MARK: - DraftGroup selection
     
     func selectSport() {
         let choices = sportChoices!
-        let mcc = DraftboardModalChoiceController(title: "Choose a Sport", choices: choices)
+        let title = (choices.count) > 0 ? "Choose a Sport" : "No DraftGroups Available!"
+        let mcc = DraftboardModalChoiceController(title: title, choices: choices)
         RootViewController.sharedInstance.pushModalViewController(mcc)
     }
     
     func didSelectSport(index: Int) {
         let sportChoice = sportChoices![index]
         selectedSport = sportChoice["object"] as? Sport
+        // Pre-fetch data required for showing player injury status
+        _ = Data.sportsInjuries(selectedSport!.name)
         selectDraftGroup()
     }
     
@@ -229,11 +231,14 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         selectedSport = nil
         selectedDraftGroup = nil
         
+        // Pre-fetch data required for player selection
         let _ = Data.draftGroup(id: draftGroup.id)
+        
+        // Creating a lineup is editing an empty lineup
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.draftGroup = draftGroup
         nvc.saveLineupAction = { (lineup: [Player]) in
-            self.didSaveLineup(lineup)
+            self.presentLineupCard(lineup)
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }
         

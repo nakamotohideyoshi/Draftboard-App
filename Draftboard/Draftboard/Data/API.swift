@@ -14,7 +14,8 @@ final class API {
     private static var session = NSURLSession.sharedSession()
     private static let baseURL = "http://" +
 //        "noodle.local:8080/"
-        "rio-dfs.herokuapp.com/"
+//        "rio-dfs.herokuapp.com/"
+        "draftboard-ios-sandbox.herokuapp.com/"
     
     // Do not instantiate
     private init() {}
@@ -169,6 +170,24 @@ extension API {
                     }
                 }
                 fulfill(contests)
+            }
+        }
+    }
+    
+    class func sportsInjuries(sportName: String) -> Promise<[UInt: String]> {
+        return Promise { fulfill, reject in
+            API.get("api/sports/injuries/\(sportName)") { json in
+                guard let data = json as? [NSDictionary]
+                else { return }
+                
+                var injuries = [UInt: String]()
+                for injuryDict in data {
+                    guard let playerId = injuryDict["player_id"] as? UInt,
+                        status = injuryDict["status"] as? String
+                    else { continue }
+                    injuries[playerId] = status
+                }
+                fulfill(injuries)
             }
         }
     }

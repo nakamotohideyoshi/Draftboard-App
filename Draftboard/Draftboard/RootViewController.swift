@@ -43,7 +43,7 @@ final class RootViewController: UIViewController {
         modalControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         modalControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         modalControllerView.hidden = true;
-        
+
         setAppearanceProperties()
         let _ = Data.draftGroupUpcoming
     }
@@ -98,11 +98,11 @@ final class RootViewController: UIViewController {
     }
     
     func didSelectModalChoice(index: Int) {
-        tabController.cnc.vcs.first?.didSelectModalChoice(index)
+        tabController.cnc.vcs.last?.didSelectModalChoice(index)
     }
     
     func didCancelModal() {
-        tabController.cnc.vcs.first?.didCancelModal()
+        tabController.cnc.vcs.last?.didCancelModal()
     }
     
     /*

@@ -9,37 +9,86 @@
 import UIKit
 
 class AccountViewController: DraftboardViewController {
-
-    @IBOutlet weak var usernameField: LabeledField!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var contentView: UIView!
     
-    @IBOutlet weak var changePasswordButton: DraftboardButton!
-    @IBOutlet weak var emailField: LabeledField!
-    @IBOutlet weak var fullNameField: LabeledField!
-    @IBOutlet weak var streetAddressField: LabeledField!
-    @IBOutlet weak var streetAddress2Field: LabeledField!
-    @IBOutlet weak var cityField: LabeledField!
-    @IBOutlet weak var zipField: LabeledField!
-    @IBOutlet weak var dobField: LabeledField!
-    @IBOutlet weak var ssnField: LabeledField!
-    @IBOutlet weak var saveButton: DraftboardButton!
-    @IBOutlet weak var stateField: LabeledField!
-    @IBOutlet var scrollView: UIScrollView!
+    var segmentedControl: DraftboardSegmentedControl!
+    
+    var settingsView: AccountSettingsView?
+    var withdrawView: WithdrawView?
+    var depositView: DepositView?
+    
+    var currentContentView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .clearColor()
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        tapRecognizer.cancelsTouchesInView = false
+        segmentedControl = DraftboardSegmentedControl(
+            choices: ["Settings", "Withdraw", "Add Funds"],
+            textColor: .whiteLowOpacity(),
+            textSelectedColor: .whiteColor()
+        )
         
-        // Set the scrollView bottom so that it can scroll
-        scrollView.bottomRancor.constraintEqualToRancor(saveButton.bottomRancor, constant: 30).active = true
+        self.view.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.topRancor.constraintEqualToRancor(headerView.topRancor).active = true
+        segmentedControl.rightRancor.constraintEqualToRancor(headerView.rightRancor).active = true
+        segmentedControl.bottomRancor.constraintEqualToRancor(headerView.bottomRancor).active = true
+        segmentedControl.leftRancor.constraintEqualToRancor(headerView.leftRancor).active = true
         
-        self.view.addGestureRecognizer(tapRecognizer)
+        segmentedControl.indexChangedHandler = { (index: Int) in
+            let view = self.contentViewForIndex(index)
+            self.replaceContentView(view!)
+        }
+        
+        settingsView = AccountSettingsView()
+        settingsView?.changePasswordButton.addTarget(self, action: "didTapChangePassword:", forControlEvents: .TouchUpInside)
+        
+        self.replaceContentView(settingsView!)
     }
     
-    func dismissKeyboard() {
-        self.view.endEditing(true)
+    func didTapChangePassword(sender: DraftboardButton) {
+        let pvc = ChangePasswordViewController(nibName: "ChangePasswordViewController", bundle: nil)
+        self.navController?.pushViewController(pvc)
+    }
+    
+    func contentViewForIndex(index: Int) -> UIView? {
+        if (index == 0) {
+            if (settingsView == nil) {
+                settingsView = AccountSettingsView()
+            }
+            
+            return settingsView
+        }
+        
+        else if (index == 1) {
+            if (withdrawView == nil) {
+                withdrawView = WithdrawView()
+            }
+            
+            return withdrawView
+        }
+        
+        else if (index == 2) {
+            if (depositView == nil) {
+                depositView = DepositView()
+            }
+            
+            return depositView
+        }
+        
+        return nil
+    }
+    
+    func replaceContentView(view: UIView) {
+        currentContentView?.removeFromSuperview()
+        contentView.addSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+        view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+        view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
+        view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
     }
     
     override func titlebarTitle() -> String {
