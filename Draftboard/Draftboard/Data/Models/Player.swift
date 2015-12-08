@@ -9,7 +9,13 @@ import UIKit
 
 class Player: Model {
     var id: UInt!
-    var name: String!
+    var name: String! {
+        didSet {
+            (firstName, lastName) = splitName(name)
+        }
+    }
+    var firstName: String!
+    var lastName: String!
     var salary: Double!
     var position: String!
     var fppg: Double!
@@ -36,12 +42,17 @@ class Player: Model {
         self.fppg = fppg
         self.team = team_alias
         self.image = UIImage()
+        
+        (self.firstName, self.lastName) = splitName(self.name)
+    }
+    
+    private func splitName(name: String) -> (String!, String!) {
+        var nameComponents = name.componentsSeparatedByString(" ")
+        let firstName = nameComponents.removeFirst()
+        return (firstName, nameComponents.joinWithSeparator(" "))
     }
     
     func shortName() -> String {
-        let nameArr = name.characters.split{$0 == " "}.map(String.init)
-        let firstName = nameArr[0]
-        let lastName = nameArr[1]
         let firstChar = firstName[firstName.startIndex]
         return String(firstChar).uppercaseString + ". " + lastName
     }

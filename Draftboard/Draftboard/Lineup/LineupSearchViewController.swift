@@ -80,9 +80,18 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     func gotDraftGroup(draftGroup: DraftGroup) {
         self.draftGroup = draftGroup
-        self.players = draftGroup.players!.sort { p1, p2 in p1.salary > p2.salary }
+        self.players = draftGroup.players
         if filterBy != "FX" {
             self.players = self.players.filter { p in p.position == filterBy }
+        }
+        self.players.sortInPlace { p1, p2 in
+            if p1.salary != p2.salary {
+                return p1.salary > p2.salary
+            }
+            if p1.fppg != p2.fppg {
+                return p1.fppg > p2.fppg
+            }
+            return p1.lastName < p2.lastName
         }
         self.loaderView.spinning = false
         self.loaderView.removeFromSuperview()
