@@ -14,6 +14,7 @@ class PermissionViewController: DraftboardViewController {
     @IBOutlet weak var bigIconView: DraftboardImageView!
     @IBOutlet weak var descriptionLabel: DraftboardLabel!
     @IBOutlet weak var grantBtn: DraftboardButton!
+    @IBOutlet weak var secondaryBtn: DraftboardButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
