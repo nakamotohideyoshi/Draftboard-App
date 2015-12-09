@@ -46,9 +46,6 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         let onePixel = 1 / UIScreen.mainScreen().scale
         statsDividerHeight.constant = onePixel
         
-        searchBar.barTintColor = UIColor(0x192436)
-//        searchBar.backgroundColor = .blueDarker()
-        
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "LineupSearchCellView", bundle: bundle)
         

@@ -53,7 +53,18 @@ final class RootViewController: UIViewController {
     }
     
     func setAppearanceProperties() {
-        UITextField.appearance().tintColor = UIColor.greenDraftboard()
+        if #available(iOS 9, *) {
+            UISearchBar.appearance().searchBarStyle = .Minimal
+            UISearchBar.appearance().barTintColor = .blueDarker()
+            UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = .greenDraftboard()
+            UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = .whiteColor()
+            /*
+            // This works but the icon colors won't budge, so...
+            UILabel.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = .greyCool()
+            // This would need image to have renderingMode .AlwaysTemplate, but it doesn't work anyway
+            UIImageView.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = .greyCool()
+            */
+        }
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
