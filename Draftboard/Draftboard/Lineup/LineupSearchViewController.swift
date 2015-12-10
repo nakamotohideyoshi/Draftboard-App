@@ -49,6 +49,8 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "LineupSearchCellView", bundle: bundle)
         
+        searchBar.delegate = self
+        
         tableView.registerNib(nib, forCellReuseIdentifier: searchCellIdentifier)
         tableView.separatorStyle = .None
         tableView.dataSource = self
@@ -153,10 +155,16 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
             navController?.popViewController()
         }
         else if(buttonType == .Back) {
+            self.view.endEditing(true)
             navController?.popViewController()
         }
         else if (buttonType == .Search) {
-            self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
+            if self.tableView.contentOffset.y == 0 {
+                self.searchBar.becomeFirstResponder()
+            }
+            else {
+                self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
+            }
         }
     }
     
@@ -170,5 +178,27 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     override func titlebarBgHidden() -> Bool {
         return false
+    }
+}
+
+extension LineupSearchViewController: UIScrollViewDelegate {
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y == 0 {
+            self.searchBar.becomeFirstResponder()
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let searchFirstResponder = self.searchBar.isFirstResponder()
+        let searchOffScreen = scrollView.contentOffset.y >= self.searchBar.frame.size.height
+        if searchFirstResponder && searchOffScreen {
+            self.searchBar.resignFirstResponder()
+        }
+    }
+}
+
+extension LineupSearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
