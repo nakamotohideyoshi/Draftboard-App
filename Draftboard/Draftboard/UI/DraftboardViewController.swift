@@ -81,4 +81,8 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
         // Done
         return attrStr
     }
+    
+    func footerType() -> FooterType {
+        return .None
+    }
 }

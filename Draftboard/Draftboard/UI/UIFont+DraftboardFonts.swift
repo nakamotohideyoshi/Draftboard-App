@@ -26,11 +26,13 @@ extension UIFont {
         return UIFont(name: "OpenSans-Light", size: 65.0)
     }
     
-    class func draftboardLineupStatTitleFont() -> UIFont? {
-        return UIFont(name: "OpenSans-Semibold", size: 8.0)
+    class func draftboardLineupStatTitleFont(style: LineupStatStyle) -> UIFont? {
+        let size: CGFloat = (style == .Small) ? 8.0 : 10.0
+        return UIFont(name: "OpenSans-Semibold", size: size)
     }
     
-    class func draftboardLineupStatValueFont() -> UIFont? {
-        return UIFont(name: "Oswald-Regular", size: 12.0)
+    class func draftboardLineupStatValueFont(style: LineupStatStyle) -> UIFont? {
+        let size: CGFloat = (style == .Small) ? 12.0 : 20.0
+        return UIFont(name: "Oswald-Regular", size: size)
     }
 }

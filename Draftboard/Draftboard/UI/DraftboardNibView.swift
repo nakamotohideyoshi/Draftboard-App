@@ -40,7 +40,7 @@ class DraftboardNibView: UIView {
         let views = nib.instantiateWithOwner(self, options: nil)
         return views.first as! UIView
     }
-
+    
     func nibName() -> String {
         return self.dynamicType.description().componentsSeparatedByString(".").last!
     }

@@ -90,11 +90,13 @@ class LineupCardView: DraftboardNibView {
     }
     
     func createStats() {
-        feesStatView = LineupStatFeesView(titleText: "Fees", valueText: "$10/4")
-        liveStatView = LineupStatTimeView(titleText: "Time", valueText: "00:00:00")
-        salaryStatView = LineupStatView(titleText: "Salary Rem.", valueText: "$10,000")
-        pmrStatView = LineupStatPMRView(titleText: "Pts", valueText: "0")
-        winningsStatView = LineupStatView(titleText: "Winnings", valueText: "$5.00")
+        let date = NSDate().dateByAddingTimeInterval(15)
+        
+        feesStatView = LineupStatFeesView(style: .Small, titleText: "FEES", valueText: "$10/4")
+        liveStatView = LineupStatTimeView(style: .Small, titleText: "TIME", date: date)
+        salaryStatView = LineupStatView(style: .Small, titleText: "SALARY REM.", valueText: "$10,000")
+        pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
+        winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5.00")
         
         addStatToContainerView(feesStatView, containerView: leftStatContainerView)
         addStatToContainerView(liveStatView, containerView: centerStatContainerView)
@@ -217,6 +219,7 @@ class LineupCardView: DraftboardNibView {
     
     func updateTime(timer: NSTimer) {
         let now = NSDate()
+        
         if (liveDate.earlierDate(now) == liveDate) {
             liveTimer.invalidate()
             makeLive()
@@ -230,7 +233,7 @@ class LineupCardView: DraftboardNibView {
                 options: []
             )
             
-            liveStatView.text = String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
+            liveStatView.valueText = String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
         }
     }
 }

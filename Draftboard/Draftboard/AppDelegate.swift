@@ -8,15 +8,31 @@
 
 import UIKit
 
+// Globals
+struct App {
+    static var screenPixel: CGFloat = 0
+    static var screenScale: CGFloat = 0
+    static var screenBounds: CGRect = CGRectZero
+    static var libraryPath: NSString = ""
+    static var cachesPath: NSString = ""
+    
+    func roundToScreenPixel(v: CGFloat) -> CGFloat {
+        return round(v * App.screenScale) / App.screenScale;
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window : UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window!.rootViewController = RootViewController.sharedInstance
-        self.window!.makeKeyAndVisible()
+        setConstants()
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.rootViewController = RootViewController.sharedInstance
+        window!.makeKeyAndVisible()
+        
         return true
     }
     
@@ -40,5 +56,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func setConstants() {
+        
+        // Screen
+        let screen = UIScreen.mainScreen()
+        App.screenBounds = screen.bounds
+        App.screenScale = screen.scale
+        App.screenPixel = 1.0 / screen.scale
+        
+        // Paths
+        App.libraryPath = NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true)[0]
+        App.cachesPath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
     }
 }
