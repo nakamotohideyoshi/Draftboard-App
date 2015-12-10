@@ -47,7 +47,7 @@ class LineupCardView: DraftboardNibView {
     var salaryStatView: LineupStatView!
     var winningsStatView: LineupStatView!
     
-    var cellViews = [LineupCellView]()
+    var cellViews = [LineupCardCellView]()
     let curtain = UIView()
     
     var liveDate: NSDate!
@@ -164,11 +164,11 @@ class LineupCardView: DraftboardNibView {
             return
         }
         
-        var previousCell: LineupCellView?
+        var previousCell: LineupCardCellView?
         let height = cellHeight()
         
         for (i, player) in theLineup.enumerate() {
-            let cellView = LineupCellView()
+            let cellView = LineupCardCellView()
             cellView.unitLabel.text = ""
             cellView.player = player
             
@@ -196,7 +196,7 @@ class LineupCardView: DraftboardNibView {
         }
     }
     
-    func didTapPlayerCell(playerCell: LineupCellView) {
+    func didTapPlayerCell(playerCell: LineupCardCellView) {
         if let showPlayerDetail = showPlayerDetailAction {
             if playerCell.player == nil {
                 return
