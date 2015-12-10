@@ -93,7 +93,6 @@
 		5D6237C31BB61F7B0007E62A /* LineupListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B61BB61F7B0007E62A /* LineupListController.xib */; };
 		5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */; };
 		5D6237C61BB61F7B0007E62A /* LineupEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */; };
-		5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237BA1BB61F7B0007E62A /* LineupsDetailController.swift */; };
 		5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237BB1BB61F7B0007E62A /* LineupListController.swift */; };
 		5D6237CB1BB61F9B0007E62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860E01B9FB195004013AB /* AppDelegate.swift */; };
 		5D6237CC1BB61F9B0007E62A /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4412171BAA163700A86111 /* Closures.swift */; };
@@ -115,7 +114,6 @@
 		5D63D0A91BD6B711000215DF /* LineupSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D63D0A81BD6B711000215DF /* LineupSearchViewController.swift */; };
 		5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */; };
 		5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */; };
-		5D783AC31BD9439C000D8494 /* LineupBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D783AC21BD9439C000D8494 /* LineupBar.xib */; };
 		5D783AC91BD94847000D8494 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AC81BD94847000D8494 /* Player.swift */; };
 		5D783ACC1BD97C54000D8494 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783ACA1BD97C54000D8494 /* Model.swift */; };
 		5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783ACE1BD97CAA000D8494 /* DDM.swift */; };
@@ -263,12 +261,10 @@
 		5D6237B61BB61F7B0007E62A /* LineupListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupListController.xib; sourceTree = "<group>"; };
 		5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEditViewController.swift; sourceTree = "<group>"; };
 		5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupEditViewController.xib; sourceTree = "<group>"; };
-		5D6237BA1BB61F7B0007E62A /* LineupsDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupsDetailController.swift; sourceTree = "<group>"; };
 		5D6237BB1BB61F7B0007E62A /* LineupListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListController.swift; sourceTree = "<group>"; };
 		5D63D0A81BD6B711000215DF /* LineupSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupSearchViewController.swift; sourceTree = "<group>"; };
 		5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalNavController.swift; sourceTree = "<group>"; };
 		5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalItemView.swift; sourceTree = "<group>"; };
-		5D783AC21BD9439C000D8494 /* LineupBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupBar.xib; sourceTree = "<group>"; };
 		5D783AC81BD94847000D8494 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5D783ACA1BD97C54000D8494 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		5D783ACE1BD97CAA000D8494 /* DDM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDM.swift; sourceTree = "<group>"; };
@@ -502,7 +498,8 @@
 		5DC589411BA1DBDB00B9D134 /* Lineup */ = {
 			isa = PBXGroup;
 			children = (
-				5D783AC21BD9439C000D8494 /* LineupBar.xib */,
+				5D6237BB1BB61F7B0007E62A /* LineupListController.swift */,
+				5D6237B61BB61F7B0007E62A /* LineupListController.xib */,
 				5D6237B01BB61F7B0007E62A /* LineupCardView.swift */,
 				5D6237B11BB61F7B0007E62A /* LineupCardView.xib */,
 				5D6237B21BB61F7B0007E62A /* LineupCardCellView.swift */,
@@ -511,13 +508,10 @@
 				5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */,
 				5D6237B41BB61F7B0007E62A /* LineupEditCellView.swift */,
 				5D6237B51BB61F7B0007E62A /* LineupEditCellView.xib */,
-				5D6237BB1BB61F7B0007E62A /* LineupListController.swift */,
-				5D6237B61BB61F7B0007E62A /* LineupListController.xib */,
-				5D6237BA1BB61F7B0007E62A /* LineupsDetailController.swift */,
-				5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */,
-				5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */,
 				5D63D0A81BD6B711000215DF /* LineupSearchViewController.swift */,
 				5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */,
+				5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */,
+				5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */,
 				3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */,
 				3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */,
 				3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */,
@@ -701,7 +695,6 @@
 				3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */,
 				3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */,
 				5D4E63481BAB75D80033C4C2 /* OpenSans-Italic.ttf in Resources */,
-				5D783AC31BD9439C000D8494 /* LineupBar.xib in Resources */,
 				3CB630A91C10A19000ACEAD3 /* DepositView.xib in Resources */,
 				5D4E63491BAB75D80033C4C2 /* OpenSans-Light.ttf in Resources */,
 				5D26FC701BBEE0BD00ACF127 /* LabeledField.xib in Resources */,
@@ -817,7 +810,6 @@
 				5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */,
 				3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */,
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
-				5D6237C71BB61F7B0007E62A /* LineupsDetailController.swift in Sources */,
 				3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,
 				5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */,
