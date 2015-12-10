@@ -17,7 +17,7 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupEmptyCellView" customModule="Draftboard" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupEditCellView" customModule="Draftboard" customModuleProvider="target">
             <connections>
                 <outlet property="abbrLabel" destination="biX-Vx-Jha" id="ZdX-Rb-CP2"/>
                 <outlet property="avatarImageView" destination="Esd-Fy-OQR" id="eNE-hR-UuY"/>

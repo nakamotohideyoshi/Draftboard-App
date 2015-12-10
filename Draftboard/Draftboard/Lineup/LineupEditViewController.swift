@@ -21,7 +21,7 @@ class LineupEditViewController: DraftboardViewController {
     var saveLineupAction: (([Player]) -> Void)?
     var positions = [String]()
     var positionPlaceholders = [String]()
-    var cellViews = [LineupEmptyCellView]()
+    var cellViews = [LineupEditCellView]()
     var cellIndex = 0
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func layoutCellViews() {
-        var previousCell: LineupEmptyCellView?
+        var previousCell: LineupEditCellView?
         
         var divisor: CGFloat = 5.0 // iPhone 4S
         let screenHeight = UIScreen.mainScreen().bounds.height
@@ -63,7 +63,7 @@ class LineupEditViewController: DraftboardViewController {
         }
         
         for (i, position) in positions.enumerate() {
-            let cellView = LineupEmptyCellView()
+            let cellView = LineupEditCellView()
             cellView.abbrText = position
             cellView.nameText = positionPlaceholders[i]
             cellView.salaryText = ""
@@ -120,7 +120,7 @@ class LineupEditViewController: DraftboardViewController {
         return nil
     }
     
-    func didTapCell(sender: LineupEmptyCellView) {
+    func didTapCell(sender: LineupEditCellView) {
 
         cellIndex = sender.index
         
