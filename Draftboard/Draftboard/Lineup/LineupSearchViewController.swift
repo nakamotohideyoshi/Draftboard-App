@@ -23,6 +23,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     var playerSelectedAction:((Player) -> Void)?
     var positionText: String!
     var loaderView: LoaderView!
+    var searchTextField: UITextField?
     
     init(titleText: String, nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -50,6 +51,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         let nib = UINib(nibName: "LineupSearchCellView", bundle: bundle)
         
         searchBar.delegate = self
+        searchBar.enablesReturnKeyAutomatically = false
         
         tableView.registerNib(nib, forCellReuseIdentifier: searchCellIdentifier)
         tableView.separatorStyle = .None
@@ -79,11 +81,37 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     func gotDraftGroup(draftGroup: DraftGroup) {
         self.draftGroup = draftGroup
-        self.players = draftGroup.players
+        self.updatePlayers()
+        self.loaderView.spinning = false
+        self.loaderView.removeFromSuperview()
+        self.tableView.reloadData()
+    }
+    
+    func updatePlayers() {
+        players = draftGroup.players
+        // Filter by position
         if filterBy != "FX" {
-            self.players = self.players.filter { p in p.position == filterBy }
+            players = players.filter { p in p.position == filterBy }
         }
-        self.players.sortInPlace { p1, p2 in
+        // Filter by search text
+        let searchText = searchBar.text ?? ""
+        if searchText != "" {
+            let searchWords = searchText.lowercaseString.componentsSeparatedByString(" ")
+            if searchWords.count > 0 {
+                players = players.filter { player in
+                    for component in searchWords {
+                        let firstname = player.firstName.lowercaseString
+                        let lastName = player.lastName.lowercaseString
+                        if firstname.hasPrefix(component) || lastName.hasPrefix(component) {
+                            return true
+                        }
+                    }
+                    return false
+                }
+            }
+        }
+        // Sort by salary, fppg, name
+        players.sortInPlace { p1, p2 in
             if p1.salary != p2.salary {
                 return p1.salary > p2.salary
             }
@@ -92,9 +120,6 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
             }
             return p1.lastName < p2.lastName
         }
-        self.loaderView.spinning = false
-        self.loaderView.removeFromSuperview()
-        self.tableView.reloadData()
     }
     
     func addInjuryInfo(draftGroup: DraftGroup, injuries: [UInt: String]) {
@@ -108,6 +133,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let players = self.players {
+            self.view.endEditing(true)
             let player = players[indexPath.row]
             playerSelectedAction?(player)
         }
@@ -182,9 +208,21 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
 }
 
 extension LineupSearchViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y == 0 && !searchBar.isFirstResponder() {
+            searchBar.becomeFirstResponder()
+        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate && scrollView.contentOffset.y == 0 && !searchBar.isFirstResponder() {
+            searchBar.becomeFirstResponder()
+        }
+    }
+
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y == 0 {
-            self.searchBar.becomeFirstResponder()
+        if scrollView.contentOffset.y == 0 && !searchBar.isFirstResponder() {
+            searchBar.becomeFirstResponder()
         }
     }
     
@@ -199,6 +237,30 @@ extension LineupSearchViewController: UIScrollViewDelegate {
 
 extension LineupSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        if players.count > 0 {
+            searchBar.resignFirstResponder()
+            if players.count == 1 {
+                playerSelectedAction?(players.first!)
+            }
+        }
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        updatePlayers()
+        if players.count == 0 {
+            tableView.scrollEnabled = false
+            searchBar.returnKeyType = .Default
+        }
+        else if players.count == 1 {
+            tableView.scrollEnabled = true
+            searchBar.returnKeyType = .Go
+        }
+        else {
+            tableView.scrollEnabled = true
+            searchBar.returnKeyType = .Search
+        }
+        tableView.reloadData()
         searchBar.resignFirstResponder()
+        searchBar.becomeFirstResponder()
     }
 }

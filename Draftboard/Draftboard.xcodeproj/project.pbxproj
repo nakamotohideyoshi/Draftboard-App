@@ -51,6 +51,7 @@
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
 		3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
+		3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */; };
 		3EB2CB671BFE473B00579F1B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB661BFE473B00579F1B /* Data.swift */; };
 		3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB731BFE763400579F1B /* DraftGroup.swift */; };
 		3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */; };
@@ -207,6 +208,7 @@
 		3E80C2A91BC5F51C0031CE3F /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		3E832BC41BE2CB3900084621 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3E96695D1BED5C8B005179E0 /* Lineup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lineup.swift; sourceTree = "<group>"; };
+		3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Traversal.swift"; sourceTree = "<group>"; };
 		3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutRancor.swift; sourceTree = "<group>"; };
 		3EB2CB661BFE473B00579F1B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3EB2CB731BFE763400579F1B /* DraftGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftGroup.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				5DE6C5971BD052FE005A4DC6 /* Spring.swift */,
+				3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -825,6 +828,7 @@
 				3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */,
 				5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */,
 				5D6237CB1BB61F9B0007E62A /* AppDelegate.swift in Sources */,
+				3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */,
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
 				5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */,
 				5D6237CC1BB61F9B0007E62A /* Closures.swift in Sources */,
