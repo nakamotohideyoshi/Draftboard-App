@@ -158,7 +158,7 @@ class LineupEditViewController: DraftboardViewController {
         }
         
         statRemSalary = draftGroup.sport.salary - lineupSalary
-        statAvgSalary = statRemSalary / Double(playersRemaining)
+        statAvgSalary = (playersRemaining == 0) ? 0 : statRemSalary / Double(playersRemaining)
     }
     
 //    func updateStatLiveIn() {

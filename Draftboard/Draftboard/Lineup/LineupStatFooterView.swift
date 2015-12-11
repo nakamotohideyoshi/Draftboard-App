@@ -49,7 +49,7 @@ class LineupStatFooterView: DraftboardFooterView {
         // Stat views
         liveInView = LineupStatTimeView(style: .Large, titleText: "LIVE IN", date: dataSource?.footerStatLiveInDate())
         remSalaryView = LineupStatCurrencyView(style: .Large, titleText: "REM SALARY", currencyValue: dataSource?.footerStatRemSalary())
-        avgPlayerView = LineupStatCurrencyView(style: .Large, titleText: "REM PER", currencyValue: dataSource?.footerStatAvgSalary())
+        avgPlayerView = LineupStatCurrencyView(style: .Large, titleText: "REM / PLAYER", currencyValue: dataSource?.footerStatAvgSalary())
         
         // Layout stat views
         statViews = [liveInView, remSalaryView, avgPlayerView]
