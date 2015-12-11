@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LineupCellView: DraftboardNibControl {
+class LineupCardCellView: DraftboardNibControl {
     @IBOutlet weak var positionLabel: DraftboardLabel!
     @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet weak var nameLabel: DraftboardLabel!

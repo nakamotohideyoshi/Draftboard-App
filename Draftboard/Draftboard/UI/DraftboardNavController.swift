@@ -21,10 +21,11 @@ class DraftboardNavController: UIViewController {
     var vcs = [DraftboardViewController]()
     var rvc: DraftboardViewController!
     
-    var footerContainerView: UIView!
-    var footerHeight: NSLayoutConstraint!
     var footerView: DraftboardFooterView?
     var footerType: FooterType = .None
+    
+    var footerInSpring: Spring?
+    var footerOutSpring: Spring?
     
     var inSpring: Spring?
     var outSpring: Spring?
@@ -57,17 +58,6 @@ class DraftboardNavController: UIViewController {
         contentView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         
-        footerContainerView = UIView()
-        view.addSubview(footerContainerView!)
-        
-        footerContainerView.translatesAutoresizingMaskIntoConstraints = false
-        footerContainerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
-        footerContainerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
-        footerContainerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
-        
-        footerHeight = footerContainerView.heightRancor.constraintEqualToConstant(0.0)
-        footerHeight.active = true
-        
         if (vcs.count == 0) {
             self.pushViewController(rvc, animated: false)
         }
@@ -89,24 +79,17 @@ class DraftboardNavController: UIViewController {
         // Add new view controller
         vcs.append(nvc)
         nvc.navController = self
-        contentView.addSubview(nvc.view)
         
         // Constrain new controller
+        contentView.addSubview(nvc.view)
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
         nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+        nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
         nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
         
-        // Attach new view controller to either the top of the footer
-        // or the bottom of the content view
-        let newFooterType = nvc.footerType()
-        let bottomAnchor = self.anchorForFooterType(newFooterType)
-        nvc.view.bottomRancor.constraintEqualToRancor(bottomAnchor).active = true
-        
         // Got a different footer here
-        if (footerType != newFooterType) {
-            self.updateFooterForViewController(nvc)
-        }
+        updateFooterForViewController(nvc)
         
         // Update titlebar
         titlebar.delegate = nvc
@@ -149,25 +132,18 @@ class DraftboardNavController: UIViewController {
         
         // Get view controllers
         let cvc = vcs.popLast()
-        let nvc = vcs.last
+        let nvc = vcs.last!
         
-        // Constrai new view controller
-        contentView.addSubview(nvc!.view)
-        nvc!.view.translatesAutoresizingMaskIntoConstraints = false
-        nvc!.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
-        nvc!.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
-        nvc!.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+        // Constrain new view controller
+        contentView.addSubview(nvc.view)
+        nvc.view.translatesAutoresizingMaskIntoConstraints = false
+        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+        nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+        nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
+        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
         
-        // Attach new view controller to either the top of the footer
-        // or the bottom of the content view
-        let newFooterType = nvc!.footerType()
-        let bottomAnchor = self.anchorForFooterType(newFooterType)
-        nvc!.view.bottomRancor.constraintEqualToRancor(bottomAnchor).active = true
-        
-        // Got a different footer here
-        if (footerType != newFooterType) {
-            self.updateFooterForViewController(nvc!)
-        }
+        // Update footer
+        updateFooterForViewController(nvc)
         
         // Update titlebar
         titlebar.delegate = nvc
@@ -182,7 +158,7 @@ class DraftboardNavController: UIViewController {
         if (animated) {
             view.layoutIfNeeded()
             
-            inSpring = animateViewControllerIn(nvc!, dir: -1.0)
+            inSpring = animateViewControllerIn(nvc, dir: -1.0)
             inSpring!.start()
             
             if let vc = cvc {
@@ -198,22 +174,29 @@ class DraftboardNavController: UIViewController {
     }
     
     func popToRootViewController(animated: Bool = true) {
-        if (vcs.count < 2) {
+        if vcs.count < 2 {
             return
         }
         
+        // Get controllers
         let cvc = vcs.last!
         let nvc = vcs.first!
         
+        // Remove current controller
         cvc.view.removeFromSuperview()
         contentView.addSubview(nvc.view)
         
+        // Constrain root controller
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
         nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
         nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
         nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
         nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         
+        // Update footer
+        updateFooterForViewController(nvc)
+        
+        // Update titlebar
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
         titlebar.popElements(animated: animated)
@@ -222,7 +205,7 @@ class DraftboardNavController: UIViewController {
     }
     
     func animateViewControllerIn(vc: DraftboardViewController, dir: CGFloat = 1.0) -> Spring {
-        let sw = UIScreen.mainScreen().bounds.width
+        let sw = App.screenBounds.width
         
         let endPos = vc.view.layer.position
         let startPos = CGPointMake(endPos.x + (sw * dir), endPos.y)
@@ -230,7 +213,7 @@ class DraftboardNavController: UIViewController {
         self.view.bringSubviewToFront(vc.view)
         
         vc.view.hidden = true // TODO: this shouldn't be necessary, needs a fix
-        let spring = Spring(stiffness: 3.4, damping: 0.63, velocity: 0.0)
+        let spring = Spring(stiffness: 3.4, damping: 0.62, velocity: 0.0)
         spring.updateBlock = { (value) -> Void in
             vc.view.hidden = false // TODO: this shouldn't be necessary, needs a fix
             
@@ -246,13 +229,13 @@ class DraftboardNavController: UIViewController {
     }
     
     func animateViewControllerOut(vc: DraftboardViewController, dir: CGFloat = -1.0) -> Spring {
-        let sw = UIScreen.mainScreen().bounds.width
+        let sw = App.screenBounds.width
         
         let startPos = vc.view.layer.position
         let endPos = CGPointMake(startPos.x + (sw * dir), startPos.y)
         let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
         
-        let spring = Spring(stiffness: 3.4, damping: 0.63, velocity: 0.0)
+        let spring = Spring(stiffness: 3.4, damping: 0.62, velocity: 0.0)
         spring.updateBlock = { (value) -> Void in
             vc.view.layer.position = CGPointMake(
                 startPos.x + (deltaPos.x * value),
@@ -275,57 +258,118 @@ extension DraftboardNavController {
     func heightForFooterType(footerType: FooterType) -> CGFloat {
         switch (footerType) {
         case FooterType.Stats:
-            return 61.0
+            return 60.0
         default:
             return 0.0
-        }
-    }
-    
-    func anchorForFooterType(footerType: FooterType) -> LayoutRancor {
-        switch (footerType) {
-        case FooterType.Stats:
-            return contentView.bottomRancor
-        default:
-            return contentView.bottomRancor
         }
     }
     
     func viewForFooterType(vc: DraftboardViewController, footerType: FooterType) -> DraftboardFooterView? {
         switch (footerType) {
         case FooterType.Stats:
-            if let xvc = vc as? StatFooterDataSource {
-                return LineupStatFooterView(dataSource: xvc)
-            }
-            return nil
-        
+            return LineupStatFooterView(dataSource: vc as? StatFooterDataSource)
         default:
             return nil
         }
     }
     
-    func updateFooterForViewController(nvc: DraftboardViewController) {
+    func updateFooterForViewController(nvc: DraftboardViewController, animated: Bool = true) {
         
-        // Set footer height
-        footerType = nvc.footerType()
-        footerHeight.constant = self.heightForFooterType(footerType)
+        // Same footer type
+        let newFooterType = nvc.footerType()
+        if footerType == newFooterType {
+            
+            // Update data source
+            if let fv = footerView as? LineupStatFooterView {
+                fv.dataSource = nvc as? StatFooterDataSource
+                fv.reloadData()
+            }
+            
+            // Bail
+            return
+        }
+        
+        // Kill in animation
+        footerInSpring?.stop()
+        footerInSpring = nil
+        
+        // Kill out animation
+        footerOutSpring?.stop()
+        footerOutSpring = nil
         
         // Remove old footer view
-        footerView?.removeFromSuperview()
-        footerView = nil
-        
+        if let fv = footerView {
+            let completeBlock = { (complete: Bool) in
+                fv.removeFromSuperview()
+            }
+            
+            if animated {
+                footerOutSpring = animateFooterOut(fv)
+                footerOutSpring?.completeBlock = completeBlock
+                footerOutSpring?.start()
+            }
+            else {
+                completeBlock(true)
+            }
+        }
+
         // Create new footer view
+        footerType = nvc.footerType()
         if let fv = self.viewForFooterType(nvc, footerType: footerType) {
-            footerContainerView.addSubview(fv)
+            view.addSubview(fv)
             
             // Constrain new footer view
             fv.translatesAutoresizingMaskIntoConstraints = false
-            fv.topRancor.constraintEqualToRancor(footerContainerView.topRancor).active = true
-            fv.rightRancor.constraintEqualToRancor(footerContainerView.rightRancor).active = true
-            fv.bottomRancor.constraintEqualToRancor(footerContainerView.bottomRancor).active = true
-            fv.leftRancor.constraintEqualToRancor(footerContainerView.leftRancor).active = true
+            fv.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
+            fv.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
+            fv.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+            fv.heightRancor.constraintEqualToConstant(heightForFooterType(footerType)).active = true
             
             // Keep a reference
             footerView = fv
+            
+            // Animate in
+            self.view.layoutIfNeeded()
+            
+            // Animate in
+            if (animated) {
+                footerInSpring = self.animateFooterIn(fv)
+                footerInSpring!.start(0.25)
+            }
         }
+    }
+    
+    func animateFooterIn(fv: UIView) -> Spring {
+        let endPos = fv.layer.position
+        let startPos = CGPointMake(endPos.x, endPos.y + fv.bounds.size.height)
+        let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
+        
+        fv.layer.position = startPos
+        let spring = Spring(stiffness: 3.4, damping: 0.62, velocity: 0.0)
+        spring.updateBlock = { (value) -> Void in
+            fv.layer.position = CGPointMake(
+                startPos.x + (deltaPos.x * value),
+                startPos.y + (deltaPos.y * value)
+            )
+        }
+        
+        return spring
+    }
+    
+    func animateFooterOut(fv: UIView) -> Spring {
+        let startPos = fv.layer.position
+        let endPos = CGPointMake(startPos.x, startPos.y + fv.bounds.size.height)
+        let deltaPos = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
+        
+        fv.layer.position = startPos
+        let spring = Spring(stiffness: 3.4, damping: 0.62, velocity: 0.0)
+        spring.updateBlock = { (value) -> Void in
+            fv.layer.position = CGPointMake(
+                startPos.x + (deltaPos.x * value),
+                startPos.y + (deltaPos.y * value)
+            )
+        }
+        
+        return spring
     }
 }

@@ -20,7 +20,7 @@ class LineupEditViewController: DraftboardViewController {
     var saveLineupAction: (([Player]) -> Void)?
     var positions = [String]()
     var positionPlaceholders = [String]()
-    var cellViews = [LineupEmptyCellView]()
+    var cellViews = [LineupEditCellView]()
     var cellIndex = 0
     
     var statRemSalary: Double = 0
@@ -31,6 +31,8 @@ class LineupEditViewController: DraftboardViewController {
         
         // Temp
         draftGroup.start = NSDate(timeIntervalSinceNow: 3600 * 12)
+        statRemSalary = draftGroup.sport.salary
+        statAvgSalary = statRemSalary / 8.0
         
         positions = ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"]
         positionPlaceholders = [
@@ -45,13 +47,12 @@ class LineupEditViewController: DraftboardViewController {
         ]
         
         contentView.alwaysBounceVertical = true
+        contentView.indicatorStyle = .White
         layoutCellViews()
-        
-//        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateStatLiveIn", userInfo: nil, repeats: true)
     }
     
     func layoutCellViews() {
-        var previousCell: LineupEmptyCellView?
+        var previousCell: LineupEditCellView?
         
         var divisor: CGFloat = 5.0 // iPhone 4S
         let screenHeight = UIScreen.mainScreen().bounds.height
@@ -64,7 +65,7 @@ class LineupEditViewController: DraftboardViewController {
         }
         
         for (i, position) in positions.enumerate() {
-            let cellView = LineupEmptyCellView()
+            let cellView = LineupEditCellView()
             cellView.abbrText = position
             cellView.nameText = positionPlaceholders[i]
             cellView.salaryText = ""
@@ -121,7 +122,7 @@ class LineupEditViewController: DraftboardViewController {
         return nil
     }
     
-    func didTapCell(sender: LineupEmptyCellView) {
+    func didTapCell(sender: LineupEditCellView) {
 
         cellIndex = sender.index
         

@@ -24,7 +24,7 @@ class LineupStatFooterView: DraftboardFooterView {
     
     let dividerView = UIView()
     
-    init(dataSource _dataSource: StatFooterDataSource) {
+    init(dataSource _dataSource: StatFooterDataSource?) {
         super.init(frame: CGRectZero)
         self.backgroundColor = .footerViewColor()
         dataSource = _dataSource
@@ -48,8 +48,8 @@ class LineupStatFooterView: DraftboardFooterView {
         
         // Stat views
         liveInView = LineupStatTimeView(style: .Large, titleText: "LIVE IN", date: dataSource?.footerStatLiveInDate())
-        remSalaryView = LineupStatCurrencyView(style: .Large, titleText: "REM. SALARY", currencyValue: dataSource?.footerStatRemSalary())
-        avgPlayerView = LineupStatCurrencyView(style: .Large, titleText: "AVG / PLAYER", currencyValue: dataSource?.footerStatAvgSalary())
+        remSalaryView = LineupStatCurrencyView(style: .Large, titleText: "REM SALARY", currencyValue: dataSource?.footerStatRemSalary())
+        avgPlayerView = LineupStatCurrencyView(style: .Large, titleText: "REM PER", currencyValue: dataSource?.footerStatAvgSalary())
         
         // Layout stat views
         statViews = [liveInView, remSalaryView, avgPlayerView]

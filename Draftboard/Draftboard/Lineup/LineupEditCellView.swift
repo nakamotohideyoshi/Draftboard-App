@@ -1,5 +1,5 @@
 //
-//  LineupEmptyCellView.swift
+//  LineupEditCellView.swift
 //  Draftboard
 //
 //  Created by Wes Pearce on 9/15/15.
@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class LineupEmptyCellView: DraftboardNibControl {
+class LineupEditCellView: DraftboardNibControl {
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarImageView: UIImageView!

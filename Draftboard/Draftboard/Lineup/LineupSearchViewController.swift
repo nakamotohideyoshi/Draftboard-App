@@ -10,11 +10,9 @@ import UIKit
 import PromiseKit
 
 class LineupSearchViewController: DraftboardViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var remSalaryLabel: DraftboardLabel!
-    @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var statsDividerHeight: NSLayoutConstraint!
     
     let searchCellIdentifier = "searchCellIdentifier"
     var draftGroup: DraftGroup!
@@ -28,7 +26,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         positionText = titleText
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -43,14 +41,10 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         
         view.backgroundColor = .blueDarker()
         
-        let onePixel = 1 / UIScreen.mainScreen().scale
-        statsDividerHeight.constant = onePixel
-        
-        searchBar.barTintColor = UIColor(0x192436)
-//        searchBar.backgroundColor = .blueDarker()
-        
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "LineupSearchCellView", bundle: bundle)
+        
+        searchBar.delegate = self
         
         tableView.registerNib(nib, forCellReuseIdentifier: searchCellIdentifier)
         tableView.separatorStyle = .None
@@ -156,10 +150,16 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
             navController?.popViewController()
         }
         else if(buttonType == .Back) {
+            self.view.endEditing(true)
             navController?.popViewController()
         }
         else if (buttonType == .Search) {
-            self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
+            if self.tableView.contentOffset.y == 0 {
+                self.searchBar.becomeFirstResponder()
+            }
+            else {
+                self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
+            }
         }
     }
     
@@ -173,5 +173,31 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     override func titlebarBgHidden() -> Bool {
         return false
+    }
+    
+    override func footerType() -> FooterType {
+        return .Stats
+    }
+}
+
+extension LineupSearchViewController: UIScrollViewDelegate {
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y == 0 {
+            self.searchBar.becomeFirstResponder()
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let searchFirstResponder = self.searchBar.isFirstResponder()
+        let searchOffScreen = scrollView.contentOffset.y >= self.searchBar.frame.size.height
+        if searchFirstResponder && searchOffScreen {
+            self.searchBar.resignFirstResponder()
+        }
+    }
+}
+
+extension LineupSearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }

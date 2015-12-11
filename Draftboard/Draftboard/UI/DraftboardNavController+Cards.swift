@@ -14,18 +14,23 @@ extension DraftboardNavController {
         
         vcs.append(nvc)
         nvc.navController = self
-        contentView.addSubview(nvc.view)
         nvc.view.layer.opacity = 0
         
+        // Constrain content
+        contentView.addSubview(nvc.view)
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
-        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
         nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
-        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
         
+        // Update titlebar
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
         titlebar.pushElements(directionless: true, animated: animated)
+        
+        // Update footer
+        updateFooterForViewController(nvc)
         
         // Begin animation code
         
@@ -77,17 +82,23 @@ extension DraftboardNavController {
         cardView.layer.opacity = 0
         nvc.view.hidden = false
         
+        // Constrain new view controller
         contentView.addSubview(nvc.view)
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
-        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
+        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         nvc.view.rightRancor.constraintEqualToRancor(contentView.rightRancor).active = true
         nvc.view.bottomRancor.constraintEqualToRancor(contentView.bottomRancor).active = true
-        nvc.view.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+        nvc.view.leftRancor.constraintEqualToRancor(contentView.leftRancor).active = true
         
+        // Update titlebar
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
         titlebar.popElements(directionless: true, animated: animated)
         
+        // Update footer
+        updateFooterForViewController(nvc)
+        
+        // Layout
         self.view.layoutIfNeeded()
         
         // Begin animation code
