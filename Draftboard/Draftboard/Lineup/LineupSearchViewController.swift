@@ -163,7 +163,9 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func didTapPlayerInfo(sender: DraftboardButton) {
+        let cell = sender.superview as? LineupSearchCellView
         let pdvc = PlayerDetailViewController(nibName: "PlayerDetailViewController", bundle: nil)
+        pdvc.player = cell?.player
         self.navController?.pushViewController(pdvc)
     }
     
