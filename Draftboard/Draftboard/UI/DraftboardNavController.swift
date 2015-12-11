@@ -334,7 +334,7 @@ extension DraftboardNavController {
             // Animate in
             if (animated) {
                 footerInSpring = self.animateFooterIn(fv)
-                footerInSpring!.start(0.25)
+                footerInSpring!.start(0.0)
             }
         }
     }
