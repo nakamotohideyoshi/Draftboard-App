@@ -175,7 +175,7 @@ class LineupEditViewController: DraftboardViewController {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .DisabledValue) {
-            print("You can't save a completely empty lineup")
+            print("You can't save an invalid lineup")
             return
         }
         
@@ -207,12 +207,15 @@ class LineupEditViewController: DraftboardViewController {
     
     override func titlebarRightButtonType() -> TitlebarButtonType {
         for cell in self.cellViews {
-            if cell.player != nil {
-                return .Value
+            if cell.player == nil {
+                return .DisabledValue
             }
         }
+        if statRemSalary < 0 {
+            return .DisabledValue
+        }
         
-        return .DisabledValue
+        return .Value
     }
     
     override func titlebarRightButtonText() -> String? {
