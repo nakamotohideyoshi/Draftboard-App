@@ -10,44 +10,65 @@ import UIKit
 
 class LineupStatTimeView: LineupStatView {
     
-    override func setup() {
-        titleLabel.font = .draftboardLineupStatTitleFont()
-        titleLabel.textColor = .lineupStatTitleColor()
-        titleLabel.text = titleText.uppercaseString
+    var defaultString = "00:00:00"
+    var timer: NSTimer!
+    
+    init(style _style: LineupStatStyle, titleText _titleText: String?, date _date: NSDate?) {
+        super.init(style: _style, titleText: _titleText, valueText: nil)
         
-        valueLabel.attributedText = attributedText(valueText.uppercaseString)
+        date = _date
+        self.valueText = timeStringFromDate(_date)
         
-        self.addSubview(titleLabel)
-        self.addSubview(valueLabel)
-        
-        constrainLabels()
+        // Countdown timer
+        timer = NSTimer(timeInterval: 0.5, target: self, selector: "update", userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes);
     }
     
-    var text: String = "00:00:00" {
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var date: NSDate? {
         didSet {
-            valueLabel.attributedText = attributedText(text)
+            self.valueText = timeStringFromDate(date!)
         }
     }
     
-    func attributedText(str: String) -> NSMutableAttributedString? {
-        
-        // Create attributed string
-        let attrStr = NSMutableAttributedString(string: str.uppercaseString)
-        
-        // Kerning
-        let wholeStr = NSMakeRange(0, attrStr.length)
-        attrStr.addAttribute(NSKernAttributeName, value: 0.0, range: wholeStr)
-        
-        // Font
-        if let font = UIFont.draftboardLineupStatValueFont() {
-            attrStr.addAttribute(NSFontAttributeName, value: font, range: wholeStr)
+    func timeStringFromDate(date: NSDate?) -> String {
+        if (date == nil) {
+            return defaultString
         }
         
-        // Colors
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatValueColor(), range: wholeStr)
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatTimeColor(), range: NSMakeRange(0, 6))
+        let cal = NSCalendar.currentCalendar()
+        let now = NSDate()
         
-        // Done
+        let components = cal.components(
+            [.Hour, .Minute, .Second],
+            fromDate: now,
+            toDate: date!,
+            options: []
+        )
+        
+        return String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
+    }
+    
+    override func attributedValueText(str: String) -> NSMutableAttributedString {
+        let attrStr = super.attributedValueText(str)
+        
+        // TODO: add logic here for coloring the right zeros
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatTimeColor(style), range: NSMakeRange(0, 6))
+        
         return attrStr
+    }
+    
+    func update() {
+        if (date != nil) {
+            self.valueText = timeStringFromDate(date)
+        }
+    }
+    
+    deinit {
+        timer.invalidate()
+        timer = nil
     }
 }

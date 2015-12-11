@@ -120,15 +120,23 @@ extension UIColor {
         return greyCool()
     }
     
-    class func lineupStatTitleColor() -> UIColor {
+    class func footerViewColor() -> UIColor {
+        return UIColor(0x152133, alpha: 0.9)
+    }
+    
+    class func lineupStatTitleColor(style: LineupStatStyle) -> UIColor {
         return greyCool()
     }
     
-    class func lineupStatValueColor() -> UIColor {
+    class func lineupStatValueColor(style: LineupStatStyle) -> UIColor {
         return whiteColor()
     }
     
-    class func lineupStatTimeColor() -> UIColor {
+    class func lineupStatTimeColor(style: LineupStatStyle) -> UIColor {
+        return greyCool()
+    }
+    
+    class func lineupStatFeesColor(style: LineupStatStyle) -> UIColor {
         return greyCool()
     }
     

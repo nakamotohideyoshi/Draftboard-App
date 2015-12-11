@@ -77,24 +77,18 @@ class LineupCardView: DraftboardNibView {
         curtain.userInteractionEnabled = false
         curtain.alpha = 0
         
+        liveDate = NSDate().dateByAddingTimeInterval(15)
+        liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
+        
         createStats()
-        startTimer()
-    }
-    
-    func startTimer() {
-        let now = NSDate()
-        let cal = NSCalendar.currentCalendar()
-        liveDate = cal.dateByAddingUnit(.Second, value: 15, toDate: now, options: [])
-        liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime:"), userInfo: nil, repeats: true)
-        updateTime(liveTimer)
     }
     
     func createStats() {
-        feesStatView = LineupStatFeesView(titleText: "Fees", valueText: "$10/4")
-        liveStatView = LineupStatTimeView(titleText: "Time", valueText: "00:00:00")
-        salaryStatView = LineupStatView(titleText: "Salary Rem.", valueText: "$10,000")
-        pmrStatView = LineupStatPMRView(titleText: "Pts", valueText: "0")
-        winningsStatView = LineupStatView(titleText: "Winnings", valueText: "$5.00")
+        feesStatView = LineupStatFeesView(style: .Small, titleText: "FEES", valueText: "$10/4")
+        liveStatView = LineupStatTimeView(style: .Small, titleText: "TIME", date: liveDate)
+        salaryStatView = LineupStatView(style: .Small, titleText: "REM SALARY", valueText: "$10,000")
+        pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
+        winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5.00")
         
         addStatToContainerView(feesStatView, containerView: leftStatContainerView)
         addStatToContainerView(liveStatView, containerView: centerStatContainerView)
@@ -104,9 +98,11 @@ class LineupCardView: DraftboardNibView {
     func makeLive() {
         live = true
         
-//        feesStatView.removeFromSuperview()
         liveStatView.removeFromSuperview()
+        liveStatView = nil
+        
         salaryStatView.removeFromSuperview()
+        salaryStatView = nil
         
         addStatToContainerView(pmrStatView, containerView: centerStatContainerView)
         addStatToContainerView(winningsStatView, containerView: rightStatContainerView)
@@ -215,22 +211,12 @@ class LineupCardView: DraftboardNibView {
         }
     }
     
-    func updateTime(timer: NSTimer) {
+    func updateTime() {
         let now = NSDate()
         if (liveDate.earlierDate(now) == liveDate) {
             liveTimer.invalidate()
+            liveTimer = nil
             makeLive()
-        }
-        else {
-            let cal = NSCalendar.currentCalendar()
-            let components = cal.components(
-                [.Hour, .Minute, .Second],
-                fromDate: now,
-                toDate: liveDate,
-                options: []
-            )
-            
-            liveStatView.text = String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
         }
     }
 }

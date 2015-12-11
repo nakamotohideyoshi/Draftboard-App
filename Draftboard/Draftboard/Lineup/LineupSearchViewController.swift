@@ -10,11 +10,9 @@ import UIKit
 import PromiseKit
 
 class LineupSearchViewController: DraftboardViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var remSalaryLabel: DraftboardLabel!
-    @IBOutlet weak var avgSalaryLabel: DraftboardLabel!
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var statsDividerHeight: NSLayoutConstraint!
     
     let searchCellIdentifier = "searchCellIdentifier"
     var draftGroup: DraftGroup!
@@ -29,7 +27,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         positionText = titleText
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -43,9 +41,6 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         when(draftGroupPromise, injuriesPromise).then(self.addInjuryInfo)
         
         view.backgroundColor = .blueDarker()
-        
-        let onePixel = 1 / UIScreen.mainScreen().scale
-        statsDividerHeight.constant = onePixel
         
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "LineupSearchCellView", bundle: bundle)
@@ -204,6 +199,10 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     override func titlebarBgHidden() -> Bool {
         return false
+    }
+    
+    override func footerType() -> FooterType {
+        return .Stats
     }
 }
 

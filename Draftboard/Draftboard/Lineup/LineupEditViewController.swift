@@ -10,11 +10,10 @@ import UIKit
 
 class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var contentView: UIScrollView!
-    @IBOutlet weak var statContainer: UIView!
-    @IBOutlet weak var dividerHeight: NSLayoutConstraint!
-    @IBOutlet weak var statLiveIn: DraftboardLabel!
-    @IBOutlet weak var statRemSalary: DraftboardLabel!
-    @IBOutlet weak var statAvgPerPlayer: DraftboardLabel!
+    
+//    @IBOutlet weak var statLiveIn: DraftboardLabel!
+//    @IBOutlet weak var statRemSalary: DraftboardLabel!
+//    @IBOutlet weak var statAvgPerPlayer: DraftboardLabel!
     
     var draftGroup: DraftGroup!
     var lineup: Lineup!
@@ -24,10 +23,16 @@ class LineupEditViewController: DraftboardViewController {
     var cellViews = [LineupEditCellView]()
     var cellIndex = 0
     
+    var statRemSalary: Double = 0
+    var statAvgSalary: Double = 0
+    
     override func viewDidLoad() {
         let _ = Data.draftGroup(id: draftGroup.id)
+        
         // Temp
         draftGroup.start = NSDate(timeIntervalSinceNow: 3600 * 12)
+        statRemSalary = draftGroup.sport.salary
+        statAvgSalary = statRemSalary / 8.0
         
         positions = ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"]
         positionPlaceholders = [
@@ -40,13 +45,10 @@ class LineupEditViewController: DraftboardViewController {
             "Select Flex Player",
             "Select Flex Player"
         ]
-        contentView.alwaysBounceVertical = true
-//        statContainer.backgroundColor = UIColor(0x152133, alpha: 0.96)
-        let onePixel = 1 / UIScreen.mainScreen().scale
-        dividerHeight.constant = onePixel
-        layoutCellViews()
         
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateStatLiveIn", userInfo: nil, repeats: true)
+        contentView.alwaysBounceVertical = true
+        contentView.indicatorStyle = .White
+        layoutCellViews()
     }
     
     func layoutCellViews() {
@@ -143,6 +145,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func updateStats() {
+        
         // Lame
         var lineupSalary: Double = 0
         var playersRemaining: Int = 0
@@ -153,44 +156,29 @@ class LineupEditViewController: DraftboardViewController {
                 playersRemaining += 1
             }
         }
-        let remaining = draftGroup.sport.salary - lineupSalary
-        let remainingPerPlayer = remaining / Double(playersRemaining)
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
-        formatter.maximumFractionDigits = 0
-        statRemSalary.text = formatter.stringFromNumber(remaining)
-        statAvgPerPlayer.text = formatter.stringFromNumber(remainingPerPlayer)
-        if remaining >= 0 {
-            statRemSalary.textColor = .whiteColor()
-            statAvgPerPlayer.textColor = .whiteColor()
-        } else {
-            statRemSalary.textColor = .redDraftboard()
-            statAvgPerPlayer.textColor = .redDraftboard()
-            statAvgPerPlayer.text = "$0"
-        }
-        if playersRemaining == 0 {
-            statAvgPerPlayer.text = "--"
-        }
+        
+        statRemSalary = draftGroup.sport.salary - lineupSalary
+        statAvgSalary = statRemSalary / Double(playersRemaining)
     }
     
-    func updateStatLiveIn() {
-        // http://stackoverflow.com/questions/4933075/nstimeinterval-to-hhmmss
-        
-//        abs
-        let interval = Int(draftGroup.start.timeIntervalSinceNow)
-        let seconds = abs(interval) % 60
-        let minutes = abs(interval / 60) % 60
-        let hours = abs(interval / 3600)
-        let sign = (interval < 0) ? "-" : ""
-        statLiveIn.text = String(format: "%@%02d:%02d:%02d", sign, hours, minutes, seconds)
-    }
+//    func updateStatLiveIn() {
+//        // http://stackoverflow.com/questions/4933075/nstimeinterval-to-hhmmss
+//        let interval = Int(draftGroup.start.timeIntervalSinceNow)
+//        let seconds = abs(interval) % 60
+//        let minutes = abs(interval / 60) % 60
+//        let hours = abs(interval / 3600)
+//        let sign = (interval < 0) ? "-" : ""
+//        statLiveIn.text = String(format: "%@%02d:%02d:%02d", sign, hours, minutes, seconds)
+//    }
+    
+    // MARK: - Titlebar datasource methods
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .DisabledValue) {
             print("You can't save a completely empty lineup")
             return
         }
-
+        
         if (buttonType == .Value) {
             var players = [Player]()
             for cell in cellViews {
@@ -223,6 +211,7 @@ class LineupEditViewController: DraftboardViewController {
                 return .Value
             }
         }
+        
         return .DisabledValue
     }
     
@@ -232,5 +221,28 @@ class LineupEditViewController: DraftboardViewController {
     
     override func titlebarBgHidden() -> Bool {
         return false
+    }
+    
+    override func footerType() -> FooterType {
+        return .Stats
+    }
+}
+
+extension LineupEditViewController: StatFooterDataSource {
+    
+    func footerStatAvgSalary() -> Double? {
+        if (statAvgSalary < 0) {
+            return 0.0
+        }
+        
+        return statAvgSalary
+    }
+    
+    func footerStatRemSalary() -> Double? {
+        return statRemSalary
+    }
+    
+    func footerStatLiveInDate() -> NSDate? {
+        return draftGroup.start
     }
 }
