@@ -62,14 +62,14 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func showSpinner() {
-        loaderView = LoaderView(frame: CGRectMake(0, 0, 64, 64))
+        loaderView = LoaderView(frame: CGRectMake(0, 0, 42, 42))
         
         view.addSubview(loaderView)
         loaderView.translatesAutoresizingMaskIntoConstraints = false
         loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
         loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: -30.0).active = true
-        loaderView.heightRancor.constraintEqualToConstant(64.0).active = true
-        loaderView.widthRancor.constraintEqualToConstant(64.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
         
         loaderView.spinning = true
     }
