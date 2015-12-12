@@ -12,13 +12,9 @@ class LineupStatCurrencyView: LineupStatView {
     
     var invalid = false
     var defaultString = "--"
-    let formatter = NSNumberFormatter()
     
     init(style _style: LineupStatStyle, titleText _titleText: String?, currencyValue _currencyValue: Double?) {
         super.init(style: _style, titleText: _titleText, valueText: nil)
-        
-        formatter.numberStyle = .CurrencyStyle
-        formatter.maximumFractionDigits = 0
         
         if (_currencyValue != nil) {
             invalid = (_currencyValue < 0)
@@ -34,7 +30,7 @@ class LineupStatCurrencyView: LineupStatView {
     
     func currencyTextFromValue(value: Double?) -> String {
         if let val = value {
-            if let str = formatter.stringFromNumber(val) {
+            if let str = Format.currency.stringFromNumber(val) {
                 return str
             }
         }

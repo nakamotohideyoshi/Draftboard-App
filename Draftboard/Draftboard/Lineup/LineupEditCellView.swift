@@ -34,8 +34,8 @@ class LineupEditCellView: DraftboardNibControl {
         didSet {
             nameLabel.textColor = .whiteColor()
             nameLabel.text = player?.shortName()
-            teamLabel.text = " " + (player?.team)!
-            salaryLabel.text = String(format: "$%.0f", (player?.salary)!)
+            teamLabel.text = player?.team
+            salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
         }
     }
     

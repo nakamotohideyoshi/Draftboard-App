@@ -88,7 +88,7 @@ class LineupCardView: DraftboardNibView {
         liveStatView = LineupStatTimeView(style: .Small, titleText: "TIME", date: liveDate)
         salaryStatView = LineupStatView(style: .Small, titleText: "REM SALARY", valueText: "$10,000")
         pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
-        winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5.00")
+        winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
         
         addStatToContainerView(feesStatView, containerView: leftStatContainerView)
         addStatToContainerView(liveStatView, containerView: centerStatContainerView)

@@ -86,8 +86,8 @@
                         <constraint firstAttribute="height" constant="1" id="ypB-iF-A6u"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- DET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9C-8j-2hg" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="166" y="23" width="27" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9C-8j-2hg" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="169" y="23" width="21" height="15"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
                     <color key="textColor" red="0.61176470588235299" green="0.62352941176470589" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
@@ -111,7 +111,7 @@
                 <constraint firstItem="bhE-mQ-tq1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BZ6-Ok-MdW"/>
                 <constraint firstItem="KcH-Xh-Aog" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="CPB-zq-7J9"/>
                 <constraint firstItem="KcH-Xh-Aog" firstAttribute="leading" secondItem="Esd-Fy-OQR" secondAttribute="trailing" constant="20" id="EjC-wo-dGo"/>
-                <constraint firstItem="q9C-8j-2hg" firstAttribute="leading" secondItem="KcH-Xh-Aog" secondAttribute="trailing" id="Hpu-DX-yql"/>
+                <constraint firstItem="q9C-8j-2hg" firstAttribute="leading" secondItem="KcH-Xh-Aog" secondAttribute="trailing" constant="3" id="Hpu-DX-yql"/>
                 <constraint firstAttribute="trailing" secondItem="KcH-Xh-Aog" secondAttribute="trailing" constant="10" id="Pm6-cD-5xM"/>
                 <constraint firstAttribute="trailing" secondItem="WzK-wL-hS3" secondAttribute="trailing" constant="15" id="cfe-vf-2F6"/>
                 <constraint firstAttribute="trailing" secondItem="bhE-mQ-tq1" secondAttribute="trailing" constant="15" id="eWb-4a-4BO"/>

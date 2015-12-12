@@ -11,17 +11,12 @@ import UIKit
 class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var contentView: UIScrollView!
     
-//    @IBOutlet weak var statLiveIn: DraftboardLabel!
-//    @IBOutlet weak var statRemSalary: DraftboardLabel!
-//    @IBOutlet weak var statAvgPerPlayer: DraftboardLabel!
-    
     var draftGroup: DraftGroup!
-    var lineup: Lineup!
+    var positions: [String]!
+    var players: [Player?]!
+    var lineup: Lineup?
     var saveLineupAction: (([Player]) -> Void)?
-    var positions = [String]()
-    var positionPlaceholders = [String]()
     var cellViews = [LineupEditCellView]()
-    var cellIndex = 0
     
     var statRemSalary: Double = 0
     var statAvgSalary: Double = 0
@@ -29,26 +24,19 @@ class LineupEditViewController: DraftboardViewController {
     override func viewDidLoad() {
         let _ = Data.draftGroup(id: draftGroup.id)
         
-        // Temp
-        draftGroup.start = NSDate(timeIntervalSinceNow: 3600 * 12)
-        statRemSalary = draftGroup.sport.salary
-        statAvgSalary = statRemSalary / 8.0
-        
-        positions = ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"]
-        positionPlaceholders = [
-            "Select Point Guard",
-            "Select Shooting Guard",
-            "Select Small Forward",
-            "Select Power Forward",
-            "Select Center",
-            "Select Flex Player",
-            "Select Flex Player",
-            "Select Flex Player"
-        ]
+        if let lineup = lineup {
+            positions = lineup.sport.positions
+            players = lineup.players
+        }
+        else {
+            positions = draftGroup.sport.positions
+            players = [Player?](count: positions.count, repeatedValue: nil)
+        }
         
         contentView.alwaysBounceVertical = true
         contentView.indicatorStyle = .White
         layoutCellViews()
+        updateStats()
     }
     
     func layoutCellViews() {
@@ -67,7 +55,7 @@ class LineupEditViewController: DraftboardViewController {
         for (i, position) in positions.enumerate() {
             let cellView = LineupEditCellView()
             cellView.abbrText = position
-            cellView.nameText = positionPlaceholders[i]
+            cellView.nameText = "Select " + positionTextForAbbr(position)
             cellView.salaryText = ""
             cellView.teamText = ""
                 
@@ -100,7 +88,7 @@ class LineupEditViewController: DraftboardViewController {
         }
     }
     
-    func positionTextForAbbr(abbr: String) -> String? {
+    func positionTextForAbbr(abbr: String) -> String {
         if (abbr == "PG") {
             return "Point Guard"
         } else if (abbr == "SG") {
@@ -111,32 +99,22 @@ class LineupEditViewController: DraftboardViewController {
             return "Power Forward"
         } else if (abbr == "C") {
             return "Center"
-        } else if (abbr == "G") {
-            return "Guard"
-        } else if (abbr == "F") {
-            return "Forward"
         } else if (abbr == "FX"){
-            return "Flex"
+            return "Flex Player"
         }
         
-        return nil
+        return ""
     }
     
-    func didTapCell(sender: LineupEditCellView) {
-
-        cellIndex = sender.index
-        
-        var titleText = self.cellViews[cellIndex].abbrLabel.text
-        titleText = positionTextForAbbr(titleText!)
-        titleText = (titleText == nil) ? "Empty" : titleText
-        
-        let svc = LineupSearchViewController(titleText: titleText!, nibName: "LineupSearchViewController", bundle: nil)
+    func didTapCell(cell: LineupEditCellView) {
+        let titleText = positionTextForAbbr(positions[cell.index])
+        let svc = LineupSearchViewController(titleText: titleText, nibName: "LineupSearchViewController", bundle: nil)
         svc.draftGroup = draftGroup
-        svc.filterBy = positions[cellIndex]
-        svc.playerSelectedAction = {(player: Player) in
-            let cellView = self.cellViews[self.cellIndex]
-            cellView.avatarImageView.image = UIImage(named: "sample-avatar-big")
-            cellView.player = player
+        svc.filterBy = positions[cell.index]
+        svc.playerSelectedAction = { player in
+            cell.avatarImageView.image = UIImage(named: "sample-avatar-big")
+            cell.player = player
+            self.players[cell.index] = player
             self.updateStats()
             self.navController?.popViewController()
         }
@@ -145,52 +123,21 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func updateStats() {
-        
-        // Lame
-        var lineupSalary: Double = 0
-        var playersRemaining: Int = 0
-        for cell in cellViews {
-            if let player = cell.player {
-                lineupSalary += player.salary
-            } else {
-                playersRemaining += 1
-            }
-        }
-        
+        let lineupSalary = players.reduce(0) {$0 + ($1?.salary ?? 0)}
+        let playersRemaining = players.filter {$0 == nil}.count
         statRemSalary = draftGroup.sport.salary - lineupSalary
-        statAvgSalary = (playersRemaining == 0) ? 0 : statRemSalary / Double(playersRemaining)
+        statAvgSalary = (playersRemaining > 0) ? statRemSalary / Double(playersRemaining) : 0
     }
-    
-//    func updateStatLiveIn() {
-//        // http://stackoverflow.com/questions/4933075/nstimeinterval-to-hhmmss
-//        let interval = Int(draftGroup.start.timeIntervalSinceNow)
-//        let seconds = abs(interval) % 60
-//        let minutes = abs(interval / 60) % 60
-//        let hours = abs(interval / 3600)
-//        let sign = (interval < 0) ? "-" : ""
-//        statLiveIn.text = String(format: "%@%02d:%02d:%02d", sign, hours, minutes, seconds)
-//    }
     
     // MARK: - Titlebar datasource methods
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .DisabledValue) {
             print("You can't save an invalid lineup")
-            return
         }
-        
-        if (buttonType == .Value) {
-            var players = [Player]()
-            for cell in cellViews {
-                if let player = cell.player {
-                    players.append(player)
-                }
-            }
-            // Make a full lineup even when they didn't pick all 8
-            while players.count < 8 {
-                players.append(players[0])
-            }
-            saveLineupAction?(players)
+        else if (buttonType == .Value) {
+            let p = players.flatMap{$0}
+            saveLineupAction?(p)
         }
         else if (buttonType == .Close) {
             self.navController?.popViewController()
@@ -206,10 +153,10 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType {
-        for cell in self.cellViews {
-            if cell.player == nil {
-                return .DisabledValue
-            }
+        let playersRemaining = players.filter {$0 == nil}.count
+        
+        if playersRemaining > 0 {
+            return .DisabledValue
         }
         if statRemSalary < 0 {
             return .DisabledValue

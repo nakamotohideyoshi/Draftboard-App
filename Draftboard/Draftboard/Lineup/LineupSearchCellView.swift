@@ -37,11 +37,11 @@ class LineupSearchCellView: UITableViewCell {
     var player: Player? {
         didSet {
             nameLabel.text = player?.shortName()
-            positionLabel.text = (player?.position)!
-            ppgLabel.text = String(format: "%.2f FPPG", (player?.fppg)!)
-            leagueLabel.text = (player?.team)!
-            salaryLabel.text = String(format: "$%.0f", (player?.salary)!)
-            statusLabel.text = player?.injury ?? ""
+            positionLabel.text = player?.position
+            leagueLabel.text = player?.team
+            statusLabel.text = player?.injury
+            salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
+            ppgLabel.text = String(format: "%.2f FPPG", player?.fppg ?? 0)
         }
     }
 
