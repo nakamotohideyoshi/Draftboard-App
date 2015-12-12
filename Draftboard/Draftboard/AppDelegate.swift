@@ -13,8 +13,10 @@ struct App {
     static var screenPixel: CGFloat = 0
     static var screenScale: CGFloat = 0
     static var screenBounds: CGRect = CGRectZero
-    static var libraryPath: NSString = ""
-    static var cachesPath: NSString = ""
+    static var libraryPath = ""
+    static var cachesPath = ""
+    
+    static var DefaultsDidSeeNotifications = "draftboard_defaults_did_see_notifications"
     
     func roundToScreenPixel(v: CGFloat) -> CGFloat {
         return round(v * App.screenScale) / App.screenScale;

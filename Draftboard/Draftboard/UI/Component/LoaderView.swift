@@ -33,22 +33,43 @@ class LoaderView: UIView {
         gradientImageView = UIImageView(image: gradientImage)
         gradientImageView.frame = frame;
         
-        let d = frame.size.width;
-        let r = d / 2;
-        
         mask = CAShapeLayer()
-        mask.path = arcWithRadius(r * 0.65, progress: 1.0)
-        mask.frame = CGRectMake(0, 0, d, d)
         mask.strokeColor = UIColor.redColor().CGColor
         mask.fillColor = UIColor.clearColor().CGColor
-        mask.lineWidth = 2;
+        
         addSubview(gradientImageView)
         gradientImageView.layer.mask = mask;
         spinning = false
+        
+        if !CGRectEqualToRect(frame, CGRectZero) {
+            updateMask()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateMask()
+    }
+    
+    func updateMask() {
+        let d = frame.size.width;
+        let r = d / 2;
+        
+        mask.path = arcWithRadius(r - thickness, progress: 1.0)
+        mask.frame = CGRectMake(0, 0, d, d)
+        mask.lineWidth = thickness;
+        
+        gradientImageView.frame = mask.frame
+    }
+    
+    var thickness: CGFloat = 2.0 {
+        didSet {
+            mask.lineWidth = thickness;
+        }
     }
 
     func resumeSpinning() {
@@ -67,18 +88,9 @@ class LoaderView: UIView {
     }
     
     func arcWithRadius(radius: CGFloat, progress: CGFloat) -> CGPathRef {
-        let xy = self.frame.size.width / 2.0
+        let xy = frame.size.width / 2.0
         let center = CGPointMake(xy, xy)
         let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0.0, endAngle: CGFloat(M_PI) * 2.0 * progress, clockwise: true)
-        
         return path.CGPath;
-    }
-
-    func selectedMaskPath() -> CGPathRef {
-        let r = self.frame.size.width / 2.0
-        let center = CGPointMake(r, r)
-        let path = UIBezierPath(arcCenter: center, radius: r * 0.5, startAngle: 0.0, endAngle: CGFloat(M_PI) * 2.0, clockwise: true)
-        
-        return path.CGPath
     }
 }

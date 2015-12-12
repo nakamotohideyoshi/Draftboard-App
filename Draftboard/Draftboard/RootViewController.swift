@@ -8,6 +8,7 @@
 
 import UIKit
 import GLKit
+import CoreLocation
 
 final class RootViewController: UIViewController {
     
@@ -16,36 +17,58 @@ final class RootViewController: UIViewController {
     
     var tabController = DraftboardTabController()
     var modalController = DraftboardModalNavController()
+    var loginViewController: LoginViewController?
     
     @IBOutlet weak var bgView: UIView!
     
     override func viewDidLoad() {
+        addTabController()
+        addModalController()
+        setAppearanceProperties()
         
-        // Create tab controller
-        let tabControllerView = tabController.view
-        view.addSubview(tabControllerView)
+        let authenticated = false
+        if !authenticated {
+            addLoginController()
+        }
         
-        // Constrain tab controller
-        tabControllerView.translatesAutoresizingMaskIntoConstraints = false
-        tabControllerView.topRancor.constraintEqualToRancor(view.topRancor, constant: 20.0).active = true
-        tabControllerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
-        tabControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
-        tabControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
+        let _ = Data.draftGroupUpcoming
+    }
+    
+    func addLoginController() {
+        let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+        pushModalViewController(vc, animated: false)
+        loginViewController = vc
+    }
+    
+    func addModalController() {
         
-        // Create modal controller
+        // Add modal controller view
         let modalControllerView = modalController.view
         view.addSubview(modalControllerView)
         
-        // Constraint modal controller
+        // Constrain modal controller view
         modalControllerView.translatesAutoresizingMaskIntoConstraints = false
         modalControllerView.topRancor.constraintEqualToRancor(view.topRancor).active = true
         modalControllerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         modalControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         modalControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
-        modalControllerView.hidden = true;
-
-        setAppearanceProperties()
-        let _ = Data.draftGroupUpcoming
+        
+        // Starts hidden
+        modalController.view.hidden = true
+    }
+    
+    func addTabController() {
+        
+        // Add tab controller view
+        let tabControllerView = tabController.view
+        view.addSubview(tabControllerView)
+        
+        // Constrain tab controller view
+        tabControllerView.translatesAutoresizingMaskIntoConstraints = false
+        tabControllerView.topRancor.constraintEqualToRancor(view.topRancor, constant: 20.0).active = true
+        tabControllerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
+        tabControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
+        tabControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
     }
     
     func didSelectGlobalFilter(index: Int) {
@@ -70,11 +93,16 @@ final class RootViewController: UIViewController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return tabController.preferredStatusBarStyle()
     }
+}
+
+// MARK - Modals
+
+extension RootViewController {
     
     func pushModalViewController(nvc: DraftboardModalViewController, animated: Bool = true) {
         modalController.pushViewController(nvc, animated: animated)
         if (modalController.vcs.count == 1) {
-            showModalViewController()
+            showModalViewController(animated)
         }
     }
     
@@ -84,28 +112,39 @@ final class RootViewController: UIViewController {
 //            hideModalViewController()
 //        }
         
-        modalController.popOutViewController()
-        hideModalViewController()
+        modalController.popOutViewController(animated)
+        hideModalViewController(animated)
     }
     
-    func showModalViewController() {
+    func showModalViewController(animated: Bool = true) {
         modalController.view.layer.removeAllAnimations()
         modalController.view.hidden = false
-        modalController.view.alpha = 0.0
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
-            self.modalController.view.alpha = 1.0
-        }) { (completed) -> Void in
-            // nuffin' fer now
+        
+        if (animated) {
+            modalController.view.alpha = 0.0
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                self.modalController.view.alpha = 1.0
+                }) { (completed) -> Void in
+                    // mt
+            }
         }
     }
     
-    func hideModalViewController() {
+    func hideModalViewController(animated: Bool = true) {
         modalController.view.layer.removeAllAnimations()
-        UIView.animateWithDuration(0.25, animations: { () -> Void in
-            self.modalController.view.alpha = 0.0
-        }) { (completed) -> Void in
-            self.modalController.view.hidden = true
+        
+        if (animated) {
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                self.modalController.view.alpha = 0.0
+                }) { (completed) -> Void in
+                    self.modalController.view.hidden = true
+            }
+            
+            return
         }
+        
+        self.modalController.view.hidden = true
+        self.modalController.view.alpha = 0.0
     }
     
     func didSelectModalChoice(index: Int) {
@@ -115,80 +154,52 @@ final class RootViewController: UIViewController {
     func didCancelModal() {
         tabController.cnc.vcs.last?.didCancelModal()
     }
-    
-    /*
-    var updateHandler:(()->Void)?
+}
 
-    func updatePhysics() {
-        updateHandler?()
+// MARK - Permissions
+
+extension RootViewController {
+    
+    func authComplete() {
+        checkLocationPermissions()
     }
     
-    func springPlayground() {
-        let redBall = UIView(frame: CGRectMake(0.0,0.0,20.0,20.0))
-        redBall.backgroundColor = .redColor()
-        redBall.layer.cornerRadius = 10.0
-        redBall.layer.shouldRasterize = true
-        redBall.layer.rasterizationScale = 2.0
-        redBall.layer.position = CGPointMake(100.0, 100.0)
+    func checkLocationPermissions() {
+        let locAuthStatus = CLLocationManager.authorizationStatus()
         
-        view.addSubview(redBall)
-        
-        let displayLink = CADisplayLink(target: self, selector: Selector("updatePhysics"))
-        displayLink.frameInterval = 1
-        displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
-        
-        let k: Float = 2.0
-        var p = redBall.layer.position
-        let endPos = GLKVector2Make(200.0, 100.0)
-        var velocity = GLKVector2Make(-15.0, 20.0)
-        let mass: Float = 3.0
-        
-        updateHandler = { () -> Void in
-            p = redBall.layer.position
-            
-            let pos = GLKVector2Make(Float(p.x), Float(p.y))
-            let dir = GLKVector2Normalize(GLKVector2Subtract(endPos, pos))
-            
-            if (dir.x.isNaN || dir.y.isNaN) {
-                displayLink.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
-                return
-            }
-            
-            let dist = GLKVector2Distance(endPos, pos)
-            let restoringForce = k * dist
-            let speed: Float = restoringForce * (1.0 / 60.0)
-            
-            let m: Float = 1.0 / mass
-            velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(dir, speed * m))
-            velocity = GLKVector2MultiplyScalar(velocity, 0.9)
-            
-            redBall.layer.position = CGPointMake(CGFloat(pos.x + velocity.x), CGFloat(pos.y + velocity.y))
+        if locAuthStatus == .NotDetermined {
+            let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
+            pushModalViewController(vc, animated: true)
+        }
+        else if locAuthStatus == .Denied || locAuthStatus == .Restricted {
+            let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
+            pushModalViewController(vc, animated: true)
+        }
+        else {
+            checkNotificationPermissions()
         }
     }
     
-    func springPlayground2() {
-        let redBall = UIView(frame: CGRectMake(0.0,0.0,20.0,20.0))
-        redBall.backgroundColor = .redColor()
-        redBall.layer.cornerRadius = 10.0
-        redBall.layer.shouldRasterize = true
-        redBall.layer.rasterizationScale = 2.0
-        redBall.layer.position = CGPointMake(100.0, 100.0)
-        view.addSubview(redBall)
-        
-        let spring = Spring(stiffness: 3.0, mass: 1.0, damping: 0.9, velocity: 0.0)
-        
-        let startPos = redBall.layer.position
-        let endPos = CGPointMake(200.0, 300.0)
-        let posDelta = CGPointMake(endPos.x - startPos.x, endPos.y - startPos.y)
-        spring.updateBlock = { (value) -> Void in
-            redBall.layer.position = CGPointMake(startPos.x + posDelta.x * value, startPos.y + posDelta.y * value)
-        }
-        
-        spring.completeBlock = { (completed) -> Void in
-            print("complete fired")
-        }
-        
-        spring.start()
+    func locationPermissionsComplete() {
+        checkNotificationPermissions()
     }
-    */
+    
+    func checkNotificationPermissions() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey(App.DefaultsDidSeeNotifications) {
+            notificationPermissionsComplete()
+            return
+        }
+        
+        defaults.setBool(true, forKey: App.DefaultsDidSeeNotifications)
+        defaults.synchronize()
+        
+        let vc = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
+        pushModalViewController(vc, animated: true)
+    }
+    
+    func notificationPermissionsComplete() {
+        self.tabController.view.hidden = false
+        self.popModalViewController(true)
+    }
 }

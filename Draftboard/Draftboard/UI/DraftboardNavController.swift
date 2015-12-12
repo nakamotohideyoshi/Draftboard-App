@@ -328,7 +328,7 @@ extension DraftboardNavController {
             // Keep a reference
             footerView = fv
             
-            // Animate in
+            // Animate inq
             self.view.layoutIfNeeded()
             
             // Animate in

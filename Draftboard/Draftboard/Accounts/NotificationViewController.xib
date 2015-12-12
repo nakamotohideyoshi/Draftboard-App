@@ -14,11 +14,12 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PermissionViewController" customModule="Draftboard" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
                 <outlet property="bigIconView" destination="2hO-po-NfI" id="lDg-a4-yJN"/>
                 <outlet property="descriptionLabel" destination="t2b-ak-6ey" id="M1h-jX-CER"/>
                 <outlet property="grantBtn" destination="Qhp-NJ-SHt" id="VB7-De-9Vd"/>
+                <outlet property="secondaryBtn" destination="TCX-2N-Cfu" id="m0d-Ji-MhS"/>
                 <outlet property="titleLabel" destination="4ie-Ex-Fcu" id="Vom-Yf-zWT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -31,8 +32,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muH-EZ-ssD" userLabel="Top Container">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="142"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WE NEED TO CHECK YOUR LOCATION" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ie-Ex-Fcu" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ie-Ex-Fcu" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="80" y="81" width="160" height="45"/>
+                            <string key="text">WE WANT TO SEND
+YOU NOTIFICATIONS</string>
                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -45,7 +48,7 @@
                         <constraint firstItem="4ie-Ex-Fcu" firstAttribute="width" secondItem="muH-EZ-ssD" secondAttribute="width" multiplier="0.5" id="yIO-Y0-hlt"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-big-location" translatesAutoresizingMaskIntoConstraints="NO" id="2hO-po-NfI" customClass="DraftboardImageView" customModule="Draftboard" customModuleProvider="target">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-big-notification" translatesAutoresizingMaskIntoConstraints="NO" id="2hO-po-NfI" customClass="DraftboardImageView" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="142" width="320" height="114"/>
                     <color key="tintColor" red="0.3516054153" green="0.36195579169999997" blue="0.4706665277" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
@@ -53,13 +56,12 @@
                     <rect key="frame" x="0.0" y="256" width="320" height="312"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2b-ak-6ey" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="40" y="8" width="240" height="90"/>
+                            <rect key="frame" x="40" y="8" width="240" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="Ug5-pm-lcW"/>
                             </constraints>
-                            <string key="text">Due to current legislation, we are required to verify that you are located in a state where daily fantasy is legal.
-
-We are going to ask that you share your location with the Draftboard app.</string>
+                            <string key="text">We would really like to send you notifications.
+You're gonna love them.</string>
                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
                             <color key="textColor" red="0.35160541534423828" green="0.36195579171180725" blue="0.47066652774810791" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -78,13 +80,39 @@ We are going to ask that you share your location with the Draftboard app.</strin
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Qhp-NJ-SHt" secondAttribute="bottom" constant="40" id="0BN-FH-vWY"/>
                         <constraint firstItem="t2b-ak-6ey" firstAttribute="width" secondItem="Z1w-Gx-VeP" secondAttribute="width" multiplier="0.8" priority="900" id="R8p-Ys-zst"/>
                         <constraint firstItem="t2b-ak-6ey" firstAttribute="top" secondItem="Z1w-Gx-VeP" secondAttribute="top" constant="8" id="ZGJ-6N-1Yn"/>
                         <constraint firstItem="t2b-ak-6ey" firstAttribute="centerX" secondItem="Z1w-Gx-VeP" secondAttribute="centerX" id="exk-lR-RBu"/>
-                        <constraint firstItem="Qhp-NJ-SHt" firstAttribute="leading" secondItem="Z1w-Gx-VeP" secondAttribute="leading" constant="45" id="rDC-lk-pHT"/>
-                        <constraint firstAttribute="trailing" secondItem="Qhp-NJ-SHt" secondAttribute="trailing" constant="45" id="sDz-XD-BEJ"/>
+                        <constraint firstAttribute="bottom" secondItem="Qhp-NJ-SHt" secondAttribute="bottom" constant="40" id="n75-bO-L3U"/>
+                        <constraint firstItem="Qhp-NJ-SHt" firstAttribute="leading" secondItem="Z1w-Gx-VeP" secondAttribute="leading" constant="45" id="wx5-Um-euo"/>
+                        <constraint firstAttribute="trailing" secondItem="Qhp-NJ-SHt" secondAttribute="trailing" constant="45" id="xKB-qg-NJz"/>
                     </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCX-2N-Cfu" userLabel="Secondary Btn" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="45" y="410" width="230" height="49"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="uhg-04-aoz"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="DO NOT NOTIFY ME"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.3529411764705882" green="0.36078431372549019" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderHighlightColor">
+                            <color key="value" red="0.3529411764705882" green="0.36078431372549019" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgHighlightColor">
+                            <color key="value" red="0.35294117650000001" green="0.36078431370000003" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.075701445341110229" green="0.10320654511451721" blue="0.16180172562599182" alpha="1" colorSpace="calibratedRGB"/>
@@ -92,21 +120,25 @@ We are going to ask that you share your location with the Draftboard app.</strin
                 <constraint firstItem="Z1w-Gx-VeP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5OX-zl-Awh"/>
                 <constraint firstAttribute="trailing" secondItem="muH-EZ-ssD" secondAttribute="trailing" id="9DB-BT-lN4"/>
                 <constraint firstItem="muH-EZ-ssD" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.25" id="BCg-Zy-TjF"/>
+                <constraint firstItem="TCX-2N-Cfu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="D2l-kn-has"/>
                 <constraint firstItem="muH-EZ-ssD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HXt-fN-D3q"/>
                 <constraint firstAttribute="trailing" secondItem="2hO-po-NfI" secondAttribute="trailing" id="M2p-Wm-LRy"/>
+                <constraint firstItem="Qhp-NJ-SHt" firstAttribute="top" secondItem="TCX-2N-Cfu" secondAttribute="bottom" constant="20" id="YHa-OM-vgQ"/>
                 <constraint firstItem="muH-EZ-ssD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iwP-Pl-0bl"/>
                 <constraint firstAttribute="bottom" secondItem="Z1w-Gx-VeP" secondAttribute="bottom" id="k6p-5o-Dxy"/>
                 <constraint firstItem="Z1w-Gx-VeP" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.55" id="kqE-V5-3L7"/>
                 <constraint firstItem="2hO-po-NfI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n52-4s-EzP"/>
                 <constraint firstItem="Z1w-Gx-VeP" firstAttribute="top" secondItem="2hO-po-NfI" secondAttribute="bottom" id="qTH-5h-Wlv"/>
                 <constraint firstAttribute="trailing" secondItem="Z1w-Gx-VeP" secondAttribute="trailing" id="rCk-Il-dt0"/>
+                <constraint firstAttribute="trailing" secondItem="TCX-2N-Cfu" secondAttribute="trailing" constant="45" id="sCf-g1-I1u"/>
                 <constraint firstItem="2hO-po-NfI" firstAttribute="top" secondItem="muH-EZ-ssD" secondAttribute="bottom" id="z37-6T-QNW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="538" y="428"/>
         </view>
     </objects>
     <resources>
-        <image name="icon-big-location" width="66" height="86"/>
+        <image name="icon-big-notification" width="92" height="92"/>
     </resources>
 </document>

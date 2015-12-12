@@ -18,6 +18,8 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
     
+    var delegate: UITextFieldDelegate?
+    
     override func willAwakeFromNib() {
         borderBottomView.hidden = true
         
@@ -29,12 +31,17 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
         borderBottomView.backgroundColor = bc
         
         textField.textColor = .whiteColor()
+        textField.autocorrectionType = .No
         textField.delegate = self
         
         label.textColor = .whiteLowOpacity()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if let delegate = delegate {
+            return (delegate.textFieldShouldReturn?(textField))!
+        }
+        
         textField.resignFirstResponder()
         return true
     }
@@ -76,7 +83,7 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
     
     @IBInspectable var placeholderText: String = "Placeholder Text" {
         didSet {
-            let str = NSAttributedString(string: placeholderText, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            let str = NSAttributedString(string: placeholderText, attributes: [NSForegroundColorAttributeName: UIColor(0xFFFFFF, alpha: 0.25)])
             textField.attributedPlaceholder = str
         }
     }

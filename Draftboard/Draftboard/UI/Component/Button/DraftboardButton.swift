@@ -40,19 +40,28 @@ class DraftboardButton: UIControl {
     
     func setDefaults() {
         textHighlightColor = .whiteColor()
+//        textDisabledColor = .whiteColor()
         textColor = .whiteColor()
         textSize = 10.0
+
         textValue = "button".uppercaseString
         textBold = false
         textLetterSpacing = 0.5
+
         borderHighlightColor = .greenDraftboard()
+//        borderDisabledColor = .greenDraftboard()
         borderColor = .greenDraftboard()
         borderWidth = 0.0
         cornerRadius = 0.0
+
         bgHighlightColor = .greenDraftboardDarker()
+//        bgDisabledColor = .greenDraftboardDarker()
         bgColor = .greenDraftboard()
-        iconColor = .whiteColor()
+
         iconHighlightColor = .whiteColor()
+//        iconDisabledColor = .whiteColor()
+        iconColor = .whiteColor()
+
         selectedState = false
     }
     
@@ -70,16 +79,36 @@ class DraftboardButton: UIControl {
         iconImageView.topRancor.constraintEqualToRancor(self.topRancor).active = true
     }
     
+    var disabled: Bool = false {
+        didSet {
+            if disabled {
+                label.textColor = textDisabledColor
+                self.tintColor = iconDisabledColor
+                self.layer.borderColor = borderDisabledColor.CGColor
+                self.backgroundColor = bgDisabledColor
+            }
+            else {
+                label.textColor = textColor
+                self.tintColor = iconColor
+                self.layer.borderColor = borderColor.CGColor
+                self.backgroundColor = bgColor
+            }
+        }
+    }
+    
     // MARK: UIControl
     
     override var highlighted: Bool {
         didSet {
-            if (highlighted) {
+            if disabled {
+                return
+            }
+            
+            if highlighted {
                 label.textColor = textHighlightColor
                 self.tintColor = iconHighlightColor
                 self.layer.borderColor = borderHighlightColor.CGColor
                 self.backgroundColor = bgHighlightColor
-
             }
             else {
                 label.textColor = textColor
@@ -107,6 +136,9 @@ class DraftboardButton: UIControl {
     
     @IBInspectable
     var textHighlightColor: UIColor = .whiteColor()
+    
+    @IBInspectable
+    var textDisabledColor: UIColor = .whiteColor()
     
     @IBInspectable
     var textColor: UIColor = .whiteColor() {
@@ -153,6 +185,9 @@ class DraftboardButton: UIControl {
     var borderHighlightColor: UIColor = .greenDraftboard()
     
     @IBInspectable
+    var borderDisabledColor: UIColor = .greenDraftboard()
+    
+    @IBInspectable
     var borderColor: UIColor = .greenDraftboard() {
         didSet {
             self.layer.borderColor = borderColor.CGColor
@@ -170,6 +205,9 @@ class DraftboardButton: UIControl {
     
     @IBInspectable
     var bgHighlightColor: UIColor = .greenDraftboardDarker()
+    
+    @IBInspectable
+    var bgDisabledColor: UIColor = .buttonDisabledBackground()
     
     @IBInspectable
     var bgColor: UIColor = .greenDraftboard() {
@@ -202,6 +240,9 @@ class DraftboardButton: UIControl {
     var iconHighlightColor: UIColor = .whiteColor()
     
     @IBInspectable
+    var iconDisabledColor: UIColor = .whiteColor()
+    
+    @IBInspectable
     var iconColor: UIColor = .greenDraftboard() {
         didSet {
             self.tintColor = iconColor
@@ -227,6 +268,9 @@ class DraftboardButton: UIControl {
         let _textHighlightColor = textHighlightColor
         textHighlightColor = _textHighlightColor
         
+        let _textDisabledColor = textDisabledColor
+        textDisabledColor = _textDisabledColor
+        
         let _textColor = textColor
         textColor = _textColor
         
@@ -245,6 +289,9 @@ class DraftboardButton: UIControl {
         let _borderHighlightColor = borderHighlightColor
         borderHighlightColor = _borderHighlightColor
         
+        let _borderDisabledColor = borderDisabledColor
+        borderDisabledColor = _borderDisabledColor
+        
         let _borderColor = borderColor
         borderColor = _borderColor
         
@@ -254,6 +301,9 @@ class DraftboardButton: UIControl {
         let _bgHighlightColor = bgHighlightColor
         bgHighlightColor = _bgHighlightColor
         
+        let _bgDisabledColor = bgDisabledColor
+        bgDisabledColor = _bgDisabledColor
+        
         let _bgColor = bgColor
         bgColor = _bgColor
         
@@ -262,6 +312,9 @@ class DraftboardButton: UIControl {
         
         let _iconHighlightColor = iconHighlightColor
         iconHighlightColor = _iconHighlightColor
+        
+        let _iconDisabledColor = iconDisabledColor
+        iconDisabledColor = _iconDisabledColor
         
         let _selectedState = selectedState
         selectedState = _selectedState
