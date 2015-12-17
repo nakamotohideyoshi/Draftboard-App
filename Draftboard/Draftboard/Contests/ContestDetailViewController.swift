@@ -158,7 +158,7 @@ extension ContestDetailViewController: UIScrollViewDelegate {
             topView.alpha = min(1 - (scrollView.contentOffset.y / 320), 1)
         }
         
-        if scrollView.contentOffset.y > topViewHeightBase - 24 {
+        if scrollView.contentOffset.y > topViewHeightBase - 24 - 76 {
             buttonTopConstraint.constant = -(scrollView.contentOffset.y - bottomInfoTopConstraint.constant)
             
             self.view.layoutIfNeeded()
@@ -166,7 +166,7 @@ extension ContestDetailViewController: UIScrollViewDelegate {
             buttonTrailingConstraint.constant = 0
             UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
                 self.view.layoutIfNeeded()
-                }, completion: nil)
+            }, completion: nil)
         } else {
             buttonTopConstraint.constant = 24
             
@@ -175,7 +175,7 @@ extension ContestDetailViewController: UIScrollViewDelegate {
             buttonTrailingConstraint.constant = -45
             UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
                 self.view.layoutIfNeeded()
-                }, completion: nil)
+            }, completion: nil)
         }
     }
 }

@@ -13,6 +13,7 @@ struct App {
     static var screenPixel: CGFloat = 0
     static var screenScale: CGFloat = 0
     static var screenBounds: CGRect = CGRectZero
+    static var authenticated = true
     static var libraryPath = ""
     static var cachesPath = ""
     

@@ -44,7 +44,7 @@ class DraftboardNavController: UIViewController {
         view.addSubview(titlebar)
         
         titlebar.translatesAutoresizingMaskIntoConstraints = false
-        titlebar.topRancor.constraintEqualToRancor(view.topRancor).active = true
+        titlebar.topRancor.constraintEqualToRancor(view.topRancor, constant: 20.0).active = true
         titlebar.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         titlebar.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         titlebar.heightRancor.constraintEqualToConstant(56.0).active = true
@@ -53,7 +53,7 @@ class DraftboardNavController: UIViewController {
         view.addSubview(contentView)
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.topRancor.constraintEqualToRancor(titlebar.bottomRancor).active = true
+        contentView.topRancor.constraintEqualToRancor(view.topRancor).active = true
         contentView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         contentView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
@@ -95,6 +95,7 @@ class DraftboardNavController: UIViewController {
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
         titlebar.pushElements(animated: animated)
+        view.bringSubviewToFront(titlebar)
         
         // Animation complete
         completionHandler = { (complete: Bool) in
@@ -149,6 +150,7 @@ class DraftboardNavController: UIViewController {
         titlebar.delegate = nvc
         titlebar.dataSource = nvc
         titlebar.popElements(animated: animated)
+        view.bringSubviewToFront(titlebar)
         
         // Animation complete
         completionHandler = { (complete: Bool) in

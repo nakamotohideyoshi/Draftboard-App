@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -13,14 +13,9 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
-            <connections>
-                <outlet property="leftText" destination="5C6-9e-mMa" id="2Pv-gP-KCV"/>
-                <outlet property="rightText" destination="87F-tQ-DTM" id="lrQ-7v-hXK"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ContestDetailViewCell" customModule="Draftboard" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DraftboardDetailCell" customModule="Draftboard" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="505" height="87"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -71,6 +66,14 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="borderBottomHeight" destination="WyL-Kr-bbQ" id="qL4-YF-Luq"/>
+                <outlet property="borderBottomView" destination="pZp-a3-zi9" id="r8i-G5-f5R"/>
+                <outlet property="borderTopHeight" destination="0lW-2X-Pcb" id="Tdz-im-fTl"/>
+                <outlet property="borderTopView" destination="WVH-dh-XQe" id="aWM-9f-xKb"/>
+                <outlet property="leftLabel" destination="5C6-9e-mMa" id="Cc3-g3-XBd"/>
+                <outlet property="rightLabel" destination="87F-tQ-DTM" id="L0v-rB-duX"/>
+            </connections>
             <point key="canvasLocation" x="518.5" y="304.5"/>
         </view>
     </objects>
