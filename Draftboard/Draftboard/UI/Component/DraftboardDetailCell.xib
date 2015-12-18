@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="Oswald-Regular.ttf">
+            <string>Oswald-Regular</string>
             <string>Oswald-Regular</string>
         </mutableArray>
     </customFonts>
@@ -21,7 +22,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZp-a3-zi9" userLabel="BottomDivider">
                     <rect key="frame" x="0.0" y="86" width="505" height="1"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.90159028768539429" green="0.90952247381210327" blue="0.93018561601638794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="0lW-2X-Pcb"/>
@@ -29,35 +29,39 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87F-tQ-DTM" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="445" y="32" width="30" height="23"/>
-                    <animations/>
                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
                     <color key="textColor" red="0.096235401928424835" green="0.13966953754425049" blue="0.21438547968864441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1st Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C6-9e-mMa" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="30" y="33" width="62" height="21"/>
-                    <animations/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" red="0.096235401928424835" green="0.13966953754425049" blue="0.21438547968864441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVH-dh-XQe" userLabel="TopDivider">
                     <rect key="frame" x="0.0" y="0.0" width="505" height="1"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.90159028768539429" green="0.90952247381210327" blue="0.93018561601638794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="WyL-Kr-bbQ"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWC-6w-08u" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="475" y="44" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="12"/>
+                    <color key="textColor" red="0.35160541534423828" green="0.36195579171180725" blue="0.47066652774810791" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="WVH-dh-XQe" secondAttribute="trailing" id="BCo-uX-KCh"/>
-                <constraint firstAttribute="trailing" secondItem="87F-tQ-DTM" secondAttribute="trailing" constant="30" id="IUp-SM-q9c"/>
+                <constraint firstAttribute="trailing" secondItem="iWC-6w-08u" secondAttribute="trailing" constant="30" id="Kz8-cT-CH1"/>
+                <constraint firstItem="87F-tQ-DTM" firstAttribute="trailing" secondItem="iWC-6w-08u" secondAttribute="leading" id="TFa-AM-P5g"/>
                 <constraint firstItem="WVH-dh-XQe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yja-1N-5aR"/>
                 <constraint firstAttribute="bottom" secondItem="pZp-a3-zi9" secondAttribute="bottom" id="ZHQ-GA-Lyf"/>
                 <constraint firstItem="5C6-9e-mMa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="aBy-pv-gZZ"/>
+                <constraint firstItem="iWC-6w-08u" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bH0-3n-s35"/>
                 <constraint firstItem="pZp-a3-zi9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eTg-7z-c8k"/>
                 <constraint firstItem="87F-tQ-DTM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fq1-Qb-4cS"/>
                 <constraint firstItem="5C6-9e-mMa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="w0h-aq-0Jj"/>
@@ -73,6 +77,7 @@
                 <outlet property="borderTopView" destination="WVH-dh-XQe" id="aWM-9f-xKb"/>
                 <outlet property="leftLabel" destination="5C6-9e-mMa" id="Cc3-g3-XBd"/>
                 <outlet property="rightLabel" destination="87F-tQ-DTM" id="L0v-rB-duX"/>
+                <outlet property="rightLabelSuffix" destination="iWC-6w-08u" id="lE2-Wt-zri"/>
             </connections>
             <point key="canvasLocation" x="518.5" y="304.5"/>
         </view>
