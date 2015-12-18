@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 
 class LineupSearchViewController: DraftboardViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -41,7 +41,6 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         when(draftGroupPromise, injuriesPromise).then(self.addInjuryInfo)
         
         view.backgroundColor = .blueDarker()
-        
         let bundle = NSBundle(forClass: self.dynamicType)
         let nib = UINib(nibName: "LineupSearchCellView", bundle: bundle)
         
@@ -220,7 +219,7 @@ extension LineupSearchViewController: UIScrollViewDelegate {
             searchBar.becomeFirstResponder()
         }
     }
-
+    
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         if scrollView.contentOffset.y == 0 && !searchBar.isFirstResponder() {
             searchBar.becomeFirstResponder()

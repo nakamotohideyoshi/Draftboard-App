@@ -184,6 +184,10 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cPk-Jw-KF4">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="492"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.075701445340000006" green="0.10320654510000001" blue="0.1618017256" alpha="1" colorSpace="calibratedRGB"/>
@@ -200,21 +204,13 @@
                         <constraint firstItem="FTX-oK-qdV" firstAttribute="leading" secondItem="csw-7X-Hpg" secondAttribute="leading" constant="15" id="xwd-FD-RX3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cPk-Jw-KF4">
-                    <rect key="frame" x="0.0" y="76" width="320" height="492"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="csw-7X-Hpg" secondAttribute="trailing" id="8AS-xz-FRa"/>
                 <constraint firstItem="csw-7X-Hpg" firstAttribute="leading" secondItem="rZ0-a6-FxC" secondAttribute="leading" id="HKn-WH-7p5"/>
-                <constraint firstItem="cPk-Jw-KF4" firstAttribute="top" secondItem="rZ0-a6-FxC" secondAttribute="top" constant="76" id="JGd-WD-IQa"/>
-                <constraint firstItem="cPk-Jw-KF4" firstAttribute="leading" secondItem="rZ0-a6-FxC" secondAttribute="leading" id="bo3-6V-acb"/>
                 <constraint firstItem="csw-7X-Hpg" firstAttribute="top" secondItem="rZ0-a6-FxC" secondAttribute="top" constant="76" id="jR2-Ia-ag9"/>
-                <constraint firstAttribute="bottom" secondItem="cPk-Jw-KF4" secondAttribute="bottom" id="w0J-eS-cw7"/>
-                <constraint firstAttribute="trailing" secondItem="cPk-Jw-KF4" secondAttribute="trailing" id="wnr-iR-UB4"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
