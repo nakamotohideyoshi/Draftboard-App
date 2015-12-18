@@ -5,7 +5,7 @@
 //  Created by Wes Pearce on 10/23/15.
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
-
+/*
 import UIKit
 
 class Team: Model {
@@ -21,3 +21,4 @@ class Team: Model {
         abbr = data["abbr"] as! String
     }
 }
+*/

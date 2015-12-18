@@ -117,8 +117,8 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         }
     }
     
-    func addInjuryInfo(draftGroup: DraftGroup, injuries: [UInt: String]) {
-        for player in draftGroup.players! {
+    func addInjuryInfo(draftGroup: DraftGroup, injuries: [Int: String]) {
+        for player in draftGroup.players {
             if let injury = injuries[player.id] {
                 player.injury = injury
             }

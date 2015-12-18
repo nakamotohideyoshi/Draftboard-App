@@ -91,7 +91,7 @@ class PlayerDetailLiveViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String? {
-        return player?.name?.uppercaseString
+        return player?.name.uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType? {

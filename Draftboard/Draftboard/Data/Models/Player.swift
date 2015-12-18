@@ -8,52 +8,59 @@
 import UIKit
 
 class Player: Model {
-    var id: UInt!
-    var name: String! {
-        didSet {
-            (firstName, lastName) = splitName(name)
-        }
+    private(set) var firstName: String = ""
+    private(set) var lastName: String = ""
+    private(set) var shortName: String = ""
+    private var fullName: String = ""
+    var name: String {
+        get { return fullName }
+        set { setName(newValue) }
     }
-    var firstName: String!
-    var lastName: String!
-    var salary: Double!
-    var position: String!
-    var fppg: Double!
-    var team: String!
-    var image: UIImage!
-    var points: Double = 0
-    var injury: String?
+    var salary: Double = 0.00
+    var position: String = ""
+    var fppg: Double = 0.0
+    var team: String = ""
+    var image: UIImage = UIImage()
+    var points: Double = 0.0
+    var injury: String = ""
     
-    init?(data: NSDictionary) {
-        super.init()
+    convenience init?(data: NSDictionary) {
+        self.init()
         
-        guard let player_id = data["player_id"] as? UInt,
-            name = data["name"] as? String,
-            salary = data["salary"] as? Double,
-            position = data["position"] as? String,
-            fppg = data["fppg"] as? Double,
-            team_alias = data["team_alias"] as? String
+        // JSON
+        guard let dataPlayerID = data["player_id"] as? Int,
+            dataName = data["name"] as? String,
+            dataSalary = data["salary"] as? Double,
+            dataPosition = data["position"] as? String,
+            dataFPPG = data["fppg"] as? Double,
+            dataTeamAlias = data["team_alias"] as? String
         else { return nil }
         
-        self.id = player_id
-        self.name = name
-        self.salary = salary
-        self.position = position
-        self.fppg = fppg
-        self.team = team_alias
-        self.image = UIImage()
+        // Other setup
+        let image = UIImage()
         
-        (self.firstName, self.lastName) = splitName(self.name)
+        // Assignment
+        self.id = dataPlayerID
+        self.name = dataName
+        self.salary = dataSalary
+        self.position = dataPosition
+        self.fppg = dataFPPG
+        self.team = dataTeamAlias
+        self.image = image
     }
     
-    private func splitName(name: String) -> (String!, String!) {
+}
+
+// Name stuff
+extension Player {
+    private func setName(name: String) {
+        fullName = name
+        // First, last names
         var nameComponents = name.componentsSeparatedByString(" ")
-        let firstName = nameComponents.removeFirst()
-        return (firstName, nameComponents.joinWithSeparator(" "))
-    }
-    
-    func shortName() -> String {
+        firstName = nameComponents.removeFirst()
+        lastName = nameComponents.joinWithSeparator(" ")
+        // Short name
         let firstChar = firstName[firstName.startIndex]
-        return String(firstChar).uppercaseString + ". " + lastName
+        shortName = String(firstChar).uppercaseString + ". " + lastName
     }
 }

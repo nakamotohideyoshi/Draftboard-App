@@ -6,37 +6,46 @@
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Lineup: Model {
-    var id: UInt!
-    var name: String!
-    var sport: Sport!
-    var draftGroupId: UInt!
-    var players: [Player]!
-    var salary: Double {
-        get {
-            return players.reduce(0) {$0 + $1.salary}
-        }
-    }
-    var points: Double {
-        get {
-            return players.reduce(0) {$0 + $1.points}
-        }
-    }
+    var name: String = ""
+    var sport: Sport = Sport()
+    var draftGroup: DraftGroup = DraftGroup()
+    var players: [Player] = [Player]()
     
-    init?(data: NSDictionary) {
-        super.init()
+    convenience init?(data: NSDictionary) {
+        self.init()
         
-        guard let id = data["id"] as? UInt,
-            name = data["name"] as? String,
-            sport = data["sport"] as? String,
-            draft_group = data["draft_group"] as? UInt
+        // JSON
+        guard let dataPK = data["pk"] as? Int,
+            dataName = data["name"] as? String,
+            dataSport = data["sport"] as? String,
+            dataDraftGroup = data["draft_group"] as? Int
         else { return nil }
         
-        self.id = id
-        self.name = name
-        self.sport = Sport.sportWithName(sport)
-        self.draftGroupId = draft_group
+        // Dependencies
+        guard let sport = Sport(name: dataSport)
+        else { return nil }
+        
+        // Other setup
+        let draftGroup = DraftGroup()
+        draftGroup.id = dataDraftGroup
+        
+        // Assignment
+        self.id = dataPK
+        self.name = dataName
+        self.sport = sport
+        self.draftGroup = draftGroup
+    }
+}
+
+// Computed properties
+extension Lineup {
+    var salary: Double {
+        get { return players.reduce(0) {$0 + $1.salary} }
+    }
+    var points: Double {
+        get { return players.reduce(0) {$0 + $1.points} }
     }
 }

@@ -14,8 +14,8 @@ class Data {
     static var draftGroupUpcoming = API.draftGroupUpcoming()
     
     // Draft group by id
-    private static var _draftGroupId = [UInt: Promise<DraftGroup>]()
-    class func draftGroup(id id: UInt) -> Promise<DraftGroup> {
+    private static var _draftGroupId = [Int: Promise<DraftGroup>]()
+    class func draftGroup(id id: Int) -> Promise<DraftGroup> {
         if let draftGroup = _draftGroupId[id] {
             return draftGroup
         } else {
@@ -29,8 +29,8 @@ class Data {
     static var contestLobby = API.contestLobby()
     
     // Sports injuries by id
-    private static var _sportsInjuries = [String: Promise<[UInt: String]>]()
-    class func sportsInjuries(sportName: String) -> Promise<[UInt: String]> {
+    private static var _sportsInjuries = [String: Promise<[Int: String]>]()
+    class func sportsInjuries(sportName: String) -> Promise<[Int: String]> {
         if let injuries = _sportsInjuries[sportName] {
             return injuries
         } else {

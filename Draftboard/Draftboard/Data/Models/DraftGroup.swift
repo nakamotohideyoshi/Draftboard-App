@@ -8,31 +8,31 @@
 
 import Foundation
 
-class DraftGroup {
-    var id: UInt!
-    var sport: Sport!
-    var start: NSDate!
-    var numGames: Int!
-    var players: [Player]?
+class DraftGroup: Model {
+    var sport: Sport = Sport()
+    var start: NSDate = NSDate()
+    var numGames: Int = 0
+    var players: [Player] = [Player]()
     
-    init(data: NSDictionary) {
-        guard let pk = data["pk"] as? UInt,
-            sport = data["sport"] as? String,
-            start = data["start"] as? String,
-            numGames = data["num_games"] as? Int
+    convenience init?(data: NSDictionary) {
+        self.init()
+        
+        // JSON
+        guard let dataPK = data["pk"] as? Int,
+            dataSport = data["sport"] as? String,
+            dataStart = data["start"] as? String,
+            dataNumGames = data["num_games"] as? Int
         else { return }
         
-        self.id = pk
-        self.sport = Sport.sportWithName(sport)
-        self.start = NSDate.dateFromRFC3339String(start)
-        self.numGames = numGames
-    }
-}
-
-private extension NSDate {
-    class func dateFromRFC3339String(string: String) -> NSDate? {
-        let df = NSDateFormatter()
-        df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-        return df.dateFromString(string)
+        // Dependencies
+        guard let sport = Sport(name: dataSport),
+            start = Format.date.dateFromString(dataStart)
+        else { return nil }
+        
+        // Assignment
+        self.id = dataPK
+        self.sport = sport
+        self.start = start
+        self.numGames = dataNumGames
     }
 }

@@ -9,38 +9,66 @@
 import UIKit
 
 class Contest: Model {
-    var id: UInt!
-    var name: String!
-    var sport: Sport!
-    var status: String!
-    var start: NSDate!
-    var buyin: Double!
-    var draftGroupId: Int!
-    var maxEntries: Int!
-    var prizeStructureId: Int!
-    var prizePool: Double!
-    var entries: Int!
-    var currentEntries: Int!
-    var gpp: Bool!
-    var doubleUp: Bool!
-    var respawn: Bool!
+    var name: String = ""
+    var sport: Sport = Sport()
+    var status: String = ""
+    var start: NSDate = NSDate()
+    var buyin: Double = 0.00
+    var draftGroup: DraftGroup = DraftGroup()
+    var maxEntries: Int = 0
+    var prizeStructure: Int = 0
+    var prizePool: Double = 0.00
+    var entries: Int = 0
+    var currentEntries: Int = 0
+    var gpp: Bool = false
+    var doubleup: Bool = false
+    var respawn: Bool = false
     
-    init?(data: NSDictionary) {
-        guard let id = data["id"] as? UInt,
-            sport = data["sport"] as? String,
-            draftGroup = data["draft_group"] as? Int
-        else { return }
+    convenience init?(data: NSDictionary) {
+        self.init()
         
-        self.id = id
-        self.sport = Sport.sportWithName(sport)
-        self.draftGroupId = draftGroup
+        // JSON
+        guard let dataID = data["id"] as? Int,
+            dataName = data["name"] as? String,
+            dataSport = data["sport"] as? String,
+            dataStatus = data["status"] as? String,
+            dataStart = data["start"] as? String,
+            dataBuyin = data["buyin"] as? Double,
+            dataDraftGroup = data["draft_group"] as? Int,
+            dataMaxEntries = data["max_entries"] as? Int,
+            dataPrizeStructure = data["prize_structure"] as? Int,
+            dataPrizePool = data["prize_pool"] as? Double,
+            dataEntries = data["entries"] as? Int,
+            dataCurrentEntries = data["current_entries"] as? Int,
+            dataGPP = data["gpp"] as? Bool,
+            dataDoubleup = data["doubleup"] as? Bool,
+            dataRespawn = data["respawn"] as? Bool
+        else { return nil }
+        
+        // Dependencies
+        guard let sport = Sport(name: dataSport),
+            start = Format.date.dateFromString(dataStart)
+        else { return nil }
+
+        // Other setup
+        let draftGroup = DraftGroup()
+        draftGroup.id = dataDraftGroup
+
+        // Assignment
+        self.id = dataID
+        self.name = dataName
+        self.sport = sport
+        self.status = dataStatus
+        self.start = start
+        self.buyin = dataBuyin
+        self.draftGroup = draftGroup
+        self.maxEntries = dataMaxEntries
+        self.prizeStructure = dataPrizeStructure
+        self.prizePool = dataPrizePool
+        self.entries = dataEntries
+        self.currentEntries = dataCurrentEntries
+        self.gpp = dataGPP
+        self.doubleup = dataDoubleup
+        self.respawn = dataRespawn
     }
 }
-
-//private extension NSDate {
-//    class func dateFromRFC3339String(string: String) -> NSDate? {
-//        let df = NSDateFormatter()
-//        df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-//        return df.dateFromString(string)
-//    }
-//}

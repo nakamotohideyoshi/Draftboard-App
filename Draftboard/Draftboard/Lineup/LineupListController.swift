@@ -99,14 +99,19 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         }
         
         var sportContestCounts = [String: Int]()
-        var draftGroupContestCounts = [String: Int]()
+        var draftGroupContestCounts = [Int: Int]()
         for contest in contests {
+            if contest.status == "completed" {
+                continue
+            }
             let s = contest.sport.name
             let sportCount = sportContestCounts[s] ?? 0
             sportContestCounts[s] = sportCount + 1
-            let draftGroupCount = draftGroupContestCounts[s] ?? 0
-            draftGroupContestCounts[s] = draftGroupCount + 1
+            let d = contest.draftGroup.id
+            let draftGroupCount = draftGroupContestCounts[d] ?? 0
+            draftGroupContestCounts[d] = draftGroupCount + 1
         }
+        
         
         // Build choices
         var sportChoices = [NSDictionary]()
@@ -116,7 +121,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             let choice = [
                 "title": sportName,
                 "subtitle": "\(contestCount) \(contestNoun)",
-                "object": Sport.sportWithName(sportName)
+                "object": Sport(name: sportName)!
             ]
             sportChoices.append(choice)
         }
@@ -124,12 +129,13 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         var draftGroupChoices = [String: [NSDictionary]]()
         for draftGroup in draftGroups {
             let s = draftGroup.sport.name
+            let id = draftGroup.id
             // Start time
             let df = NSDateFormatter()
             df.dateFormat = "E, MMM dd, h:mm a"
             let start = df.stringFromDate(draftGroup.start)
             // Contest and game counts
-            let contestCount = draftGroupContestCounts[s] ?? 0
+            let contestCount = draftGroupContestCounts[id] ?? 0
             let contestNoun = (contestCount == 1) ? "Contest" : "Contests"
             let gameCount = draftGroup.numGames
             let gameNoun = (gameCount == 1) ? "Game" : "Games"

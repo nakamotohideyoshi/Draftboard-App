@@ -7,5 +7,5 @@
 //
 
 class Model {
-
+    var id: Int = 0
 }

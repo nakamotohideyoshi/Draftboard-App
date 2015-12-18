@@ -8,18 +8,19 @@
 import Foundation
 
 class Sport: Model {
-    var name: String!
-    var positions: [String]!
-    var salary: Double!
+    var name: String = ""
+    var positions: [String] = [String]()
+    var salary: Double = 0.00
 
-    private init?(data: NSDictionary) {
-        super.init()
+    convenience init?(name: String) {
+        self.init()
         
-        guard let name = data["name"] as? String,
-            positions = data["positions"] as? [String],
-            salary = data["salary"] as? Double
+        // Pre-defined sport data
+        guard let positions = Sport.positions[name],
+            salary = Sport.salaries[name]
         else { return nil }
-        
+
+        // Assignment
         self.name = name
         self.positions = positions
         self.salary = salary
@@ -27,21 +28,13 @@ class Sport: Model {
 }
 
 extension Sport {
-    private static let sports: [String: Sport] = [
-        "nba": Sport(data: [
-            "name": "nba",
-            "positions": ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"],
-            "salary": 50000
-            ])!,
-        "nhl": Sport(data: [
-            "name": "nhl",
-            "positions": ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"],
-            "salary": 50000
-            ])!
+    private static let positions: [String: [String]] = [
+        "nba": ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"],
+        "nhl": ["PG", "SG", "SF", "PF", "C", "FX", "FX", "FX"],
     ]
-    
-    class func sportWithName(name: String) -> Sport {
-        return Sport.sports[name]!
-    }
+    private static let salaries: [String: Double] = [
+        "nba": 50_000.00,
+        "nhl": 50_000.00,
+    ]
 }
 

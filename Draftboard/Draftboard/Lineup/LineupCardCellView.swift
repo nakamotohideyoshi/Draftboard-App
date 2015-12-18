@@ -24,7 +24,7 @@ class LineupCardCellView: DraftboardNibControl {
     
     var player: Player? {
         didSet {
-            nameLabel.text = player?.shortName()
+            nameLabel.text = player?.shortName
             teamLabel.text = player?.team
             rightLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
         }

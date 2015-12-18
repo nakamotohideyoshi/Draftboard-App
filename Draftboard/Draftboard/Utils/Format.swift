@@ -10,6 +10,7 @@ import Foundation
 
 final class Format {
     static let currency = Format.currencyFormatter()
+    static let date = Format.dateFormatter()
 
     private init() {}
     
@@ -17,6 +18,13 @@ final class Format {
         let f = NSNumberFormatter()
         f.numberStyle = .CurrencyStyle
         f.maximumFractionDigits = 0
+        return f
+    }
+    
+    private class func dateFormatter() -> NSDateFormatter {
+        let f = NSDateFormatter()
+        f.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+        f.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         return f
     }
 }

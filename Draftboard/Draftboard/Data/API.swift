@@ -21,7 +21,6 @@ final class API {
     private init() {}
     
     private class func http(path: String, method: String, parameters: NSDictionary, completion: (data: NSData, response: NSHTTPURLResponse) -> Void) {
-
         // Build query string
         let p = parameters as! [String: String]
         let q = p.map() {$0 + "=" + $1}.joinWithSeparator("&")
@@ -128,25 +127,27 @@ extension API {
                 
                 var draftGroups = [DraftGroup]()
                 for draftGroupDict in data {
-                    draftGroups.append(DraftGroup(data: draftGroupDict))
+                    if let draftGroup = DraftGroup(data: draftGroupDict) {
+                        draftGroups.append(draftGroup)
+                    }
                 }
                 fulfill(draftGroups)
             }
         }
     }
 
-    class func draftGroup(id id: UInt) -> Promise<DraftGroup> {
+    class func draftGroup(id id: Int) -> Promise<DraftGroup> {
         return Promise { fulfill, reject in
             API.get("api/draft-group/\(id)/") { json in
                 guard let data = json as? NSDictionary,
-                    players = data["players"] as? [NSDictionary]
+                    players = data["players"] as? [NSDictionary],
+                    draftGroup = DraftGroup(data: data)
                 else { return }
 
-                let draftGroup = DraftGroup(data: data)
                 draftGroup.players = [Player]()
                 for playerDict in players {
                     if let player = Player(data: playerDict) {
-                        draftGroup.players?.append(player)
+                        draftGroup.players.append(player)
                     }
                 }
                 fulfill(draftGroup)
@@ -164,9 +165,6 @@ extension API {
                 for contestDict in data {
                     if let contest = Contest(data: contestDict) {
                         contests.append(contest)
-                    } else {
-                        // Reject promise
-                        // This needs to happen in a lot of other places too
                     }
                 }
                 fulfill(contests)
@@ -174,18 +172,18 @@ extension API {
         }
     }
     
-    class func sportsInjuries(sportName: String) -> Promise<[UInt: String]> {
+    class func sportsInjuries(sportName: String) -> Promise<[Int: String]> {
         return Promise { fulfill, reject in
-            API.get("api/sports/injuries/\(sportName)") { json in
+            API.get("api/sports/injuries/\(sportName)/") { json in
                 guard let data = json as? [NSDictionary]
                 else { return }
                 
-                var injuries = [UInt: String]()
+                var injuries = [Int: String]()
                 for injuryDict in data {
-                    guard let playerId = injuryDict["player_id"] as? UInt,
+                    guard let playerID = injuryDict["player_id"] as? Int,
                         status = injuryDict["status"] as? String
                     else { continue }
-                    injuries[playerId] = status
+                    injuries[playerID] = status
                 }
                 fulfill(injuries)
             }

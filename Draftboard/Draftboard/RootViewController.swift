@@ -30,8 +30,6 @@ final class RootViewController: UIViewController {
         if !authenticated {
             addLoginController()
         }
-        
-        let _ = Data.draftGroupUpcoming
     }
     
     func addLoginController() {

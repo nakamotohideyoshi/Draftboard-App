@@ -8,6 +8,10 @@
 
 import Foundation
 
+class Position {
+    
+}
+
 /*
 // Roster templates for empty lineup cards.
 const rosterTemplates = {

@@ -36,7 +36,7 @@ class LineupSearchCellView: UITableViewCell {
     
     var player: Player? {
         didSet {
-            nameLabel.text = player?.shortName()
+            nameLabel.text = player?.shortName
             positionLabel.text = player?.position
             leagueLabel.text = player?.team
             statusLabel.text = player?.injury

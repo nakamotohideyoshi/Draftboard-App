@@ -33,7 +33,7 @@ class LineupEditCellView: DraftboardNibControl {
     var player: Player? {
         didSet {
             nameLabel.textColor = .whiteColor()
-            nameLabel.text = player?.shortName()
+            nameLabel.text = player?.shortName
             teamLabel.text = player?.team
             salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
         }
