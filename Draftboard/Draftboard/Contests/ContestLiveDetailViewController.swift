@@ -59,7 +59,7 @@ class ContestLiveDetailViewController: DraftboardViewController {
         tableView.backgroundColor = .clearColor()
         view.addSubview(tableView)
         
-        tableView.topRancor.constraintEqualToRancor(view.topRancor).active = true
+        tableView.topRancor.constraintEqualToRancor(view.topRancor, constant: 76.0).active = true
         tableView.trailingRancor.constraintEqualToRancor(view.trailingRancor).active = true
         tableView.leadingRancor.constraintEqualToRancor(view.leadingRancor).active = true
         tableView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
@@ -76,8 +76,7 @@ class ContestLiveDetailViewController: DraftboardViewController {
             forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
         
         // offset the top of the tableview with a clear headerview
-        let headerView = UIView(frame: CGRect(x: 0, y: 0,
-            width: CGRectGetWidth(self.view.frame), height: topViewHeight.constant))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: CGRectGetWidth(self.view.frame), height: topViewHeight.constant - 76.0))
         tableView.tableHeaderView = headerView
         
         topViewHeightBase = topViewHeight.constant
@@ -148,10 +147,14 @@ extension ContestLiveDetailViewController: UITableViewDelegate, UITableViewDataS
 
 extension ContestLiveDetailViewController {
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        let total = topViewHeight.constant - 76.0
+        
         if scrollView.contentOffset.y < 0 {
             topViewHeight.constant = topViewHeightBase + abs(scrollView.contentOffset.y)
-        } else {
-            topView.alpha = min(1 - (scrollView.contentOffset.y / 320), 1)
+            topView.alpha = 1.0
+        }
+        else {
+            topView.alpha = min(1 - (scrollView.contentOffset.y / total), 1)
         }
     }
 }

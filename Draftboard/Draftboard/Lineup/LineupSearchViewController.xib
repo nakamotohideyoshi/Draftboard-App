@@ -18,10 +18,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zfb-n6-XbY" userLabel="Container">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                     <subviews>
                         <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q65-WL-cqQ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="608"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="532"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="XEt-AD-oLn">
@@ -45,7 +45,7 @@
             <color key="backgroundColor" red="0.070588235294117646" green="0.10980392156862745" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Zfb-n6-XbY" secondAttribute="bottom" id="Rt7-18-pNF"/>
-                <constraint firstItem="Zfb-n6-XbY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bUe-Vw-wce"/>
+                <constraint firstItem="Zfb-n6-XbY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="76" id="bUe-Vw-wce"/>
                 <constraint firstAttribute="trailing" secondItem="Zfb-n6-XbY" secondAttribute="trailing" id="emn-LC-EHs"/>
                 <constraint firstItem="Zfb-n6-XbY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zNC-NX-d81"/>
             </constraints>

@@ -67,15 +67,15 @@ class DraftboardSegmentedControl: UIView {
         // Create selection indicator
         if (controls.count > 0) {
             let firstControl = controls[0]
-            firstControl.label.textColor = .whiteColor()
+            firstControl.label.textColor = textSelectedColor
             
             lineView = UIView(frame: CGRectZero)
-            lineView.backgroundColor = .greenDraftboard()
+            lineView.backgroundColor = textSelectedColor
             self.addSubview(lineView)
             
             lineView.translatesAutoresizingMaskIntoConstraints = false
             lineView.topRancor.constraintEqualToRancor(firstControl.label.bottomRancor, constant: 1.0).active = true
-            lineView.widthRancor.constraintEqualToConstant(40.0).active = true
+            lineView.widthRancor.constraintEqualToConstant(30.0).active = true
             lineView.heightRancor.constraintEqualToConstant(2.0).active = true
             
             lineConstraint = lineView.leftRancor.constraintEqualToRancor(firstControl.label.leftRancor)

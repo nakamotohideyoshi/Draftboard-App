@@ -39,195 +39,220 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sKm-du-xs9" customClass="UIScrollView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="894"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76d-rm-0uv">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
-                            <animations/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" id="Q1K-5w-0wy"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-U8-cc6" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="15" y="316" width="290" height="50"/>
-                            <animations/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="veg-al-P5h"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="000-00-0000"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="SSN"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12L-sP-xUm" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="32" y="496" width="256" height="50"/>
-                            <animations/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="Ag0-Ap-Trc"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="WITHDRAW $99.99"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="selectedState" value="NO"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZW-vV-cuO" userLabel="Balance Container">
-                            <rect key="frame" x="15" y="0.0" width="145" height="126"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBB-9e-MNU">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="894"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT BALANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-pS-cM2" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="24" y="48" width="96" height="14"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-7b-V8b" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="26" y="58" width="94" height="39"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="26"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <animations/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="126" id="5kB-kV-jU6"/>
-                                <constraint firstItem="WM3-pS-cM2" firstAttribute="centerX" secondItem="fZW-vV-cuO" secondAttribute="centerX" id="9MK-iM-xif"/>
-                                <constraint firstItem="Wp4-7b-V8b" firstAttribute="centerY" secondItem="fZW-vV-cuO" secondAttribute="centerY" constant="14" id="dIx-ot-nrX"/>
-                                <constraint firstItem="Wp4-7b-V8b" firstAttribute="centerX" secondItem="fZW-vV-cuO" secondAttribute="centerX" id="k8q-Yv-8e0"/>
-                                <constraint firstItem="WM3-pS-cM2" firstAttribute="centerY" secondItem="fZW-vV-cuO" secondAttribute="centerY" constant="-8" id="wLS-ZZ-bcy"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Us7-bM-ZVJ" userLabel="Pending Container">
-                            <rect key="frame" x="160" y="0.0" width="145" height="126"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoG-kx-IMb" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="33" y="58" width="79" height="39"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="26"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENDING BONUS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-Dc-fko" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="48" width="85" height="14"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <animations/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="sBB-Dc-fko" firstAttribute="centerX" secondItem="Us7-bM-ZVJ" secondAttribute="centerX" id="2hb-Gn-aqm"/>
-                                <constraint firstItem="sBB-Dc-fko" firstAttribute="centerY" secondItem="Us7-bM-ZVJ" secondAttribute="centerY" constant="-8" id="EDj-iY-NHe"/>
-                                <constraint firstAttribute="height" constant="126" id="fdx-U5-gYz"/>
-                                <constraint firstItem="yoG-kx-IMb" firstAttribute="centerX" secondItem="Us7-bM-ZVJ" secondAttribute="centerX" id="gR9-1K-bjW"/>
-                                <constraint firstItem="yoG-kx-IMb" firstAttribute="centerY" secondItem="Us7-bM-ZVJ" secondAttribute="centerY" constant="14" id="s1k-pc-Pto"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKD-Rz-Wul" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="15" y="126" width="290" height="50"/>
-                            <animations/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="btV-tF-LVT"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="$0"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Withdrawal amount"/>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktd-pt-bX1" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="15" y="176" width="290" height="50"/>
-                            <animations/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="1GZ-HF-Nle"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="PayPal Address"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="To PayPal"/>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNj-pt-33r" userLabel="Credit Card Container">
-                            <rect key="frame" x="15" y="226" width="290" height="60"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payment-paypal" translatesAutoresizingMaskIntoConstraints="NO" id="uRn-rh-PLs">
-                                    <rect key="frame" x="10" y="20" width="30" height="20"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilQ-GW-t4Q">
+                                    <rect key="frame" x="15" y="0.0" width="290" height="126"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZW-vV-cuO" userLabel="Balance Container">
+                                            <rect key="frame" x="0.0" y="0.0" width="145" height="126"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CURRENT BALANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-pS-cM2" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="48" width="96" height="14"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$999.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-7b-V8b" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="25" y="58" width="94" height="39"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="26"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="126" id="5kB-kV-jU6"/>
+                                                <constraint firstItem="WM3-pS-cM2" firstAttribute="centerX" secondItem="fZW-vV-cuO" secondAttribute="centerX" id="9MK-iM-xif"/>
+                                                <constraint firstItem="Wp4-7b-V8b" firstAttribute="centerY" secondItem="fZW-vV-cuO" secondAttribute="centerY" constant="14" id="dIx-ot-nrX"/>
+                                                <constraint firstItem="Wp4-7b-V8b" firstAttribute="centerX" secondItem="fZW-vV-cuO" secondAttribute="centerX" id="k8q-Yv-8e0"/>
+                                                <constraint firstItem="WM3-pS-cM2" firstAttribute="centerY" secondItem="fZW-vV-cuO" secondAttribute="centerY" constant="-8" id="wLS-ZZ-bcy"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="5kB-kV-jU6"/>
+                                                </mask>
+                                            </variation>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Us7-bM-ZVJ" userLabel="Pending Container">
+                                            <rect key="frame" x="145" y="0.0" width="145" height="126"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$99.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoG-kx-IMb" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="33" y="58" width="79" height="39"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="26"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PENDING BONUS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-Dc-fko" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="48" width="85" height="14"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="sBB-Dc-fko" firstAttribute="centerX" secondItem="Us7-bM-ZVJ" secondAttribute="centerX" id="2hb-Gn-aqm"/>
+                                                <constraint firstItem="sBB-Dc-fko" firstAttribute="centerY" secondItem="Us7-bM-ZVJ" secondAttribute="centerY" constant="-8" id="EDj-iY-NHe"/>
+                                                <constraint firstAttribute="height" constant="126" id="fdx-U5-gYz"/>
+                                                <constraint firstItem="yoG-kx-IMb" firstAttribute="centerX" secondItem="Us7-bM-ZVJ" secondAttribute="centerX" id="gR9-1K-bjW"/>
+                                                <constraint firstItem="yoG-kx-IMb" firstAttribute="centerY" secondItem="Us7-bM-ZVJ" secondAttribute="centerY" constant="14" id="s1k-pc-Pto"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="fdx-U5-gYz"/>
+                                                </mask>
+                                            </variation>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Us7-bM-ZVJ" firstAttribute="width" secondItem="ilQ-GW-t4Q" secondAttribute="width" multiplier="0.5" id="1R3-I0-Z8K"/>
+                                        <constraint firstItem="fZW-vV-cuO" firstAttribute="top" secondItem="ilQ-GW-t4Q" secondAttribute="top" id="Ojn-W7-dO0"/>
+                                        <constraint firstItem="fZW-vV-cuO" firstAttribute="height" secondItem="ilQ-GW-t4Q" secondAttribute="height" id="Z4N-1F-oLb"/>
+                                        <constraint firstItem="Us7-bM-ZVJ" firstAttribute="height" secondItem="ilQ-GW-t4Q" secondAttribute="height" id="eUw-ao-bXM"/>
+                                        <constraint firstAttribute="height" constant="126" id="exR-qJ-BhK"/>
+                                        <constraint firstItem="fZW-vV-cuO" firstAttribute="width" secondItem="ilQ-GW-t4Q" secondAttribute="width" multiplier="0.5" id="iv3-qt-lAT"/>
+                                        <constraint firstItem="fZW-vV-cuO" firstAttribute="leading" secondItem="ilQ-GW-t4Q" secondAttribute="leading" id="m9b-Fb-5Da"/>
+                                        <constraint firstItem="Us7-bM-ZVJ" firstAttribute="top" secondItem="ilQ-GW-t4Q" secondAttribute="top" id="nnc-qm-y3p"/>
+                                        <constraint firstAttribute="trailing" secondItem="Us7-bM-ZVJ" secondAttribute="trailing" id="tZh-Fz-VXx"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKD-Rz-Wul" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="127" width="290" height="50"/>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="Vlf-J9-iHU"/>
-                                        <constraint firstAttribute="width" constant="30" id="kLd-dn-AVE"/>
+                                        <constraint firstAttribute="height" constant="50" id="btV-tF-LVT"/>
                                     </constraints>
-                                </imageView>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="$0"/>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Withdrawal amount"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktd-pt-bX1" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="177" width="290" height="50"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="1GZ-HF-Nle"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="PayPal Address"/>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="To PayPal"/>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNj-pt-33r" userLabel="Credit Card Container">
+                                    <rect key="frame" x="15" y="227" width="290" height="60"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payment-paypal" translatesAutoresizingMaskIntoConstraints="NO" id="uRn-rh-PLs">
+                                            <rect key="frame" x="10" y="20" width="30" height="20"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Vlf-J9-iHU"/>
+                                                <constraint firstAttribute="width" constant="30" id="kLd-dn-AVE"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="ZEA-Wa-Is7"/>
+                                        <constraint firstItem="uRn-rh-PLs" firstAttribute="leading" secondItem="CNj-pt-33r" secondAttribute="leading" constant="10" id="oER-MJ-HZe"/>
+                                        <constraint firstItem="uRn-rh-PLs" firstAttribute="centerY" secondItem="CNj-pt-33r" secondAttribute="centerY" id="xE2-CH-srC"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-U8-cc6" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="287" width="290" height="50"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="veg-al-P5h"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="000-00-0000"/>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="SSN"/>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Social Security Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6i-bIZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="357" width="133" height="15"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
+                                    <color key="textColor" red="0.42661195993423462" green="0.44114261865615845" blue="0.54481643438339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSv-d7-HXi" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="372" width="290" height="45"/>
+                                    <animations/>
+                                    <string key="text">You have requested to withdraw more than $600 and by Federal Law we are required to associate your winnings with your Social Security Number.</string>
+                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
+                                    <color key="textColor" red="0.42661195993423462" green="0.44114261865615845" blue="0.54481643438339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12L-sP-xUm" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="437" width="290" height="50"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="Ag0-Ap-Trc"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="WITHDRAW $99.99"/>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="selectedState" value="NO"/>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
                             </subviews>
-                            <animations/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="ZEA-Wa-Is7"/>
-                                <constraint firstItem="uRn-rh-PLs" firstAttribute="leading" secondItem="CNj-pt-33r" secondAttribute="leading" constant="10" id="oER-MJ-HZe"/>
-                                <constraint firstItem="uRn-rh-PLs" firstAttribute="centerY" secondItem="CNj-pt-33r" secondAttribute="centerY" id="xE2-CH-srC"/>
+                                <constraint firstItem="lKD-Rz-Wul" firstAttribute="top" secondItem="ilQ-GW-t4Q" secondAttribute="bottom" constant="1" id="0dr-Gj-DYI"/>
+                                <constraint firstAttribute="trailing" secondItem="LS1-U8-cc6" secondAttribute="trailing" constant="15" id="1Ze-xv-ZVN"/>
+                                <constraint firstItem="12L-sP-xUm" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="5Iz-ik-qdR"/>
+                                <constraint firstAttribute="trailing" secondItem="lKD-Rz-Wul" secondAttribute="trailing" constant="15" id="97k-jW-zMk"/>
+                                <constraint firstItem="lKD-Rz-Wul" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="9bx-ch-0K0"/>
+                                <constraint firstAttribute="trailing" secondItem="ilQ-GW-t4Q" secondAttribute="trailing" constant="15" id="FaL-9y-u5e"/>
+                                <constraint firstItem="LS1-U8-cc6" firstAttribute="top" secondItem="CNj-pt-33r" secondAttribute="bottom" id="KdP-CL-tpu"/>
+                                <constraint firstItem="CNj-pt-33r" firstAttribute="top" secondItem="ktd-pt-bX1" secondAttribute="bottom" id="LFc-SX-udr"/>
+                                <constraint firstItem="CNj-pt-33r" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="PFU-UQ-MeX"/>
+                                <constraint firstItem="ilQ-GW-t4Q" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="QUn-DF-J3J"/>
+                                <constraint firstAttribute="trailing" secondItem="CNj-pt-33r" secondAttribute="trailing" constant="15" id="Qws-SM-2AO"/>
+                                <constraint firstItem="bRq-6i-bIZ" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="TTd-4j-Vmm"/>
+                                <constraint firstItem="lSv-d7-HXi" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="aTw-8F-bq1"/>
+                                <constraint firstItem="12L-sP-xUm" firstAttribute="top" secondItem="lSv-d7-HXi" secondAttribute="bottom" constant="20" id="ewd-kd-nuj"/>
+                                <constraint firstAttribute="trailing" secondItem="12L-sP-xUm" secondAttribute="trailing" constant="15" id="fIY-tB-mZU"/>
+                                <constraint firstItem="LS1-U8-cc6" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="fTv-ls-N3B"/>
+                                <constraint firstItem="ktd-pt-bX1" firstAttribute="top" secondItem="lKD-Rz-Wul" secondAttribute="bottom" id="iEm-gj-aKj"/>
+                                <constraint firstAttribute="trailing" secondItem="ktd-pt-bX1" secondAttribute="trailing" constant="15" id="j3j-pv-4tq"/>
+                                <constraint firstItem="lSv-d7-HXi" firstAttribute="top" secondItem="bRq-6i-bIZ" secondAttribute="bottom" id="lBf-tH-MD8"/>
+                                <constraint firstItem="ilQ-GW-t4Q" firstAttribute="top" secondItem="IBB-9e-MNU" secondAttribute="top" id="pfX-tb-xkP"/>
+                                <constraint firstItem="ktd-pt-bX1" firstAttribute="leading" secondItem="IBB-9e-MNU" secondAttribute="leading" constant="15" id="upj-yv-M2D"/>
+                                <constraint firstItem="bRq-6i-bIZ" firstAttribute="top" secondItem="LS1-U8-cc6" secondAttribute="bottom" constant="20" id="vCK-3F-J4D"/>
+                                <constraint firstAttribute="trailing" secondItem="lSv-d7-HXi" secondAttribute="trailing" constant="15" id="zp4-Kk-yUz"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Social Security Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6i-bIZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="25" y="386" width="132" height="15"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
-                            <color key="textColor" red="0.42661195993423462" green="0.44114261865615845" blue="0.54481643438339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSv-d7-HXi" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="25" y="403" width="270" height="45"/>
-                            <animations/>
-                            <string key="text">You have requested to withdraw more than $600 and by Federal Law we are required to associate your winnings with your Social Security Number.</string>
-                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
-                            <color key="textColor" red="0.42661195993423462" green="0.44114261865615845" blue="0.54481643438339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.08235294118" green="0.12941176469999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="12L-sP-xUm" firstAttribute="top" secondItem="LS1-U8-cc6" secondAttribute="bottom" constant="130" id="0w2-vE-U2L"/>
-                        <constraint firstItem="bRq-6i-bIZ" firstAttribute="top" secondItem="LS1-U8-cc6" secondAttribute="bottom" constant="20" id="8a6-dX-yuu"/>
-                        <constraint firstItem="ktd-pt-bX1" firstAttribute="leading" secondItem="sKm-du-xs9" secondAttribute="leading" constant="15" id="CkH-0A-zSP"/>
-                        <constraint firstItem="ktd-pt-bX1" firstAttribute="top" secondItem="lKD-Rz-Wul" secondAttribute="bottom" id="GCZ-0M-Lib"/>
-                        <constraint firstItem="lSv-d7-HXi" firstAttribute="leading" secondItem="bRq-6i-bIZ" secondAttribute="leading" id="HxN-FU-bY7"/>
-                        <constraint firstItem="LS1-U8-cc6" firstAttribute="leading" secondItem="sKm-du-xs9" secondAttribute="leading" constant="15" id="K9T-VR-y54"/>
-                        <constraint firstItem="76d-rm-0uv" firstAttribute="width" secondItem="sKm-du-xs9" secondAttribute="width" id="LDe-ql-BHI"/>
-                        <constraint firstAttribute="trailing" secondItem="76d-rm-0uv" secondAttribute="trailing" id="LXg-Z7-9nN"/>
-                        <constraint firstItem="fZW-vV-cuO" firstAttribute="leading" secondItem="lKD-Rz-Wul" secondAttribute="leading" id="See-7p-Xq2"/>
-                        <constraint firstItem="lKD-Rz-Wul" firstAttribute="leading" secondItem="sKm-du-xs9" secondAttribute="leading" constant="15" id="VZH-zh-9mc"/>
-                        <constraint firstItem="Us7-bM-ZVJ" firstAttribute="leading" secondItem="fZW-vV-cuO" secondAttribute="trailing" id="ZtE-et-1bo"/>
-                        <constraint firstItem="12L-sP-xUm" firstAttribute="centerX" secondItem="sKm-du-xs9" secondAttribute="centerX" id="bb1-2l-Ae1"/>
-                        <constraint firstItem="lSv-d7-HXi" firstAttribute="top" secondItem="bRq-6i-bIZ" secondAttribute="bottom" constant="2" id="d1c-X7-UE3"/>
-                        <constraint firstItem="76d-rm-0uv" firstAttribute="top" secondItem="sKm-du-xs9" secondAttribute="top" id="d71-y4-eQk"/>
-                        <constraint firstAttribute="trailing" secondItem="LS1-U8-cc6" secondAttribute="trailing" constant="15" id="f5H-FI-zAy"/>
-                        <constraint firstItem="LS1-U8-cc6" firstAttribute="top" secondItem="ktd-pt-bX1" secondAttribute="bottom" constant="90" id="h9T-Dv-XZD"/>
-                        <constraint firstAttribute="trailing" secondItem="lKD-Rz-Wul" secondAttribute="trailing" constant="15" id="iAr-W7-VBW"/>
-                        <constraint firstItem="fZW-vV-cuO" firstAttribute="top" secondItem="sKm-du-xs9" secondAttribute="top" id="jme-YU-5LH"/>
-                        <constraint firstItem="fZW-vV-cuO" firstAttribute="width" secondItem="lKD-Rz-Wul" secondAttribute="width" multiplier="0.5" id="oZb-qK-0om"/>
-                        <constraint firstItem="bRq-6i-bIZ" firstAttribute="leading" secondItem="sKm-du-xs9" secondAttribute="leading" constant="25" id="qnb-jn-8aO"/>
-                        <constraint firstItem="CNj-pt-33r" firstAttribute="trailing" secondItem="ktd-pt-bX1" secondAttribute="trailing" id="rVI-y2-m3o"/>
-                        <constraint firstItem="CNj-pt-33r" firstAttribute="top" secondItem="ktd-pt-bX1" secondAttribute="bottom" id="rYi-qZ-U0l"/>
-                        <constraint firstAttribute="trailing" secondItem="lSv-d7-HXi" secondAttribute="trailing" constant="25" id="sDR-DB-t2H"/>
-                        <constraint firstItem="lKD-Rz-Wul" firstAttribute="top" secondItem="fZW-vV-cuO" secondAttribute="bottom" id="sMx-Vh-C0a"/>
-                        <constraint firstItem="Us7-bM-ZVJ" firstAttribute="top" secondItem="sKm-du-xs9" secondAttribute="top" id="smt-Pz-cLF"/>
-                        <constraint firstItem="76d-rm-0uv" firstAttribute="leading" secondItem="sKm-du-xs9" secondAttribute="leading" id="t08-ib-dhL"/>
-                        <constraint firstItem="CNj-pt-33r" firstAttribute="leading" secondItem="ktd-pt-bX1" secondAttribute="leading" id="tbk-go-2co"/>
-                        <constraint firstItem="Us7-bM-ZVJ" firstAttribute="trailing" secondItem="lKD-Rz-Wul" secondAttribute="trailing" id="td8-BU-DmY"/>
-                        <constraint firstAttribute="trailing" secondItem="ktd-pt-bX1" secondAttribute="trailing" constant="15" id="uLq-2G-OaT"/>
-                        <constraint firstItem="12L-sP-xUm" firstAttribute="width" secondItem="sKm-du-xs9" secondAttribute="width" multiplier="0.8" id="vgU-ev-3lp"/>
+                        <constraint firstItem="IBB-9e-MNU" firstAttribute="centerX" secondItem="sKm-du-xs9" secondAttribute="centerX" id="BZP-bd-kSy"/>
+                        <constraint firstItem="IBB-9e-MNU" firstAttribute="centerY" secondItem="sKm-du-xs9" secondAttribute="centerY" id="Naf-nu-eaf"/>
+                        <constraint firstAttribute="bottom" secondItem="IBB-9e-MNU" secondAttribute="bottom" id="P3g-Gk-ekm"/>
+                        <constraint firstItem="IBB-9e-MNU" firstAttribute="height" secondItem="sKm-du-xs9" secondAttribute="height" id="eP0-0Q-PnO"/>
+                        <constraint firstItem="IBB-9e-MNU" firstAttribute="leading" secondItem="sKm-du-xs9" secondAttribute="leading" constant="15" id="gVq-LV-rPk"/>
+                        <constraint firstAttribute="trailing" secondItem="IBB-9e-MNU" secondAttribute="trailing" constant="15" id="rOX-Xm-Dwo"/>
+                        <constraint firstItem="IBB-9e-MNU" firstAttribute="top" secondItem="sKm-du-xs9" secondAttribute="top" id="sLb-ot-IZH"/>
                     </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="715-F1-vLN">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                    <animations/>
-                    <color key="backgroundColor" white="1" alpha="0.050000000000000003" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="LhR-PZ-0gy"/>
-                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="P3g-Gk-ekm"/>
+                            <exclude reference="gVq-LV-rPk"/>
+                            <exclude reference="rOX-Xm-Dwo"/>
+                            <exclude reference="sLb-ot-IZH"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <animations/>
@@ -235,11 +260,9 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="sKm-du-xs9" secondAttribute="bottom" id="B6R-RD-osa"/>
                 <constraint firstItem="sKm-du-xs9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GWT-4U-2jd"/>
-                <constraint firstAttribute="trailing" secondItem="715-F1-vLN" secondAttribute="trailing" id="Ii8-H7-fo1"/>
                 <constraint firstAttribute="trailing" secondItem="sKm-du-xs9" secondAttribute="trailing" id="Kjy-Yf-VjE"/>
                 <constraint firstItem="sKm-du-xs9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qsr-Wh-MGu"/>
-                <constraint firstItem="715-F1-vLN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ccb-rd-8Xi"/>
-                <constraint firstItem="715-F1-vLN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wjo-0Z-UUH"/>
+                <constraint firstItem="IBB-9e-MNU" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="eeM-F5-AZZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

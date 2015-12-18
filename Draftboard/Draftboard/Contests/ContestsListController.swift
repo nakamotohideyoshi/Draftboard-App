@@ -129,6 +129,6 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
             cdvc.contestName = "$100k Slam Dunk"
             self.navController?.pushViewController(cdvc)
         }
-        
+
     }
 }

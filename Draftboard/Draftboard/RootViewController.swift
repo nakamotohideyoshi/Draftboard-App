@@ -26,8 +26,7 @@ final class RootViewController: UIViewController {
         addModalController()
         setAppearanceProperties()
         
-        let authenticated = false
-        if !authenticated {
+        if !App.authenticated {
             addLoginController()
         }
     }
@@ -63,7 +62,7 @@ final class RootViewController: UIViewController {
         
         // Constrain tab controller view
         tabControllerView.translatesAutoresizingMaskIntoConstraints = false
-        tabControllerView.topRancor.constraintEqualToRancor(view.topRancor, constant: 20.0).active = true
+        tabControllerView.topRancor.constraintEqualToRancor(view.topRancor).active = true
         tabControllerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         tabControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         tabControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true

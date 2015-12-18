@@ -67,7 +67,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         view.addSubview(loaderView)
         loaderView.translatesAutoresizingMaskIntoConstraints = false
         loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
-        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: -30.0).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: 38.0 - 30.0).active = true
         loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
         loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
         
@@ -148,7 +148,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(searchCellIdentifier, forIndexPath: indexPath) as! LineupSearchCellView
-        cell.infoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
+        cell.bigInfoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
         cell.player = self.players?[indexPath.row]
         cell.backgroundColor = .clearColor()
         cell.topBorder = true

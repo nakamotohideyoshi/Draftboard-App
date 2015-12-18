@@ -11,38 +11,67 @@ import UIKit
 @IBDesignable
 class PlayerDetailViewController: DraftboardViewController {
     
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet weak var bottomInfoView: UIView!
-    @IBOutlet weak var infoList: UIView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var draftPlayerBtn: DraftboardArrowButton!
-    
+    @IBOutlet weak var topViewTop: NSLayoutConstraint!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var topViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var infoListDividerHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var buttonLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var buttonTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomInfoTopConstraint: NSLayoutConstraint!
+    var draftButton: DraftboardArrowButton!
+    var draftButtonTop: NSLayoutConstraint!
+    var draftButtonWidth: NSLayoutConstraint!
+    var draftButtonHeight: NSLayoutConstraint!
     
-    var topViewHeightBase = CGFloat()
+    var segmentedControl: DraftboardSegmentedControl!
+    var segmentedHeight: NSLayoutConstraint!
+    var segmentedTop: NSLayoutConstraint!
+
+    var topViewTopStart: CGFloat = 0.0
+    var draftButtonTopStart: CGFloat = 0.0
     
-    var player: Player?
+    var stuck = true
     var draftable = true
     
+    var player: Player?
     var playerUpdates = [String]()
+    
+    let detailCellIdentifier = "player_detail_cell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.delegate = self
         
-        topViewHeightBase = topViewHeight.constant
+        // Create UI
+        createSegmentedControl()
+        createDraftButton()
         
+        // Remove background colors from nib
         topView.backgroundColor = .clearColor()
-        infoListDividerHeight.constant = 1 / UIScreen.mainScreen().scale
+        tableView.backgroundColor = .clearColor()
         
-        let playerUpdates = [
+        // Need these for scrollViewDidScroll
+        topViewTopStart = topViewTop.constant
+        draftButtonTopStart = draftButtonTop.constant
+        
+        // offset the top of the tableview with a clear headerview
+        let headerView = UIView(frame: CGRectMake(0.0, 0.0, App.screenBounds.width, topViewHeight.constant))
+        tableView.tableHeaderView = headerView
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // Register cell
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let cellNib = UINib(nibName: "DraftboardDetailCell", bundle: bundle)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: detailCellIdentifier)
+        
+        // Fake data
+        playerUpdates = [
+            "John Lackey beats Royals for ninth win",
+            "Matthew Berry dishes out his player advice",
+            "McHale firing signals revisions in coach's job",
+            "Ford/Pelton: Was Russell right for Lakers?",
+            "Drummond best center in the NBA?",
+            "Surprising pace leaders",
+            "DeRozan's career-best start",
+            "Finding fantasy NBA studs with usage rate",
             "John Lackey beats Royals for ninth win",
             "Matthew Berry dishes out his player advice",
             "McHale firing signals revisions in coach's job",
@@ -52,40 +81,51 @@ class PlayerDetailViewController: DraftboardViewController {
             "DeRozan's career-best start",
             "Finding fantasy NBA studs with usage rate",
         ]
+    }
+    
+    func createDraftButton() {
+        draftButton = DraftboardArrowButton()
+        draftButton.textBold = true
+        draftButton.textValue = "DRAFT PLAYER";
         
-        if draftable == false {
-            draftPlayerBtn.removeFromSuperview()
-        }
+        tableView.addSubview(draftButton)
+        draftButton.translatesAutoresizingMaskIntoConstraints = false
+        draftButton.centerXRancor.constraintEqualToRancor(tableView.centerXRancor).active = true
         
-        var previousCell: DraftboardDetailListItem?
+        draftButtonHeight = draftButton.heightRancor.constraintEqualToConstant(50.0)
+        draftButtonHeight.active = true
         
-        for (i, update) in playerUpdates.enumerate() {
-            let playerUpdateCell = DraftboardDetailListItem(showRightArrow: true)
-            
-            infoList.addSubview(playerUpdateCell)
-            playerUpdateCell.leftText.text = update
-            
-            playerUpdateCell.leadingRancor.constraintEqualToRancor(infoList.leadingRancor).active = true
-            playerUpdateCell.trailingRancor.constraintEqualToRancor(infoList.trailingRancor).active = true
-            
-            // we're the first!
-            if previousCell == nil {
-                playerUpdateCell.topRancor.constraintEqualToRancor(infoList.topRancor).active = true
-            }
-            
-            // we're not first :(
-            if let previous = previousCell {
-                playerUpdateCell.topRancor.constraintEqualToRancor(previous.bottomRancor).active = true
-            }
-            
-            // we're the last… but A(nchor) for effort?
-            if i == playerUpdates.count - 1 {
-                playerUpdateCell.bottomRancor.constraintEqualToRancor(infoList.bottomRancor).active = true
-            }
-            
-            previousCell = playerUpdateCell
+        draftButtonWidth = draftButton.widthRancor.constraintEqualToConstant(230.0)
+        draftButtonWidth.active = true
+        
+        draftButtonTop = draftButton.topRancor.constraintEqualToRancor(tableView.topRancor, constant: topViewHeight.constant - 25.0)
+        draftButtonTop.active = true
+    }
+    
+    func createSegmentedControl() {
+        segmentedControl = DraftboardSegmentedControl(
+            choices: ["Points", "Game Log"],
+            textColor: .blueDarker(),
+            textSelectedColor: .greenDraftboard()
+        )
+        
+        self.tableView.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.widthRancor.constraintEqualToConstant(170.0).active = true
+        segmentedControl.centerXRancor.constraintEqualToRancor(tableView.centerXRancor).active = true
+        
+        segmentedHeight = segmentedControl.heightRancor.constraintEqualToConstant(97.0)
+        segmentedHeight.active = true
+        
+        segmentedTop = segmentedControl.topRancor.constraintEqualToRancor(tableView.topRancor, constant: topViewHeight.constant + 25.0)
+        segmentedTop.active = true
+        
+        segmentedControl.indexChangedHandler = { (index: Int) in
+            // TODO: switch / reload data
         }
     }
+    
+    // MARK: DraftboardViewController
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Back) {
@@ -109,40 +149,99 @@ class PlayerDetailViewController: DraftboardViewController {
     }
 }
 
-// MARK: - UIScrollViewDelegate
-extension PlayerDetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        if(scrollView.contentOffset.y < 0) {
-//            topViewTopConstraint.constant = abs(scrollView.contentOffset.y / 2)
-//        } else {
-//            topView.alpha = min(1 - (scrollView.contentOffset.y / 320), 1)
-//        }
-        if scrollView.contentOffset.y < 0 {
-            topViewHeight.constant = topViewHeightBase + abs(scrollView.contentOffset.y)
-        } else {
-            topView.alpha = min(1 - (scrollView.contentOffset.y / 320), 1)
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension PlayerDetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return playerUpdates.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = UITableViewCell(style: .Default, reuseIdentifier: "player_detail_empty_cell")
+            cell.userInteractionEnabled = false
+            return cell
         }
         
-        if draftable {
-            if scrollView.contentOffset.y > topViewHeightBase - 24 {
-                buttonTopConstraint.constant = -(scrollView.contentOffset.y - bottomInfoTopConstraint.constant)
+        let cell = tableView.dequeueReusableCellWithIdentifier(detailCellIdentifier, forIndexPath: indexPath) as! DraftboardDetailCell
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if (indexPath.row == 0) {
+            return 122.0
+        }
+        
+        return 40.0
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // TODO: what happens here?
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension PlayerDetailViewController: UIScrollViewDelegate {
+    
+    func updateBackgroundForDelta(delta: CGFloat, total: CGFloat) {
+        if (delta > total) {
+            tableView.backgroundColor = .whiteColor()
+        }
+        else {
+            tableView.backgroundColor = .clearColor()
+        }
+    }
+    
+    // Update top view
+    func updateTopViewForDelta(delta: CGFloat, total: CGFloat) {
+        if (delta < 0.0) {
+            topViewTop.constant = topViewTopStart - delta / 2.0
+            topView.alpha = 1.0
+            return
+        }
+        
+        topView.alpha = 1.0 - delta / total;
+    }
+    
+    // Update draft button
+    func updateDraftButtonForDelta(delta: CGFloat, total: CGFloat) {
+        let adjDelta = delta + draftButtonHeight.constant / 2.0
+        
+        if (adjDelta >= total) {
+            draftButtonTop.constant = draftButtonTopStart + adjDelta - total
+            
+            if (!stuck) {
+                draftButtonWidth.constant = App.screenBounds.width
+                draftButton.layer.removeAllAnimations()
                 
-                self.view.layoutIfNeeded()
-                buttonLeadingConstraint.constant = 0
-                buttonTrailingConstraint.constant = 0
                 UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
                     self.view.layoutIfNeeded()
-                    }, completion: nil)
-            } else {
-                buttonTopConstraint.constant = 24
+                }, completion: nil)
                 
-                self.view.layoutIfNeeded()
-                buttonLeadingConstraint.constant = 45
-                buttonTrailingConstraint.constant = -45
-                UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
-                    self.view.layoutIfNeeded()
-                    }, completion: nil)
+                stuck = true
             }
         }
+        else if (stuck) {
+            draftButtonTop.constant = draftButtonTopStart
+            draftButtonWidth.constant = 230.0
+            
+            draftButton.layer.removeAllAnimations()
+            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            
+            stuck = false
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let y = scrollView.contentOffset.y
+        let t = topViewHeight.constant
+        
+        // Update views
+        updateTopViewForDelta(y, total: t)
+        updateDraftButtonForDelta(y, total: t)
+        updateBackgroundForDelta(y, total: t)
     }
 }

@@ -18,20 +18,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mL7-wR-cJV">
-                    <rect key="frame" x="0.0" y="0.0" width="341" height="40"/>
+                    <rect key="frame" x="0.0" y="76" width="341" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="MNJ-d6-AZK"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kfk-Uk-Bcj">
-                    <rect key="frame" x="0.0" y="40" width="341" height="656"/>
+                    <rect key="frame" x="0.0" y="116" width="341" height="580"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="mL7-wR-cJV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9Ju-J0-jVA"/>
+                <constraint firstItem="mL7-wR-cJV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="76" id="9Ju-J0-jVA"/>
                 <constraint firstAttribute="trailing" secondItem="mL7-wR-cJV" secondAttribute="trailing" id="CLw-aX-rDD"/>
                 <constraint firstItem="Kfk-Uk-Bcj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Lfb-en-yUp"/>
                 <constraint firstAttribute="trailing" secondItem="Kfk-Uk-Bcj" secondAttribute="trailing" id="POu-Qg-REY"/>

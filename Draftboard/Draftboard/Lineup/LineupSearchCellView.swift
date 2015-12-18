@@ -19,6 +19,7 @@ class LineupSearchCellView: UITableViewCell {
     @IBOutlet weak var statusLabel: DraftboardLabel!
     @IBOutlet weak var ppgLabel: UILabel!
     @IBOutlet weak var infoButton: DraftboardButton!
+    @IBOutlet weak var bigInfoButton: UIButton!
 //    @IBOutlet weak var infoButtonImage: UIImageView!
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!

@@ -17,10 +17,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBe-mP-5Fl" userLabel="Content View Clip">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd7-dN-DKs" customClass="UIScrollView">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="608"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="532"/>
                             <animations/>
                             <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
@@ -40,7 +40,7 @@
                 <constraint firstAttribute="trailing" secondItem="JBe-mP-5Fl" secondAttribute="trailing" id="EUW-EC-l04"/>
                 <constraint firstAttribute="bottom" secondItem="JBe-mP-5Fl" secondAttribute="bottom" id="paD-qK-t9H"/>
                 <constraint firstItem="JBe-mP-5Fl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vIy-w6-2pf"/>
-                <constraint firstItem="JBe-mP-5Fl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yGK-3O-Y7G"/>
+                <constraint firstItem="JBe-mP-5Fl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="76" id="yGK-3O-Y7G"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

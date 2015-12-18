@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C0068471BFE412700789B53 /* DraftboardDetailListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0068461BFE412700789B53 /* DraftboardDetailListItem.swift */; };
 		3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */; };
 		3C0EDA891BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */; };
 		3C245CD51BEAD4EA00A24F43 /* DraftboardModalItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */; };
@@ -19,7 +18,6 @@
 		3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */; };
 		3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA3A1BE050D50077DF0C /* PieChart.swift */; };
 		3C74CA3F1BE051070077DF0C /* ContestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA3E1BE051070077DF0C /* ContestDetailViewController.xib */; };
-		3C74CA411BE051290077DF0C /* ContestDetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA401BE051290077DF0C /* ContestDetailViewCell.xib */; };
 		3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA421BE0513A0077DF0C /* ContestsHeaderCell.swift */; };
 		3C74CA451BE051530077DF0C /* ContestsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA441BE051530077DF0C /* ContestsHeaderCell.xib */; };
 		3C74CA471BE0516C0077DF0C /* ContestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA461BE0516C0077DF0C /* ContestsListController.swift */; };
@@ -131,6 +129,11 @@
 		5D9A32211BCD72A0006C758B /* DraftboardNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */; };
 		5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */; };
 		5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */; };
+		5DAC07921C21DCC10002B97B /* DraftboardDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07911C21DCC10002B97B /* DraftboardDetailCell.swift */; };
+		5DAC07941C21DCC60002B97B /* DraftboardDetailListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07931C21DCC60002B97B /* DraftboardDetailListItem.swift */; };
+		5DAC07961C21DE680002B97B /* DraftboardDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DAC07951C21DE680002B97B /* DraftboardDetailCell.xib */; };
+		5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07971C222ED70002B97B /* DraftboardButtonHeader.swift */; };
+		5DAC079B1C222F360002B97B /* DraftboardSegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC079A1C222F360002B97B /* DraftboardSegmentCell.swift */; };
 		5DAF71761BF3C00F00CB972F /* AvatarPMRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */; };
 		5DB14BF51C1218CD008E14A4 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */; };
 		5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */; };
@@ -168,7 +171,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C0068461BFE412700789B53 /* DraftboardDetailListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardDetailListItem.swift; sourceTree = "<group>"; };
 		3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailLiveViewController.swift; sourceTree = "<group>"; };
 		3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailLiveViewController.xib; sourceTree = "<group>"; };
 		3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalItemView.xib; sourceTree = "<group>"; };
@@ -180,7 +182,6 @@
 		3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailViewController.swift; sourceTree = "<group>"; };
 		3C74CA3A1BE050D50077DF0C /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		3C74CA3E1BE051070077DF0C /* ContestDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestDetailViewController.xib; sourceTree = "<group>"; };
-		3C74CA401BE051290077DF0C /* ContestDetailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestDetailViewCell.xib; sourceTree = "<group>"; };
 		3C74CA421BE0513A0077DF0C /* ContestsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsHeaderCell.swift; sourceTree = "<group>"; };
 		3C74CA441BE051530077DF0C /* ContestsHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestsHeaderCell.xib; sourceTree = "<group>"; };
 		3C74CA461BE0516C0077DF0C /* ContestsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsListController.swift; sourceTree = "<group>"; };
@@ -296,6 +297,11 @@
 		5D9D68731BB5B59E00855501 /* DraftboardRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardRoundButton.swift; sourceTree = "<group>"; };
 		5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalViewController.swift; sourceTree = "<group>"; };
 		5D9E99531BB615590017E332 /* DraftboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardViewController.swift; sourceTree = "<group>"; };
+		5DAC07911C21DCC10002B97B /* DraftboardDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardDetailCell.swift; sourceTree = "<group>"; };
+		5DAC07931C21DCC60002B97B /* DraftboardDetailListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardDetailListItem.swift; sourceTree = "<group>"; };
+		5DAC07951C21DE680002B97B /* DraftboardDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardDetailCell.xib; sourceTree = "<group>"; };
+		5DAC07971C222ED70002B97B /* DraftboardButtonHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardButtonHeader.swift; sourceTree = "<group>"; };
+		5DAC079A1C222F360002B97B /* DraftboardSegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentCell.swift; sourceTree = "<group>"; };
 		5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPMRView.swift; sourceTree = "<group>"; };
 		5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
 		5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
@@ -432,9 +438,9 @@
 				5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */,
 				5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */,
 				5D26FC731BBEE78700ACF127 /* AccountViewController.swift */,
+				5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */,
 				3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */,
 				3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */,
-				5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */,
 				5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */,
 				5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */,
 				3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */,
@@ -464,12 +470,16 @@
 		5D4B871D1BB31A5F00B58EDF /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				3C0068461BFE412700789B53 /* DraftboardDetailListItem.swift */,
+				5DAC07931C21DCC60002B97B /* DraftboardDetailListItem.swift */,
+				5DAC07911C21DCC10002B97B /* DraftboardDetailCell.swift */,
+				5DAC07951C21DE680002B97B /* DraftboardDetailCell.xib */,
 				5D9D686E1BB5B52200855501 /* Button */,
 				5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */,
 				5D4B87431BB3388E00B58EDF /* DraftboardTitlebar.swift */,
 				5D5829D51BF2894700FFA7D8 /* CircleProgressView.swift */,
 				3E19DA1C1C03B75000E6B53F /* LoaderView.swift */,
+				5DAC07971C222ED70002B97B /* DraftboardButtonHeader.swift */,
+				5DAC079A1C222F360002B97B /* DraftboardSegmentCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -595,7 +605,6 @@
 		9327371E1BAC9CFB00198AA9 /* Contests */ = {
 			isa = PBXGroup;
 			children = (
-				3C74CA401BE051290077DF0C /* ContestDetailViewCell.xib */,
 				3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */,
 				3C74CA3E1BE051070077DF0C /* ContestDetailViewController.xib */,
 				3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */,
@@ -702,8 +711,8 @@
 				3CB630AB1C10E85F00ACEAD3 /* ContestConfirmationModal.xib in Resources */,
 				5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */,
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
-				3C74CA411BE051290077DF0C /* ContestDetailViewCell.xib in Resources */,
 				3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */,
+				5DAC07961C21DE680002B97B /* DraftboardDetailCell.xib in Resources */,
 				3C6FBAE41C0FA8D4009C3287 /* WithdrawView.xib in Resources */,
 				3C6FBAE41C0FA8D4009C3287 /* WithdrawView.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
@@ -808,6 +817,7 @@
 				5D6237D71BB61FFB0007E62A /* UIColor+DraftboardColors.swift in Sources */,
 				5D6237D81BB61FFB0007E62A /* DraftboardTabBar.swift in Sources */,
 				5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */,
+				5DAC07941C21DCC60002B97B /* DraftboardDetailListItem.swift in Sources */,
 				3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */,
 				5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */,
 				5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */,
@@ -820,6 +830,7 @@
 				5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */,
 				3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
+				5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
 				5D6237D41BB61FD60007E62A /* ResultsViewController.swift in Sources */,
 				5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */,
@@ -830,7 +841,6 @@
 				5D86F2751C18D2BB004E9655 /* DraftboardNavController+Cards.swift in Sources */,
 				5DD3C4E71C17AEAD0040DC71 /* LineupStatFooterView.swift in Sources */,
 				5DAF71761BF3C00F00CB972F /* AvatarPMRView.swift in Sources */,
-				3C0068471BFE412700789B53 /* DraftboardDetailListItem.swift in Sources */,
 				5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */,
 				5D783AD11BD97D09000D8494 /* Contest.swift in Sources */,
 				3CDCF9C41BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift in Sources */,
@@ -841,6 +851,7 @@
 				5D6237C11BB61F7B0007E62A /* LineupEditCellView.swift in Sources */,
 				5DE2D6331C0F915F0023D4DB /* DraftboardSegmentedControl.swift in Sources */,
 				5D5829D61BF2894700FFA7D8 /* CircleProgressView.swift in Sources */,
+				5DAC079B1C222F360002B97B /* DraftboardSegmentCell.swift in Sources */,
 				5D5386DA1BF534CF002CDAF3 /* LineupStatFeesView.swift in Sources */,
 				5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */,
 				5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */,
@@ -851,6 +862,7 @@
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
 				3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,
+				5DAC07921C21DCC10002B97B /* DraftboardDetailCell.swift in Sources */,
 				5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */,
 				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
