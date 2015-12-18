@@ -50,14 +50,14 @@ final class API {
     
     private class func endpoint(path: String, method: String, parameters: NSDictionary, completion: (AnyObject) -> Void) {
         API.http(path, method: method, parameters: parameters, completion: { data, response in
-            // Unauthorized
+            // 403 Unauthorized
             if response.statusCode == 403 {
                 API.auth(completion: {
                     API.endpoint(path, method: method, parameters: parameters, completion: completion)
                 })
             }
-            // Probably 200 OK
-            else {
+            // 200 OK
+            else if response.statusCode == 200 {
                 // JSON response
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data, options: []) {
                     completion(json)
@@ -74,6 +74,9 @@ final class API {
                         completion(str)
                     }
                 }
+            }
+            else {
+                print("Unhandled HTTP status code in API response")
             }
         })
     }
