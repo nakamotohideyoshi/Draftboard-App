@@ -18,6 +18,7 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var contentView: UIScrollView!
     
     @IBOutlet weak var editButton: DraftboardButton!
+    @IBOutlet weak var contestsButton: DraftboardArrowButton!
     @IBOutlet weak var dividerHeight: NSLayoutConstraint!
     @IBOutlet weak var buttonDividerHeight: NSLayoutConstraint!
     @IBOutlet weak var horizontalDivider: UIView!
@@ -37,6 +38,8 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet weak var rightStatContainerView: UIView!
     
     var showPlayerDetailAction: ((Player, isLive: Bool, isDraftable: Bool) -> Void)?
+    var editAction: (LineupCardView -> Void)?
+    var contestsAction: (LineupCardView -> Void)?
     
     var contentHeight: CGFloat!
     var totalHeight: CGFloat!
@@ -86,6 +89,17 @@ class LineupCardView: DraftboardNibView {
         liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
         
         createStats()
+        
+        editButton.addTarget(self, action: "didTapEdit", forControlEvents: .TouchUpInside)
+        contestsButton.addTarget(self, action: "didTapContests", forControlEvents: .TouchUpInside)
+    }
+    
+    func didTapEdit() {
+        editAction?(self)
+    }
+    
+    func didTapContests() {
+        contestsAction?(self)
     }
     
     func createStats() {
@@ -160,6 +174,11 @@ class LineupCardView: DraftboardNibView {
     }
     
     func layoutCellViews() {
+        for cellView in cellViews {
+            cellView.removeFromSuperview()
+        }
+        cellViews = [LineupCardCellView]()
+
         var previousCell: LineupCardCellView?
         let height = cellHeight()
         

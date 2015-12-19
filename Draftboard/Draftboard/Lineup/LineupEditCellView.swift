@@ -32,6 +32,7 @@ class LineupEditCellView: DraftboardNibControl {
     
     var player: Player? {
         didSet {
+            avatarImageView.image = UIImage(named: "sample-avatar-big")
             nameLabel.textColor = .whiteColor()
             nameLabel.text = player?.shortName
             teamLabel.text = player?.team

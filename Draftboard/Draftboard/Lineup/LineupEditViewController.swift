@@ -11,7 +11,9 @@ import UIKit
 class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var contentView: UIScrollView!
     
-    var lineup: Lineup = Lineup()
+    var lineup: Lineup = Lineup() {
+        didSet { updateCellViews() }
+    }
     var saveLineupAction: (Lineup -> Void)?
     var cellViews = [LineupEditCellView]()
     
@@ -74,6 +76,18 @@ class LineupEditViewController: DraftboardViewController {
             previousCell = cellView
             cellViews.append(cellView)
             cellView.index = i
+            
+            if let player = lineup.players[i] {
+                cellView.player = player
+            }
+        }
+    }
+    
+    func updateCellViews() {
+        for (i, cellView) in cellViews.enumerate() {
+            if let player = lineup.players[i] {
+                cellView.player = player
+            }
         }
     }
     
@@ -102,7 +116,6 @@ class LineupEditViewController: DraftboardViewController {
         svc.draftGroup = lineup.draftGroup
         svc.filterBy = positions[cell.index]
         svc.playerSelectedAction = { player in
-            cell.avatarImageView.image = UIImage(named: "sample-avatar-big")
             cell.player = player
             self.lineup.players[cell.index] = player
             self.updateStats()

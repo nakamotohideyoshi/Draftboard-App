@@ -171,6 +171,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Set player detail action
         cardView.showPlayerDetailAction = showPlayerDetail
+        cardView.editAction = editLineup
+        cardView.contestsAction = showContestsForLineup
         
         // Set card dimensions
         cardView.translatesAutoresizingMaskIntoConstraints = false
@@ -251,12 +253,19 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         navController?.pushViewController(nvc)
     }
     
-    func editLineup(lineup: Lineup) {
-        
+    func editLineup(lineupCard: LineupCardView) {
+        let evc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
+        evc.lineup = lineupCard.lineup
+        evc.saveLineupAction = { lineup in
+            lineupCard.lineup = lineup
+            self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
+        }
+        navController?.pushViewController(evc)
     }
     
-    func showContestsForLineup(lineup: Lineup) {
-        
+    func showContestsForLineup(lineupCard: LineupCardView) {
+        let tc = RootViewController.sharedInstance.tabController
+        tc.tabBar.selectButtonAtIndex(1, animated: true)
     }
     
     func showPlayerDetail(player: Player, isLive: Bool, isDraftable: Bool = false) {
