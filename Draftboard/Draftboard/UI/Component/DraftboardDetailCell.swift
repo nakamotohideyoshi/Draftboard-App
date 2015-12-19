@@ -12,6 +12,7 @@ class DraftboardDetailCell: UITableViewCell {
     
     @IBOutlet weak var leftLabel: DraftboardLabel!
     @IBOutlet weak var rightLabel: DraftboardLabel!
+    @IBOutlet weak var rightLabelSuffix: DraftboardLabel!
     
     @IBOutlet weak var borderTopView: UIView!
     @IBOutlet weak var borderBottomView: UIView!

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
@@ -26,72 +27,81 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etd-ho-8Gk" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                        <rect key="frame" x="21" y="29" width="28" height="18"/>
-                        <animations/>
+                        <rect key="frame" x="140" y="31" width="26" height="14"/>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                        <color key="textColor" red="0.35160541534423828" green="0.36195579171180725" blue="0.47066652774810791" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzP-OD-fGf" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                        <rect key="frame" x="23" y="28" width="4" height="18"/>
                         <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="299 PMR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFP-Y5-nGO" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                        <rect key="frame" x="242" y="31" width="36" height="15"/>
-                        <animations/>
+                        <rect key="frame" x="249" y="30" width="36" height="15"/>
                         <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="10"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmQ-45-91i" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                        <rect key="frame" x="206" y="31" width="22" height="15"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="10"/>
-                        <color key="textColor" red="0.1186207458" green="0.75475335119999998" blue="0.29064974189999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPP-Vm-UxC" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                        <rect key="frame" x="72" y="18" width="84" height="21"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99th" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlK-34-jis" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                        <rect key="frame" x="72" y="39" width="22" height="14"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAp-Kg-JbK" userLabel="PMR">
-                        <rect key="frame" x="293" y="32" width="12" height="12"/>
-                        <animations/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAp-Kg-JbK" userLabel="PMR" customClass="DraftboardView" customModule="Draftboard" customModuleProvider="target">
+                        <rect key="frame" x="293" y="31" width="12" height="12"/>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.50588235290000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="12" id="ikv-C7-8Gb"/>
                             <constraint firstAttribute="height" constant="12" id="ktj-k9-Yhx"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPP-Vm-UxC" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                        <rect key="frame" x="50" y="26" width="84" height="21"/>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVj-we-aYy" userLabel="PseudoDash">
+                        <rect key="frame" x="37" y="37" width="5" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="iWP-Md-i2q"/>
+                            <constraint firstAttribute="width" constant="5" id="w7d-fa-aqU"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmQ-45-91i" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                        <rect key="frame" x="218" y="30" width="22" height="15"/>
+                        <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="10"/>
+                        <color key="textColor" red="0.1186207458" green="0.75475335119999998" blue="0.29064974189999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <animations/>
+                <constraints>
+                    <constraint firstItem="SzP-OD-fGf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fef-OV-Gb7"/>
+                    <constraint firstItem="lVj-we-aYy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LWm-3j-43X"/>
+                    <constraint firstItem="SzP-OD-fGf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="U36-Ta-QEG"/>
+                    <constraint firstItem="lVj-we-aYy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="29" id="WJ0-1E-gna"/>
+                    <constraint firstItem="etd-ho-8Gk" firstAttribute="leading" secondItem="MPP-Vm-UxC" secondAttribute="trailing" constant="6" id="xyp-7b-pyT"/>
+                </constraints>
             </tableViewCellContentView>
-            <animations/>
             <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="SFP-Y5-nGO" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" constant="1" id="1S0-Vv-JdN"/>
-                <constraint firstAttribute="trailing" secondItem="SFP-Y5-nGO" secondAttribute="trailing" constant="42" id="96t-iG-iMk"/>
-                <constraint firstItem="GlK-34-jis" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" constant="8" id="Av8-lG-uJd"/>
+                <constraint firstItem="SFP-Y5-nGO" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" id="1S0-Vv-JdN"/>
+                <constraint firstAttribute="trailing" secondItem="SFP-Y5-nGO" secondAttribute="trailing" constant="35" id="96t-iG-iMk"/>
                 <constraint firstAttribute="trailing" secondItem="eAp-Kg-JbK" secondAttribute="trailing" constant="15" id="DZt-ti-oqR"/>
-                <constraint firstItem="etd-ho-8Gk" firstAttribute="leading" secondItem="KGk-i7-Jjw" secondAttribute="leading" constant="21" id="EJ5-7A-eYD"/>
                 <constraint firstItem="etd-ho-8Gk" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" id="M7p-3J-QwG"/>
-                <constraint firstItem="MPP-Vm-UxC" firstAttribute="leading" secondItem="KGk-i7-Jjw" secondAttribute="leading" constant="72" id="RG3-KN-uPH"/>
+                <constraint firstItem="MPP-Vm-UxC" firstAttribute="leading" secondItem="KGk-i7-Jjw" secondAttribute="leading" constant="50" id="RG3-KN-uPH"/>
                 <constraint firstItem="eAp-Kg-JbK" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" id="UTE-qd-0xl"/>
-                <constraint firstItem="MPP-Vm-UxC" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" constant="-9" id="bql-A0-KLk"/>
-                <constraint firstItem="kmQ-45-91i" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" constant="1" id="mqp-Td-LkQ"/>
-                <constraint firstItem="GlK-34-jis" firstAttribute="leading" secondItem="KGk-i7-Jjw" secondAttribute="leading" constant="72" id="si2-h6-E4s"/>
-                <constraint firstAttribute="trailing" secondItem="kmQ-45-91i" secondAttribute="trailing" constant="92" id="uaJ-e8-Wjj"/>
+                <constraint firstItem="MPP-Vm-UxC" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" constant="-1" id="bql-A0-KLk"/>
+                <constraint firstItem="kmQ-45-91i" firstAttribute="centerY" secondItem="KGk-i7-Jjw" secondAttribute="centerY" id="mqp-Td-LkQ"/>
+                <constraint firstAttribute="trailing" secondItem="kmQ-45-91i" secondAttribute="trailing" constant="80" id="uaJ-e8-Wjj"/>
             </constraints>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="lineupPMR" destination="SFP-Y5-nGO" id="5Xi-DJ-bhn"/>
-                <outlet property="lineupPlace" destination="GlK-34-jis" id="AC9-mr-B2Z"/>
+                <outlet property="lineupPlace" destination="SzP-OD-fGf" id="ZPA-Xs-3s6"/>
                 <outlet property="lineupPoints" destination="etd-ho-8Gk" id="STf-s6-GNt"/>
                 <outlet property="lineupWinnings" destination="kmQ-45-91i" id="ENk-g9-j67"/>
                 <outlet property="playerName" destination="MPP-Vm-UxC" id="yDM-2y-BSw"/>

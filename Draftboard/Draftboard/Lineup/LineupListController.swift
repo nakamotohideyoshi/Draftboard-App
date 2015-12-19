@@ -269,16 +269,11 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     func showPlayerDetail(player: Player, isLive: Bool, isDraftable: Bool = false) {
-        if isLive {
-            let nvc = PlayerDetailLiveViewController()
-            nvc.player = player
-            self.navController?.pushViewController(nvc)
-        } else {
-            let nvc = PlayerDetailViewController()
-            nvc.player = player
-            nvc.draftable = false
-            self.navController?.pushViewController(nvc)
-        }
+        let nvc = PlayerDetailViewController()
+        nvc.player = player
+        nvc.draftable = false
+        
+        self.navController?.pushViewController(nvc)
     }
     
     // MARK: - Titlebar datasource methods

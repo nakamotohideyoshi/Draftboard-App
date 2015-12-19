@@ -9,6 +9,294 @@
 import UIKit
 
 class ContestDetailViewController: DraftboardViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var topViewTop: NSLayoutConstraint!
+    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    
+    var draftButton: DraftboardArrowButton!
+    var draftButtonTop: NSLayoutConstraint!
+    var draftButtonWidth: NSLayoutConstraint!
+    var draftButtonHeight: NSLayoutConstraint!
+    
+    var segmentedControl: DraftboardSegmentedControl!
+    var segmentedHeight: NSLayoutConstraint!
+    var segmentedTop: NSLayoutConstraint!
+    
+    var topViewTopStart: CGFloat = 0.0
+    var topViewHeightStart: CGFloat = 0.0
+    var draftButtonTopStart: CGFloat = 0.0
+    
+    var stuck = true
+    var draftable = true
+    
+    var player: Player?
+    var playerUpdates = [String]()
+    
+    let detailCellIdentifier = "contest_detail_cell"
+    
+    var contestName: String?
+    var contestEntered = false
+    var lineupSelected: Int?
+    var confirmationModal: ContestConfirmationModal?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Create UI
+        createSegmentedControl()
+        createDraftButton()
+        
+        // Remove background colors from nibh
+        topView.backgroundColor = .clearColor()
+        tableView.backgroundColor = .clearColor()
+        
+        // Need these for scrollViewDidScroll
+        topViewTopStart = topViewTop.constant
+        topViewHeightStart = topViewHeight.constant
+        draftButtonTopStart = draftButtonTop.constant
+        
+        // offset the top of the tableview with a clear headerview
+        let headerView = UIView(frame: CGRectMake(0.0, 0.0, App.screenBounds.width, topViewHeight.constant - 76.0))
+        tableView.tableHeaderView = headerView
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // Register cell
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let cellNib = UINib(nibName: "DraftboardDetailCell", bundle: bundle)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: detailCellIdentifier)
+        
+        // Fake data
+        playerUpdates = [
+            "John Lackey beats Royals for ninth win",
+            "Matthew Berry dishes out his player advice",
+            "McHale firing signals revisions in coach's job",
+            "Ford/Pelton: Was Russell right for Lakers?",
+            "Drummond best center in the NBA?",
+            "Surprising pace leaders",
+            "DeRozan's career-best start",
+            "Finding fantasy NBA studs with usage rate",
+            "John Lackey beats Royals for ninth win",
+            "Matthew Berry dishes out his player advice",
+            "McHale firing signals revisions in coach's job",
+            "Ford/Pelton: Was Russell right for Lakers?",
+            "Drummond best center in the NBA?",
+            "Surprising pace leaders",
+            "DeRozan's career-best start",
+            "Finding fantasy NBA studs with usage rate",
+        ]
+        
+        draftButton.addTarget(self, action: "handleButtonTap:", forControlEvents: .TouchUpInside)
+    }
+    
+    func createDraftButton() {
+        draftButton = DraftboardArrowButton()
+        draftButton.textBold = true
+        draftButton.textValue = "ENTER CONTEST";
+        
+        tableView.addSubview(draftButton)
+        draftButton.translatesAutoresizingMaskIntoConstraints = false
+        draftButton.centerXRancor.constraintEqualToRancor(tableView.centerXRancor).active = true
+        
+        draftButtonHeight = draftButton.heightRancor.constraintEqualToConstant(50.0)
+        draftButtonHeight.active = true
+        
+        draftButtonWidth = draftButton.widthRancor.constraintEqualToConstant(230.0)
+        draftButtonWidth.active = true
+        
+        draftButtonTop = draftButton.topRancor.constraintEqualToRancor(tableView.topRancor, constant: topViewHeight.constant - 76.0 - 25.0)
+        draftButtonTop.active = true
+    }
+    
+    func createSegmentedControl() {
+        segmentedControl = DraftboardSegmentedControl(
+            choices: ["Payout", "Scoring", "Games", "Entries"],
+            textColor: .blueDarker(),
+            textSelectedColor: .greenDraftboard()
+        )
+        
+        self.tableView.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.leftRancor.constraintEqualToRancor(tableView.leftRancor, constant: 15.0).active = true
+        segmentedControl.rightRancor.constraintEqualToRancor(tableView.rightRancor, constant: 15.0).active = true
+        segmentedControl.centerXRancor.constraintEqualToRancor(tableView.centerXRancor).active = true
+        
+        segmentedHeight = segmentedControl.heightRancor.constraintEqualToConstant(97.0)
+        segmentedHeight.active = true
+        
+        segmentedTop = segmentedControl.topRancor.constraintEqualToRancor(tableView.topRancor, constant: topViewHeight.constant - 76.0 + 25.0)
+        segmentedTop.active = true
+        
+        segmentedControl.indexChangedHandler = { (index: Int) in
+            // TODO: switch / reload data
+        }
+    }
+    
+    func handleButtonTap(sender: DraftboardButton) {
+        var choices = [[String: String]]()
+        choices.append(["title": "Warriors Stack", "subtitle": "In 3 Contests"])
+        choices.append(["title": "Optimal", "subtitle": "In 0 Contests"])
+        choices.append(["title": "Bulls Stack", "subtitle": "In 0 Contests"])
+        
+        let mcc = DraftboardModalChoiceController(title: "Choose an Eligible Lineup", choices: choices)
+        RootViewController.sharedInstance.pushModalViewController(mcc)
+    }
+    
+    override func didSelectModalChoice(index: Int) {
+        confirmationModal = ContestConfirmationModal(nibName: "ContestConfirmationModal", bundle: nil)
+        RootViewController.sharedInstance.pushModalViewController(confirmationModal!)
+        confirmationModal!.enterContestButton.addTarget(self, action: "enterContestTap:", forControlEvents: .TouchUpInside)
+    }
+    
+    func enterContestTap(sender: DraftboardButton) {
+        confirmationModal?.showSpinner()
+        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            dispatch_async(dispatch_get_main_queue(),{
+                self.confirmationModal?.showConfirmed()
+                
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.8 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    dispatch_async(dispatch_get_main_queue(),{
+                        RootViewController.sharedInstance.popModalViewController()
+                        self.didEnterContest()
+                    })
+                }
+            })
+        }
+    }
+    
+    func didEnterContest() {
+        draftButton.userInteractionEnabled = false
+        draftButton.backgroundColor = .greyCool()
+        draftButton.label.text = "Contest Entered".uppercaseString
+        draftButton.iconImageView.alpha = 0
+    }
+    
+    override func didCancelModal() {
+        RootViewController.sharedInstance.popModalViewController()
+        lineupSelected = nil
+    }
+    
+    // MARK: DraftboardViewController
+    
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if (buttonType == .Back) {
+            self.navController?.popViewController()
+        }
+    }
+    
+    override func titlebarTitle() -> String? {
+        return contestName?.uppercaseString
+    }
+    
+    override func titlebarLeftButtonType() -> TitlebarButtonType? {
+        return .Back
+    }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension ContestDetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return playerUpdates.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = UITableViewCell(style: .Default, reuseIdentifier: "player_detail_empty_cell")
+            cell.userInteractionEnabled = false
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(detailCellIdentifier, forIndexPath: indexPath) as! DraftboardDetailCell
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if (indexPath.row == 0) {
+            return 122.0
+        }
+        
+        return 40.0
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // TODO: what happens here?
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension ContestDetailViewController: UIScrollViewDelegate {
+    
+    func updateBackgroundForDelta(delta: CGFloat, total: CGFloat) {
+        if (delta > total) {
+            tableView.backgroundColor = .whiteColor()
+        }
+        else {
+            tableView.backgroundColor = .clearColor()
+        }
+    }
+    
+    // Update top view
+    func updateTopViewForDelta(delta: CGFloat, total: CGFloat) {
+        if (delta < 0.0) {
+            topViewHeight.constant = topViewHeightStart - delta;
+            topView.alpha = 1.0
+            return
+        }
+        
+        topView.alpha = 1.0 - delta / total;
+    }
+    
+    // Update draft button
+    func updateDraftButtonForDelta(delta: CGFloat, total: CGFloat) {
+        let adjDelta = 76.0 + delta + draftButtonHeight.constant / 2.0
+        
+        if (adjDelta >= total) {
+            draftButtonTop.constant = draftButtonTopStart + adjDelta - total
+            
+            if (!stuck) {
+                draftButtonWidth.constant = App.screenBounds.width
+                draftButton.layer.removeAllAnimations()
+                
+                UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+                    self.view.layoutIfNeeded()
+                    }, completion: nil)
+                
+                stuck = true
+            }
+        }
+        else if (stuck) {
+            draftButtonTop.constant = draftButtonTopStart
+            draftButtonWidth.constant = 230.0
+            
+            draftButton.layer.removeAllAnimations()
+            UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+            
+            stuck = false
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let y = scrollView.contentOffset.y
+        let t = topViewHeight.constant
+        
+        // Update views
+        updateTopViewForDelta(y, total: t)
+        updateDraftButtonForDelta(y, total: t)
+        updateBackgroundForDelta(y, total: t)
+    }
+}
+
+/*
+class ContestDetailViewController: DraftboardViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomInfoView: UIView!
     @IBOutlet weak var infoList: UIView!
@@ -179,3 +467,4 @@ extension ContestDetailViewController: UIScrollViewDelegate {
         }
     }
 }
+*/

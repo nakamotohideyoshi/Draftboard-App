@@ -56,6 +56,7 @@ class PlayerDetailViewController: DraftboardViewController {
         tableView.tableHeaderView = headerView
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 60.0, 0.0)
         
         // Register cell
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -81,6 +82,12 @@ class PlayerDetailViewController: DraftboardViewController {
             "DeRozan's career-best start",
             "Finding fantasy NBA studs with usage rate",
         ]
+        
+        if (!draftable) {
+            segmentedHeight.constant = 97.0;
+            segmentedTop.constant = topViewHeight.constant;
+            draftButton.hidden = true
+        }
     }
     
     func createDraftButton() {
@@ -147,6 +154,14 @@ class PlayerDetailViewController: DraftboardViewController {
     override func titlebarBgHidden() -> Bool {
         return false
     }
+    
+    override func footerType() -> FooterType {
+        if (draftable) {
+            return .Stats
+        }
+        
+        return .None
+    }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -169,6 +184,10 @@ extension PlayerDetailViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 0) {
+            if (!draftable) {
+                return 97.0
+            }
+            
             return 122.0
         }
         

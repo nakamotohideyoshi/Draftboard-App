@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */; };
-		3C0EDA891BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */; };
 		3C245CD51BEAD4EA00A24F43 /* DraftboardModalItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */; };
 		3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */; };
 		3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */; };
@@ -171,8 +169,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailLiveViewController.swift; sourceTree = "<group>"; };
-		3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailLiveViewController.xib; sourceTree = "<group>"; };
 		3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalItemView.xib; sourceTree = "<group>"; };
 		3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionViewController.xib; sourceTree = "<group>"; };
@@ -549,8 +545,6 @@
 				5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */,
 				3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */,
 				3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */,
-				3C0EDA861BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift */,
-				3C0EDA871BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib */,
 				5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */,
 				5D5386D91BF534CF002CDAF3 /* LineupStatFeesView.swift */,
 				5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */,
@@ -747,7 +741,6 @@
 				5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */,
 				5D6237BE1BB61F7B0007E62A /* LineupCardView.xib in Resources */,
 				5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */,
-				3C0EDA891BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.xib in Resources */,
 				5D3214951BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib in Resources */,
 				3C245CD51BEAD4EA00A24F43 /* DraftboardModalItemView.xib in Resources */,
 				5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */,
@@ -818,7 +811,6 @@
 				5D6237D81BB61FFB0007E62A /* DraftboardTabBar.swift in Sources */,
 				5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */,
 				5DAC07941C21DCC60002B97B /* DraftboardDetailListItem.swift in Sources */,
-				3C0EDA881BFCFDD200A7BEC0 /* PlayerDetailLiveViewController.swift in Sources */,
 				5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */,
 				5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */,
 				5D9A321D1BCD6591006C758B /* DraftboardFilterButton.swift in Sources */,
