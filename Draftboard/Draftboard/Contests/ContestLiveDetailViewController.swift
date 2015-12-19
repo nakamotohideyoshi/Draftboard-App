@@ -109,15 +109,7 @@ extension ContestLiveDetailViewController: UITableViewDelegate, UITableViewDataS
         let cell = tableView.dequeueReusableCellWithIdentifier(contestStandingCell,
             forIndexPath: indexPath) as! ContestPlayerStandingCell
         cell.playerName.text = tempStandings[indexPath.row]
-        if indexPath.row == 0 {
-            cell.lineupPlace.text = "1st place"
-        } else if indexPath.row == 1 {
-            cell.lineupPlace.text = "2nd place"
-        } else if indexPath.row == 2 {
-            cell.lineupPlace.text = "3rd place"
-        } else {
-            cell.lineupPlace.text = String(format: "%ith place", indexPath.row + 1)
-        }
+        cell.lineupPlace.text = String(format: "%i", indexPath.row + 1)
         return cell
     }
     

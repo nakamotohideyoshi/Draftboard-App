@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZp-a3-zi9" userLabel="BottomDivider">
-                    <rect key="frame" x="0.0" y="86" width="505" height="1"/>
+                    <rect key="frame" x="15" y="86" width="475" height="1"/>
                     <color key="backgroundColor" red="0.90159028768539429" green="0.90952247381210327" blue="0.93018561601638794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="0lW-2X-Pcb"/>
@@ -40,7 +40,7 @@
                     <color key="highlightedColor" red="0.096235401928424835" green="0.13966953754425049" blue="0.21438547968864441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVH-dh-XQe" userLabel="TopDivider">
-                    <rect key="frame" x="0.0" y="0.0" width="505" height="1"/>
+                    <rect key="frame" x="15" y="0.0" width="475" height="1"/>
                     <color key="backgroundColor" red="0.90159028768539429" green="0.90952247381210327" blue="0.93018561601638794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="WyL-Kr-bbQ"/>
@@ -55,18 +55,18 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="WVH-dh-XQe" secondAttribute="trailing" id="BCo-uX-KCh"/>
+                <constraint firstAttribute="trailing" secondItem="WVH-dh-XQe" secondAttribute="trailing" constant="15" id="BCo-uX-KCh"/>
                 <constraint firstAttribute="trailing" secondItem="iWC-6w-08u" secondAttribute="trailing" constant="30" id="Kz8-cT-CH1"/>
                 <constraint firstItem="87F-tQ-DTM" firstAttribute="trailing" secondItem="iWC-6w-08u" secondAttribute="leading" id="TFa-AM-P5g"/>
                 <constraint firstItem="WVH-dh-XQe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yja-1N-5aR"/>
                 <constraint firstAttribute="bottom" secondItem="pZp-a3-zi9" secondAttribute="bottom" id="ZHQ-GA-Lyf"/>
                 <constraint firstItem="5C6-9e-mMa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="aBy-pv-gZZ"/>
                 <constraint firstItem="iWC-6w-08u" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bH0-3n-s35"/>
-                <constraint firstItem="pZp-a3-zi9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eTg-7z-c8k"/>
+                <constraint firstItem="pZp-a3-zi9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="eTg-7z-c8k"/>
                 <constraint firstItem="87F-tQ-DTM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fq1-Qb-4cS"/>
                 <constraint firstItem="5C6-9e-mMa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="w0h-aq-0Jj"/>
-                <constraint firstItem="WVH-dh-XQe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zVP-59-gno"/>
-                <constraint firstAttribute="trailing" secondItem="pZp-a3-zi9" secondAttribute="trailing" id="zsO-dn-fa6"/>
+                <constraint firstItem="WVH-dh-XQe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="zVP-59-gno"/>
+                <constraint firstAttribute="trailing" secondItem="pZp-a3-zi9" secondAttribute="trailing" constant="15" id="zsO-dn-fa6"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
