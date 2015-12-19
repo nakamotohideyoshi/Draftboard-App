@@ -11,27 +11,15 @@ import UIKit
 class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var contentView: UIScrollView!
     
-    var draftGroup: DraftGroup!
-    var positions: [String]!
-    var players: [Player?]!
-    var lineup: Lineup?
-    var saveLineupAction: (([Player]) -> Void)?
+    var lineup: Lineup = Lineup()
+    var saveLineupAction: (Lineup -> Void)?
     var cellViews = [LineupEditCellView]()
     
     var statRemSalary: Double = 0
     var statAvgSalary: Double = 0
     
     override func viewDidLoad() {
-        let _ = Data.draftGroup(id: draftGroup.id)
-        
-        if let lineup = lineup {
-            positions = lineup.sport.positions
-            players = lineup.players
-        }
-        else {
-            positions = draftGroup.sport.positions
-            players = [Player?](count: positions.count, repeatedValue: nil)
-        }
+        let _ = Data.draftGroup(id: lineup.draftGroup.id)
         
         contentView.alwaysBounceVertical = true
         contentView.indicatorStyle = .White
@@ -52,6 +40,7 @@ class LineupEditViewController: DraftboardViewController {
             divisor = 7.0
         }
         
+        let positions = lineup.sport.positions
         for (i, position) in positions.enumerate() {
             let cellView = LineupEditCellView()
             cellView.abbrText = position
@@ -107,14 +96,15 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func didTapCell(cell: LineupEditCellView) {
+        let positions = lineup.sport.positions
         let titleText = positionTextForAbbr(positions[cell.index])
         let svc = LineupSearchViewController(titleText: titleText, nibName: "LineupSearchViewController", bundle: nil)
-        svc.draftGroup = draftGroup
+        svc.draftGroup = lineup.draftGroup
         svc.filterBy = positions[cell.index]
         svc.playerSelectedAction = { player in
             cell.avatarImageView.image = UIImage(named: "sample-avatar-big")
             cell.player = player
-            self.players[cell.index] = player
+            self.lineup.players[cell.index] = player
             self.updateStats()
             self.navController?.popViewController()
         }
@@ -123,9 +113,8 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func updateStats() {
-        let lineupSalary = players.reduce(0) {$0 + ($1?.salary ?? 0)}
-        let playersRemaining = players.filter {$0 == nil}.count
-        statRemSalary = draftGroup.sport.salary - lineupSalary
+        let playersRemaining = lineup.players.filter {$0 == nil}.count
+        statRemSalary = lineup.sport.salary - lineup.salary
         statAvgSalary = (playersRemaining > 0) ? statRemSalary / Double(playersRemaining) : 0
     }
     
@@ -136,8 +125,7 @@ class LineupEditViewController: DraftboardViewController {
             print("You can't save an invalid lineup")
         }
         else if (buttonType == .Value) {
-            let p = players.flatMap{$0}
-            saveLineupAction?(p)
+            saveLineupAction?(lineup)
         }
         else if (buttonType == .Close) {
             self.navController?.popViewController()
@@ -145,7 +133,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String {
-        return "Create \(draftGroup.sport.name) Lineup".uppercaseString
+        return "Create \(lineup.sport.name) Lineup".uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -153,7 +141,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType {
-        let playersRemaining = players.filter {$0 == nil}.count
+        let playersRemaining = lineup.players.filter {$0 == nil}.count
         
         if playersRemaining > 0 {
             return .DisabledValue
@@ -193,6 +181,6 @@ extension LineupEditViewController: StatFooterDataSource {
     }
     
     func footerStatLiveInDate() -> NSDate? {
-        return draftGroup.start
+        return lineup.draftGroup.start
     }
 }

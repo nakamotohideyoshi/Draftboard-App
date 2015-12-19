@@ -162,7 +162,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         }
     }
     
-    func presentLineupCard(lineup: [Player]) {
+    func presentLineupCard(lineup: Lineup) {
         self.createView.hidden = true
 
         let cardView = LineupCardView()
@@ -242,8 +242,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Creating a lineup is editing an empty lineup
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
-        nvc.draftGroup = draftGroup
-        nvc.saveLineupAction = { (lineup: [Player]) in
+        nvc.lineup.draftGroup = draftGroup
+        nvc.saveLineupAction = { lineup in
             self.presentLineupCard(lineup)
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }

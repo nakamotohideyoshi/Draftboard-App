@@ -10,9 +10,13 @@ import Foundation
 
 class Lineup: Model {
     var name: String = ""
-    var sport: Sport = Sport()
-    var draftGroup: DraftGroup = DraftGroup()
-    var players: [Player] = [Player]()
+    var sport: Sport = Sport() {
+        didSet { didSetSport(sport) }
+    }
+    var draftGroup: DraftGroup = DraftGroup() {
+        didSet { didSetDraftGroup(draftGroup) }
+    }
+    var players: [Player?] = [Player?]()
     
     convenience init?(data: NSDictionary) {
         self.init()
@@ -40,12 +44,24 @@ class Lineup: Model {
     }
 }
 
+// Property observers
+extension Lineup {
+    func didSetSport(sport: Sport) {
+        let positionsCount = sport.positions.count
+        self.players = [Player?](count: positionsCount, repeatedValue: nil)
+    }
+    
+    func didSetDraftGroup(draftGroup: DraftGroup) {
+        self.sport = draftGroup.sport
+    }
+}
+
 // Computed properties
 extension Lineup {
     var salary: Double {
-        get { return players.reduce(0) {$0 + $1.salary} }
+        get { return players.reduce(0) {$0 + ($1?.salary ?? 0)} }
     }
     var points: Double {
-        get { return players.reduce(0) {$0 + $1.points} }
+        get { return players.reduce(0) {$0 + ($1?.points ?? 0)} }
     }
 }
