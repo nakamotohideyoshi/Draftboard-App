@@ -135,8 +135,6 @@ class ContestDetailViewController: DraftboardViewController {
     }
     
     func handleButtonTap(sender: DraftboardButton) {
-        print("handleButtonTap");
-        
         var choices = [[String: String]]()
         choices.append(["title": "Warriors Stack", "subtitle": "In 3 Contests"])
         choices.append(["title": "Optimal", "subtitle": "In 0 Contests"])

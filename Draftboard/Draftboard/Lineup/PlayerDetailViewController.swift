@@ -29,7 +29,6 @@ class PlayerDetailViewController: DraftboardViewController {
     var draftButtonTopStart: CGFloat = 0.0
     
     var stuck = true
-    var draftable = true
     
     var player: Player?
     var playerUpdates = [String]()
@@ -56,6 +55,7 @@ class PlayerDetailViewController: DraftboardViewController {
         tableView.tableHeaderView = headerView
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, 60.0, 0.0)
         
         // Register cell
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -81,6 +81,12 @@ class PlayerDetailViewController: DraftboardViewController {
             "DeRozan's career-best start",
             "Finding fantasy NBA studs with usage rate",
         ]
+    }
+
+    var draftable: Bool = true {
+        didSet {
+            draftButton.hidden = draftable
+        }
     }
     
     func createDraftButton() {
@@ -147,6 +153,14 @@ class PlayerDetailViewController: DraftboardViewController {
     
     override func titlebarBgHidden() -> Bool {
         return false
+    }
+    
+    override func footerType() -> FooterType {
+        if (draftable) {
+            return .Stats
+        }
+        
+        return .None
     }
 }
 
