@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -36,6 +36,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerDetailViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="vNi-CI-TZo" id="IqM-R0-uuF"/>
                 <outlet property="topView" destination="csw-7X-Hpg" id="qCw-88-OQI"/>
                 <outlet property="topViewHeight" destination="uOQ-gf-OK1" id="W52-jN-aHp"/>
                 <outlet property="topViewTop" destination="jR2-Ia-ag9" id="BXj-zu-TaA"/>
@@ -84,8 +85,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIb-U7-gpI" userLabel="Position">
                                             <rect key="frame" x="0.0" y="0.0" width="72" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npw-QV-daf" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="3" width="23" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npw-QV-daf" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="26" y="3" width="20" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -112,8 +113,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x85-dl-gd0" userLabel="PTS">
                                             <rect key="frame" x="72" y="0.0" width="73" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sT4-pF-HnY" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="26" y="3" width="21" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sT4-pF-HnY" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="28" y="3" width="18" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -140,8 +141,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pan-4H-ZGB" userLabel="Salary">
                                             <rect key="frame" x="146" y="0.0" width="72" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SALARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKv-Ay-fI7" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="43" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SALARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKv-Ay-fI7" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="18" y="3" width="37" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -168,8 +169,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6e-hZ-uHg" userLabel="Owned">
                                             <rect key="frame" x="218" y="0.0" width="72" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OWNED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPW-MP-SCh" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="3" width="43" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="OWNED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPW-MP-SCh" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="17" y="3" width="38" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -220,8 +221,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcV-K1-hwD" userLabel="PTS">
                                             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrs-mQ-dYT" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="14" y="3" width="21" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrs-mQ-dYT" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="3" width="18" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -248,8 +249,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Uu-jW-X6p" userLabel="AST">
                                             <rect key="frame" x="48" y="0.0" width="48" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTz-Je-IuY" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="14" y="3" width="21" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="AST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTz-Je-IuY" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="3" width="18" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -276,8 +277,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAC-gO-BRZ" userLabel="REB">
                                             <rect key="frame" x="96" y="0.0" width="47" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbB-PC-QuZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="13" y="3" width="22" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="REB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbB-PC-QuZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="14" y="3" width="19" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -304,8 +305,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bkf-1m-DLD" userLabel="BLK">
                                             <rect key="frame" x="143" y="0.0" width="48" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8X-us-hrB" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="13" y="3" width="22" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BLK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8X-us-hrB" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="3" width="19" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -332,8 +333,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3a-kv-ch2" userLabel="STL">
                                             <rect key="frame" x="191" y="0.0" width="48" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qS-jL-0Hh" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="14" y="3" width="20" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qS-jL-0Hh" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="3" width="17" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -360,8 +361,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKr-Os-RZz" userLabel="TO">
                                             <rect key="frame" x="239" y="0.0" width="48" height="48"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G55-OR-cQy" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="3" width="16" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G55-OR-cQy" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="17" y="3" width="14" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -429,8 +430,8 @@
                                 <constraint firstItem="usZ-P3-FHG" firstAttribute="leading" secondItem="eXN-WO-1Mj" secondAttribute="leading" constant="-25" id="vG9-RB-fpb"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHI @ BOS — TONIGHT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-Ah-UYF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="104" y="166" width="112" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CHI @ BOS — TONIGHT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqU-Ah-UYF" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="105" y="166" width="111" height="14"/>
                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -456,12 +457,20 @@
                         <constraint firstItem="Yw9-2j-B23" firstAttribute="centerX" secondItem="csw-7X-Hpg" secondAttribute="centerX" id="wOm-TC-VtV"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vNi-CI-TZo">
+                    <rect key="frame" x="0.0" y="76" width="320" height="492"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="csw-7X-Hpg" secondAttribute="trailing" id="8AS-xz-FRa"/>
+                <constraint firstItem="vNi-CI-TZo" firstAttribute="leading" secondItem="rZ0-a6-FxC" secondAttribute="leading" id="Bke-aT-p6L"/>
+                <constraint firstItem="vNi-CI-TZo" firstAttribute="top" secondItem="rZ0-a6-FxC" secondAttribute="top" constant="76" id="Cu9-mG-PBf"/>
                 <constraint firstItem="csw-7X-Hpg" firstAttribute="leading" secondItem="rZ0-a6-FxC" secondAttribute="leading" id="HKn-WH-7p5"/>
+                <constraint firstAttribute="trailing" secondItem="vNi-CI-TZo" secondAttribute="trailing" id="amp-Gx-Lta"/>
                 <constraint firstItem="csw-7X-Hpg" firstAttribute="top" secondItem="rZ0-a6-FxC" secondAttribute="top" constant="76" id="jR2-Ia-ag9"/>
+                <constraint firstAttribute="bottom" secondItem="vNi-CI-TZo" secondAttribute="bottom" id="wJn-jp-qdS"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

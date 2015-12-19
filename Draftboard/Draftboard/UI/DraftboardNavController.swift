@@ -80,6 +80,8 @@ class DraftboardNavController: UIViewController {
         vcs.append(nvc)
         nvc.navController = self
         
+        print("here", nvc)
+        
         // Constrain new controller
         contentView.addSubview(nvc.view)
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
