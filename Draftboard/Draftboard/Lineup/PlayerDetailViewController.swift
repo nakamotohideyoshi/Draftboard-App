@@ -29,6 +29,7 @@ class PlayerDetailViewController: DraftboardViewController {
     var draftButtonTopStart: CGFloat = 0.0
     
     var stuck = true
+    var draftable = true
     
     var player: Player?
     var playerUpdates = [String]()
@@ -81,11 +82,11 @@ class PlayerDetailViewController: DraftboardViewController {
             "DeRozan's career-best start",
             "Finding fantasy NBA studs with usage rate",
         ]
-    }
-
-    var draftable: Bool = true {
-        didSet {
-            draftButton.hidden = draftable
+        
+        if (!draftable) {
+            segmentedHeight.constant = 97.0;
+            segmentedTop.constant = topViewHeight.constant;
+            draftButton.hidden = true
         }
     }
     
@@ -184,6 +185,10 @@ extension PlayerDetailViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 0) {
+            if (!draftable) {
+                return 97.0
+            }
+            
             return 122.0
         }
         

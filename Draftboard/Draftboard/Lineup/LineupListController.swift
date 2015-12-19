@@ -255,8 +255,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     func showPlayerDetail(player: Player, isLive: Bool, isDraftable: Bool = false) {
         let nvc = PlayerDetailViewController()
-        nvc.draftable = false
         nvc.player = player
+        nvc.draftable = false
         
         self.navController?.pushViewController(nvc)
     }
