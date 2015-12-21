@@ -138,6 +138,9 @@ class LineupEditViewController: DraftboardViewController {
             print("You can't save an invalid lineup")
         }
         else if (buttonType == .Value) {
+            if let mvp = lineup.mvp {
+                lineup.name = Data.teamNames[mvp.name] ?? mvp.name + " Stack"
+            }
             saveLineupAction?(lineup)
         }
         else if (buttonType == .Close) {

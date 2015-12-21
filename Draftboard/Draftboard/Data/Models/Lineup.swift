@@ -58,10 +58,16 @@ extension Lineup {
 
 // Computed properties
 extension Lineup {
+    private var flatPlayers: [Player] {
+        get { return players.flatMap {$0} }
+    }
     var salary: Double {
-        get { return players.reduce(0) {$0 + ($1?.salary ?? 0)} }
+        get { return flatPlayers.reduce(0) {$0 + $1.salary} }
     }
     var points: Double {
-        get { return players.reduce(0) {$0 + ($1?.points ?? 0)} }
+        get { return flatPlayers.reduce(0) {$0 + $1.points} }
+    }
+    var mvp: Player? {
+        get { return flatPlayers.sort {$0.salary > $1.salary}.first }
     }
 }
