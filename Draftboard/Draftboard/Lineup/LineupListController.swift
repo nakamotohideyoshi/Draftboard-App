@@ -17,6 +17,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     @IBOutlet weak var createIconImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var titleText: String = "Lineups"
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
     
@@ -246,6 +247,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.lineup.draftGroup = draftGroup
         nvc.saveLineupAction = { lineup in
+            self.titleText = lineup.name
             self.presentLineupCard(lineup)
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
         }
@@ -258,7 +260,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         evc.lineup = lineupCard.lineup
         evc.saveLineupAction = { lineup in
             lineupCard.lineup = lineup
-            self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
+            self.titleText = lineup.name
+            self.navController?.popViewControllerToCardView(lineupCard, animated: true)
         }
         navController?.pushViewController(evc)
     }
@@ -279,7 +282,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     // MARK: - Titlebar datasource methods
     
     override func titlebarTitle() -> String {
-        return "Lineups".uppercaseString
+        return titleText.uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -309,6 +312,18 @@ extension LineupListController: UIScrollViewDelegate {
             let m = max(magnitude - 0.05, 0.0) * 1.1
             card.rotate(m * direction)
             card.fade(magnitude)
+        }
+        
+        if lineupCardViews.count > 0 {
+            var page = Int(round(pageOffset))
+            page = max(page, 0)
+            page = min(page, lineupCardViews.count - 1)
+            let lineupName = lineupCardViews[page].lineup.name
+            if titleText != lineupName {
+                titleText = lineupName
+                self.navController?.titlebar.updateElements()
+                self.navController?.titlebar.transitionElements(.Directionless)
+            }
         }
     }
 }

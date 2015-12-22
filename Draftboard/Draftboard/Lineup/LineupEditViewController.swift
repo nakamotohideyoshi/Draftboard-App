@@ -185,7 +185,10 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String {
-        return "Create \(lineup.sport.name) Lineup".uppercaseString
+        if lineup.name != "" {
+            return lineup.name.uppercaseString
+        }
+        return "New \(lineup.sport.name) Lineup".uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
