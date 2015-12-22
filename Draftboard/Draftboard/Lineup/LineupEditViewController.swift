@@ -20,13 +20,23 @@ class LineupEditViewController: DraftboardViewController {
     var statRemSalary: Double = 0
     var statAvgSalary: Double = 0
     
+    var draftGroup = DraftGroup()
+    
     override func viewDidLoad() {
-        let _ = Data.draftGroup(id: lineup.draftGroup.id)
+        Data.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
+            self.draftGroup = draftGroup
+        }
         
         contentView.alwaysBounceVertical = true
         contentView.indicatorStyle = .White
         layoutCellViews()
         updateStats()
+        
+        // Temp:
+        // Pick an MVP, then double-tap contentView to fill junk lineup
+        let junkGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "fillJunkLineup")
+        junkGesture.edges = .Right
+        view.addGestureRecognizer(junkGesture)
     }
     
     func layoutCellViews() {
@@ -129,6 +139,32 @@ class LineupEditViewController: DraftboardViewController {
         let playersRemaining = lineup.players.filter {$0 == nil}.count
         statRemSalary = lineup.sport.salary - lineup.salary
         statAvgSalary = (playersRemaining > 0) ? statRemSalary / Double(playersRemaining) : 0
+    }
+    
+    // Temp:
+    // Pick an MVP, then double-tap contentView to fill junk lineup
+    func fillJunkLineup() {
+        if let mvp = lineup.mvp {
+            for (i, player) in lineup.players.enumerate() {
+                if player === mvp { continue }
+                if player != nil { continue }
+                let position = lineup.sport.positions[i]
+                var draftable = draftGroup.players.filter { $0.salary <= statAvgSalary }
+                draftable.sortInPlace { $0.salary > $1.salary }
+                if position == "FX" {
+                    let rand = Int(arc4random()) % draftable.count
+                    lineup.players[i] = draftable[rand]
+                } else {
+                    lineup.players[i] = draftable.filter { $0.position == position }.first
+                }
+                updateStats()
+            }
+            updateCellViews()
+            updateStats()
+            navController?.updateFooterForViewController(self)
+            navController?.titlebar.updateElements()
+            navController?.titlebar.transitionElements(.None)
+        }
     }
     
     // MARK: - Titlebar datasource methods
