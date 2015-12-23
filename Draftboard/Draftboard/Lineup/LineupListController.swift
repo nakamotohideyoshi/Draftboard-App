@@ -250,6 +250,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             self.titleText = lineup.name
             self.presentLineupCard(lineup)
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
+            API.lineupCreate(lineup)
         }
         
         navController?.pushViewController(nvc)

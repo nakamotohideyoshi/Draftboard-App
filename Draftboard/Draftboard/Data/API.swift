@@ -16,18 +16,34 @@ final class API {
 //        "noodle.local:8080/"
 //        "rio-dfs.herokuapp.com/"
         "draftboard-ios-sandbox.herokuapp.com/"
+    private static var token: String?
     
     // Do not instantiate
     private init() {}
     
-    private class func http(path: String, method: String, parameters: NSDictionary, completion: (data: NSData, response: NSHTTPURLResponse) -> Void) {
-        // Build query string
-        let p = parameters as! [String: String]
-        let q = p.map() {$0 + "=" + $1}.joinWithSeparator("&")
+    private class func http(path: String, method: String, parameters: NSDictionary, paramsAsJSON: Bool = false, completion: (data: NSData, response: NSHTTPURLResponse) -> Void) {
+        var q: String = ""
+        if paramsAsJSON {
+            // Dump JSON
+            let json = try! NSJSONSerialization.dataWithJSONObject(parameters, options: [])
+            q = String(data: json, encoding: NSUTF8StringEncoding)!
+        }
+        else {
+            // Build query string
+            let p = parameters as! [String: String]
+            q = p.map() {$0 + "=" + $1}.joinWithSeparator("&")
+        }
 
         // Build request
         let request = NSMutableURLRequest()
         request.HTTPMethod = method
+        if paramsAsJSON {
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+        }
+        if let token = API.token {
+            request.addValue("JWT " + token, forHTTPHeaderField: "Authorization")
+        }
         if method == "GET" {
             let query = (q == "") ? "" : "?" + q
             request.URL = NSURL(string: API.baseURL + path + query)!
@@ -48,8 +64,8 @@ final class API {
 
     }
     
-    private class func endpoint(path: String, method: String, parameters: NSDictionary, completion: (AnyObject) -> Void) {
-        API.http(path, method: method, parameters: parameters, completion: { data, response in
+    private class func endpoint(path: String, method: String, parameters: NSDictionary, paramsAsJSON: Bool = false, completion: (AnyObject) -> Void) {
+        API.http(path, method: method, parameters: parameters, paramsAsJSON: paramsAsJSON, completion: { data, response in
             // 403 Unauthorized
             if response.statusCode == 403 {
                 API.auth(completion: {
@@ -67,7 +83,7 @@ final class API {
                     let str = String(data: data, encoding: NSUTF8StringEncoding)!
                     if str.containsString("This is not yet available to the public.") {
                         API.preAuth(completion: {
-                            API.endpoint(path, method: method, parameters: parameters, completion: completion)
+                            API.endpoint(path, method: method, parameters: parameters, paramsAsJSON: paramsAsJSON, completion: completion)
                         })
                     }
                     else {
@@ -81,12 +97,12 @@ final class API {
         })
     }
     
-    private class func get(path: String, parameters: NSDictionary = [:], completion: (AnyObject) -> Void) {
-        API.endpoint(path, method: "GET", parameters: parameters, completion: completion)
+    private class func get(path: String, parameters: NSDictionary = [:], paramsAsJSON: Bool = false, completion: (AnyObject) -> Void) {
+        API.endpoint(path, method: "GET", parameters: parameters, paramsAsJSON: paramsAsJSON, completion: completion)
     }
     
-    private class func post(path: String, parameters: NSDictionary = [:], completion: (AnyObject) -> Void) {
-        API.endpoint(path, method: "POST", parameters: parameters, completion: completion)
+    private class func post(path: String, parameters: NSDictionary = [:], paramsAsJSON: Bool = false, completion: (AnyObject) -> Void) {
+        API.endpoint(path, method: "POST", parameters: parameters, paramsAsJSON: paramsAsJSON, completion: completion)
     }
     
 }
@@ -102,9 +118,7 @@ extension API {
             let dict = json as! NSDictionary
             let token = dict["token"] as! String
             
-            let config = API.session.configuration
-            config.HTTPAdditionalHeaders = ["Authorization": "JWT " + token]
-            API.session = NSURLSession(configuration: config)
+            API.token = token
             
             completion()
         })
@@ -191,5 +205,13 @@ extension API {
                 fulfill(injuries)
             }
         }
+    }
+    
+    class func lineupCreate(lineup: Lineup) {
+        let postData = NSMutableDictionary()
+        postData["name"] = lineup.name
+        postData["players"] = lineup.players.map {$0?.id ?? 0}
+        postData["draft_group"] = lineup.draftGroup.id
+        API.post("api/lineup/create/", parameters: postData, paramsAsJSON: true) { _ in }
     }
 }
