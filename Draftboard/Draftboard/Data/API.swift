@@ -12,83 +12,59 @@ import PromiseKit
 final class API {
     
     private static var session = NSURLSession.sharedSession()
-    private static let baseURL = "http://" +
-//        "noodle.local:8080/"
-//        "rio-dfs.herokuapp.com/"
-        "draftboard-ios-sandbox.herokuapp.com/"
+    private static let baseURL = "http://draftboard-ios-sandbox.herokuapp.com/"
     private static var token: String?
     
     // Do not instantiate
     private init() {}
     
-    private class func http(path: String, method: String, parameters: NSDictionary, paramsAsJSON: Bool = false, completion: (data: NSData, response: NSHTTPURLResponse) -> Void) {
-        var q: String = ""
-        if paramsAsJSON {
-            // Dump JSON
-            let json = try! NSJSONSerialization.dataWithJSONObject(parameters, options: [])
-            q = String(data: json, encoding: NSUTF8StringEncoding)!
-        }
-        else {
-            // Build query string
-            let p = parameters as! [String: String]
-            q = p.map() {$0 + "=" + $1}.joinWithSeparator("&")
-        }
-
-        // Build request
+    private class func http(path: String, method: String, parameters: NSDictionary, completion: (data: NSData, response: NSHTTPURLResponse) -> Void) {
         let request = NSMutableURLRequest()
         request.HTTPMethod = method
-        if paramsAsJSON {
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.URL = NSURL(string: API.baseURL + path)!
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        // Method-specific
+        if method == "GET" {
+            // No handling of parameters!
         }
+        if method == "POST" {
+            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(parameters, options: [])
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        
+        // Authentication
         if let token = API.token {
             request.addValue("JWT " + token, forHTTPHeaderField: "Authorization")
         }
-        if method == "GET" {
-            let query = (q == "") ? "" : "?" + q
-            request.URL = NSURL(string: API.baseURL + path + query)!
-        }
-        if method == "POST" {
-            request.URL = NSURL(string: API.baseURL + path)!
-            request.HTTPBody = q.dataUsingEncoding(NSUTF8StringEncoding)
-        }
-        
-        // Submit request
-        API.session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) in
-            if error != nil {
-                print(error)
-                return
-            }
-            completion(data: data!, response: response as! NSHTTPURLResponse)
-        }).resume()
 
+        // Make request
+        API.session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) in
+            if let error = error {
+                print(error)
+            } else {
+                completion(data: data!, response: response as! NSHTTPURLResponse)
+            }
+        }).resume()
     }
     
-    private class func endpoint(path: String, method: String, parameters: NSDictionary, paramsAsJSON: Bool = false, completion: (AnyObject) -> Void) {
-        API.http(path, method: method, parameters: parameters, paramsAsJSON: paramsAsJSON, completion: { data, response in
+    private class func endpoint(path: String, method: String, parameters: NSDictionary, completion: (AnyObject) -> Void) {
+        API.http(path, method: method, parameters: parameters, completion: { data, response in
             // 403 Unauthorized
             if response.statusCode == 403 {
                 API.auth(completion: {
                     API.endpoint(path, method: method, parameters: parameters, completion: completion)
                 })
             }
-            // 200 OK
-            else if response.statusCode == 200 {
+            // 2XX
+            else if response.statusCode / 100 == 2 {
                 // JSON response
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data, options: []) {
                     completion(json)
                 }
                 // Probably HTML response
                 else {
-                    let str = String(data: data, encoding: NSUTF8StringEncoding)!
-                    if str.containsString("This is not yet available to the public.") {
-                        API.preAuth(completion: {
-                            API.endpoint(path, method: method, parameters: parameters, paramsAsJSON: paramsAsJSON, completion: completion)
-                        })
-                    }
-                    else {
-                        completion(str)
-                    }
+                    print("Could not parse JSON in response")
                 }
             }
             else {
@@ -97,12 +73,12 @@ final class API {
         })
     }
     
-    private class func get(path: String, parameters: NSDictionary = [:], paramsAsJSON: Bool = false, completion: (AnyObject) -> Void) {
-        API.endpoint(path, method: "GET", parameters: parameters, paramsAsJSON: paramsAsJSON, completion: completion)
+    private class func get(path: String, parameters: NSDictionary = [:], completion: (AnyObject) -> Void) {
+        API.endpoint(path, method: "GET", parameters: parameters, completion: completion)
     }
     
-    private class func post(path: String, parameters: NSDictionary = [:], paramsAsJSON: Bool = false, completion: (AnyObject) -> Void) {
-        API.endpoint(path, method: "POST", parameters: parameters, paramsAsJSON: paramsAsJSON, completion: completion)
+    private class func post(path: String, parameters: NSDictionary = [:], completion: (AnyObject) -> Void) {
+        API.endpoint(path, method: "POST", parameters: parameters, completion: completion)
     }
     
 }
@@ -110,7 +86,6 @@ final class API {
 // MARK: - Authentication
 
 extension API {
-
     // Get a JWT token and use it in auth header from now on
     class func auth(completion completion: () -> Void) {
         let params = ["username": "admin", "password": "admin"]
@@ -123,14 +98,6 @@ extension API {
             completion()
         })
     }
-    
-    // Get past the "garden wall"
-    class func preAuth(completion completion: () -> Void) {
-        let params = ["password": "gpp"]
-        // Automatically picks up session cookie
-        API.post("", parameters: params, completion: { _ in completion() })
-    }
-    
 }
 
 // MARK: - General accessors
@@ -212,6 +179,6 @@ extension API {
         postData["name"] = lineup.name
         postData["players"] = lineup.players.map {$0?.id ?? 0}
         postData["draft_group"] = lineup.draftGroup.id
-        API.post("api/lineup/create/", parameters: postData, paramsAsJSON: true) { _ in }
+        API.post("api/lineup/create/", parameters: postData) { _ in }
     }
 }
