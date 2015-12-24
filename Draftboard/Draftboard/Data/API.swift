@@ -181,4 +181,33 @@ extension API {
         postData["draft_group"] = lineup.draftGroup.id
         API.post("api/lineup/create/", parameters: postData) { _ in }
     }
+    
+    class func lineupUpcoming() -> Promise<[Lineup]> {
+        return Promise { fulfill, reject in
+            API.get("api/lineup/upcoming/") { json in
+                guard let data = json as? [NSDictionary]
+                else { return }
+                
+                var lineups = [Lineup]()
+                for lineupDict in data {
+                    if let lineup = Lineup(data: lineupDict) {
+                        // Players
+                        if let playersData = lineupDict["players"] as? [NSDictionary] {
+                            var players = [Player?]()
+                            for playerDict in playersData {
+                                let player = Player(lineupData: playerDict)
+                                players.append(player)
+                            }
+                            lineup.players = players
+                        }
+                        lineups.append(lineup)
+                    }
+                }
+                // Temp
+                let fewLineups: [Lineup] = lineups.reverse()[0...2].reverse()
+                fulfill(fewLineups)
+//                fulfill(lineups)
+            }
+        }
+    }
 }

@@ -22,7 +22,7 @@ class Lineup: Model {
         self.init()
         
         // JSON
-        guard let dataPK = data["pk"] as? Int,
+        guard let dataID = data["id"] as? Int,
             dataName = data["name"] as? String,
             dataSport = data["sport"] as? String,
             dataDraftGroup = data["draft_group"] as? Int
@@ -37,7 +37,7 @@ class Lineup: Model {
         draftGroup.id = dataDraftGroup
         
         // Assignment
-        self.id = dataPK
+        self.id = dataID
         self.name = dataName
         self.sport = sport
         self.draftGroup = draftGroup
@@ -47,11 +47,22 @@ class Lineup: Model {
 // Property observers
 extension Lineup {
     func didSetSport(sport: Sport) {
-        let positionsCount = sport.positions.count
-        self.players = [Player?](count: positionsCount, repeatedValue: nil)
+        if players.count == 0 {
+            let positionsCount = sport.positions.count
+            self.players = [Player?](count: positionsCount, repeatedValue: nil)
+        }
     }
     
     func didSetDraftGroup(draftGroup: DraftGroup) {
+        if players.count > 0 && draftGroup.players.count > 0 {
+            for (i, player) in players.enumerate() {
+                for draftGroupPlayer in draftGroup.players {
+                    if player?.id == draftGroupPlayer.id {
+                        players[i] = draftGroupPlayer
+                    }
+                }
+            }
+        }
         self.sport = draftGroup.sport
     }
 }

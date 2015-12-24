@@ -49,6 +49,28 @@ class Player: Model {
         self.image = image
     }
     
+    // Upcoming lineup endpoint gives different json -_-
+    convenience init?(lineupData: NSDictionary) {
+        self.init()
+        
+        // JSON
+        guard let dataPlayerID = lineupData["player_id"] as? Int,
+            dataFullName = lineupData["full_name"] as? String,
+//            dataRosterSpot = lineupData["roster_spot"] as? String,
+            dataPlayerMeta = lineupData["player_meta"] as? NSDictionary,
+            dataTeam = dataPlayerMeta["team"] as? NSDictionary,
+            dataTeamName = dataTeam["alias"] as? String
+        else { return nil }
+        
+        // Other setup
+        let image = UIImage()
+        
+        // Assignment
+        self.id = dataPlayerID
+        self.name = dataFullName
+        self.team = dataTeamName
+        self.image = image
+    }
 }
 
 // Name stuff

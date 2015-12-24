@@ -39,5 +39,8 @@ class Data {
             return injuries
         }
     }
+    
+    // Lineups, all upcoming
+    static var lineupUpcoming = API.lineupUpcoming()
 }
 

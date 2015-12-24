@@ -20,6 +20,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     var titleText: String = "Lineups"
     var lineupCardViews : [LineupCardView] = []
     var lastConstraint : NSLayoutConstraint?
+    var loaderView: LoaderView!
     
     var sportChoices: [NSDictionary]?
     var draftGroupChoices: [String: [NSDictionary]]?
@@ -35,6 +36,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         // Pre-fetch data required for lineup creation
         let _ = Data.draftGroupUpcoming
         let _ = Data.contestLobby
+        Data.lineupUpcoming.then(self.gotLineups)
         
         // Create view tap
         let tapRecognizer = UITapGestureRecognizer()
@@ -82,6 +84,30 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     // MARK: - Data
+    
+    func gotLineups(lineups: [Lineup]) {
+        // Wow this dumb
+        if self.lineupCardViews.count == lineups.count {
+            return
+        }
+        
+        self.showSpinner()
+        UIView.animateWithDuration(0.3, animations: {
+            self.scrollView.alpha = 0
+        }, completion: { completed in
+            for lineup in lineups {
+                Data.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
+                    lineup.draftGroup = draftGroup
+                    self.presentLineupCard(lineup)
+                    if self.lineupCardViews.count == lineups.count {
+                        UIView.animateWithDuration(0.3) {
+                            self.scrollView.alpha = 1
+                        }
+                    }
+                }
+            }
+        })
+    }
     
     func collateDraftGroups(draftGroups: [DraftGroup], contests: [Contest]) {
         // https://gist.github.com/zachwood/3a048570e904e31143d7
@@ -155,6 +181,24 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
 
     // MARK: - View presentation
+    
+    func showSpinner() {
+        loaderView = LoaderView(frame: CGRectMake(0, 0, 42, 42))
+        
+        view.insertSubview(loaderView, belowSubview: scrollView)
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: 38.0 - 30.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
+        
+        loaderView.spinning = true
+    }
+    
+    func hideSpinner() {
+        loaderView.spinning = false
+        loaderView.removeFromSuperview()
+    }
     
     func presentDraftGroupPrompt() {
         when(Data.draftGroupUpcoming, Data.contestLobby).then { draftGroups, contests -> Void in

@@ -20,9 +20,9 @@ class DraftGroup: Model {
         // JSON
         guard let dataPK = data["pk"] as? Int,
             dataSport = data["sport"] as? String,
-            dataStart = data["start"] as? String,
-            dataNumGames = data["num_games"] as? Int
-        else { return }
+            dataStart = data["start"] as? String
+//            dataNumGames = data["num_games"] as? Int
+        else { return nil }
         
         // Dependencies
         guard let sport = Sport(name: dataSport),
@@ -33,6 +33,11 @@ class DraftGroup: Model {
         self.id = dataPK
         self.sport = sport
         self.start = start
-        self.numGames = dataNumGames
+        
+        // UGH
+        if let numGames = data["num_games"] as? Int {
+            self.numGames = numGames
+        }
+//        self.numGames = dataNumGames
     }
 }
