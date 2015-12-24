@@ -186,6 +186,7 @@ class LineupCardView: DraftboardNibView {
             let cellView = LineupCardCellView()
             cellView.unitLabel.text = ""
             cellView.player = player
+            cellView.positionLabel.text = lineup.sport.positions[i]
             
             contentView.addSubview(cellView)
             cellViews.append(cellView)
