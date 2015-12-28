@@ -204,9 +204,13 @@ extension API {
                     }
                 }
                 // Temp
-                let fewLineups: [Lineup] = lineups.reverse()[0...2].reverse()
-                fulfill(fewLineups)
-//                fulfill(lineups)
+                if lineups.count > 0 {
+                    let limitedLineupCount = lineups.count > 2 ? 2 : lineups.count - 1
+                    let fewLineups: [Lineup] = lineups.reverse()[0...limitedLineupCount].reverse()
+                    fulfill(fewLineups)
+                } else {
+                    fulfill(lineups)
+                }
             }
         }
     }
