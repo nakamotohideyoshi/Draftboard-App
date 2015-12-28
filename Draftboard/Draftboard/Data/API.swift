@@ -204,9 +204,8 @@ extension API {
                     }
                 }
                 // Temp
-                if lineups.count > 0 {
-                    let limitedLineupCount = lineups.count > 2 ? 2 : lineups.count - 1
-                    let fewLineups: [Lineup] = lineups.reverse()[0...limitedLineupCount].reverse()
+                if lineups.count > 3 {
+                    let fewLineups = [Lineup](lineups.suffix(3))
                     fulfill(fewLineups)
                 } else {
                     fulfill(lineups)
