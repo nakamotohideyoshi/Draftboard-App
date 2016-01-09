@@ -52,9 +52,13 @@ final class API {
         API.http(path, method: method, parameters: parameters, completion: { data, response in
             // 403 Unauthorized
             if response.statusCode == 403 {
-                API.auth(completion: {
-                    API.endpoint(path, method: method, parameters: parameters, completion: completion)
-                })
+                if let str = String(data: data, encoding: NSUTF8StringEncoding) {
+                    if str.containsString("Authentication") {
+                        API.auth(completion: {
+                            API.endpoint(path, method: method, parameters: parameters, completion: completion)
+                        })
+                    }
+                }
             }
             // 2XX
             else if response.statusCode / 100 == 2 {
@@ -152,6 +156,27 @@ extension API {
                     }
                 }
                 fulfill(contests)
+            }
+        }
+    }
+    
+    class func contestEntries() -> Promise<[NSDictionary]> {
+        return Promise { fulfill, reject in
+            API.get("api/contest/current-entries/") { json in
+                guard let data = json as? [NSDictionary]
+                else { return }
+                fulfill(data)
+            }
+        }
+    }
+    
+    class func contestEnter(contest: Contest, lineup: Lineup) -> Promise<NSDictionary> {
+        return Promise { fulfill, reject in
+            let params = ["contest": contest.id, "lineup": lineup.id]
+            API.post("api/contest/enter-lineup/", parameters: params) { json in
+                guard let data = json as? NSDictionary
+                else { return }
+                fulfill(data)
             }
         }
     }

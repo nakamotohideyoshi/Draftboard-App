@@ -23,6 +23,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContestDetailViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="liveInLabel" destination="KCm-MQ-gHp" id="0EE-61-nag"/>
+                <outlet property="startDateLabel" destination="Vvk-ux-bv1" id="EC0-8t-vnj"/>
                 <outlet property="tableView" destination="IB0-nH-Wxx" id="I2W-Jd-cyg"/>
                 <outlet property="topView" destination="u6D-7K-oPo" id="rzv-mw-FwE"/>
                 <outlet property="topViewHeight" destination="jSh-pq-pT6" id="o16-1K-URV"/>

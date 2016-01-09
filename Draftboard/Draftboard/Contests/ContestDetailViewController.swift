@@ -14,6 +14,8 @@ class ContestDetailViewController: DraftboardViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topViewTop: NSLayoutConstraint!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var liveInLabel: DraftboardLabel!
+    @IBOutlet weak var startDateLabel: DraftboardLabel!
     
     var draftButton: DraftboardArrowButton!
     var draftButtonTop: NSLayoutConstraint!
@@ -36,7 +38,9 @@ class ContestDetailViewController: DraftboardViewController {
     
     let detailCellIdentifier = "contest_detail_cell"
     
-    var contestName: String?
+    var contest: Contest = Contest()
+    var lineupChoice: Lineup?
+    var eligibleLineups: [Lineup]?
     var contestEntered = false
     var lineupSelected: Int?
     var confirmationModal: ContestConfirmationModal?
@@ -47,6 +51,17 @@ class ContestDetailViewController: DraftboardViewController {
         // Create UI
         createSegmentedControl()
         createDraftButton()
+        
+        // Update start date
+        let df = NSDateFormatter()
+        df.dateFormat = "E, MMMM dd, h:mm a"
+        let start = df.stringFromDate(contest.start)
+        startDateLabel.text = start.uppercaseString
+        
+        // Update live in time
+        liveInLabel.text = liveInString()
+        let timer = NSTimer(timeInterval: 0.5, target: self, selector: "updateTime", userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes);
         
         // Remove background colors from nibh
         topView.backgroundColor = .clearColor()
@@ -88,7 +103,30 @@ class ContestDetailViewController: DraftboardViewController {
             "Finding fantasy NBA studs with usage rate",
         ]
         
-        draftButton.addTarget(self, action: "handleButtonTap:", forControlEvents: .TouchUpInside)
+        if contestEntered {
+            didEnterContest()
+        } else {
+            draftButton.addTarget(self, action: "handleButtonTap:", forControlEvents: .TouchUpInside)
+        }
+    }
+    
+    func liveInString() -> String {
+        // Ripped from LineupStatTimeView
+        let cal = NSCalendar.currentCalendar()
+        let now = NSDate()
+        
+        let components = cal.components(
+            [.Hour, .Minute, .Second],
+            fromDate: now,
+            toDate: contest.start,
+            options: []
+        )
+        
+        return String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
+    }
+    
+    func updateTime() {
+        liveInLabel.text = liveInString()
     }
     
     func createDraftButton() {
@@ -135,37 +173,37 @@ class ContestDetailViewController: DraftboardViewController {
     }
     
     func handleButtonTap(sender: DraftboardButton) {
-        var choices = [[String: String]]()
-        choices.append(["title": "Warriors Stack", "subtitle": "In 3 Contests"])
-        choices.append(["title": "Optimal", "subtitle": "In 0 Contests"])
-        choices.append(["title": "Bulls Stack", "subtitle": "In 0 Contests"])
-        
-        let mcc = DraftboardModalChoiceController(title: "Choose an Eligible Lineup", choices: choices)
-        RootViewController.sharedInstance.pushModalViewController(mcc)
+        Data.lineupUpcoming.then { lineups -> Void in
+            let eligible = lineups.filter { $0.draftGroup.id == self.contest.draftGroup.id }
+            let choices = eligible.map {["title": $0.name, "subtitle": "In ? Contests"]}
+            self.eligibleLineups = eligible
+            let mcc = DraftboardModalChoiceController(title: "Choose an Eligible Lineup", choices: choices)
+            RootViewController.sharedInstance.pushModalViewController(mcc)
+        }
     }
     
     override func didSelectModalChoice(index: Int) {
+        guard let chosenLineup = self.eligibleLineups?[index] else { return }
+        self.lineupChoice = chosenLineup
         confirmationModal = ContestConfirmationModal(nibName: "ContestConfirmationModal", bundle: nil)
         RootViewController.sharedInstance.pushModalViewController(confirmationModal!)
         confirmationModal!.enterContestButton.addTarget(self, action: "enterContestTap:", forControlEvents: .TouchUpInside)
     }
     
     func enterContestTap(sender: DraftboardButton) {
+        guard let chosenLineup = self.lineupChoice else { return }
+
         confirmationModal?.showSpinner()
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            dispatch_async(dispatch_get_main_queue(),{
-                self.confirmationModal?.showConfirmed()
-                
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.8 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                    dispatch_async(dispatch_get_main_queue(),{
-                        RootViewController.sharedInstance.popModalViewController()
-                        self.didEnterContest()
-                    })
-                }
-            })
+        API.contestEnter(contest, lineup: chosenLineup).then { _ -> Void in
+            self.confirmationModal?.showConfirmed()
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.8 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                dispatch_async(dispatch_get_main_queue(),{
+                    RootViewController.sharedInstance.popModalViewController()
+                    self.didEnterContest()
+                })
+            }
         }
     }
     
@@ -190,7 +228,7 @@ class ContestDetailViewController: DraftboardViewController {
     }
     
     override func titlebarTitle() -> String? {
-        return contestName?.uppercaseString
+        return contest.name.uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType? {

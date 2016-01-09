@@ -17,17 +17,23 @@ class ContestsListController: DraftboardViewController{
     @IBOutlet weak var lineupButton: DraftboardFilterButton!
     @IBOutlet weak var gametypeButton: DraftboardFilterButton!
     
-    let tempSections = [
-        "Live",
-        "Upcoming",
-        "Completed"
-    ]
+//    let tempSections = [
+//        "Live",
+//        "Upcoming",
+//        "Completed"
+//    ]
+    
+    var contests = [Contest]()
+    var entries = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.backgroundColor = .blueDarker()
         
+        Data.contestLobby.then(self.gotContests)
+        API.contestEntries().then(self.gotEntries)
+
         let bundle = NSBundle(forClass: self.dynamicType)
         let contestCellNib = UINib(nibName: "DraftboardContestsCell", bundle: bundle)
         let contestUpcomingCellNib = UINib(nibName: "DraftboardContestsUpcomingCell", bundle: bundle)
@@ -69,42 +75,48 @@ class ContestsListController: DraftboardViewController{
     }
 }
 
+// MARK: - Data
+extension ContestsListController {
+    func gotContests(contests: [Contest]) {
+        self.contests = contests
+        self.tableView.reloadData()
+    }
+    
+    func gotEntries(entries: [NSDictionary]) {
+        self.entries = entries.flatMap { $0["contest"] as? Int }
+        self.tableView.reloadData()
+    }
+}
+
 // MARK: - UITableViewDelegate functions
 
 extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return tempSections.count
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 4
-        } else {
-            return 12
-        }
+        return self.contests.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(liveContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsCell
-            cell.topBorderView.hidden = (indexPath.row == 0)
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsUpcomingCell
-            cell.topBorderView.hidden = (indexPath.row == 0)
-            return cell
-        }
+        let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsUpcomingCell
+        let contest = self.contests[indexPath.row]
+        let fee = Format.currency.stringFromNumber(contest.buyin)!
+        let prizes = Format.currency.stringFromNumber(contest.prizePool)!
+        let entered = self.entries.contains(contest.id)
+        cell.titleLabel.text = contest.name
+        cell.contestInfo.text = "\(fee) FEE / \(prizes) PRIZES"
+        cell.iconImageView.tintColor = entered ? .whiteColor() : .whiteMediumOpacity()
+        cell.topBorderView.hidden = (indexPath.row == 0)
+        return cell
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as! ContestsHeaderCell
-        if section > 0 {
-            header.titleLabel.textColor = .whiteMediumOpacity()
-        } else {
-            header.titleLabel.textColor = .whiteColor()
-        }
-        header.titleLabel.text = tempSections[section].uppercaseString
+        header.titleLabel.textColor = .whiteMediumOpacity()
+        header.titleLabel.text = "Upcoming".uppercaseString
         return header
     }
     
@@ -117,18 +129,11 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        // TODO: Actual logic for selecting section
-        
-        if indexPath.section == 0 {
-            let cdvc = ContestLiveDetailViewController(nibName: "ContestLiveDetailViewController", bundle: nil)
-            cdvc.contestName = "$100k Slam Dunk"
-            self.navController?.pushViewController(cdvc)
-        } else {
-            let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
-            cdvc.contestName = "$100k Slam Dunk"
-            self.navController?.pushViewController(cdvc)
-        }
-
+        let contest = self.contests[indexPath.row]
+        let entered = self.entries.contains(contest.id)
+        let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
+        cdvc.contest = contest
+        cdvc.contestEntered = entered
+        self.navController?.pushViewController(cdvc)
     }
 }
