@@ -35,10 +35,14 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let draftGroupPromise = Data.draftGroup(id: draftGroup.id)
-        let injuriesPromise = Data.sportsInjuries(draftGroup.sport.name)
-        draftGroupPromise.then(self.gotDraftGroup)
-        when(draftGroupPromise, injuriesPromise).then(self.addInjuryInfo)
+        let draftGroupPromise = API.draftGroup(id: draftGroup.id)
+        let injuriesPromise = API.sportsInjuries(draftGroup.sport.name)
+        draftGroupPromise.then { draftGroup in
+            self.gotDraftGroup(draftGroup)
+        }
+        when(draftGroupPromise, injuriesPromise).then { (draftGroup, injuries) in
+            self.addInjuryInfo(draftGroup, injuries: injuries)
+        }
         
         view.backgroundColor = .blueDarker()
         let bundle = NSBundle(forClass: self.dynamicType)

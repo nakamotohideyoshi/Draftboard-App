@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class LoginViewController: DraftboardModalViewController, UITextFieldDelegate {
     
@@ -17,6 +18,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate {
     @IBOutlet var loginField: LabeledField!
     
     var logoPosition: CGPoint?
+    let (promise, fulfill, reject) = Promise<Void>.pendingPromise()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate {
     }
     
     func didTapLogin(loginButton: DraftboardLoadingButton) {
-        loginComplete()
+        login()
     }
     
     func loginComplete() {
@@ -81,4 +83,26 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate {
             // nothing
         }
     }
+    
+    func login() {
+        let username = loginField.textField.text ?? ""
+        let password = passwordField.textField.text ?? ""
+        API.auth(username: username, password: password).then { () -> Void in
+            self.fulfill()
+            self.leave()
+        }.error { error in
+            // Update UI
+            print("try again")
+        }
+    }
+    
+    func cancel() {
+        self.reject(APIError.Whatever)
+        self.leave()
+    }
+    
+    func leave() {
+        RootViewController.sharedInstance.popModalViewController(true)
+    }
+    
 }

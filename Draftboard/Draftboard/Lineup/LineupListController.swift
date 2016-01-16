@@ -34,9 +34,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         self.view.backgroundColor = .clearColor()
         
         // Pre-fetch data required for lineup creation
-        let _ = Data.draftGroupUpcoming
-        let _ = Data.contestLobby
-        Data.lineupUpcoming.then(self.gotLineups)
+        API.lineupUpcoming().then { lineups in
+            self.gotLineups(lineups)
+        }
         
         // Create view tap
         let tapRecognizer = UITapGestureRecognizer()
@@ -96,7 +96,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             self.scrollView.alpha = 0
         }, completion: { completed in
             for lineup in lineups {
-                Data.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
+                API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                     lineup.draftGroup = draftGroup
                     self.presentLineupCard(lineup)
                     if self.lineupCardViews.count == lineups.count {
@@ -201,7 +201,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     func presentDraftGroupPrompt() {
-        when(Data.draftGroupUpcoming, Data.contestLobby).then { draftGroups, contests -> Void in
+        when(API.draftGroupUpcoming(), API.contestLobby()).then { draftGroups, contests -> Void in
             self.collateDraftGroups(draftGroups, contests: contests)
             self.selectSport()
         }
@@ -259,7 +259,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         let sportChoice = sportChoices![index]
         selectedSport = sportChoice["object"] as? Sport
         // Pre-fetch data required for showing player injury status
-        _ = Data.sportsInjuries(selectedSport!.name)
+//        _ = Data.sportsInjuries(selectedSport!.name)
         selectDraftGroup()
     }
     
@@ -283,9 +283,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         let draftGroup = selectedDraftGroup!
         selectedSport = nil
         selectedDraftGroup = nil
-        
-        // Pre-fetch data required for player selection
-        let _ = Data.draftGroup(id: draftGroup.id)
         
         // Creating a lineup is editing an empty lineup
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)

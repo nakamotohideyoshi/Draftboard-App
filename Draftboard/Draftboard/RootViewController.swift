@@ -9,6 +9,7 @@
 import UIKit
 import GLKit
 import CoreLocation
+import PromiseKit
 
 final class RootViewController: UIViewController {
     
@@ -22,19 +23,11 @@ final class RootViewController: UIViewController {
     @IBOutlet weak var bgView: UIView!
     
     override func viewDidLoad() {
+        
         addTabController()
         addModalController()
         setAppearanceProperties()
         
-        if !App.authenticated {
-            addLoginController()
-        }
-    }
-    
-    func addLoginController() {
-        let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
-        pushModalViewController(vc, animated: false)
-        loginViewController = vc
     }
     
     func addModalController() {
@@ -157,6 +150,12 @@ extension RootViewController {
 
 extension RootViewController {
     
+    func showLoginController() -> Promise<Void> {
+        let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
+        pushModalViewController(vc, animated: true)
+        return vc.promise
+    }
+
     func authComplete() {
         checkLocationPermissions()
     }

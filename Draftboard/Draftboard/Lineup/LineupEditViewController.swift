@@ -23,7 +23,7 @@ class LineupEditViewController: DraftboardViewController {
     var draftGroup = DraftGroup()
     
     override func viewDidLoad() {
-        Data.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
+        API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
             self.draftGroup = draftGroup
         }
         

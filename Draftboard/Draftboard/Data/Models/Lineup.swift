@@ -42,6 +42,41 @@ class Lineup: Model {
         self.sport = sport
         self.draftGroup = draftGroup
     }
+    
+    convenience init?(upcomingData data: NSDictionary) {
+        self.init()
+        
+        // JSON
+        guard let dataID = data["id"] as? Int,
+            dataName = data["name"] as? String,
+            dataSport = data["sport"] as? String,
+            dataDraftGroup = data["draft_group"] as? Int,
+            dataPlayers = data["players"] as? [NSDictionary]
+        else {
+            log("Failed to parse JSON")
+            return nil
+        }
+        
+        // Dependencies
+        let players = dataPlayers.map { Player(lineupData: $0) }
+        guard players.count == dataPlayers.count,
+            let sport = Sport(name: dataSport)
+        else {
+            log("Failed to create dependencies")
+            return nil
+        }
+
+        // Other setup
+        let draftGroup = DraftGroup()
+        draftGroup.id = dataDraftGroup
+        
+        // Assignment
+        self.id = dataID
+        self.name = dataName
+        self.sport = sport
+        self.draftGroup = draftGroup
+        self.players = players
+    }
 }
 
 // Property observers

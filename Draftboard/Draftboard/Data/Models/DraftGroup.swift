@@ -10,34 +10,65 @@ import Foundation
 
 class DraftGroup: Model {
     var sport: Sport = Sport()
-    var start: NSDate = NSDate()
+    var start: NSDate = NSDate.distantPast()
     var numGames: Int = 0
     var players: [Player] = [Player]()
     
-    convenience init?(data: NSDictionary) {
+    convenience init?(upcomingData data: NSDictionary) {
         self.init()
         
         // JSON
         guard let dataPK = data["pk"] as? Int,
+            dataStart = data["start"] as? String,
             dataSport = data["sport"] as? String,
-            dataStart = data["start"] as? String
-//            dataNumGames = data["num_games"] as? Int
-        else { return nil }
+            dataNumGames = data["num_games"] as? Int
+        else {
+            log("Failed to parse JSON")
+            return nil
+        }
         
         // Dependencies
         guard let sport = Sport(name: dataSport),
             start = Format.date.dateFromString(dataStart)
-        else { return nil }
+        else {
+            log("Failed to create dependencies")
+            return nil
+        }
         
         // Assignment
         self.id = dataPK
-        self.sport = sport
         self.start = start
+        self.sport = sport
+        self.numGames = dataNumGames
+    }
+    
+    convenience init?(idData data: NSDictionary) {
+        self.init()
         
-        // UGH
-        if let numGames = data["num_games"] as? Int {
-            self.numGames = numGames
+        // JSON
+        guard let dataPK = data["pk"] as? Int,
+            dataStart = data["start"] as? String,
+            dataSport = data["sport"] as? String,
+            dataPlayers = data["players"] as? [NSDictionary]
+        else {
+            log("Failed to parse JSON")
+            return nil
         }
-//        self.numGames = dataNumGames
+        
+        // Dependencies
+        let players = dataPlayers.flatMap { Player(data: $0) }
+        guard players.count == dataPlayers.count,
+            let sport = Sport(name: dataSport),
+            start = Format.date.dateFromString(dataStart)
+        else {
+            log("Failed to create dependencies")
+            return nil
+        }
+        
+        // Assignment
+        self.id = dataPK
+        self.start = start
+        self.sport = sport
+        self.players = players
     }
 }

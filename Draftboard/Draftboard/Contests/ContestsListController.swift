@@ -30,10 +30,12 @@ class ContestsListController: DraftboardViewController{
         super.viewDidLoad()
         
         tableView.backgroundColor = .blueDarker()
-        
-        Data.contestLobby.then(self.gotContests)
-        API.contestEntries().then(self.gotEntries)
-
+        API.contestLobby().then { contests in
+            self.gotContests(contests)
+        }
+        API.contestEntries().then { entries in
+            self.gotEntries(entries)
+        }
         let bundle = NSBundle(forClass: self.dynamicType)
         let contestCellNib = UINib(nibName: "DraftboardContestsCell", bundle: bundle)
         let contestUpcomingCellNib = UINib(nibName: "DraftboardContestsUpcomingCell", bundle: bundle)

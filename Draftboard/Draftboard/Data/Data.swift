@@ -10,6 +10,10 @@ import UIKit
 import PromiseKit
 
 class Data {
+}
+
+/*
+
     // Draft groups, all upcoming (lazy by default as a static var)
     static var draftGroupUpcoming = API.draftGroupUpcoming()
     
@@ -44,3 +48,4 @@ class Data {
     static var lineupUpcoming = API.lineupUpcoming()
 }
 
+*/

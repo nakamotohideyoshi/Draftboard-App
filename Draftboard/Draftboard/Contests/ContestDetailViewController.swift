@@ -173,7 +173,7 @@ class ContestDetailViewController: DraftboardViewController {
     }
     
     func handleButtonTap(sender: DraftboardButton) {
-        Data.lineupUpcoming.then { lineups -> Void in
+        API.lineupUpcoming().then { lineups -> Void in
             let eligible = lineups.filter { $0.draftGroup.id == self.contest.draftGroup.id }
             let choices = eligible.map {["title": $0.name, "subtitle": "In ? Contests"]}
             self.eligibleLineups = eligible
@@ -194,7 +194,6 @@ class ContestDetailViewController: DraftboardViewController {
         guard let chosenLineup = self.lineupChoice else { return }
 
         confirmationModal?.showSpinner()
-        
         API.contestEnter(contest, lineup: chosenLineup).then { _ -> Void in
             self.confirmationModal?.showConfirmed()
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.8 * Double(NSEC_PER_SEC)))
