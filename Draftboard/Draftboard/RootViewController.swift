@@ -18,6 +18,7 @@ final class RootViewController: UIViewController {
     
     var tabController = DraftboardTabController()
     var modalController = DraftboardModalNavController()
+    var modalAlertController = DraftboardModalNavController()
     var loginViewController: LoginViewController?
     
     @IBOutlet weak var bgView: UIView!
@@ -25,26 +26,26 @@ final class RootViewController: UIViewController {
     override func viewDidLoad() {
         
         addTabController()
-        addModalController()
+        addModalControllerView(modalController.view)
+        addModalControllerView(modalAlertController.view)
         setAppearanceProperties()
         
     }
     
-    func addModalController() {
+    func addModalControllerView(v: UIView) {
         
         // Add modal controller view
-        let modalControllerView = modalController.view
-        view.addSubview(modalControllerView)
+        view.addSubview(v)
         
         // Constrain modal controller view
-        modalControllerView.translatesAutoresizingMaskIntoConstraints = false
-        modalControllerView.topRancor.constraintEqualToRancor(view.topRancor).active = true
-        modalControllerView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
-        modalControllerView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
-        modalControllerView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.topRancor.constraintEqualToRancor(view.topRancor).active = true
+        v.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
+        v.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
+        v.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
         
         // Starts hidden
-        modalController.view.hidden = true
+        v.hidden = true
     }
     
     func addTabController() {
@@ -143,6 +144,52 @@ extension RootViewController {
     
     func didCancelModal() {
         tabController.cnc.vcs.last?.didCancelModal()
+    }
+}
+
+extension RootViewController {
+    
+    func pushAlertViewController(nvc: DraftboardModalViewController, animated: Bool = true) {
+        modalAlertController.pushViewController(nvc, animated: animated)
+        if (modalAlertController.vcs.count == 1) {
+            showAlertViewController(animated)
+        }
+    }
+    
+    func popAlertViewController(animated: Bool = true) {
+        modalAlertController.popOutViewController(animated)
+        hideAlertViewController(animated)
+    }
+    
+    func showAlertViewController(animated: Bool = true) {
+        modalAlertController.view.layer.removeAllAnimations()
+        modalAlertController.view.hidden = false
+        
+        if (animated) {
+            modalAlertController.view.alpha = 0.0
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                self.modalAlertController.view.alpha = 1.0
+                }) { (completed) -> Void in
+                    // mt
+            }
+        }
+    }
+    
+    func hideAlertViewController(animated: Bool = true) {
+        modalAlertController.view.layer.removeAllAnimations()
+        
+        if (animated) {
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                self.modalAlertController.view.alpha = 0.0
+                }) { (completed) -> Void in
+                    self.modalAlertController.view.hidden = true
+            }
+            
+            return
+        }
+        
+        self.modalAlertController.view.hidden = true
+        self.modalAlertController.view.alpha = 0.0
     }
 }
 

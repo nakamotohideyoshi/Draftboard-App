@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </mutableArray>
+        <mutableArray key="Oswald-Regular.ttf">
+            <string>Oswald-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorViewController" customModule="Draftboard" customModuleProvider="target">
+            <connections>
+                <outlet property="errorLabel" destination="N1J-5f-cQC" id="SWU-A9-5ga"/>
+                <outlet property="errorView" destination="4J0-Z7-E4e" id="eCf-Ts-2Fs"/>
+                <outlet property="errorViewCenter" destination="gTb-Ay-iyZ" id="Ib8-8q-DZb"/>
+                <outlet property="lineHeight" destination="qex-d7-4tc" id="mX2-xP-WG8"/>
+                <outlet property="titleLabel" destination="PlW-WX-8ja" id="3rA-OQ-0EA"/>
+                <outlet property="view" destination="iN0-l3-epB" id="ZLq-kx-PpT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="456" height="661"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4J0-Z7-E4e">
+                    <rect key="frame" x="85" y="290" width="286" height="81"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The error message goes here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1J-5f-cQC" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="30" y="30" width="226" height="21"/>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                            <color key="textColor" red="0.12156862745098039" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhO-oY-mxO">
+                            <rect key="frame" x="0.0" y="80" width="286" height="1"/>
+                            <color key="backgroundColor" red="0.12156862745098039" green="0.1764705882352941" blue="0.27843137254901962" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="qex-d7-4tc"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="N1J-5f-cQC" secondAttribute="trailing" constant="30" id="AAy-KJ-A8t"/>
+                        <constraint firstAttribute="bottom" secondItem="MhO-oY-mxO" secondAttribute="bottom" id="BOL-qL-LXu"/>
+                        <constraint firstItem="MhO-oY-mxO" firstAttribute="leading" secondItem="4J0-Z7-E4e" secondAttribute="leading" id="NnX-c5-6eS"/>
+                        <constraint firstItem="N1J-5f-cQC" firstAttribute="top" secondItem="4J0-Z7-E4e" secondAttribute="top" constant="30" id="WDb-KP-frv"/>
+                        <constraint firstAttribute="trailing" secondItem="MhO-oY-mxO" secondAttribute="trailing" id="kAo-qC-xQg"/>
+                        <constraint firstItem="N1J-5f-cQC" firstAttribute="centerX" secondItem="4J0-Z7-E4e" secondAttribute="centerX" id="leR-Tu-FJw"/>
+                        <constraint firstAttribute="bottom" secondItem="N1J-5f-cQC" secondAttribute="bottom" constant="30" id="p3B-l1-IfH"/>
+                        <constraint firstAttribute="width" constant="286" id="w2C-IP-jOf"/>
+                        <constraint firstItem="N1J-5f-cQC" firstAttribute="leading" secondItem="4J0-Z7-E4e" secondAttribute="leading" constant="30" id="yCA-xP-nmb"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ERROR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlW-WX-8ja" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="206" y="237" width="45" height="23"/>
+                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="4J0-Z7-E4e" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0ph-bm-vLt"/>
+                <constraint firstItem="PlW-WX-8ja" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Qwj-PM-TRb"/>
+                <constraint firstItem="4J0-Z7-E4e" firstAttribute="top" secondItem="PlW-WX-8ja" secondAttribute="bottom" constant="30" id="dRB-WY-TL9"/>
+                <constraint firstItem="4J0-Z7-E4e" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gTb-Ay-iyZ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="434" y="410.5"/>
+        </view>
+    </objects>
+</document>

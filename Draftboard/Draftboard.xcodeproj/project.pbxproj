@@ -122,6 +122,8 @@
 		5D783AD31BD97D23000D8494 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AD21BD97D23000D8494 /* Sport.swift */; };
 		5D86F2751C18D2BB004E9655 /* DraftboardNavController+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D86F2741C18D2BB004E9655 /* DraftboardNavController+Cards.swift */; };
 		5D86F2771C19043D004E9655 /* LineupStatCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D86F2761C19043D004E9655 /* LineupStatCurrencyView.swift */; };
+		5D88B0551C49E591002CA1BB /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D88B0531C49E591002CA1BB /* ErrorViewController.swift */; };
+		5D88B0561C49E591002CA1BB /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D88B0541C49E591002CA1BB /* ErrorViewController.xib */; };
 		5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */; };
 		5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */; };
 		5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */; };
@@ -287,6 +289,8 @@
 		5D783AD21BD97D23000D8494 /* Sport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
 		5D86F2741C18D2BB004E9655 /* DraftboardNavController+Cards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DraftboardNavController+Cards.swift"; sourceTree = "<group>"; };
 		5D86F2761C19043D004E9655 /* LineupStatCurrencyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupStatCurrencyView.swift; sourceTree = "<group>"; };
+		5D88B0531C49E591002CA1BB /* ErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		5D88B0541C49E591002CA1BB /* ErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
 		5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTabBarButton.swift; sourceTree = "<group>"; };
 		5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+DraftboardFonts.swift"; sourceTree = "<group>"; };
 		5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardFilterButton.xib; sourceTree = "<group>"; };
@@ -438,6 +442,8 @@
 		5D26FC6C1BBEE02D00ACF127 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				5D88B0531C49E591002CA1BB /* ErrorViewController.swift */,
+				5D88B0541C49E591002CA1BB /* ErrorViewController.xib */,
 				5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */,
 				5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */,
 				5D26FC731BBEE78700ACF127 /* AccountViewController.swift */,
@@ -744,6 +750,7 @@
 				5D26FC701BBEE0BD00ACF127 /* LabeledField.xib in Resources */,
 				5D26FC721BBEE77300ACF127 /* AccountSettingsView.xib in Resources */,
 				5D4E634A1BAB75D80033C4C2 /* OpenSans-LightItalic.ttf in Resources */,
+				5D88B0561C49E591002CA1BB /* ErrorViewController.xib in Resources */,
 				5D4E634B1BAB75D80033C4C2 /* OpenSans-Regular.ttf in Resources */,
 				5D6237C31BB61F7B0007E62A /* LineupListController.xib in Resources */,
 				5D4E634C1BAB75D80033C4C2 /* OpenSans-Semibold.ttf in Resources */,
@@ -833,6 +840,7 @@
 				5D783AC91BD94847000D8494 /* Player.swift in Sources */,
 				5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */,
 				3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */,
+				5D88B0551C49E591002CA1BB /* ErrorViewController.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
 				5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
