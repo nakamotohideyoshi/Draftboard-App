@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C1F970C1C49B4D000A5BA0E /* ContestsPlayerHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F970B1C49B4D000A5BA0E /* ContestsPlayerHeaderCell.xib */; };
+		3C1F970E1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F970D1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift */; };
 		3C245CD51BEAD4EA00A24F43 /* DraftboardModalItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */; };
 		3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */; };
 		3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */; };
@@ -170,6 +172,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C1F970B1C49B4D000A5BA0E /* ContestsPlayerHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestsPlayerHeaderCell.xib; sourceTree = "<group>"; };
+		3C1F970D1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsPlayerHeaderCell.swift; sourceTree = "<group>"; };
 		3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardModalItemView.xib; sourceTree = "<group>"; };
 		3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermissionViewController.xib; sourceTree = "<group>"; };
@@ -602,19 +606,21 @@
 		9327371E1BAC9CFB00198AA9 /* Contests */ = {
 			isa = PBXGroup;
 			children = (
+				5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */,
+				3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */,
 				3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */,
 				3C74CA3E1BE051070077DF0C /* ContestDetailViewController.xib */,
 				3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */,
 				3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */,
 				3C74CA521BE0528D0077DF0C /* ContestModel.swift */,
-				5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */,
-				3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */,
 				3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */,
 				3CDC73621BF1499E00DDF60E /* ContestPlayerStandingCell.xib */,
 				3C74CA421BE0513A0077DF0C /* ContestsHeaderCell.swift */,
 				3C74CA441BE051530077DF0C /* ContestsHeaderCell.xib */,
 				3C74CA461BE0516C0077DF0C /* ContestsListController.swift */,
 				3C74CA481BE0517B0077DF0C /* ContestsListController.xib */,
+				3C1F970D1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift */,
+				3C1F970B1C49B4D000A5BA0E /* ContestsPlayerHeaderCell.xib */,
 				3C74CA4A1BE051A00077DF0C /* ContestsViewController.swift */,
 				3C74CA4B1BE051A00077DF0C /* DraftboardContestsCell.swift */,
 				3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */,
@@ -704,6 +710,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C1F970C1C49B4D000A5BA0E /* ContestsPlayerHeaderCell.xib in Resources */,
 				3C74CA491BE0517B0077DF0C /* ContestsListController.xib in Resources */,
 				3CB630AB1C10E85F00ACEAD3 /* ContestConfirmationModal.xib in Resources */,
 				5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */,
@@ -785,6 +792,7 @@
 				5DD3C4E51C17AE630040DC71 /* DraftboardFooterView.swift in Sources */,
 				3E608D921C1B72FC0085569D /* Format.swift in Sources */,
 				5D6237E21BB620320007E62A /* DraftboardButton.swift in Sources */,
+				3C1F970E1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift in Sources */,
 				3E832BC51BE2CB3900084621 /* API.swift in Sources */,
 				3E272EAA1C2880390023B303 /* TeamNames.swift in Sources */,
 				5D783ACC1BD97C54000D8494 /* Model.swift in Sources */,

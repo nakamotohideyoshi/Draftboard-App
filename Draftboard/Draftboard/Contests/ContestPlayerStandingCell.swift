@@ -18,13 +18,14 @@ class ContestPlayerStandingCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        backgroundColor = UIColor(0xFAFAFA)
         self.selectedBackgroundView = UIView()
-        self.selectedBackgroundView?.backgroundColor = UIColor(0x0, alpha: 0.1)
+        self.selectedBackgroundView?.backgroundColor = UIColor(0x0, alpha: 0.05)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        self.backgroundColor = UIColor(0x1a2537)
+//        self.backgroundColor = UIColor(0x1a2537)
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {

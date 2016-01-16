@@ -18,16 +18,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TjU-ey-ygx" userLabel="Top">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-contest" translatesAutoresizingMaskIntoConstraints="NO" id="Y2W-M0-Hie">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARj-2N-ZSV" userLabel="Safe Area">
-                            <rect key="frame" x="0.0" y="76" width="320" height="274"/>
+                            <rect key="frame" x="0.0" y="76" width="320" height="159"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="temp-contest-money-line" translatesAutoresizingMaskIntoConstraints="NO" id="73T-MG-Ns9" userLabel="Money Line">
-                                    <rect key="frame" x="15" y="17" width="290" height="240"/>
+                                    <rect key="frame" x="15" y="-40" width="290" height="240"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="240" id="7rW-5P-CQA"/>
                                     </constraints>
@@ -50,7 +50,7 @@
                         <constraint firstItem="Y2W-M0-Hie" firstAttribute="top" secondItem="TjU-ey-ygx" secondAttribute="top" id="jIM-7N-ZXS"/>
                         <constraint firstAttribute="trailing" secondItem="Y2W-M0-Hie" secondAttribute="trailing" id="pru-fI-dER"/>
                         <constraint firstItem="ARj-2N-ZSV" firstAttribute="top" secondItem="TjU-ey-ygx" secondAttribute="top" constant="76" id="uAM-Iy-MCm"/>
-                        <constraint firstAttribute="height" constant="350" id="zah-Qv-WRa"/>
+                        <constraint firstAttribute="height" constant="235" id="zah-Qv-WRa"/>
                     </constraints>
                 </view>
             </subviews>

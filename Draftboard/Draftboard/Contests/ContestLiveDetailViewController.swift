@@ -64,14 +64,14 @@ class ContestLiveDetailViewController: DraftboardViewController {
         tableView.leadingRancor.constraintEqualToRancor(view.leadingRancor).active = true
         tableView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         
-        tableView.separatorColor = .dividerOnDarkColor()
+        tableView.separatorColor = .dividerOnWhiteColor()
         
         // Make those cells play nice with nibs
         let bundle = NSBundle(forClass: self.dynamicType)
         let contestStandingCellNib = UINib(nibName: "ContestPlayerStandingCell", bundle: bundle)
         tableView.registerNib(contestStandingCellNib, forCellReuseIdentifier: contestStandingCell)
         
-        let contestHeaderNib = UINib(nibName: "ContestsHeaderCell", bundle: bundle)
+        let contestHeaderNib = UINib(nibName: "ContestsPlayerHeaderCell", bundle: bundle)
         tableView.registerNib(contestHeaderNib,
             forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
         
@@ -114,17 +114,16 @@ extension ContestLiveDetailViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 24.0
+        return 52.0
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 76.0
+        return 52.0
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as! ContestsHeaderCell
-        header.titleLabel.textColor = .whiteMediumOpacity()
-        header.titleLabel.text = "Player Ranking".uppercaseString
+        let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as! ContestsPlayerHeaderCell
+        header.playerName.text = "Player Name"
         return header
     }
     
