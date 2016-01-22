@@ -121,6 +121,9 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        login()
+        self.loginButton.loading = true
+        self.loginButton.userInteractionEnabled = false
         textField.resignFirstResponder()
         return true
     }
