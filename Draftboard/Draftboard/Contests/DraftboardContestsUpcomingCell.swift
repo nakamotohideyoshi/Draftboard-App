@@ -13,6 +13,7 @@ class DraftboardContestsUpcomingCell: UITableViewCell {
     @IBOutlet weak var bottomBorderView: UIView!
     @IBOutlet weak var topBorderView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var guaranteedImageView: UIImageView!
     @IBOutlet weak var titleLabel: DraftboardLabel!
     @IBOutlet var contestInfo: DraftboardLabel!
     

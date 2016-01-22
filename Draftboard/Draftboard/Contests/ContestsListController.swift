@@ -111,6 +111,7 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.text = contest.name
         cell.contestInfo.text = "\(fee) FEE / \(prizes) PRIZES"
         cell.iconImageView.tintColor = entered ? .whiteColor() : .whiteMediumOpacity()
+        cell.guaranteedImageView.hidden = !contest.gpp
         cell.topBorderView.hidden = (indexPath.row == 0)
         return cell
     }
