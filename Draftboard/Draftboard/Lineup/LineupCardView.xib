@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LineupCardView">
             <connections>
+                <outlet property="actionContainerView" destination="oiB-9s-vtL" id="DAI-VQ-SY5"/>
                 <outlet property="buttonDividerHeight" destination="R7J-QQ-vKY" id="goZ-iC-Amg"/>
                 <outlet property="centerStatContainerView" destination="xTt-uy-B8J" id="X7f-M9-Lek"/>
                 <outlet property="clipView" destination="J1c-D5-t47" id="Tda-f8-BKl"/>
@@ -21,8 +22,7 @@
                 <outlet property="leftStatContainerView" destination="KLb-w2-xhc" id="VpY-uu-qcb"/>
                 <outlet property="liveContestWidth" destination="bUq-uc-f8k" id="6Zs-Uh-hel"/>
                 <outlet property="rightStatContainerView" destination="ZcS-DT-Had" id="TUL-DQ-wCa"/>
-                <outlet property="toggleHeight" destination="OSh-7t-Fp8" id="D7Q-g5-b0t"/>
-                <outlet property="toggleSelectorView" destination="CMP-Rl-0u5" id="4qL-fk-Oa5"/>
+                <outlet property="statContainerView" destination="wVh-Sh-VIp" id="dFY-Ze-hoc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -35,25 +35,9 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ui6-2o-GIQ" customClass="UIScrollView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMP-Rl-0u5" userLabel="Toggle Selector View">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
-                                    <animations/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="OSh-7t-Fp8"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="CMP-Rl-0u5" firstAttribute="centerX" secondItem="ui6-2o-GIQ" secondAttribute="centerX" id="c3a-I1-C8L"/>
-                                <constraint firstItem="CMP-Rl-0u5" firstAttribute="top" secondItem="ui6-2o-GIQ" secondAttribute="top" id="r90-g3-hIh"/>
-                                <constraint firstItem="CMP-Rl-0u5" firstAttribute="width" secondItem="ui6-2o-GIQ" secondAttribute="width" id="vXS-UX-jPl"/>
-                            </constraints>
                         </view>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="ui6-2o-GIQ" firstAttribute="top" secondItem="J1c-D5-t47" secondAttribute="top" id="AVd-iY-TBi"/>
                         <constraint firstAttribute="trailing" secondItem="ui6-2o-GIQ" secondAttribute="trailing" id="F89-5r-hbB"/>
@@ -65,12 +49,10 @@
                     <subviews>
                         <view alpha="0.95999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvV-3G-I0b" userLabel="ScrollOverlay">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.12156862745098039" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLb-w2-xhc">
                             <rect key="frame" x="0.0" y="0.0" width="106" height="68"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="68" id="gC8-bj-BEa"/>
                             </constraints>
@@ -82,7 +64,6 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTt-uy-B8J">
                             <rect key="frame" x="106" y="0.0" width="108" height="68"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="68" id="vkK-SU-wEk"/>
                             </constraints>
@@ -94,11 +75,9 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZcS-DT-Had">
                             <rect key="frame" x="214" y="0.0" width="106" height="68"/>
-                            <animations/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N4l-U0-E02" userLabel="Divider">
                             <rect key="frame" x="32" y="0.0" width="256" height="1"/>
-                            <animations/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="MiH-Rg-KtN"/>
@@ -106,14 +85,12 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IcF-oT-2Ip">
                             <rect key="frame" x="0.0" y="67" width="320" height="1"/>
-                            <animations/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="R7J-QQ-vKY"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="N4l-U0-E02" firstAttribute="top" secondItem="wVh-Sh-VIp" secondAttribute="top" id="27C-Er-g3q"/>
                         <constraint firstAttribute="bottom" secondItem="kvV-3G-I0b" secondAttribute="bottom" id="4Cr-rT-1wY"/>
@@ -145,11 +122,9 @@
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photographic-bg" translatesAutoresizingMaskIntoConstraints="NO" id="JII-2d-qyX">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <animations/>
                         </imageView>
                         <view alpha="0.050000000000000003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Pt-Ya-HPp" userLabel="Divider">
                             <rect key="frame" x="160" y="0.0" width="1" height="44"/>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="1" id="Yng-Vp-Hq4"/>
@@ -157,7 +132,6 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-bV-UG2" userLabel="Contests Button" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="160" y="0.0" width="160" height="44"/>
-                            <animations/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CONTESTS"/>
                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -180,7 +154,6 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Uy-5Q-cBS" userLabel="Edit Button" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
-                            <animations/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="EDIT"/>
                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
@@ -203,7 +176,6 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="width" secondItem="oiB-9s-vtL" secondAttribute="width" multiplier="0.5" id="0uJ-6u-S4a"/>
                         <constraint firstItem="1Uy-5Q-cBS" firstAttribute="centerY" secondItem="oiB-9s-vtL" secondAttribute="centerY" id="9Hc-HZ-AeY"/>
@@ -230,7 +202,6 @@
                     </variation>
                 </view>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.12156862745098039" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="J1c-D5-t47" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3LL-l6-q97"/>

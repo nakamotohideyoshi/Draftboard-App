@@ -12,10 +12,12 @@ protocol LineupCardViewDelegate {
     func didTap(buttonType: TabBarButtonType)
 }
 
-class LineupCardView: DraftboardNibView {
+class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     
     @IBOutlet weak var clipView: UIView!
     @IBOutlet weak var contentView: UIScrollView!
+    @IBOutlet weak var statContainerView: UIView!
+    @IBOutlet weak var actionContainerView: UIView!
     
     @IBOutlet weak var editButton: DraftboardButton!
     @IBOutlet weak var contestsButton: DraftboardArrowButton!
@@ -27,15 +29,11 @@ class LineupCardView: DraftboardNibView {
     @IBOutlet var contestWidth: NSLayoutConstraint!
     @IBOutlet var liveContestWidth: NSLayoutConstraint!
     
-    @IBOutlet weak var toggleSelectorView: UIView!
-    @IBOutlet weak var toggleHeight: NSLayoutConstraint!
-//    @IBOutlet weak var pointsBackgroundShape: UIView!
-//    @IBOutlet weak var averageBackgroundShape: UIView!
-//    @IBOutlet weak var salaryBackgroundShape: UIView!
-    
     @IBOutlet weak var leftStatContainerView: UIView!
     @IBOutlet weak var centerStatContainerView: UIView!
     @IBOutlet weak var rightStatContainerView: UIView!
+    
+    var toggleView: LineupCardToggle!
     
     var showPlayerDetailAction: ((Player, isLive: Bool, isDraftable: Bool) -> Void)?
     var editAction: (LineupCardView -> Void)?
@@ -53,28 +51,40 @@ class LineupCardView: DraftboardNibView {
     var cellViews = [LineupCardCellView]()
     let curtain = UIView()
     
-    var lineup: Lineup = Lineup() {
-        didSet {
-            self.layoutCellViews()
-            self.updateStats()
-        }
-    }
+    var loaderView: LoaderView!
+    var lineup: Lineup?
     
     var liveTimer: NSTimer!
     var live = false
     
+    override func setupNib() {
+        feesStatView = LineupStatFeesView(style: .Small, titleText: "FEES", valueText: "$10/4")
+        liveStatView = LineupStatTimeView(style: .Small, titleText: "TIME", date: nil)
+        salaryStatView = LineupStatCurrencyView(style: .Small, titleText: "REM SALARY", currencyValue: nil)
+        pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
+        winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
+        
+        super.setupNib()
+    }
+    
     override func willAwakeFromNib() {
         contentView.indicatorStyle = .White
         contentView.alwaysBounceVertical = true
+        
+        contentView.alpha = 0
+        contentView.hidden = true
+        
+        statContainerView.alpha = 0
+        statContainerView.hidden = true
+        
+        actionContainerView.alpha = 0
+        actionContainerView.hidden = true
         
         // set dividers to real 1px height
         let onePixel = 1 / UIScreen.mainScreen().scale
         dividerHeight.constant = onePixel
         buttonDividerHeight.constant = onePixel
         horizontalDividerWidth.constant = onePixel
-        
-        toggleHeight.constant = 0.0
-        toggleSelectorView.clipsToBounds = true
         
         addSubview(curtain)
         curtain.backgroundColor = .blueDarker()
@@ -88,10 +98,67 @@ class LineupCardView: DraftboardNibView {
         
         liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
         
-        createStats()
-        
         editButton.addTarget(self, action: "didTapEdit", forControlEvents: .TouchUpInside)
         contestsButton.addTarget(self, action: "didTapContests", forControlEvents: .TouchUpInside)
+        
+        toggleView = LineupCardToggle(options: ["POINTS", "AVG FPPG", "SALARY"])
+        toggleView.delegate = self
+        contentView.addSubview(toggleView)
+        
+        toggleView.translatesAutoresizingMaskIntoConstraints = false
+        toggleView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
+        toggleView.leftRancor.constraintEqualToRancor(self.leftRancor, constant: 20.0).active = true
+        toggleView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -20.0).active = true
+        toggleView.heightRancor.constraintEqualToConstant(44.0).active = true
+        
+        toggleView.selectButton(1)
+        
+        addStats()
+        addLoaderView()
+        updateContent()
+    }
+    
+    func didTapToggleButton(index: Int) {
+        // TODO: update data display
+    }
+    
+    func updateContent() {
+        if let lineup = lineup {
+            if lineup.draftGroup.complete {
+                self.layoutCellViews()
+                self.updateStats()
+                self.showContent()
+            }
+        }
+    }
+    
+    func addLoaderView() {
+        loaderView = LoaderView(frame: CGRectZero)
+        loaderView.thickness = 2.0
+        self.addSubview(loaderView)
+        
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
+        loaderView.centerXRancor.constraintEqualToRancor(self.centerXRancor).active = true
+        
+        loaderView.spinning = true
+    }
+    
+    func showContent(animated: Bool = true) {
+        contentView.hidden = false
+        statContainerView.hidden = false
+        actionContainerView.hidden = false
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.contentView.alpha = 1.0
+            self.statContainerView.alpha = 1.0
+            self.actionContainerView.alpha = 1.0
+            self.loaderView.alpha = 0.0
+        }) { (completed) -> Void in
+            self.loaderView.hidden = true
+        }
     }
     
     func didTapEdit() {
@@ -102,27 +169,23 @@ class LineupCardView: DraftboardNibView {
         contestsAction?(self)
     }
     
-    func createStats() {
-        feesStatView = LineupStatFeesView(style: .Small, titleText: "FEES", valueText: "$10/4")
-        liveStatView = LineupStatTimeView(style: .Small, titleText: "TIME", date: nil)
-        salaryStatView = LineupStatCurrencyView(style: .Small, titleText: "REM SALARY", currencyValue: nil)
-        pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
-        winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
-        
+    func addStats() {
         addStatToContainerView(feesStatView, containerView: leftStatContainerView)
-        addStatToContainerView(liveStatView, containerView: centerStatContainerView)
+        addStatToContainerView(liveStatView!, containerView: centerStatContainerView)
         addStatToContainerView(salaryStatView, containerView: rightStatContainerView)
     }
     
     func updateStats() {
-        liveStatView.date = lineup.draftGroup.start
-        salaryStatView.currencyValue = lineup.sport.salary - lineup.salary
+        if let l = lineup {
+            liveStatView.date = l.draftGroup.start
+            salaryStatView.currencyValue = l.sport.salary - l.salary
+        }
     }
     
     func makeLive() {
         live = true
         
-        liveStatView.removeFromSuperview()
+        liveStatView!.removeFromSuperview()
         liveStatView = nil
         
         salaryStatView.removeFromSuperview()
@@ -177,16 +240,17 @@ class LineupCardView: DraftboardNibView {
         for cellView in cellViews {
             cellView.removeFromSuperview()
         }
+        
         cellViews = [LineupCardCellView]()
 
         var previousCell: LineupCardCellView?
         let height = cellHeight()
         
-        for (i, player) in lineup.players.enumerate() {
+        for (i, player) in lineup!.players.enumerate() {
             let cellView = LineupCardCellView()
             cellView.unitLabel.text = ""
             cellView.player = player
-            cellView.positionLabel.text = lineup.sport.positions[i]
+            cellView.positionLabel.text = lineup!.sport.positions[i]
             
             contentView.addSubview(cellView)
             cellViews.append(cellView)
@@ -197,13 +261,13 @@ class LineupCardView: DraftboardNibView {
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             if (previousCell == nil) {
-                cellView.topRancor.constraintEqualToRancor(toggleSelectorView.bottomRancor).active = true
+                cellView.topRancor.constraintEqualToRancor(toggleView.bottomRancor).active = true
             }
             else {
                 cellView.topRancor.constraintEqualToRancor(previousCell!.bottomRancor).active = true
             }
             
-            if (i == lineup.players.count - 1) {
+            if (i == lineup!.players.count - 1) {
                 cellView.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
             }
             
@@ -232,12 +296,14 @@ class LineupCardView: DraftboardNibView {
     }
     
     func updateTime() {
-        let now = NSDate()
-        let liveDate = lineup.draftGroup.start
-        if (liveDate.earlierDate(now) == liveDate) {
-            liveTimer.invalidate()
-            liveTimer = nil
-            makeLive()
+        if let lineup = lineup {
+            let now = NSDate()
+            let liveDate = lineup.draftGroup.start
+            if (liveDate.earlierDate(now) == liveDate) {
+                liveTimer.invalidate()
+                liveTimer = nil
+                makeLive()
+            }
         }
     }
 }

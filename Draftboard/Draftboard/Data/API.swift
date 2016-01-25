@@ -19,6 +19,7 @@ private extension API {
     static let agent = "Draftboard iOS" // + version?
     static let baseURL = "http://draftboard-ios-sandbox.herokuapp.com/"
     static var token: String?
+    //static var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE0NTYwNzk1MjksImVtYWlsIjoiIiwidXNlcm5hbWUiOiJhZG1pbiIsIm9yaWdfaWF0IjoxNDUzNDg3NTI5fQ.5CqyH2JePaKZQ4w13yLwWPew-DVmyS6UAc2zQTqtW-8"
     
     class func request(path: String) -> NSMutableURLRequest {
         let rq = NSMutableURLRequest()
@@ -97,6 +98,7 @@ extension API {
             else { throw APIError.FailedToParse(json) }
             
             API.token = token
+            print(token)
             
             return Promise()
         }
