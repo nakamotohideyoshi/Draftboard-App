@@ -16,6 +16,10 @@ class ContestDetailViewController: DraftboardViewController {
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     @IBOutlet weak var liveInLabel: DraftboardLabel!
     @IBOutlet weak var startDateLabel: DraftboardLabel!
+    @IBOutlet weak var feeLabel: DraftboardLabel!
+    @IBOutlet weak var prizesLabel: DraftboardLabel!
+    @IBOutlet weak var guaranteedImageView: UIImageView!
+    @IBOutlet weak var entriesLabel: DraftboardLabel!
     
     var draftButton: DraftboardArrowButton!
     var draftButtonTop: NSLayoutConstraint!
@@ -63,6 +67,23 @@ class ContestDetailViewController: DraftboardViewController {
         let timer = NSTimer(timeInterval: 0.5, target: self, selector: "updateTime", userInfo: nil, repeats: true)
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes);
         
+        // Set stats
+        let fee = Format.currency.stringFromNumber(contest.buyin)
+        let prizes = Format.currency.stringFromNumber(contest.prizePool)
+        let entries = "\(contest.currentEntries) / \(contest.entries)"
+        feeLabel.text = fee
+        prizesLabel.text = prizes
+        entriesLabel.text = entries
+        if !contest.gpp {
+            guaranteedImageView.hidden = true
+        }
+        
+        // Full?
+        if contest.currentEntries == contest.entries {
+            disableContestEntry()
+            draftButton.label.text = "Contest Full".uppercaseString
+        }
+
         // Remove background colors from nibh
         topView.backgroundColor = .clearColor()
         tableView.backgroundColor = .clearColor()
@@ -206,11 +227,15 @@ class ContestDetailViewController: DraftboardViewController {
         }
     }
     
-    func didEnterContest() {
+    func disableContestEntry() {
         draftButton.userInteractionEnabled = false
         draftButton.backgroundColor = .greyCool()
-        draftButton.label.text = "Contest Entered".uppercaseString
         draftButton.iconImageView.alpha = 0
+    }
+    
+    func didEnterContest() {
+        disableContestEntry()
+        draftButton.label.text = "Contest Entered".uppercaseString
     }
     
     override func didCancelModal() {

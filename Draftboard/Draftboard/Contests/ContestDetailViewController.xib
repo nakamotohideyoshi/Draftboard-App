@@ -23,7 +23,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContestDetailViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="entriesLabel" destination="Zey-hN-JMr" id="DZb-8T-pQE"/>
+                <outlet property="feeLabel" destination="4MV-Vd-gEZ" id="a0j-Ql-ysS"/>
+                <outlet property="guaranteedImageView" destination="Lqv-XD-dJi" id="3Oe-ea-Irp"/>
                 <outlet property="liveInLabel" destination="KCm-MQ-gHp" id="0EE-61-nag"/>
+                <outlet property="prizesLabel" destination="VJ2-pv-wZr" id="0Eh-Re-Fwj"/>
                 <outlet property="startDateLabel" destination="Vvk-ux-bv1" id="EC0-8t-vnj"/>
                 <outlet property="tableView" destination="IB0-nH-Wxx" id="I2W-Jd-cyg"/>
                 <outlet property="topView" destination="u6D-7K-oPo" id="rzv-mw-FwE"/>
