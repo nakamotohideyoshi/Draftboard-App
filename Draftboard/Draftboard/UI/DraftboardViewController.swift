@@ -12,6 +12,11 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
     
     var navController: DraftboardNavController?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.clipsToBounds = true
+    }
+    
     func didSelectModalChoice(index: Int) {
         print("DraftboardViewController::didSelectModalChoice", index)
     }

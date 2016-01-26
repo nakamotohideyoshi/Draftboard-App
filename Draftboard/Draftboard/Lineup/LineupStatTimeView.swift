@@ -30,7 +30,9 @@ class LineupStatTimeView: LineupStatView {
     
     var date: NSDate? {
         didSet {
-            self.valueText = timeStringFromDate(date!)
+            if let date = date {
+                self.valueText = timeStringFromDate(date)
+            }
         }
     }
     

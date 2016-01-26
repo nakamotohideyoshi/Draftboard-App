@@ -198,7 +198,25 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
 
             vc.actions = actions
             vc.promise.then { index -> Void in
-                RootViewController.sharedInstance.popAlertViewController()
+                
+                if index == 0 { // Reset password
+                    let rvc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+                    let resetActions = ["Okay"]
+                    
+                    // TODO: make reset API call
+                    
+                    rvc.actions = resetActions
+                    rvc.promise.then { index -> Void in
+                        RootViewController.sharedInstance.popAlertViewController()
+                    }
+                    
+                    RootViewController.sharedInstance.pushAlertViewController(rvc)
+                    rvc.titleLabel.text = "RESET PASSWORD"
+                    rvc.errorLabel.text = "Check your email for more info on resetting your password."
+                }
+                else { // Try again
+                    RootViewController.sharedInstance.popAlertViewController()
+                }
             }
             
             self.loginButton.userInteractionEnabled = true

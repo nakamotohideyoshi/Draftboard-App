@@ -17,11 +17,13 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
     var scrollView: UIScrollView!
     var titleLabel: DraftboardLabel!
     var closeButton: DraftboardButton!
-    var choiceData: [NSDictionary]!
-    var choiceViews: [DraftboardModalItemView]!
     var titleText: String!
+    var loaderView: LoaderView!
     
-    init(title: String, choices: [NSDictionary]) {
+    var choiceData: [NSDictionary]?
+    var choiceViews: [DraftboardModalItemView] = []
+    
+    init(title: String, choices: [NSDictionary]?) {
         super.init(nibName: nil, bundle: nil)
         choiceData = choices
         titleText = title
@@ -57,9 +59,6 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         titleLabel.heightRancor.constraintEqualToConstant(50.0).active = true
         titleLabel.centerXRancor.constraintEqualToRancor(scrollView.centerXRancor).active = true
         
-        // Add choices
-        self.addChoiceViews()
-        
         // Create close button
         closeButton = DraftboardButton()
         view.addSubview(closeButton)
@@ -77,6 +76,23 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         closeButton.iconImageView.image = UIImage(named: "titlebar-icon-close")
         
         closeButton.addTarget(self, action: Selector("didTapCancel:"), forControlEvents: .TouchUpInside)
+        
+        addLoaderView()
+        showLoader(false)
+        if choiceData != nil {
+            reloadChoiceViews()
+            hideLoader(false)
+        }
+    }
+    
+    func showLoader(animated: Bool = true) {
+        loaderView.hidden = false
+        scrollView.hidden = true
+    }
+    
+    func hideLoader(animated: Bool = true) {
+        loaderView.hidden = true
+        scrollView.hidden = false
     }
     
     func didTapCancel(sender: DraftboardButton) {
@@ -87,16 +103,25 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         RootViewController.sharedInstance.didSelectModalChoice(sender.index)
     }
     
-    func addChoiceViews() {
+    func reloadChoiceViews() {
+        print(hideLoader)
+        hideLoader()
         
-        // Choice dimensions
+        for (_, choiceView) in choiceViews.enumerate() {
+            choiceView.removeFromSuperview()
+        }
+        
+        if choiceData == nil {
+            return
+        }
+        
+        let data = choiceData!
         let itemWidth: CGFloat = 275.0
         let itemHeight: CGFloat = 77.0
         
         // Choice views
-        var choiceViews = [DraftboardModalItemView]()
         var lastChoiceView: DraftboardModalItemView?
-         for (i, data) in choiceData.enumerate() {
+         for (i, data) in data.enumerate() {
             
             // Choice view
             let title = data["title"] as? String ?? ""
@@ -119,7 +144,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
             }
             
             // Constrain to the bottom of the scroll view as well
-            if (i == choiceData.count-1) {
+            if (i == data.count-1) {
                 choiceView.bottomRancor.constraintEqualToRancor(scrollView.bottomRancor).active = true
             }
             
@@ -150,5 +175,19 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         }
         
         scrollView.alwaysBounceVertical = true
+    }
+    
+    func addLoaderView() {
+        loaderView = LoaderView(frame: CGRectZero)
+        loaderView.thickness = 2.0
+        view.addSubview(loaderView)
+        
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor).active = true
+        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
+        
+        loaderView.spinning = true
     }
 }

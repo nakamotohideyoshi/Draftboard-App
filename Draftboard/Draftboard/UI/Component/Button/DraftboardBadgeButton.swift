@@ -12,14 +12,20 @@ class DraftboardBadgeButton: DraftboardButton {
     
     override func setDefaults() {
         super.setDefaults()
+        
         let bundle = NSBundle(forClass: self.dynamicType)
         let img = UIImage(named: "icon-arrow-down", inBundle: bundle, compatibleWithTraitCollection: self.traitCollection)
         iconImage = img
+        
+        bgColor = .clearColor()
+        iconColor = .greenDraftboard()
+        
+        selectedState = false
     }
     
     override func constrainIconImageView() {
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        iconImageView.rightRancor.constraintEqualToRancor(label.leftRancor).active = true
+        iconImageView.rightRancor.constraintEqualToRancor(label.leftRancor, constant: -8.0).active = true
         iconImageView.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
     }
     

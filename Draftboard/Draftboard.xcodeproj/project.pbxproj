@@ -132,6 +132,7 @@
 		5D9A32211BCD72A0006C758B /* DraftboardNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */; };
 		5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */; };
 		5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */; };
+		5DA644A31C56A27500B44DC5 /* LineupCardToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA644A21C56A27500B44DC5 /* LineupCardToggle.swift */; };
 		5DAC07921C21DCC10002B97B /* DraftboardDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07911C21DCC10002B97B /* DraftboardDetailCell.swift */; };
 		5DAC07941C21DCC60002B97B /* DraftboardDetailListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07931C21DCC60002B97B /* DraftboardDetailListItem.swift */; };
 		5DAC07961C21DE680002B97B /* DraftboardDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DAC07951C21DE680002B97B /* DraftboardDetailCell.xib */; };
@@ -142,6 +143,7 @@
 		5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */; };
 		5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */; };
 		5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */; };
+		5DCFB8981C52953F00924EC7 /* DraftboardPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCFB8971C52953F00924EC7 /* DraftboardPagination.swift */; };
 		5DD0C8B41BD8615F00CE01C2 /* LineupSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */; };
 		5DD3C4E51C17AE630040DC71 /* DraftboardFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD3C4E41C17AE630040DC71 /* DraftboardFooterView.swift */; };
 		5DD3C4E71C17AEAD0040DC71 /* LineupStatFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD3C4E61C17AEAD0040DC71 /* LineupStatFooterView.swift */; };
@@ -303,6 +305,7 @@
 		5D9D68731BB5B59E00855501 /* DraftboardRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardRoundButton.swift; sourceTree = "<group>"; };
 		5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalViewController.swift; sourceTree = "<group>"; };
 		5D9E99531BB615590017E332 /* DraftboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardViewController.swift; sourceTree = "<group>"; };
+		5DA644A21C56A27500B44DC5 /* LineupCardToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCardToggle.swift; sourceTree = "<group>"; };
 		5DAC07911C21DCC10002B97B /* DraftboardDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardDetailCell.swift; sourceTree = "<group>"; };
 		5DAC07931C21DCC60002B97B /* DraftboardDetailListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardDetailListItem.swift; sourceTree = "<group>"; };
 		5DAC07951C21DE680002B97B /* DraftboardDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardDetailCell.xib; sourceTree = "<group>"; };
@@ -313,6 +316,7 @@
 		5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestConfirmationModal.swift; sourceTree = "<group>"; };
 		5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalChoiceController.swift; sourceTree = "<group>"; };
+		5DCFB8971C52953F00924EC7 /* DraftboardPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardPagination.swift; sourceTree = "<group>"; };
 		5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupSearchViewController.xib; sourceTree = "<group>"; };
 		5DD3C4E41C17AE630040DC71 /* DraftboardFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardFooterView.swift; sourceTree = "<group>"; };
 		5DD3C4E61C17AEAD0040DC71 /* LineupStatFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupStatFooterView.swift; sourceTree = "<group>"; };
@@ -565,6 +569,7 @@
 				5D54F4341BF29AF2005BB87F /* LineupStatView.swift */,
 				5DD3C4E41C17AE630040DC71 /* DraftboardFooterView.swift */,
 				5DD3C4E61C17AEAD0040DC71 /* LineupStatFooterView.swift */,
+				5DA644A21C56A27500B44DC5 /* LineupCardToggle.swift */,
 			);
 			path = Lineup;
 			sourceTree = "<group>";
@@ -605,6 +610,7 @@
 				5D3C726B1BF11EE3005A27B1 /* GlobalFilterItem.swift */,
 				5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */,
 				5DE2D6321C0F915F0023D4DB /* DraftboardSegmentedControl.swift */,
+				5DCFB8971C52953F00924EC7 /* DraftboardPagination.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -824,6 +830,7 @@
 				5D6237DF1BB6200B0007E62A /* DraftboardNibView.swift in Sources */,
 				5D6237E01BB6200B0007E62A /* DraftboardView.swift in Sources */,
 				5D783AD31BD97D23000D8494 /* Sport.swift in Sources */,
+				5DCFB8981C52953F00924EC7 /* DraftboardPagination.swift in Sources */,
 				5D6237E11BB6200B0007E62A /* DraftboardViewController.swift in Sources */,
 				3E1870E81C05410F006641F8 /* Roster.swift in Sources */,
 				5D6237D71BB61FFB0007E62A /* UIColor+DraftboardColors.swift in Sources */,
@@ -836,6 +843,7 @@
 				5D6237D91BB61FFB0007E62A /* DraftboardTitlebar.swift in Sources */,
 				3CB630A81C10A19000ACEAD3 /* DepositView.swift in Sources */,
 				5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */,
+				5DA644A31C56A27500B44DC5 /* LineupCardToggle.swift in Sources */,
 				5DE1D63E1BF2A5FC00C796ED /* LineupStatPMRView.swift in Sources */,
 				5D783AC91BD94847000D8494 /* Player.swift in Sources */,
 				5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */,

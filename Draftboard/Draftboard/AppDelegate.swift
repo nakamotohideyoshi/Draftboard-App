@@ -16,7 +16,7 @@ struct App {
     static var authenticated = true
     static var libraryPath = ""
     static var cachesPath = ""
-    
+    static var nibCache = [String: UINib]()
     static var DefaultsDidSeeNotifications = "draftboard_defaults_did_see_notifications"
     
     func roundToScreenPixel(v: CGFloat) -> CGFloat {
@@ -36,7 +36,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = RootViewController.sharedInstance
         window!.makeKeyAndVisible()
         
+        preloadKeyboard()
+        
         return true
+    }
+    
+    func preloadKeyboard() {
+        let lagFreeField: UITextField = UITextField()
+        self.window?.addSubview(lagFreeField)
+        lagFreeField.becomeFirstResponder()
+        lagFreeField.resignFirstResponder()
+        lagFreeField.removeFromSuperview()
     }
     
     func applicationWillResignActive(application: UIApplication) {
