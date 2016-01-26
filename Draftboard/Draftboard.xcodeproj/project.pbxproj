@@ -131,7 +131,6 @@
 		5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A321E1BCD6E09006C758B /* DraftboardBadgeButton.swift */; };
 		5D9A32211BCD72A0006C758B /* DraftboardNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */; };
 		5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */; };
-		5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */; };
 		5DA644A31C56A27500B44DC5 /* LineupCardToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA644A21C56A27500B44DC5 /* LineupCardToggle.swift */; };
 		5DAC07921C21DCC10002B97B /* DraftboardDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07911C21DCC10002B97B /* DraftboardDetailCell.swift */; };
 		5DAC07941C21DCC60002B97B /* DraftboardDetailListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07931C21DCC60002B97B /* DraftboardDetailListItem.swift */; };
@@ -300,7 +299,6 @@
 		5D9A321E1BCD6E09006C758B /* DraftboardBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardBadgeButton.swift; sourceTree = "<group>"; };
 		5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardNavController.swift; sourceTree = "<group>"; };
 		5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTabController.swift; sourceTree = "<group>"; };
-		5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "basketball-lineup.jpg"; sourceTree = "<group>"; };
 		5D9D686F1BB5B59E00855501 /* DraftboardButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardButton.swift; sourceTree = "<group>"; };
 		5D9D68731BB5B59E00855501 /* DraftboardRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardRoundButton.swift; sourceTree = "<group>"; };
 		5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalViewController.swift; sourceTree = "<group>"; };
@@ -521,7 +519,6 @@
 			isa = PBXGroup;
 			children = (
 				5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */,
-				5D9C2FCC1BAC685E0076355D /* basketball-lineup.jpg */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -725,7 +722,6 @@
 				3C1F970C1C49B4D000A5BA0E /* ContestsPlayerHeaderCell.xib in Resources */,
 				3C74CA491BE0517B0077DF0C /* ContestsListController.xib in Resources */,
 				3CB630AB1C10E85F00ACEAD3 /* ContestConfirmationModal.xib in Resources */,
-				5D9C2FCD1BAC685E0076355D /* basketball-lineup.jpg in Resources */,
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */,
 				5DAC07961C21DE680002B97B /* DraftboardDetailCell.xib in Resources */,

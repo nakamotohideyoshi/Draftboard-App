@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="OpenSans-Light.ttf">
-            <string>OpenSans-Light</string>
-        </mutableArray>
-        <mutableArray key="OpenSans-Semibold.ttf">
-            <string>OpenSans-Semibold</string>
+        <mutableArray key="Oswald-Bold.ttf">
+            <string>Oswald-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -41,26 +38,9 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQe-Dq-RT6">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="488"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basketball-lineup.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wEd-ga-bn1">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lineup-cta" translatesAutoresizingMaskIntoConstraints="NO" id="wEd-ga-bn1">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="443"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GET IN THE ACTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REV-yZ-qef" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="22" y="22" width="291" height="14"/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="letterSpacing">
-                                            <real key="value" value="0.29999999999999999"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a Lineup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G09-aq-qUZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="36" width="293" height="41"/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="30"/>
-                                    <color key="textColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIh-Wp-jOB" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="443" width="335" height="45"/>
                                     <constraints>
@@ -77,17 +57,25 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="IT’S ANYONE’S GAME" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G09-aq-qUZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="36" width="293" height="112"/>
+                                    <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="46"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeightMultiple">
+                                            <real key="value" value="0.81999999999999995"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="wEd-ga-bn1" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" id="00g-YD-FJm"/>
                                 <constraint firstItem="KIh-Wp-jOB" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" id="4ZA-KO-rwN"/>
-                                <constraint firstAttribute="trailing" secondItem="REV-yZ-qef" secondAttribute="trailing" constant="22" id="9wy-4a-x6O"/>
+                                <constraint firstItem="G09-aq-qUZ" firstAttribute="top" secondItem="OQe-Dq-RT6" secondAttribute="top" constant="36" id="FZW-Wi-tnp"/>
                                 <constraint firstAttribute="trailing" secondItem="wEd-ga-bn1" secondAttribute="trailing" id="H8P-6h-4ce"/>
-                                <constraint firstItem="REV-yZ-qef" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="22" id="Mxi-aD-GHA"/>
                                 <constraint firstAttribute="trailing" secondItem="KIh-Wp-jOB" secondAttribute="trailing" id="Of1-JP-yM4"/>
-                                <constraint firstItem="G09-aq-qUZ" firstAttribute="top" secondItem="REV-yZ-qef" secondAttribute="bottom" id="WqV-Bi-vPH"/>
-                                <constraint firstItem="REV-yZ-qef" firstAttribute="top" secondItem="OQe-Dq-RT6" secondAttribute="top" constant="22" id="YVh-18-qA2"/>
                                 <constraint firstAttribute="bottom" secondItem="wEd-ga-bn1" secondAttribute="bottom" constant="45" id="ZQE-wD-EK0"/>
                                 <constraint firstItem="wEd-ga-bn1" firstAttribute="top" secondItem="OQe-Dq-RT6" secondAttribute="top" id="hGN-5T-DUj"/>
                                 <constraint firstItem="G09-aq-qUZ" firstAttribute="leading" secondItem="OQe-Dq-RT6" secondAttribute="leading" constant="20" id="jh7-Tk-h5I"/>
@@ -120,6 +108,6 @@
         </view>
     </objects>
     <resources>
-        <image name="basketball-lineup.jpg" width="592" height="914"/>
+        <image name="lineup-cta" width="296" height="457"/>
     </resources>
 </document>
