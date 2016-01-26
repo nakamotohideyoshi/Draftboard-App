@@ -229,6 +229,28 @@ extension API {
 //            }
         }
     }
+    
+    class func prizeStructure(id id: Int) -> Promise<[NSDictionary]> {
+        let path = "api/prize/\(id)/"
+        return API.get(path).then { json in
+            guard let data = json as? NSDictionary,
+                ranks = data["ranks"] as? [NSDictionary]
+            else { throw APIError.FailedToParse(json) }
+            
+            var payouts = [NSDictionary]()
+            for position in ranks {
+                guard let rank = position["rank"] as? Int,
+                    value = position["value"] as? Double
+                else { throw APIError.FailedToModel(NSDictionary) }
+                payouts.append([
+                    "left": String(format: "%dst", rank),
+                    "right": Format.currency.stringFromNumber(value)!
+                ])
+            }
+            return Promise(payouts)
+        }
+    }
+
 }
 
 // MARK: - Errors and Typealiases

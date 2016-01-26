@@ -35,10 +35,6 @@ class ContestDetailViewController: DraftboardViewController {
     var draftButtonTopStart: CGFloat = 0.0
     
     var stuck = true
-    var draftable = true
-    
-    var player: Player?
-    var playerUpdates = [String]()
     
     let detailCellIdentifier = "contest_detail_cell"
     
@@ -49,8 +45,22 @@ class ContestDetailViewController: DraftboardViewController {
     var lineupSelected: Int?
     var confirmationModal: ContestConfirmationModal?
     
+    var tableData = [
+        "payout": [NSDictionary](),
+        "scoring": [NSDictionary](),
+        "games": [NSDictionary](),
+        "entries": [NSDictionary]()
+    ]
+    var tableDataKey = "payout"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Retrieve data
+        API.prizeStructure(id: contest.prizeStructure).then { payout -> Void in
+            self.tableData["payout"] = payout
+            self.tableView.reloadData()
+        }
         
         // Create UI
         createSegmentedControl()
@@ -103,26 +113,6 @@ class ContestDetailViewController: DraftboardViewController {
         let bundle = NSBundle(forClass: self.dynamicType)
         let cellNib = UINib(nibName: "DraftboardDetailCell", bundle: bundle)
         tableView.registerNib(cellNib, forCellReuseIdentifier: detailCellIdentifier)
-        
-        // Fake data
-        playerUpdates = [
-            "John Lackey beats Royals for ninth win",
-            "Matthew Berry dishes out his player advice",
-            "McHale firing signals revisions in coach's job",
-            "Ford/Pelton: Was Russell right for Lakers?",
-            "Drummond best center in the NBA?",
-            "Surprising pace leaders",
-            "DeRozan's career-best start",
-            "Finding fantasy NBA studs with usage rate",
-            "John Lackey beats Royals for ninth win",
-            "Matthew Berry dishes out his player advice",
-            "McHale firing signals revisions in coach's job",
-            "Ford/Pelton: Was Russell right for Lakers?",
-            "Drummond best center in the NBA?",
-            "Surprising pace leaders",
-            "DeRozan's career-best start",
-            "Finding fantasy NBA studs with usage rate",
-        ]
         
         if contestEntered {
             didEnterContest()
@@ -190,6 +180,8 @@ class ContestDetailViewController: DraftboardViewController {
         
         segmentedControl.indexChangedHandler = { (index: Int) in
             // TODO: switch / reload data
+            self.tableDataKey = ["payout", "scoring", "games", "entries"][index]
+            self.tableView.reloadData()
         }
     }
     
@@ -264,23 +256,30 @@ class ContestDetailViewController: DraftboardViewController {
 
 extension ContestDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playerUpdates.count
+        return tableData[tableDataKey]!.count + 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0 || indexPath.row == tableData[tableDataKey]!.count + 1) {
             let cell = UITableViewCell(style: .Default, reuseIdentifier: "player_detail_empty_cell")
             cell.userInteractionEnabled = false
             return cell
         }
         
         let cell = tableView.dequeueReusableCellWithIdentifier(detailCellIdentifier, forIndexPath: indexPath) as! DraftboardDetailCell
+        if let datum = tableData[tableDataKey]?[indexPath.row - 1] {
+            cell.leftLabel.text = datum["left"] as? String
+            cell.rightLabel.text = datum["right"] as? String
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 0) {
             return 122.0
+        }
+        else if (indexPath.row == tableData[tableDataKey]!.count + 1) {
+            return 100.0
         }
         
         return 40.0
