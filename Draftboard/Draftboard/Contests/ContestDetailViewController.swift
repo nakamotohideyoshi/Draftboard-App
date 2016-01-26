@@ -20,6 +20,7 @@ class ContestDetailViewController: DraftboardViewController {
     @IBOutlet weak var prizesLabel: DraftboardLabel!
     @IBOutlet weak var guaranteedImageView: UIImageView!
     @IBOutlet weak var entriesLabel: DraftboardLabel!
+    @IBOutlet weak var prizesLabelConstraint: NSLayoutConstraint!
     
     var draftButton: DraftboardArrowButton!
     var draftButtonTop: NSLayoutConstraint!
@@ -85,6 +86,7 @@ class ContestDetailViewController: DraftboardViewController {
         prizesLabel.text = prizes
         entriesLabel.text = entries
         if !contest.gpp {
+            prizesLabelConstraint.constant = 0
             guaranteedImageView.hidden = true
         }
         
