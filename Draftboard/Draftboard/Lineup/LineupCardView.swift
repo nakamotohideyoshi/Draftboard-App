@@ -64,6 +64,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
         winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
         
+        print(liveStatView)
         super.setupNib()
     }
     
@@ -111,7 +112,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         toggleView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -20.0).active = true
         toggleView.heightRancor.constraintEqualToConstant(44.0).active = true
         
-        toggleView.selectButton(1)
+        toggleView.selectButton(2)
         
         addStats()
         addLoaderView()
@@ -119,7 +120,16 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     }
     
     func didTapToggleButton(index: Int) {
-        // TODO: update data display
+        if index == 1 {
+            for (_, cellView) in cellViews.enumerate() {
+                cellView.showFPPG()
+            }
+        }
+        else if index == 2 {
+            for (_, cellView) in cellViews.enumerate() {
+                cellView.showSalary()
+            }
+        }
     }
     
     func updateContent() {
@@ -171,7 +181,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     
     func addStats() {
         addStatToContainerView(feesStatView, containerView: leftStatContainerView)
-        addStatToContainerView(liveStatView!, containerView: centerStatContainerView)
+        addStatToContainerView(liveStatView, containerView: centerStatContainerView)
         addStatToContainerView(salaryStatView, containerView: rightStatContainerView)
     }
     
@@ -250,6 +260,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
             let cellView = LineupCardCellView()
             cellView.unitLabel.text = ""
             cellView.player = player
+            cellView.showSalary()
             cellView.positionLabel.text = lineup!.sport.positions[i]
             
             contentView.addSubview(cellView)

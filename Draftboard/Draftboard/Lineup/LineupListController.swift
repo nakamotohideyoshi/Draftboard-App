@@ -212,9 +212,20 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     func presentDraftGroupPrompt() {
+        let mcc = DraftboardModalChoiceController(title: "CHOOSE A SPORT", choices: nil)
+        RootViewController.sharedInstance.pushModalViewController(mcc)
+        
         when(API.draftGroupUpcoming(), API.contestLobby()).then { draftGroups, contests -> Void in
             self.collateDraftGroups(draftGroups, contests: contests)
             self.selectSport()
+            
+            let choices = self.sportChoices!
+            if (choices.count == 0) {
+                mcc.titleLabel.text = "No DraftGroups Available!"
+            }
+
+            mcc.choiceData = choices
+            mcc.reloadChoiceViews()
         }
     }
     
@@ -272,10 +283,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     // MARK: - DraftGroup selection
     
     func selectSport() {
-        let choices = sportChoices!
-        let title = (choices.count) > 0 ? "Choose a Sport" : "No DraftGroups Available!"
-        let mcc = DraftboardModalChoiceController(title: title, choices: choices)
-        RootViewController.sharedInstance.pushModalViewController(mcc)
+
     }
     
     func didSelectSport(index: Int) {

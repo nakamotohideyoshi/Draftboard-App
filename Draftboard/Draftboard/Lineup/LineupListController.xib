@@ -55,6 +55,12 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a Lineup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G09-aq-qUZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="20" y="36" width="293" height="41"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="30"/>
+                                    <color key="textColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIh-Wp-jOB" customClass="DraftboardArrowButton" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="443" width="335" height="45"/>
                                     <constraints>
@@ -71,12 +77,6 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a Lineup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G09-aq-qUZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="36" width="293" height="41"/>
-                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="30"/>
-                                    <color key="textColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.92156863209999995" green="0.92941176889999999" blue="0.94901961089999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>

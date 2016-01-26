@@ -10,7 +10,7 @@ import UIKit
 
 class LineupCardCellView: DraftboardNibControl {
     @IBOutlet weak var positionLabel: DraftboardLabel!
-    @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var rightLabel: DraftboardLabel!
     @IBOutlet weak var nameLabel: DraftboardLabel!
     @IBOutlet weak var teamLabel: DraftboardLabel!
     @IBOutlet weak var selectedView: DraftboardView!
@@ -27,7 +27,20 @@ class LineupCardCellView: DraftboardNibControl {
             avatarView.avatarImageView.image = UIImage(named: "sample-avatar-big")
             nameLabel.text = player?.shortName
             teamLabel.text = player?.team
-            rightLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
+        }
+    }
+    
+    func showFPPG() {
+        if let player = player {
+            rightLabel.text = String(format: "%.1f", player.fppg)
+            unitLabel.text = "PTS"
+        }
+    }
+    
+    func showSalary() {
+        if let player = player {
+            rightLabel.text = Format.currency.stringFromNumber(player.salary ?? 0)
+            unitLabel.text = ""
         }
     }
 }

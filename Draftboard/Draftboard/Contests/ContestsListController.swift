@@ -14,8 +14,8 @@ class ContestsListController: DraftboardViewController{
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var lineupButton: DraftboardFilterButton!
-    @IBOutlet weak var gametypeButton: DraftboardFilterButton!
+    @IBOutlet weak var lineupButton: DraftboardArrowButton!
+    @IBOutlet weak var gametypeButton: DraftboardArrowButton!
     
 //    let tempSections = [
 //        "Live",
@@ -30,12 +30,14 @@ class ContestsListController: DraftboardViewController{
         super.viewDidLoad()
         
         tableView.backgroundColor = .blueDarker()
+        
         API.contestLobby().then { contests in
             self.gotContests(contests)
         }
         API.contestEntries().then { entries in
             self.gotEntries(entries)
         }
+        
         let bundle = NSBundle(forClass: self.dynamicType)
         let contestCellNib = UINib(nibName: "DraftboardContestsCell", bundle: bundle)
         let contestUpcomingCellNib = UINib(nibName: "DraftboardContestsUpcomingCell", bundle: bundle)
@@ -45,19 +47,42 @@ class ContestsListController: DraftboardViewController{
         tableView.registerNib(contestUpcomingCellNib, forCellReuseIdentifier: normalContestCellReuseIdentifier)
         tableView.registerNib(contestHeaderNib, forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
         
-        /*
-        lineupButton.text = lineups[0].name
-        let lineupTapGesture = UITapGestureRecognizer(target: self, action: "switchLineup:")
-        lineupButton.addGestureRecognizer(lineupTapGesture)
-        gametypeButton.text = GameType.Standard.rawValue
-        let gameTypeTapGesture = UITapGestureRecognizer(target: self, action: "switchGameType:")
-        gametypeButton.addGestureRecognizer(gameTypeTapGesture)
-        */
+        lineupButton.addTarget(self, action: Selector("lineupTap:"), forControlEvents: .TouchUpInside)
+        gametypeButton.addTarget(self, action: Selector("gametypeTap:"), forControlEvents: .TouchUpInside)
         
         tableView.delegate = self
     }
     
+    func lineupTap(button: DraftboardButton) {
+        let choices = NSDictionary(dictionary: [
+            "title": "Lineup A",
+            "subtitle": "Basketball",
+            "object": "Object"
+        ])
+        
+        let mcc = DraftboardModalChoiceController(title: "Lineup Types", choices: [choices])
+        RootViewController.sharedInstance.pushModalViewController(mcc)
+    }
     
+    func gametypeTap(button: DraftboardButton) {
+        let choices = NSDictionary(dictionary: [
+            "title": "Game Type A",
+            "subtitle": "14 Games",
+            "object": "Object"
+        ])
+        
+        let mcc = DraftboardModalChoiceController(title: "Game Types", choices: [choices])
+        RootViewController.sharedInstance.pushModalViewController(mcc)
+    }
+    
+    override func didSelectModalChoice(index: Int) {
+        // TODO: actually sort
+        RootViewController.sharedInstance.popModalViewController()
+    }
+    
+    override func didCancelModal() {
+        RootViewController.sharedInstance.popModalViewController()
+    }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if(buttonType == .Menu) {
