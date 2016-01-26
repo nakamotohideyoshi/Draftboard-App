@@ -23,6 +23,7 @@ class ContestsListController: DraftboardViewController{
 //        "Completed"
 //    ]
     
+    var lineups = [Lineup]()
     var contests = [Contest]()
     var entries = [Int]()
     
@@ -31,6 +32,9 @@ class ContestsListController: DraftboardViewController{
         
         tableView.backgroundColor = .blueDarker()
         
+        API.lineupUpcoming().then { lineups in
+            self.gotLineups(lineups)
+        }
         API.contestLobby().then { contests in
             self.gotContests(contests)
         }
@@ -54,24 +58,44 @@ class ContestsListController: DraftboardViewController{
     }
     
     func lineupTap(button: DraftboardButton) {
-        let choices = NSDictionary(dictionary: [
-            "title": "Lineup A",
-            "subtitle": "Basketball",
-            "object": "Object"
-        ])
-        
-        let mcc = DraftboardModalChoiceController(title: "Lineup Types", choices: [choices])
+        let noFilterChoice = [
+            "title": "Show All",
+            "subtitle": "? Contests"
+        ]
+        let mcc = DraftboardModalChoiceController(title: "Filter by Lineup Eligibility", choices: nil)
+        if self.lineups.count > 0 {
+            var choices = self.lineups.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
+            choices.insert(noFilterChoice, atIndex: 0)
+            mcc.choiceData = choices
+        }
+        else {
+            API.lineupUpcoming().then { lineups -> Void in
+                self.lineups = lineups
+                var choices = self.lineups.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
+                choices.insert(noFilterChoice, atIndex: 0)
+                mcc.choiceData = choices
+            }
+        }
         RootViewController.sharedInstance.pushModalViewController(mcc)
     }
     
     func gametypeTap(button: DraftboardButton) {
-        let choices = NSDictionary(dictionary: [
-            "title": "Game Type A",
-            "subtitle": "14 Games",
-            "object": "Object"
-        ])
-        
-        let mcc = DraftboardModalChoiceController(title: "Game Types", choices: [choices])
+        let choices = [
+            [
+                "title": "Show All",
+                "subtitle": "? Contests"
+            ],
+            [
+                "title": "Guaranteed Prize Pool",
+                "subtitle": "? Contests"
+            ],
+            [
+                "title": "Head-To-Head",
+                "subtitle": "? Contests"
+            ]
+        ]
+    
+        let mcc = DraftboardModalChoiceController(title: "Filter by Contest Type", choices: choices)
         RootViewController.sharedInstance.pushModalViewController(mcc)
     }
     
@@ -104,6 +128,10 @@ class ContestsListController: DraftboardViewController{
 
 // MARK: - Data
 extension ContestsListController {
+    func gotLineups(lineups: [Lineup]) {
+        self.lineups = lineups
+    }
+    
     func gotContests(contests: [Contest]) {
         self.contests = contests
         self.tableView.reloadData()
