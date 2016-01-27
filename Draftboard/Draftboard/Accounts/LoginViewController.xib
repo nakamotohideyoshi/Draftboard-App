@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -26,14 +26,12 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-login" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-ih-wf1">
                             <rect key="frame" x="166" y="186" width="64" height="55"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="KkW-lu-0bj"/>
                                 <constraint firstAttribute="width" constant="64" id="UBi-lT-inJ"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="CDt-ih-wf1" firstAttribute="centerY" secondItem="aQP-3X-iJG" secondAttribute="centerY" constant="-10" id="2p9-sP-A92"/>
                         <constraint firstItem="CDt-ih-wf1" firstAttribute="centerX" secondItem="aQP-3X-iJG" secondAttribute="centerX" constant="10" id="LcT-ul-tAQ"/>
@@ -50,7 +48,6 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kz-Pv-XKj" userLabel="loginField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="hSr-wF-efb"/>
                                             </constraints>
@@ -61,7 +58,6 @@
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb0-JJ-cIu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="50" width="345" height="50"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="oCH-H5-V60"/>
                                             </constraints>
@@ -74,7 +70,6 @@
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1XO-l8-dAf" customClass="DraftboardLoadingButton" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="35" y="135" width="276" height="50"/>
-                                            <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="TkO-DQ-FBZ"/>
@@ -85,7 +80,6 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="2kz-Pv-XKj" firstAttribute="top" secondItem="4bR-3r-Aib" secondAttribute="top" id="6hl-1j-FYU"/>
                                         <constraint firstItem="1XO-l8-dAf" firstAttribute="width" secondItem="4bR-3r-Aib" secondAttribute="width" multiplier="0.8" id="8BS-Ny-dpD"/>
@@ -123,7 +117,6 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.074509803921568626" green="0.10196078431372549" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4gV-Nr-lFS"/>

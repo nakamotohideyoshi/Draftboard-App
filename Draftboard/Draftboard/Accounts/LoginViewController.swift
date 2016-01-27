@@ -23,16 +23,16 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .clearColor()
+        view.backgroundColor = .clearColor()
         
-        passwordField.delegate = self
         loginField.delegate = self
+        passwordField.delegate = self
         
         tapGestureRecognizer = UITapGestureRecognizer()
         tapGestureRecognizer.addTarget(self, action: Selector("didTap:"))
         tapGestureRecognizer.delegate = self
         
-        self.view.addGestureRecognizer(tapGestureRecognizer)
+        view.addGestureRecognizer(tapGestureRecognizer)
         
         let defaultCenter = NSNotificationCenter.defaultCenter()
         defaultCenter.addObserver(self, selector:Selector("keyboardWillChange:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
@@ -161,7 +161,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         if (logoPosition == nil) {
             logoPosition = logoImageView.layer.position
         }
-
+        
         animateLogo(0.0, offset: -40.0)
     }
     
@@ -178,6 +178,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     func login() {
         let username = loginField.textField.text ?? ""
         let password = passwordField.textField.text ?? ""
+        
         API.auth(username: username, password: password).then { () -> Void in
             self.fulfill()
             self.leave()
@@ -195,7 +196,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
             
             let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
             let actions = ["Reset Password", "Try Again"]
-
+            
             vc.actions = actions
             vc.promise.then { index -> Void in
                 
@@ -221,7 +222,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
             
             self.loginButton.userInteractionEnabled = true
             self.loginButton.loading = false
-
+            
             RootViewController.sharedInstance.pushAlertViewController(vc)
             vc.errorLabel.text = finalErrorText
         }
@@ -235,5 +236,4 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     func leave() {
         RootViewController.sharedInstance.popModalViewController(true)
     }
-    
 }

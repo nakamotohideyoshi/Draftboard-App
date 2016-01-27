@@ -33,14 +33,9 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     @IBOutlet weak var centerStatContainerView: UIView!
     @IBOutlet weak var rightStatContainerView: UIView!
     
+    var curtainView: UIView!
+    var loaderView: LoaderView!
     var toggleView: LineupCardToggle!
-    
-    var showPlayerDetailAction: ((Player, isLive: Bool, isDraftable: Bool) -> Void)?
-    var editAction: (LineupCardView -> Void)?
-    var contestsAction: (LineupCardView -> Void)?
-    
-    var contentHeight: CGFloat!
-    var totalHeight: CGFloat!
     
     var pmrStatView: LineupStatPMRView!
     var liveStatView: LineupStatTimeView!
@@ -48,127 +43,251 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     var salaryStatView: LineupStatCurrencyView!
     var winningsStatView: LineupStatView!
     
+    var showPlayerDetailAction: ((Player, isLive: Bool, isDraftable: Bool) -> Void)?
+    var editAction: (LineupCardView -> Void)?
+    var contestsAction: (LineupCardView -> Void)?
+    
     var cellViews = [LineupCardCellView]()
-    let curtain = UIView()
     
-    var loaderView: LoaderView!
-    var lineup: Lineup?
-    
-    var liveTimer: NSTimer!
+    var liveTimer: NSTimer?
     var live = false
     
-    override func setupNib() {
+    var lineup: Lineup?
+    let cellCount: Int
+    
+    init(frame: CGRect, cellCount _cellCount: Int) {
+        cellCount = _cellCount
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func willAwakeFromNib() {
+        
+        // Configure content scroll view
+        contentView.indicatorStyle = .White
+        contentView.alwaysBounceVertical = true
+        
+        // Set divider heights
+        let onePixel = 1 / UIScreen.mainScreen().scale
+        dividerHeight.constant = onePixel
+        buttonDividerHeight.constant = onePixel
+        horizontalDividerWidth.constant = onePixel
+        
+        // Set button actions
+        editButton.addTarget(self, action: "didTapEdit", forControlEvents: .TouchUpInside)
+        contestsButton.addTarget(self, action: "didTapContests", forControlEvents: .TouchUpInside)
+        
+        // Create stat views
         feesStatView = LineupStatFeesView(style: .Small, titleText: "FEES", valueText: "$10/4")
         liveStatView = LineupStatTimeView(style: .Small, titleText: "TIME", date: nil)
         salaryStatView = LineupStatCurrencyView(style: .Small, titleText: "REM SALARY", currencyValue: nil)
         pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
         winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
         
-        print(liveStatView)
-        super.setupNib()
-    }
-    
-    override func willAwakeFromNib() {
-        contentView.indicatorStyle = .White
-        contentView.alwaysBounceVertical = true
-        
-        contentView.alpha = 0
-        contentView.hidden = true
-        
-        statContainerView.alpha = 0
-        statContainerView.hidden = true
-        
-        actionContainerView.alpha = 0
-        actionContainerView.hidden = true
-        
-        // set dividers to real 1px height
-        let onePixel = 1 / UIScreen.mainScreen().scale
-        dividerHeight.constant = onePixel
-        buttonDividerHeight.constant = onePixel
-        horizontalDividerWidth.constant = onePixel
-        
-        addSubview(curtain)
-        curtain.backgroundColor = .blueDarker()
-        curtain.translatesAutoresizingMaskIntoConstraints = false
-        curtain.topRancor.constraintEqualToRancor(self.topRancor).active = true
-        curtain.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
-        curtain.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
-        curtain.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        curtain.userInteractionEnabled = false
-        curtain.alpha = 0
-        
-        liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
-        
-        editButton.addTarget(self, action: "didTapEdit", forControlEvents: .TouchUpInside)
-        contestsButton.addTarget(self, action: "didTapContests", forControlEvents: .TouchUpInside)
-        
+        // Create cell toggle
         toggleView = LineupCardToggle(options: ["POINTS", "AVG FPPG", "SALARY"])
         toggleView.delegate = self
-        contentView.addSubview(toggleView)
+        toggleView.selectButton(2)
         
+        // Create curtain view
+        curtainView = UIView()
+        curtainView.alpha = 0
+        curtainView.userInteractionEnabled = false
+        curtainView.backgroundColor = .blueDarker()
+        
+        // Create loader view
+        loaderView = LoaderView(frame: CGRectZero)
+        loaderView.thickness = 2.0
+        loaderView.spinning = true
+        
+        // Add subviews
+        addSubview(curtainView)
+        addSubview(loaderView)
+        contentView.addSubview(toggleView)
+        leftStatContainerView.addSubview(feesStatView)
+        centerStatContainerView.addSubview(liveStatView)
+        centerStatContainerView.addSubview(pmrStatView)
+        rightStatContainerView.addSubview(salaryStatView)
+        rightStatContainerView.addSubview(winningsStatView)
+        
+        // Constrain subviews
+        constrainCurtainView()
+        constrainLoaderView()
+        constrainToggleView()
+        
+        constrainStatView(feesStatView)
+        constrainStatView(liveStatView)
+        constrainStatView(pmrStatView)
+        constrainStatView(salaryStatView)
+        constrainStatView(winningsStatView)
+        
+        // Create cell views
+        createCellViews()
+        showNormalContent()
+        showLoader()
+    }
+    
+    func reloadContent() {
+        if let lineup = lineup {
+            liveTimer?.invalidate()
+            liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
+            
+            liveStatView.date = lineup.draftGroup.start
+            salaryStatView.currencyValue = lineup.sport.salary - lineup.salary
+        }
+    }
+    
+    func constrainToggleView() {
         toggleView.translatesAutoresizingMaskIntoConstraints = false
         toggleView.topRancor.constraintEqualToRancor(contentView.topRancor).active = true
         toggleView.leftRancor.constraintEqualToRancor(self.leftRancor, constant: 20.0).active = true
         toggleView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -20.0).active = true
         toggleView.heightRancor.constraintEqualToConstant(44.0).active = true
-        
-        toggleView.selectButton(2)
-        
-        addStats()
-        addLoaderView()
-        updateContent()
+    }
+    
+    func constrainCurtainView() {
+        curtainView.translatesAutoresizingMaskIntoConstraints = false
+        curtainView.topRancor.constraintEqualToRancor(self.topRancor).active = true
+        curtainView.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+        curtainView.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+        curtainView.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+    }
+    
+    func constrainLoaderView() {
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
+        loaderView.centerXRancor.constraintEqualToRancor(self.centerXRancor).active = true
+    }
+    
+    func constrainStatView(statView: LineupStatView) {
+        let sv = statView.superview!
+        statView.translatesAutoresizingMaskIntoConstraints = false
+        statView.leftRancor.constraintEqualToRancor(sv.leftRancor).active = true
+        statView.rightRancor.constraintEqualToRancor(sv.rightRancor).active = true
+        statView.topRancor.constraintEqualToRancor(sv.topRancor).active = true
+        statView.bottomRancor.constraintEqualToRancor(sv.bottomRancor).active = true
     }
     
     func didTapToggleButton(index: Int) {
-        if index == 1 {
+        if index == 1 { // avg fppg
             for (_, cellView) in cellViews.enumerate() {
                 cellView.showFPPG()
             }
         }
-        else if index == 2 {
+        else if index == 2 { // salary
             for (_, cellView) in cellViews.enumerate() {
                 cellView.showSalary()
             }
         }
     }
     
-    func updateContent() {
-        if let lineup = lineup {
-            if lineup.draftGroup.complete {
-                self.layoutCellViews()
-                self.updateStats()
-                self.showContent()
-            }
-        }
+    func showLoader(animated: Bool = true) {
+        contentView.hidden = true
+        statContainerView.hidden = true
+        actionContainerView.hidden = true
+        loaderView.hidden = false
     }
     
-    func addLoaderView() {
-        loaderView = LoaderView(frame: CGRectZero)
-        loaderView.thickness = 2.0
-        self.addSubview(loaderView)
-        
-        loaderView.translatesAutoresizingMaskIntoConstraints = false
-        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
-        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
-        loaderView.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
-        loaderView.centerXRancor.constraintEqualToRancor(self.centerXRancor).active = true
-        
-        loaderView.spinning = true
-    }
-    
-    func showContent(animated: Bool = true) {
+    func hideLoader(animated: Bool = true) {
         contentView.hidden = false
         statContainerView.hidden = false
         actionContainerView.hidden = false
+        loaderView.hidden = true
+    }
+    
+    func showNormalContent() {
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.contentView.alpha = 1.0
-            self.statContainerView.alpha = 1.0
-            self.actionContainerView.alpha = 1.0
-            self.loaderView.alpha = 0.0
-        }) { (completed) -> Void in
-            self.loaderView.hidden = true
+        // Show date, salary
+        liveStatView.hidden = false
+        salaryStatView.hidden = false
+        
+        // Hide PMR, winnings
+        pmrStatView.hidden = true
+        winningsStatView.hidden = true
+        
+        // Update constraints
+        contestWidth.active = true
+        liveContestWidth.active = false
+        
+        // Hide views
+        horizontalDivider.hidden = false
+        editButton.hidden = false
+        
+        // Animate cells
+        for (_, cellView) in cellViews.enumerate() {
+            cellView.avatarView.PMRView.hidden = true
         }
+    }
+    
+    func showLiveContent(animated: Bool) {
+        
+        // Hide date, salary
+        liveStatView.hidden = true
+        salaryStatView.hidden = true
+        
+        // Show PMR, winnings
+        pmrStatView.hidden = false
+        winningsStatView.hidden = false
+        
+        // Update constraints
+        contestWidth.active = false
+        liveContestWidth.active = true
+        
+        // Hide views
+        horizontalDivider.hidden = true
+        editButton.hidden = true
+        
+        // Animate cells
+        for (i, cellView) in cellViews.enumerate() {
+            cellView.avatarView.PMRView.setProgress(1.0, animated: animated, delay: Double(i) * 0.1)
+            cellView.avatarView.PMRView.hidden = false
+        }
+        
+        // Animate PMR graph
+        pmrStatView.graphView.setProgress(1.0)
+    }
+    
+    func cellHeight() -> CGFloat {
+        let h = UIScreen.mainScreen().bounds.height
+        if (h > 568) { // 6, 6S, 6+, 6S+
+            return 51.0
+        } else if (h > 480.0) { // 5, 5C, 5S
+            return 45.0
+        } else { // 4, 4S
+            return 42.0
+        }
+    }
+    
+    func createCellViews() {
+        let height = cellHeight()
+        
+        for _ in 1...cellCount {
+            let cellView = LineupCardCellView()
+            cellView.addTarget(self, action: "didTapPlayerCell:", forControlEvents: .TouchUpInside)
+            contentView.addSubview(cellView)
+            
+            cellView.translatesAutoresizingMaskIntoConstraints = false
+            cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
+            cellView.heightRancor.constraintEqualToConstant(height).active = true
+            cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
+            
+            if let lastCellView = cellViews.last {
+                cellView.topRancor.constraintEqualToRancor(lastCellView.bottomRancor).active = true
+            }
+            else {
+                cellView.topRancor.constraintEqualToRancor(toggleView.bottomRancor).active = true
+            }
+            
+            cellViews.append(cellView)
+        }
+        
+        // Scroll view
+        cellViews.last?.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
     }
     
     func didTapEdit() {
@@ -179,122 +298,28 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         contestsAction?(self)
     }
     
-    func addStats() {
-        addStatToContainerView(feesStatView, containerView: leftStatContainerView)
-        addStatToContainerView(liveStatView, containerView: centerStatContainerView)
-        addStatToContainerView(salaryStatView, containerView: rightStatContainerView)
-    }
-    
-    func updateStats() {
-        if let l = lineup {
-            liveStatView.date = l.draftGroup.start
-            salaryStatView.currencyValue = l.sport.salary - l.salary
-        }
-    }
-    
-    func makeLive() {
-        live = true
-        
-        liveStatView!.removeFromSuperview()
-        liveStatView = nil
-        
-        salaryStatView.removeFromSuperview()
-        salaryStatView = nil
-        
-        addStatToContainerView(pmrStatView, containerView: centerStatContainerView)
-        addStatToContainerView(winningsStatView, containerView: rightStatContainerView)
-        
-        for (i, cellView) in cellViews.enumerate() {
-            cellView.avatarView.PMRView.setProgress(1.0, animated: true, delay: Double(i) * 0.1)
-            cellView.avatarView.PMRView.hidden = false
-            cellView.rightLabel.text = "0"
-            cellView.unitLabel.text = "PTS"
-        }
-        
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            dispatch_async(dispatch_get_main_queue(),{
-                self.pmrStatView.graphView.setProgress(1.0)
-            })
-        }
-        
-        contestWidth.active = false
-        liveContestWidth.active = true
-        
-        horizontalDivider.removeFromSuperview()
-        editButton.removeFromSuperview()
-    }
-    
-    func addStatToContainerView(statView: LineupStatView, containerView: UIView) {
-        containerView.addSubview(statView)
-        statView.translatesAutoresizingMaskIntoConstraints = false
-        statView.leftRancor.constraintEqualToRancor(containerView.leftRancor).active = true
-        statView.rightRancor.constraintEqualToRancor(containerView.rightRancor).active = true
-        statView.topRancor.constraintEqualToRancor(containerView.topRancor).active = true
-        statView.bottomRancor.constraintEqualToRancor(containerView.bottomRancor).active = true
-    }
-    
-    func cellHeight() -> CGFloat {
-        let h = UIScreen.mainScreen().bounds.height
-        
-        if (h > 568) { // 6, 6S, 6+, 6S+
-            return 51.0
-        } else if (h > 480.0) { // 5, 5C, 5S
-            return 45.0
-        } else { // 4, 4S
-            return 42.0
-        }
-    }
-    
-    func layoutCellViews() {
-        for cellView in cellViews {
-            cellView.removeFromSuperview()
-        }
-        
-        cellViews = [LineupCardCellView]()
-
-        var previousCell: LineupCardCellView?
-        let height = cellHeight()
-        
-        for (i, player) in lineup!.players.enumerate() {
-            let cellView = LineupCardCellView()
-            cellView.unitLabel.text = ""
-            cellView.player = player
-            cellView.showSalary()
-            cellView.positionLabel.text = lineup!.sport.positions[i]
-            
-            contentView.addSubview(cellView)
-            cellViews.append(cellView)
-            
-            cellView.translatesAutoresizingMaskIntoConstraints = false
-            cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
-            cellView.heightRancor.constraintEqualToConstant(height).active = true
-            cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
-            
-            if (previousCell == nil) {
-                cellView.topRancor.constraintEqualToRancor(toggleView.bottomRancor).active = true
-            }
-            else {
-                cellView.topRancor.constraintEqualToRancor(previousCell!.bottomRancor).active = true
-            }
-            
-            if (i == lineup!.players.count - 1) {
-                cellView.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
-            }
-            
-            cellView.addTarget(self, action: "didTapPlayerCell:", forControlEvents: .TouchUpInside)
-            previousCell = cellView
-        }
-    }
-    
     func didTapPlayerCell(playerCell: LineupCardCellView) {
         if let showPlayerDetail = showPlayerDetailAction {
             if playerCell.player == nil {
                 return
             }
+            
             showPlayerDetail(playerCell.player!, isLive: live, isDraftable: false)
         }
-        
+    }
+    
+    func updateTime() {
+        if let lineup = lineup {
+            let now = NSDate()
+            let liveDate = lineup.draftGroup.start
+            if (liveDate.earlierDate(now) == liveDate) {
+                liveTimer?.invalidate()
+                liveTimer = nil
+                
+                showLiveContent(true)
+                live = true
+            }
+        }
     }
     
     override func layoutSubviews() {
@@ -305,29 +330,17 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
             liveContestWidth.active = true
         }
     }
-    
-    func updateTime() {
-        if let lineup = lineup {
-            let now = NSDate()
-            let liveDate = lineup.draftGroup.start
-            if (liveDate.earlierDate(now) == liveDate) {
-                liveTimer.invalidate()
-                liveTimer = nil
-                makeLive()
-            }
-        }
-    }
 }
 
 // TODO: This should really be restricted to LineupCardView, but the
 // create lineup CTA currently shares this behavior
 extension UIView {
-    
+
     func fade(amount: Double) {
         self.alpha = 1 // dumb, fix later
         if self.isKindOfClass(LineupCardView) {
             let lcv = self as! LineupCardView
-            lcv.curtain.alpha = CGFloat(amount * 0.8)
+            lcv.curtainView.alpha = CGFloat(amount * 0.8)
         }
     }
     

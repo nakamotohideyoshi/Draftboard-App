@@ -14,27 +14,26 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     @IBOutlet weak var createView: UIView!
     @IBOutlet weak var createViewButton: DraftboardRoundButton!
     @IBOutlet weak var createImageView: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var paginationView: DraftboardPagination!
     @IBOutlet weak var paginationHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var titleText: String = "Lineups"
-    var lineupCardViews : [LineupCardView] = []
-    var lastConstraint : NSLayoutConstraint?
+    var lineupCardViews: [LineupCardView] = []
+    var lastConstraint: NSLayoutConstraint?
     var loaderView: LoaderView!
     
-    var sportChoices: [NSDictionary]?
     var draftGroupChoices: [String: [NSDictionary]]?
-//    var draftGroupChoicesBySportName: [String: [String: String]]?
-    var selectedSport: Sport?
+    var sportChoices: [NSDictionary]?
+    
     var selectedDraftGroup: DraftGroup?
+    var selectedSport: Sport?
+    
     var lineups: [Lineup] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .clearColor()
-        paginationHeight.constant = 0
         
         // Pre-fetch data required for lineup creation
         API.lineupUpcoming().then { lineups in
@@ -54,9 +53,25 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.alpha = 0
         
-        // Create goes on top
-        view.bringSubviewToFront(self.createView)
-        self.showSpinner()
+        // Pagination height
+        paginationHeight.constant = 0
+        
+        // Add loader view
+        addLoaderView()
+    }
+    
+    func addLoaderView() {
+        loaderView = LoaderView(frame: CGRectZero)
+        loaderView.thickness = 2.0
+        view.addSubview(loaderView)
+        
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor).active = true
+        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
+        
+        loaderView.spinning = true
     }
     
     // MARK: - Titlebar delegate methods
@@ -94,14 +109,15 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         self.lineups = lineups
         self.updatePagination()
         
-        self.hideSpinner()
+        // Hide spinner
+        self.loaderView.hidden = true
         UIView.animateWithDuration(0.25) { () -> Void in
             self.scrollView.alpha = 1.0
         }
         
+        // Load lineup players
         for lineup in lineups {
             self.presentLineupCard(lineup, scroll: false)
-            
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
                 
@@ -109,7 +125,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
                     if let cardLineup = cardView.lineup {
                         if cardLineup.id == lineup.id {
                             cardView.lineup = lineup
-                            cardView.updateContent()
+                            cardView.hideLoader()
                             break
                         }
                     }
@@ -168,10 +184,12 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         for draftGroup in draftGroups {
             let s = draftGroup.sport.name
             let id = draftGroup.id
+            
             // Start time
             let df = NSDateFormatter()
             df.dateFormat = "E, MMM dd, h:mm a"
             let start = df.stringFromDate(draftGroup.start)
+            
             // Contest and game counts
             let contestCount = draftGroupContestCounts[id] ?? 0
             let contestNoun = (contestCount == 1) ? "Contest" : "Contests"
@@ -182,6 +200,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
                 "subtitle": "\(contestCount) \(contestNoun), \(gameCount) \(gameNoun)",
                 "object": draftGroup
             ]
+            
             var choices = draftGroupChoices[s] ?? [NSDictionary]()
             choices.append(choice)
             draftGroupChoices[s] = choices
@@ -190,21 +209,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         self.sportChoices = sportChoices
         self.draftGroupChoices = draftGroupChoices
     }
-
-    // MARK: - View presentation
     
-    func showSpinner() {
-        loaderView = LoaderView(frame: CGRectMake(0, 0, 42, 42))
-        
-        view.insertSubview(loaderView, belowSubview: scrollView)
-        loaderView.translatesAutoresizingMaskIntoConstraints = false
-        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
-        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: 38.0 - 30.0).active = true
-        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
-        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
-        
-        loaderView.spinning = true
-    }
+    // MARK: - View presentation
     
     func hideSpinner() {
         loaderView.spinning = false
@@ -223,7 +229,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             if (choices.count == 0) {
                 mcc.titleLabel.text = "No DraftGroups Available!"
             }
-
+            
             mcc.choiceData = choices
             mcc.reloadChoiceViews()
         }
@@ -241,7 +247,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     func presentLineupCard(lineup: Lineup, scroll: Bool = true) -> LineupCardView {
         self.createView.hidden = true
         
-        let cardView = LineupCardView()
+        let cardView = LineupCardView(frame: CGRectMake(0, 0, 10, 10), cellCount: 12)
         scrollView.addSubview(cardView)
         cardView.lineup = lineup
         
@@ -335,8 +341,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             self.updatePagination()
             
             lineup.draftGroup.complete = true
-            let cardView = self.presentLineupCard(lineup)
-            cardView.updateContent()
+            //self.presentLineupCard(lineup)
+            //cardView.updateContent()
             
             self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
             API.lineupCreate(lineup)

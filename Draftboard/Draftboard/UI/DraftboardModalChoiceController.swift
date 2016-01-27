@@ -79,6 +79,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         
         addLoaderView()
         showLoader(false)
+        
         if choiceData != nil {
             reloadChoiceViews()
             hideLoader(false)
