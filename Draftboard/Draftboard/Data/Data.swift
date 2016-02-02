@@ -9,43 +9,94 @@
 import UIKit
 import PromiseKit
 
-class Data {
-}
-
 /*
+PLEASE NOTE:
+* Currently, API requests are made every time, no matter what.
+* You can selectively ignore cached or fresh results, as in patterns 2 & 3.
+* Specifying the maxCacheAge parameter allows forced invalidation of cache.
 
-    // Draft groups, all upcoming (lazy by default as a static var)
-    static var draftGroupUpcoming = API.draftGroupUpcoming()
-    
-    // Draft group by id
-    private static var _draftGroupId = [Int: Promise<DraftGroup>]()
-    class func draftGroup(id id: Int) -> Promise<DraftGroup> {
-        if let draftGroup = _draftGroupId[id] {
-            return draftGroup
-        } else {
-            let draftGroup = API.draftGroup(id: id)
-            _draftGroupId[id] = draftGroup
-            return draftGroup
-        }
+PATTERNS FOR USE:
+* 1. Use cached (if it exists) AND update with fresh. (1 or 2 udpates)
+
+Data.lineups().then { cached, fresh -> Promise<[Lineup]> in
+    if let lineups = cached {
+        self.updateWithData(lineups)
     }
-    
-    // Contests, all upcoming
-    static var contestLobby = API.contestLobby()
-    
-    // Sports injuries by id
-    private static var _sportsInjuries = [String: Promise<[Int: String]>]()
-    class func sportsInjuries(sportName: String) -> Promise<[Int: String]> {
-        if let injuries = _sportsInjuries[sportName] {
-            return injuries
-        } else {
-            let injuries = API.sportsInjuries(sportName)
-            _sportsInjuries[sportName] = injuries
-            return injuries
-        }
-    }
-    
-    // Lineups, all upcoming
-    static var lineupUpcoming = API.lineupUpcoming()
+    return fresh
+}.then { lineups in
+    self.updateWithData(lineups)
 }
 
+* 2. Use cached (if it exists) OR use fresh. (1 update)
+
+Data.lineups().then { cached, fresh -> Promise<[Lineup]> in
+    if let lineups = cached {
+        return Promise(lineups)
+    }
+    return fresh
+}.then { lineups in
+    self.updateWithData(lineups)
+}
+
+* 3. Ignore cached, ONLY use fresh. (1 update)
+
+Data.lineups().then { cached, fresh -> Promise<[Lineup]> in
+    return fresh
+}.then { lineups in
+    self.updateWithData(lineups)
+}
 */
+
+private class Datum<T> {
+    var endpoint: () -> Promise<T>
+    var date: NSDate = NSDate.distantPast()
+    var cached: T?
+    var pending: Promise<T>?
+    
+    func cachedAndFresh(maxCacheAge maxAge: NSTimeInterval) -> Promise<(T?, Promise<T>)> {
+        // Expired?
+        if NSDate().timeIntervalSinceDate(date) > maxAge {
+            cached = nil
+        }
+        // Limit identical API requests to one at a time
+        if pending == nil {
+            pending = endpoint().then { (fresh: T) -> Promise<T> in
+                self.date = NSDate()
+                self.cached = fresh
+                return Promise(fresh)
+            }.always {
+                self.pending = nil
+            }
+        }
+        // Swift compiler gets confused if these lines are combined
+        let tup = (cached, pending!)
+        return Promise(tup)
+    }
+    
+    init(endpoint: () -> Promise<T>) {
+        self.endpoint = endpoint
+    }
+}
+
+class Data {
+    typealias LineupsPromise = Promise<([Lineup]?, Promise<[Lineup]>)>
+    typealias DraftGroupPromise = Promise<(DraftGroup?, Promise<DraftGroup>)>
+
+    // Upcoming lineups
+    private static var lineups: Datum<[Lineup]>?
+    class func lineups(maxCacheAge: NSTimeInterval = 60) -> LineupsPromise {
+        if lineups == nil {
+            lineups = Datum<[Lineup]> { API.lineupUpcoming() }
+        }
+        return lineups!.cachedAndFresh(maxCacheAge: maxCacheAge)
+    }
+    
+    // Upcoming draftgroups
+    private static var draftGroup = [Int: Datum<DraftGroup>]()
+    class func draftGroup(id id: Int, maxCacheAge: NSTimeInterval = 60) -> DraftGroupPromise {
+        if draftGroup[id] == nil {
+            draftGroup[id] = Datum<DraftGroup> { API.draftGroup(id: id) }
+        }
+        return draftGroup[id]!.cachedAndFresh(maxCacheAge: maxCacheAge)
+    }
+}
