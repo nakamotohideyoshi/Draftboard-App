@@ -52,8 +52,6 @@ class DraftboardPagination: UIControl {
     }
     
     func createPages() {
-        print(pages)
-        
         if (pages <= 0) {
             return
         }
@@ -103,5 +101,7 @@ class DraftboardPagination: UIControl {
             // Keep page view
             pageViews.append(pageView)
         }
+        
+        page = -1
     }
 }

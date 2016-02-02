@@ -349,7 +349,10 @@ extension DraftboardNavController {
         
         fv.layer.position = startPos
         let spring = Spring(stiffness: 3.4, damping: 0.62, velocity: 0.0)
+        
+        fv.alpha = 0
         spring.updateBlock = { (value) -> Void in
+            fv.alpha = 1.0
             fv.layer.position = CGPointMake(
                 startPos.x + (deltaPos.x * value),
                 startPos.y + (deltaPos.y * value)

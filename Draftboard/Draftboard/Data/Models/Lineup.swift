@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Lineup: Model {
     var name: String = ""
@@ -17,6 +18,7 @@ class Lineup: Model {
         didSet { didSetDraftGroup(draftGroup) }
     }
     var players: [Player?] = [Player?]()
+    var cardScrollPos: CGPoint = CGPointMake(0, 44.0)
     
     convenience init?(data: NSDictionary) {
         self.init()

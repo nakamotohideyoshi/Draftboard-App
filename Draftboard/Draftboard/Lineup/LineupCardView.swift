@@ -79,6 +79,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         // Configure content scroll view
         contentView.indicatorStyle = .White
         contentView.alwaysBounceVertical = true
+        contentView.delegate = self
         
         // Set divider heights
         let onePixel = 1 / UIScreen.mainScreen().scale
@@ -262,7 +263,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         let h = UIScreen.mainScreen().bounds.height
         
         if (h > 568) { // 6, 6S, 6+, 6S+
-            return 51.0
+            return 50.0
         } else if (h > 480.0) { // 5, 5C, 5S
             return 45.0
         } else { // 4, 4S
@@ -293,7 +294,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
             cellViews.append(cellView)
         }
         
-        // Scroll view
+        // Needed for scroll view content size
         cellViews.last?.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
     }
     
@@ -318,12 +319,11 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
                 }
             }
         }
+        
+        delegate?.didSelectToggleOption(option)
     }
     
-    func reloadContent(option: LineupCardToggleOption) {
-        print(option, lineup)
-        print("here")
-        
+    func reloadContent(option: LineupCardToggleOption, updateScrollPos: Bool = true) {
         if let lineup = lineup {
             for (index, player) in lineup.players.enumerate() {
                 let cellView = cellViews[index]
@@ -344,6 +344,10 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
             
             liveStatView.date = lineup.draftGroup.start
             salaryStatView.currencyValue = lineup.sport.salary - lineup.salary
+            
+            if updateScrollPos {
+                contentView.contentOffset = lineup.cardScrollPos
+            }
             
             showNormalContent()
             hideLoader()
@@ -392,6 +396,14 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         if (live) {
             contestWidth.active = false
             liveContestWidth.active = true
+        }
+    }
+}
+
+extension LineupCardView: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if contentView.contentOffset.y > 44.0 {
+            lineup?.cardScrollPos = contentView.contentOffset
         }
     }
 }

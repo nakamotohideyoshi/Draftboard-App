@@ -34,15 +34,11 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     var cardIndicesInView: Set<Int> = Set()
     
     var toggleOption: LineupCardToggleOption = .Salary
+    var noLoad: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clearColor()
-        
-        // Pre-fetch data required for lineup creation
-        API.lineupUpcoming().then { lineups in
-            self.gotLineups(lineups)
-        }
         
         // Create view tap
         let tapRecognizer = UITapGestureRecognizer()
@@ -74,6 +70,28 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         createReusableCardViews()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+        // TODO: remove this stupid fix
+        if noLoad {
+            noLoad = false
+            return
+        }
+        
+        // Get lineups
+        Data.lineups().then { cached, fresh -> Promise<[Lineup]> in
+            if let cachedLineups = cached {
+                if self.lineups.count == 0 {
+                    self.gotLineups(cachedLineups)
+                }
+            }
+            
+            return fresh
+        }.then { lineups in
+            self.gotLineups(lineups)
+        }
+    }
+    
     // MARK: - Setup stuff
     
     func constrainLoaderView() {
@@ -88,6 +106,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         createView.hidden = true
         
         for _ in 1...3 {
+            
+            // Create card view
             let cardView = LineupCardView(frame: CGRectMake(0, 0, 500, 500), cellCount: 8)
             cardView.delegate = self
             cardView.hidden = true
@@ -99,9 +119,16 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor).active = true
             cardView.heightRancor.constraintEqualToRancor(scrollView.heightRancor).active = true
             
+            // Position card view
             cardView.left = cardView.leftRancor.constraintEqualToRancor(scrollView.leftRancor, constant: 0.0)
             cardView.left!.active = true
             
+            // Configure card actions
+            cardView.editAction = editLineup
+            cardView.contestsAction = showContestsForLineup
+            cardView.showPlayerDetailAction = showPlayerDetail
+            
+            // Hang onto it
             reusableCardViews.append(cardView)
         }
     }
@@ -112,6 +139,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         for (_, cardView) in reusableCardViews.enumerate() {
             cardView.selectToggleOption(option)
         }
+        
+        toggleOption = option
     }
     
     // MARK: - Modals
@@ -136,7 +165,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     func gotLineups(newLineups: [Lineup]) {
         
         // Got lineups
-        self.loaderView.hidden = true
+        loaderView.hidden = true
         UIView.animateWithDuration(0.25) { () -> Void in
             self.scrollView.alpha = 1.0
         }
@@ -145,15 +174,18 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         let b = scrollView.bounds
         scrollView.contentSize = CGSizeMake(CGFloat(newLineups.count) * b.size.width, 0)
         
+        // Save scroll positions
+        for newLineup in newLineups {
+            for lineup in lineups {
+                if lineup.id == newLineup.id {
+                    newLineup.cardScrollPos = lineup.cardScrollPos
+                }
+            }
+        }
+        
         // New lineups
         lineups = newLineups
         updatePagination()
-        
-        // Hide spinner
-        loaderView.hidden = true
-        UIView.animateWithDuration(0.25) { () -> Void in
-            self.scrollView.alpha = 1.0
-        }
         
         // Show create view if necessary
         if lineups.count == 0 {
@@ -163,6 +195,15 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         
         // Load lineup players
         for lineup in lineups {
+            
+            // Save scroll positions
+            for newLineup in newLineups {
+                if lineup.id == newLineup.id {
+                    newLineup.cardScrollPos = lineup.cardScrollPos
+                }
+            }
+            
+            // Update cards one by one
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
                 
@@ -171,8 +212,15 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
                         let modIndex = idx % self.reusableCardViews.count
                         let cardView = self.reusableCardViews[modIndex]
                         
+                        // Update scroll position
+                        if let cardLineup = cardView.lineup {
+                            if cardLineup.id == lineup.id {
+                                lineup.cardScrollPos = cardLineup.cardScrollPos
+                            }
+                        }
+
                         cardView.lineup = lineup
-                        cardView.reloadContent(self.toggleOption)
+                        cardView.reloadContent(self.toggleOption, updateScrollPos: false)
                     }
                 }
             }
@@ -313,8 +361,13 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             let b = self.scrollView.bounds
             self.scrollView.contentSize = CGSizeMake(CGFloat(self.lineups.count) * b.size.width, 0)
             
+            // Move to new lineup
+            self.noLoad = true
+            self.setLineupIndex(self.lineups.count - 1)
             self.navController?.popViewController()
-            //API.lineupCreate(lineup)
+            
+            // Save lineup
+            API.lineupCreate(lineup)
         }
         
         navController?.pushViewController(nvc)
@@ -326,8 +379,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         
         evc.saveLineupAction = { lineup in
             lineupCard.lineup = lineup
+            lineupCard.reloadContent(self.toggleOption)
+            
             self.titleText = lineup.name
-            self.navController?.popViewControllerToCardView(lineupCard, animated: true)
+            self.navController?.popViewController()
         }
         
         navController?.pushViewController(evc)
