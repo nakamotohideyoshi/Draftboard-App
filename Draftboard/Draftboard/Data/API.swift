@@ -85,6 +85,15 @@ private extension API {
     }
 }
 
+private extension Promise where T: AnyObject {
+    func asType<U>(type: U.Type) -> Promise<U> {
+        return then { json -> U in
+            guard let data = json as? U
+            else { throw JSONError.UnexpectedRootNode(json) }
+            return data
+        }
+    }
+}
 
 // MARK: - Authentication
 
@@ -92,15 +101,10 @@ extension API {
     class func auth(username username: String, password: String) -> Promise<Void> {
         let path = "api-token-auth/"
         let params = ["username": username, "password": password]
-        return API.post(path, json: params).then { json in
-            guard let data = json as? NSDictionary,
-                let token = data["token"] as? String
-            else { throw APIError.FailedToParse(json) }
-            
+        return API.post(path, json: params).asType(NSDictionary).then { data -> Void in
+            guard let token = data["token"] as? String
+            else { throw APIError.FailedToParse(data) }
             API.token = token
-            print(token)
-            
-            return Promise()
         }
     }
 }
@@ -110,10 +114,7 @@ extension API {
 extension API {
     class func draftGroupUpcoming() -> Promise<[DraftGroup]> {
         let path = "api/draft-group/upcoming/"
-        return API.get(path).then { json in
-            guard let data = json as? [NSDictionary]
-            else { throw APIError.FailedToParse(json) }
-            
+        return API.get(path).asType([NSDictionary]).then { data -> [DraftGroup] in
             var draftGroups = [DraftGroup]()
             for dict in data {
                 if let draftGroup = DraftGroup(upcomingData: dict) {
@@ -122,19 +123,15 @@ extension API {
                     throw APIError.FailedToModel(DraftGroup)
                 }
             }
-            
-            return Promise(draftGroups)
+            return draftGroups
         }
     }
 
     class func draftGroup(id id: Int) -> Promise<DraftGroup> {
         let path = "api/draft-group/\(id)/"
-        return API.get(path).then { json in
-            guard let data = json as? NSDictionary
-            else { throw APIError.FailedToParse(json) }
-            
+        return API.get(path).asType(NSDictionary).then { data -> DraftGroup in
             if let draftGroup = DraftGroup(idData: data) {
-                return Promise(draftGroup)
+                return draftGroup
             } else {
                 throw APIError.FailedToModel(DraftGroup)
             }
@@ -143,10 +140,7 @@ extension API {
     
     class func contestLobby() -> Promise<[Contest]> {
         let path = "api/contest/lobby/"
-        return API.get(path).then { json in
-            guard let data = json as? [NSDictionary]
-            else { throw APIError.FailedToParse(json) }
-            
+        return API.get(path).asType([NSDictionary]).then { data -> [Contest] in
             var contests = [Contest]()
             for dict in data {
                 if let contest = Contest(data: dict) {
@@ -155,35 +149,24 @@ extension API {
                     throw APIError.FailedToModel(Contest)
                 }
             }
-            return Promise(contests)
+            return contests
         }
     }
     
     class func contestEntries() -> Promise<[NSDictionary]> {
         let path = "api/contest/current-entries/"
-        return API.get(path).then { json in
-            guard let data = json as? [NSDictionary]
-            else { throw APIError.FailedToParse(json) }
-            return Promise(data)
-        }
+        return API.get(path).asType([NSDictionary])
     }
     
     class func contestEnter(contest: Contest, lineup: Lineup) -> Promise<NSDictionary> {
         let path = "api/contest/enter-lineup/"
         let params = ["contest": contest.id, "lineup": lineup.id]
-        return API.post(path, json: params).then { json in
-            guard let data = json as? NSDictionary
-            else { throw APIError.FailedToParse(json) }
-            return Promise(data)
-        }
+        return API.post(path, json: params).asType(NSDictionary)
     }
     
     class func sportsInjuries(sportName: String) -> Promise<[Int: String]> {
         let path = "api/sports/injuries/\(sportName)/"
-        return API.get(path).then { json in
-            guard let data = json as? [NSDictionary]
-            else { throw APIError.FailedToParse(json) }
-            
+        return API.get(path).asType([NSDictionary]).then { data -> [Int: String] in
             var injuries = [Int: String]()
             for injuryDict in data {
                 guard let playerID = injuryDict["player_id"] as? Int,
@@ -191,8 +174,7 @@ extension API {
                 else { continue }
                 injuries[playerID] = status
             }
-            
-            return Promise(injuries)
+            return injuries
         }
     }
 
@@ -208,10 +190,7 @@ extension API {
     
     class func lineupUpcoming() -> Promise<[Lineup]> {
         let path = "api/lineup/upcoming/"
-        return API.get(path).then { json in
-            guard let data = json as? [NSDictionary]
-            else { throw APIError.FailedToParse(json) }
-            
+        return API.get(path).asType([NSDictionary]).then { data -> [Lineup] in
             var lineups = [Lineup]()
             for dict in data {
                 if let lineup = Lineup(upcomingData: dict) {
@@ -220,24 +199,15 @@ extension API {
                     throw APIError.FailedToModel(Lineup)
                 }
             }
-            return Promise(lineups)
-
-//            // Temp
-//            if lineups.count > 3 {
-//                let fewLineups = [Lineup](lineups.suffix(3))
-//                fulfill(fewLineups)
-//            } else {
-//                fulfill(lineups)
-//            }
+            return lineups
         }
     }
     
     class func prizeStructure(id id: Int) -> Promise<[NSDictionary]> {
         let path = "api/prize/\(id)/"
-        return API.get(path).then { json in
-            guard let data = json as? NSDictionary,
-                ranks = data["ranks"] as? [NSDictionary]
-            else { throw APIError.FailedToParse(json) }
+        return API.get(path).asType(NSDictionary).then { data -> [NSDictionary] in
+            guard let ranks = data["ranks"] as? [NSDictionary]
+            else { throw APIError.FailedToParse(data) }
             
             var payouts = [NSDictionary]()
             for position in ranks {
@@ -249,7 +219,7 @@ extension API {
                     "right": Format.currency.stringFromNumber(value)!
                 ])
             }
-            return Promise(payouts)
+            return payouts
         }
     }
 
