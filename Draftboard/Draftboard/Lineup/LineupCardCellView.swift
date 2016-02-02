@@ -30,10 +30,17 @@ class LineupCardCellView: DraftboardNibControl {
         }
     }
     
-    func showFPPG() {
+    func showPoints() {
+        if let _ = player { // TODO: for real
+            rightLabel.text = String(format: "%.1f", 0.0)
+            unitLabel.text = "PTS"
+        }
+    }
+    
+    func showFantasyPoints() {
         if let player = player {
             rightLabel.text = String(format: "%.1f", player.fppg)
-            unitLabel.text = "PTS"
+            unitLabel.text = "FPPG"
         }
     }
     

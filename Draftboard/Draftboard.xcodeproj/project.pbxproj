@@ -126,6 +126,7 @@
 		5D88B0561C49E591002CA1BB /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D88B0541C49E591002CA1BB /* ErrorViewController.xib */; };
 		5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */; };
 		5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */; };
+		5D95604E1C60133900E58144 /* DraftboardToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95604D1C60133900E58144 /* DraftboardToggleButton.swift */; };
 		5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */; };
 		5D9A321D1BCD6591006C758B /* DraftboardFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A321B1BCD6591006C758B /* DraftboardFilterButton.swift */; };
 		5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A321E1BCD6E09006C758B /* DraftboardBadgeButton.swift */; };
@@ -294,6 +295,7 @@
 		5D88B0541C49E591002CA1BB /* ErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
 		5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTabBarButton.swift; sourceTree = "<group>"; };
 		5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+DraftboardFonts.swift"; sourceTree = "<group>"; };
+		5D95604D1C60133900E58144 /* DraftboardToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardToggleButton.swift; sourceTree = "<group>"; };
 		5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardFilterButton.xib; sourceTree = "<group>"; };
 		5D9A321B1BCD6591006C758B /* DraftboardFilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardFilterButton.swift; sourceTree = "<group>"; };
 		5D9A321E1BCD6E09006C758B /* DraftboardBadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardBadgeButton.swift; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 		5D9D686E1BB5B52200855501 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				5D95604D1C60133900E58144 /* DraftboardToggleButton.swift */,
 				5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */,
 				5D9D686F1BB5B59E00855501 /* DraftboardButton.swift */,
 				5D9A321B1BCD6591006C758B /* DraftboardFilterButton.swift */,
@@ -856,6 +859,7 @@
 				3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */,
 				5D86F2751C18D2BB004E9655 /* DraftboardNavController+Cards.swift in Sources */,
 				5DD3C4E71C17AEAD0040DC71 /* LineupStatFooterView.swift in Sources */,
+				5D95604E1C60133900E58144 /* DraftboardToggleButton.swift in Sources */,
 				5DAF71761BF3C00F00CB972F /* AvatarPMRView.swift in Sources */,
 				5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */,
 				5D783AD11BD97D09000D8494 /* Contest.swift in Sources */,

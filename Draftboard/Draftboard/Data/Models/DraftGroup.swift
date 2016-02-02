@@ -13,7 +13,6 @@ class DraftGroup: Model {
     var start: NSDate = NSDate.distantPast()
     var numGames: Int = 0
     var players: [Player] = [Player]()
-    var complete: Bool = false
     
     convenience init?(upcomingData data: NSDictionary) {
         self.init()
@@ -71,7 +70,5 @@ class DraftGroup: Model {
         self.start = start
         self.sport = sport
         self.players = players
-        
-        complete = true
     }
 }

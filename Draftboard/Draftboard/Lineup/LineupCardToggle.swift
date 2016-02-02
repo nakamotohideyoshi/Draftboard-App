@@ -8,31 +8,55 @@
 
 import UIKit
 
+enum LineupCardToggleOption {
+    case Points
+    case FantasyPoints
+    case Salary
+    
+    static let allValues = [Points, FantasyPoints, Salary]
+    
+    func toggleText() -> String {
+        switch self {
+            case .Points:
+                return "POINTS"
+            case .FantasyPoints:
+                return "AVG FPPG"
+            case .Salary:
+                return "SALARY"
+        }
+    }
+}
+
 protocol LineupCardToggleDelegate {
-    func didTapToggleButton(index: Int)
+    func didSelectToggleOption(option: LineupCardToggleOption)
 }
 
 class LineupCardToggle: UIView {
-    var buttons: [DraftboardButton] = []
+    var buttons: [DraftboardToggleButton] = []
     var delegate: LineupCardToggleDelegate?
-    var index: Int = 0
-
-    init(options: [String]) {
+    var selectedOption: LineupCardToggleOption
+    
+    init(option: LineupCardToggleOption) {
+        selectedOption = option
         super.init(frame: CGRectZero)
         
-        let count = CGFloat(options.count)
-        for (i, option) in options.enumerate() {
-            let b = buttonWithTitle(option)
-            self.addSubview(b)
+        // Loop over toggle options
+        let count = CGFloat(LineupCardToggleOption.allValues.count)
+        for (_, option) in LineupCardToggleOption.allValues.enumerate() {
             
+            // Create button
+            let b = buttonWithOption(option)
+            b.disabled = (option == selectedOption)
             b.addTarget(self, action: Selector("didTapButton:"), forControlEvents: .TouchUpInside)
-            b.tag = i
+            addSubview(b)
             
+            // Constrain button
             b.translatesAutoresizingMaskIntoConstraints = false
             b.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 1.0 / count).active = true
             b.heightRancor.constraintEqualToConstant(20.0).active = true
             b.centerYRancor.constraintEqualToRancor(self.centerYRancor).active = true
             
+            // Constrain to last button
             if let lastButton = buttons.last {
                 b.leftRancor.constraintEqualToRancor(lastButton.rightRancor).active = true
             }
@@ -40,51 +64,46 @@ class LineupCardToggle: UIView {
                 b.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
             }
             
+            // Keep button
             buttons.append(b)
         }
-        
-        buttons[0].disabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func selectButton(idx: Int) {
-        if idx == index || buttons.count <= 0 {
+    func selectOption(option: LineupCardToggleOption) {
+        if option == selectedOption {
             return
         }
         
-        var i = min(idx, buttons.count - 1)
-        i = max(i, 0)
-        
         for (_, button) in buttons.enumerate() {
+            if button.option == option {
+                button.disabled = true
+                continue
+            }
+            
             button.disabled = false
         }
         
-        buttons[i].disabled = true
-        index = i
+        selectedOption = option
     }
     
-    func didTapButton(button: DraftboardButton) {
-        if (index == button.tag) {
+    func didTapButton(button: DraftboardToggleButton) {
+        let option = button.option
+        
+        if (selectedOption == option) {
             return
         }
         
-        selectButton(button.tag)
-        delegate?.didTapToggleButton(button.tag)
+        selectOption(option)
+        delegate?.didSelectToggleOption(option)
     }
     
-    func buttonWithTitle(title: String) -> DraftboardButton {
-        let b = DraftboardButton()
-        b.bgColor = .clearColor()
-        b.textColor = UIColor(0x6d718a, alpha: 0.8)
-        b.textValue = title
-        b.cornerRadius = 10.0
-        
-        b.bgDisabledColor = UIColor(0x495b78, alpha: 0.5)
-        b.textDisabledColor = .whiteColor()
-        
+    func buttonWithOption(option: LineupCardToggleOption) -> DraftboardToggleButton {
+        let b = DraftboardToggleButton(option: option)
+        b.textValue = option.toggleText()
         return b
     }
 }

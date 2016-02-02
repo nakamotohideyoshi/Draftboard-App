@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-class LineupListController: DraftboardViewController, UIActionSheetDelegate {
+class LineupListController: DraftboardViewController, UIActionSheetDelegate, LineupCardViewDelegate {
     
     @IBOutlet weak var createView: UIView!
     @IBOutlet weak var createViewButton: DraftboardRoundButton!
@@ -30,6 +30,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     var selectedSport: Sport?
     
     var lineups: [Lineup] = []
+    var reusableCardViews: [LineupCardView] = []
+    var cardIndicesInView: Set<Int> = Set()
+    
+    var toggleOption: LineupCardToggleOption = .Salary
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +49,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         tapRecognizer.addTarget(self, action: "presentDraftGroupPrompt")
         self.createView.addGestureRecognizer(tapRecognizer)
         
-        // Scroll view
+        // Configure scroll view
         scrollView.clipsToBounds = false
         scrollView.delegate = self
         scrollView.pagingEnabled = true
@@ -53,40 +57,64 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.alpha = 0
         
-        // Pagination height
-        paginationHeight.constant = 0
-        
-        // Add loader view
-        addLoaderView()
-    }
-    
-    func addLoaderView() {
+        // Create loader view
         loaderView = LoaderView(frame: CGRectZero)
         loaderView.thickness = 2.0
-        view.addSubview(loaderView)
+        loaderView.spinning = true
         
+        // Add loader view
+        view.addSubview(loaderView)
+        constrainLoaderView()
+        
+        // Hide pagination to start
+        paginationHeight.constant = 20.0
+        paginationView.hidden = true
+
+        // Create reusable cards
+        createReusableCardViews()
+    }
+    
+    // MARK: - Setup stuff
+    
+    func constrainLoaderView() {
         loaderView.translatesAutoresizingMaskIntoConstraints = false
         loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
         loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
         loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor).active = true
         loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
+    }
+    
+    func createReusableCardViews() {
+        createView.hidden = true
         
-        loaderView.spinning = true
+        for _ in 1...3 {
+            let cardView = LineupCardView(frame: CGRectMake(0, 0, 500, 500), cellCount: 8)
+            cardView.delegate = self
+            cardView.hidden = true
+            
+            // Set card dimensions
+            scrollView.addSubview(cardView)
+            cardView.translatesAutoresizingMaskIntoConstraints = false
+            cardView.topRancor.constraintEqualToRancor(scrollView.topRancor).active = true
+            cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor).active = true
+            cardView.heightRancor.constraintEqualToRancor(scrollView.heightRancor).active = true
+            
+            cardView.left = cardView.leftRancor.constraintEqualToRancor(scrollView.leftRancor, constant: 0.0)
+            cardView.left!.active = true
+            
+            reusableCardViews.append(cardView)
+        }
     }
     
-    // MARK: - Titlebar delegate methods
+    // MARK: - LineupCardViewDelegate methods
     
-    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
-        if (buttonType == .Plus) {
-            presentDraftGroupPrompt()
-        }
-        else if(buttonType == .Menu) {
-            let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
-            RootViewController.sharedInstance.pushModalViewController(gfvc)
+    func didSelectToggleOption(option: LineupCardToggleOption) {
+        for (_, cardView) in reusableCardViews.enumerate() {
+            cardView.selectToggleOption(option)
         }
     }
     
-    // MARK: - Modal delegate methods
+    // MARK: - Modals
     
     override func didSelectModalChoice(index: Int) {
         if (selectedSport == nil) {
@@ -105,29 +133,46 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     // MARK: - Data
     
-    func gotLineups(lineups: [Lineup]) {
-        self.lineups = lineups
-        self.updatePagination()
+    func gotLineups(newLineups: [Lineup]) {
         
-        // Hide spinner
+        // Got lineups
         self.loaderView.hidden = true
         UIView.animateWithDuration(0.25) { () -> Void in
             self.scrollView.alpha = 1.0
         }
         
+        // Update scroll view
+        let b = scrollView.bounds
+        scrollView.contentSize = CGSizeMake(CGFloat(newLineups.count) * b.size.width, 0)
+        
+        // New lineups
+        lineups = newLineups
+        updatePagination()
+        
+        // Hide spinner
+        loaderView.hidden = true
+        UIView.animateWithDuration(0.25) { () -> Void in
+            self.scrollView.alpha = 1.0
+        }
+        
+        // Show create view if necessary
+        if lineups.count == 0 {
+            createView.hidden = false
+            return
+        }
+        
         // Load lineup players
         for lineup in lineups {
-            self.presentLineupCard(lineup, scroll: false)
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
                 
-                for (_, cardView) in self.lineupCardViews.enumerate() {
-                    if let cardLineup = cardView.lineup {
-                        if cardLineup.id == lineup.id {
-                            cardView.lineup = lineup
-                            cardView.hideLoader()
-                            break
-                        }
+                if let idx = self.lineups.indexOf({$0.id == lineup.id}) {
+                    if self.cardIndicesInView.contains(idx) {
+                        let modIndex = idx % self.reusableCardViews.count
+                        let cardView = self.reusableCardViews[modIndex]
+                        
+                        cardView.lineup = lineup
+                        cardView.reloadContent(self.toggleOption)
                     }
                 }
             }
@@ -165,7 +210,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             let draftGroupCount = draftGroupContestCounts[d] ?? 0
             draftGroupContestCounts[d] = draftGroupCount + 1
         }
-        
         
         // Build choices
         var sportChoices = [NSDictionary]()
@@ -210,12 +254,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         self.draftGroupChoices = draftGroupChoices
     }
     
-    // MARK: - View presentation
-    
-    func hideSpinner() {
-        loaderView.spinning = false
-        loaderView.removeFromSuperview()
-    }
+    // MARK: - Modals
     
     func presentDraftGroupPrompt() {
         let mcc = DraftboardModalChoiceController(title: "CHOOSE A SPORT", choices: nil)
@@ -223,7 +262,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         
         when(API.draftGroupUpcoming(), API.contestLobby()).then { draftGroups, contests -> Void in
             self.collateDraftGroups(draftGroups, contests: contests)
-            self.selectSport()
             
             let choices = self.sportChoices!
             if (choices.count == 0) {
@@ -235,68 +273,11 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         }
     }
     
-    func updateCardFrames() {
-        let cardSize = scrollView.bounds.size
-        let cardFrame = CGRectMake(0, 0, cardSize.width, cardSize.height)
-        
-        for (i, cardView) in lineupCardViews.enumerate() {
-            cardView.frame = CGRectOffset(cardFrame, cardSize.width * CGFloat(i), 0)
-        }
-    }
-    
-    func presentLineupCard(lineup: Lineup, scroll: Bool = true) -> LineupCardView {
-        self.createView.hidden = true
-        
-        let cardView = LineupCardView(frame: CGRectMake(0, 0, 10, 10), cellCount: 12)
-        scrollView.addSubview(cardView)
-        cardView.lineup = lineup
-        
-        // Set player detail action
-        cardView.showPlayerDetailAction = showPlayerDetail
-        cardView.editAction = editLineup
-        cardView.contestsAction = showContestsForLineup
-        
-        // Set card dimensions
-        cardView.translatesAutoresizingMaskIntoConstraints = false
-        cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor).active = true
-        cardView.heightRancor.constraintEqualToRancor(scrollView.heightRancor).active = true
-        cardView.topRancor.constraintEqualToRancor(scrollView.topRancor).active = true
-        
-        // Position card horizontally
-        if let lastCardView = lineupCardViews.last {
-            cardView.leftRancor.constraintEqualToRancor(lastCardView.rightRancor).active = true
-        } else {
-            cardView.leftRancor.constraintEqualToRancor(scrollView.leftRancor).active = true
-        }
-        
-        // Attach to right edge / end of scrollView
-        lastConstraint?.active = false
-        lastConstraint = cardView.rightRancor.constraintEqualToRancor(scrollView.rightRancor)
-        lastConstraint?.active = true
-        
-        // Store card
-        lineupCardViews.append(cardView)
-        
-        // Scroll
-        if scroll {
-            self.view.layoutIfNeeded()
-            scrollView.setContentOffset(cardView.frame.origin, animated: false)
-        }
-        
-        return cardView
-    }
-    
-    // MARK: - DraftGroup selection
-    
-    func selectSport() {
-
-    }
-    
     func didSelectSport(index: Int) {
         let sportChoice = sportChoices![index]
         selectedSport = sportChoice["object"] as? Sport
         // Pre-fetch data required for showing player injury status
-//        _ = Data.sportsInjuries(selectedSport!.name)
+        // _ = Data.sportsInjuries(selectedSport!.name)
         selectDraftGroup()
     }
     
@@ -314,18 +295,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         createLineup()
     }
     
-    // MARK: - View controller handoff
-    
-    func updatePagination() {
-        self.paginationView.pages = self.lineups.count
-        
-        if lineups.count > 1 {
-            paginationHeight.constant = 36.0
-        }
-        else {
-            paginationHeight.constant = 0
-        }
-    }
+    // MARK: - Create/Edit/Contests
     
     func createLineup() {
         let draftGroup = selectedDraftGroup!
@@ -337,15 +307,14 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         nvc.lineup.draftGroup = draftGroup
         nvc.saveLineupAction = { lineup in
             self.lineups.append(lineup)
-            self.titleText = lineup.name
             self.updatePagination()
             
-            lineup.draftGroup.complete = true
-            //self.presentLineupCard(lineup)
-            //cardView.updateContent()
+            // Update content size, pagination
+            let b = self.scrollView.bounds
+            self.scrollView.contentSize = CGSizeMake(CGFloat(self.lineups.count) * b.size.width, 0)
             
-            self.navController?.popViewControllerToCardView(self.lineupCardViews.last!, animated: true)
-            API.lineupCreate(lineup)
+            self.navController?.popViewController()
+            //API.lineupCreate(lineup)
         }
         
         navController?.pushViewController(nvc)
@@ -354,6 +323,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     func editLineup(lineupCard: LineupCardView) {
         let evc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         evc.lineup = lineupCard.lineup!
+        
         evc.saveLineupAction = { lineup in
             lineupCard.lineup = lineup
             self.titleText = lineup.name
@@ -376,6 +346,51 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         self.navController?.pushViewController(nvc)
     }
     
+    // MARK: - Controls
+    
+    func setLineupIndex(index: Int, animated: Bool = true) {
+        if lineups.count <= 0 {
+            return
+        }
+        
+        // Bound index
+        let idx = min(index, lineups.count - 1)
+        let lineup = lineups[idx]
+        self.titleText = lineup.name
+        
+        // Update scroll position
+        let x = CGFloat(idx) * scrollView.bounds.size.width
+        self.scrollView.setContentOffset(CGPointMake(x, 0), animated: animated)
+        
+        // Update pagination page
+        self.paginationView.selectPage(idx)
+    }
+    
+    func updatePagination() {
+        paginationView.pages = lineups.count
+        
+        if lineups.count > 1 {
+            paginationHeight.constant = 36.0
+            paginationView.hidden = false
+        }
+        else {
+            paginationHeight.constant = 20.0
+            paginationView.hidden = true
+        }
+    }
+    
+    // MARK: - DraftboardTitlebarDelegate methods
+    
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if (buttonType == .Plus) {
+            presentDraftGroupPrompt()
+        }
+        else if(buttonType == .Menu) {
+            let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
+            RootViewController.sharedInstance.pushModalViewController(gfvc)
+        }
+    }
+    
     // MARK: - Titlebar datasource methods
     
     override func titlebarTitle() -> String {
@@ -394,40 +409,85 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
 // MARK: - UIScrollViewDelegate
 
 extension LineupListController: UIScrollViewDelegate {
+
+    func updateCardsInView(indices: Set<Int>) {
+        let indicesToUpdate = indices.subtract(cardIndicesInView)
+        let bounds = scrollView.bounds
+        
+        for (_, index) in indicesToUpdate.enumerate() {
+            let modIndex = index % reusableCardViews.count
+            let cardView = reusableCardViews[modIndex]
+            
+            cardView.left?.constant = CGFloat(index) * bounds.size.width
+            cardView.hidden = false
+            
+            let lineup = lineups[index]
+            cardView.lineup = lineup
+            cardView.reloadContent(toggleOption)
+        }
+    }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func updateCardIndicesInView(pageOffset: Double) {
+        var indices: Set<Int> = Set()
+        let bounds = scrollView.bounds
+        let cardFrame = CGRectMake(0, 0, bounds.size.width, bounds.size.height)
+        let adjustedBounds = CGRectMake(bounds.origin.x - 20.0, bounds.origin.y, bounds.size.width + 40.0, bounds.size.height)
         
-        let pageOffset = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
-        let views: [UIView] = (lineupCardViews.count > 0) ? lineupCardViews : [createView]
-        paginationView.selectPage(Int(round(pageOffset)))
+        for index in 0...lineups.count - 1 {
+            let frame = CGRectOffset(cardFrame, CGFloat(index) * cardFrame.size.width, 0)
+            if CGRectIntersectsRect(frame, adjustedBounds) {
+                indices.insert(index)
+            }
+        }
         
-        for (pageIndex, card) in views.enumerate() {
+        if indices != cardIndicesInView {
+            updateCardsInView(indices)
+            cardIndicesInView = indices
+        }
+    }
+    
+    func updateTransforms(pageOffset: Double) {
+        for (_, pageIndex) in cardIndicesInView.enumerate() {
+            let modIndex = pageIndex % reusableCardViews.count
+            let cardView = reusableCardViews[modIndex]
+            
             // Page delta is number of pages from perfect center and can be negative
             let pageDelta = Double(pageIndex) - pageOffset
+            
             // Clamp values from -1.0 to 1.0
             let magnitude = min(Double.abs(pageDelta), 1.0)
             let direction = (pageDelta < 0) ? -1.0 : 1.0
+            
             // Lame attempt to fix a visual glitch in fake carousel rotation
             let m = max(magnitude - 0.05, 0.0) * 1.1
-            card.rotate(m * direction)
-            card.fade(magnitude)
+            cardView.rotate(m * direction)
+            cardView.fade(magnitude)
+        }
+    }
+    
+    func updateTitle(pageOffset: Double) {
+        var page = Int(round(pageOffset))
+        page = max(page, 0)
+        page = min(page, lineups.count - 1)
+        
+        let lineup = lineups[page]
+        if titleText != lineup.name {
+            titleText = lineup.name
+            self.navController?.titlebar.updateElements()
+            self.navController?.titlebar.transitionElements(.Directionless)
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if lineups.count <= 0 {
+            return
         }
         
-        if lineupCardViews.count > 0 {
-            var page = Int(round(pageOffset))
-            page = max(page, 0)
-            page = min(page, lineupCardViews.count - 1)
-            
-            let cardView = lineupCardViews[page]
-            if let lineup = cardView.lineup {
-                let lineupName = lineup.name
-                
-                if titleText != lineupName {
-                    titleText = lineupName
-                    self.navController?.titlebar.updateElements()
-                    self.navController?.titlebar.transitionElements(.Directionless)
-                }
-            }
-        }
+        let pageOffset = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
+        paginationView.selectPage(Int(round(pageOffset)))
+        
+        updateCardIndicesInView(pageOffset)
+        updateTransforms(pageOffset)
+        updateTitle(pageOffset)
     }
 }

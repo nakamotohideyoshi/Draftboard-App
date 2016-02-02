@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContestsListController: DraftboardViewController{
+class ContestsListController: DraftboardViewController {
     let normalContestCellReuseIdentifier = "normalContestCell"
     let liveContestCellReuseIdentifier = "liveContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
@@ -29,7 +29,6 @@ class ContestsListController: DraftboardViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.backgroundColor = .blueDarker()
         
         API.lineupUpcoming().then { lineups in
@@ -62,6 +61,7 @@ class ContestsListController: DraftboardViewController{
             "title": "Show All",
             "subtitle": "? Contests"
         ]
+        
         let mcc = DraftboardModalChoiceController(title: "Filter by Lineup Eligibility", choices: nil)
         if self.lineups.count > 0 {
             var choices = self.lineups.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
@@ -76,6 +76,7 @@ class ContestsListController: DraftboardViewController{
                 mcc.choiceData = choices
             }
         }
+        
         RootViewController.sharedInstance.pushModalViewController(mcc)
     }
     

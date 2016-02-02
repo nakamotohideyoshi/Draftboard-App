@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LineupCardViewDelegate {
-    func didTap(buttonType: TabBarButtonType)
+    func didSelectToggleOption(option: LineupCardToggleOption)
 }
 
 class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
@@ -33,25 +33,35 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     @IBOutlet weak var centerStatContainerView: UIView!
     @IBOutlet weak var rightStatContainerView: UIView!
     
+    // Delegate
+    var delegate: LineupCardViewDelegate?
+    
+    // Position in scroll view
+    var left: NSLayoutConstraint?
+    
+    // Views
     var curtainView: UIView!
     var loaderView: LoaderView!
     var toggleView: LineupCardToggle!
     
+    // Stats
     var pmrStatView: LineupStatPMRView!
     var liveStatView: LineupStatTimeView!
     var feesStatView: LineupStatFeesView!
     var salaryStatView: LineupStatCurrencyView!
     var winningsStatView: LineupStatView!
+    var cellViews = [LineupCardCellView]()
     
+    // Actions
     var showPlayerDetailAction: ((Player, isLive: Bool, isDraftable: Bool) -> Void)?
     var editAction: (LineupCardView -> Void)?
     var contestsAction: (LineupCardView -> Void)?
     
-    var cellViews = [LineupCardCellView]()
-    
+    // Live timer
     var liveTimer: NSTimer?
     var live = false
     
+    // Data
     var lineup: Lineup?
     let cellCount: Int
     
@@ -88,9 +98,8 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
         
         // Create cell toggle
-        toggleView = LineupCardToggle(options: ["POINTS", "AVG FPPG", "SALARY"])
+        toggleView = LineupCardToggle(option: .Salary)
         toggleView.delegate = self
-        toggleView.selectButton(2)
         
         // Create curtain view
         curtainView = UIView()
@@ -126,18 +135,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         
         // Create cell views
         createCellViews()
-        showNormalContent()
         showLoader()
-    }
-    
-    func reloadContent() {
-        if let lineup = lineup {
-            liveTimer?.invalidate()
-            liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
-            
-            liveStatView.date = lineup.draftGroup.start
-            salaryStatView.currencyValue = lineup.sport.salary - lineup.salary
-        }
     }
     
     func constrainToggleView() {
@@ -173,17 +171,25 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         statView.bottomRancor.constraintEqualToRancor(sv.bottomRancor).active = true
     }
     
-    func didTapToggleButton(index: Int) {
-        if index == 1 { // avg fppg
-            for (_, cellView) in cellViews.enumerate() {
-                cellView.showFPPG()
-            }
+    func didSelectToggleOption(option: LineupCardToggleOption) {
+        switch option {
+            case .Points:
+                for (_, cellView) in cellViews.enumerate() {
+                    cellView.showPoints()
+                }
+            
+            case .FantasyPoints:
+                for (_, cellView) in cellViews.enumerate() {
+                    cellView.showFantasyPoints()
+                }
+            
+            case .Salary:
+                for (_, cellView) in cellViews.enumerate() {
+                    cellView.showSalary()
+                }
         }
-        else if index == 2 { // salary
-            for (_, cellView) in cellViews.enumerate() {
-                cellView.showSalary()
-            }
-        }
+        
+        delegate?.didSelectToggleOption(option)
     }
     
     func showLoader(animated: Bool = true) {
@@ -254,6 +260,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     
     func cellHeight() -> CGFloat {
         let h = UIScreen.mainScreen().bounds.height
+        
         if (h > 568) { // 6, 6S, 6+, 6S+
             return 51.0
         } else if (h > 480.0) { // 5, 5C, 5S
@@ -288,6 +295,63 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         
         // Scroll view
         cellViews.last?.bottomRancor.constraintEqualToRancor(contentView!.bottomRancor).active = true
+    }
+    
+    func selectToggleOption(option: LineupCardToggleOption) {
+        if toggleView.selectedOption == option {
+            return
+        }
+        
+        toggleView.selectOption(option)
+        
+        if let lineup = lineup {
+            for (index, _) in lineup.players.enumerate() {
+                let cellView = cellViews[index]
+                
+                switch option {
+                    case .Points:
+                        cellView.showPoints()
+                    case .FantasyPoints:
+                        cellView.showFantasyPoints()
+                    case .Salary:
+                        cellView.showSalary()
+                }
+            }
+        }
+    }
+    
+    func reloadContent(option: LineupCardToggleOption) {
+        print(option, lineup)
+        print("here")
+        
+        if let lineup = lineup {
+            for (index, player) in lineup.players.enumerate() {
+                let cellView = cellViews[index]
+                cellView.player = player
+                
+                switch option {
+                    case .Points:
+                        cellView.showPoints()
+                    case .FantasyPoints:
+                        cellView.showFantasyPoints()
+                    case .Salary:
+                        cellView.showSalary()
+                }
+            }
+            
+            //liveTimer?.invalidate()
+            //liveTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
+            
+            liveStatView.date = lineup.draftGroup.start
+            salaryStatView.currencyValue = lineup.sport.salary - lineup.salary
+            
+            showNormalContent()
+            hideLoader()
+            
+            return
+        }
+
+        showLoader()
     }
     
     func didTapEdit() {
