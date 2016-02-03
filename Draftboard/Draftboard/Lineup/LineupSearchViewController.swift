@@ -61,28 +61,48 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         
         tableView.setContentOffset(CGPointMake(0, searchBar.bounds.size.height), animated: false)
         
-        self.showSpinner()
+        loaderView = LoaderView(frame: CGRectZero)
+        loaderView.spinning = true
+        view.addSubview(loaderView)
+        constrainLoader()
+        
+        showLoader()
     }
     
-    func showSpinner() {
-        loaderView = LoaderView(frame: CGRectMake(0, 0, 42, 42))
-        
-        view.addSubview(loaderView)
+    func constrainLoader() {
         loaderView.translatesAutoresizingMaskIntoConstraints = false
         loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
         loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor, constant: 38.0 - 30.0).active = true
         loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
         loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
-        
-        loaderView.spinning = true
+    }
+    
+    func showLoader() {
+        tableView.hidden = true
+        loaderView.hidden = false
+    }
+    
+    func hideLoader() {
+        tableView.hidden = false
+        loaderView.hidden = true
+    }
+    
+    func reloadData() {
+        if let _ = draftGroup {
+            self.updatePlayers()
+            self.tableView.reloadData()
+            hideLoader()
+        }
+        else {
+            showLoader()
+        }
     }
     
     func gotDraftGroup(draftGroup: DraftGroup) {
         self.draftGroup = draftGroup
         self.updatePlayers()
-        self.loaderView.spinning = false
-        self.loaderView.removeFromSuperview()
         self.tableView.reloadData()
+        hideLoader()
     }
     
     func updatePlayers() {

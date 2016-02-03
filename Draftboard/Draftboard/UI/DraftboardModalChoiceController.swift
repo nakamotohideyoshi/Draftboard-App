@@ -105,9 +105,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
     }
     
     func reloadChoiceViews() {
-        print(hideLoader)
         hideLoader()
-        
         for (_, choiceView) in choiceViews.enumerate() {
             choiceView.removeFromSuperview()
         }

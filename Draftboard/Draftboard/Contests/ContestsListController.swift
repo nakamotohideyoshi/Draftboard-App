@@ -17,6 +17,8 @@ class ContestsListController: DraftboardViewController {
     @IBOutlet weak var lineupButton: DraftboardArrowButton!
     @IBOutlet weak var gametypeButton: DraftboardArrowButton!
     
+    var loaderView: LoaderView!
+    
 //    let tempSections = [
 //        "Live",
 //        "Upcoming",
@@ -49,11 +51,42 @@ class ContestsListController: DraftboardViewController {
         tableView.registerNib(contestCellNib, forCellReuseIdentifier: liveContestCellReuseIdentifier)
         tableView.registerNib(contestUpcomingCellNib, forCellReuseIdentifier: normalContestCellReuseIdentifier)
         tableView.registerNib(contestHeaderNib, forHeaderFooterViewReuseIdentifier: normalContestHeaderReuseIdentifier)
+        tableView.delegate = self
+        
+        // Create loader view
+        loaderView = LoaderView(frame: CGRectZero)
+        loaderView.thickness = 2.0
+        loaderView.spinning = true
+        
+        view.addSubview(loaderView)
+        constrainLoaderView()
         
         lineupButton.addTarget(self, action: Selector("lineupTap:"), forControlEvents: .TouchUpInside)
         gametypeButton.addTarget(self, action: Selector("gametypeTap:"), forControlEvents: .TouchUpInside)
         
-        tableView.delegate = self
+        showLoader()
+    }
+    
+    func showLoader() {
+        loaderView.hidden = false
+        tableView.hidden = true
+        lineupButton.hidden = true
+        gametypeButton.hidden = true
+    }
+    
+    func hideLoader() {
+        loaderView.hidden = true
+        tableView.hidden = false
+        lineupButton.hidden = false
+        gametypeButton.hidden = false
+    }
+    
+    func constrainLoaderView() {
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
+        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor).active = true
+        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
     }
     
     func lineupTap(button: DraftboardButton) {
@@ -136,6 +169,7 @@ extension ContestsListController {
     func gotContests(contests: [Contest]) {
         self.contests = contests
         self.tableView.reloadData()
+        self.hideLoader()
     }
     
     func gotEntries(entries: [NSDictionary]) {

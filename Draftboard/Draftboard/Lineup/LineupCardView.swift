@@ -354,7 +354,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
             
             return
         }
-
+        
         showLoader()
     }
     
