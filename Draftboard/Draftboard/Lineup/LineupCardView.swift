@@ -325,6 +325,12 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     
     func reloadContent(option: LineupCardToggleOption, updateScrollPos: Bool = true) {
         if let lineup = lineup {
+            
+            if lineup.draftGroup.start == NSDate.distantPast() {
+                showLoader()
+                return
+            }
+            
             for (index, player) in lineup.players.enumerate() {
                 let cellView = cellViews[index]
                 cellView.player = player

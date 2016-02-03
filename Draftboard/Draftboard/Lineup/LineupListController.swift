@@ -207,6 +207,11 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
                 
+                //let rando = arc4random_uniform(10)
+                //if rando > 5 {
+                //    draftGroup.start = NSDate.distantPast()
+                //}
+                
                 if let idx = self.lineups.indexOf({$0.id == lineup.id}) {
                     if self.cardIndicesInView.contains(idx) {
                         let modIndex = idx % self.reusableCardViews.count
