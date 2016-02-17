@@ -9,6 +9,7 @@
 import UIKit
 
 class ContestsListController: DraftboardViewController {
+    
     let normalContestCellReuseIdentifier = "normalContestCell"
     let liveContestCellReuseIdentifier = "liveContestCell"
     let normalContestHeaderReuseIdentifier = "normalHeaderCell"
@@ -33,16 +34,6 @@ class ContestsListController: DraftboardViewController {
         super.viewDidLoad()
         tableView.backgroundColor = .blueDarker()
         
-        API.lineupUpcoming().then { lineups in
-            self.gotLineups(lineups)
-        }
-        API.contestLobby().then { contests in
-            self.gotContests(contests)
-        }
-        API.contestEntries().then { entries in
-            self.gotEntries(entries)
-        }
-        
         let bundle = NSBundle(forClass: self.dynamicType)
         let contestCellNib = UINib(nibName: "DraftboardContestsCell", bundle: bundle)
         let contestUpcomingCellNib = UINib(nibName: "DraftboardContestsUpcomingCell", bundle: bundle)
@@ -65,6 +56,18 @@ class ContestsListController: DraftboardViewController {
         gametypeButton.addTarget(self, action: Selector("gametypeTap:"), forControlEvents: .TouchUpInside)
         
         showLoader()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        API.lineupUpcoming().then { lineups in
+            self.gotLineups(lineups)
+        }
+        API.contestLobby().then { contests in
+            self.gotContests(contests)
+        }
+        API.contestEntries().then { entries in
+            self.gotEntries(entries)
+        }
     }
     
     func showLoader() {

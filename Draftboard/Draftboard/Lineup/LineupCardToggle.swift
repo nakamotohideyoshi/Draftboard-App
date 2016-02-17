@@ -36,8 +36,8 @@ class LineupCardToggle: UIView {
     var delegate: LineupCardToggleDelegate?
     var selectedOption: LineupCardToggleOption
     
-    init(option: LineupCardToggleOption) {
-        selectedOption = option
+    init(selectedOption _selectedOption: LineupCardToggleOption) {
+        selectedOption = _selectedOption
         super.init(frame: CGRectZero)
         
         // Loop over toggle options
@@ -66,6 +66,20 @@ class LineupCardToggle: UIView {
             
             // Keep button
             buttons.append(b)
+        }
+    }
+    
+    var live: Bool = false {
+        didSet {
+            if (live) {
+                buttons[0].hidden = false
+                layer.transform = CATransform3DIdentity
+            } else {
+                buttons[0].hidden = true
+                let p = 1.0 / CGFloat(buttons.count)
+                let x = self.bounds.size.width * p / 2.0
+                layer.transform = CATransform3DMakeTranslation(-x, 0, 0)
+            }
         }
     }
     

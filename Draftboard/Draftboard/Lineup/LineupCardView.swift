@@ -99,7 +99,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
         
         // Create cell toggle
-        toggleView = LineupCardToggle(option: .Salary)
+        toggleView = LineupCardToggle(selectedOption: .Salary)
         toggleView.delegate = self
         
         // Create curtain view
@@ -355,6 +355,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
                 contentView.contentOffset = lineup.cardScrollPos
             }
             
+            toggleView.live = false
             showNormalContent()
             hideLoader()
             
