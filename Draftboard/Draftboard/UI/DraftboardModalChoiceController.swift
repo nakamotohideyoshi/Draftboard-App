@@ -119,14 +119,12 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         let itemHeight: CGFloat = 77.0
         
         // Choice views
-        var lastChoiceView: DraftboardModalItemView?
-         for (i, data) in data.enumerate() {
+        for (i, data) in data.enumerate() {
             
             // Choice view
             let title = data["title"] as? String ?? ""
             let subtitle = data["subtitle"] as? String ?? ""
             let choiceView = DraftboardModalItemView(title: title, subtitle: subtitle)
-            choiceViews.append(choiceView)
             
             // Add choice to scroll view
             scrollView.addSubview(choiceView)
@@ -135,16 +133,12 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
             choiceView.heightRancor.constraintEqualToConstant(itemHeight).active = true
             choiceView.centerXRancor.constraintEqualToRancor(scrollView.centerXRancor).active = true
             
-            // Constrain to top of scroll view
-            if (lastChoiceView == nil) {
-                choiceView.topRancor.constraintEqualToRancor(titleLabel?.bottomRancor).active = true
-            } else { // Or the top of the last choice
-                choiceView.topRancor.constraintEqualToRancor(lastChoiceView!.bottomRancor).active = true
+            // Constrain to last choice
+            if let lastChoiceView = choiceViews.last {
+                choiceView.topRancor.constraintEqualToRancor(lastChoiceView.bottomRancor).active = true
             }
-            
-            // Constrain to the bottom of the scroll view as well
-            if (i == data.count-1) {
-                choiceView.bottomRancor.constraintEqualToRancor(scrollView.bottomRancor).active = true
+            else { // First one goes under the title
+                choiceView.topRancor.constraintEqualToRancor(titleLabel?.bottomRancor).active = true
             }
             
             // Add action
@@ -152,7 +146,11 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
             choiceView.index = i
             
             // Store last choice
-            lastChoiceView = choiceView
+            choiceViews.append(choiceView)
+        }
+        
+        if let lastChoiceView = choiceViews.last {
+            lastChoiceView.bottomRancor.constraintEqualToRancor(scrollView.bottomRancor).active = true
         }
         
         self.view.layoutIfNeeded()
@@ -164,13 +162,6 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         if (totalHeight < scrollViewHeight) {
             let heightDelta = scrollViewHeight - totalHeight
             scrollView.contentInset = UIEdgeInsetsMake(heightDelta * 0.5, 0.0, 0.0, 0.0)
-            scrollView.delaysContentTouches = false
-        }
-        else { // Let it scroll
-            let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(0.25 * Double(NSEC_PER_SEC)))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                self.scrollView.flashScrollIndicators()
-            })
         }
         
         scrollView.alwaysBounceVertical = true

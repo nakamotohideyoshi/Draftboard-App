@@ -22,10 +22,16 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     var positionText: String!
     var loaderView: LoaderView!
     var searchTextField: UITextField?
+    var replacingPlayer: Player?
     
-    init(titleText: String, nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    var statRemSalary: Double = 0
+    var statAvgSalary: Double = 0
+    var lineup: Lineup
+    
+    init(titleText: String, lineup _lineup: Lineup, nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        lineup = _lineup
         positionText = titleText
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,6 +75,16 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         showLoader()
     }
     
+    func updateStats() {
+        let playersRemaining = lineup.players.filter {$0 == nil}.count
+        statRemSalary = lineup.sport.salary - lineup.salary
+        statAvgSalary = (playersRemaining > 0) ? statRemSalary / Double(playersRemaining) : 0
+        
+        if let rp = replacingPlayer {
+            statRemSalary += rp.salary
+        }
+    }
+    
     func constrainLoader() {
         loaderView.translatesAutoresizingMaskIntoConstraints = false
         loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
@@ -100,17 +116,44 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     
     func gotDraftGroup(draftGroup: DraftGroup) {
         self.draftGroup = draftGroup
+        
         self.updatePlayers()
         self.tableView.reloadData()
-        hideLoader()
+        self.scrollToFirstAffordablePlayer()
+        
+        self.hideLoader()
+    }
+    
+    func scrollToFirstAffordablePlayer() {
+        var idx = 0
+        for player in players {
+            if player.salary > statRemSalary {
+                idx++
+            }
+            else {
+                break
+            }
+        }
+        
+        if idx < players.count {
+            if idx > 0 {
+                idx--
+            }
+            
+            let indexPath = NSIndexPath(forRow: idx, inSection: 0)
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+            tableView.flashScrollIndicators()
+        }
     }
     
     func updatePlayers() {
         players = draftGroup.players
+        
         // Filter by position
         if filterBy != "FX" {
             players = players.filter { p in p.position == filterBy }
         }
+        
         // Filter by search text
         let searchText = searchBar.text ?? ""
         if searchText != "" {
@@ -128,6 +171,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
                 }
             }
         }
+        
         // Sort by salary, fppg, name
         players.sortInPlace { p1, p2 in
             if p1.salary != p2.salary {
@@ -164,20 +208,33 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let players = self.players {
             return players.count
-        } else {
+        }
+        else {
             return 0
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let player = self.players?[indexPath.row]
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(searchCellIdentifier, forIndexPath: indexPath) as! LineupSearchCellView
         cell.bigInfoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
-        cell.player = self.players?[indexPath.row]
-        cell.backgroundColor = .clearColor()
+        cell.player = player
+        
         cell.topBorder = true
+        cell.backgroundColor = .clearColor()
+        
+        if player?.salary > statRemSalary {
+            cell.overBudget = true
+        }
+        else {
+            cell.overBudget = false
+        }
+    
         if indexPath.row == 0 {
             cell.topBorder = false
         }
+        
         return cell
     }
     
@@ -271,6 +328,7 @@ extension LineupSearchViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         updatePlayers()
+        
         if players.count == 0 {
             tableView.scrollEnabled = false
             searchBar.returnKeyType = .Default
@@ -283,8 +341,28 @@ extension LineupSearchViewController: UISearchBarDelegate {
             tableView.scrollEnabled = true
             searchBar.returnKeyType = .Search
         }
+        
         tableView.reloadData()
         searchBar.resignFirstResponder()
         searchBar.becomeFirstResponder()
+    }
+}
+
+extension LineupSearchViewController: StatFooterDataSource {
+    
+    func footerStatAvgSalary() -> Double? {
+        if (statAvgSalary < 0) {
+            return 0.0
+        }
+        
+        return statAvgSalary
+    }
+    
+    func footerStatRemSalary() -> Double? {
+        return statRemSalary
+    }
+    
+    func footerStatLiveInDate() -> NSDate? {
+        return lineup.draftGroup.start
     }
 }

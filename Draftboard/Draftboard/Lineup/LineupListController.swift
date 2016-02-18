@@ -65,9 +65,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         // Hide pagination to start
         paginationHeight.constant = 20.0
         paginationView.hidden = true
-
+        
         // Create reusable cards
         createReusableCardViews()
+        createView.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -103,8 +104,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     }
     
     func createReusableCardViews() {
-        createView.hidden = true
-        
         for _ in 1...3 {
             
             // Create card view
@@ -193,6 +192,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             return
         }
         
+        // Hide create view
+        createView.hidden = true
+        
         // Load lineup players
         for lineup in lineups {
             
@@ -207,11 +209,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
                 
-                //let rando = arc4random_uniform(10)
-                //if rando > 5 {
-                //    draftGroup.start = NSDate.distantPast()
-                //}
-                
                 if let idx = self.lineups.indexOf({$0.id == lineup.id}) {
                     if self.cardIndicesInView.contains(idx) {
                         let modIndex = idx % self.reusableCardViews.count
@@ -223,7 +220,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
                                 lineup.cardScrollPos = cardLineup.cardScrollPos
                             }
                         }
-
+                        
                         cardView.lineup = lineup
                         cardView.reloadContent(self.toggleOption, updateScrollPos: false)
                     }
@@ -359,16 +356,31 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         nvc.lineup.draftGroup = draftGroup
         nvc.saveLineupAction = { lineup in
+            
+            // Add lineup, sort by date
             self.lineups.append(lineup)
-            self.updatePagination()
+            self.lineups.sortInPlace { (element1, element2) -> Bool in
+                let result = element1.draftGroup.start.compare(element2.draftGroup.start)
+                return result == NSComparisonResult.OrderedAscending
+            }
+            
+            // Get index of added lineup
+            var idx = 0
+            for lp in self.lineups {
+                if lp.id == lineup.id {
+                    break
+                }
+                idx++
+            }
             
             // Update content size, pagination
             let b = self.scrollView.bounds
             self.scrollView.contentSize = CGSizeMake(CGFloat(self.lineups.count) * b.size.width, 0)
+            self.updatePagination()
             
             // Move to new lineup
             self.noLoad = true
-            self.setLineupIndex(self.lineups.count - 1)
+            self.setLineupIndex(idx)
             self.navController?.popViewController()
             
             // Save lineup
@@ -469,7 +481,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
 // MARK: - UIScrollViewDelegate
 
 extension LineupListController: UIScrollViewDelegate {
-
+    
     func updateCardsInView(indices: Set<Int>) {
         let indicesToUpdate = indices.subtract(cardIndicesInView)
         let bounds = scrollView.bounds

@@ -46,6 +46,23 @@ class LineupSearchCellView: UITableViewCell {
             ppgLabel.text = String(format: "%.2f FPPG", player?.fppg ?? 0)
         }
     }
+    
+    var overBudget: Bool = false {
+        didSet {
+            if overBudget {
+                nameLabel.alpha = 0.35
+                salaryLabel.alpha = 0.35
+                leagueLabel.alpha = 0.35
+                statusLabel.alpha = 0.35
+            }
+            else {
+                nameLabel.alpha = 1.0
+                salaryLabel.alpha = 1.0
+                leagueLabel.alpha = 1.0
+                statusLabel.alpha = 1.0
+            }
+        }
+    }
 
     @IBInspectable var topBorder: Bool = true {
         didSet {
@@ -58,5 +75,4 @@ class LineupSearchCellView: UITableViewCell {
             bottomBorderView.hidden = !bottomBorder
         }
     }
-    
 }

@@ -122,7 +122,10 @@ class LineupEditViewController: DraftboardViewController {
     func didTapCell(cell: LineupEditCellView) {
         let positions = lineup.sport.positions
         let titleText = positionTextForAbbr(positions[cell.index])
-        let svc = LineupSearchViewController(titleText: titleText, nibName: "LineupSearchViewController", bundle: nil)
+        let svc = LineupSearchViewController(titleText: titleText, lineup: lineup, nibName: "LineupSearchViewController", bundle: nil)
+        svc.replacingPlayer = cell.player
+        svc.updateStats()
+        
         svc.draftGroup = lineup.draftGroup
         svc.filterBy = positions[cell.index]
         svc.playerSelectedAction = { player in
