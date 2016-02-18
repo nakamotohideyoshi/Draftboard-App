@@ -192,10 +192,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             return
         }
         
-        for l in lineups {
-            print(l.draftGroup.start)
-        }
-        
         // Hide create view
         createView.hidden = true
         
@@ -212,7 +208,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             // Update cards one by one
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
-                print(lineup.draftGroup.start)
                 
                 if let idx = self.lineups.indexOf({$0.id == lineup.id}) {
                     if self.cardIndicesInView.contains(idx) {
@@ -367,10 +362,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             self.lineups.sortInPlace { (element1, element2) -> Bool in
                 let result = element1.draftGroup.start.compare(element2.draftGroup.start)
                 return result == NSComparisonResult.OrderedAscending
-            }
-            
-            for l in self.lineups {
-                print(l.draftGroup.start)
             }
             
             // Get index of added lineup

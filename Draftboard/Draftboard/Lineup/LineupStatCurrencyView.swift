@@ -51,7 +51,7 @@ class LineupStatCurrencyView: LineupStatView {
         
         // Make it red if necessary
         if (invalid) {
-            attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(0, str.characters.count))
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.redDraftboard(), range: NSMakeRange(0, str.characters.count))
         }
 
         return attrStr
