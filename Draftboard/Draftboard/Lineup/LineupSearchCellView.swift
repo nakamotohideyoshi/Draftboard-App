@@ -12,7 +12,7 @@ class LineupSearchCellView: UITableViewCell {
     @IBOutlet weak var topBorderView: UIView!
     @IBOutlet weak var bottomBorderView: UIView!
     @IBOutlet weak var positionLabel: DraftboardLabel!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: AvatarImageView!
     @IBOutlet weak var nameLabel: DraftboardLabel!
     @IBOutlet weak var salaryLabel: DraftboardLabel!
     @IBOutlet weak var leagueLabel: DraftboardLabel!
@@ -37,6 +37,7 @@ class LineupSearchCellView: UITableViewCell {
     
     var player: Player? {
         didSet {
+            avatarImageView.player = player
             nameLabel.text = player?.shortName
             positionLabel.text = player?.position
             leagueLabel.text = player?.team
