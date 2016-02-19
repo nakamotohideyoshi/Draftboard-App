@@ -17,7 +17,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     let searchCellIdentifier = "searchCellIdentifier"
     var draftGroup: DraftGroup!
     var players: [Player]!
-    var filterBy: String?
+    var filterBy: [String] = []
     var playerSelectedAction:((Player) -> Void)?
     var positionText: String!
     var loaderView: LoaderView!
@@ -173,8 +173,8 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         // Filter by position
         players = removeLineupPlayers(draftGroup.players)
         
-        if filterBy != "FX" {
-            players = players.filter { p in p.position == filterBy }
+        if filterBy.count > 0 {
+            players = players.filter { p in filterBy.contains(p.position) }
         }
         
         // Filter by search text

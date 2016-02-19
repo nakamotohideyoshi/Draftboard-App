@@ -331,9 +331,10 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
                 return
             }
             
-            for (index, player) in lineup.players.enumerate() {
+            for (index, position) in lineup.sport.positions.enumerate() {
                 let cellView = cellViews[index]
-                cellView.player = player
+                cellView.positionLabel.text = position
+                cellView.player = lineup.players[index]
                 
                 switch option {
                     case .Points:
