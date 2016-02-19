@@ -35,6 +35,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     
     var toggleOption: LineupCardToggleOption = .Salary
     var noLoad: Bool = false
+    var loaded: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -202,6 +203,14 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             for newLineup in newLineups {
                 if lineup.id == newLineup.id {
                     newLineup.cardScrollPos = lineup.cardScrollPos
+                }
+            }
+            
+            // Start up
+            if !loaded {
+                loaded = true
+                for cardView in reusableCardViews {
+                    cardView.contentView.contentOffset = CGPointMake(0, 44.0)
                 }
             }
             
