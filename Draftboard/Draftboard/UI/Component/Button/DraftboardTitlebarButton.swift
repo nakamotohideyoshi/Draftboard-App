@@ -57,8 +57,10 @@ class DraftboardTitlebarButton: DraftboardButton {
 //            bgHighlightColor = UIColor(0x8b90af)
         }
         else if (type == .DisabledValue) {
-            bgColor = .greyCool()
-            bgHighlightColor = .greyCool()
+            bgColor = UIColor(0x6d718a, alpha: 0.3)
+            bgHighlightColor = UIColor(0x6d718a, alpha: 0.3)
+            textColor = UIColor(0xFFFFFF, alpha: 0.3)
+            textHighlightColor = UIColor(0xFFFFFF, alpha: 0.3)
         }
         else {
             bgColor = .clearColor()

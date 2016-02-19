@@ -124,6 +124,28 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         self.hideLoader()
     }
     
+    func removeLineupPlayers(players: [Player]) -> [Player] {
+        var selectablePlayers = [Player]()
+        
+        for player in players {
+            var found = false
+            
+            for lineupPlayer in lineup.players {
+                if let lp = lineupPlayer {
+                    if player.id == lp.id {
+                        found = true
+                    }
+                }
+            }
+            
+            if !found {
+                selectablePlayers.append(player)
+            }
+        }
+        
+        return selectablePlayers
+    }
+    
     func scrollToFirstAffordablePlayer() {
         var idx = 0
         for player in players {
@@ -147,9 +169,10 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func updatePlayers() {
-        players = draftGroup.players
         
         // Filter by position
+        players = removeLineupPlayers(draftGroup.players)
+        
         if filterBy != "FX" {
             players = players.filter { p in p.position == filterBy }
         }
@@ -190,6 +213,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
                 player.injury = injury
             }
         }
+        
         self.tableView.reloadData()
     }
     
@@ -230,7 +254,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         else {
             cell.overBudget = false
         }
-    
+        
         if indexPath.row == 0 {
             cell.topBorder = false
         }

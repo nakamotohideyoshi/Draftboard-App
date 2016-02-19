@@ -172,9 +172,33 @@ class LineupEditViewController: DraftboardViewController {
     
     // MARK: - Titlebar datasource methods
     
+    func showInvalidModal() {
+        var errorMsg = ""
+        let playersRemaining = lineup.players.filter {$0 == nil}.count
+        
+        if playersRemaining > 0 {
+            errorMsg = "You must select a player for all positions"
+        }
+        if statRemSalary < 0 {
+            errorMsg = "You overshot your budget"
+        }
+        
+        let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+        let actions = ["Okay"]
+        
+        vc.actions = actions
+        vc.promise.then { index -> Void in
+            RootViewController.sharedInstance.popAlertViewController()
+        }
+        
+        RootViewController.sharedInstance.pushAlertViewController(vc)
+        vc.titleLabel.text = "FOUL"
+        vc.errorLabel.text = errorMsg
+    }
+    
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .DisabledValue) {
-            print("You can't save an invalid lineup")
+            showInvalidModal()
         }
         else if (buttonType == .Value) {
             if let mvp = lineup.mvp {
