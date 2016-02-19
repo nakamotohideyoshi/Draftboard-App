@@ -102,14 +102,10 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func positionTextForAbbr(abbr: String) -> String {
-        if (abbr == "PG") {
-            return "Point Guard"
-        } else if (abbr == "SG") {
-            return "Shooting Guard"
-        } else if (abbr == "SF") {
-            return "Small Forward"
-        } else if (abbr == "PF") {
-            return "Power Forward"
+        if (abbr == "G") {
+            return "Guard"
+        } else if (abbr == "F") {
+            return "Forward"
         } else if (abbr == "C") {
             return "Center"
         } else if (abbr == "FX"){
