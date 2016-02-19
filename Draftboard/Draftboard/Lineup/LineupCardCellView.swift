@@ -24,8 +24,7 @@ class LineupCardCellView: DraftboardNibControl {
     
     var player: Player? {
         didSet {
-            avatarView.avatarImageView.image = UIImage(named: "sample-avatar-big")
-            positionLabel.text = player?.position
+            avatarView.avatarImageView.player = player
             nameLabel.text = player?.shortName
             teamLabel.text = player?.team
         }

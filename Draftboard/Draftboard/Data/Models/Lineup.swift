@@ -60,7 +60,7 @@ class Lineup: Model {
         }
         
         // Dependencies
-        let players = dataPlayers.map { Player(lineupData: $0) }
+        let players = dataPlayers.reverse().map { Player(lineupData: $0) }
         guard players.count == dataPlayers.count,
             let sport = Sport(name: dataSport)
         else {

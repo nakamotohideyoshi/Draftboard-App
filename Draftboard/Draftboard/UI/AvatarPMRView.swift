@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 class AvatarPMRView: UIView {
     var PMRView: CircleProgressView!
-    var avatarImageView: UIImageView!
+    var avatarImageView: AvatarImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,7 +24,7 @@ class AvatarPMRView: UIView {
     }
     
     func setup() {
-        avatarImageView = UIImageView()
+        avatarImageView = AvatarImageView()
         self.addSubview(avatarImageView)
         
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,10 +44,6 @@ class AvatarPMRView: UIView {
         
         PMRView.setProgress(0.0, animated: false)
         PMRView.hidden = true
-        
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let img = UIImage(named: "icon-avatar", inBundle: bundle, compatibleWithTraitCollection: self.traitCollection)
-        avatarImageView.image = img
     }
     
     override func layoutSubviews() {

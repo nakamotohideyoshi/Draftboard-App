@@ -55,6 +55,8 @@
 		3EB2CB671BFE473B00579F1B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB661BFE473B00579F1B /* Data.swift */; };
 		3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB731BFE763400579F1B /* DraftGroup.swift */; };
 		3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */; };
+		3EB4BD891C72A62200CD760B /* PlayerPhotos in Resources */ = {isa = PBXBuildFile; fileRef = 3EB4BD881C72A62200CD760B /* PlayerPhotos */; };
+		3EB4BD8B1C73D06400CD760B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
 		5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
 		5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CBFD01BDA8E7D006746B2 /* Team.swift */; };
@@ -230,6 +232,8 @@
 		3EB2CB661BFE473B00579F1B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3EB2CB731BFE763400579F1B /* DraftGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftGroup.swift; sourceTree = "<group>"; };
 		3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLConnection+Promise.swift"; sourceTree = "<group>"; };
+		3EB4BD881C72A62200CD760B /* PlayerPhotos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PlayerPhotos; sourceTree = "<group>"; };
+		3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		3EE452051BFBBCE70085FB6D /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
 		5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardArrowButton.swift; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 				3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */,
 				5DC589411BA1DBDB00B9D134 /* Lineup */,
 				5D9C2FCB1BAC681D0076355D /* Photos */,
+				3EB4BD881C72A62200CD760B /* PlayerPhotos */,
 				3E7860E41B9FB1CF004013AB /* ResultsViewController.swift */,
 				5DF14B3D1BB21A4200C3F07C /* RootViewController.swift */,
 				5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */,
@@ -609,6 +614,7 @@
 				3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */,
 				5D3C726B1BF11EE3005A27B1 /* GlobalFilterItem.swift */,
 				5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */,
+				3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */,
 				5DE2D6321C0F915F0023D4DB /* DraftboardSegmentedControl.swift */,
 				5DCFB8971C52953F00924EC7 /* DraftboardPagination.swift */,
 			);
@@ -771,6 +777,7 @@
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */,
 				5D6237C61BB61F7B0007E62A /* LineupEditViewController.xib in Resources */,
+				3EB4BD891C72A62200CD760B /* PlayerPhotos in Resources */,
 				3CDCF9C21BE411BB00F75BF2 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -863,6 +870,7 @@
 				5DAF71761BF3C00F00CB972F /* AvatarPMRView.swift in Sources */,
 				5DDF131F1BBAF86F007D8001 /* DraftboardTitlebarButton.swift in Sources */,
 				5D783AD11BD97D09000D8494 /* Contest.swift in Sources */,
+				3EB4BD8B1C73D06400CD760B /* AvatarImageView.swift in Sources */,
 				3CDCF9C41BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift in Sources */,
 				3C74CA4E1BE051A00077DF0C /* DraftboardContestsCell.swift in Sources */,
 				5D6237BF1BB61F7B0007E62A /* LineupCardCellView.swift in Sources */,

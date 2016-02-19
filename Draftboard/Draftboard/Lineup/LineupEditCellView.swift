@@ -12,7 +12,7 @@ import UIKit
 class LineupEditCellView: DraftboardNibControl {
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBorderHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: AvatarImageView!
     @IBOutlet weak var bottomBorderView: UIView!
     @IBOutlet weak var topBorderView: UIView!
     
@@ -32,7 +32,7 @@ class LineupEditCellView: DraftboardNibControl {
     
     var player: Player? {
         didSet {
-            avatarImageView.image = UIImage(named: "sample-avatar-big")
+            avatarImageView.player = player
             nameLabel.textColor = .whiteColor()
             nameLabel.text = player?.shortName
             teamLabel.text = player?.team
@@ -73,12 +73,6 @@ class LineupEditCellView: DraftboardNibControl {
     @IBInspectable var salaryText: String = "" {
         didSet {
             salaryLabel.text = salaryText
-        }
-    }
-    
-    @IBInspectable var avatarImage: UIImage? {
-        didSet {
-            avatarImageView.image = avatarImage
         }
     }
 }

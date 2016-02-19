@@ -15,6 +15,7 @@ class PlayerDetailViewController: DraftboardViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topViewTop: NSLayoutConstraint!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var avatarImageView: BigAvatarImageView!
     
     var draftButton: DraftboardArrowButton!
     var draftButtonTop: NSLayoutConstraint!
@@ -82,6 +83,9 @@ class PlayerDetailViewController: DraftboardViewController {
             "DeRozan's career-best start",
             "Finding fantasy NBA studs with usage rate",
         ]
+        
+        // Update avatar image
+        avatarImageView.player = player
         
         if (!draftable) {
             segmentedHeight.constant = 97.0;

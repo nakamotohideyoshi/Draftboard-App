@@ -127,7 +127,7 @@ class LineupEditViewController: DraftboardViewController {
         svc.updateStats()
         
         svc.draftGroup = lineup.draftGroup
-        svc.filterBy = positions[cell.index]
+        svc.filterBy = lineup.sport.positionMatches[cell.index]
         svc.playerSelectedAction = { player in
             cell.player = player
             self.lineup.players[cell.index] = player
