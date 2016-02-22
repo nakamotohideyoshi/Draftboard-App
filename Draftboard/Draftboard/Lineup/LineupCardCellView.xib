@@ -41,19 +41,19 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="hidden" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiN-qF-zEh" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiN-qF-zEh" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="270" y="23" width="6" height="17"/>
                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="11"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjp-H9-6El" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjp-H9-6El" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="278" y="25" width="14" height="14"/>
                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="9"/>
                     <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K. Korver " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-Xh-Aog" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="K. Korver " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcH-Xh-Aog" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="85" y="23" width="59" height="18"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -64,7 +64,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ATL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Lr-I6Q" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" ATL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Lr-I6Q" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="146" y="28" width="16" height="11"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="8"/>
                     <color key="textColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,7 +75,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PG" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-Vx-Jha" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                     <rect key="frame" x="15" y="25" width="24" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="6Hm-Uo-36I"/>

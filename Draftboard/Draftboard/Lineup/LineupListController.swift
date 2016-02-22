@@ -394,6 +394,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             
             // Save lineup
             API.lineupCreate(lineup)
+            self.createView.hidden = true
+            self.scrollViewDidScroll(self.scrollView)
         }
         
         navController?.pushViewController(nvc)
