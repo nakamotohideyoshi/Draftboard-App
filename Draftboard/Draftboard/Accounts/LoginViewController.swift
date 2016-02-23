@@ -48,6 +48,8 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         loginField.textField.addTarget(self, action: Selector("loginChanged:"), forControlEvents: .EditingChanged)
         
         scrollView.scrollEnabled = false
+        
+        logoPosition = logoImageView.layer.position
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
@@ -158,10 +160,6 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        if (logoPosition == nil) {
-            logoPosition = logoImageView.layer.position
-        }
-        
         animateLogo(0.0, offset: -40.0)
     }
     
