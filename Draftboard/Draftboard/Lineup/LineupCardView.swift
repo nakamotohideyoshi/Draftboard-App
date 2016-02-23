@@ -259,20 +259,8 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         pmrStatView.graphView.setProgress(1.0)
     }
     
-    func cellHeight() -> CGFloat {
-        let h = UIScreen.mainScreen().bounds.height
-        
-        if (h > 568) { // 6, 6S, 6+, 6S+
-            return 50.0
-        } else if (h > 480.0) { // 5, 5C, 5S
-            return 45.0
-        } else { // 4, 4S
-            return 42.0
-        }
-    }
-    
     func createCellViews() {
-        let height = cellHeight()
+        let h = UIScreen.mainScreen().bounds.height
         
         for _ in 1...cellCount {
             let cellView = LineupCardCellView()
@@ -281,7 +269,17 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
             cellView.widthRancor.constraintEqualToRancor(contentView.widthRancor).active = true
-            cellView.heightRancor.constraintEqualToConstant(height).active = true
+            
+            if h > 568 {
+                cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / 8.0).active = true
+            }
+            else if h > 480 {
+                cellView.heightRancor.constraintEqualToConstant(45.0).active = true
+            }
+            else {
+                cellView.heightRancor.constraintEqualToConstant(42.0).active = true
+            }
+            
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
             if let lastCellView = cellViews.last {
