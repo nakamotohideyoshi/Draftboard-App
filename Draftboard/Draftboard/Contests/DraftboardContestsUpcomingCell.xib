@@ -54,31 +54,31 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100 Contest Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XN2-ts-hAb" userLabel="contestName" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="64" y="20" width="341" height="21"/>
+                    <rect key="frame" x="64" y="19" width="341" height="21"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpR-w7-dMX" userLabel="contestFee" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="64" y="40" width="18" height="14"/>
+                    <rect key="frame" x="64" y="44" width="18" height="14"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" FEE / " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jg4-pP-EJj" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="80" y="40" width="28" height="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" FEE / " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jg4-pP-EJj" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="82" y="44" width="28" height="14"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$180" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfA-BE-PRq" userLabel="contestPrizes" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="108" y="40" width="23" height="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$180" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfA-BE-PRq" userLabel="contestPrizes" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="110" y="44" width="23" height="14"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                     <color key="textColor" red="0.14901960784313725" green="0.77647058823529413" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcd-K3-9ml" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="131" y="40" width="35" height="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcd-K3-9ml" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="133" y="44" width="35" height="14"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -94,14 +94,14 @@
                 <constraint firstItem="Jg4-pP-EJj" firstAttribute="baseline" secondItem="hpR-w7-dMX" secondAttribute="baseline" id="HEG-t0-k7i"/>
                 <constraint firstItem="isM-uk-86f" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" id="JhC-S9-JpI"/>
                 <constraint firstAttribute="bottom" secondItem="uFH-JC-6aI" secondAttribute="bottom" id="Jqa-6M-97B"/>
-                <constraint firstItem="XN2-ts-hAb" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" constant="-9" id="Tof-ac-sXQ"/>
+                <constraint firstItem="XN2-ts-hAb" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" constant="-10" id="Tof-ac-sXQ"/>
                 <constraint firstItem="gby-6s-OnB" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" id="UR9-zt-OIc"/>
                 <constraint firstAttribute="bottom" secondItem="isM-uk-86f" secondAttribute="bottom" id="VZr-oc-jEl"/>
                 <constraint firstItem="uFH-JC-6aI" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" constant="15" id="ZzN-ZW-he9"/>
                 <constraint firstItem="XN2-ts-hAb" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" constant="64" id="dWl-b3-kkn"/>
                 <constraint firstItem="Jg4-pP-EJj" firstAttribute="leading" secondItem="hpR-w7-dMX" secondAttribute="trailing" id="hnV-RA-yos"/>
                 <constraint firstAttribute="trailing" secondItem="vSi-oc-gfO" secondAttribute="trailing" constant="15" id="hu9-tJ-owX"/>
-                <constraint firstItem="hpR-w7-dMX" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" constant="7" id="iJ4-UW-iFa"/>
+                <constraint firstItem="hpR-w7-dMX" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" constant="12" id="iJ4-UW-iFa"/>
                 <constraint firstItem="isM-uk-86f" firstAttribute="top" secondItem="wOm-nG-XTZ" secondAttribute="top" id="qrU-wB-h4h"/>
                 <constraint firstItem="vSi-oc-gfO" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" id="qyb-b3-3YX"/>
                 <constraint firstItem="zfA-BE-PRq" firstAttribute="baseline" secondItem="Jg4-pP-EJj" secondAttribute="baseline" id="uXj-ex-tkK"/>
