@@ -26,9 +26,10 @@ class ContestsListController: DraftboardViewController {
 //        "Completed"
 //    ]
     
-    var lineups = [Lineup]()
-    var contests = [Contest]()
-    var entries = [Int]()
+    var lineups: [Lineup]?
+    var startTimes: [NSDate]?
+    var contests: [NSDate: [Contest]]?
+//    var entries = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,9 +66,9 @@ class ContestsListController: DraftboardViewController {
         API.contestLobby().then { contests in
             self.gotContests(contests)
         }
-        API.contestEntries().then { entries in
-            self.gotEntries(entries)
-        }
+//        API.contestEntries().then { entries in
+//            self.gotEntries(entries)
+//        }
     }
     
     func showLoader() {
@@ -97,18 +98,17 @@ class ContestsListController: DraftboardViewController {
             "title": "Show All",
             "subtitle": "? Contests"
         ]
-        
         let mcc = DraftboardModalChoiceController(title: "Filter by Lineup Eligibility", choices: nil)
-        if self.lineups.count > 0 {
-            var choices = self.lineups.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
-            choices.insert(noFilterChoice, atIndex: 0)
+        if self.lineups?.count > 0 {
+            var choices = self.lineups?.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
+            choices?.insert(noFilterChoice, atIndex: 0)
             mcc.choiceData = choices
         }
         else {
             API.lineupUpcoming().then { lineups -> Void in
                 self.lineups = lineups
-                var choices = self.lineups.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
-                choices.insert(noFilterChoice, atIndex: 0)
+                var choices = self.lineups?.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
+                choices?.insert(noFilterChoice, atIndex: 0)
                 mcc.choiceData = choices
             }
         }
@@ -170,15 +170,24 @@ extension ContestsListController {
     }
     
     func gotContests(contests: [Contest]) {
-        self.contests = contests
+        self.contests = contests.reduce([:]) { (var dict, contest) -> [NSDate: [Contest]] in
+            if dict[contest.start] == nil {
+                dict[contest.start] = [Contest]()
+            }
+            dict[contest.start]?.append(contest)
+            return dict
+        }
+        self.startTimes = self.contests?.keys.sort { date1, date2 in
+            return date1.earlierDate(date2) == date1
+        }
         self.tableView.reloadData()
         self.hideLoader()
     }
     
-    func gotEntries(entries: [NSDictionary]) {
-        self.entries = entries.flatMap { $0["contest"] as? Int }
-        self.tableView.reloadData()
-    }
+//    func gotEntries(entries: [NSDictionary]) {
+//        self.entries = entries.flatMap { $0["contest"] as? Int }
+//        self.tableView.reloadData()
+//    }
 }
 
 // MARK: - UITableViewDelegate functions
@@ -186,22 +195,34 @@ extension ContestsListController {
 extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        guard let startTimes = self.startTimes
+        else { return 0 }
+        
+        return startTimes.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.contests.count
+        guard let start = self.startTimes?[section],
+            contests = self.contests?[start]
+        else { return 0 }
+        
+        return contests.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(normalContestCellReuseIdentifier, forIndexPath: indexPath) as! DraftboardContestsUpcomingCell
-        let contest = self.contests[indexPath.row]
+
+        guard let start = self.startTimes?[indexPath.section],
+            contests = self.contests?[start]
+        else { return cell }
+        
+        let contest = contests[indexPath.row]
         let fee = Format.currency.stringFromNumber(contest.buyin)!
         let prizes = Format.currency.stringFromNumber(contest.prizePool)!
-        let entered = self.entries.contains(contest.id)
+//        let entered = self.entries.contains(contest.id)
         cell.titleLabel.text = contest.name
         cell.contestInfo.text = "\(fee) FEE / \(prizes) PRIZES"
-        cell.iconImageView.tintColor = entered ? .whiteColor() : .whiteMediumOpacity()
+//        cell.iconImageView.tintColor = entered ? .whiteColor() : .whiteMediumOpacity()
         cell.guaranteedImageView.hidden = !contest.gpp
         cell.topBorderView.hidden = (indexPath.row == 0)
         return cell
@@ -209,8 +230,11 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier(normalContestHeaderReuseIdentifier) as! ContestsHeaderCell
-        header.titleLabel.textColor = .whiteMediumOpacity()
-        header.titleLabel.text = "Upcoming".uppercaseString
+        
+        guard let start = self.startTimes?[section]
+        else { return header }
+
+        header.countdownView.date = start
         return header
     }
     
@@ -223,11 +247,15 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let contest = self.contests[indexPath.row]
-        let entered = self.entries.contains(contest.id)
+        guard let start = self.startTimes?[indexPath.section],
+            contests = self.contests?[start]
+        else { return }
+
+        let contest = contests[indexPath.row]
+//        let entered = self.entries.contains(contest.id)
         let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
         cdvc.contest = contest
-        cdvc.contestEntered = entered
+//        cdvc.contestEntered = entered
         self.navController?.pushViewController(cdvc)
     }
 }
