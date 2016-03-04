@@ -36,8 +36,9 @@ class CountdownView: UILabel {
         setup()
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+//        fatalError("init(coder:) has not been implemented")
     }
     
     func setup() {

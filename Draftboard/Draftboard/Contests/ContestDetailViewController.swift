@@ -14,7 +14,7 @@ class ContestDetailViewController: DraftboardViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topViewTop: NSLayoutConstraint!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var liveInLabel: DraftboardLabel!
+    @IBOutlet weak var liveInLabel: CountdownView!
     @IBOutlet weak var startDateLabel: DraftboardLabel!
     @IBOutlet weak var feeLabel: DraftboardLabel!
     @IBOutlet weak var prizesLabel: DraftboardLabel!
@@ -73,10 +73,10 @@ class ContestDetailViewController: DraftboardViewController {
         let start = df.stringFromDate(contest.start)
         startDateLabel.text = start.uppercaseString
         
-        // Update live in time
-        liveInLabel.text = liveInString()
-        let timer = NSTimer(timeInterval: 0.5, target: self, selector: "updateTime", userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes);
+        // Update "live in" label
+        liveInLabel.date = contest.start
+        liveInLabel.size = 60.0
+        liveInLabel.color = .whiteColor()
         
         // Set stats
         let fee = Format.currency.stringFromNumber(contest.buyin)
@@ -121,25 +121,6 @@ class ContestDetailViewController: DraftboardViewController {
         } else {
             draftButton.addTarget(self, action: "handleButtonTap:", forControlEvents: .TouchUpInside)
         }
-    }
-    
-    func liveInString() -> String {
-        // Ripped from LineupStatTimeView
-        let cal = NSCalendar.currentCalendar()
-        let now = NSDate()
-        
-        let components = cal.components(
-            [.Hour, .Minute, .Second],
-            fromDate: now,
-            toDate: contest.start,
-            options: []
-        )
-        
-        return String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
-    }
-    
-    func updateTime() {
-        liveInLabel.text = liveInString()
     }
     
     func createDraftButton() {
