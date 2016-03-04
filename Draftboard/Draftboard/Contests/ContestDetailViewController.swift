@@ -111,6 +111,12 @@ class ContestDetailViewController: DraftboardViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        // Add a white footer to the tableview
+        let footerView = UIView(frame: CGRectMake(0.0, 0.0, App.screenBounds.width, 600.0))
+        footerView.backgroundColor = .whiteColor()
+        tableView.tableFooterView = footerView
+        tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, -600.0, 0.0)
+        
         // Register cell
         let bundle = NSBundle(forClass: self.dynamicType)
         let cellNib = UINib(nibName: "DraftboardDetailCell", bundle: bundle)
@@ -239,7 +245,7 @@ class ContestDetailViewController: DraftboardViewController {
 
 extension ContestDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData[tableDataKey]!.count + 2
+        return tableData[tableDataKey]!.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -260,9 +266,6 @@ extension ContestDetailViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 0) {
             return 122.0
-        }
-        else if (indexPath.row == tableData[tableDataKey]!.count + 1) {
-            return 100.0
         }
         
         return 40.0

@@ -214,8 +214,22 @@ extension API {
                 guard let rank = position["rank"] as? Int,
                     value = position["value"] as? Double
                 else { throw APIError.FailedToModel(NSDictionary) }
+                
+                // Ordinals
+                var suffix = "th";
+                let ones = rank % 10;
+                let tens = (rank/10) % 10;
+                
+                if (tens != 1 && ones == 1){
+                    suffix = "st";
+                } else if (tens != 1 && ones == 2){
+                    suffix = "nd";
+                } else if (tens != 1 && ones == 3){
+                    suffix = "rd";
+                }
+
                 payouts.append([
-                    "left": String(format: "%dst", rank),
+                    "left": String(format: "%d\(suffix)", rank),
                     "right": Format.currency.stringFromNumber(value)!
                 ])
             }
