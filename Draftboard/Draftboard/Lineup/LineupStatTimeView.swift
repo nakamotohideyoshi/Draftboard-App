@@ -10,18 +10,22 @@ import UIKit
 
 class LineupStatTimeView: LineupStatView {
     
-    var defaultString = "00:00:00"
-    var timer: NSTimer!
-    
     init(style _style: LineupStatStyle, titleText _titleText: String?, date _date: NSDate?) {
         super.init(style: _style, titleText: _titleText, valueText: nil)
         
         date = _date
-        self.valueText = timeStringFromDate(_date)
+        let size: CGFloat = (style == .Large) ? 20.0 : 12.0
+        let constant: CGFloat = (style == .Large) ? 7.0 : 4.0
         
-        // Countdown timer
-        timer = NSTimer(timeInterval: 0.5, target: self, selector: "update", userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes);
+        valueLabel.removeFromSuperview()
+        valueLabel = CountdownView(date: _date ?? NSDate(), size: size, color: .whiteColor())
+
+        addSubview(valueLabel)
+        valueLabel.translatesAutoresizingMaskIntoConstraints = false
+        valueLabel.centerXRancor.constraintEqualToRancor(self.centerXRancor).active = true
+        valueLabel.centerYRancor.constraintEqualToRancor(self.centerYRancor, constant: constant).active = true
+        
+        titleLabel.bottomRancor.constraintEqualToRancor(valueLabel.topRancor).active = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,46 +35,9 @@ class LineupStatTimeView: LineupStatView {
     var date: NSDate? {
         didSet {
             if let date = date {
-                self.valueText = timeStringFromDate(date)
+                (self.valueLabel as! CountdownView).date = date
             }
         }
     }
     
-    func timeStringFromDate(date: NSDate?) -> String {
-        if (date == nil) {
-            return defaultString
-        }
-        
-        let cal = NSCalendar.currentCalendar()
-        let now = NSDate()
-        
-        let components = cal.components(
-            [.Hour, .Minute, .Second],
-            fromDate: now,
-            toDate: date!,
-            options: []
-        )
-        
-        return String(format: "%02d:%02d:%02d", components.hour, components.minute, components.second)
-    }
-    
-    override func attributedValueText(str: String) -> NSMutableAttributedString {
-        let attrStr = super.attributedValueText(str)
-        
-        // TODO: add logic here for coloring the right zeros
-        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.lineupStatTimeColor(style), range: NSMakeRange(0, 6))
-        
-        return attrStr
-    }
-    
-    func update() {
-        if (date != nil) {
-            self.valueText = timeStringFromDate(date)
-        }
-    }
-    
-    deinit {
-        timer.invalidate()
-        timer = nil
-    }
 }

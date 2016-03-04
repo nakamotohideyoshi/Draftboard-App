@@ -18,7 +18,7 @@ class LineupStatView: UIView {
     
     let style: LineupStatStyle
     let titleLabel = UILabel()
-    let valueLabel = UILabel()
+    var valueLabel = UILabel()
     
     init(style _style: LineupStatStyle, titleText _titleText: String?, valueText _valueText: String?) {
         style = _style

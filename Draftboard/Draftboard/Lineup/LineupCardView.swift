@@ -93,7 +93,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         
         // Create stat views
         feesStatView = LineupStatFeesView(style: .Small, titleText: "FEES", valueText: "$10/4")
-        liveStatView = LineupStatTimeView(style: .Small, titleText: "TIME", date: nil)
+        liveStatView = LineupStatTimeView(style: .Small, titleText: "LIVE IN", date: nil)
         salaryStatView = LineupStatCurrencyView(style: .Small, titleText: "REM SALARY", currencyValue: nil)
         pmrStatView = LineupStatPMRView(style: .Small, titleText: "PTS", valueText: "0")
         winningsStatView = LineupStatView(style: .Small, titleText: "WINNINGS", valueText: "$5")
