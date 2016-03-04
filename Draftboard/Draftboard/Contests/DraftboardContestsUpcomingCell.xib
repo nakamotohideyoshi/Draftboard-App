@@ -35,14 +35,14 @@
                     <rect key="frame" x="15" y="78" width="428" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="U8w-AN-OaS"/>
+                        <constraint firstAttribute="height" constant="0.5" id="U8w-AN-OaS"/>
                     </constraints>
                 </view>
                 <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-yH-5ca" userLabel="topDivider">
                     <rect key="frame" x="15" y="0.0" width="428" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="C55-QP-dno"/>
+                        <constraint firstAttribute="height" constant="0.5" id="C55-QP-dno"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-basketball" translatesAutoresizingMaskIntoConstraints="NO" id="gby-6s-OnB">
