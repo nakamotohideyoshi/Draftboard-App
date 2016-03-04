@@ -34,6 +34,7 @@ class ContestsListController: DraftboardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = .blueDarker()
+        tableView.indicatorStyle = .White
         
         let bundle = NSBundle(forClass: self.dynamicType)
         let contestCellNib = UINib(nibName: "DraftboardContestsCell", bundle: bundle)
