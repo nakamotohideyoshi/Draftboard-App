@@ -18,8 +18,8 @@ final class API { // Do not subclass
 private extension API {
     static let agent = "Draftboard iOS" // + version?
     static let baseURL = "http://draftboard-staging.herokuapp.com/"
-    static var token: String?
-//    static var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6IiIsInVzZXJuYW1lIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTQ1NDAwNTQ0NiwiZXhwIjoxNDU2NTk3NDQ2fQ.QKFr2j5tpgI-rhNgflVhSnpY-KSPG1nbqbGI8IisMA8"
+//    static var token: String?
+    static var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZXhwIjoxNDU5Mzc3ODkyLCJvcmlnX2lhdCI6MTQ1Njc4NTg5MiwiZW1haWwiOiIiLCJ1c2VyX2lkIjo1fQ.fgAvd0-hyP0gygWY0YSwoNDf_1etAESPQetGA25EIm0"
     
     class func request(path: String) -> NSMutableURLRequest {
         let rq = NSMutableURLRequest()
