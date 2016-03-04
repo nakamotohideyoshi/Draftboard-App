@@ -175,6 +175,12 @@ extension ContestsListController {
                 dict[contest.start] = [Contest]()
             }
             dict[contest.start]?.append(contest)
+            dict[contest.start]?.sortInPlace { a, b in
+                if a.gpp != b.gpp { return a.gpp }
+                if a.buyin != b.buyin { return a.buyin > b.buyin }
+                if a.prizePool != b.prizePool { return a.prizePool > b.prizePool }
+                return a.name < b.name
+            }
             return dict
         }
         self.startTimes = self.contests?.keys.sort { date1, date2 in
