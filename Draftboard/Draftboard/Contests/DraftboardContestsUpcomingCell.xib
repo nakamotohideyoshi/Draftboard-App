@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
         </mutableArray>
@@ -19,12 +22,10 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isM-uk-86f">
                     <rect key="frame" x="0.0" y="0.0" width="458" height="79"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.082352941176470587" green="0.12941176470588234" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-guaranteed" translatesAutoresizingMaskIntoConstraints="NO" id="vSi-oc-gfO">
                     <rect key="frame" x="425" y="31" width="18" height="18"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="18" id="Ikj-wm-DpE"/>
                         <constraint firstAttribute="height" constant="18" id="Wb4-s8-CwI"/>
@@ -32,7 +33,6 @@
                 </imageView>
                 <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFH-JC-6aI" userLabel="bottomDivider">
                     <rect key="frame" x="15" y="78" width="428" height="1"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="U8w-AN-OaS"/>
@@ -40,7 +40,6 @@
                 </view>
                 <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-yH-5ca" userLabel="topDivider">
                     <rect key="frame" x="15" y="0.0" width="428" height="1"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="C55-QP-dno"/>
@@ -48,7 +47,6 @@
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-basketball" translatesAutoresizingMaskIntoConstraints="NO" id="gby-6s-OnB">
                     <rect key="frame" x="15" y="33" width="14" height="14"/>
-                    <animations/>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="0kN-Yc-f9c"/>
@@ -61,20 +59,39 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$10 FEE / $100 PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpR-w7-dMX" userLabel="contestDetails" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="64" y="40" width="103" height="14"/>
-                    <animations/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpR-w7-dMX" userLabel="contestFee" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="64" y="40" width="18" height="14"/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" FEE / " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jg4-pP-EJj" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="80" y="40" width="28" height="14"/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$180" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfA-BE-PRq" userLabel="contestPrizes" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="108" y="40" width="23" height="14"/>
+                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                    <color key="textColor" red="0.14901960784313725" green="0.77647058823529413" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" PRIZES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcd-K3-9ml" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                    <rect key="frame" x="131" y="40" width="35" height="14"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <animations/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="MS8-yH-5ca" secondAttribute="trailing" constant="15" id="2gL-DR-p7M"/>
                 <constraint firstAttribute="trailing" secondItem="isM-uk-86f" secondAttribute="trailing" id="88m-FY-eeQ"/>
+                <constraint firstItem="Qcd-K3-9ml" firstAttribute="leading" secondItem="zfA-BE-PRq" secondAttribute="trailing" id="8ig-MJ-ia9"/>
                 <constraint firstItem="gby-6s-OnB" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" constant="15" id="AhU-Jm-5GD"/>
                 <constraint firstItem="XN2-ts-hAb" firstAttribute="trailing" secondItem="vSi-oc-gfO" secondAttribute="leading" constant="-20" id="CUJ-J8-9DE"/>
+                <constraint firstItem="Qcd-K3-9ml" firstAttribute="baseline" secondItem="zfA-BE-PRq" secondAttribute="baseline" id="FTZ-1L-mxm"/>
+                <constraint firstItem="Jg4-pP-EJj" firstAttribute="baseline" secondItem="hpR-w7-dMX" secondAttribute="baseline" id="HEG-t0-k7i"/>
                 <constraint firstItem="isM-uk-86f" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" id="JhC-S9-JpI"/>
                 <constraint firstAttribute="bottom" secondItem="uFH-JC-6aI" secondAttribute="bottom" id="Jqa-6M-97B"/>
                 <constraint firstItem="XN2-ts-hAb" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" constant="-9" id="Tof-ac-sXQ"/>
@@ -82,11 +99,14 @@
                 <constraint firstAttribute="bottom" secondItem="isM-uk-86f" secondAttribute="bottom" id="VZr-oc-jEl"/>
                 <constraint firstItem="uFH-JC-6aI" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" constant="15" id="ZzN-ZW-he9"/>
                 <constraint firstItem="XN2-ts-hAb" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" constant="64" id="dWl-b3-kkn"/>
+                <constraint firstItem="Jg4-pP-EJj" firstAttribute="leading" secondItem="hpR-w7-dMX" secondAttribute="trailing" id="hnV-RA-yos"/>
                 <constraint firstAttribute="trailing" secondItem="vSi-oc-gfO" secondAttribute="trailing" constant="15" id="hu9-tJ-owX"/>
                 <constraint firstItem="hpR-w7-dMX" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" constant="7" id="iJ4-UW-iFa"/>
                 <constraint firstItem="isM-uk-86f" firstAttribute="top" secondItem="wOm-nG-XTZ" secondAttribute="top" id="qrU-wB-h4h"/>
                 <constraint firstItem="vSi-oc-gfO" firstAttribute="centerY" secondItem="wOm-nG-XTZ" secondAttribute="centerY" id="qyb-b3-3YX"/>
+                <constraint firstItem="zfA-BE-PRq" firstAttribute="baseline" secondItem="Jg4-pP-EJj" secondAttribute="baseline" id="uXj-ex-tkK"/>
                 <constraint firstItem="MS8-yH-5ca" firstAttribute="top" secondItem="wOm-nG-XTZ" secondAttribute="top" id="uz8-sc-X9E"/>
+                <constraint firstItem="zfA-BE-PRq" firstAttribute="leading" secondItem="Jg4-pP-EJj" secondAttribute="trailing" id="vfx-u9-gq4"/>
                 <constraint firstAttribute="trailing" secondItem="uFH-JC-6aI" secondAttribute="trailing" constant="15" id="xM4-Qs-LNu"/>
                 <constraint firstItem="MS8-yH-5ca" firstAttribute="leading" secondItem="wOm-nG-XTZ" secondAttribute="leading" constant="15" id="xXc-Uf-ogR"/>
                 <constraint firstItem="hpR-w7-dMX" firstAttribute="leading" secondItem="XN2-ts-hAb" secondAttribute="leading" id="zZg-lZ-sYq"/>
@@ -95,7 +115,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomBorderView" destination="uFH-JC-6aI" id="pBs-Dl-Kvl"/>
-                <outlet property="contestInfo" destination="hpR-w7-dMX" id="her-Yx-Obl"/>
+                <outlet property="contestFee" destination="hpR-w7-dMX" id="wHY-Bq-VIQ"/>
+                <outlet property="contestPrizes" destination="zfA-BE-PRq" id="skl-hz-Omp"/>
                 <outlet property="guaranteedImageView" destination="vSi-oc-gfO" id="9KD-tO-wjZ"/>
                 <outlet property="iconImageView" destination="gby-6s-OnB" id="mEX-1v-M3j"/>
                 <outlet property="titleLabel" destination="XN2-ts-hAb" id="RHo-fG-Yh4"/>

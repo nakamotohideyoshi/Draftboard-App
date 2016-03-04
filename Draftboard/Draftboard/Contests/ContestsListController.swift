@@ -227,7 +227,8 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
         let prizes = Format.currency.stringFromNumber(contest.prizePool)!
 //        let entered = self.entries.contains(contest.id)
         cell.titleLabel.text = contest.name
-        cell.contestInfo.text = "\(fee) FEE / \(prizes) PRIZES"
+        cell.contestFee.text = "\(fee)"
+        cell.contestPrizes.text = "\(prizes)"
 //        cell.iconImageView.tintColor = entered ? .whiteColor() : .whiteMediumOpacity()
         cell.guaranteedImageView.hidden = !contest.gpp
         cell.topBorderView.hidden = (indexPath.row == 0)

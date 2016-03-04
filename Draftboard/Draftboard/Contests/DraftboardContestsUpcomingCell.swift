@@ -15,7 +15,8 @@ class DraftboardContestsUpcomingCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var guaranteedImageView: UIImageView!
     @IBOutlet weak var titleLabel: DraftboardLabel!
-    @IBOutlet var contestInfo: DraftboardLabel!
+    @IBOutlet weak var contestFee: DraftboardLabel!
+    @IBOutlet weak var contestPrizes: DraftboardLabel!
     
     override func awakeFromNib() {
         self.backgroundColor = .cellColorDark()
