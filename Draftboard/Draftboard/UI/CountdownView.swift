@@ -64,9 +64,10 @@ class CountdownView: UILabel {
         let components = dateComponents()
         let (h, m, s) = (components.hour, components.minute, components.second)
         
-        // Size to fit :00 seconds to avoid wiggling
-        if widthConstraint.constant == 0 || s == 59 {
-            let timeString = String(format: "%02d:%02d:00", h, m)
+        // Size to fit :00 or :10 seconds to avoid excessive wiggling
+        if widthConstraint.constant == 0 || s == 59 || s == 19 || s == 9 {
+            var timeString = String(format: "%02d:%02d", h, m)
+            timeString += (s / 10 == 1) ? ":10" : ":00"
             attributedText = attributedTimeString(timeString)
             widthConstraint.constant = sizeThatFits(CGSizeZero).width
         }
