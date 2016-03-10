@@ -210,28 +210,40 @@ extension API {
             else { throw APIError.FailedToParse(data) }
             
             var payouts = [NSDictionary]()
+            var lastRank: Int = 0
+            var lastValue: Double = 0.00
             for position in ranks {
                 guard let rank = position["rank"] as? Int,
                     value = position["value"] as? Double
                 else { throw APIError.FailedToModel(NSDictionary) }
                 
-                // Ordinals
-                var suffix = "th";
-                let ones = rank % 10;
-                let tens = (rank/10) % 10;
+                if value == lastValue { continue }
                 
-                if (tens != 1 && ones == 1){
-                    suffix = "st";
-                } else if (tens != 1 && ones == 2){
-                    suffix = "nd";
-                } else if (tens != 1 && ones == 3){
-                    suffix = "rd";
+                func ordinalForInt(i: Int) -> String {
+                    // Ordinals
+                    var suffix = "th"
+                    let ones = i % 10
+                    let tens = (i / 10) % 10
+                    
+                    if (tens != 1 && ones == 1) {
+                        suffix = "st";
+                    } else if (tens != 1 && ones == 2) {
+                        suffix = "nd";
+                    } else if (tens != 1 && ones == 3) {
+                        suffix = "rd";
+                    }
+                    return String(format: "%d\(suffix)", i)
                 }
 
+                let left1 = (rank == lastRank + 1) ? "" : ordinalForInt(lastRank + 1) + "–"
+                let left2 = ordinalForInt(rank)
                 payouts.append([
-                    "left": String(format: "%d\(suffix)", rank),
+                    "left": left1 + left2,
                     "right": Format.currency.stringFromNumber(value)!
                 ])
+                
+                lastRank = rank
+                lastValue = value
             }
             return payouts
         }
