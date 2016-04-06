@@ -477,7 +477,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     // MARK: - Titlebar datasource methods
     
     override func titlebarTitle() -> String {
-        return titleText.uppercaseString
+        return "Lineups".uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -548,19 +548,6 @@ extension LineupListController: UIScrollViewDelegate {
         }
     }
     
-    func updateTitle(pageOffset: Double) {
-        var page = Int(round(pageOffset))
-        page = max(page, 0)
-        page = min(page, lineups.count - 1)
-        
-        let lineup = lineups[page]
-        if titleText != lineup.name {
-            titleText = lineup.name
-            self.navController?.titlebar.updateElements()
-            self.navController?.titlebar.transitionElements(.Directionless)
-        }
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if lineups.count <= 0 {
             return
@@ -571,6 +558,5 @@ extension LineupListController: UIScrollViewDelegate {
         
         updateCardIndicesInView(pageOffset)
         updateTransforms(pageOffset)
-        updateTitle(pageOffset)
     }
 }
