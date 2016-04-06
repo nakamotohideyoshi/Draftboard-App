@@ -19,7 +19,7 @@ private extension API {
     static let agent = "Draftboard iOS" // + version?
     static let baseURL = "http://draftboard-staging.herokuapp.com/"
 //    static var token: String?
-    static var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZXhwIjoxNDU5Mzc3ODkyLCJvcmlnX2lhdCI6MTQ1Njc4NTg5MiwiZW1haWwiOiIiLCJ1c2VyX2lkIjo1fQ.fgAvd0-hyP0gygWY0YSwoNDf_1etAESPQetGA25EIm0"
+    static var token: String? = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6IiIsImV4cCI6MTQ2MjU2MjEwMSwidXNlcm5hbWUiOiJ1c2VyMSIsIm9yaWdfaWF0IjoxNDU5OTcwMTAxfQ.1G9G0EDU5ws-guH_Cf42iRW3uwYyNekVA5c3B5BtBRU"
     
     class func request(path: String) -> NSMutableURLRequest {
         let rq = NSMutableURLRequest()
