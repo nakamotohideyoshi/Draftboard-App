@@ -150,7 +150,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         var idx = 0
         for player in players {
             if player.salary > statRemSalary {
-                idx++
+                idx += 1
             }
             else {
                 break
@@ -159,7 +159,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         
         if idx < players.count {
             if idx > 0 {
-                idx--
+                idx -= 1
             }
             
             let indexPath = NSIndexPath(forRow: idx, inSection: 0)
@@ -242,7 +242,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         let player = self.players?[indexPath.row]
         
         let cell = tableView.dequeueReusableCellWithIdentifier(searchCellIdentifier, forIndexPath: indexPath) as! LineupSearchCellView
-        cell.bigInfoButton.addTarget(self, action: Selector("didTapPlayerInfo:"), forControlEvents: .TouchUpInside)
+        cell.bigInfoButton.addTarget(self, action: .didTapPlayerInfo, forControlEvents: .TouchUpInside)
         cell.player = player
         
         cell.topBorder = true
@@ -389,4 +389,8 @@ extension LineupSearchViewController: StatFooterDataSource {
     func footerStatLiveInDate() -> NSDate? {
         return lineup.draftGroup.start
     }
+}
+
+private extension Selector {
+    static let didTapPlayerInfo = #selector(LineupSearchViewController.didTapPlayerInfo(_:))
 }

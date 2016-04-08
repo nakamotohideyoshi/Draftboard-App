@@ -47,7 +47,7 @@ class LineupCardToggle: UIView {
             // Create button
             let b = buttonWithOption(option)
             b.disabled = (option == selectedOption)
-            b.addTarget(self, action: Selector("didTapButton:"), forControlEvents: .TouchUpInside)
+            b.addTarget(self, action: .didTapButton, forControlEvents: .TouchUpInside)
             addSubview(b)
             
             // Constrain button
@@ -120,4 +120,8 @@ class LineupCardToggle: UIView {
         b.textValue = option.toggleText()
         return b
     }
+}
+
+private extension Selector {
+    static let didTapButton = #selector(LineupCardToggle.didTapButton(_:))
 }

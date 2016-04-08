@@ -51,7 +51,7 @@ class DraftboardSegmentedControl: UIView {
             control.heightRancor.constraintEqualToRancor(self.heightRancor).active = true
             control.topRancor.constraintEqualToRancor(self.topRancor).active = true
             
-            control.addTarget(self, action: "buttonTap:", forControlEvents: .TouchDown)
+            control.addTarget(self, action: .buttonTap, forControlEvents: .TouchDown)
             
             if (lastControl != nil) {
                 control.leftRancor.constraintEqualToRancor(lastControl?.rightRancor).active = true
@@ -197,4 +197,8 @@ class DraftboardControlSegment: UIControl {
             }
         }
     }
+}
+
+private extension Selector {
+    static let buttonTap = #selector(DraftboardSegmentedControl.buttonTap(_:))
 }

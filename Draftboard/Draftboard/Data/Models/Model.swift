@@ -11,7 +11,7 @@ import Foundation
 class Model {
     var id: Int = 0
     
-    internal func log(message: String, function: String = __FUNCTION__) {
+    internal func log(message: String, function: String = #function) {
         print("\(message) in \(self.dynamicType).\(function)")
     }
 }

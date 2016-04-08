@@ -34,7 +34,7 @@ class LineupEditViewController: DraftboardViewController {
         
         // Temp:
         // Pick an MVP, then double-tap contentView to fill junk lineup
-        let junkGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "fillJunkLineup")
+        let junkGesture = UIScreenEdgePanGestureRecognizer(target: self, action: .fillJunkLineup)
         junkGesture.edges = .Right
         view.addGestureRecognizer(junkGesture)
     }
@@ -68,7 +68,7 @@ class LineupEditViewController: DraftboardViewController {
             cellView.heightRancor.constraintEqualToRancor(contentView.heightRancor, multiplier: 1.0 / divisor).active = true
             cellView.centerXRancor.constraintEqualToRancor(contentView.centerXRancor).active = true
             
-            cellView.addTarget(self, action: Selector("didTapCell:"), forControlEvents: .TouchUpInside)
+            cellView.addTarget(self, action: .didTapCell, forControlEvents: .TouchUpInside)
             cellView.bottomBorder = true
             cellView.topBorder = false
             
@@ -261,4 +261,9 @@ extension LineupEditViewController: StatFooterDataSource {
     func footerStatLiveInDate() -> NSDate? {
         return lineup.draftGroup.start
     }
+}
+
+private extension Selector {
+    static let fillJunkLineup = #selector(LineupEditViewController.fillJunkLineup)
+    static let didTapCell = #selector(LineupEditViewController.didTapCell(_:))
 }

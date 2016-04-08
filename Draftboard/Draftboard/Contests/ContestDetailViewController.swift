@@ -125,7 +125,7 @@ class ContestDetailViewController: DraftboardViewController {
         if contestEntered {
             didEnterContest()
         } else {
-            draftButton.addTarget(self, action: "handleButtonTap:", forControlEvents: .TouchUpInside)
+            draftButton.addTarget(self, action: .handleButtonTap, forControlEvents: .TouchUpInside)
         }
     }
     
@@ -189,7 +189,7 @@ class ContestDetailViewController: DraftboardViewController {
         self.lineupChoice = chosenLineup
         confirmationModal = ContestConfirmationModal(nibName: "ContestConfirmationModal", bundle: nil)
         RootViewController.sharedInstance.pushModalViewController(confirmationModal!)
-        confirmationModal!.enterContestButton.addTarget(self, action: "enterContestTap:", forControlEvents: .TouchUpInside)
+        confirmationModal!.enterContestButton.addTarget(self, action: .enterContestTap, forControlEvents: .TouchUpInside)
     }
     
     func enterContestTap(sender: DraftboardButton) {
@@ -340,6 +340,11 @@ extension ContestDetailViewController: UIScrollViewDelegate {
         updateDraftButtonForDelta(y, total: t)
         updateBackgroundForDelta(y, total: t)
     }
+}
+
+private extension Selector {
+    static let handleButtonTap = #selector(ContestDetailViewController.handleButtonTap(_:))
+    static let enterContestTap = #selector(ContestDetailViewController.enterContestTap(_:))
 }
 
 /*

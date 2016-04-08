@@ -31,7 +31,7 @@ class AccountSettingsView: DraftboardNibView {
         // Set the scrollView bottom so that it can scroll
         scrollView.bottomRancor.constraintEqualToRancor(saveButton.bottomRancor, constant: 30).active = true
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: .dismissKeyboard)
         tapRecognizer.cancelsTouchesInView = false
         self.addGestureRecognizer(tapRecognizer)
     }
@@ -39,4 +39,8 @@ class AccountSettingsView: DraftboardNibView {
     func dismissKeyboard() {
         self.endEditing(true)
     }
+}
+
+private extension Selector {
+    static let dismissKeyboard = #selector(AccountSettingsView.dismissKeyboard)
 }

@@ -36,7 +36,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
 
         // Create view tap
         let tapRecognizer = UITapGestureRecognizer()
-        tapRecognizer.addTarget(self, action: "presentDraftGroupPrompt")
+        tapRecognizer.addTarget(self, action: .presentDraftGroupPrompt)
         view.createView.addGestureRecognizer(tapRecognizer)
         
         // Configure scroll view
@@ -356,7 +356,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
                 if lp.id == lineup.id {
                     break
                 }
-                idx++
+                idx += 1
             }
             
             // Update content size, pagination
@@ -544,4 +544,8 @@ extension LineupListController: UIScrollViewDelegate {
         updateCardIndicesInView(pageOffset)
         updateTransforms(pageOffset)
     }
+}
+
+private extension Selector {
+    static let presentDraftGroupPrompt = #selector(LineupListController.presentDraftGroupPrompt)
 }

@@ -88,8 +88,8 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         horizontalDividerWidth.constant = onePixel
         
         // Set button actions
-        editButton.addTarget(self, action: "didTapEdit", forControlEvents: .TouchUpInside)
-        contestsButton.addTarget(self, action: "didTapContests", forControlEvents: .TouchUpInside)
+        editButton.addTarget(self, action: .didTapEdit, forControlEvents: .TouchUpInside)
+        contestsButton.addTarget(self, action: .didTapContests, forControlEvents: .TouchUpInside)
         
         // Create stat views
         feesStatView = LineupStatFeesView(style: .Small, titleText: "FEES", valueText: "$10/4")
@@ -264,7 +264,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         
         for _ in 1...cellCount {
             let cellView = LineupCardCellView()
-            cellView.addTarget(self, action: "didTapPlayerCell:", forControlEvents: .TouchUpInside)
+            cellView.addTarget(self, action: .didTapPlayerCell, forControlEvents: .TouchUpInside)
             contentView.addSubview(cellView)
             
             cellView.translatesAutoresizingMaskIntoConstraints = false
@@ -438,4 +438,10 @@ extension UIView {
         transform = CATransform3DTranslate(transform, CGFloat(translation), 0, 0)
         self.layer.transform = transform
     }
+}
+
+private extension Selector {
+    static let didTapEdit = #selector(LineupCardView.didTapEdit)
+    static let didTapContests = #selector(LineupCardView.didTapContests)
+    static let didTapPlayerCell = #selector(LineupCardView.didTapPlayerCell(_:))
 }

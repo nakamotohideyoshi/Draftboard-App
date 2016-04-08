@@ -42,7 +42,7 @@ class AccountViewController: DraftboardViewController {
         }
         
         settingsView = AccountSettingsView()
-        settingsView?.changePasswordButton.addTarget(self, action: "didTapChangePassword:", forControlEvents: .TouchUpInside)
+        settingsView?.changePasswordButton.addTarget(self, action: .didTapChangePassword, forControlEvents: .TouchUpInside)
         
         self.replaceContentView(settingsView!)
     }
@@ -102,4 +102,8 @@ class AccountViewController: DraftboardViewController {
     override func titlebarRightButtonType() -> TitlebarButtonType? {
         return nil
     }
+}
+
+private extension Selector {
+    static let didTapChangePassword = #selector(AccountViewController.didTapChangePassword(_:))
 }

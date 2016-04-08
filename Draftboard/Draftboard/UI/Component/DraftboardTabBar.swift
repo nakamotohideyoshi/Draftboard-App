@@ -95,7 +95,7 @@ class DraftboardTabBar: UIView {
         
         for (i, button) in buttons.enumerate() {
             self.addSubview(button)
-            button.addTarget(self, action: "buttonTap:", forControlEvents: .TouchDown)
+            button.addTarget(self, action: .buttonTap, forControlEvents: .TouchDown)
             
             button.translatesAutoresizingMaskIntoConstraints = false
             button.topRancor.constraintEqualToRancor(self.topRancor).active = true
@@ -222,4 +222,8 @@ class DraftboardTabBar: UIView {
             buttons[selectedIndex].iconColor = selectedColor
         }
     }
+}
+
+private extension Selector {
+    static let buttonTap = #selector(DraftboardTabBar.buttonTap(_:))
 }

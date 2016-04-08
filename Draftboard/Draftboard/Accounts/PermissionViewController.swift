@@ -21,7 +21,7 @@ class PermissionViewController: DraftboardModalViewController, CLLocationManager
     override func viewDidLoad() {
         super.viewDidLoad()
         bigIconView.tintColor = bigIconView.tintColor
-        grantBtn.addTarget(self, action: Selector("didTapGrantButton:"), forControlEvents: .TouchUpInside)
+        grantBtn.addTarget(self, action: .didTapGrantButton, forControlEvents: .TouchUpInside)
         manager.delegate = self
     }
     
@@ -67,4 +67,8 @@ class PermissionViewController: DraftboardModalViewController, CLLocationManager
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         updateAuthStatus(status)
     }
+}
+
+private extension Selector {
+    static let didTapGrantButton = #selector(PermissionViewController.didTapGrantButton(_:))
 }

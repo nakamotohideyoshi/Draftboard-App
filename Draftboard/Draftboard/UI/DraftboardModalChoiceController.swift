@@ -75,7 +75,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         closeButton.heightRancor.constraintEqualToConstant(56).active = true
         closeButton.iconImageView.image = UIImage(named: "titlebar-icon-close")
         
-        closeButton.addTarget(self, action: Selector("didTapCancel:"), forControlEvents: .TouchUpInside)
+        closeButton.addTarget(self, action: .didTapCancel, forControlEvents: .TouchUpInside)
         
         addLoaderView()
         showLoader(false)
@@ -142,7 +142,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
             }
             
             // Add action
-            choiceView.addTarget(self, action: Selector("didTapChoice:"), forControlEvents: .TouchUpInside)
+            choiceView.addTarget(self, action: .didTapChoice, forControlEvents: .TouchUpInside)
             choiceView.index = i
             
             // Store last choice
@@ -180,4 +180,9 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         
         loaderView.spinning = true
     }
+}
+
+private extension Selector {
+    static let didTapCancel = #selector(DraftboardModalChoiceController.didTapCancel(_:))
+    static let didTapChoice = #selector(DraftboardModalChoiceController.didTapChoice(_:))
 }

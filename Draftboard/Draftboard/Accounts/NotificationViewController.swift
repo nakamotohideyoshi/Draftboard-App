@@ -20,8 +20,8 @@ class NotificationViewController: DraftboardModalViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bigIconView.tintColor = bigIconView.tintColor
-        grantBtn.addTarget(self, action: Selector("didTapGrantButton:"), forControlEvents: .TouchUpInside)
-        secondaryBtn.addTarget(self, action: Selector("didTapSecondaryButton:"), forControlEvents: .TouchUpInside)
+        grantBtn.addTarget(self, action: .didTapGrantButton, forControlEvents: .TouchUpInside)
+        secondaryBtn.addTarget(self, action: .didTapSecondaryButton, forControlEvents: .TouchUpInside)
     }
     
     func didTapGrantButton(button: DraftboardButton) {
@@ -35,4 +35,9 @@ class NotificationViewController: DraftboardModalViewController {
     func didTapSecondaryButton(button: DraftboardButton) {
         RootViewController.sharedInstance.notificationPermissionsComplete()
     }
+}
+
+private extension Selector {
+    static let didTapGrantButton = #selector(NotificationViewController.didTapGrantButton(_:))
+    static let didTapSecondaryButton = #selector(NotificationViewController.didTapSecondaryButton(_:))    
 }

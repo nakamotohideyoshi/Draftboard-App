@@ -94,7 +94,7 @@ class DraftboardTitlebar: UIView {
             // Create new left button
             if let buttonType = newLeftButtonType {
                 newLeftButton = DraftboardTitlebarButton(type: buttonType)
-                newLeftButton!.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
+                newLeftButton!.addTarget(self, action: .didTapButton, forControlEvents: .TouchUpInside)
                 
                 if (buttonType == .Value || buttonType == .DisabledValue) {
                     if let textValue = dataSource?.titlebarLeftButtonText() {
@@ -114,7 +114,7 @@ class DraftboardTitlebar: UIView {
             // Create new right button
             if let buttonType = newRightButtonType {
                 newRightButton = DraftboardTitlebarButton(type: buttonType)
-                newRightButton?.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
+                newRightButton?.addTarget(self, action: .didTapButton, forControlEvents: .TouchUpInside)
                 
                 if (buttonType == .Value || buttonType == .DisabledValue) {
                     if let textValue = dataSource?.titlebarRightButtonText() {
@@ -328,4 +328,8 @@ class DraftboardTitlebar: UIView {
             
         self.constrainButton(button)
     }
+}
+
+private extension Selector {
+    static let didTapButton = #selector(DraftboardTitlebar.didTapButton(_:))
 }

@@ -36,7 +36,7 @@ class ErrorViewController: DraftboardModalViewController {
                 // Create button
                 let button = DraftboardButton()
                 button.textValue = buttonText.uppercaseString
-                button.addTarget(self, action: Selector("didTapAction:"), forControlEvents: .TouchUpInside)
+                button.addTarget(self, action: .didTapAction, forControlEvents: .TouchUpInside)
                 
                 // Style button
                 button.textBold = true;
@@ -74,4 +74,8 @@ class ErrorViewController: DraftboardModalViewController {
         let x = buttons.indexOf{$0 === button}
         fulfill(x!)
     }
+}
+
+private extension Selector {
+    static let didTapAction = #selector(ErrorViewController.didTapAction(_:))
 }

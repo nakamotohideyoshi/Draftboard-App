@@ -54,8 +54,8 @@ class ContestsListController: DraftboardViewController {
         view.addSubview(loaderView)
         constrainLoaderView()
         
-        lineupButton.addTarget(self, action: Selector("lineupTap:"), forControlEvents: .TouchUpInside)
-        gametypeButton.addTarget(self, action: Selector("gametypeTap:"), forControlEvents: .TouchUpInside)
+        lineupButton.addTarget(self, action: .lineupTap, forControlEvents: .TouchUpInside)
+        gametypeButton.addTarget(self, action: .gametypeTap, forControlEvents: .TouchUpInside)
         
         showLoader()
     }
@@ -267,4 +267,9 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
 //        cdvc.contestEntered = entered
         self.navController?.pushViewController(cdvc)
     }
+}
+
+private extension Selector {
+    static let lineupTap = #selector(ContestsListController.lineupTap(_:))
+    static let gametypeTap = #selector(ContestsListController.gametypeTap(_:))
 }

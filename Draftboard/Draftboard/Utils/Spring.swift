@@ -26,7 +26,7 @@ final class Springs: NSObject {
             return
         }
         
-        displayLink = CADisplayLink(target: self, selector: Selector("update"))
+        displayLink = CADisplayLink(target: self, selector: .update)
         displayLink!.frameInterval = 1
         displayLink!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
     }
@@ -96,7 +96,8 @@ final class Springs: NSObject {
     }
     
     func uniqueId() -> UInt {
-        return id++
+        id += 1
+        return id
     }
 }
 
@@ -186,6 +187,10 @@ extension CALayer {
             "path": na,
         ];
     }
+}
+
+private extension Selector {
+    static let update = #selector(Springs.update)
 }
 
 class NullAction: CAAction {

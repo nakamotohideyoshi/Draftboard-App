@@ -30,7 +30,7 @@ class CountdownView: UILabel {
         widthConstraint.active = true
 
         // Tick
-        let displayLink = CADisplayLink(target: self, selector:"tick:")
+        let displayLink = CADisplayLink(target: self, selector: .tick)
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         
         setup()
@@ -92,4 +92,8 @@ class CountdownView: UILabel {
         let now = date.earlierDate(NSDate()) // Stop at zero
         return cal.components(units, fromDate: now, toDate: date, options: [])
     }
+}
+
+private extension Selector {
+    static let tick = #selector(CountdownView.tick(_:))
 }

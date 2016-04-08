@@ -29,23 +29,23 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         passwordField.delegate = self
         
         tapGestureRecognizer = UITapGestureRecognizer()
-        tapGestureRecognizer.addTarget(self, action: Selector("didTap:"))
+        tapGestureRecognizer.addTarget(self, action: .didTap)
         tapGestureRecognizer.delegate = self
         
         view.addGestureRecognizer(tapGestureRecognizer)
         
         let defaultCenter = NSNotificationCenter.defaultCenter()
-        defaultCenter.addObserver(self, selector:Selector("keyboardWillChange:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
-        defaultCenter.addObserver(self, selector:Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-        defaultCenter.addObserver(self, selector:Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        defaultCenter.addObserver(self, selector: .keyboardWillChange, name: UIKeyboardWillChangeFrameNotification, object: nil)
+        defaultCenter.addObserver(self, selector: .keyboardWillHide, name: UIKeyboardWillHideNotification, object: nil)
+        defaultCenter.addObserver(self, selector: .keyboardWillShow, name: UIKeyboardWillShowNotification, object: nil)
         
-        loginButton.addTarget(self, action: Selector("didTapLogin:"), forControlEvents: .TouchUpInside)
+        loginButton.addTarget(self, action: .didTapLogin, forControlEvents: .TouchUpInside)
         loginButton.userInteractionEnabled = false
         loginButton.iconImageView.hidden = true
         loginButton.disabled = true
         
-        passwordField.textField.addTarget(self, action: Selector("passwordChanged:"), forControlEvents: .EditingChanged)
-        loginField.textField.addTarget(self, action: Selector("loginChanged:"), forControlEvents: .EditingChanged)
+        passwordField.textField.addTarget(self, action: .passwordChanged, forControlEvents: .EditingChanged)
+        loginField.textField.addTarget(self, action: .loginChanged, forControlEvents: .EditingChanged)
         
         scrollView.scrollEnabled = false
         
@@ -234,4 +234,14 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     func leave() {
         RootViewController.sharedInstance.popModalViewController(true)
     }
+}
+
+private extension Selector {
+    static let didTap = #selector(LoginViewController.didTap(_:))
+    static let keyboardWillChange = #selector(LoginViewController.keyboardWillChange(_:))
+    static let keyboardWillHide = #selector(LoginViewController.keyboardWillHide(_:))
+    static let keyboardWillShow = #selector(LoginViewController.keyboardWillShow(_:))
+    static let didTapLogin = #selector(LoginViewController.didTapLogin(_:))
+    static let passwordChanged = #selector(LoginViewController.passwordChanged(_:))
+    static let loginChanged = #selector(LoginViewController.loginChanged(_:))
 }

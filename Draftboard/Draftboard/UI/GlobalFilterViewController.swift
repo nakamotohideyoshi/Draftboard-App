@@ -33,7 +33,7 @@ class GlobalFilterViewController: DraftboardModalViewController {
         self.view.layoutIfNeeded()
         
         for (i, control) in filterControls.enumerate() {
-            control.addTarget(self, action: Selector("didTapControl:"), forControlEvents: .TouchUpInside)
+            control.addTarget(self, action: .didTapControl, forControlEvents: .TouchUpInside)
             control.underlined(false, animated: false)
             control.index = i
         }
@@ -42,7 +42,7 @@ class GlobalFilterViewController: DraftboardModalViewController {
         currentControl.underlined(true, animated: false)
         currentControl.selected = true
         
-        closeButton.addTarget(self, action: Selector("didTapClose:"), forControlEvents: .TouchUpInside)
+        closeButton.addTarget(self, action: .didTapClose, forControlEvents: .TouchUpInside)
     }
     
     func didTapControl(sender: GlobalFilterItem) {
@@ -87,4 +87,9 @@ class FilterLabel: DraftboardLabel {
         self.textColor = UIColor.whiteLowOpacity()
         self.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 2))
     }
+}
+
+private extension Selector {
+    static let didTapControl = #selector(GlobalFilterViewController.didTapControl(_:))
+    static let didTapClose = #selector(GlobalFilterViewController.didTapClose(_:))
 }
