@@ -13,7 +13,6 @@
 		3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */; };
 		3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */; };
 		3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE11C0FA8D4009C3287 /* WithdrawView.swift */; };
-		3C6FBAE41C0FA8D4009C3287 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */; };
 		3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */; };
 		3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */; };
 		3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA3A1BE050D50077DF0C /* PieChart.swift */; };
@@ -53,6 +52,7 @@
 		3E8018AE1CB5A18300403528 /* LineupListControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8018AD1CB5A18300403528 /* LineupListControllerView.swift */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
 		3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
+		3E9DBAB01CB878860098BB77 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */; };
 		3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */; };
 		3EB2CB671BFE473B00579F1B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB661BFE473B00579F1B /* Data.swift */; };
 		3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB731BFE763400579F1B /* DraftGroup.swift */; };
@@ -702,7 +702,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Rally Interactive";
 				TargetAttributes = {
 					3E7860BA1B9FB0E7004013AB = {
@@ -740,8 +740,7 @@
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */,
 				5DAC07961C21DE680002B97B /* DraftboardDetailCell.xib in Resources */,
-				3C6FBAE41C0FA8D4009C3287 /* WithdrawView.xib in Resources */,
-				3C6FBAE41C0FA8D4009C3287 /* WithdrawView.xib in Resources */,
+				3E9DBAB01CB878860098BB77 /* WithdrawView.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D6237C01BB61F7B0007E62A /* LineupCardCellView.xib in Resources */,
 				5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */,
