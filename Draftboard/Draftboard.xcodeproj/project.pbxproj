@@ -50,6 +50,7 @@
 		3E73AADA1C850D89000E7D99 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73AAD91C850D89000E7D99 /* CountdownView.swift */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
+		3E8018AE1CB5A18300403528 /* LineupListControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8018AD1CB5A18300403528 /* LineupListControllerView.swift */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
 		3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
 		3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */; };
@@ -226,6 +227,7 @@
 		3E7860CA1B9FB0E7004013AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3E7860E01B9FB195004013AB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E7860E41B9FB1CF004013AB /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		3E8018AD1CB5A18300403528 /* LineupListControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListControllerView.swift; sourceTree = "<group>"; };
 		3E80C2A91BC5F51C0031CE3F /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		3E832BC41BE2CB3900084621 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3E96695D1BED5C8B005179E0 /* Lineup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lineup.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				5D6237BB1BB61F7B0007E62A /* LineupListController.swift */,
+				3E8018AD1CB5A18300403528 /* LineupListControllerView.swift */,
 				5D6237B61BB61F7B0007E62A /* LineupListController.xib */,
 				5D6237B01BB61F7B0007E62A /* LineupCardView.swift */,
 				5D6237B11BB61F7B0007E62A /* LineupCardView.xib */,
@@ -911,6 +914,7 @@
 				3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */,
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
 				5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */,
+				3E8018AE1CB5A18300403528 /* LineupListControllerView.swift in Sources */,
 				5D6237CC1BB61F9B0007E62A /* Closures.swift in Sources */,
 				3CDC73631BF1499E00DDF60E /* ContestPlayerStandingCell.swift in Sources */,
 			);

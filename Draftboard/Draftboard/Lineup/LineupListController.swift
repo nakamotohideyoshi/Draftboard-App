@@ -11,17 +11,10 @@ import PromiseKit
 
 class LineupListController: DraftboardViewController, UIActionSheetDelegate, LineupCardViewDelegate {
     
-    @IBOutlet weak var createView: UIView!
-    @IBOutlet weak var createViewButton: DraftboardRoundButton!
-    @IBOutlet weak var createImageView: UIImageView!
-    @IBOutlet weak var paginationView: DraftboardPagination!
-    @IBOutlet weak var paginationHeight: NSLayoutConstraint!
-    @IBOutlet weak var scrollView: UIScrollView!
+    var downcastedView: LineupListControllerView { return view as! LineupListControllerView }
     
-    var titleText: String = "Lineups"
     var lineupCardViews: [LineupCardView] = []
     var lastConstraint: NSLayoutConstraint?
-    var loaderView: LoaderView!
     
     var draftGroupChoices: [String: [NSDictionary]]?
     var sportChoices: [NSDictionary]?
@@ -37,39 +30,26 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     var noLoad: Bool = false
     var loaded: Bool = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .clearColor()
-        
+    override func loadView() {
+        self.view = LineupListControllerView()
+        let view = downcastedView
+
         // Create view tap
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: "presentDraftGroupPrompt")
-        self.createView.addGestureRecognizer(tapRecognizer)
+        view.createView.addGestureRecognizer(tapRecognizer)
         
         // Configure scroll view
-        scrollView.clipsToBounds = false
-        scrollView.delegate = self
-        scrollView.pagingEnabled = true
-        scrollView.alwaysBounceHorizontal = true
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.alpha = 0
-        
-        // Create loader view
-        loaderView = LoaderView(frame: CGRectZero)
-        loaderView.thickness = 2.0
-        loaderView.spinning = true
-        
-        // Add loader view
-        view.addSubview(loaderView)
-        constrainLoaderView()
-        
+        view.scrollView.delegate = self
+        view.scrollView.alpha = 0
+
         // Hide pagination to start
-        paginationHeight.constant = 20.0
-        paginationView.hidden = true
+        view.paginationHeight.constant = 20.0
+        view.paginationView.hidden = true
         
         // Create reusable cards
         createReusableCardViews()
-        createView.hidden = true
+        view.createView.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -96,15 +76,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     
     // MARK: - Setup stuff
     
-    func constrainLoaderView() {
-        loaderView.translatesAutoresizingMaskIntoConstraints = false
-        loaderView.widthRancor.constraintEqualToConstant(42.0).active = true
-        loaderView.heightRancor.constraintEqualToConstant(42.0).active = true
-        loaderView.centerYRancor.constraintEqualToRancor(view.centerYRancor).active = true
-        loaderView.centerXRancor.constraintEqualToRancor(view.centerXRancor).active = true
-    }
-    
     func createReusableCardViews() {
+        let view = downcastedView
+        
         for _ in 1...3 {
             
             // Create card view
@@ -113,14 +87,14 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             cardView.hidden = true
             
             // Set card dimensions
-            scrollView.addSubview(cardView)
+            view.scrollView.addSubview(cardView)
             cardView.translatesAutoresizingMaskIntoConstraints = false
-            cardView.topRancor.constraintEqualToRancor(scrollView.topRancor).active = true
-            cardView.widthRancor.constraintEqualToRancor(scrollView.widthRancor).active = true
-            cardView.heightRancor.constraintEqualToRancor(scrollView.heightRancor).active = true
+            cardView.topRancor.constraintEqualToRancor(view.scrollView.topRancor).active = true
+            cardView.widthRancor.constraintEqualToRancor(view.scrollView.widthRancor).active = true
+            cardView.heightRancor.constraintEqualToRancor(view.scrollView.heightRancor).active = true
             
             // Position card view
-            cardView.left = cardView.leftRancor.constraintEqualToRancor(scrollView.leftRancor, constant: 0.0)
+            cardView.left = cardView.leftRancor.constraintEqualToRancor(view.scrollView.leftRancor, constant: 0.0)
             cardView.left!.active = true
             
             // Configure card actions
@@ -163,16 +137,17 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     // MARK: - Data
     
     func gotLineups(newLineups: [Lineup]) {
+        let view = downcastedView
         
         // Got lineups
-        loaderView.hidden = true
-        UIView.animateWithDuration(0.25) { () -> Void in
-            self.scrollView.alpha = 1.0
+        view.loaderView.hidden = true
+        UIView.animateWithDuration(0.25) {
+            view.scrollView.alpha = 1.0
         }
         
         // Update scroll view
-        let b = scrollView.bounds
-        scrollView.contentSize = CGSizeMake(CGFloat(newLineups.count) * b.size.width, 0)
+        let b = view.scrollView.bounds
+        view.scrollView.contentSize = CGSizeMake(CGFloat(newLineups.count) * b.size.width, 0)
         
         // Save scroll positions
         for newLineup in newLineups {
@@ -189,12 +164,12 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         
         // Show create view if necessary
         if lineups.count == 0 {
-            createView.hidden = false
+            view.createView.hidden = false
             return
         }
         
         // Hide create view
-        createView.hidden = true
+        view.createView.hidden = true
         
         // Load lineup players
         for lineup in lineups {
@@ -237,7 +212,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             }
         }
         
-        scrollViewDidScroll(scrollView)
+        scrollViewDidScroll(view.scrollView)
     }
     
     func collateDraftGroups(draftGroups: [DraftGroup], contests: [Contest]) {
@@ -357,6 +332,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     // MARK: - Create/Edit/Contests
     
     func createLineup() {
+        let view = downcastedView
+        
         let draftGroup = selectedDraftGroup!
         selectedSport = nil
         selectedDraftGroup = nil
@@ -383,8 +360,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             }
             
             // Update content size, pagination
-            let b = self.scrollView.bounds
-            self.scrollView.contentSize = CGSizeMake(CGFloat(self.lineups.count) * b.size.width, 0)
+            let b = view.scrollView.bounds
+            view.scrollView.contentSize = CGSizeMake(CGFloat(self.lineups.count) * b.size.width, 0)
             self.updatePagination()
             
             // Move to new lineup
@@ -394,8 +371,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             
             // Save lineup
             API.lineupCreate(lineup)
-            self.createView.hidden = true
-            self.scrollViewDidScroll(self.scrollView)
+            view.createView.hidden = true
+            self.scrollViewDidScroll(view.scrollView)
         }
         
         navController?.pushViewController(nvc)
@@ -409,7 +386,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             lineupCard.lineup = lineup
             lineupCard.reloadContent(self.toggleOption)
             
-            self.titleText = lineup.name
             self.navController?.popViewController()
         }
         
@@ -432,33 +408,36 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     // MARK: - Controls
     
     func setLineupIndex(index: Int, animated: Bool = true) {
+        let view = downcastedView
+        
         if lineups.count <= 0 {
             return
         }
         
         // Bound index
         let idx = min(index, lineups.count - 1)
-        let lineup = lineups[idx]
-        self.titleText = lineup.name
+//        let lineup = lineups[idx]
         
         // Update scroll position
-        let x = CGFloat(idx) * scrollView.bounds.size.width
-        self.scrollView.setContentOffset(CGPointMake(x, 0), animated: animated)
+        let x = CGFloat(idx) * view.scrollView.bounds.size.width
+        view.scrollView.setContentOffset(CGPointMake(x, 0), animated: animated)
         
         // Update pagination page
-        self.paginationView.selectPage(idx)
+        view.paginationView.selectPage(idx)
     }
     
     func updatePagination() {
-        paginationView.pages = lineups.count
+        let view = downcastedView
+        
+        view.paginationView.pages = lineups.count
         
         if lineups.count > 1 {
-            paginationHeight.constant = 36.0
-            paginationView.hidden = false
+            view.paginationHeight.constant = 36.0
+            view.paginationView.hidden = false
         }
         else {
-            paginationHeight.constant = 20.0
-            paginationView.hidden = true
+            view.paginationHeight.constant = 20.0
+            view.paginationView.hidden = true
         }
     }
     
@@ -494,8 +473,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
 extension LineupListController: UIScrollViewDelegate {
     
     func updateCardsInView(indices: Set<Int>) {
+        let view = downcastedView
+        
         let indicesToUpdate = indices.subtract(cardIndicesInView)
-        let bounds = scrollView.bounds
+        let bounds = view.scrollView.bounds
         
         for (_, index) in indicesToUpdate.enumerate() {
             let modIndex = index % reusableCardViews.count
@@ -511,8 +492,10 @@ extension LineupListController: UIScrollViewDelegate {
     }
     
     func updateCardIndicesInView(pageOffset: Double) {
+        let view = downcastedView
+
         var indices: Set<Int> = Set()
-        let bounds = scrollView.bounds
+        let bounds = view.scrollView.bounds
         let cardFrame = CGRectMake(0, 0, bounds.size.width, bounds.size.height)
         let adjustedBounds = CGRectMake(bounds.origin.x - 20.0, bounds.origin.y, bounds.size.width + 40.0, bounds.size.height)
         
@@ -549,12 +532,14 @@ extension LineupListController: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        let view = downcastedView
+        
         if lineups.count <= 0 {
             return
         }
         
         let pageOffset = Double(scrollView.contentOffset.x / scrollView.frame.size.width)
-        paginationView.selectPage(Int(round(pageOffset)))
+        view.paginationView.selectPage(Int(round(pageOffset)))
         
         updateCardIndicesInView(pageOffset)
         updateTransforms(pageOffset)
