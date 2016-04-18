@@ -11,13 +11,16 @@ import UIKit
 class LineupListControllerView: UIView {
     
     let scrollView = UIScrollView()
+    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewLayout())
     let paginationView = DraftboardPagination()
     let loaderView = LoaderView()
     let createView = UIView()
     
+    let cardInset = UIEdgeInsetsMake(0, 20.0, 0, 20.0)
+    var cardSize: CGSize { return UIEdgeInsetsInsetRect(collectionView.frame, cardInset).size }
     var paginationHeight: NSLayoutConstraint!
     
-    // MARK: Init
+    // MARK: -
     
     init() {
         super.init(frame: CGRectZero)
@@ -32,7 +35,7 @@ class LineupListControllerView: UIView {
         self.init()
     }
     
-    // MARK: Setup
+    // MARK: -
     
     func setup() {
         addSubviews()
@@ -42,6 +45,7 @@ class LineupListControllerView: UIView {
     
     func addSubviews() {
         addSubview(scrollView)
+        addSubview(collectionView)
         addSubview(paginationView)
         addSubview(loaderView)
         scrollView.addSubview(createView)
@@ -52,6 +56,20 @@ class LineupListControllerView: UIView {
         scrollView.pagingEnabled = true
         scrollView.alwaysBounceHorizontal = true
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.hidden = true
+
+        let layout = PaginatedCollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.pageSize = { return self.cardSize }
+        layout.scrollDirection = .Horizontal
+        layout.sectionInset = UIEdgeInsetsMake(0, cardInset.left, 0, 0)
+        collectionView.alwaysBounceHorizontal = true
+        collectionView.backgroundColor = .clearColor()
+        collectionView.collectionViewLayout = layout
+        collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, cardInset.right)
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView.registerClass(LineupCardCell.self, forCellWithReuseIdentifier: LineupCardCell.reuseIdentifier)
+        collectionView.showsHorizontalScrollIndicator = false
    
         loaderView.thickness = 2.0
         loaderView.spinning = true
@@ -67,6 +85,11 @@ class LineupListControllerView: UIView {
             scrollView.leftRancor.constraintEqualToRancor(leftRancor, constant: 20.0),
             scrollView.rightRancor.constraintEqualToRancor(rightRancor, constant: -20.0),
             scrollView.bottomRancor.constraintEqualToRancor(paginationView.topRancor),
+            
+            collectionView.topRancor.constraintEqualToRancor(topRancor, constant: 76.0),
+            collectionView.leftRancor.constraintEqualToRancor(leftRancor),
+            collectionView.rightRancor.constraintEqualToRancor(rightRancor),
+            collectionView.bottomRancor.constraintEqualToRancor(paginationView.topRancor),
             
             paginationView.leftRancor.constraintEqualToRancor(leftRancor),
             paginationView.rightRancor.constraintEqualToRancor(rightRancor),
@@ -86,10 +109,48 @@ class LineupListControllerView: UIView {
 
         translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         paginationView.translatesAutoresizingMaskIntoConstraints = false
         loaderView.translatesAutoresizingMaskIntoConstraints = false
         createView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
+}
+
+extension LineupListControllerView {
+    
+    func collectionViewCellForIndexPath(indexPath: NSIndexPath) -> LineupCardCell {
+        return collectionView.dequeueReusableCellWithReuseIdentifier(LineupCardCell.reuseIdentifier, forIndexPath: indexPath) as! LineupCardCell
+    }
+    
+}
+
+// MARK: -
+
+class LineupCardCell: UICollectionViewCell {
+    
+    static let reuseIdentifier = "LineupCardCell"
+    
+    var lineup: Lineup!
+    
+}
+
+class PaginatedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+    
+    var pageSize: () -> CGSize = { return CGSizeZero }
+    
+    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        let pageWidth = pageSize().width
+        let proposedPage = proposedContentOffset.x / pageWidth
+        var targetPage = round(proposedPage)
+        // Always go at least one page if velocity is non-zero
+        if -1.0 <= velocity.x && velocity.x < 0 {
+            targetPage = floor(proposedPage)
+        } else if 0 < velocity.x && velocity.x <= 1.0 {
+            targetPage = ceil(proposedPage)
+        }
+        return CGPointMake(targetPage * pageWidth, proposedContentOffset.y)
+    }
+    
 }

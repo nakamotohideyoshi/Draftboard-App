@@ -9,12 +9,12 @@
 import UIKit
 import PromiseKit
 
-class LineupListController: DraftboardViewController, UIActionSheetDelegate, LineupCardViewDelegate {
+class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     var downcastedView: LineupListControllerView { return view as! LineupListControllerView }
     
-    var lineupCardViews: [LineupCardView] = []
-    var lastConstraint: NSLayoutConstraint?
+//    var lineupCardViews: [LineupCardView] = []
+//    var lastConstraint: NSLayoutConstraint?
     
     var draftGroupChoices: [String: [NSDictionary]]?
     var sportChoices: [NSDictionary]?
@@ -23,8 +23,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     var selectedSport: Sport?
     
     var lineups: [Lineup] = []
-    var reusableCardViews: [LineupCardView] = []
-    var cardIndicesInView: Set<Int> = Set()
+//    var reusableCardViews: [LineupCardView] = []
+//    var cardIndicesInView: Set<Int> = Set()
     
     var toggleOption: LineupCardToggleOption = .Salary
     var noLoad: Bool = false
@@ -33,7 +33,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     override func loadView() {
         self.view = LineupListControllerView()
         let view = downcastedView
-
+        
+        view.collectionView.delegate = self
+        view.collectionView.dataSource = self
+        
         // Create view tap
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: .presentDraftGroupPrompt)
@@ -47,9 +50,11 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         view.paginationHeight.constant = 20.0
         view.paginationView.hidden = true
         
+        /*
         // Create reusable cards
         createReusableCardViews()
         view.createView.hidden = true
+        */
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -76,6 +81,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     
     // MARK: - Setup stuff
     
+    /*
     func createReusableCardViews() {
         let view = downcastedView
         
@@ -106,7 +112,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             reusableCardViews.append(cardView)
         }
     }
-    
+ 
     // MARK: - LineupCardViewDelegate methods
     
     func didSelectToggleOption(option: LineupCardToggleOption) {
@@ -116,7 +122,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         
         toggleOption = option
     }
-    
+    */
+
     // MARK: - Modals
     
     override func didSelectModalChoice(index: Int) {
@@ -141,6 +148,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         
         // Got lineups
         view.loaderView.hidden = true
+        /*
         UIView.animateWithDuration(0.25) {
             view.scrollView.alpha = 1.0
         }
@@ -148,6 +156,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
         // Update scroll view
         let b = view.scrollView.bounds
         view.scrollView.contentSize = CGSizeMake(CGFloat(newLineups.count) * b.size.width, 0)
+        */
         
         // Save scroll positions
         for newLineup in newLineups {
@@ -181,6 +190,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
                 }
             }
             
+            /*
             // Start up
             if !loaded {
                 loaded = true
@@ -188,7 +198,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
                     cardView.contentView.contentOffset = CGPointMake(0, 44.0)
                 }
             }
-            
+ 
             // Update cards one by one
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
@@ -210,9 +220,11 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
                     }
                 }
             }
+            */
+
         }
         
-        scrollViewDidScroll(view.scrollView)
+//        scrollViewDidScroll(view.scrollView)
     }
     
     func collateDraftGroups(draftGroups: [DraftGroup], contests: [Contest]) {
@@ -372,7 +384,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
             // Save lineup
             API.lineupCreate(lineup)
             view.createView.hidden = true
-            self.scrollViewDidScroll(view.scrollView)
+//            self.scrollViewDidScroll(view.scrollView)
         }
         
         navController?.pushViewController(nvc)
@@ -468,10 +480,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate, Lin
     }
 }
 
+/*
 // MARK: - UIScrollViewDelegate
-
 extension LineupListController: UIScrollViewDelegate {
-    
     func updateCardsInView(indices: Set<Int>) {
         let view = downcastedView
         
@@ -545,6 +556,42 @@ extension LineupListController: UIScrollViewDelegate {
         updateTransforms(pageOffset)
     }
 }
+*/
+
+
+// MARK: -
+
+extension LineupListController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    // UICollectionViewDataSource
+    
+    func collectionView(_: UICollectionView, numberOfItemsInSection: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = downcastedView.collectionViewCellForIndexPath(indexPath)
+        cell.contentView.backgroundColor = (indexPath.item % 2 == 0) ? .blueColor() : .redColor()
+        cell.lineup = Lineup()
+        return cell
+    }
+
+    // UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return downcastedView.cardSize
+    }
+    
+}
+
+extension LineupListController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_: UIScrollView) {
+//        let view = downcastedView
+//        updateTransforms(pageOffset)
+    }
+}
+
+// MARK: -
 
 private extension Selector {
     static let presentDraftGroupPrompt = #selector(LineupListController.presentDraftGroupPrompt)
