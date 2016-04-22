@@ -58,7 +58,6 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        
         // TODO: remove this stupid fix
         if noLoad {
             noLoad = false
@@ -77,6 +76,10 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         }.then { lineups in
             self.gotLineups(lineups)
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        downcastedView.collectionView.updateCellTransforms()
     }
     
     // MARK: - Setup stuff
@@ -570,24 +573,22 @@ extension LineupListController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = downcastedView.collectionViewCellForIndexPath(indexPath)
-        cell.contentView.backgroundColor = (indexPath.item % 2 == 0) ? .blueColor() : .redColor()
-        cell.lineup = Lineup()
+        let cell = downcastedView.collectionView.dequeueCellForIndexPath(indexPath)
+        cell.lineup = (indexPath.item == 0) ? nil : Lineup()
         return cell
     }
 
     // UICollectionViewDelegateFlowLayout
     
     func collectionView(_: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return downcastedView.cardSize
+        return downcastedView.collectionView.cardSize
     }
     
 }
 
 extension LineupListController: UIScrollViewDelegate {
     func scrollViewDidScroll(_: UIScrollView) {
-//        let view = downcastedView
-//        updateTransforms(pageOffset)
+        downcastedView.collectionView.updateCellTransforms()
     }
 }
 
