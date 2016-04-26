@@ -13,7 +13,7 @@ class LineupCardCell: UICollectionViewCell {
     static let reuseIdentifier = "LineupCardCell"
     
     let lineupView = UIView()
-    let createView = UIView()
+    let createView = LineupCardCreateView()
     
     var lineup: Lineup? {
         didSet {
@@ -76,7 +76,6 @@ class LineupCardCell: UICollectionViewCell {
     func setupSubviews() {
         contentView.backgroundColor = .clearColor()
         lineupView.backgroundColor = .whiteColor()
-        createView.backgroundColor = .blueMediumDark()
         lineupView.layer.allowsEdgeAntialiasing = true
         createView.layer.allowsEdgeAntialiasing = true
     }
@@ -130,4 +129,101 @@ class LineupCardCell: UICollectionViewCell {
          */
     }
     
+}
+
+class LineupCardCreateView: UIControl, CancelableTouchControl {
+    
+    let titleLabel = UILabel()
+    let buttonLabel = UILabel()
+    
+    override var highlighted: Bool { didSet { didSetHighlighted() } }
+    
+    init() {
+        super.init(frame: CGRectZero)
+        addSubviews()
+        addConstraints()
+        setup()
+    }
+    
+    override convenience init(frame: CGRect) {
+        self.init()
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        self.init()
+    }
+    
+    func addSubviews() {
+        addSubview(titleLabel)
+        addSubview(buttonLabel)
+    }
+    
+    func addConstraints() {
+        let viewConstraints: [NSLayoutConstraint] = [
+            titleLabel.topRancor.constraintEqualToRancor(topRancor, constant: 20.0),
+            titleLabel.leftRancor.constraintEqualToRancor(leftRancor, constant: 20.0),
+            
+            buttonLabel.leftRancor.constraintEqualToRancor(leftRancor, constant: 20.0),
+            buttonLabel.rightRancor.constraintEqualToRancor(rightRancor, constant: -20.0),
+            buttonLabel.bottomRancor.constraintEqualToRancor(bottomRancor, constant: -20.0),
+            buttonLabel.heightRancor.constraintEqualToConstant(35.0)
+        ]
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        buttonLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints(viewConstraints)
+    }
+    
+    func setup() {
+        // Label
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.maximumLineHeight = 54.0
+        let font = UIFont(name: "Oswald-Bold", size: 50.0)!
+        titleLabel.attributedText = NSAttributedString(string: "IT’S\nANYONE’S\nGAME.", attributes: [
+            NSBaselineOffsetAttributeName: font.descender,
+            NSFontAttributeName: font,
+            NSParagraphStyleAttributeName: paragraphStyle,
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+        ])
+        titleLabel.numberOfLines = 0
+        
+        // Button
+        buttonLabel.font = UIFont(name: "OpenSans-Bold", size: 10)
+        buttonLabel.text = "START DRAFTING"
+        buttonLabel.textAlignment = .Center
+        buttonLabel.textColor = .whiteColor()
+        buttonLabel.layer.allowsEdgeAntialiasing = true
+        buttonLabel.layer.borderWidth = 0.5
+        buttonLabel.layer.borderColor = UIColor.greenDraftboard().CGColor
+        
+        // Self
+        backgroundColor = .blueMediumDark()
+        addTarget(self, action: .flashHighlightedState, forControlEvents: .TouchUpInside)
+    }
+    
+    func didSetHighlighted() {
+        let color: UIColor = highlighted ? .greenDraftboard() : .clearColor()
+        buttonLabel.layer.backgroundColor = color.CGColor
+    }
+    
+    func flashHighlightedState() {
+        highlighted = true
+        UIView.animateWithDuration(0.5, animations: {
+            self.highlighted = false
+        })
+    }
+    
+}
+
+// MARK: -
+
+protocol CancelableTouchControl {}
+extension CancelableTouchControl {
+    var touchesShouldCancel: Bool { return true }
+}
+
+private extension Selector {
+    static let flashHighlightedState = #selector(LineupCardCreateView.flashHighlightedState)
 }

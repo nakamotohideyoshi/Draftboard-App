@@ -63,6 +63,11 @@ class LineupCardCollectionView: UICollectionView {
         }
     }
     
+    override func touchesShouldCancelInContentView(view: UIView) -> Bool {
+        return (view as? CancelableTouchControl)?.touchesShouldCancel ??
+            super.touchesShouldCancelInContentView(view)
+    }
+    
 }
 
 // MARK: -
