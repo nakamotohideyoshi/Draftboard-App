@@ -383,7 +383,7 @@ extension LineupListController: UICollectionViewDataSource, UICollectionViewDele
     // UICollectionViewDataSource
     
     func collectionView(_: UICollectionView, numberOfItemsInSection: Int) -> Int {
-        return 1
+        return 4
     }
     
     func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

@@ -14,6 +14,7 @@ class LineupCardCell: UICollectionViewCell {
     
     let lineupView = UIView()
     let createView = LineupCardCreateView()
+    let shadowView = LineupCardShadowView()
     
     var lineup: Lineup? {
         didSet {
@@ -45,6 +46,7 @@ class LineupCardCell: UICollectionViewCell {
     func addSubviews() {
         contentView.addSubview(lineupView)
         contentView.addSubview(createView)
+        contentView.insertSubview(shadowView, atIndex: 0)
     }
     
     func addConstraints() {
@@ -63,12 +65,18 @@ class LineupCardCell: UICollectionViewCell {
             createView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
             createView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
             createView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
-            ]
+
+            shadowView.topRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -5.0),
+            shadowView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: -40.0),
+            shadowView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: 40.0),
+            shadowView.heightRancor.constraintEqualToConstant(25.0),
+        ]
         
         translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         lineupView.translatesAutoresizingMaskIntoConstraints = false
         createView.translatesAutoresizingMaskIntoConstraints = false
+        shadowView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
@@ -76,12 +84,20 @@ class LineupCardCell: UICollectionViewCell {
     func setupSubviews() {
         contentView.backgroundColor = .clearColor()
         lineupView.backgroundColor = .whiteColor()
+        
+        shadowView.opaque = false
+        shadowView.layer.rasterizationScale = UIScreen.mainScreen().scale
+        shadowView.layer.shouldRasterize = true
+        
         lineupView.layer.allowsEdgeAntialiasing = true
         createView.layer.allowsEdgeAntialiasing = true
+        shadowView.layer.allowsEdgeAntialiasing = true
     }
+    
     
     func fade(amount: CGFloat) {
         alpha = 1.0 - (amount * 0.5)
+        shadowView.alpha = 1.0 - (amount * 0.5)
     }
     
     func rotate(amount: CGFloat) {
@@ -129,6 +145,20 @@ class LineupCardCell: UICollectionViewCell {
          */
     }
     
+}
+
+class LineupCardShadowView: UIView {
+    override func drawRect(rect: CGRect) {
+        print("drawRect")
+        let radius = bounds.width * 0.5
+        let center = CGPointMake(radius, radius)
+        let black = UIColor(white: 0, alpha: 0.3).CGColor
+        let clear = UIColor(white: 0, alpha: 0).CGColor
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [black, clear], [0, 1.0])
+        let context = UIGraphicsGetCurrentContext()
+        CGContextScaleCTM(context, 1.0, bounds.height / bounds.width)
+        CGContextDrawRadialGradient(context, gradient, center, 0, center, radius, [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+    }
 }
 
 class LineupCardCreateView: UIControl, CancelableTouchControl {
