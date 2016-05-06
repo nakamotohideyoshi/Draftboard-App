@@ -14,6 +14,16 @@ class DraftGroup: Model {
     var numGames: Int = 0
     var players: [Player] = [Player]()
     
+    convenience init(throwableData data: NSDictionary) throws {
+        self.init()
+        
+        do {
+            let _: Int = try data.get("fart")
+        } catch let error {
+            throw APIError.ModelError(self.dynamicType, error)
+        }
+    }
+
     convenience init?(upcomingData data: NSDictionary) {
         self.init()
         

@@ -20,6 +20,16 @@ class Lineup: Model {
     var players: [Player?] = [Player?]()
     var cardScrollPos: CGPoint = CGPointMake(0, 44.0)
     
+    convenience init(throwableData data: NSDictionary) throws {
+        self.init()
+        
+        do {
+            let _: Int = try data.get("start")
+        } catch let error {
+            throw APIError.ModelError(self.dynamicType, error)
+        }
+    }
+
     convenience init?(data: NSDictionary) {
         self.init()
         

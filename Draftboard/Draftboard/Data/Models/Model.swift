@@ -15,3 +15,4 @@ class Model {
         print("\(message) in \(self.dynamicType).\(function)")
     }
 }
+
