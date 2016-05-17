@@ -41,14 +41,14 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let draftGroupPromise = API.draftGroup(id: draftGroup.id)
-        let injuriesPromise = API.sportsInjuries(draftGroup.sport.name)
-        draftGroupPromise.then { draftGroup in
-            self.gotDraftGroup(draftGroup)
-        }
-        when(draftGroupPromise, injuriesPromise).then { (draftGroup, injuries) in
-            self.addInjuryInfo(draftGroup, injuries: injuries)
-        }
+//        let draftGroupPromise = API.draftGroup(id: draftGroup.id)
+//        let injuriesPromise = API.sportsInjuries(draftGroup.sport)
+//        draftGroupPromise.then { draftGroup in
+//            self.gotDraftGroup(draftGroup)
+//        }
+//        when(draftGroupPromise, injuriesPromise).then { (draftGroup, injuries) in
+//            self.addInjuryInfo(draftGroup, injuries: injuries)
+//        }
         
         view.backgroundColor = .blueDarker()
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -76,9 +76,9 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     }
     
     func updateStats() {
-        let playersRemaining = lineup.players.filter {$0 == nil}.count
-        statRemSalary = lineup.sport.salary - lineup.salary
-        statAvgSalary = (playersRemaining > 0) ? statRemSalary / Double(playersRemaining) : 0
+//        let playersRemaining = lineup.players.filter {$0 == nil}.count
+//        statRemSalary = lineup.sport.salary - lineup.salary
+//        statAvgSalary = (playersRemaining > 0) ? statRemSalary / Double(playersRemaining) : 0
         
         if let rp = replacingPlayer {
             statRemSalary += rp.salary
@@ -128,19 +128,19 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         var selectablePlayers = [Player]()
         
         for player in players {
-            var found = false
+//            var found = false
             
-            for lineupPlayer in lineup.players {
-                if let lp = lineupPlayer {
-                    if player.id == lp.id {
-                        found = true
-                    }
-                }
-            }
+//            for lineupPlayer in lineup.players {
+//                if let lp = lineupPlayer {
+//                    if player.id == lp.id {
+//                        found = true
+//                    }
+//                }
+//            }
             
-            if !found {
-                selectablePlayers.append(player)
-            }
+//            if !found {
+//                selectablePlayers.append(player)
+//            }
         }
         
         return selectablePlayers
@@ -184,11 +184,11 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
             if searchWords.count > 0 {
                 players = players.filter { player in
                     for component in searchWords {
-                        let firstname = player.firstName.lowercaseString
-                        let lastName = player.lastName.lowercaseString
-                        if firstname.hasPrefix(component) || lastName.hasPrefix(component) {
-                            return true
-                        }
+//                        let firstname = player.firstName.lowercaseString
+//                        let lastName = player.lastName.lowercaseString
+//                        if firstname.hasPrefix(component) || lastName.hasPrefix(component) {
+//                            return true
+//                        }
                     }
                     return false
                 }
@@ -196,21 +196,21 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         }
         
         // Sort by salary, fppg, name
-        players.sortInPlace { p1, p2 in
-            if p1.salary != p2.salary {
-                return p1.salary > p2.salary
-            }
-            if p1.fppg != p2.fppg {
-                return p1.fppg > p2.fppg
-            }
-            return p1.lastName < p2.lastName
-        }
+//        players.sortInPlace { p1, p2 in
+//            if p1.salary != p2.salary {
+//                return p1.salary > p2.salary
+//            }
+//            if p1.fppg != p2.fppg {
+//                return p1.fppg > p2.fppg
+//            }
+//            return p1.lastName < p2.lastName
+//        }
     }
     
     func addInjuryInfo(draftGroup: DraftGroup, injuries: [Int: String]) {
         for player in draftGroup.players {
             if let injury = injuries[player.id] {
-                player.injury = injury
+//                player.injury = injury
             }
         }
         
@@ -387,7 +387,8 @@ extension LineupSearchViewController: StatFooterDataSource {
     }
     
     func footerStatLiveInDate() -> NSDate? {
-        return lineup.draftGroup.start
+        return NSDate.distantPast()
+//        return lineup.draftGroup.start
     }
 }
 

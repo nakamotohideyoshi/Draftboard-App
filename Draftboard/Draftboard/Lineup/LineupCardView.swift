@@ -6,13 +6,15 @@
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
 
+
+
 import UIKit
 
 protocol LineupCardViewDelegate {
     func didSelectToggleOption(option: LineupCardToggleOption)
 }
 
-class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
+class LineupCardView: DraftboardNibView/*, LineupCardToggleDelegate*/ {
     
     @IBOutlet weak var clipView: UIView!
     @IBOutlet weak var contentView: UIScrollView!
@@ -32,7 +34,7 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
     @IBOutlet weak var leftStatContainerView: UIView!
     @IBOutlet weak var centerStatContainerView: UIView!
     @IBOutlet weak var rightStatContainerView: UIView!
-    
+    /*
     // Delegate
     var delegate: LineupCardViewDelegate?
     
@@ -304,18 +306,18 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
         toggleView.selectOption(option)
         
         if let lineup = lineup {
-            for (index, _) in lineup.players.enumerate() {
-                let cellView = cellViews[index]
-                
-                switch option {
-                    case .Points:
-                        cellView.showPoints()
-                    case .FantasyPoints:
-                        cellView.showFantasyPoints()
-                    case .Salary:
-                        cellView.showSalary()
-                }
-            }
+//            for (index, _) in lineup.players.enumerate() {
+//                let cellView = cellViews[index]
+//            
+//                switch option {
+//                    case .Points:
+//                        cellView.showPoints()
+//                    case .FantasyPoints:
+//                        cellView.showFantasyPoints()
+//                    case .Salary:
+//                        cellView.showSalary()
+//                }
+//            }
         }
         
         delegate?.didSelectToggleOption(option)
@@ -403,9 +405,9 @@ class LineupCardView: DraftboardNibView, LineupCardToggleDelegate {
             contestWidth.active = false
             liveContestWidth.active = true
         }
-    }
+    }*/
 }
-
+/*
 extension LineupCardView: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if contentView.contentOffset.y > 44.0 {
@@ -419,3 +421,5 @@ private extension Selector {
     static let didTapContests = #selector(LineupCardView.didTapContests)
     static let didTapPlayerCell = #selector(LineupCardView.didTapPlayerCell(_:))
 }
+ 
+ */

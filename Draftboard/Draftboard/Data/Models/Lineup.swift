@@ -7,29 +7,55 @@
 //
 
 import Foundation
-import UIKit
 
-class Lineup: Model {
-    var name: String = ""
-    var sport: Sport = Sport() {
-        didSet { didSetSport(sport) }
-    }
-    var draftGroup: DraftGroup = DraftGroup() {
-        didSet { didSetDraftGroup(draftGroup) }
-    }
-    var players: [Player?] = [Player?]()
-    var cardScrollPos: CGPoint = CGPointMake(0, 44.0)
+class Lineup: CustomStringConvertible {
     
-    convenience init(throwableData data: NSDictionary) throws {
-        self.init()
-        
+    let id: Int
+    let name: String
+    let draftGroupID: Int
+    let playerIDs: [Int]
+    
+    init(id: Int, name: String, draftGroupID: Int, playerIDs: [Int]) {
+        self.id = id
+        self.name = name
+        self.draftGroupID = draftGroupID
+        self.playerIDs = playerIDs
+    }
+    
+    convenience init(JSON: NSDictionary) throws {
         do {
-            let _: Int = try data.get("start")
+            let id: Int = try JSON.get("id")
+            let name: String = try JSON.get("name")
+            let draftGroupID: Int = try JSON.get("draft_group")
+            let playersJSON: [NSDictionary] = try JSON.get("players")
+            let playerIDs: [Int] = try playersJSON.map { try $0.get("player_id") }
+            self.init(id: id, name: name, draftGroupID: draftGroupID, playerIDs: playerIDs)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
     }
+    
+//    var description: String { return "Lineup: \(id) \(name) \(playerIDs)" }
+    
+}
 
+class MutableLineup {
+    var id: Int?
+    var name: String?
+    var draftGroupID: Int?
+    var playerIDs: [Int?] = []
+    
+    func copy() -> Lineup? {
+        if let id = id, name = name, draftGroupID = draftGroupID {
+            if !playerIDs.contains({$0 == nil}) {
+                return Lineup(id: id, name: name, draftGroupID: draftGroupID, playerIDs: playerIDs.map {$0!})
+            }
+        }
+        return nil
+    }
+}
+
+    /*
     convenience init?(data: NSDictionary) {
         self.init()
         
@@ -129,3 +155,4 @@ extension Lineup {
         get { return flatPlayers.sort {$0.salary > $1.salary}.first }
     }
 }
+ */

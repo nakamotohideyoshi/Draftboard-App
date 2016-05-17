@@ -11,25 +11,25 @@ import PromiseKit
 
 private typealias API_Endpoints = API
 extension API_Endpoints {
-    
-    class func draftGroupUpcoming() -> Promise<[DraftGroup]> {
+
+    class func draftGroupUpcoming() -> Promise<[ShortDraftGroup]> {
         let path = "api/draft-group/upcoming/"
-        return API.get(path).then { (data: [NSDictionary]) -> [DraftGroup] in
-            return try data.map { try DraftGroup(throwableData: $0) }
+        return API.get(path).then { (json: [NSDictionary]) -> [ShortDraftGroup] in
+            return try json.map { try ShortDraftGroup(JSON: $0) }
         }
     }
     
     class func draftGroup(id id: Int) -> Promise<DraftGroup> {
         let path = "api/draft-group/\(id)/"
-        return API.get(path).then { (data: NSDictionary) -> DraftGroup in
-            return try DraftGroup(throwableData: data)
+        return API.get(path).then { (json: NSDictionary) -> DraftGroup in
+            return try DraftGroup(JSON: json)
         }
     }
     
     class func contestLobby() -> Promise<[Contest]> {
         let path = "api/contest/lobby/"
-        return API.get(path).then { (data: [NSDictionary]) -> [Contest] in
-            return try data.map { try Contest(throwableData: $0) }
+        return API.get(path).then { (json: [NSDictionary]) -> [Contest] in
+            return try json.map { try Contest(throwableData: $0) }
         }
     }
     
@@ -58,21 +58,21 @@ extension API_Endpoints {
         }
     }
     
-    class func lineupCreate(lineup: Lineup) -> Void {
+    class func lineupCreate(lineup: Lineup) -> Promise<AnyObject> {
         let path = "api/lineup/create/"
         let params = [
             "name": lineup.name,
-            "players": lineup.players.map {$0?.id ?? 0},
-            "draft_group": lineup.draftGroup.id
+            "players": lineup.playerIDs,
+            "draft_group": lineup.draftGroupID
         ]
-        let doNothing: (AnyObject) -> Void = {_ in}
-        API.post(path, JSON: params).then(doNothing)
+        return API.post(path, JSON: params)
     }
+    
     
     class func lineupUpcoming() -> Promise<[Lineup]> {
         let path = "api/lineup/upcoming/"
-        return API.get(path).then { (data: [NSDictionary]) -> [Lineup] in
-            return try data.map { try Lineup(throwableData: $0) }
+        return API.get(path).then { (json: [NSDictionary]) -> [Lineup] in
+            return try json.map { try Lineup(JSON: $0) }
         }
     }
     

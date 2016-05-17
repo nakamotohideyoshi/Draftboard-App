@@ -61,12 +61,12 @@ class ContestsListController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        API.lineupUpcoming().then { lineups in
-            self.gotLineups(lineups)
-        }
-        API.contestLobby().then { contests in
-            self.gotContests(contests)
-        }
+//        API.lineupUpcoming().then { lineups in
+//            self.gotLineups(lineups)
+//        }
+//        API.contestLobby().then { contests in
+//            self.gotContests(contests)
+//        }
 //        API.contestEntries().then { entries in
 //            self.gotEntries(entries)
 //        }
@@ -106,12 +106,12 @@ class ContestsListController: DraftboardViewController {
             mcc.choiceData = choices
         }
         else {
-            API.lineupUpcoming().then { lineups -> Void in
-                self.lineups = lineups
-                var choices = self.lineups?.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
-                choices?.insert(noFilterChoice, atIndex: 0)
-                mcc.choiceData = choices
-            }
+//            API.lineupUpcoming().then { lineups -> Void in
+//                self.lineups = lineups
+//                var choices = self.lineups?.map { ["title": $0.name, "subtitle": "In ? Contests", "object": $0] }
+//                choices?.insert(noFilterChoice, atIndex: 0)
+//                mcc.choiceData = choices
+//            }
         }
         
         RootViewController.sharedInstance.pushModalViewController(mcc)

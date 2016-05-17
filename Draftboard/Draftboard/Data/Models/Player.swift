@@ -7,7 +7,48 @@
 //
 import UIKit
 
-class Player: Model {
+class Player {
+    let id: Int
+    let name: String
+    let salary: Double
+    let position: String
+    let fppg: Double
+    let teamSRID: String
+    let gameSRID: String
+    let srid: String
+    
+    init(id: Int, name: String, salary: Double, position: String, fppg: Double, teamSRID: String, gameSRID: String, srid: String) {
+        self.id = id
+        self.name = name
+        self.salary = salary
+        self.position = position
+        self.fppg = fppg
+        self.teamSRID = teamSRID
+        self.gameSRID = gameSRID
+        self.srid = srid
+    }
+    
+    convenience init(JSON json: NSDictionary) throws {
+        do {
+            let id: Int = try json.get("player_id")
+            let name: String = try json.get("name")
+            let salary: Double = try json.get("salary")
+            let position: String = try json.get("position")
+            let fppg: Double = try json.get("fppg")
+            let teamSRID: String = try json.get("team_srid")
+            let gameSRID: String = try json.get("game_srid")
+            let srid: String = try json.get("player_srid")
+            self.init(id: id, name: name, salary: salary, position: position, fppg: fppg, teamSRID: teamSRID, gameSRID: gameSRID, srid: srid)
+        } catch let error {
+            throw APIError.ModelError(self.dynamicType, error)
+        }
+    }
+
+}
+    
+    
+    /*
+
     private(set) var firstName: String = ""
     private(set) var lastName: String = ""
     private(set) var shortName: String = ""
@@ -48,7 +89,6 @@ class Player: Model {
         self.team = dataTeamAlias
         self.image = image
     }
-    
     // Upcoming lineup endpoint gives different json -_-
     convenience init?(lineupData: NSDictionary) {
         self.init()
@@ -72,17 +112,24 @@ class Player: Model {
         self.image = image
     }
 }
-
+ 
+ */
+ 
 // Name stuff
 extension Player {
-    private func setName(name: String) {
-        fullName = name
-        // First, last names
+    var firstName: String {
         var nameComponents = name.componentsSeparatedByString(" ")
-        firstName = nameComponents.removeFirst()
-        lastName = nameComponents.joinWithSeparator(" ")
-        // Short name
-        let firstChar = firstName[firstName.startIndex]
-        shortName = String(firstChar).uppercaseString + ". " + lastName
+        return nameComponents.removeFirst()
+    }
+    
+    var lastName: String {
+        var nameComponents = name.componentsSeparatedByString(" ")
+        nameComponents.removeFirst()
+        return nameComponents.joinWithSeparator(" ")
+    }
+    
+    var shortName: String {
+        let firstLetter = String(firstName[firstName.startIndex])
+        return "\(firstLetter). \(lastName)"
     }
 }

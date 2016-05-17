@@ -175,6 +175,7 @@ class ContestDetailViewController: DraftboardViewController {
     }
     
     func handleButtonTap(sender: DraftboardButton) {
+        /*
         API.lineupUpcoming().then { lineups -> Void in
             let eligible = lineups.filter { $0.draftGroup.id == self.contest.draftGroup.id }
             let choices = eligible.map {["title": $0.name, "subtitle": "In ? Contests"]}
@@ -182,6 +183,7 @@ class ContestDetailViewController: DraftboardViewController {
             let mcc = DraftboardModalChoiceController(title: "Choose an Eligible Lineup", choices: choices)
             RootViewController.sharedInstance.pushModalViewController(mcc)
         }
+         */
     }
     
     override func didSelectModalChoice(index: Int) {

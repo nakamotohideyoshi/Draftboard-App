@@ -40,8 +40,8 @@ class LineupSearchCellView: UITableViewCell {
             avatarImageView.player = player
             nameLabel.text = player?.shortName
             positionLabel.text = player?.position
-            leagueLabel.text = player?.team
-            statusLabel.text = player?.injury
+//            leagueLabel.text = player?.team
+//            statusLabel.text = player?.injury
             salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
             ppgLabel.text = String(format: "%.2f FPPG", player?.fppg ?? 0)
         }

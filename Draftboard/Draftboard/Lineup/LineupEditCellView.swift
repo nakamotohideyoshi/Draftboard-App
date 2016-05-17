@@ -35,7 +35,7 @@ class LineupEditCellView: DraftboardNibControl {
             avatarImageView.player = player
             nameLabel.textColor = .whiteColor()
             nameLabel.text = player?.shortName
-            teamLabel.text = player?.team
+//            teamLabel.text = player?.team
             salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
         }
     }

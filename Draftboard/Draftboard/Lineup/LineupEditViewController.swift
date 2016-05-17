@@ -11,7 +11,7 @@ import UIKit
 class LineupEditViewController: DraftboardViewController {
     @IBOutlet weak var contentView: UIScrollView!
     
-    var lineup: Lineup = Lineup() {
+    var lineup: Lineup!/* = Lineup()*/ {
         didSet { updateCellViews() }
     }
     var saveLineupAction: (Lineup -> Void)?
@@ -20,12 +20,12 @@ class LineupEditViewController: DraftboardViewController {
     var statRemSalary: Double = 0
     var statAvgSalary: Double = 0
     
-    var draftGroup = DraftGroup()
+    var draftGroup: DraftGroup!
     
     override func viewDidLoad() {
-        API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
-            self.draftGroup = draftGroup
-        }
+//        API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
+//            self.draftGroup = draftGroup
+//        }
         
         contentView.alwaysBounceVertical = true
         contentView.indicatorStyle = .White
@@ -51,7 +51,7 @@ class LineupEditViewController: DraftboardViewController {
         else if (screenHeight > 480.0) { // iPhone 5 and up
             divisor = 7.0
         }
-        
+        /*
         let positions = lineup.sport.positions
         for (i, position) in positions.enumerate() {
             let cellView = LineupEditCellView()
@@ -91,14 +91,17 @@ class LineupEditViewController: DraftboardViewController {
                 cellView.player = player
             }
         }
+         */
     }
     
     func updateCellViews() {
+        /*
         for (i, cellView) in cellViews.enumerate() {
             if let player = lineup.players[i] {
                 cellView.player = player
             }
         }
+         */
     }
     
     func positionTextForAbbr(abbr: String) -> String {
@@ -116,6 +119,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     func didTapCell(cell: LineupEditCellView) {
+        /*
         let positions = lineup.sport.positions
         let titleText = positionTextForAbbr(positions[cell.index])
         let svc = LineupSearchViewController(titleText: titleText, lineup: lineup, nibName: "LineupSearchViewController", bundle: nil)
@@ -132,17 +136,21 @@ class LineupEditViewController: DraftboardViewController {
         }
         
         navController?.pushViewController(svc)
+         */
     }
     
     func updateStats() {
+        /*
         let playersRemaining = lineup.players.filter {$0 == nil}.count
         statRemSalary = lineup.sport.salary - lineup.salary
         statAvgSalary = (playersRemaining > 0) ? statRemSalary / Double(playersRemaining) : 0
+         */
     }
     
     // Temp:
     // Pick an MVP, then double-tap contentView to fill junk lineup
     func fillJunkLineup() {
+        /*
         if let mvp = lineup.mvp {
             for (i, player) in lineup.players.enumerate() {
                 if player === mvp { continue }
@@ -164,11 +172,13 @@ class LineupEditViewController: DraftboardViewController {
             navController?.titlebar.updateElements()
             navController?.titlebar.transitionElements(.None)
         }
+         */
     }
     
     // MARK: - Titlebar datasource methods
     
     func showInvalidModal() {
+        /*
         var errorMsg = ""
         let playersRemaining = lineup.players.filter {$0 == nil}.count
         
@@ -190,6 +200,7 @@ class LineupEditViewController: DraftboardViewController {
         RootViewController.sharedInstance.pushAlertViewController(vc)
         vc.titleLabel.text = "FOUL"
         vc.errorLabel.text = errorMsg
+         */
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
@@ -197,10 +208,12 @@ class LineupEditViewController: DraftboardViewController {
             showInvalidModal()
         }
         else if (buttonType == .Value) {
+            /*
             if let mvp = lineup.mvp {
                 lineup.name = Data.teamNames[mvp.name] ?? mvp.name + " Stack"
             }
             saveLineupAction?(lineup)
+             */
         }
         else if (buttonType == .Close) {
             self.navController?.popViewController()
@@ -211,7 +224,8 @@ class LineupEditViewController: DraftboardViewController {
         if lineup.name != "" {
             return lineup.name.uppercaseString
         }
-        return "New \(lineup.sport.name) Lineup".uppercaseString
+//        return "New \(lineup.sport.name) Lineup".uppercaseString
+        return "TITLE"
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -219,6 +233,7 @@ class LineupEditViewController: DraftboardViewController {
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType {
+        /*
         let playersRemaining = lineup.players.filter {$0 == nil}.count
         
         if playersRemaining > 0 {
@@ -227,6 +242,7 @@ class LineupEditViewController: DraftboardViewController {
         if statRemSalary < 0 {
             return .DisabledValue
         }
+         */
         
         return .Value
     }
@@ -259,7 +275,8 @@ extension LineupEditViewController: StatFooterDataSource {
     }
     
     func footerStatLiveInDate() -> NSDate? {
-        return lineup.draftGroup.start
+        return NSDate.distantPast()
+//        return lineup.draftGroup.start
     }
 }
 

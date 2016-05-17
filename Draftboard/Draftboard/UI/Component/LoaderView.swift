@@ -73,7 +73,8 @@ class LoaderView: UIView {
     }
 
     func resumeSpinning() {
-        if (spinning) {
+        if (spinning && !hidden) {
+            gradientImageView.layer.removeAllAnimations()
             gradientImageView.layer.addAnimation(spinningAnim(), forKey: "transform.rotation.z")
         }
     }

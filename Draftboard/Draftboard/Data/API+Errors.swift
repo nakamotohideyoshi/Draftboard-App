@@ -14,6 +14,7 @@ enum APIError: ErrorType {
     case JSONKeyNotFound(Any, Any)
     case JSONTypeMismatch(Any, Any.Type)
     case InvalidToken(APIRequest)
+    case InvalidDateString(String)
     case ModelError(Any.Type, ErrorType)
     case Whatever
 }
@@ -24,7 +25,7 @@ private typealias API_Errors = API
 extension API_Errors {
     
     static let InvalidTokenCondition: APIRequestErrorCondition = { request, _, string, response in
-        if response.statusCode == 403 && string.lowercaseString.containsString("Signature") {
+        if response.statusCode == 403 && string.lowercaseString.containsString("signature") {
             return APIError.InvalidToken(request)
         }
         return nil

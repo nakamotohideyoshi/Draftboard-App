@@ -19,7 +19,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     var selectedDraftGroup: DraftGroup?
     var selectedSport: Sport?
     
-    var lineups: [Lineup] = []
+    var lineups: [Lineup]? { didSet { update() } }
     
     override func loadView() {
         self.view = LineupListControllerView()
@@ -31,20 +31,15 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         // Hide pagination to start
         view.paginationHeight.constant = 20.0
         view.paginationView.hidden = true
+        
+        update()
     }
     
     override func viewWillAppear(animated: Bool) {
         // Get lineups
-        Data.lineups().then { cached, fresh -> Promise<[Lineup]> in
-            if let cachedLineups = cached {
-                if self.lineups.count == 0 {
-                    self.gotLineups(cachedLineups)
-                }
-            }
-            
-            return fresh
-        }.then { lineups in
-            self.gotLineups(lineups)
+        lineups = nil
+        Data.upcomingLineups.get().then { lineups -> Void in
+            self.lineups = lineups
         }
     }
     
@@ -52,8 +47,16 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         downcastedView.collectionView.updateCellTransforms()
     }
     
-    // MARK: - Modals
+    func update() {
+        let view = downcastedView
+        view.loaderView.hidden = (lineups != nil)
+        view.loaderView.resumeSpinning()
+        view.collectionView.hidden = (lineups == nil)
+        view.collectionView.reloadData()
+    }
     
+    // MARK: - Modals
+    /*
     override func didSelectModalChoice(index: Int) {
         if (selectedSport == nil) {
             didSelectSport(index)
@@ -74,6 +77,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     func gotLineups(newLineups: [Lineup]) {
         let view = downcastedView
         
+     
         // Got lineups
         view.loaderView.hidden = true
         
@@ -100,7 +104,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
                 }
             }
             
-            /*
+         
             // Update cards one by one
             API.draftGroup(id: lineup.draftGroup.id).then { draftGroup -> Void in
                 lineup.draftGroup = draftGroup
@@ -122,7 +126,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
                     }
                 }
             }
-            */
+ 
 
         }
     }
@@ -252,6 +256,9 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         
         // Creating a lineup is editing an empty lineup
         let nvc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
+        Data.draftGroup(id: draftGroup.id).then { draftGroupWithPlayers in
+            nvc.draftGroup = draftGroupWithPlayers
+        }
         nvc.lineup.draftGroup = draftGroup
         nvc.saveLineupAction = { lineup in
             
@@ -360,6 +367,7 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
             RootViewController.sharedInstance.pushModalViewController(gfvc)
         }
     }
+ */
     
     // MARK: - Titlebar datasource methods
     
@@ -382,13 +390,14 @@ extension LineupListController: UICollectionViewDataSource, UICollectionViewDele
     
     // UICollectionViewDataSource
     
-    func collectionView(_: UICollectionView, numberOfItemsInSection: Int) -> Int {
-        return 4
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // At least one
+        return max(1, lineups?.count ?? 0)
     }
     
     func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = downcastedView.collectionView.dequeueCellForIndexPath(indexPath)
-        cell.lineup = (indexPath.item == 0) ? nil : Lineup()
+        cell.lineup = lineups?[safe: indexPath.item]
         return cell
     }
 
@@ -405,9 +414,15 @@ extension LineupListController: UIScrollViewDelegate {
         downcastedView.collectionView.updateCellTransforms()
     }
 }
-
+ 
 // MARK: -
+ 
+private extension Array {
+    subscript (safe index: Int) -> Element? {
+        return (0 <= index && index < count) ? self[index] : nil
+    }
+}
 
 private extension Selector {
-    static let presentDraftGroupPrompt = #selector(LineupListController.presentDraftGroupPrompt)
+//    static let presentDraftGroupPrompt = #selector(LineupListController.presentDraftGroupPrompt)
 }

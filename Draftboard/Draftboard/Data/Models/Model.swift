@@ -16,3 +16,12 @@ class Model {
     }
 }
 
+extension CustomStringConvertible {
+    var description: String {
+        let properties = Mirror(reflecting: self).children.flatMap { (label, value) -> String? in
+            return (label == nil) ? nil : "\(label!): \(value)"
+        }.joinWithSeparator(", ")
+
+        return "{\(self.dynamicType) \(properties)}"
+    }
+}

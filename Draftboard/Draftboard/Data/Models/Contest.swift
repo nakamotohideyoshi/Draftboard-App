@@ -14,7 +14,7 @@ class Contest: Model {
     var status: String = ""
     var start: NSDate = NSDate()
     var buyin: Double = 0.00
-    var draftGroup: DraftGroup = DraftGroup()
+    var draftGroup: DraftGroup!// = DraftGroup()
     var maxEntries: Int = 0
     var prizeStructure: Int = 0
     var prizePool: Double = 0.00
@@ -61,8 +61,8 @@ class Contest: Model {
         else { return nil }
 
         // Other setup
-        let draftGroup = DraftGroup()
-        draftGroup.id = dataDraftGroup
+//        let draftGroup = DraftGroup()
+//        draftGroup.id = dataDraftGroup
 
         // Assignment
         self.id = dataID
@@ -71,7 +71,7 @@ class Contest: Model {
         self.status = dataStatus
         self.start = start
         self.buyin = dataBuyin
-        self.draftGroup = draftGroup
+//        self.draftGroup = draftGroup
         self.maxEntries = dataMaxEntries
         self.prizeStructure = dataPrizeStructure
         self.prizePool = dataPrizePool
