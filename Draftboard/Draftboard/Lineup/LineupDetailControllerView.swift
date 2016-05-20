@@ -95,7 +95,7 @@ class LineupDetailControllerView: UIView {
             
             nameField.topRancor.constraintEqualToRancor(headerView.topRancor),
             nameField.leftRancor.constraintEqualToRancor(headerView.leftRancor),
-            nameField.rightRancor.constraintEqualToRancor(headerView.rightRancor),
+            nameField.rightRancor.constraintEqualToRancor(editButton.leftRancor, constant: 10.0),
             nameField.bottomRancor.constraintEqualToRancor(headerView.bottomRancor),
             
             editButton.topRancor.constraintEqualToRancor(headerView.topRancor),
@@ -124,15 +124,58 @@ class LineupDetailControllerView: UIView {
     
     func otherSetup() {
         tableView.backgroundColor = .whiteColor()
-        headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.75)
-        footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.75)
+        headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+        footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+
+//        headerView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+//        footerView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+
+        
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            
+            let blurEffectView = APCustomBlurView()
+//            let blurEffectView = UIVisualEffectView()
+//            blurEffectView.effect = UIBlurEffect()
+            //always fill the view
+            blurEffectView.setBlurRadius(3)
+            blurEffectView.frame = headerView.bounds
+            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            
+            let blurEffectView2 = APCustomBlurView()
+            blurEffectView2.setBlurRadius(3)
+            blurEffectView2.frame = footerView.bounds
+            blurEffectView2.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+
+            headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.85)
+            footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.85)
+
+            headerView.insertSubview(blurEffectView, atIndex: 0)
+            footerView.insertSubview(blurEffectView2, atIndex: 0)
+            
+            let headerBackgroundView = HeaderBackgroundView()
+            headerBackgroundView.opaque = false
+            headerBackgroundView.layer.shouldRasterize = true
+            headerBackgroundView.frame = headerView.bounds
+            headerBackgroundView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            headerView.insertSubview(headerBackgroundView, atIndex: 0)
+//            headerView.insertSubview(HeaderBackgroundView(), atIndex: 0)
+            
+            let footerBackgroundView = FooterBackgroundView()
+            footerBackgroundView.opaque = false
+            footerBackgroundView.layer.shouldRasterize = true
+            footerBackgroundView.frame = footerView.bounds
+            footerBackgroundView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            footerView.insertSubview(footerBackgroundView, atIndex: 0)
+
+        }
+
         
         footerView.userInteractionEnabled = false
         
 //        sportIcon.backgroundColor = .blueColor()
 //        nameField.backgroundColor = UIColor(0xFFFF00, alpha: 0.5)
-        editButton.backgroundColor = .redColor()
-        flipButton.backgroundColor = .yellowColor()
+//        editButton.backgroundColor = .redColor()
+//        flipButton.backgroundColor = .yellowColor()
         
 //        tableView.allowsSelection = false
 //        tableView.showsVerticalScrollIndicator = true
@@ -141,14 +184,21 @@ class LineupDetailControllerView: UIView {
 //        tableView.scrollIndicatorInsets = tableView.contentInset
         
         sportIcon.image = UIImage(named: "icon-basketball")
+        sportIcon.tintColor = UIColor(0x9c9faf)
+        
+        editButton.setImage(UIImage(named: "icon-edit"), forState: .Normal)
+        editButton.imageEdgeInsets = UIEdgeInsetsMake(0, 7, 0, 0)
+        flipButton.setImage(UIImage(named: "icon-flip"), forState: .Normal)
+        flipButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 4)
         
         nameField.delegate = self
         nameField.edgeInsets = UIEdgeInsetsMake(0, 44, 0, 0)
         nameField.font = UIFont.openSansRegular()?.fontWithSize(16.0)
         nameField.textColor = .blackColor()
-        nameField.clearButtonMode = .Always
+        nameField.clearButtonMode = .WhileEditing
         nameField.placeholder = "Lineup Name"
         nameField.returnKeyType = .Done
+        nameField.userInteractionEnabled = false
         
         editButton.addTarget(self, action: .editButtonTapped, forControlEvents: .TouchUpInside)
     }
@@ -163,6 +213,31 @@ class LineupDetailControllerView: UIView {
 
     
 }
+
+private class HeaderBackgroundView: UIView {
+    override func drawRect(rect: CGRect) {
+        let white = UIColor(white: 1, alpha: 1).CGColor
+        let clear = UIColor(white: 1, alpha: 0).CGColor
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [white, clear], [0, 1.0])
+        let context = UIGraphicsGetCurrentContext()
+        CGContextDrawLinearGradient(context, gradient, CGPointMake(bounds.width * 0.3, bounds.height * 0.25), CGPointMake(bounds.width * 0.28, bounds.height * 1.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+//        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, bounds.height * 0.15), CGPointMake(0, bounds.height), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+    }
+
+}
+
+private class FooterBackgroundView: UIView {
+    override func drawRect(rect: CGRect) {
+        let white = UIColor(white: 1, alpha: 1).CGColor
+        let clear = UIColor(white: 1, alpha: 0).CGColor
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [white, clear], [0, 1.0])
+        let context = UIGraphicsGetCurrentContext()
+        CGContextDrawLinearGradient(context, gradient, CGPointMake(bounds.width * 0.3, bounds.height * 0.75), CGPointMake(bounds.width * 0.28, bounds.height * 0.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+//        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, bounds.height * 0.85), CGPointMake(0, 0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+    }
+    
+}
+
 
 class TextField: UITextField {
     lazy var edgeInsets: UIEdgeInsets = UIEdgeInsetsZero
