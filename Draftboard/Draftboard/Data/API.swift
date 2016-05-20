@@ -40,9 +40,9 @@ private extension API_Private {
 
     static var token: String? =
         // user1
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjMxMzAsIm9yaWdfaWF0IjoxNDYzNDMxMTMwLCJ1c2VyX2lkIjo1fQ.G7C5AALFOpvNNQesjSjGOgJogcK0bAcpW-62bwqVvwA"
+//    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjMxMzAsIm9yaWdfaWF0IjoxNDYzNDMxMTMwLCJ1c2VyX2lkIjo1fQ.G7C5AALFOpvNNQesjSjGOgJogcK0bAcpW-62bwqVvwA"
     // user3
-//    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjM3OTEsIm9yaWdfaWF0IjoxNDYzNDMxNzkxLCJ1c2VyX2lkIjo3fQ.WEe-ySK5lN43X5NAf1kXMvT4srT4V7rRFklPuSNF3dU"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjM3OTEsIm9yaWdfaWF0IjoxNDYzNDMxNzkxLCJ1c2VyX2lkIjo3fQ.WEe-ySK5lN43X5NAf1kXMvT4srT4V7rRFklPuSNF3dU"
 
     
     class func promise<T>(request: APIRequest) -> Promise<T> {

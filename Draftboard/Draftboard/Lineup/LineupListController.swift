@@ -12,14 +12,15 @@ import PromiseKit
 class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     var downcastedView: LineupListControllerView { return view as! LineupListControllerView }
-    
+    var myTitle: String = "Lineups"
     var draftGroupChoices: [String: [NSDictionary]]?
     var sportChoices: [NSDictionary]?
     
     var selectedDraftGroup: DraftGroup?
     var selectedSport: Sport?
     
-    var lineups: [Lineup]? { didSet { update() } }
+//    var lineups: [Lineup]? { didSet { update() } }
+    var lineupDetailControllers: [LineupDetailController]? { didSet { update() } }
     
     override func loadView() {
         self.view = LineupListControllerView()
@@ -37,22 +38,26 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     
     override func viewWillAppear(animated: Bool) {
         // Get lineups
-        lineups = nil
-        Data.upcomingLineups.get().then { lineups -> Void in
-            self.lineups = lineups
+        Data.upcomingLineups.get().then { lineups in
+            return lineups.sortedByDate()
+        }.then { sortedLineups -> Void in
+            if self.lineupDetailControllers?.count != sortedLineups.count {
+                self.lineupDetailControllers = sortedLineups.map { LineupDetailController(lineup: $0) }
+            }
         }
     }
     
     override func viewDidAppear(animated: Bool) {
-        downcastedView.collectionView.updateCellTransforms()
     }
     
     func update() {
         let view = downcastedView
-        view.loaderView.hidden = (lineups != nil)
+        view.loaderView.hidden = (lineupDetailControllers != nil)
         view.loaderView.resumeSpinning()
-        view.collectionView.hidden = (lineups == nil)
+        view.collectionView.hidden = (lineupDetailControllers == nil)
         view.collectionView.reloadData()
+        view.collectionView.setContentOffset(CGPointMake(1, 0), animated: false)
+        view.collectionView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     // MARK: - Modals
@@ -372,14 +377,14 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     // MARK: - Titlebar datasource methods
     
     override func titlebarTitle() -> String {
-        return "Lineups".uppercaseString
+        return myTitle.uppercaseString
     }
     
-    override func titlebarLeftButtonType() -> TitlebarButtonType {
-        return .Menu
+    override func titlebarLeftButtonType() -> TitlebarButtonType? {
+        return nil
     }
     
-    override func titlebarRightButtonType() -> TitlebarButtonType {
+    override func titlebarRightButtonType() -> TitlebarButtonType? {
         return .Plus
     }
 }
@@ -392,12 +397,137 @@ extension LineupListController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // At least one
-        return max(1, lineups?.count ?? 0)
+        return max(1, lineupDetailControllers?.count ?? 0)
     }
     
     func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = downcastedView.collectionView.dequeueCellForIndexPath(indexPath)
-        cell.lineup = lineups?[safe: indexPath.item]
+        for subview in cell.lineupView.subviews {
+//            subview.removeConstraints(subview.constraints)
+            subview.removeFromSuperview()
+        }
+        if let newView = lineupDetailControllers?[safe: indexPath.row]?.view {
+            cell.lineupView.addSubview(newView)
+            newView.topRancor.constraintEqualToRancor(cell.lineupView.topRancor).active = true
+            newView.leftRancor.constraintEqualToRancor(cell.lineupView.leftRancor).active = true
+            newView.rightRancor.constraintEqualToRancor(cell.lineupView.rightRancor).active = true
+            newView.bottomRancor.constraintEqualToRancor(cell.lineupView.bottomRancor).active = true
+            newView.translatesAutoresizingMaskIntoConstraints = false
+        }
+        /*
+        cell.lineupView.editAction = {
+//            print(cell.lineupView.convertRect(cell.bounds, toView: self.view))
+//            cell.hidden = true
+            self.myTitle = "Edit Lineup"
+            self.navController?.updateTitlebar()
+            let fart = LineupDetailControllerView()
+            fart.tableView.contentOffset = cell.lineupView.tableView.contentOffset
+            self.view.addSubview(fart)
+            fart.translatesAutoresizingMaskIntoConstraints = false
+            let left = fart.leftRancor.constraintEqualToRancor(self.view.leftRancor, constant: 26)
+            let right = fart.rightRancor.constraintEqualToRancor(self.view.rightRancor, constant: -26)
+            let top = fart.topRancor.constraintEqualToRancor(self.view.topRancor, constant: 78.0)
+            let bottom = fart.bottomRancor.constraintEqualToRancor(self.view.bottomRancor, constant: -22)
+            NSLayoutConstraint.activateConstraints([left, right, top, bottom])
+            self.view.layoutIfNeeded()
+//            UIView.animateKeyframesWithDuration(0.25, delay: 0, options: [.CalculationModeLinear], animations: {
+//                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/3, animations: {
+//                    left.constant = 26
+//                    right.constant = -26
+//                    bottom.constant = -22
+//                    self.view.layoutIfNeeded()
+//                    var transform = CATransform3DIdentity
+////                    transform.m34 = -1/500
+////                    transform = CATransform3DRotate(transform, CGFloat(-M_PI / 12), 1, 0, 0)
+//                    fart.layer.transform = transform
+//                })
+//                UIView.addKeyframeWithRelativeStartTime(0.5, relativeDuration: 1/3, animations: {
+//                    var transform = CATransform3DIdentity
+//                    transform.m34 = -1/500
+//                    transform = CATransform3DRotate(transform, CGFloat(-M_PI / 12), 1, 0, 0)
+//                    fart.layer.transform = transform
+//                })
+
+            UIView.animateWithDuration(0.25, animations: { 
+                
+//                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1, animations: {
+                    var transform = CATransform3DIdentity
+                    transform = CATransform3DScale(transform, 0.95, 0.95, 1.0)
+                    transform = CATransform3DTranslate(transform, 0, 10, 0)
+                    self.downcastedView.collectionView.layer.transform = transform
+                    self.downcastedView.collectionView.layer.opacity = 0
+                    left.constant = 0
+                    right.constant = 0
+                    bottom.constant = 50
+                    self.view.layoutIfNeeded()
+                })
+                /*
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.5, animations: {
+                    var transform = CATransform3DIdentity
+//                    transform.m34 = -1/500
+                    transform = CATransform3DTranslate(transform, 0, 15, 0)
+//                    transform = CATransform3DTranslate(transform, 0, -fart.bounds.height/2, 0)
+//                    transform = CATransform3DRotate(transform, CGFloat(-M_PI / 12), 1, 0, 0)
+//                    transform = CATransform3DTranslate(transform, 0, fart.bounds.height/2, 0)
+                    fart.layer.transform = transform
+                })
+                UIView.addKeyframeWithRelativeStartTime(0.5, relativeDuration: 0.5, animations: {
+//                    var transform = CATransform3DIdentity
+//                    transform.m34 = -1/500
+//                    transform = CATransform3DRotate(transform, CGFloat(-M_PI / 12), 1, 0, 0)
+                    fart.layer.transform = CATransform3DIdentity
+                })
+                 */
+
+//            }, completion: nil)
+            fart.tableView.setEditing(true, animated: true)
+            
+
+//            UIView.animateWithDuration(0.2, delay: 0, options: [.CurveEaseOut], animations: {
+//                left.constant = 0
+//                right.constant = 0
+//                bottom.constant = 50
+//                self.view.layoutIfNeeded()
+//                var transform = CATransform3DIdentity
+//                transform.m34 = -1/500
+//                transform = CATransform3DRotate(transform, CGFloat(-M_PI / 12), 1, 0, 0)
+//                fart.layer.transform = transform
+//            }, completion: nil)
+ 
+            fart.editAction = {
+                self.myTitle = "Lineups"
+                self.navController?.updateTitlebar()
+                fart.tableView.setEditing(false, animated: true)
+                
+                UIView.animateWithDuration(0.25, delay: 0, options: [.CurveEaseOut], animations: {
+                    
+                    left.constant = 26
+                    right.constant = -26
+                    bottom.constant = -22
+                    self.view.layoutIfNeeded()
+                    self.downcastedView.collectionView.layer.transform = CATransform3DIdentity
+                    self.downcastedView.collectionView.layer.opacity = 1
+                    fart.layer.transform = CATransform3DIdentity
+ 
+                }, completion: { _ in
+                    cell.lineupView.tableView.contentOffset = fart.tableView.contentOffset
+                    fart.removeFromSuperview()
+//                    cell.hidden = false
+                })
+                
+            }
+
+//            UIView.animateWithDuration(0.25, animations: {
+//                left.constant = 0
+//                right.constant = 0
+//                bottom.constant = 50
+//                self.view.layoutIfNeeded()
+//            })
+//            [UIView animateWithDuration:0.5 animations:^{[self.view layoutIfNeeded];}];
+
+//            cell.lineupView.tableView.backgroundColor = .purpleColor()
+        }
+         */
         return cell
     }
 

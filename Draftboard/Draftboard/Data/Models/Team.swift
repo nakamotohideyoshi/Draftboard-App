@@ -5,20 +5,35 @@
 //  Created by Wes Pearce on 10/23/15.
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
-/*
+
 import UIKit
 
-class Team: Model {
+class Team {
     let id: Int
+    let srid: String
     let name: String
-    let short_name: String
-    let abbr: String
+    let alias: String
+    let city: String
     
-    init(data: NSDictionary) {
-        id = data["id"] as! Int
-        name = data["name"] as! String
-        short_name = data["short_name"] as! String
-        abbr = data["abbr"] as! String
+    init(id: Int, srid: String, name: String, alias: String, city: String) {
+        self.id = id
+        self.srid = srid
+        self.name = name
+        self.alias = alias
+        self.city = city
     }
+    
+    convenience init(JSON json: NSDictionary) throws {
+        do {
+            let id: Int = try json.get("id")
+            let srid: String = try json.get ("srid")
+            let name: String = try json.get("name")
+            let alias: String = try json.get("alias")
+            let city: String = try json.get("city")
+            self.init(id: id, srid: srid, name: name, alias: alias, city: city)
+        } catch let error {
+            throw APIError.ModelError(self.dynamicType, error)
+        }
+    }
+    
 }
-*/

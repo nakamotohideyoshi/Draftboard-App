@@ -10,11 +10,9 @@ import UIKit
 
 class LineupListControllerView: UIView {
     
-    let scrollView = UIScrollView()
     let collectionView = LineupCardCollectionView()
     let paginationView = DraftboardPagination()
     let loaderView = LoaderView()
-    let createView = UIView()
     
     var paginationHeight: NSLayoutConstraint!
     
@@ -39,26 +37,19 @@ class LineupListControllerView: UIView {
         addSubviews()
         addConstraints()
         setupSubviews()
-        clipsToBounds = true
+//        clipsToBounds = true
     }
     
     func addSubviews() {
-        addSubview(scrollView)
         addSubview(collectionView)
         addSubview(paginationView)
         addSubview(loaderView)
-        scrollView.addSubview(createView)
     }
     
     func addConstraints() {
         paginationHeight = paginationView.heightRancor.constraintEqualToConstant(36.0)
         
         let viewConstraints: [NSLayoutConstraint] = [
-            scrollView.topRancor.constraintEqualToRancor(topRancor, constant: 76.0),
-            scrollView.leftRancor.constraintEqualToRancor(leftRancor, constant: 20.0),
-            scrollView.rightRancor.constraintEqualToRancor(rightRancor, constant: -20.0),
-            scrollView.bottomRancor.constraintEqualToRancor(paginationView.topRancor),
-            
             collectionView.topRancor.constraintEqualToRancor(topRancor, constant: 76.0),
             collectionView.leftRancor.constraintEqualToRancor(leftRancor, constant: -20.0),
             collectionView.rightRancor.constraintEqualToRancor(rightRancor, constant: 20.0),
@@ -73,36 +64,21 @@ class LineupListControllerView: UIView {
             loaderView.heightRancor.constraintEqualToConstant(42.0),
             loaderView.centerXRancor.constraintEqualToRancor(centerXRancor),
             loaderView.centerYRancor.constraintEqualToRancor(centerYRancor),
-            
-            createView.topRancor.constraintEqualToRancor(scrollView.topRancor),
-            createView.leftRancor.constraintEqualToRancor(scrollView.leftRancor),
-            createView.widthRancor.constraintEqualToRancor(scrollView.widthRancor),
-            createView.heightRancor.constraintEqualToRancor(scrollView.heightRancor),
         ]
 
         translatesAutoresizingMaskIntoConstraints = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         paginationView.translatesAutoresizingMaskIntoConstraints = false
         loaderView.translatesAutoresizingMaskIntoConstraints = false
-        createView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
     func setupSubviews() {
-        scrollView.clipsToBounds = false
-        scrollView.pagingEnabled = true
-        scrollView.alwaysBounceHorizontal = true
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.hidden = true
-        
         collectionView.cardInset = UIEdgeInsetsMake(0, 44.0, 0, 44.0)
         
         loaderView.thickness = 2.0
         loaderView.spinning = true
-        
-        createView.backgroundColor = .blueColor()
     }
     
     func collectionViewCellForIndexPath(indexPath: NSIndexPath) -> LineupCardCell {

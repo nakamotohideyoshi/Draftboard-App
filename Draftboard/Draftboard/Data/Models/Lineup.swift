@@ -28,8 +28,13 @@ class Lineup: CustomStringConvertible {
             let name: String = try JSON.get("name")
             let draftGroupID: Int = try JSON.get("draft_group")
             let playersJSON: [NSDictionary] = try JSON.get("players")
-            let playerIDs: [Int] = try playersJSON.map { try $0.get("player_id") }
-            self.init(id: id, name: name, draftGroupID: draftGroupID, playerIDs: playerIDs)
+//            playersJSON.sortInPlace { let idx: Int = J
+            let playerIDs: [(Int, Int)] = try playersJSON.map {
+                (try $0.get("idx"), try $0.get("player_id"))
+            }
+            let foo = playerIDs.sort { (a, b) in a.0 < a.1 }.map { $0.1 }
+//            let foo = playerIDs.sort { ((idxA, _), (idxB, _)) in idxA < idxB }.map { (_, id) in id }
+            self.init(id: id, name: name, draftGroupID: draftGroupID, playerIDs: foo)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
@@ -54,6 +59,13 @@ class MutableLineup {
         return nil
     }
 }
+
+//class LineupWithInfo {
+//    let id: Int
+//    let name: String
+//    let draftGroup: DraftGroupWithInfo
+//    let players: [PlayerWithInfo]
+//}
 
     /*
     convenience init?(data: NSDictionary) {

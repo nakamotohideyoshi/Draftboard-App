@@ -12,17 +12,21 @@ class LineupCardCell: UICollectionViewCell {
     
     static let reuseIdentifier = "LineupCardCell"
     
-    let lineupView = UIView()
+    var lineupView = UIView()
     let createView = LineupCardCreateView()
     let shadowView = LineupCardShadowView()
     
+    /*
     var lineup: Lineup? {
         didSet {
-            let lineupExists = (lineup != nil)
-            lineupView.hidden = !lineupExists
-            createView.hidden = lineupExists
+//            lineupView.lineup = lineup
+            lineupView.hidden = (lineup == nil)
+            createView.hidden = (lineup != nil)
         }
     }
+ */
+    
+//    var editAction: () -> Void { return lineupView.editAction }
     
     init() {
         super.init(frame: CGRectZero)
@@ -44,9 +48,9 @@ class LineupCardCell: UICollectionViewCell {
     }
     
     func addSubviews() {
-        contentView.addSubview(lineupView)
+        contentView.addSubview(shadowView)
         contentView.addSubview(createView)
-        contentView.insertSubview(shadowView, atIndex: 0)
+        contentView.addSubview(lineupView)
     }
     
     func addConstraints() {

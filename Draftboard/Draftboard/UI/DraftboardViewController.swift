@@ -14,7 +14,7 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.clipsToBounds = true
+//        view.clipsToBounds = true
     }
     
     func didSelectModalChoice(index: Int) {

@@ -50,7 +50,7 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         contentView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         contentView.bottomRancor.constraintEqualToRancor(tabBar.topRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
-        contentView.clipsToBounds = true
+//        contentView.clipsToBounds = true
 
         switchNavController(lineupNC, animated: false)
     }

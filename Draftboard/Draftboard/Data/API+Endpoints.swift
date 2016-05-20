@@ -12,6 +12,18 @@ import PromiseKit
 private typealias API_Endpoints = API
 extension API_Endpoints {
 
+    class func sportsTeams() -> Promise<[Team]> {
+        let paths = [
+            "api/sports/teams/nba/",
+            "api/sports/teams/nhl/",
+            "api/sports/teams/mlb/"
+        ]
+        let getAll: [Promise<[NSDictionary]>] = paths.map { API.get($0) }
+        return when(getAll).then {
+            try $0.flatten().map { try Team(JSON: $0) }
+        }
+    }
+    
     class func draftGroupUpcoming() -> Promise<[ShortDraftGroup]> {
         let path = "api/draft-group/upcoming/"
         return API.get(path).then { (json: [NSDictionary]) -> [ShortDraftGroup] in

@@ -42,6 +42,7 @@
 		3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */; };
 		3CDCF9C21BE411BB00F75BF2 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */; };
 		3CDCF9C41BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */; };
+		3E07C6AF1CEE437400423CCC /* LineupDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07C6AE1CEE437400423CCC /* LineupDetailController.swift */; };
 		3E1870E81C05410F006641F8 /* Roster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1870E71C05410F006641F8 /* Roster.swift */; };
 		3E192C1F1CCADE760021A31D /* LineupCardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C1E1CCADE760021A31D /* LineupCardCollectionView.swift */; };
 		3E192C211CCAE35C0021A31D /* LineupCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C201CCAE35C0021A31D /* LineupCardCell.swift */; };
@@ -55,6 +56,7 @@
 		3E192C351CE515C90021A31D /* Data+Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C341CE515C90021A31D /* Data+Old.swift */; };
 		3E192C371CE55BE50021A31D /* Pusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C361CE55BE50021A31D /* Pusher.swift */; };
 		3E192C391CE6485E0021A31D /* LineupPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C381CE6485E0021A31D /* LineupPlayer.swift */; };
+		3E192C3B1CEB88CE0021A31D /* LineupDetailControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C3A1CEB88CE0021A31D /* LineupDetailControllerView.swift */; };
 		3E19DA1D1C03B75000E6B53F /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19DA1C1C03B75000E6B53F /* LoaderView.swift */; };
 		3E272EAA1C2880390023B303 /* TeamNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E272EA91C2880390023B303 /* TeamNames.swift */; };
 		3E608D921C1B72FC0085569D /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E608D911C1B72FC0085569D /* Format.swift */; };
@@ -71,6 +73,8 @@
 		3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */; };
 		3EB4BD891C72A62200CD760B /* PlayerPhotos in Resources */ = {isa = PBXBuildFile; fileRef = 3EB4BD881C72A62200CD760B /* PlayerPhotos */; };
 		3EB4BD8B1C73D06400CD760B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */; };
+		3ECA5F551CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */; };
+		3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
 		5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
 		5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CBFD01BDA8E7D006746B2 /* Team.swift */; };
@@ -228,6 +232,7 @@
 		3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardContestsUpcomingCell.swift; sourceTree = "<group>"; };
+		3E07C6AE1CEE437400423CCC /* LineupDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDetailController.swift; sourceTree = "<group>"; };
 		3E1870E71C05410F006641F8 /* Roster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Roster.swift; sourceTree = "<group>"; };
 		3E192C1E1CCADE760021A31D /* LineupCardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCardCollectionView.swift; sourceTree = "<group>"; };
 		3E192C201CCAE35C0021A31D /* LineupCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCardCell.swift; sourceTree = "<group>"; };
@@ -241,6 +246,7 @@
 		3E192C341CE515C90021A31D /* Data+Old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Old.swift"; sourceTree = "<group>"; };
 		3E192C361CE55BE50021A31D /* Pusher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pusher.swift; sourceTree = "<group>"; };
 		3E192C381CE6485E0021A31D /* LineupPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayer.swift; sourceTree = "<group>"; };
+		3E192C3A1CEB88CE0021A31D /* LineupDetailControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDetailControllerView.swift; sourceTree = "<group>"; };
 		3E19DA1C1C03B75000E6B53F /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		3E272EA91C2880390023B303 /* TeamNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamNames.swift; sourceTree = "<group>"; };
 		3E608D911C1B72FC0085569D /* Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
@@ -262,6 +268,8 @@
 		3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLConnection+Promise.swift"; sourceTree = "<group>"; };
 		3EB4BD881C72A62200CD760B /* PlayerPhotos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PlayerPhotos; sourceTree = "<group>"; };
 		3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerTableView.swift; sourceTree = "<group>"; };
+		3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerCell.swift; sourceTree = "<group>"; };
 		3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		3EE452051BFBBCE70085FB6D /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
 		5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardArrowButton.swift; sourceTree = "<group>"; };
@@ -597,6 +605,10 @@
 				5D6237B11BB61F7B0007E62A /* LineupCardView.xib */,
 				5D6237B21BB61F7B0007E62A /* LineupCardCellView.swift */,
 				5D6237B31BB61F7B0007E62A /* LineupCardCellView.xib */,
+				3E07C6AE1CEE437400423CCC /* LineupDetailController.swift */,
+				3E192C3A1CEB88CE0021A31D /* LineupDetailControllerView.swift */,
+				3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */,
+				3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */,
 				5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */,
 				5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */,
 				5D6237B41BB61F7B0007E62A /* LineupEditCellView.swift */,
@@ -848,6 +860,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ECA5F551CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift in Sources */,
 				934B5EE01BB5B42C00502FC6 /* (null) in Sources */,
 				5DD3C4E51C17AE630040DC71 /* DraftboardFooterView.swift in Sources */,
 				3E608D921C1B72FC0085569D /* Format.swift in Sources */,
@@ -858,10 +871,12 @@
 				3E272EAA1C2880390023B303 /* TeamNames.swift in Sources */,
 				5D783ACC1BD97C54000D8494 /* Model.swift in Sources */,
 				3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */,
+				3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */,
 				5DF49CF01C1BA7DC00B371CE /* NotificationViewController.swift in Sources */,
 				5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */,
 				3E192C351CE515C90021A31D /* Data+Old.swift in Sources */,
 				5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */,
+				3E192C3B1CEB88CE0021A31D /* LineupDetailControllerView.swift in Sources */,
 				5D26FC741BBEE78700ACF127 /* AccountViewController.swift in Sources */,
 				5D6237DB1BB6200B0007E62A /* DraftboardImageView.swift in Sources */,
 				3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */,
@@ -885,6 +900,7 @@
 				3E192C291CDAB84B0021A31D /* NSDictionary+API.swift in Sources */,
 				5DCFB8981C52953F00924EC7 /* DraftboardPagination.swift in Sources */,
 				5D6237E11BB6200B0007E62A /* DraftboardViewController.swift in Sources */,
+				3E07C6AF1CEE437400423CCC /* LineupDetailController.swift in Sources */,
 				3E1870E81C05410F006641F8 /* Roster.swift in Sources */,
 				3E192C271CDAB75F0021A31D /* API+Errors.swift in Sources */,
 				5D6237D71BB61FFB0007E62A /* UIColor+DraftboardColors.swift in Sources */,
