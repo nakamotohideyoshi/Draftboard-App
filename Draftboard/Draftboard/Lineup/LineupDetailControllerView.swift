@@ -124,52 +124,37 @@ class LineupDetailControllerView: UIView {
     
     func otherSetup() {
         tableView.backgroundColor = .whiteColor()
-        headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
-        footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+        headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
+        footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
 
-//        headerView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-//        footerView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-
-        
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
-            
-            let blurEffectView = APCustomBlurView()
-//            let blurEffectView = UIVisualEffectView()
-//            blurEffectView.effect = UIBlurEffect()
-            //always fill the view
-            blurEffectView.setBlurRadius(3)
-            blurEffectView.frame = headerView.bounds
-            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            
-            let blurEffectView2 = APCustomBlurView()
-            blurEffectView2.setBlurRadius(3)
-            blurEffectView2.frame = footerView.bounds
-            blurEffectView2.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-
+        if let headerEffectView = BlurEffectView(radius: 3) {
+            headerEffectView.frame = headerView.bounds
+            headerEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            headerView.insertSubview(headerEffectView, atIndex: 0)
             headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.85)
-            footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.85)
-
-            headerView.insertSubview(blurEffectView, atIndex: 0)
-            footerView.insertSubview(blurEffectView2, atIndex: 0)
-            
-            let headerBackgroundView = HeaderBackgroundView()
-            headerBackgroundView.opaque = false
-            headerBackgroundView.layer.shouldRasterize = true
-            headerBackgroundView.frame = headerView.bounds
-            headerBackgroundView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            headerView.insertSubview(headerBackgroundView, atIndex: 0)
-//            headerView.insertSubview(HeaderBackgroundView(), atIndex: 0)
-            
-            let footerBackgroundView = FooterBackgroundView()
-            footerBackgroundView.opaque = false
-            footerBackgroundView.layer.shouldRasterize = true
-            footerBackgroundView.frame = footerView.bounds
-            footerBackgroundView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            footerView.insertSubview(footerBackgroundView, atIndex: 0)
-
         }
-
         
+        if let footerEffectView = BlurEffectView(radius: 3) {
+            footerEffectView.frame = footerView.bounds
+            footerEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            footerView.insertSubview(footerEffectView, atIndex: 0)
+            footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.85)
+        }
+        
+        let headerBackgroundView = HeaderBackgroundView()
+        headerBackgroundView.opaque = false
+        headerBackgroundView.layer.shouldRasterize = true
+        headerBackgroundView.frame = headerView.bounds
+        headerBackgroundView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        headerView.insertSubview(headerBackgroundView, atIndex: 0)
+        
+        let footerBackgroundView = FooterBackgroundView()
+        footerBackgroundView.opaque = false
+        footerBackgroundView.layer.shouldRasterize = true
+        footerBackgroundView.frame = footerView.bounds
+        footerBackgroundView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        footerView.insertSubview(footerBackgroundView, atIndex: 0)
+
         footerView.userInteractionEnabled = false
         
 //        sportIcon.backgroundColor = .blueColor()
@@ -207,11 +192,6 @@ class LineupDetailControllerView: UIView {
         editAction()
     }
     
-//    func dequeueCellForIndexPath(indexPath: NSIndexPath) -> PlayerCell {
-//        return dequeueReusableCellWithReuseIdentifier(PlayerCell.reuseIdentifier, forIndexPath: indexPath) as! PlayerCell
-//    }
-
-    
 }
 
 private class HeaderBackgroundView: UIView {
@@ -221,9 +201,7 @@ private class HeaderBackgroundView: UIView {
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [white, clear], [0, 1.0])
         let context = UIGraphicsGetCurrentContext()
         CGContextDrawLinearGradient(context, gradient, CGPointMake(bounds.width * 0.3, bounds.height * 0.25), CGPointMake(bounds.width * 0.28, bounds.height * 1.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
-//        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, bounds.height * 0.15), CGPointMake(0, bounds.height), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
     }
-
 }
 
 private class FooterBackgroundView: UIView {
@@ -233,7 +211,6 @@ private class FooterBackgroundView: UIView {
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [white, clear], [0, 1.0])
         let context = UIGraphicsGetCurrentContext()
         CGContextDrawLinearGradient(context, gradient, CGPointMake(bounds.width * 0.3, bounds.height * 0.75), CGPointMake(bounds.width * 0.28, bounds.height * 0.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
-//        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, bounds.height * 0.85), CGPointMake(0, 0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
     }
     
 }

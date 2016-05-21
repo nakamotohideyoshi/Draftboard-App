@@ -75,7 +75,7 @@
 		3EB4BD8B1C73D06400CD760B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */; };
 		3ECA5F551CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */; };
 		3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */; };
-		3ECA5F591CEFA36500DEDFC1 /* APCustomBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F581CEFA36500DEDFC1 /* APCustomBlurView.swift */; };
+		3ECA5F591CEFA36500DEDFC1 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
 		5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
 		5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CBFD01BDA8E7D006746B2 /* Team.swift */; };
@@ -271,7 +271,7 @@
 		3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerTableView.swift; sourceTree = "<group>"; };
 		3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerCell.swift; sourceTree = "<group>"; };
-		3ECA5F581CEFA36500DEDFC1 /* APCustomBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APCustomBlurView.swift; sourceTree = "<group>"; };
+		3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		3EE452051BFBBCE70085FB6D /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
 		5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardArrowButton.swift; sourceTree = "<group>"; };
@@ -639,7 +639,7 @@
 				5DE6C5971BD052FE005A4DC6 /* Spring.swift */,
 				3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */,
 				3E608D911C1B72FC0085569D /* Format.swift */,
-				3ECA5F581CEFA36500DEDFC1 /* APCustomBlurView.swift */,
+				3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -872,7 +872,7 @@
 				3C1F970E1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift in Sources */,
 				3E832BC51BE2CB3900084621 /* API.swift in Sources */,
 				3E272EAA1C2880390023B303 /* TeamNames.swift in Sources */,
-				3ECA5F591CEFA36500DEDFC1 /* APCustomBlurView.swift in Sources */,
+				3ECA5F591CEFA36500DEDFC1 /* BlurEffectView.swift in Sources */,
 				5D783ACC1BD97C54000D8494 /* Model.swift in Sources */,
 				3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */,
 				3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */,
