@@ -407,12 +407,15 @@ extension LineupListController: UICollectionViewDataSource, UICollectionViewDele
             subview.removeFromSuperview()
         }
         if let newView = lineupDetailControllers?[safe: indexPath.row]?.view {
+            cell.lineupView.userInteractionEnabled = true
             cell.lineupView.addSubview(newView)
             newView.topRancor.constraintEqualToRancor(cell.lineupView.topRancor).active = true
             newView.leftRancor.constraintEqualToRancor(cell.lineupView.leftRancor).active = true
             newView.rightRancor.constraintEqualToRancor(cell.lineupView.rightRancor).active = true
             newView.bottomRancor.constraintEqualToRancor(cell.lineupView.bottomRancor).active = true
             newView.translatesAutoresizingMaskIntoConstraints = false
+        } else {
+            cell.lineupView.userInteractionEnabled = false
         }
         /*
         cell.lineupView.editAction = {

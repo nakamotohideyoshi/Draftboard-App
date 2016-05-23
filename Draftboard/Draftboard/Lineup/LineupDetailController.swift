@@ -24,8 +24,22 @@ class LineupDetailController: DraftboardViewController {
         
         view.nameField.text = lineup?.name
         
+        
         view.tableView.delegate = self
         view.tableView.dataSource = self
+    }
+    
+    override func viewDidLoad() {
+        let view = downcastedView
+        lineup?.getDraftGroup().then { draftGroup -> Void in
+            let countdownView = CountdownView(date: draftGroup.start, size: 18.0, color: UIColor(0x46495e))
+//            countdownView.frame = view.liveInValue.bounds
+//            countdownView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            view.liveInValue.addSubview(countdownView)
+            countdownView.leftRancor.constraintEqualToRancor(view.liveInValue.leftRancor).active = true
+            countdownView.topRancor.constraintEqualToRancor(view.liveInValue.topRancor).active = true
+            
+        }
     }
     
     func update() {
@@ -73,15 +87,12 @@ extension LineupDetailController: UITableViewDataSource, UITableViewDelegate {
 //                cell.teamLabel
             }
         }
+        cell.borderView.hidden = (indexPath.row == (lineup?.playerIDs.count ?? 0) - 1)
         
         return cell
     }
     
     // UITableViewDelegate
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44
-    }
     
 }
 

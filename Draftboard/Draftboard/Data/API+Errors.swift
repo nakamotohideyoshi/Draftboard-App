@@ -28,6 +28,9 @@ extension API_Errors {
         if response.statusCode == 403 && string.lowercaseString.containsString("signature") {
             return APIError.InvalidToken(request)
         }
+        if response.statusCode == 403 && string.lowercaseString.containsString("credentials") {
+            return APIError.InvalidToken(request)
+        }
         return nil
     }
     

@@ -48,15 +48,22 @@ class AvatarImageView: UIView {
         player = nil
         let circlePath = "PlayerPhotos/player-background-\(size)"
         circleImageView.image = UIImage(named: circlePath)
-        for view in [circleImageView, playerImageView] {
-            self.addSubview(view)
+
+        self.addSubview(circleImageView)
+    
+        circleImageView.translatesAutoresizingMaskIntoConstraints = false
+        circleImageView.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+        circleImageView.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+        circleImageView.topRancor.constraintEqualToRancor(self.topRancor).active = true
+        circleImageView.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+            
+        self.addSubview(playerImageView)
         
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
-            view.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
-            view.topRancor.constraintEqualToRancor(self.topRancor).active = true
-            view.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-        }
+        playerImageView.translatesAutoresizingMaskIntoConstraints = false
+        playerImageView.leftRancor.constraintEqualToRancor(self.leftRancor, constant: 2.0).active = true
+        playerImageView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -2.0).active = true
+        playerImageView.topRancor.constraintEqualToRancor(self.topRancor, constant: 2.0).active = true
+        playerImageView.bottomRancor.constraintEqualToRancor(self.bottomRancor, constant: -2.0).active = true
     }
 
 }

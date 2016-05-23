@@ -23,7 +23,7 @@ class LineupPlayerTableView: UITableView {
         allowsSelection = false
         contentInset = UIEdgeInsetsMake(68, 0, 68, 0)
         contentOffset = CGPointMake(0, -68)
-        rowHeight = 44
+        rowHeight = 48
         scrollIndicatorInsets = contentInset
         separatorStyle = .None
 

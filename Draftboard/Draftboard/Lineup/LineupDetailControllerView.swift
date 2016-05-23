@@ -20,11 +20,20 @@ class LineupDetailControllerView: UIView {
     let editButton = UIButton()
     let flipButton = UIButton()
     let columnLabel = UILabel()
+    let headerBorderView = UIView()
+    private let headerShadowView = HeaderShadowView()
     
     // Footer stuff
+    let liveInLabel = UILabel()
+    let liveInValue = UIView()
+    let feesEntriesLabel = UILabel()
+    let feesEntriesValue = UILabel()
     let statBoxOne = UIView()
     let statBoxTwo = UIView()
     let statBoxThree = UIView()
+    let statBoxOneBorderView = UIView()
+    let footerBorderView = UIView()
+    private let footerShadowView = FooterShadowView()
     
 //    var lineup: Lineup? {
 //        didSet {
@@ -57,17 +66,25 @@ class LineupDetailControllerView: UIView {
     func addSubviews() {
         addSubview(tableView)
         addSubview(headerView)
+        addSubview(headerShadowView)
         addSubview(footerView)
+        addSubview(footerShadowView)
         
         headerView.addSubview(sportIcon)
         headerView.addSubview(nameField)
         headerView.addSubview(editButton)
         headerView.addSubview(flipButton)
         headerView.addSubview(columnLabel)
+        headerView.addSubview(headerBorderView)
         
         footerView.addSubview(statBoxOne)
         footerView.addSubview(statBoxTwo)
         footerView.addSubview(statBoxThree)
+        footerView.addSubview(footerBorderView)
+        
+        statBoxOne.addSubview(liveInLabel)
+        statBoxOne.addSubview(liveInValue)
+        statBoxOne.addSubview(statBoxOneBorderView)
     }
     
     func addConstraints() {
@@ -82,20 +99,30 @@ class LineupDetailControllerView: UIView {
             headerView.rightRancor.constraintEqualToRancor(rightRancor),
             headerView.heightRancor.constraintEqualToConstant(68.0),
             
+            headerShadowView.topRancor.constraintEqualToRancor(headerView.bottomRancor),
+            headerShadowView.leftRancor.constraintEqualToRancor(headerView.leftRancor),
+            headerShadowView.rightRancor.constraintEqualToRancor(headerView.rightRancor),
+            headerShadowView.heightRancor.constraintEqualToConstant(45.0),
+            
             footerView.leftRancor.constraintEqualToRancor(leftRancor),
             footerView.rightRancor.constraintEqualToRancor(rightRancor),
             footerView.bottomRancor.constraintEqualToRancor(bottomRancor),
             footerView.heightRancor.constraintEqualToConstant(68.0),
+
+            footerShadowView.leftRancor.constraintEqualToRancor(footerView.leftRancor),
+            footerShadowView.rightRancor.constraintEqualToRancor(footerView.rightRancor),
+            footerShadowView.bottomRancor.constraintEqualToRancor(footerView.topRancor),
+            footerShadowView.heightRancor.constraintEqualToConstant(45.0),
             
             // Header
-            sportIcon.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 15.0),
+            sportIcon.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 17.0),
             sportIcon.centerYRancor.constraintEqualToRancor(headerView.centerYRancor),
-            sportIcon.widthRancor.constraintEqualToConstant(12.0),
-            sportIcon.heightRancor.constraintEqualToConstant(12.0),
+            sportIcon.widthRancor.constraintEqualToConstant(13.0),
+            sportIcon.heightRancor.constraintEqualToConstant(13.0),
             
             nameField.topRancor.constraintEqualToRancor(headerView.topRancor),
             nameField.leftRancor.constraintEqualToRancor(headerView.leftRancor),
-            nameField.rightRancor.constraintEqualToRancor(editButton.leftRancor, constant: 10.0),
+            nameField.rightRancor.constraintEqualToRancor(editButton.leftRancor, constant: 15.0),
             nameField.bottomRancor.constraintEqualToRancor(headerView.bottomRancor),
             
             editButton.topRancor.constraintEqualToRancor(headerView.topRancor),
@@ -107,17 +134,58 @@ class LineupDetailControllerView: UIView {
             flipButton.bottomRancor.constraintEqualToRancor(headerView.bottomRancor),
             flipButton.rightRancor.constraintEqualToRancor(headerView.rightRancor),
             flipButton.widthRancor.constraintEqualToConstant(44.0),
+            
+            headerBorderView.leftRancor.constraintEqualToRancor(headerView.leftRancor),
+            headerBorderView.rightRancor.constraintEqualToRancor(headerView.rightRancor),
+            headerBorderView.bottomRancor.constraintEqualToRancor(headerView.bottomRancor),
+            headerBorderView.heightRancor.constraintEqualToConstant(1.0),
+            
+            // Footer
+            statBoxOne.topRancor.constraintEqualToRancor(footerView.topRancor),
+            statBoxOne.bottomRancor.constraintEqualToRancor(footerView.bottomRancor),
+            statBoxOne.leftRancor.constraintEqualToRancor(footerView.leftRancor),
+            statBoxOne.widthRancor.constraintEqualToRancor(footerView.widthRancor, multiplier: 0.5),
+            
+            statBoxOneBorderView.topRancor.constraintEqualToRancor(statBoxOne.topRancor),
+            statBoxOneBorderView.bottomRancor.constraintEqualToRancor(statBoxOne.bottomRancor),
+            statBoxOneBorderView.rightRancor.constraintEqualToRancor(statBoxOne.rightRancor),
+            statBoxOneBorderView.widthRancor.constraintEqualToConstant(1.0),
+            
+            liveInLabel.topRancor.constraintEqualToRancor(statBoxOne.topRancor, constant: 14.0),
+            liveInLabel.leftRancor.constraintEqualToRancor(statBoxOne.leftRancor, constant: 38.0),
+            
+            liveInValue.leftRancor.constraintEqualToRancor(liveInLabel.leftRancor),
+            liveInValue.topRancor.constraintEqualToRancor(liveInLabel.bottomRancor, constant: 0),
+            
+            footerBorderView.leftRancor.constraintEqualToRancor(footerView.leftRancor),
+            footerBorderView.rightRancor.constraintEqualToRancor(footerView.rightRancor),
+            footerBorderView.topRancor.constraintEqualToRancor(footerView.topRancor),
+            footerBorderView.heightRancor.constraintEqualToConstant(1.0),
+
         ]
         
         translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerShadowView.translatesAutoresizingMaskIntoConstraints = false
         footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerShadowView.translatesAutoresizingMaskIntoConstraints = false
         
+        // Header
         sportIcon.translatesAutoresizingMaskIntoConstraints = false
         nameField.translatesAutoresizingMaskIntoConstraints = false
         editButton.translatesAutoresizingMaskIntoConstraints = false
         flipButton.translatesAutoresizingMaskIntoConstraints = false
+        headerBorderView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Footer
+        statBoxOne.translatesAutoresizingMaskIntoConstraints = false
+        statBoxOneBorderView.translatesAutoresizingMaskIntoConstraints = false
+        liveInLabel.translatesAutoresizingMaskIntoConstraints = false
+        liveInValue.translatesAutoresizingMaskIntoConstraints = false
+        feesEntriesLabel.translatesAutoresizingMaskIntoConstraints = false
+        feesEntriesValue.translatesAutoresizingMaskIntoConstraints = false
+        footerBorderView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
@@ -126,8 +194,15 @@ class LineupDetailControllerView: UIView {
         tableView.backgroundColor = .whiteColor()
         headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
         footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
+        headerShadowView.hidden = true
+        footerShadowView.hidden = true
+        headerShadowView.opaque = false
+        footerShadowView.opaque = false
+        headerShadowView.userInteractionEnabled = false
+        footerShadowView.userInteractionEnabled = false
 
         if let headerEffectView = BlurEffectView(radius: 3) {
+            headerEffectView.layer.allowsEdgeAntialiasing = true
             headerEffectView.frame = headerView.bounds
             headerEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             headerView.insertSubview(headerEffectView, atIndex: 0)
@@ -168,22 +243,36 @@ class LineupDetailControllerView: UIView {
 //        tableView.contentOffset = CGPointMake(0, -68)
 //        tableView.scrollIndicatorInsets = tableView.contentInset
         
-        sportIcon.image = UIImage(named: "icon-basketball")
+        sportIcon.image = UIImage(named: "icon-baseball")
         sportIcon.tintColor = UIColor(0x9c9faf)
         
         editButton.setImage(UIImage(named: "icon-edit"), forState: .Normal)
-        editButton.imageEdgeInsets = UIEdgeInsetsMake(0, 7, 0, 0)
+        editButton.imageEdgeInsets = UIEdgeInsetsMake(0, 7, 4, 0)
         flipButton.setImage(UIImage(named: "icon-flip"), forState: .Normal)
-        flipButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 4)
+        flipButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 4, 4)
         
         nameField.delegate = self
         nameField.edgeInsets = UIEdgeInsetsMake(0, 44, 0, 0)
         nameField.font = UIFont.openSansRegular()?.fontWithSize(16.0)
-        nameField.textColor = .blackColor()
+        nameField.textColor = UIColor(0x46495e)
         nameField.clearButtonMode = .WhileEditing
         nameField.placeholder = "Lineup Name"
         nameField.returnKeyType = .Done
-        nameField.userInteractionEnabled = false
+//        nameField.userInteractionEnabled = false
+        headerView.userInteractionEnabled = false
+        
+        headerBorderView.backgroundColor = UIColor(0xebedf2)
+        footerBorderView.backgroundColor = UIColor(0xebedf2)
+        statBoxOneBorderView.backgroundColor = UIColor(0xebedf2)
+        
+        headerView.layer.allowsEdgeAntialiasing = true
+        headerBackgroundView.layer.allowsEdgeAntialiasing = true
+        
+        liveInLabel.font = UIFont(name: "OpenSans-Semibold", size: 8.0)
+        liveInLabel.textColor = UIColor(0x09c9faf)
+        liveInLabel.text = "Live In".uppercaseString
+
+//        liveInValue.date = 
         
         editButton.addTarget(self, action: .editButtonTapped, forControlEvents: .TouchUpInside)
     }
@@ -215,6 +304,25 @@ private class FooterBackgroundView: UIView {
     
 }
 
+private class HeaderShadowView: UIView {
+    override func drawRect(rect: CGRect) {
+        let black = UIColor(white: 0, alpha: 0.05).CGColor
+        let clear = UIColor(white: 0, alpha: 0).CGColor
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [black, clear], [0, 1.0])
+        let context = UIGraphicsGetCurrentContext()
+        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, 0), CGPointMake(0, bounds.height), [])
+    }
+}
+
+private class FooterShadowView: UIView {
+    override func drawRect(rect: CGRect) {
+        let black = UIColor(white: 0, alpha: 0.05).CGColor
+        let clear = UIColor(white: 0, alpha: 0).CGColor
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [black, clear], [0, 1.0])
+        let context = UIGraphicsGetCurrentContext()
+        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, bounds.height), CGPointMake(0, 0), [])
+    }
+}
 
 class TextField: UITextField {
     lazy var edgeInsets: UIEdgeInsets = UIEdgeInsetsZero

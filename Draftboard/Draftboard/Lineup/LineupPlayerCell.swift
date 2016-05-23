@@ -17,6 +17,7 @@ class LineupPlayerCell: UITableViewCell {
     let nameLabel = UILabel()
     let teamLabel = UILabel()
     let salaryLabel = UILabel()
+    let borderView = UIView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .Default, reuseIdentifier: LineupPlayerCell.reuseIdentifier)
@@ -39,6 +40,7 @@ class LineupPlayerCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(teamLabel)
         contentView.addSubview(salaryLabel)
+        contentView.addSubview(borderView)
     }
     
     func addConstraints() {
@@ -49,25 +51,34 @@ class LineupPlayerCell: UITableViewCell {
 //            contentView.bottomRancor.constraintEqualToRancor(bottomRancor),
             
             positionLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            positionLabel.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 10.0),
+            positionLabel.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 18.0),
+            positionLabel.widthRancor.constraintEqualToConstant(18.0),
 //            positionLabel.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
 //            positionLabel.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
             
             avatarImageView.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            avatarImageView.leftRancor.constraintEqualToRancor(positionLabel.rightRancor, constant: 10.0),
-            avatarImageView.widthRancor.constraintEqualToConstant(40.0),
-            avatarImageView.heightRancor.constraintEqualToConstant(40.0),
+            avatarImageView.leftRancor.constraintEqualToRancor(positionLabel.rightRancor, constant: 7.0),
+            avatarImageView.widthRancor.constraintEqualToConstant(38.0),
+            avatarImageView.heightRancor.constraintEqualToConstant(38.0),
             
 //            avatarImageView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
 //            avatarImageView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
             
             nameLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            nameLabel.leftRancor.constraintEqualToRancor(avatarImageView.rightRancor, constant: 10.0),
+            nameLabel.leftRancor.constraintEqualToRancor(avatarImageView.rightRancor, constant: 12.0),
 //            nameLabel.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: 40.0),
 //            nameLabel.heightRancor.constraintEqualToConstant(25.0),
             
             teamLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            teamLabel.leftRancor.constraintEqualToRancor(nameLabel.rightRancor, constant: 10.0),
+            teamLabel.leftRancor.constraintEqualToRancor(nameLabel.rightRancor),
+            
+            salaryLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
+            salaryLabel.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -18.0),
+            
+            borderView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 10.0),
+            borderView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -10.0),
+            borderView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor),
+            borderView.heightRancor.constraintEqualToConstant(1.0)
 
         ]
         
@@ -77,11 +88,27 @@ class LineupPlayerCell: UITableViewCell {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         teamLabel.translatesAutoresizingMaskIntoConstraints = false
+        salaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        borderView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
     func setupSubviews() {
+        positionLabel.font = UIFont(name: "OpenSans-Semibold", size: 9.0)
+        positionLabel.textColor = UIColor(0x9c9faf)
+
+        nameLabel.font = UIFont.openSansRegular()?.fontWithSize(13.0)
+        nameLabel.textColor = UIColor(0x46495e)
+        
+        teamLabel.font = UIFont.openSansRegular()?.fontWithSize(13.0)
+        teamLabel.textColor = UIColor(0x9c9faf)
+        
+        salaryLabel.font = UIFont.oswaldRegular()?.fontWithSize(13.0)
+        salaryLabel.textColor = UIColor(0x46495e)
+        
+        borderView.backgroundColor = UIColor(0xebedf2)
+        
 //        contentView.backgroundColor = .clearColor()
 //        lineupView.backgroundColor = .whiteColor()
 //        
@@ -96,12 +123,13 @@ class LineupPlayerCell: UITableViewCell {
 
     var player: Player? {
         didSet {
+            positionLabel.text = player?.position
             avatarImageView.player = player
             nameLabel.text = player?.shortName
             player?.getTeam().then { team in
-                self.teamLabel.text = team.alias
+                self.teamLabel.text = " - " + team.alias
             }
-//            salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
+            salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
         }
     }
 }

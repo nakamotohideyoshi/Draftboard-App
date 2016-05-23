@@ -19,8 +19,10 @@ public class BlurEffectView: UIVisualEffectView {
                 effect.respondsToSelector(Selector(blurRadiusKeyPath)) &&
                 effect.respondsToSelector(Selector(scaleKeyPath))
         else { return nil }
+        
         effect.setValue(radius, forKeyPath: blurRadiusKeyPath)
         effect.setValue(1.0, forKeyPath: scaleKeyPath)
+        
         self.effect = effect
     }
     

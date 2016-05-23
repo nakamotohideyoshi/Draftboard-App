@@ -87,7 +87,7 @@ class LineupCardCell: UICollectionViewCell {
     
     func setupSubviews() {
         contentView.backgroundColor = .clearColor()
-        lineupView.backgroundColor = .whiteColor()
+//        lineupView.backgroundColor = .clearColor()
         
         shadowView.opaque = false
         shadowView.layer.rasterizationScale = UIScreen.mainScreen().scale
