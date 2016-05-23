@@ -758,7 +758,7 @@
 				TargetAttributes = {
 					3E7860BA1B9FB0E7004013AB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = GWWYBB2K3Z;
+						DevelopmentTeam = Z3T2U2R53B;
 					};
 				};
 			};
@@ -1101,7 +1101,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ansonschall.draftboard;
+				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.draftboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
@@ -1126,7 +1126,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ansonschall.draftboard;
+				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.draftboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
