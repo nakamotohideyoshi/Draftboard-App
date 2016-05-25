@@ -12,21 +12,10 @@ class LineupCardCell: UICollectionViewCell {
     
     static let reuseIdentifier = "LineupCardCell"
     
-    var lineupView = UIView()
-    let createView = LineupCardCreateView()
     let shadowView = LineupCardShadowView()
-    
-    /*
-    var lineup: Lineup? {
-        didSet {
-//            lineupView.lineup = lineup
-            lineupView.hidden = (lineup == nil)
-            createView.hidden = (lineup != nil)
-        }
-    }
- */
-    
-//    var editAction: () -> Void { return lineupView.editAction }
+    let createView = LineupCardCreateView()
+    let lineupView = UIView()
+    var lineupDetailView: LineupDetailView? { didSet { didSetLineupView() } }
     
     init() {
         super.init(frame: CGRectZero)
@@ -44,7 +33,7 @@ class LineupCardCell: UICollectionViewCell {
     func setup() {
         addSubviews()
         addConstraints()
-        setupSubviews()
+        otherSetup()
     }
     
     func addSubviews() {
@@ -60,44 +49,59 @@ class LineupCardCell: UICollectionViewCell {
             contentView.rightRancor.constraintEqualToRancor(rightRancor),
             contentView.bottomRancor.constraintEqualToRancor(bottomRancor),
             
-            lineupView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
-            lineupView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
-            lineupView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
-            lineupView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
+            shadowView.topRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -5.0),
+            shadowView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: -40.0),
+            shadowView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: 40.0),
+            shadowView.heightRancor.constraintEqualToConstant(25.0),
             
             createView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
             createView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
             createView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
             createView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
 
-            shadowView.topRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -5.0),
-            shadowView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: -40.0),
-            shadowView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: 40.0),
-            shadowView.heightRancor.constraintEqualToConstant(25.0),
+            lineupView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
+            lineupView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
+            lineupView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
+            lineupView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
         ]
         
         translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        lineupView.translatesAutoresizingMaskIntoConstraints = false
-        createView.translatesAutoresizingMaskIntoConstraints = false
         shadowView.translatesAutoresizingMaskIntoConstraints = false
+        createView.translatesAutoresizingMaskIntoConstraints = false
+        lineupView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
-    func setupSubviews() {
+    func otherSetup() {
         contentView.backgroundColor = .clearColor()
-//        lineupView.backgroundColor = .clearColor()
         
         shadowView.opaque = false
         shadowView.layer.rasterizationScale = UIScreen.mainScreen().scale
         shadowView.layer.shouldRasterize = true
         
-        lineupView.layer.allowsEdgeAntialiasing = true
-        createView.layer.allowsEdgeAntialiasing = true
         shadowView.layer.allowsEdgeAntialiasing = true
+        createView.layer.allowsEdgeAntialiasing = true
+        lineupView.layer.allowsEdgeAntialiasing = true
     }
     
+    func didSetLineupView() {
+        lineupView.hidden = (lineupDetailView == nil)
+        createView.hidden = (lineupDetailView != nil)
+        if let lineupDetailView = lineupDetailView {
+            for subview in lineupView.subviews {
+                subview.removeFromSuperview()
+            }
+            lineupView.addSubview(lineupView)
+            NSLayoutConstraint.activateConstraints([
+                lineupDetailView.topRancor.constraintEqualToRancor(lineupView.topRancor),
+                lineupDetailView.leftRancor.constraintEqualToRancor(lineupView.leftRancor),
+                lineupDetailView.rightRancor.constraintEqualToRancor(lineupView.rightRancor),
+                lineupDetailView.bottomRancor.constraintEqualToRancor(lineupView.bottomRancor),
+            ])
+        }
+    }
     
     func fade(amount: CGFloat) {
         alpha = 1.0 - (amount * 0.5)
@@ -174,8 +178,6 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
     
     init() {
         super.init(frame: CGRectZero)
-        addSubviews()
-        addConstraints()
         setup()
     }
     
@@ -185,6 +187,12 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
     
     required convenience init?(coder: NSCoder) {
         self.init()
+    }
+    
+    func setup() {
+        addSubviews()
+        addConstraints()
+        otherSetup()
     }
     
     func addSubviews() {
@@ -210,7 +218,7 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
-    func setup() {
+    func otherSetup() {
         // Label
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.maximumLineHeight = 54.0

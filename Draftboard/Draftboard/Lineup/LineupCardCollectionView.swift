@@ -46,7 +46,7 @@ class LineupCardCollectionView: UICollectionView {
         registerClass(LineupCardCell.self, forCellWithReuseIdentifier: LineupCardCell.reuseIdentifier)
     }
     
-    func dequeueCellForIndexPath(indexPath: NSIndexPath) -> LineupCardCell {
+    func dequeueReusableCellForIndexPath(indexPath: NSIndexPath) -> LineupCardCell {
         return dequeueReusableCellWithReuseIdentifier(LineupCardCell.reuseIdentifier, forIndexPath: indexPath) as! LineupCardCell
     }
     

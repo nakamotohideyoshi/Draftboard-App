@@ -9,9 +9,9 @@
 import UIKit
 import PromiseKit
 
-class LineupListController: DraftboardViewController, UIActionSheetDelegate {
+class LineupListViewController: DraftboardViewController, UIActionSheetDelegate {
     
-    var downcastedView: LineupListControllerView { return view as! LineupListControllerView }
+    var lineupListView: LineupListView { return view as! LineupListView }
     var myTitle: String = "Lineups"
     var draftGroupChoices: [String: [NSDictionary]]?
     var sportChoices: [NSDictionary]?
@@ -20,18 +20,17 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     var selectedSport: Sport?
     
 //    var lineups: [Lineup]? { didSet { update() } }
-    var lineupDetailControllers: [LineupDetailController]? { didSet { update() } }
+    var lineupDetailViewControllers: [LineupDetailViewController]? { didSet { update() } }
     
     override func loadView() {
-        self.view = LineupListControllerView()
-        let view = downcastedView
+        view = LineupListView()
         
-        view.collectionView.delegate = self
-        view.collectionView.dataSource = self
+        lineupListView.cardCollectionView.delegate = self
+        lineupListView.cardCollectionView.dataSource = self
         
         // Hide pagination to start
-        view.paginationHeight.constant = 20.0
-        view.paginationView.hidden = true
+        lineupListView.paginationHeight.constant = 20.0
+        lineupListView.paginationView.hidden = true
         
         update()
     }
@@ -41,8 +40,8 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
         Data.upcomingLineups.get().then { lineups in
             return lineups.sortedByDate()
         }.then { sortedLineups -> Void in
-            if self.lineupDetailControllers?.count != sortedLineups.count {
-                self.lineupDetailControllers = sortedLineups.map { LineupDetailController(lineup: $0) }
+            if self.lineupDetailViewControllers?.count != sortedLineups.count {
+                self.lineupDetailViewControllers = sortedLineups.map { LineupDetailViewController(lineup: $0) }
             }
         }
     }
@@ -51,13 +50,12 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
     }
     
     func update() {
-        let view = downcastedView
-        view.loaderView.hidden = (lineupDetailControllers != nil)
-        view.loaderView.resumeSpinning()
-        view.collectionView.hidden = (lineupDetailControllers == nil)
-        view.collectionView.reloadData()
-        view.collectionView.setContentOffset(CGPointMake(1, 0), animated: false)
-        view.collectionView.setContentOffset(CGPointMake(0, 0), animated: true)
+        lineupListView.loaderView.hidden = (lineupDetailViewControllers != nil)
+        lineupListView.loaderView.resumeSpinning()
+        lineupListView.cardCollectionView.hidden = (lineupDetailViewControllers == nil)
+        lineupListView.cardCollectionView.reloadData()
+        lineupListView.cardCollectionView.setContentOffset(CGPointMake(1, 0), animated: false)
+        lineupListView.cardCollectionView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     // MARK: - Modals
@@ -391,22 +389,26 @@ class LineupListController: DraftboardViewController, UIActionSheetDelegate {
 
 // MARK: -
 
-extension LineupListController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension LineupListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     // UICollectionViewDataSource
     
     func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // At least one
-        return max(1, lineupDetailControllers?.count ?? 0)
+        return max(1, lineupDetailViewControllers?.count ?? 0)
     }
     
     func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = downcastedView.collectionView.dequeueCellForIndexPath(indexPath)
+        let cell = lineupListView.cardCollectionView.dequeueReusableCellForIndexPath(indexPath)
+        let vc = lineupDetailViewControllers?[safe: indexPath.row]
+        cell.lineupDetailView = vc?.lineupDetailView
+        
+        /*
         for subview in cell.lineupView.subviews {
 //            subview.removeConstraints(subview.constraints)
             subview.removeFromSuperview()
         }
-        if let newView = lineupDetailControllers?[safe: indexPath.row]?.view {
+        if let newView = lineupDetailViewControllers?[safe: indexPath.row]?.view {
             cell.lineupView.userInteractionEnabled = true
             cell.lineupView.addSubview(newView)
             newView.topRancor.constraintEqualToRancor(cell.lineupView.topRancor).active = true
@@ -417,13 +419,15 @@ extension LineupListController: UICollectionViewDataSource, UICollectionViewDele
         } else {
             cell.lineupView.userInteractionEnabled = false
         }
+         */
+        
         /*
         cell.lineupView.editAction = {
 //            print(cell.lineupView.convertRect(cell.bounds, toView: self.view))
 //            cell.hidden = true
             self.myTitle = "Edit Lineup"
             self.navController?.updateTitlebar()
-            let fart = LineupDetailControllerView()
+            let fart = LineupDetailView()
             fart.tableView.contentOffset = cell.lineupView.tableView.contentOffset
             self.view.addSubview(fart)
             fart.translatesAutoresizingMaskIntoConstraints = false
@@ -537,14 +541,14 @@ extension LineupListController: UICollectionViewDataSource, UICollectionViewDele
     // UICollectionViewDelegateFlowLayout
     
     func collectionView(_: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return downcastedView.collectionView.cardSize
+        return lineupListView.cardCollectionView.cardSize
     }
     
 }
 
-extension LineupListController: UIScrollViewDelegate {
+extension LineupListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_: UIScrollView) {
-        downcastedView.collectionView.updateCellTransforms()
+        lineupListView.cardCollectionView.updateCellTransforms()
     }
 }
  
@@ -557,5 +561,5 @@ private extension Array {
 }
 
 private extension Selector {
-//    static let presentDraftGroupPrompt = #selector(LineupListController.presentDraftGroupPrompt)
+//    static let presentDraftGroupPrompt = #selector(LineupListViewController.presentDraftGroupPrompt)
 }

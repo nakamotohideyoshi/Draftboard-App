@@ -8,10 +8,10 @@
 
 import UIKit
 
-class LineupDetailController: DraftboardViewController {
+class LineupDetailViewController: DraftboardViewController {
     
-    var downcastedView: LineupDetailControllerView { return view as! LineupDetailControllerView }
     var lineup: Lineup?
+    var lineupDetailView: LineupDetailView { return view as! LineupDetailView }
     
     convenience init(lineup: Lineup) {
         self.init()
@@ -19,18 +19,15 @@ class LineupDetailController: DraftboardViewController {
     }
     
     override func loadView() {
-        self.view = LineupDetailControllerView()
-        let view = downcastedView
-        
-        view.nameField.text = lineup?.name
-        
-        
-        view.tableView.delegate = self
-        view.tableView.dataSource = self
+        self.view = LineupDetailView()
     }
     
     override func viewDidLoad() {
-        let view = downcastedView
+        let view = lineupDetailView
+        view.nameField.text = lineup?.name
+        view.tableView.delegate = self
+        view.tableView.dataSource = self
+        
         lineup?.getDraftGroup().then { draftGroup -> Void in
             let countdownView = CountdownView(date: draftGroup.start, size: 18.0, color: UIColor(0x46495e))
 //            countdownView.frame = view.liveInValue.bounds
@@ -38,7 +35,6 @@ class LineupDetailController: DraftboardViewController {
             view.liveInValue.addSubview(countdownView)
             countdownView.leftRancor.constraintEqualToRancor(view.liveInValue.leftRancor).active = true
             countdownView.topRancor.constraintEqualToRancor(view.liveInValue.topRancor).active = true
-            
         }
     }
     
@@ -54,7 +50,7 @@ class LineupDetailController: DraftboardViewController {
 
 // MARK: -
 
-extension LineupDetailController: UITableViewDataSource, UITableViewDelegate {
+extension LineupDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     // UITableViewDataSource
     
@@ -64,7 +60,7 @@ extension LineupDetailController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = downcastedView.tableView.dequeueCellForIndexPath(indexPath)
+        let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
         
 //        if let lineup = lineup {
 //            let playerID = lineup.playerIDs[indexPath.row]
