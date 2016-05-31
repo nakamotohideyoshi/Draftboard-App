@@ -7,12 +7,35 @@
 //
 
 import UIKit
+import PromiseKit
+
+enum ModalError: CancellableErrorType {
+    case Cancelled
+    
+    var cancelled: Bool {
+        switch self {
+            case .Cancelled: return true
+        }
+    }
+}
 
 protocol DraftboardModalChoiceDelegate {
     func didSelectModalChoice(idx: Int)
 }
 
-class DraftboardModalChoiceController: DraftboardModalViewController {
+class Choice<T> {
+    let title: String
+    let subtitle: String?
+    let value: T
+    
+    init(title: String, subtitle: String?, value: T) {
+        self.title = title
+        self.subtitle = subtitle
+        self.value = value
+    }
+}
+
+class DraftboardModalChoiceController<T>: DraftboardModalViewController {
     var delegate: DraftboardModalChoiceDelegate?
     var scrollView: UIScrollView!
     var titleLabel: DraftboardLabel!
@@ -20,10 +43,12 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
     var titleText: String!
     var loaderView: LoaderView!
     
-    var choiceData: [NSDictionary]?
+    var choiceData: [Choice<T>]? { didSet { reloadChoiceViews() } }
     var choiceViews: [DraftboardModalItemView] = []
     
-    init(title: String, choices: [NSDictionary]?) {
+    let (pendingPromise, fulfill, reject) = Promise<T>.pendingPromise()
+    
+    init(title: String, choices: [Choice<T>]?) {
         super.init(nibName: nil, bundle: nil)
         choiceData = choices
         titleText = title
@@ -75,7 +100,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         closeButton.heightRancor.constraintEqualToConstant(56).active = true
         closeButton.iconImageView.image = UIImage(named: "titlebar-icon-close")
         
-        closeButton.addTarget(self, action: .didTapCancel, forControlEvents: .TouchUpInside)
+        closeButton.addTarget(self, action: #selector(DraftboardModalChoiceController.didTapCancel(_:)), forControlEvents: .TouchUpInside)
         
         addLoaderView()
         showLoader(false)
@@ -96,12 +121,20 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         scrollView.hidden = false
     }
     
+    func promise() -> Promise<T> {
+        RootViewController.sharedInstance.pushModalViewController(self)
+        return pendingPromise
+    }
+    
     func didTapCancel(sender: DraftboardButton) {
-        RootViewController.sharedInstance.didCancelModal()
+        RootViewController.sharedInstance.popModalViewController()
+        reject(ModalError.Cancelled)
+//        RootViewController.sharedInstance.didCancelModal()
     }
     
     func didTapChoice(sender: DraftboardModalItemView) {
-        RootViewController.sharedInstance.didSelectModalChoice(sender.index)
+        fulfill(choiceData![sender.index].value)
+//        RootViewController.sharedInstance.didSelectModalChoice(sender.index)
     }
     
     func reloadChoiceViews() {
@@ -122,8 +155,10 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
         for (i, data) in data.enumerate() {
             
             // Choice view
-            let title = data["title"] as? String ?? ""
-            let subtitle = data["subtitle"] as? String ?? ""
+//            let title = data["title"] as? String ?? ""
+            let title = data.title
+//            let subtitle = data["subtitle"] as? String ?? ""
+            let subtitle = data.subtitle ?? ""
             let choiceView = DraftboardModalItemView(title: title, subtitle: subtitle)
             
             // Add choice to scroll view
@@ -142,7 +177,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
             }
             
             // Add action
-            choiceView.addTarget(self, action: .didTapChoice, forControlEvents: .TouchUpInside)
+            choiceView.addTarget(self, action: #selector(DraftboardModalChoiceController.didTapChoice(_:)), forControlEvents: .TouchUpInside)
             choiceView.index = i
             
             // Store last choice
@@ -182,7 +217,7 @@ class DraftboardModalChoiceController: DraftboardModalViewController {
     }
 }
 
-private extension Selector {
-    static let didTapCancel = #selector(DraftboardModalChoiceController.didTapCancel(_:))
-    static let didTapChoice = #selector(DraftboardModalChoiceController.didTapChoice(_:))
-}
+//private extension Selector {
+//    static let didTapCancel = #selector(DraftboardModalChoiceController<T>.didTapCancel(_:))
+//    static let didTapChoice = #selector(DraftboardModalChoiceController<T>.didTapChoice(_:))
+//}

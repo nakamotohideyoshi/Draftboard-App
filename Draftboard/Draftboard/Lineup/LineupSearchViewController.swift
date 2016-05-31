@@ -15,7 +15,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
     @IBOutlet weak var searchBar: UISearchBar!
     
     let searchCellIdentifier = "searchCellIdentifier"
-    var draftGroup: DraftGroup!
+    var draftGroup: DraftGroupWithPlayers!
     var players: [Player]!
     var filterBy: [String] = []
     var playerSelectedAction:((Player) -> Void)?
@@ -114,7 +114,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
         }
     }
     
-    func gotDraftGroup(draftGroup: DraftGroup) {
+    func gotDraftGroup(draftGroup: DraftGroupWithPlayers) {
         self.draftGroup = draftGroup
         
         self.updatePlayers()
@@ -207,7 +207,7 @@ class LineupSearchViewController: DraftboardViewController, UITableViewDataSourc
 //        }
     }
     
-    func addInjuryInfo(draftGroup: DraftGroup, injuries: [Int: String]) {
+    func addInjuryInfo(draftGroup: DraftGroupWithPlayers, injuries: [Int: String]) {
         for player in draftGroup.players {
             if let injury = injuries[player.id] {
 //                player.injury = injury

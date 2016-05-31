@@ -28,7 +28,7 @@ class ContestConfirmationModal: DraftboardModalViewController {
         confirmIcon.tintColor = .whiteColor()
         
         closeButton = createCloseButton()
-        closeButton.addTarget(self, action: .didTapCancel, forControlEvents: .TouchUpInside)
+//        closeButton.addTarget(self, action: .didTapCancel, forControlEvents: .TouchUpInside)
     }
     
     func createCloseButton() -> DraftboardButton {
@@ -97,6 +97,6 @@ class ContestConfirmationModal: DraftboardModalViewController {
     }
 }
 
-private extension Selector {
-    static let didTapCancel = #selector(DraftboardModalChoiceController.didTapCancel(_:))
-}
+//private extension Selector {
+//    static let didTapCancel = #selector(DraftboardModalChoiceController.didTapCancel(_:))
+//}

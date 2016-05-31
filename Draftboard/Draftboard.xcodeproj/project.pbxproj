@@ -63,7 +63,7 @@
 		3E73AADA1C850D89000E7D99 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73AAD91C850D89000E7D99 /* CountdownView.swift */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
-		3E8018AE1CB5A18300403528 /* LineupListControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8018AD1CB5A18300403528 /* LineupListControllerView.swift */; };
+		3E8018AE1CB5A18300403528 /* LineupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8018AD1CB5A18300403528 /* LineupListView.swift */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
 		3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
 		3E9DBAB01CB878860098BB77 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */; };
@@ -76,6 +76,7 @@
 		3ECA5F551CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */; };
 		3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */; };
 		3ECA5F591CEFA36500DEDFC1 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */; };
+		3ECA5F821CF75A2300DEDFC1 /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F811CF75A2300DEDFC1 /* DerivedData.swift */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
 		5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
 		5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CBFD01BDA8E7D006746B2 /* Team.swift */; };
@@ -115,7 +116,7 @@
 		5D6237C31BB61F7B0007E62A /* LineupListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B61BB61F7B0007E62A /* LineupListController.xib */; };
 		5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */; };
 		5D6237C61BB61F7B0007E62A /* LineupEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */; };
-		5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237BB1BB61F7B0007E62A /* LineupListController.swift */; };
+		5D6237C81BB61F7B0007E62A /* LineupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237BB1BB61F7B0007E62A /* LineupListViewController.swift */; };
 		5D6237CB1BB61F9B0007E62A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860E01B9FB195004013AB /* AppDelegate.swift */; };
 		5D6237CC1BB61F9B0007E62A /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4412171BAA163700A86111 /* Closures.swift */; };
 		5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */; };
@@ -258,7 +259,7 @@
 		3E7860CA1B9FB0E7004013AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3E7860E01B9FB195004013AB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E7860E41B9FB1CF004013AB /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
-		3E8018AD1CB5A18300403528 /* LineupListControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListControllerView.swift; sourceTree = "<group>"; };
+		3E8018AD1CB5A18300403528 /* LineupListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListView.swift; sourceTree = "<group>"; };
 		3E80C2A91BC5F51C0031CE3F /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		3E832BC41BE2CB3900084621 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3E96695D1BED5C8B005179E0 /* Lineup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lineup.swift; sourceTree = "<group>"; };
@@ -272,6 +273,7 @@
 		3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerTableView.swift; sourceTree = "<group>"; };
 		3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerCell.swift; sourceTree = "<group>"; };
 		3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
+		3ECA5F811CF75A2300DEDFC1 /* DerivedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedData.swift; sourceTree = "<group>"; };
 		3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		3EE452051BFBBCE70085FB6D /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
 		5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardArrowButton.swift; sourceTree = "<group>"; };
@@ -322,7 +324,7 @@
 		5D6237B61BB61F7B0007E62A /* LineupListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupListController.xib; sourceTree = "<group>"; };
 		5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEditViewController.swift; sourceTree = "<group>"; };
 		5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineupEditViewController.xib; sourceTree = "<group>"; };
-		5D6237BB1BB61F7B0007E62A /* LineupListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListController.swift; sourceTree = "<group>"; };
+		5D6237BB1BB61F7B0007E62A /* LineupListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListViewController.swift; sourceTree = "<group>"; };
 		5D63D0A81BD6B711000215DF /* LineupSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupSearchViewController.swift; sourceTree = "<group>"; };
 		5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalNavController.swift; sourceTree = "<group>"; };
 		5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalItemView.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				3E192C341CE515C90021A31D /* Data+Old.swift */,
 				3E192C2E1CE40DBA0021A31D /* NSTimeInterval+Data.swift */,
 				3E192C301CE40E630021A31D /* Cache.swift */,
+				3ECA5F811CF75A2300DEDFC1 /* DerivedData.swift */,
 				3E272EA91C2880390023B303 /* TeamNames.swift */,
 				3E192C361CE55BE50021A31D /* Pusher.swift */,
 			);
@@ -598,8 +601,8 @@
 		5DC589411BA1DBDB00B9D134 /* Lineup */ = {
 			isa = PBXGroup;
 			children = (
-				5D6237BB1BB61F7B0007E62A /* LineupListController.swift */,
-				3E8018AD1CB5A18300403528 /* LineupListControllerView.swift */,
+				5D6237BB1BB61F7B0007E62A /* LineupListViewController.swift */,
+				3E8018AD1CB5A18300403528 /* LineupListView.swift */,
 				3E192C1E1CCADE760021A31D /* LineupCardCollectionView.swift */,
 				3E192C201CCAE35C0021A31D /* LineupCardCell.swift */,
 				5D6237B61BB61F7B0007E62A /* LineupListController.xib */,
@@ -876,6 +879,7 @@
 				5D783ACC1BD97C54000D8494 /* Model.swift in Sources */,
 				3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */,
 				3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */,
+				3ECA5F821CF75A2300DEDFC1 /* DerivedData.swift in Sources */,
 				5DF49CF01C1BA7DC00B371CE /* NotificationViewController.swift in Sources */,
 				5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */,
 				3E192C351CE515C90021A31D /* Data+Old.swift in Sources */,
@@ -963,7 +967,7 @@
 				3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */,
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
 				3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */,
-				5D6237C81BB61F7B0007E62A /* LineupListController.swift in Sources */,
+				5D6237C81BB61F7B0007E62A /* LineupListViewController.swift in Sources */,
 				5DAC07921C21DCC10002B97B /* DraftboardDetailCell.swift in Sources */,
 				5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */,
 				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
@@ -981,7 +985,7 @@
 				3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */,
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
 				5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */,
-				3E8018AE1CB5A18300403528 /* LineupListControllerView.swift in Sources */,
+				3E8018AE1CB5A18300403528 /* LineupListView.swift in Sources */,
 				5D6237CC1BB61F9B0007E62A /* Closures.swift in Sources */,
 				3CDC73631BF1499E00DDF60E /* ContestPlayerStandingCell.swift in Sources */,
 			);

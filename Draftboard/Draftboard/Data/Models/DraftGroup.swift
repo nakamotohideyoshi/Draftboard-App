@@ -8,16 +8,18 @@
 
 import Foundation
 
-class ShortDraftGroup {
+class DraftGroup {
     
     let id: Int
     let sportName: String
     let start: NSDate
+    let numGames: Int
     
-    init(id: Int, sportName: String, start: NSDate) {
+    init(id: Int, sportName: String, start: NSDate, numGames: Int) {
         self.id = id
         self.sportName = sportName
         self.start = start
+        self.numGames = numGames
     }
     
     convenience init(JSON: NSDictionary) throws {
@@ -25,7 +27,8 @@ class ShortDraftGroup {
             let id: Int = try JSON.get("pk")
             let sportName: String = try JSON.get("sport")
             let start: NSDate = try API.dateFromString(try JSON.get("start"))
-            self.init(id: id, sportName: sportName, start: start)
+            let numGames: Int = try JSON.get("num_games")
+            self.init(id: id, sportName: sportName, start: start, numGames: numGames)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
@@ -33,7 +36,7 @@ class ShortDraftGroup {
 
 }
 
-class DraftGroup {
+class DraftGroupWithPlayers {
     let id: Int
     let sportName: String
     let start: NSDate
@@ -59,6 +62,21 @@ class DraftGroup {
         }
     }
     
+}
+
+class DraftGroupWithContestCount: DraftGroup {
+    let contestCount: Int
+    
+    init(id: Int, sportName: String, start: NSDate, numGames: Int, contestCount: Int) {
+        self.contestCount = contestCount
+        super.init(id: id, sportName: sportName, start: start, numGames: numGames)
+    }
+}
+
+extension DraftGroup {
+    func withContestCount(contestCount: Int) -> DraftGroupWithContestCount {
+        return DraftGroupWithContestCount(id: id, sportName: sportName, start: start, numGames: numGames, contestCount: contestCount)
+    }
 }
 /*
     convenience init?(upcomingData data: NSDictionary) {

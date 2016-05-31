@@ -24,24 +24,24 @@ extension API_Endpoints {
         }
     }
     
-    class func draftGroupUpcoming() -> Promise<[ShortDraftGroup]> {
+    class func draftGroupUpcoming() -> Promise<[DraftGroup]> {
         let path = "api/draft-group/upcoming/"
-        return API.get(path).then { (json: [NSDictionary]) -> [ShortDraftGroup] in
-            return try json.map { try ShortDraftGroup(JSON: $0) }
+        return API.get(path).then { (json: [NSDictionary]) -> [DraftGroup] in
+            return try json.map { try DraftGroup(JSON: $0) }
         }
     }
     
-    class func draftGroup(id id: Int) -> Promise<DraftGroup> {
+    class func draftGroup(id id: Int) -> Promise<DraftGroupWithPlayers> {
         let path = "api/draft-group/\(id)/"
-        return API.get(path).then { (json: NSDictionary) -> DraftGroup in
-            return try DraftGroup(JSON: json)
+        return API.get(path).then { (json: NSDictionary) -> DraftGroupWithPlayers in
+            return try DraftGroupWithPlayers(JSON: json)
         }
     }
     
     class func contestLobby() -> Promise<[Contest]> {
         let path = "api/contest/lobby/"
         return API.get(path).then { (json: [NSDictionary]) -> [Contest] in
-            return try json.map { try Contest(throwableData: $0) }
+            return try json.map { try Contest(json: $0) }
         }
     }
     

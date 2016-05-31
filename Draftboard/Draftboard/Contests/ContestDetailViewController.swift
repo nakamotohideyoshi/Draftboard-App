@@ -39,7 +39,7 @@ class ContestDetailViewController: DraftboardViewController {
     
     let detailCellIdentifier = "contest_detail_cell"
     
-    var contest: Contest = Contest()
+    var contest: Contest!
     var lineupChoice: Lineup?
     var eligibleLineups: [Lineup]?
     var contestEntered = false
@@ -58,15 +58,18 @@ class ContestDetailViewController: DraftboardViewController {
         super.viewDidLoad()
         
         // Retrieve data
+        /*
         API.prizeStructure(id: contest.prizeStructure).then { payout -> Void in
             self.tableData["payout"] = payout
             self.tableView.reloadData()
         }
+     */
         
         // Create UI
         createSegmentedControl()
         createDraftButton()
         
+        /*
         // Update start date
         let df = NSDateFormatter()
         df.dateFormat = "E, MMMM dd, h:mm a"
@@ -127,6 +130,7 @@ class ContestDetailViewController: DraftboardViewController {
         } else {
             draftButton.addTarget(self, action: .handleButtonTap, forControlEvents: .TouchUpInside)
         }
+     */
     }
     
     func createDraftButton() {

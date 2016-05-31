@@ -1,5 +1,5 @@
 //
-//  LineupsListController.swift
+//  LineupListViewController.swift
 //  Draftboard
 //
 //  Created by Anson Schall on 9/8/15.
@@ -12,19 +12,19 @@ import PromiseKit
 class LineupListViewController: DraftboardViewController, UIActionSheetDelegate {
     
     var lineupListView: LineupListView { return view as! LineupListView }
-    var myTitle: String = "Lineups"
     var draftGroupChoices: [String: [NSDictionary]]?
     var sportChoices: [NSDictionary]?
     
     var selectedDraftGroup: DraftGroup?
     var selectedSport: Sport?
     
-//    var lineups: [Lineup]? { didSet { update() } }
     var lineupDetailViewControllers: [LineupDetailViewController]? { didSet { update() } }
     
     override func loadView() {
         view = LineupListView()
-        
+    }
+    
+    override func viewDidLoad() {
         lineupListView.cardCollectionView.delegate = self
         lineupListView.cardCollectionView.dataSource = self
         
@@ -58,22 +58,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         lineupListView.cardCollectionView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
-    // MARK: - Modals
     /*
-    override func didSelectModalChoice(index: Int) {
-        if (selectedSport == nil) {
-            didSelectSport(index)
-        }
-        else if (selectedSport != nil && selectedDraftGroup == nil) {
-            didSelectDraftGroup(index)
-        }
-    }
-    
-    override func didCancelModal() {
-        RootViewController.sharedInstance.popModalViewController()
-        selectedSport = nil
-        selectedDraftGroup = nil
-    }
     
     // MARK: - Data
     
@@ -134,123 +119,39 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         }
     }
     
-    func collateDraftGroups(draftGroups: [DraftGroup], contests: [Contest]) {
-        // https://gist.github.com/zachwood/3a048570e904e31143d7
-        
-        if self.sportChoices != nil && self.draftGroupChoices != nil {
-            return
-        }
-        
-        // Organize data
-        var sportNames = [String]()
-        for draftGroup in draftGroups {
-            let s = draftGroup.sport.name
-            if !sportNames.contains(s) {
-                sportNames.append(s)
-            }
-        }
-        
-        var sportContestCounts = [String: Int]()
-        var draftGroupContestCounts = [Int: Int]()
-        for contest in contests {
-            if contest.status == "completed" {
-                continue
-            }
-            let s = contest.sport.name
-            let sportCount = sportContestCounts[s] ?? 0
-            sportContestCounts[s] = sportCount + 1
-            let d = contest.draftGroup.id
-            let draftGroupCount = draftGroupContestCounts[d] ?? 0
-            draftGroupContestCounts[d] = draftGroupCount + 1
-        }
-        
-        // Build choices
-        var sportChoices = [NSDictionary]()
-        for sportName in sportNames {
-            let contestCount = sportContestCounts[sportName] ?? 0
-            let contestNoun = (contestCount == 1) ? "Contest" : "Contests"
-            let choice = [
-                "title": sportName,
-                "subtitle": "\(contestCount) \(contestNoun)",
-                "object": Sport(name: sportName)!
-            ]
-            sportChoices.append(choice)
-        }
-        
-        var draftGroupChoices = [String: [NSDictionary]]()
-        for draftGroup in draftGroups {
-            let s = draftGroup.sport.name
-            let id = draftGroup.id
-            
-            // Start time
-            let df = NSDateFormatter()
-            df.dateFormat = "E, MMM dd, h:mm a"
-            let start = df.stringFromDate(draftGroup.start)
-            
-            // Contest and game counts
-            let contestCount = draftGroupContestCounts[id] ?? 0
-            let contestNoun = (contestCount == 1) ? "Contest" : "Contests"
-            let gameCount = draftGroup.numGames
-            let gameNoun = (gameCount == 1) ? "Game" : "Games"
-            let choice = [
-                "title": "\(start)",
-                "subtitle": "\(contestCount) \(contestNoun), \(gameCount) \(gameNoun)",
-                "object": draftGroup
-            ]
-            
-            var choices = draftGroupChoices[s] ?? [NSDictionary]()
-            choices.append(choice)
-            draftGroupChoices[s] = choices
-        }
-        
-        self.sportChoices = sportChoices
-        self.draftGroupChoices = draftGroupChoices
-    }
+     */
     
     // MARK: - Modals
     
-    func presentDraftGroupPrompt() {
-        let mcc = DraftboardModalChoiceController(title: "CHOOSE A SPORT", choices: nil)
-        RootViewController.sharedInstance.pushModalViewController(mcc)
-        
-        when(API.draftGroupUpcoming(), API.contestLobby()).then { draftGroups, contests -> Void in
-            self.collateDraftGroups(draftGroups, contests: contests)
-            
-            let choices = self.sportChoices!
-            if (choices.count == 0) {
-                mcc.titleLabel.text = "No DraftGroups Available!"
-            }
-            
-            mcc.choiceData = choices
-            mcc.reloadChoiceViews()
+    func pickDraftGroup() -> Promise<DraftGroup> {
+        // Use two modal choice controllers to pick an upcoming draft group
+        return firstly {
+            let mcc = DraftboardModalChoiceController<String>(title: "CHOOSE A SPORT", choices: nil)
+            DerivedData.upcomingSportChoices().then { mcc.choiceData = $0 }
+            return mcc.promise()
+        }.then { (sportName: String) -> Promise<DraftGroup> in
+            let mcc = DraftboardModalChoiceController<DraftGroup>(title: "CHOOSE A START TIME", choices: nil)
+            DerivedData.upcomingDraftGroupChoices(sportName: sportName).then { mcc.choiceData = $0 }
+            return mcc.promise()
+        }.then { draftGroup -> DraftGroup in
+            RootViewController.sharedInstance.popModalViewController()
+            return draftGroup
         }
     }
-    
-    func didSelectSport(index: Int) {
-        let sportChoice = sportChoices![index]
-        selectedSport = sportChoice["object"] as? Sport
-        // Pre-fetch data required for showing player injury status
-        // _ = Data.sportsInjuries(selectedSport!.name)
-        selectDraftGroup()
-    }
-    
-    func selectDraftGroup() {
-        let choices = draftGroupChoices![selectedSport!.name]!
-        let mcc = DraftboardModalChoiceController(title: "Choose a Start Time", choices: choices)
-        RootViewController.sharedInstance.pushModalViewController(mcc)
-    }
-    
-    func didSelectDraftGroup(index: Int) {
-        RootViewController.sharedInstance.popModalViewController()
-        let choices = draftGroupChoices![selectedSport!.name]
-        let draftGroupChoice = choices![index]
-        selectedDraftGroup = draftGroupChoice["object"] as? DraftGroup
-        createLineup()
-    }
-    
+
     // MARK: - Create/Edit/Contests
     
     func createLineup() {
+        let vc = LineupDetailViewController()
+        vc.editing = true
+        vc.lineup = nil
+        
+        pickDraftGroup().then { draftGroup -> Void in
+            print("DraftGroup picked!", draftGroup.start)
+//            vc.draftGroup = draftGroup
+//            navController?.pushViewController(nvc)
+        }
+        /*
         let view = downcastedView
         
         let draftGroup = selectedDraftGroup!
@@ -295,8 +196,9 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         }
         
         navController?.pushViewController(nvc)
+         */
     }
-    
+    /*
     func editLineup(lineupCard: LineupCardView) {
         let evc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
         evc.lineup = lineupCard.lineup!
@@ -357,25 +259,22 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
             view.paginationHeight.constant = 20.0
             view.paginationView.hidden = true
         }
-    }
-    
-    // MARK: - DraftboardTitlebarDelegate methods
+    }*/
+
+// MARK: -
+
+    // DraftboardTitlebarDelegate
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Plus) {
-            presentDraftGroupPrompt()
-        }
-        else if(buttonType == .Menu) {
-            let gfvc = GlobalFilterViewController(nibName: "GlobalFilterViewController", bundle: nil)
-            RootViewController.sharedInstance.pushModalViewController(gfvc)
+            createLineup()
         }
     }
- */
     
-    // MARK: - Titlebar datasource methods
+    // DraftboardTitlebarDatasource
     
     override func titlebarTitle() -> String {
-        return myTitle.uppercaseString
+        return "LINEUPS"
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType? {
@@ -386,8 +285,6 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         return .Plus
     }
 }
-
-// MARK: -
 
 extension LineupListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -402,6 +299,7 @@ extension LineupListViewController: UICollectionViewDataSource, UICollectionView
         let cell = lineupListView.cardCollectionView.dequeueReusableCellForIndexPath(indexPath)
         let vc = lineupDetailViewControllers?[safe: indexPath.row]
         cell.lineupDetailView = vc?.lineupDetailView
+        cell.createAction = { self.createLineup() }
         
         /*
         for subview in cell.lineupView.subviews {
@@ -560,6 +458,21 @@ private extension Array {
     }
 }
 
-private extension Selector {
-//    static let presentDraftGroupPrompt = #selector(LineupListViewController.presentDraftGroupPrompt)
+private extension Dictionary {
+    // See: https://gist.github.com/jverkoey/0b993932ddc9bd69120d
+    subscript(key: Key, @autoclosure withDefault value: Void -> Value) -> Value {
+        mutating get {
+            if self[key] == nil {
+                self[key] = value()
+            }
+            return self[key]!
+        }
+        set {
+            self[key] = newValue
+        }
+    }
 }
+
+//private extension Selector {
+//    static let presentDraftGroupPrompt = #selector(LineupListViewController.presentDraftGroupPrompt)
+//}

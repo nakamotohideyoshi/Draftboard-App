@@ -17,6 +17,8 @@ class LineupCardCell: UICollectionViewCell {
     let lineupView = UIView()
     var lineupDetailView: LineupDetailView? { didSet { didSetLineupView() } }
     
+    var createAction: () -> Void = {}
+    
     init() {
         super.init(frame: CGRectZero)
         setup()
@@ -84,6 +86,13 @@ class LineupCardCell: UICollectionViewCell {
         shadowView.layer.allowsEdgeAntialiasing = true
         createView.layer.allowsEdgeAntialiasing = true
         lineupView.layer.allowsEdgeAntialiasing = true
+        
+        createView.addTarget(self, action: .createViewTapped, forControlEvents: .TouchUpInside)
+    }
+    
+    func createViewTapped() {
+        createView.flashHighlightedState()
+        createAction()
     }
     
     func didSetLineupView() {
@@ -93,7 +102,7 @@ class LineupCardCell: UICollectionViewCell {
             for subview in lineupView.subviews {
                 subview.removeFromSuperview()
             }
-            lineupView.addSubview(lineupView)
+            lineupView.addSubview(lineupDetailView)
             NSLayoutConstraint.activateConstraints([
                 lineupDetailView.topRancor.constraintEqualToRancor(lineupView.topRancor),
                 lineupDetailView.leftRancor.constraintEqualToRancor(lineupView.leftRancor),
@@ -242,7 +251,6 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
         
         // Self
         backgroundColor = .blueMediumDark()
-        addTarget(self, action: .flashHighlightedState, forControlEvents: .TouchUpInside)
     }
     
     func didSetHighlighted() {
@@ -267,5 +275,5 @@ extension CancelableTouchControl {
 }
 
 private extension Selector {
-    static let flashHighlightedState = #selector(LineupCardCreateView.flashHighlightedState)
+    static let createViewTapped = #selector(LineupCardCell.createViewTapped)
 }

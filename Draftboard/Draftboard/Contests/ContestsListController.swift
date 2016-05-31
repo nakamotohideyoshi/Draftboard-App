@@ -95,6 +95,7 @@ class ContestsListController: DraftboardViewController {
     }
     
     func lineupTap(button: DraftboardButton) {
+        /*
         let noFilterChoice = [
             "title": "Show All",
             "subtitle": "? Contests"
@@ -115,9 +116,11 @@ class ContestsListController: DraftboardViewController {
         }
         
         RootViewController.sharedInstance.pushModalViewController(mcc)
+ */
     }
     
     func gametypeTap(button: DraftboardButton) {
+        /*
         let choices = [
             [
                 "title": "Show All",
@@ -135,6 +138,7 @@ class ContestsListController: DraftboardViewController {
     
         let mcc = DraftboardModalChoiceController(title: "Filter by Contest Type", choices: choices)
         RootViewController.sharedInstance.pushModalViewController(mcc)
+ */
     }
     
     override func didSelectModalChoice(index: Int) {
@@ -171,6 +175,7 @@ extension ContestsListController {
     }
     
     func gotContests(contests: [Contest]) {
+        /*
         self.contests = contests.reduce([:]) { (var dict, contest) -> [NSDate: [Contest]] in
             if dict[contest.start] == nil {
                 dict[contest.start] = [Contest]()
@@ -189,6 +194,7 @@ extension ContestsListController {
         }
         self.tableView.reloadData()
         self.hideLoader()
+        */
     }
     
 //    func gotEntries(entries: [NSDictionary]) {
@@ -222,7 +228,7 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
         guard let start = self.startTimes?[indexPath.section],
             contests = self.contests?[start]
         else { return cell }
-        
+        /*
         let contest = contests[indexPath.row]
         let fee = Format.currency.stringFromNumber(contest.buyin)!
         let prizes = Format.currency.stringFromNumber(contest.prizePool)!
@@ -234,6 +240,7 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
 //        cell.iconImageView.tintColor = entered ? .whiteColor() : .whiteMediumOpacity()
         cell.guaranteedImageView.hidden = !contest.gpp
         cell.topBorderView.hidden = (indexPath.row == 0)
+         */
         return cell
     }
     

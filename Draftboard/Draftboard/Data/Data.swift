@@ -40,7 +40,7 @@ extension Array where Element: Lineup {
 }
 
 extension Lineup {
-    func getDraftGroup() -> Promise<DraftGroup> {
+    func getDraftGroup() -> Promise<DraftGroupWithPlayers> {
         return Data.draftGroup[draftGroupID].get()
     }
     func getSportName() -> Promise<String> {
