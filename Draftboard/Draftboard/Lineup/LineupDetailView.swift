@@ -12,7 +12,7 @@ class LineupDetailView: UIView {
     
     let tableView = LineupPlayerTableView()
     let headerView = UIView()
-    let footerView = UIView()
+    let footerView = LineupFooterView()
     
     // Header stuff
     let sportIcon = UIImageView()
@@ -24,18 +24,7 @@ class LineupDetailView: UIView {
     private let headerShadowView = HeaderShadowView()
     
     // Footer stuff
-    let liveInLabel = UILabel()
-    let liveInValue = UIView()
-    let feesEntriesLabel = UILabel()
-    let feesEntriesValue = UILabel()
-    let statBoxOne = UIView()
-    let statBoxTwo = UIView()
-    let statBoxThree = UIView()
-    let statBoxOneBorderView = UIView()
-    let footerBorderView = UIView()
-    private let footerShadowView = FooterShadowView()
-    
-    let newFooterView = LineupFooterView()
+//    private let footerShadowView = FooterShadowView()
     
 //    var lineup: Lineup? {
 //        didSet {
@@ -70,9 +59,7 @@ class LineupDetailView: UIView {
         addSubview(headerView)
         addSubview(headerShadowView)
         addSubview(footerView)
-        addSubview(footerShadowView)
-        
-        addSubview(newFooterView)
+//        addSubview(footerShadowView)
         
         headerView.addSubview(sportIcon)
         headerView.addSubview(nameField)
@@ -80,15 +67,6 @@ class LineupDetailView: UIView {
         headerView.addSubview(flipButton)
         headerView.addSubview(columnLabel)
         headerView.addSubview(headerBorderView)
-        
-        footerView.addSubview(statBoxOne)
-        footerView.addSubview(statBoxTwo)
-        footerView.addSubview(statBoxThree)
-        footerView.addSubview(footerBorderView)
-        
-        statBoxOne.addSubview(liveInLabel)
-        statBoxOne.addSubview(liveInValue)
-        statBoxOne.addSubview(statBoxOneBorderView)
     }
     
     func addConstraints() {
@@ -113,15 +91,10 @@ class LineupDetailView: UIView {
             footerView.bottomRancor.constraintEqualToRancor(bottomRancor),
             footerView.heightRancor.constraintEqualToConstant(68.0),
             
-            newFooterView.leftRancor.constraintEqualToRancor(leftRancor),
-            newFooterView.rightRancor.constraintEqualToRancor(rightRancor),
-            newFooterView.bottomRancor.constraintEqualToRancor(bottomRancor),
-            newFooterView.heightRancor.constraintEqualToConstant(68.0),
-
-            footerShadowView.leftRancor.constraintEqualToRancor(footerView.leftRancor),
-            footerShadowView.rightRancor.constraintEqualToRancor(footerView.rightRancor),
-            footerShadowView.bottomRancor.constraintEqualToRancor(footerView.topRancor),
-            footerShadowView.heightRancor.constraintEqualToConstant(45.0),
+//            footerShadowView.leftRancor.constraintEqualToRancor(footerView.leftRancor),
+//            footerShadowView.rightRancor.constraintEqualToRancor(footerView.rightRancor),
+//            footerShadowView.bottomRancor.constraintEqualToRancor(footerView.topRancor),
+//            footerShadowView.heightRancor.constraintEqualToConstant(45.0),
             
             // Header
             sportIcon.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 17.0),
@@ -148,30 +121,6 @@ class LineupDetailView: UIView {
             headerBorderView.rightRancor.constraintEqualToRancor(headerView.rightRancor),
             headerBorderView.bottomRancor.constraintEqualToRancor(headerView.bottomRancor),
             headerBorderView.heightRancor.constraintEqualToConstant(1.0),
-            
-            // Footer
-            statBoxOne.topRancor.constraintEqualToRancor(footerView.topRancor),
-            statBoxOne.bottomRancor.constraintEqualToRancor(footerView.bottomRancor),
-            statBoxOne.leftRancor.constraintEqualToRancor(footerView.leftRancor),
-            statBoxOne.widthRancor.constraintEqualToRancor(footerView.widthRancor, multiplier: 0.5),
-            
-            statBoxOneBorderView.topRancor.constraintEqualToRancor(statBoxOne.topRancor),
-            statBoxOneBorderView.bottomRancor.constraintEqualToRancor(statBoxOne.bottomRancor),
-            statBoxOneBorderView.rightRancor.constraintEqualToRancor(statBoxOne.rightRancor),
-            statBoxOneBorderView.widthRancor.constraintEqualToConstant(1.0),
-            
-            liveInLabel.topRancor.constraintEqualToRancor(statBoxOne.topRancor, constant: 14.0),
-            liveInLabel.widthRancor.constraintEqualToRancor(statBoxOne.widthRancor, multiplier: 0.52),
-            liveInLabel.centerXRancor.constraintEqualToRancor(statBoxOne.centerXRancor),
-            
-            liveInValue.leftRancor.constraintEqualToRancor(liveInLabel.leftRancor),
-            liveInValue.topRancor.constraintEqualToRancor(liveInLabel.bottomRancor, constant: 0),
-            
-            footerBorderView.leftRancor.constraintEqualToRancor(footerView.leftRancor),
-            footerBorderView.rightRancor.constraintEqualToRancor(footerView.rightRancor),
-            footerBorderView.topRancor.constraintEqualToRancor(footerView.topRancor),
-            footerBorderView.heightRancor.constraintEqualToConstant(1.0),
-
         ]
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -179,9 +128,7 @@ class LineupDetailView: UIView {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerShadowView.translatesAutoresizingMaskIntoConstraints = false
         footerView.translatesAutoresizingMaskIntoConstraints = false
-        footerShadowView.translatesAutoresizingMaskIntoConstraints = false
-        
-        newFooterView.translatesAutoresizingMaskIntoConstraints = false
+//        footerShadowView.translatesAutoresizingMaskIntoConstraints = false
         
         // Header
         sportIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -189,15 +136,6 @@ class LineupDetailView: UIView {
         editButton.translatesAutoresizingMaskIntoConstraints = false
         flipButton.translatesAutoresizingMaskIntoConstraints = false
         headerBorderView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Footer
-        statBoxOne.translatesAutoresizingMaskIntoConstraints = false
-        statBoxOneBorderView.translatesAutoresizingMaskIntoConstraints = false
-        liveInLabel.translatesAutoresizingMaskIntoConstraints = false
-        liveInValue.translatesAutoresizingMaskIntoConstraints = false
-        feesEntriesLabel.translatesAutoresizingMaskIntoConstraints = false
-        feesEntriesValue.translatesAutoresizingMaskIntoConstraints = false
-        footerBorderView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
@@ -207,11 +145,11 @@ class LineupDetailView: UIView {
         headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
         footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
         headerShadowView.hidden = true
-        footerShadowView.hidden = true
+//        footerShadowView.hidden = true
         headerShadowView.opaque = false
-        footerShadowView.opaque = false
+//        footerShadowView.opaque = false
         headerShadowView.userInteractionEnabled = false
-        footerShadowView.userInteractionEnabled = false
+//        footerShadowView.userInteractionEnabled = false
 
         if let headerEffectView = BlurEffectView(radius: 3) {
             headerEffectView.layer.allowsEdgeAntialiasing = true
@@ -244,17 +182,6 @@ class LineupDetailView: UIView {
 
         footerView.userInteractionEnabled = false
         
-//        sportIcon.backgroundColor = .blueColor()
-//        nameField.backgroundColor = UIColor(0xFFFF00, alpha: 0.5)
-//        editButton.backgroundColor = .redColor()
-//        flipButton.backgroundColor = .yellowColor()
-        
-//        tableView.allowsSelection = false
-//        tableView.showsVerticalScrollIndicator = true
-//        tableView.contentInset = UIEdgeInsetsMake(68, 0, 68, 0)
-//        tableView.contentOffset = CGPointMake(0, -68)
-//        tableView.scrollIndicatorInsets = tableView.contentInset
-        
         sportIcon.image = UIImage(named: "icon-baseball")
         sportIcon.tintColor = UIColor(0x9c9faf)
         
@@ -263,35 +190,22 @@ class LineupDetailView: UIView {
         flipButton.setImage(UIImage(named: "icon-flip"), forState: .Normal)
         flipButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 4, 4)
         
-        nameField.delegate = self
         nameField.edgeInsets = UIEdgeInsetsMake(0, 44, 0, 0)
         nameField.font = UIFont.openSansRegular()?.fontWithSize(16.0)
         nameField.textColor = UIColor(0x46495e)
         nameField.clearButtonMode = .WhileEditing
         nameField.placeholder = "Lineup Name"
         nameField.returnKeyType = .Done
-//        nameField.userInteractionEnabled = false
-//        headerView.userInteractionEnabled = false
         
         headerBorderView.backgroundColor = UIColor(0xebedf2)
-        footerBorderView.backgroundColor = UIColor(0xebedf2)
-        statBoxOneBorderView.backgroundColor = UIColor(0xebedf2)
         
         headerView.layer.allowsEdgeAntialiasing = true
         headerBackgroundView.layer.allowsEdgeAntialiasing = true
         
-        liveInLabel.font = UIFont(name: "OpenSans-Semibold", size: 8.0)
-        liveInLabel.textColor = UIColor(0x09c9faf)
-        liveInLabel.text = "Live In".uppercaseString
-        
-        
-        footerView.hidden = true
         footerBackgroundView.hidden = true
-        footerShadowView.hidden = true
+//        footerShadowView.hidden = true
         
 
-//        liveInValue.date = 
-        
         editButton.addTarget(self, action: .editButtonTapped, forControlEvents: .TouchUpInside)
     }
     
@@ -342,23 +256,34 @@ private class FooterShadowView: UIView {
     }
 }
 
+//protocol StatFooterDataSource {
+//    func footerStatAvgSalary() -> Double?
+//    func footerStatRemSalary() -> Double?
+//    func footerStatLiveInDate() -> NSDate?
+//}
+
+
 class LineupFooterView: UIView {
     
-    // Normal configuration is [countdown | feesEntries]
-    // Editing configuration is [countdown | totalSalaryRem | avgSalaryRem]
-    // Live configuration is [points | winnings | pmr]
-
-    let countdown = StatView()
+    enum FooterConfiguration {
+        case Normal  // [ countdown | feesEntries ]
+        case Editing // [ countdown | totalSalaryRem | avgSalaryRem ]
+        case Live    // [ points | winnings | pmr ]
+    }
+    
+    var configuration: FooterConfiguration = .Normal { didSet { update() } }
+    
+    let countdown = CountdownStatView()
     let feesEntries = StatView()
     let totalSalaryRem = StatView()
     let avgSalaryRem = StatView()
-    
+    let points = StatView()
+    let winnings = StatView()
+    let pmr = StatView()
+    let topBorderView = UIView()
+
     var halfWidthConstraints = [NSLayoutConstraint]()
     var thirdWidthConstraints = [NSLayoutConstraint]()
-    
-//    let points = StatView()
-//    let winnings = StatView()
-//    let pmr = StatView()
 
     init() {
         super.init(frame: CGRectZero)
@@ -384,12 +309,13 @@ class LineupFooterView: UIView {
         addSubview(feesEntries)
         addSubview(totalSalaryRem)
         addSubview(avgSalaryRem)
+        addSubview(points)
+        addSubview(winnings)
+        addSubview(pmr)
+        addSubview(topBorderView)
     }
     
     func addConstraints() {
-        // Normal configuration is [countdown | feesEntries]
-        // Editing configuration is [countdown | totalSalaryRem | avgSalaryRem]
-        
         let viewConstraints: [NSLayoutConstraint] = [
             countdown.topRancor.constraintEqualToRancor(topRancor),
             countdown.bottomRancor.constraintEqualToRancor(bottomRancor),
@@ -406,6 +332,23 @@ class LineupFooterView: UIView {
             avgSalaryRem.topRancor.constraintEqualToRancor(topRancor),
             avgSalaryRem.bottomRancor.constraintEqualToRancor(bottomRancor),
             avgSalaryRem.leftRancor.constraintEqualToRancor(totalSalaryRem.rightRancor),
+            
+            points.topRancor.constraintEqualToRancor(topRancor),
+            points.bottomRancor.constraintEqualToRancor(bottomRancor),
+            points.leftRancor.constraintEqualToRancor(leftRancor, constant: 1.0),
+            
+            winnings.topRancor.constraintEqualToRancor(topRancor),
+            winnings.bottomRancor.constraintEqualToRancor(bottomRancor),
+            winnings.leftRancor.constraintEqualToRancor(points.rightRancor),
+            
+            pmr.topRancor.constraintEqualToRancor(topRancor),
+            pmr.bottomRancor.constraintEqualToRancor(bottomRancor),
+            pmr.leftRancor.constraintEqualToRancor(winnings.rightRancor),
+
+            topBorderView.topRancor.constraintEqualToRancor(topRancor),
+            topBorderView.leftRancor.constraintEqualToRancor(leftRancor),
+            topBorderView.rightRancor.constraintEqualToRancor(rightRancor),
+            topBorderView.heightRancor.constraintEqualToConstant(1.0),
         ]
         
         halfWidthConstraints = [
@@ -413,6 +356,9 @@ class LineupFooterView: UIView {
             feesEntries.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.5),
             totalSalaryRem.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.5),
             avgSalaryRem.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.5),
+            points.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.5),
+            winnings.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.5),
+            pmr.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.5),
         ]
         
         thirdWidthConstraints = [
@@ -420,14 +366,20 @@ class LineupFooterView: UIView {
             feesEntries.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.333),
             totalSalaryRem.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.333),
             avgSalaryRem.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.333),
+            points.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.333),
+            winnings.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.333),
+            pmr.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.333),
         ]
-
         
         translatesAutoresizingMaskIntoConstraints = false
         countdown.translatesAutoresizingMaskIntoConstraints = false
         feesEntries.translatesAutoresizingMaskIntoConstraints = false
         totalSalaryRem.translatesAutoresizingMaskIntoConstraints = false
         avgSalaryRem.translatesAutoresizingMaskIntoConstraints = false
+        points.translatesAutoresizingMaskIntoConstraints = false
+        winnings.translatesAutoresizingMaskIntoConstraints = false
+        pmr.translatesAutoresizingMaskIntoConstraints = false
+        topBorderView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activateConstraints(viewConstraints + halfWidthConstraints)
     }
@@ -436,50 +388,89 @@ class LineupFooterView: UIView {
         backgroundColor = .whiteColor()
         clipsToBounds = true
         
+        topBorderView.backgroundColor = UIColor(0xebedf2)
+        
+        // Values
         countdown.titleLabel.text = "LIVE IN"
-        countdown.valueLabel.text = "00:00:00"
+        countdown.countdownView.date = NSDate().dateByAddingTimeInterval(60)
         
         feesEntries.titleLabel.text = "FEES / ENTRIES"
-        feesEntries.valueLabel.text = "$234 / 22"
+        feesEntries.valueLabel.text = "\(Format.currency.stringFromNumber(0.00)!) / \(0)"
         
-        totalSalaryRem.titleLabel.text = "SALARY REM."
-        totalSalaryRem.valueLabel.text = "$50,000"
+        totalSalaryRem.titleLabel.text = "REM. SALARY"
+        totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(0.00)!
         
-        avgSalaryRem.titleLabel.text = "SALARY REM. / PLAYER"
-        avgSalaryRem.valueLabel.text = "$6,250"
+        avgSalaryRem.titleLabel.text = "AVG. SALARY"
+        avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(0.00)!
         
-        totalSalaryRem.alpha = 0
-        avgSalaryRem.alpha = 0
+        points.titleLabel.text = "POINTS"
+        points.valueLabel.text = "\(0)"
+        
+        winnings.titleLabel.text = "WINNINGS"
+        winnings.valueLabel.text = Format.currency.stringFromNumber(0.00)!
+        
+        pmr.titleLabel.text = "PMR"
+        pmr.valueLabel.text = "\(0)"
+        
+        update()
     }
 
-    func showTwoBoxes() {
-        // If three boxes, animate frames then update constraints
-        UIView.animateWithDuration(0.25) {
-            NSLayoutConstraint.deactivateConstraints(self.thirdWidthConstraints)
-            NSLayoutConstraint.activateConstraints(self.halfWidthConstraints)
-            self.layoutIfNeeded()
-            self.totalSalaryRem.alpha = 0
-            self.avgSalaryRem.alpha = 0
-            self.feesEntries.alpha = 1
-        }
-    }
-    
-    func showThreeBoxes() {
-        // If two boxes, animate frames then update constraints
-        UIView.animateWithDuration(0.25) {
-            NSLayoutConstraint.deactivateConstraints(self.halfWidthConstraints)
-            NSLayoutConstraint.activateConstraints(self.thirdWidthConstraints)
-            self.layoutIfNeeded()
-            self.totalSalaryRem.alpha = 1
-            self.avgSalaryRem.alpha = 1
-            self.feesEntries.alpha = 0
+    func update() {
+        if configuration == .Normal {
+//            UIView.animateWithDuration(0.25) {
+                NSLayoutConstraint.deactivateConstraints(self.thirdWidthConstraints)
+                NSLayoutConstraint.activateConstraints(self.halfWidthConstraints)
+                self.layoutIfNeeded()
+                self.countdown.alpha = 1
+                self.feesEntries.alpha = 1
+                self.totalSalaryRem.alpha = 0
+                self.avgSalaryRem.alpha = 0
+                self.points.alpha = 0
+                self.winnings.alpha = 0
+                self.pmr.alpha = 0
+//            }
+        } else if configuration == .Editing {
+//            UIView.animateWithDuration(0.25) {
+                NSLayoutConstraint.deactivateConstraints(self.halfWidthConstraints)
+                NSLayoutConstraint.activateConstraints(self.thirdWidthConstraints)
+                self.layoutIfNeeded()
+                self.countdown.alpha = 1
+                self.feesEntries.alpha = 0
+                self.totalSalaryRem.alpha = 1
+                self.avgSalaryRem.alpha = 1
+                self.points.alpha = 0
+                self.winnings.alpha = 0
+                self.pmr.alpha = 0
+//            }
+        } else if configuration == .Live {
+//            UIView.animateWithDuration(0.25) {
+                NSLayoutConstraint.deactivateConstraints(self.halfWidthConstraints)
+                NSLayoutConstraint.activateConstraints(self.thirdWidthConstraints)
+                self.layoutIfNeeded()
+                self.countdown.alpha = 0
+                self.feesEntries.alpha = 0
+                self.totalSalaryRem.alpha = 0
+                self.avgSalaryRem.alpha = 0
+                self.points.alpha = 1
+                self.winnings.alpha = 1
+                self.pmr.alpha = 1
+//            }
         }
     }
 }
 
+class CountdownStatView: StatView {
+    var countdownView: CountdownView { return valueLabel as! CountdownView }
+    
+    override func setup() {
+        valueLabel = CountdownView(date: NSDate(), size: 18.0, color: UIColor(0x46495e))
+        super.setup()
+    }
+}
+
 class StatView: UIView {
-    let titleLabel = UILabel()
-    let valueLabel = UILabel()
+    var titleLabel = UILabel()
+    var valueLabel = UILabel()
     let rightBorderView = UIView()
     
     init() {
@@ -511,7 +502,7 @@ class StatView: UIView {
         let viewConstraints: [NSLayoutConstraint] = [
             titleLabel.centerXRancor.constraintEqualToRancor(centerXRancor),
             titleLabel.centerYRancor.constraintEqualToRancor(centerYRancor, constant: -14.0),
-            titleLabel.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.52),
+            titleLabel.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.6),
             
             valueLabel.leftRancor.constraintEqualToRancor(titleLabel.leftRancor),
             valueLabel.topRancor.constraintEqualToRancor(titleLabel.bottomRancor, constant: 0),
@@ -556,14 +547,6 @@ class TextField: UITextField {
     
     override func editingRectForBounds(bounds: CGRect) -> CGRect {
         return textRectForBounds(bounds)
-    }
-}
-
-private typealias TextFieldDelegate = LineupDetailView
-extension TextFieldDelegate: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        nameField.resignFirstResponder()
-        return true
     }
 }
 

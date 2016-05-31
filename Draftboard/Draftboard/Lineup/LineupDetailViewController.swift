@@ -11,6 +11,7 @@ import UIKit
 class LineupDetailViewController: DraftboardViewController {
     
     var lineup: Lineup?
+    var draftGroup: DraftGroup?
     var lineupDetailView: LineupDetailView { return view as! LineupDetailView }
     
     convenience init(lineup: Lineup) {
@@ -24,10 +25,36 @@ class LineupDetailViewController: DraftboardViewController {
     
     override func viewDidLoad() {
         let view = lineupDetailView
+        
+        view.nameField.delegate = self
         view.nameField.text = lineup?.name
+        
         view.tableView.delegate = self
         view.tableView.dataSource = self
         
+        view.editAction = {
+            if view.footerView.configuration == .Normal {
+                view.footerView.configuration = .Editing
+            } else if view.footerView.configuration == .Editing {
+                view.footerView.configuration = .Live
+            } else if view.footerView.configuration == .Live {
+                view.footerView.configuration = .Normal
+            }
+            
+        }
+        
+        /*
+        if let draftGroup = draftGroup {
+            let countdownView = CountdownView(date: draftGroup.start, size: 18.0, color: UIColor(0x46495e))
+    //            countdownView.frame = view.liveInValue.bounds
+    //            countdownView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            view.liveInValue.addSubview(countdownView)
+            countdownView.leftRancor.constraintEqualToRancor(view.liveInValue.leftRancor).active = true
+            countdownView.topRancor.constraintEqualToRancor(view.liveInValue.topRancor).active = true
+        }
+         */
+
+        /*
         lineup?.getDraftGroup().then { draftGroup -> Void in
             let countdownView = CountdownView(date: draftGroup.start, size: 18.0, color: UIColor(0x46495e))
 //            countdownView.frame = view.liveInValue.bounds
@@ -36,6 +63,7 @@ class LineupDetailViewController: DraftboardViewController {
             countdownView.leftRancor.constraintEqualToRancor(view.liveInValue.leftRancor).active = true
             countdownView.topRancor.constraintEqualToRancor(view.liveInValue.topRancor).active = true
         }
+         */
     }
     
     func update() {
@@ -46,17 +74,42 @@ class LineupDetailViewController: DraftboardViewController {
         }
     }
     
+    override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        if buttonType == .Back {
+            self.navController?.popViewController()
+        }
+    }
+    
+    // DraftboardTitlebarDatasource
+    
+    override func titlebarTitle() -> String {
+        return (lineup == nil) ? "NEW LINEUP" : "EDIT LINEUP"
+    }
+    
+    override func titlebarLeftButtonType() -> TitlebarButtonType? {
+        return .Back
+    }
+    
+    override func titlebarRightButtonType() -> TitlebarButtonType? {
+        return .DisabledValue
+    }
+
+    override func titlebarRightButtonText() -> String? {
+        return "SAVE"
+    }
+    
 }
 
 // MARK: -
 
-extension LineupDetailViewController: UITableViewDataSource, UITableViewDelegate {
+private typealias TableViewDelegate = LineupDetailViewController
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     // UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lineup?.playerIDs.count ?? 0
-//        return 9
+//        return lineup?.playerIDs.count ?? 0
+        return 9
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -91,4 +144,16 @@ extension LineupDetailViewController: UITableViewDataSource, UITableViewDelegate
     // UITableViewDelegate
     
 }
+
+private typealias TextFieldDelegate = LineupDetailViewController
+extension TextFieldDelegate: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}
+
+
 

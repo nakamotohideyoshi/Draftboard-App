@@ -12,12 +12,6 @@ import PromiseKit
 class LineupListViewController: DraftboardViewController, UIActionSheetDelegate {
     
     var lineupListView: LineupListView { return view as! LineupListView }
-    var draftGroupChoices: [String: [NSDictionary]]?
-    var sportChoices: [NSDictionary]?
-    
-    var selectedDraftGroup: DraftGroup?
-    var selectedSport: Sport?
-    
     var lineupDetailViewControllers: [LineupDetailViewController]? { didSet { update() } }
     
     override func loadView() {
@@ -143,13 +137,9 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     
     func createLineup() {
         let vc = LineupDetailViewController()
-        vc.editing = true
-        vc.lineup = nil
-        
         pickDraftGroup().then { draftGroup -> Void in
-            print("DraftGroup picked!", draftGroup.start)
 //            vc.draftGroup = draftGroup
-//            navController?.pushViewController(nvc)
+            self.navController?.pushViewController(vc)
         }
         /*
         let view = downcastedView

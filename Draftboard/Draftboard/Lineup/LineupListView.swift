@@ -50,7 +50,7 @@ class LineupListView: UIView {
         paginationHeight = paginationView.heightRancor.constraintEqualToConstant(36.0)
         
         let viewConstraints: [NSLayoutConstraint] = [
-            cardCollectionView.topRancor.constraintEqualToRancor(topRancor, constant: 76.0),
+            cardCollectionView.topRancor.constraintEqualToRancor(topRancor),
             cardCollectionView.leftRancor.constraintEqualToRancor(leftRancor, constant: -20.0),
             cardCollectionView.rightRancor.constraintEqualToRancor(rightRancor, constant: 20.0),
             cardCollectionView.bottomRancor.constraintEqualToRancor(paginationView.topRancor),

@@ -53,7 +53,7 @@ class DraftboardNavController: UIViewController {
         view.addSubview(contentView)
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.topRancor.constraintEqualToRancor(view.topRancor).active = true
+        contentView.topRancor.constraintEqualToRancor(view.topRancor, constant: 76.0).active = true
         contentView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
         contentView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
