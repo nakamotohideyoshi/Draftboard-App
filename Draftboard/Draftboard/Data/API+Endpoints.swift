@@ -74,7 +74,7 @@ extension API_Endpoints {
         let path = "api/lineup/create/"
         let params = [
             "name": lineup.name,
-            "players": lineup.playerIDs,
+//            "players": lineup.playerIDs,
             "draft_group": lineup.draftGroupID
         ]
         return API.post(path, JSON: params)

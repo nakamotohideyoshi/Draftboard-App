@@ -62,7 +62,7 @@ extension Lineup {
         }
     }*/
 }
-
+/*
 extension Player {
     func getTeam() -> Promise<Team> {
         return Data.teams.get().then { teams in
@@ -70,7 +70,9 @@ extension Player {
         }
     }
 }
+ */
 
 extension DraftGroup {
 //    func getGames() -> Promise<
 }
+

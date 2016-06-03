@@ -121,6 +121,7 @@ class LineupPlayerCell: UITableViewCell {
 //        shadowView.layer.allowsEdgeAntialiasing = true
     }
 
+    /*
     var player: Player? {
         didSet {
             positionLabel.text = player?.position
@@ -132,5 +133,6 @@ class LineupPlayerCell: UITableViewCell {
             salaryLabel.text = Format.currency.stringFromNumber(player?.salary ?? 0)
         }
     }
+     */
 }
 

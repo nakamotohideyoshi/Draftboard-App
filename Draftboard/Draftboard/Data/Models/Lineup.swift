@@ -6,44 +6,149 @@
 //  Copyright © 2015 Rally Interactive. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class Lineup: CustomStringConvertible {
+class Sport {
     
-    let id: Int
+    static let salaryCaps = [
+        "nba": 50_000.00,
+        "nfl": 50_000.00,
+        "nhl": 50_000.00,
+        "mlb": 50_000.00,
+    ]
+    
+    static let slotTemplates = [
+        "nfl": [
+            LineupSlot(name: "QB", description: "Quarterback", positions: ["QB"]),
+            LineupSlot(name: "RB", description: "Running Back", positions: ["RB", "FB"]),
+            LineupSlot(name: "RB", description: "Running Back", positions: ["RB", "FB"]),
+            LineupSlot(name: "WR", description: "Wide Receiver", positions: ["WR"]),
+            LineupSlot(name: "WR", description: "Wide Receiver", positions: ["WR"]),
+            LineupSlot(name: "TE", description: "Tight End", positions: ["TE"]),
+            LineupSlot(name: "FX", description: "Flex Player", positions: ["RB", "FB", "WR", "TE"]),
+            LineupSlot(name: "FX", description: "Flex Player", positions: ["RB", "FB", "WR", "TE"]),
+        ],
+        "nba": [
+            LineupSlot(name: "G", description: "Guard", positions: ["PG", "SG"]),
+            LineupSlot(name: "G", description: "Guard", positions: ["PG", "SG"]),
+            LineupSlot(name: "F", description: "Forward", positions: ["SF", "PF"]),
+            LineupSlot(name: "F", description: "Forward", positions: ["SF", "PF"]),
+            LineupSlot(name: "C", description: "Center", positions: ["C"]),
+            LineupSlot(name: "FX", description: "Flex Player", positions: ["PG", "SG", "SF", "PF", "C"]),
+            LineupSlot(name: "FX", description: "Flex Player", positions: ["PG", "SG", "SF", "PF", "C"]),
+            LineupSlot(name: "FX", description: "Flex Player", positions: ["PG", "SG", "SF", "PF", "C"]),
+        ],
+        "nhl": [
+            LineupSlot(name: "F", description: "Forward", positions: ["C", "LW", "RW"]),
+            LineupSlot(name: "F", description: "Forward", positions: ["C", "LW", "RW"]),
+            LineupSlot(name: "F", description: "Forward", positions: ["C", "LW", "RW"]),
+            LineupSlot(name: "D", description: "Defenseman", positions: ["D"]),
+            LineupSlot(name: "D", description: "Defenseman", positions: ["D"]),
+            LineupSlot(name: "FX", description: "Flex Player", positions: ["C", "D", "LW", "RW"]),
+            LineupSlot(name: "FX", description: "Flex Player", positions: ["C", "D", "LW", "RW"]),
+            LineupSlot(name: "G", description: "Goaltender", positions: ["G"]),
+        ],
+        "mlb": [
+            LineupSlot(name: "SP", description: "Starting Pitcher", positions: ["SP"]),
+            LineupSlot(name: "C", description: "Catcher", positions: ["C"]),
+            LineupSlot(name: "1B", description: "First Baseman", positions: ["1B", "DH"]),
+            LineupSlot(name: "2B", description: "Second Baseman", positions: ["2B"]),
+            LineupSlot(name: "3B", description: "Third Baseman", positions: ["3B"]),
+            LineupSlot(name: "SS", description: "Shortstop", positions: ["SS"]),
+            LineupSlot(name: "OF", description: "Outfielder", positions: ["LF", "CF", "RF"]),
+            LineupSlot(name: "OF", description: "Outfielder", positions: ["LF", "CF", "RF"]),
+            LineupSlot(name: "OF", description: "Outfielder", positions: ["LF", "CF", "RF"]),
+        ],
+    ]
+}
+
+class LineupSlot {
     let name: String
-    let draftGroupID: Int
-    let playerIDs: [Int]
+    let description: String
+    let positions: [String]
+    var player: Player?
     
-    init(id: Int, name: String, draftGroupID: Int, playerIDs: [Int]) {
-        self.id = id
+    init(name: String, description: String, positions: [String], player: Player? = nil) {
         self.name = name
+        self.description = description
+        self.positions = positions
+        self.player = player
+    }
+}
+
+/*
+class NewLineup {
+    let id: Int
+    let sportName: String
+    let draftGroupID: String
+    let start: NSDate
+    let name: String
+    let slots: [LineupSlot]
+    var players: [Player] { return slots.map { $0.player! } }
+    let salaryCap: Double
+    
+    init(id: Int = -1, sportName: String, name: String = "", players: [Player] = []) {
+        self.id = id
+        self.sportName = sportName
+        self.name = name
+        self.slots = Sport.slotTemplates[sportName]!
+        self.salaryCap = NewSport.salaryCaps[sportName]!
+    }
+}
+
+class NewLineupWith: NewLineup {
+    
+}
+ */
+
+class Lineup {
+    // Core
+    let id: Int
+    var name: String
+    let sportName: String
+    let draftGroupID: Int
+    let slots: [LineupSlot]
+    // Extra
+    let salaryCap: Double
+//    let start: NSDate
+//    let entries: Int
+//    let fees: Double
+    
+    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [LineupPlayer]? = nil) {
+        self.id = id ?? -1
+        self.name = name ?? ""
+        self.sportName = sportName
         self.draftGroupID = draftGroupID
-        self.playerIDs = playerIDs
+        self.slots = Sport.slotTemplates[sportName]!
+        self.salaryCap = Sport.salaryCaps[sportName]!
+        for (i, slot) in self.slots.enumerate() {
+            slot.player = players?[i]
+        }
     }
     
+    // Intitializer for empty/blank lineup
+    convenience init(draftGroup: DraftGroup) {
+        self.init(sportName: draftGroup.sportName, draftGroupID: draftGroup.id)
+    }
+    
+    // Initializer for api/lineup/upcoming
     convenience init(JSON: NSDictionary) throws {
         do {
             let id: Int = try JSON.get("id")
             let name: String = try JSON.get("name")
+            let sportName: String = try JSON.get("sport")
             let draftGroupID: Int = try JSON.get("draft_group")
             let playersJSON: [NSDictionary] = try JSON.get("players")
-//            playersJSON.sortInPlace { let idx: Int = J
-            let playerIDs: [(Int, Int)] = try playersJSON.map {
-                (try $0.get("idx"), try $0.get("player_id"))
-            }
-            let foo = playerIDs.sort { (a, b) in a.0 < a.1 }.map { $0.1 }
-//            let foo = playerIDs.sort { ((idxA, _), (idxB, _)) in idxA < idxB }.map { (_, id) in id }
-            self.init(id: id, name: name, draftGroupID: draftGroupID, playerIDs: foo)
+            let players: [LineupPlayer] = try playersJSON.sortByIndex().map { try LineupPlayer(JSON: $0) }
+            self.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
     }
     
-//    var description: String { return "Lineup: \(id) \(name) \(playerIDs)" }
-    
 }
 
+/*
 class MutableLineup {
     var id: Int?
     var name: String?
@@ -57,6 +162,14 @@ class MutableLineup {
             }
         }
         return nil
+    }
+}
+*/
+
+private extension Array where Element: NSDictionary {
+    func sortByIndex() throws -> [Element] {
+        let indices: [Int] = try self.map { try $0.get("idx") }
+        return self.sortByOther(indices) { $0 < $1 }
     }
 }
 

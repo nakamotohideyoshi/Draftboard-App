@@ -116,7 +116,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
      */
     
     // MARK: - Modals
-    
+
     func pickDraftGroup() -> Promise<DraftGroup> {
         // Use two modal choice controllers to pick an upcoming draft group
         return firstly {
@@ -136,9 +136,11 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     // MARK: - Create/Edit/Contests
     
     func createLineup() {
-        let vc = LineupDetailViewController()
         pickDraftGroup().then { draftGroup -> Void in
-//            vc.draftGroup = draftGroup
+//            let lineup = MutableLineup(lineup: lineup)
+            let lineup = Lineup(draftGroup: draftGroup)
+            let vc = LineupDetailViewController(lineup: lineup)
+            vc.editing = true
             self.navController?.pushViewController(vc)
         }
         /*
@@ -188,20 +190,13 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         navController?.pushViewController(nvc)
          */
     }
-    /*
-    func editLineup(lineupCard: LineupCardView) {
-        let evc = LineupEditViewController(nibName: "LineupEditViewController", bundle: nil)
-        evc.lineup = lineupCard.lineup!
-        
-        evc.saveLineupAction = { lineup in
-            lineupCard.lineup = lineup
-            
-            self.navController?.popViewController()
-        }
-        
-        navController?.pushViewController(evc)
+    func editLineup(lineup: Lineup) {
+        let vc = LineupDetailViewController(lineup: lineup)
+        vc.editing = true
+        navController?.pushViewController(vc)
     }
-    
+    /*
+
     func showContestsForLineup(lineupCard: LineupCardView) {
         let tc = RootViewController.sharedInstance.tabController
         tc.tabBar.selectButtonAtIndex(1, animated: true)
@@ -287,9 +282,21 @@ extension LineupListViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = lineupListView.cardCollectionView.dequeueReusableCellForIndexPath(indexPath)
+        
+        // Draft lineup CTA, alternative to titlebar button
+        if cell.createAction == nil {
+            cell.createAction = { self.createLineup() }
+        }
+
+        // Set lineup
         let vc = lineupDetailViewControllers?[safe: indexPath.row]
         cell.lineupDetailView = vc?.lineupDetailView
-        cell.createAction = { self.createLineup() }
+        
+        if let detailView = vc?.lineupDetailView, lineup = vc?.lineup {
+            detailView.editAction = {
+                self.editLineup(lineup)
+            }
+        }
         
         /*
         for subview in cell.lineupView.subviews {
@@ -442,7 +449,7 @@ extension LineupListViewController: UIScrollViewDelegate {
  
 // MARK: -
  
-private extension Array {
+extension Array {
     subscript (safe index: Int) -> Element? {
         return (0 <= index && index < count) ? self[index] : nil
     }

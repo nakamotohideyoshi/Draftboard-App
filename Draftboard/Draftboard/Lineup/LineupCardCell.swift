@@ -17,7 +17,7 @@ class LineupCardCell: UICollectionViewCell {
     let lineupView = UIView()
     var lineupDetailView: LineupDetailView? { didSet { didSetLineupView() } }
     
-    var createAction: () -> Void = {}
+    var createAction: (() -> Void)? = {}
     
     init() {
         super.init(frame: CGRectZero)
@@ -92,7 +92,7 @@ class LineupCardCell: UICollectionViewCell {
     
     func createViewTapped() {
         createView.flashHighlightedState()
-        createAction()
+        createAction?()
     }
     
     func didSetLineupView() {

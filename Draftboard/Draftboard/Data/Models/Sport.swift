@@ -7,6 +7,7 @@
 //
 import Foundation
 
+/*
 class Sport: Model {
     var name: String = ""
     var positions: [String] = [String]()
@@ -45,3 +46,4 @@ extension Sport {
     ]
 }
 
+*/

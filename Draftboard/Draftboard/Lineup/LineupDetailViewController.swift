@@ -10,9 +10,35 @@ import UIKit
 
 class LineupDetailViewController: DraftboardViewController {
     
+    /*
+     * This controls a detail view for:
+     * 1. An existing lineup, not editing
+     * 2. An existing lineup, editing
+     * 3. A new blank lineup, editing
+     */
+    
+    var lineupDetailView: LineupDetailView { return view as! LineupDetailView }
+    var editButton: UIButton { return lineupDetailView.editButton }
+    var flipButton: UIButton { return lineupDetailView.flipButton }
+    var nameField: UITextField { return lineupDetailView.nameField }
+    
     var lineup: Lineup?
     var draftGroup: DraftGroup?
-    var lineupDetailView: LineupDetailView { return view as! LineupDetailView }
+    
+    /*
+    var lineupID: Int?
+    var lineupSport: String = ""
+    var lineupName: String = ""
+    var lineupPlayers: [Player] = []
+    var lineupStart: NSDate = NSDate()
+    var lineupFees: Double = 0.00
+    var lineupEntries: Int = 0
+    var lineupBudget: Double = 0.00
+    var lineupSalary: Double = 0.00
+    var lineupPoints: Double = 0
+    var lineupWinnings: Double = 0.00
+    var lineupPMR: Double = 0
+     */
     
     convenience init(lineup: Lineup) {
         self.init()
@@ -26,11 +52,35 @@ class LineupDetailViewController: DraftboardViewController {
     override func viewDidLoad() {
         let view = lineupDetailView
         
-        view.nameField.delegate = self
-        view.nameField.text = lineup?.name
+        // Sport icon
+        view.sportIcon.image = UIImage(named: "icon-baseball")
         
+        // Lineup name
+        view.nameField.delegate = self
+        view.nameField.placeholder = lineup?.name ?? "Lineup Name"
+        view.nameField.text = lineup?.name ?? "Lineup Name"
+        
+        // Edit button
+        
+        // Flip button
+        
+        // Players
         view.tableView.delegate = self
         view.tableView.dataSource = self
+        
+        // Countdown
+        
+        // Fees / Entries
+        
+        // Total salary remaining
+        
+        // Average salary remaining
+        
+        // Points
+        
+        // Winnings
+        
+        // PMR
         
         view.editAction = {
             if view.footerView.configuration == .Normal {
@@ -64,6 +114,25 @@ class LineupDetailViewController: DraftboardViewController {
             countdownView.topRancor.constraintEqualToRancor(view.liveInValue.topRancor).active = true
         }
          */
+    }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        // Edit button
+        editButton.alpha = editing ? 0 : 1
+        editButton.userInteractionEnabled = editing
+
+        // Flip button
+        flipButton.alpha = editing ? 0 : 1
+        flipButton.userInteractionEnabled = editing
+        
+        // Name field
+        nameField.userInteractionEnabled = editing
+        nameField.clearButtonMode = editing ? .UnlessEditing : .Never
+        
+        // Footer
+        lineupDetailView.footerView.configuration = editing ? .Editing : .Normal
     }
     
     func update() {
@@ -109,7 +178,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return lineup?.playerIDs.count ?? 0
-        return 9
+        return lineup?.slots.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -130,13 +199,16 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
 //        lineup?.getDraftGroup().then { draftGroup in
 //            cell.
 //        }
-        if let playerID = lineup?.playerIDs[indexPath.row] {
-            lineup?.getPlayer(id: playerID).then { player in
-                cell.player = player
-//                cell.teamLabel
+        if let slot = lineup?.slots[indexPath.row] {
+            cell.positionLabel.text = slot.name
+            if let player = slot.player {
+                cell.avatarImageView.player = player
+                cell.nameLabel.text = player.shortName
+                cell.teamLabel.text = " - " + player.teamAlias
+                cell.salaryLabel.text = Format.currency.stringFromNumber(player.salary ?? 0)
             }
         }
-        cell.borderView.hidden = (indexPath.row == (lineup?.playerIDs.count ?? 0) - 1)
+        cell.borderView.hidden = (indexPath.row == (lineup?.slots.count ?? 0) - 1)
         
         return cell
     }

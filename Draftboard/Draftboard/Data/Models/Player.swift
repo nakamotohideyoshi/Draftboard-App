@@ -11,23 +11,19 @@ class Player {
     let id: Int
     let name: String
     let salary: Double
-    let position: String
     let fppg: Double
-    let teamSRID: String
-    let gameSRID: String
+    let teamAlias: String
     let srid: String
     
-    init(id: Int, name: String, salary: Double, position: String, fppg: Double, teamSRID: String, gameSRID: String, srid: String) {
+    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String) {
         self.id = id
         self.name = name
         self.salary = salary
-        self.position = position
         self.fppg = fppg
-        self.teamSRID = teamSRID
-        self.gameSRID = gameSRID
+        self.teamAlias = teamAlias
         self.srid = srid
     }
-    
+    /*
     convenience init(JSON json: NSDictionary) throws {
         do {
             let id: Int = try json.get("player_id")
@@ -42,10 +38,55 @@ class Player {
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
-    }
+    }*/
 
 }
+
+class LineupPlayer: Player {
+    convenience init(JSON json: NSDictionary) throws {
+        do {
+            let id: Int = try json.get("player_id")
+            let name: String = try json.get("full_name")
+            let salary: Double = try json.get("salary")
+            let fppg: Double = try json.get("fppg")
+            let meta: NSDictionary = try json.get("player_meta")
+            let srid: String = try meta.get("srid")
+            let team: NSDictionary = try meta.get("team")
+            let teamAlias: String = try team.get("alias")
+            self.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid)
+        } catch let error {
+            throw APIError.ModelError(self.dynamicType, error)
+        }
+    }
+}
+
+class DraftGroupPlayer: Player {
+    let position: String
+    let gameSRID: String
     
+    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, position: String, gameSRID: String) {
+        self.position = position
+        self.gameSRID = gameSRID
+        super.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid)
+    }
+
+    convenience init(JSON json: NSDictionary) throws {
+        do {
+            let id: Int = try json.get("player_id")
+            let name: String = try json.get("name")
+            let salary: Double = try json.get("salary")
+            let fppg: Double = try json.get("fppg")
+            let srid: String = try json.get("player_srid")
+            let teamAlias: String = try json.get("team_alias")
+            let position: String = try json.get("position")
+            let gameSRID: String = try json.get("game_srid")
+            self.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position, gameSRID: gameSRID)
+        } catch let error {
+            throw APIError.ModelError(self.dynamicType, error)
+        }
+    }
+}
+
     
     /*
 

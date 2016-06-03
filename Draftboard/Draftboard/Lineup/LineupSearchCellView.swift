@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+/*
 class LineupSearchCellView: UITableViewCell {
     @IBOutlet weak var topBorderView: UIView!
     @IBOutlet weak var bottomBorderView: UIView!
@@ -76,3 +76,4 @@ class LineupSearchCellView: UITableViewCell {
         }
     }
 }
+*/

@@ -104,7 +104,7 @@ class LineupDetailView: UIView {
             
             nameField.topRancor.constraintEqualToRancor(headerView.topRancor),
             nameField.leftRancor.constraintEqualToRancor(headerView.leftRancor),
-            nameField.rightRancor.constraintEqualToRancor(editButton.leftRancor, constant: 15.0),
+            nameField.rightRancor.constraintEqualToRancor(headerView.rightRancor),
             nameField.bottomRancor.constraintEqualToRancor(headerView.bottomRancor),
             
             editButton.topRancor.constraintEqualToRancor(headerView.topRancor),
@@ -190,12 +190,13 @@ class LineupDetailView: UIView {
         flipButton.setImage(UIImage(named: "icon-flip"), forState: .Normal)
         flipButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 4, 4)
         
+        nameField.clearButtonEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
         nameField.edgeInsets = UIEdgeInsetsMake(0, 44, 0, 0)
+        nameField.clearButtonMode = .Never
         nameField.font = UIFont.openSansRegular()?.fontWithSize(16.0)
         nameField.textColor = UIColor(0x46495e)
-        nameField.clearButtonMode = .WhileEditing
-        nameField.placeholder = "Lineup Name"
         nameField.returnKeyType = .Done
+        nameField.userInteractionEnabled = false
         
         headerBorderView.backgroundColor = UIColor(0xebedf2)
         
@@ -535,7 +536,8 @@ class StatView: UIView {
 
 
 class TextField: UITextField {
-    lazy var edgeInsets: UIEdgeInsets = UIEdgeInsetsZero
+    var edgeInsets: UIEdgeInsets = UIEdgeInsetsZero
+    var clearButtonEdgeInsets: UIEdgeInsets = UIEdgeInsetsZero
     
     override func textRectForBounds(bounds: CGRect) -> CGRect {
         return super.textRectForBounds(UIEdgeInsetsInsetRect(bounds, edgeInsets))
@@ -547,6 +549,10 @@ class TextField: UITextField {
     
     override func editingRectForBounds(bounds: CGRect) -> CGRect {
         return textRectForBounds(bounds)
+    }
+    
+    override func clearButtonRectForBounds(bounds: CGRect) -> CGRect {
+        return super.clearButtonRectForBounds(UIEdgeInsetsInsetRect(bounds, clearButtonEdgeInsets))
     }
 }
 

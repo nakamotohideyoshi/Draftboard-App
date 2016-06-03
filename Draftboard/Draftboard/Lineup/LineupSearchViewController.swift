@@ -8,7 +8,7 @@
 
 import UIKit
 import PromiseKit
-
+/*
 class LineupSearchViewController: DraftboardViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -395,3 +395,4 @@ extension LineupSearchViewController: StatFooterDataSource {
 private extension Selector {
     static let didTapPlayerInfo = #selector(LineupSearchViewController.didTapPlayerInfo(_:))
 }
+ */

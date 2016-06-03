@@ -40,9 +40,9 @@ class DraftGroupWithPlayers {
     let id: Int
     let sportName: String
     let start: NSDate
-    let players: [Player]
+    let players: [DraftGroupPlayer]
     
-    init(id: Int, sportName: String, start: NSDate, players: [Player]) {
+    init(id: Int, sportName: String, start: NSDate, players: [DraftGroupPlayer]) {
         self.id = id
         self.sportName = sportName
         self.start = start
@@ -55,7 +55,7 @@ class DraftGroupWithPlayers {
             let sportName: String = try json.get("sport")
             let start: NSDate = try API.dateFromString(try json.get("start"))
             let playersJSON: [NSDictionary] = try json.get("players")
-            let players: [Player] = try playersJSON.map { try Player(JSON: $0) }
+            let players: [DraftGroupPlayer] = try playersJSON.map { try DraftGroupPlayer(JSON: $0) }
             self.init(id: id, sportName: sportName, start: start, players: players)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
