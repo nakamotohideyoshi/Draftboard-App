@@ -62,13 +62,13 @@ class Sport {
     ]
 }
 
-class LineupSlot {
+struct LineupSlot {
     let name: String
     let description: String
     let positions: [String]
-    var player: Player?
+    var player: LineupPlayer?
     
-    init(name: String, description: String, positions: [String], player: Player? = nil) {
+    init(name: String, description: String, positions: [String], player: LineupPlayer? = nil) {
         self.name = name
         self.description = description
         self.positions = positions
@@ -107,7 +107,7 @@ class Lineup {
     var name: String
     let sportName: String
     let draftGroupID: Int
-    let slots: [LineupSlot]
+    var slots: [LineupSlot]
     // Extra
     let salaryCap: Double
 //    let start: NSDate
@@ -116,20 +116,21 @@ class Lineup {
     
     init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [LineupPlayer]? = nil) {
         self.id = id ?? -1
-        self.name = name ?? ""
+        self.name = name ?? "New Lineup"
         self.sportName = sportName
         self.draftGroupID = draftGroupID
         self.slots = Sport.slotTemplates[sportName]!
         self.salaryCap = Sport.salaryCaps[sportName]!
         for (i, slot) in self.slots.enumerate() {
-            slot.player = players?[i]
+            slots[i].player = players?[i]
         }
     }
     
-    // Intitializer for empty/blank lineup
-    convenience init(draftGroup: DraftGroup) {
-        self.init(sportName: draftGroup.sportName, draftGroupID: draftGroup.id)
-    }
+    
+//    // Intitializer for empty/blank lineup
+//    convenience init(draftGroup: DraftGroup) {
+//        self.init(sportName: draftGroup.sportName, draftGroupID: draftGroup.id)
+//    }
     
     // Initializer for api/lineup/upcoming
     convenience init(JSON: NSDictionary) throws {
@@ -139,7 +140,11 @@ class Lineup {
             let sportName: String = try JSON.get("sport")
             let draftGroupID: Int = try JSON.get("draft_group")
             let playersJSON: [NSDictionary] = try JSON.get("players")
-            let players: [LineupPlayer] = try playersJSON.sortByIndex().map { try LineupPlayer(JSON: $0) }
+            let players = try playersJSON.sortBy {
+                $0["idx"] as? Int ?? 0 // stdlib sort can't throw
+            }.map {
+                try LineupPlayer(JSON: $0)
+            }
             self.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
@@ -147,6 +152,29 @@ class Lineup {
     }
     
 }
+
+class LineupWithStart: Lineup {
+    let start: NSDate
+    
+    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [LineupPlayer]? = nil, start: NSDate) {
+        self.start = start
+        super.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players)
+    }
+    
+    // Intitializer for empty/blank lineup
+    convenience init(draftGroup: DraftGroup) {
+        self.init(sportName: draftGroup.sportName, draftGroupID: draftGroup.id, start: draftGroup.start)
+    }
+
+}
+
+extension Lineup {
+    func withStart(start: NSDate) -> LineupWithStart {
+        let players = slots.flatMap { $0.player }
+        return LineupWithStart(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players, start: start)
+    }
+}
+
 
 /*
 class MutableLineup {
@@ -165,13 +193,6 @@ class MutableLineup {
     }
 }
 */
-
-private extension Array where Element: NSDictionary {
-    func sortByIndex() throws -> [Element] {
-        let indices: [Int] = try self.map { try $0.get("idx") }
-        return self.sortByOther(indices) { $0 < $1 }
-    }
-}
 
 //class LineupWithInfo {
 //    let id: Int

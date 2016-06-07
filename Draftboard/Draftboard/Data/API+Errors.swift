@@ -15,6 +15,7 @@ enum APIError: ErrorType {
     case JSONTypeMismatch(Any, Any.Type)
     case InvalidToken(APIRequest)
     case InvalidDateString(String)
+    case BadResponseCode(Int)
     case ModelError(Any.Type, ErrorType)
     case Whatever
 }
@@ -30,6 +31,13 @@ extension API_Errors {
         }
         if response.statusCode == 403 && string.lowercaseString.containsString("credentials") {
             return APIError.InvalidToken(request)
+        }
+        return nil
+    }
+    
+    static let BadResponseCodeCondition: APIRequestErrorCondition = { request, _, string, response in
+        if response.statusCode / 100 != 2 {
+            return APIError.BadResponseCode(response.statusCode)
         }
         return nil
     }

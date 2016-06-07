@@ -23,7 +23,7 @@ class Team {
         self.city = city
     }
     
-    convenience init(JSON json: NSDictionary) throws {
+    convenience init(json: NSDictionary) throws {
         do {
             let id: Int = try json.get("id")
             let srid: String = try json.get ("srid")

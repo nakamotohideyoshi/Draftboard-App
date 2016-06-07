@@ -60,6 +60,23 @@ class LineupPlayer: Player {
     }
 }
 
+class LineupPlayerWithGame: LineupPlayer {
+    let team: Team
+    let game: Game
+    
+    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, game: Game) {
+        self.team = (teamAlias == game.home.alias) ? game.home : game.away
+        self.game = game
+        super.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid)
+    }
+}
+
+extension LineupPlayer {
+    func withGame(game: Game) -> LineupPlayerWithGame {
+        return LineupPlayerWithGame(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, game: game)
+    }
+}
+
 class DraftGroupPlayer: Player {
     let position: String
     let gameSRID: String

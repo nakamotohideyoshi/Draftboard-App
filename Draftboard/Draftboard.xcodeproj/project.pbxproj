@@ -61,6 +61,7 @@
 		3E192C3B1CEB88CE0021A31D /* LineupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C3A1CEB88CE0021A31D /* LineupDetailView.swift */; };
 		3E19DA1D1C03B75000E6B53F /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19DA1C1C03B75000E6B53F /* LoaderView.swift */; };
 		3E272EAA1C2880390023B303 /* TeamNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E272EA91C2880390023B303 /* TeamNames.swift */; };
+		3E447D6C1D0284F400BE7F12 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E447D6B1D0284F400BE7F12 /* Extensions.swift */; };
 		3E608D921C1B72FC0085569D /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E608D911C1B72FC0085569D /* Format.swift */; };
 		3E73AADA1C850D89000E7D99 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73AAD91C850D89000E7D99 /* CountdownView.swift */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
@@ -255,6 +256,7 @@
 		3E192C3A1CEB88CE0021A31D /* LineupDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDetailView.swift; sourceTree = "<group>"; };
 		3E19DA1C1C03B75000E6B53F /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		3E272EA91C2880390023B303 /* TeamNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamNames.swift; sourceTree = "<group>"; };
+		3E447D6B1D0284F400BE7F12 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3E608D911C1B72FC0085569D /* Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		3E73AAD91C850D89000E7D99 /* CountdownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -647,6 +649,7 @@
 				3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */,
 				3E608D911C1B72FC0085569D /* Format.swift */,
 				3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */,
+				3E447D6B1D0284F400BE7F12 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				5DAC079B1C222F360002B97B /* DraftboardSegmentCell.swift in Sources */,
 				5D5386DA1BF534CF002CDAF3 /* LineupStatFeesView.swift in Sources */,
 				5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */,
+				3E447D6C1D0284F400BE7F12 /* Extensions.swift in Sources */,
 				5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */,
 				3CDC73601BF1472B00DDF60E /* ContestLiveDetailViewController.swift in Sources */,
 				5D3C726C1BF11EE3005A27B1 /* GlobalFilterItem.swift in Sources */,

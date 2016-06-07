@@ -26,7 +26,7 @@ class Boxscore {
             let srid: String = try json.get("srid")
             let sridHome: String = try json.get("srid_home")
             let sridAway: String = try json.get("srid_away")
-            let start: NSDate = try API.dateFromString(try json.get("srid"))
+            let start: NSDate = try API.dateFromString(try json.get("start"))
             self.init(srid: srid, sridHome: sridHome, sridAway: sridAway, start: start)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)

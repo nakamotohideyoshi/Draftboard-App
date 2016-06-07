@@ -10,7 +10,10 @@ import UIKit
 import PromiseKit
 
 class Data {
-    static let teams = Cache { API.sportsTeams() }
+    static let sportsTeams = MultiCache(defaultMaxCacheAge: .OneDay, defaultMinCacheAge: .OneDay) {
+        sportName in API.sportsTeams(sportName: sportName)
+    }
+    static let boxscores = MultiCache { draftGroupID in API.draftGroupBoxscores(draftGroupID: draftGroupID) }
     static let upcomingLineups = Cache { API.lineupUpcoming() }
     static let draftGroups = Cache { API.draftGroupUpcoming() }
     static let draftGroup = MultiCache { id in API.draftGroup(id: id) }
@@ -20,24 +23,24 @@ class Data {
 //enum SortByOther: ErrorType {
 //    case UnequalLength
 //}
-extension Array {
-    func sortByOther<U>(other: Array<U>, isOrderedBefore: (U, U) -> Bool) -> [Element] {
-//        if self.count != other.count { throw SortByOther.UnequalLength }
-        return self.enumerate().sort { (a, b) in
-            return isOrderedBefore(other[a.index], other[b.index])
-        }.map { (i, element) in element }
-    }
-}
-
-extension Array where Element: Lineup {
-    func sortedByDate() -> Promise<[Element]> {
-        return when(map { $0.getDraftGroup() }).then { draftGroups -> [Element] in
-            return self.sortByOther(draftGroups) { (a, b) in
-                a.start.earlierDate(b.start) == a.start
-            }
-        }
-    }
-}
+//extension Array {
+//    func sortByOther<U>(other: Array<U>, isOrderedBefore: (U, U) -> Bool) -> [Element] {
+////        if self.count != other.count { throw SortByOther.UnequalLength }
+//        return self.enumerate().sort { (a, b) in
+//            return isOrderedBefore(other[a.index], other[b.index])
+//        }.map { (i, element) in element }
+//    }
+//}
+//
+//extension Array where Element: Lineup {
+//    func sortedByDate() -> Promise<[Element]> {
+//        return when(map { $0.getDraftGroup() }).then { draftGroups -> [Element] in
+//            return self.sortByOther(draftGroups) { (a, b) in
+//                a.start.earlierDate(b.start) == a.start
+//            }
+//        }
+//    }
+//}
 
 extension Lineup {
     func getDraftGroup() -> Promise<DraftGroupWithPlayers> {

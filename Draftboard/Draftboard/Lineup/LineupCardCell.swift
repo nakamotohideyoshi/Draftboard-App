@@ -166,7 +166,6 @@ class LineupCardCell: UICollectionViewCell {
 
 class LineupCardShadowView: UIView {
     override func drawRect(rect: CGRect) {
-        print("drawRect")
         let radius = bounds.width * 0.5
         let center = CGPointMake(radius, radius)
         let black = UIColor(white: 0, alpha: 0.3).CGColor

@@ -22,7 +22,7 @@ class LineupDetailViewController: DraftboardViewController {
     var flipButton: UIButton { return lineupDetailView.flipButton }
     var nameField: UITextField { return lineupDetailView.nameField }
     
-    var lineup: Lineup?
+    var lineup: LineupWithStart?
     var draftGroup: DraftGroup?
     
     /*
@@ -40,7 +40,7 @@ class LineupDetailViewController: DraftboardViewController {
     var lineupPMR: Double = 0
      */
     
-    convenience init(lineup: Lineup) {
+    convenience init(lineup: LineupWithStart) {
         self.init()
         self.lineup = lineup
     }
@@ -69,6 +69,7 @@ class LineupDetailViewController: DraftboardViewController {
         view.tableView.dataSource = self
         
         // Countdown
+        view.footerView.countdown.countdownView.date = lineup!.start
         
         // Fees / Entries
         
@@ -204,7 +205,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
             if let player = slot.player {
                 cell.avatarImageView.player = player
                 cell.nameLabel.text = player.shortName
-                cell.teamLabel.text = " - " + player.teamAlias
+                if let player = player as? LineupPlayerWithGame {
+                    cell.teamLabel.text = " - " + player.game.home.alias + " vs " + player.game.away.alias
+                } else {
+                    cell.teamLabel.text = " - " + player.teamAlias
+                }
                 cell.salaryLabel.text = Format.currency.stringFromNumber(player.salary ?? 0)
             }
         }

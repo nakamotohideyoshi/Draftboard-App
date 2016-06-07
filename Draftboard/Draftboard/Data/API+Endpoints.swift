@@ -12,17 +12,31 @@ import PromiseKit
 private typealias API_Endpoints = API
 extension API_Endpoints {
 
-    class func sportsTeams() -> Promise<[Team]> {
-        let paths = [
-            "api/sports/teams/nba/",
-            "api/sports/teams/nhl/",
-            "api/sports/teams/mlb/"
-        ]
-        let getAll: [Promise<[NSDictionary]>] = paths.map { API.get($0) }
-        return when(getAll).then {
-            try $0.flatten().map { try Team(JSON: $0) }
+    class func sportsTeams(sportName sportName: String) -> Promise<[Team]> {
+        let path = "api/sports/teams/\(sportName)/"
+        return API.get(path).then { (json: [NSDictionary]) -> [Team] in
+            try json.map { try Team(json: $0) }
         }
     }
+    
+    class func draftGroupBoxscores(draftGroupID draftGroupID: Int) -> Promise<[Boxscore]> {
+        let path = "api/draft-group/boxscores/\(draftGroupID)/"
+        return API.get(path).then { (json: [String: NSDictionary]) -> [Boxscore] in
+            try json.values.map { try Boxscore(json: $0) }
+        }
+    }
+
+//    class func sportsTeams() -> Promise<[Team]> {
+//        let paths = [
+//            "api/sports/teams/nba/",
+//            "api/sports/teams/nhl/",
+//            "api/sports/teams/mlb/"
+//        ]
+//        let getAll: [Promise<[NSDictionary]>] = paths.map { API.get($0) }
+//        return when(getAll).then {
+//            try $0.flatten().map { try Team(JSON: $0) }
+//        }
+//    }
     
     class func draftGroupUpcoming() -> Promise<[DraftGroup]> {
         let path = "api/draft-group/upcoming/"

@@ -31,13 +31,16 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     
     override func viewWillAppear(animated: Bool) {
         // Get lineups
-        Data.upcomingLineups.get().then { lineups in
-            return lineups.sortedByDate()
-        }.then { sortedLineups -> Void in
-            if self.lineupDetailViewControllers?.count != sortedLineups.count {
-                self.lineupDetailViewControllers = sortedLineups.map { LineupDetailViewController(lineup: $0) }
-            }
+        DerivedData.upcomingLineupsWithStarts().then { lineups in
+            self.lineupDetailViewControllers = lineups.map { LineupDetailViewController(lineup: $0) }
         }
+//        Data.upcomingLineups.get().then { lineups -> [Lineup] in
+//            return lineups.sortBy(>){$0.id}
+//        }.then { sortedLineups -> Void in
+//            if self.lineupDetailViewControllers?.count != sortedLineups.count {
+//                self.lineupDetailViewControllers = sortedLineups.map { LineupDetailViewController(lineup: $0) }
+//            }
+//        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -138,7 +141,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     func createLineup() {
         pickDraftGroup().then { draftGroup -> Void in
 //            let lineup = MutableLineup(lineup: lineup)
-            let lineup = Lineup(draftGroup: draftGroup)
+            let lineup = LineupWithStart(draftGroup: draftGroup)
             let vc = LineupDetailViewController(lineup: lineup)
             vc.editing = true
             self.navController?.pushViewController(vc)
@@ -190,10 +193,15 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         navController?.pushViewController(nvc)
          */
     }
-    func editLineup(lineup: Lineup) {
-        let vc = LineupDetailViewController(lineup: lineup)
-        vc.editing = true
-        navController?.pushViewController(vc)
+    func editLineup(lineup: LineupWithStart) {
+        lineup.getPlayersWithInfo().then { players -> Void in
+            for (i, player) in players.enumerate() {
+                lineup.slots[i].player = player
+            }
+            let vc = LineupDetailViewController(lineup: lineup)
+            vc.editing = true
+            self.navController?.pushViewController(vc)
+        }
     }
     /*
 
