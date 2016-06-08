@@ -59,9 +59,11 @@ class LineupDetailViewController: DraftboardViewController {
         // Fees / Entries
         
         // Total salary remaining
+        lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
         
         // Average salary remaining
-        
+        lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
+
         // Points
         
         // Winnings
@@ -199,12 +201,14 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
 
 private typealias TextFieldDelegate = LineupDetailViewController
 extension TextFieldDelegate: UITextFieldDelegate {
-    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if nameField.text ?? "" == "" {
+            nameField.placeholder = uneditedLineup?.name ?? "Lineup Name"
+            nameField.text = uneditedLineup?.name ?? "Lineup Name"
+        }
+    }
     func textFieldShouldReturn(_: UITextField) -> Bool {
         nameField.resignFirstResponder()
-        if nameField.text ?? "" == "" {
-            nameField.text = nameField.placeholder
-        }
         return true
     }
     

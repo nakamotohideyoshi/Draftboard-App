@@ -157,20 +157,24 @@ extension Lineup {
     }
 }
 
-/*
 // Computed properties
 extension Lineup {
-    private var flatPlayers: [Player] {
-        get { return players.flatMap {$0} }
+    var filledSlots: [LineupSlot] {
+        return slots.filter { $0.player != nil }
+    }
+    var emptySlots: [LineupSlot] {
+        return slots.filter { $0.player == nil }
     }
     var salary: Double {
-        get { return flatPlayers.reduce(0) {$0 + $1.salary} }
+        return slots.reduce(0) {$0 + ($1.player?.salary ?? 0)}
     }
-    var points: Double {
-        get { return flatPlayers.reduce(0) {$0 + $1.points} }
+    var totalSalaryRemaining: Double {
+        return salaryCap - salary
     }
-    var mvp: Player? {
-        get { return flatPlayers.sort {$0.salary > $1.salary}.first }
+    var avgSalaryRemaining: Double {
+        if emptySlots.count == 0 {
+            return 0
+        }
+        return totalSalaryRemaining / Double(emptySlots.count)
     }
 }
- */

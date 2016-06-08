@@ -401,7 +401,7 @@ class LineupFooterView: UIView {
         totalSalaryRem.titleLabel.text = "REM. SALARY"
         totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(0.00)!
         
-        avgSalaryRem.titleLabel.text = "AVG. SALARY"
+        avgSalaryRem.titleLabel.text = "AVG. SALARY REM."
         avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(0.00)!
         
         points.titleLabel.text = "POINTS"
