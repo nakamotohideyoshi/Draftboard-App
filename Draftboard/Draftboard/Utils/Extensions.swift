@@ -101,7 +101,7 @@ extension Dictionary {
 }
 
 
-
+// Date comparison
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
     return lhs === rhs || lhs.compare(rhs) == .OrderedSame
 }
@@ -111,4 +111,21 @@ public func <(lhs: NSDate, rhs: NSDate) -> Bool {
 }
 
 extension NSDate: Comparable { }
+
+// Optional arrays with Equatable Elements
+func ==<T: Equatable>(lhs: [T]?, rhs: [T]?) -> Bool {
+    switch (lhs,rhs) {
+    case (.Some(let lhs), .Some(let rhs)):
+        return lhs == rhs
+    case (.None, .None):
+        return true
+    default:
+        return false
+    }
+}
+func !=<T: Equatable>(lhs: [T]?, rhs: [T]?) -> Bool {
+    return !(lhs == rhs)
+}
+
+
 

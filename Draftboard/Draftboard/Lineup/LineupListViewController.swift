@@ -11,11 +11,11 @@ import PromiseKit
 
 class LineupListViewController: DraftboardViewController, UIActionSheetDelegate {
     
-    var lineupListView: LineupListView! { didSet { view = lineupListView } }
+    var lineupListView: LineupListView { return view as! LineupListView }
     var lineupDetailViewControllers: [LineupDetailViewController]? { didSet { update() } }
     
     override func loadView() {
-        lineupListView = LineupListView()
+        view = LineupListView()
     }
     
     override func viewDidLoad() {
@@ -76,13 +76,9 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     }
     
     func editLineup(lineup: LineupWithStart) {
-        // FIXME: push vc immediately, assign lineup on data ready
-        lineup.getPlayersWithGames().then { players -> Void in
-            lineup.players = players
-            let vc = LineupDetailViewController(lineup: lineup)
-            vc.editing = true
-            self.navController?.pushViewController(vc)
-        }
+        let vc = LineupDetailViewController(lineup: lineup)
+        vc.editing = true
+        self.navController?.pushViewController(vc)
     }
 
 // MARK: -

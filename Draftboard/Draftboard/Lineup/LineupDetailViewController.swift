@@ -18,27 +18,14 @@ class LineupDetailViewController: DraftboardViewController {
      */
     
     var lineupDetailView: LineupDetailView { return view as! LineupDetailView }
+    var tableView: UITableView { return lineupDetailView.tableView }
     var editButton: UIButton { return lineupDetailView.editButton }
     var flipButton: UIButton { return lineupDetailView.flipButton }
+    var sportIcon: UIImageView { return lineupDetailView.sportIcon }
     var nameField: UITextField { return lineupDetailView.nameField }
     
+    var uneditedLineup: LineupWithStart?
     var lineup: LineupWithStart?
-    var draftGroup: DraftGroup?
-    
-    /*
-    var lineupID: Int?
-    var lineupSport: String = ""
-    var lineupName: String = ""
-    var lineupPlayers: [Player] = []
-    var lineupStart: NSDate = NSDate()
-    var lineupFees: Double = 0.00
-    var lineupEntries: Int = 0
-    var lineupBudget: Double = 0.00
-    var lineupSalary: Double = 0.00
-    var lineupPoints: Double = 0
-    var lineupWinnings: Double = 0.00
-    var lineupPMR: Double = 0
-     */
     
     convenience init(lineup: LineupWithStart) {
         self.init()
@@ -50,26 +37,24 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     override func viewDidLoad() {
-        let view = lineupDetailView
-        
         // Sport icon
-        view.sportIcon.image = UIImage(named: "icon-baseball")
+        sportIcon.image = UIImage(named: "icon-baseball")
         
         // Lineup name
-        view.nameField.delegate = self
-        view.nameField.placeholder = lineup?.name ?? "Lineup Name"
-        view.nameField.text = lineup?.name ?? "Lineup Name"
+        nameField.delegate = self
+        nameField.placeholder = lineup?.name ?? "Lineup Name"
+        nameField.text = lineup?.name ?? "Lineup Name"
         
         // Edit button
         
         // Flip button
         
         // Players
-        view.tableView.delegate = self
-        view.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
         // Countdown
-        view.footerView.countdown.countdownView.date = lineup!.start
+        lineupDetailView.footerView.countdown.countdownView.date = lineup!.start
         
         // Fees / Entries
         
@@ -83,20 +68,28 @@ class LineupDetailViewController: DraftboardViewController {
         
         // PMR
         
-        view.editAction = {
-            if view.footerView.configuration == .Normal {
-                view.footerView.configuration = .Editing
-            } else if view.footerView.configuration == .Editing {
-                view.footerView.configuration = .Live
-            } else if view.footerView.configuration == .Live {
-                view.footerView.configuration = .Normal
-            }
-            
-        }
+//        let footerView = lineupDetailView.footerView
+//        lineupDetailView.editAction = {
+//            if footerView.configuration == .Normal {
+//                footerView.configuration = .Editing
+//            } else if footerView.configuration == .Editing {
+//                footerView.configuration = .Live
+//            } else if footerView.configuration == .Live {
+//                footerView.configuration = .Normal
+//            }
+//        }
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        
+        uneditedLineup = LineupWithStart(lineup: lineup!)
+        
+        // Get game info for players
+        lineup?.getPlayersWithGames().then { playersWithGames -> Void in
+            self.lineup?.players = playersWithGames
+            self.tableView.reloadData()
+        }
         
         // Edit button
         editButton.alpha = editing ? 0 : 1
@@ -119,7 +112,29 @@ class LineupDetailViewController: DraftboardViewController {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if buttonType == .Back {
-            self.navController?.popViewController()
+            if nameField.isFirstResponder() {
+                nameField.resignFirstResponder()
+            }
+            let dirty = (nameField.text != uneditedLineup?.name) ||
+                (lineup?.players != uneditedLineup?.players)
+            if !dirty {
+                self.navController?.popViewController()
+            } else {
+                let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+                let actions = ["Abandon changes", "Keep working"]
+                
+                vc.actions = actions
+                vc.promise.then { index -> Void in
+                    RootViewController.sharedInstance.popAlertViewController()
+                    if index == 0 {
+                        self.navController?.popViewController()
+                    }
+                }
+                
+                RootViewController.sharedInstance.pushAlertViewController(vc)
+                vc.titleLabel.text = "REALLY?"
+                vc.errorLabel.text = "You'll lose your changes if you leave without saving."
+            }
         }
     }
     
@@ -162,12 +177,15 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
             if let player = slot.player {
                 cell.avatarImageView.player = player
                 cell.nameLabel.text = player.shortName
-                if let player = player as? LineupPlayerWithGame {
+                if let player = player as? PlayerWithGame {
                     cell.teamLabel.text = " - " + player.game.home.alias + " vs " + player.game.away.alias
                 } else {
                     cell.teamLabel.text = " - " + player.teamAlias
                 }
                 cell.salaryLabel.text = Format.currency.stringFromNumber(player.salary ?? 0)
+            } else {
+                cell.avatarImageView.player = nil
+                cell.nameLabel.text = "Select \(slot.description)"
             }
         }
         cell.borderView.hidden = (indexPath.row == (lineup?.slots.count ?? 0) - 1)
@@ -182,8 +200,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
 private typealias TextFieldDelegate = LineupDetailViewController
 extension TextFieldDelegate: UITextFieldDelegate {
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    func textFieldShouldReturn(_: UITextField) -> Bool {
+        nameField.resignFirstResponder()
+        if nameField.text ?? "" == "" {
+            nameField.text = nameField.placeholder
+        }
         return true
     }
     

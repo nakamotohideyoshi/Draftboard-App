@@ -66,9 +66,9 @@ class LineupSlot {
     let name: String
     let description: String
     let positions: [String]
-    var player: LineupPlayer?
+    var player: Player?
     
-    init(name: String, description: String, positions: [String], player: LineupPlayer? = nil) {
+    init(name: String, description: String, positions: [String], player: Player? = nil) {
         self.name = name
         self.description = description
         self.positions = positions
@@ -83,12 +83,12 @@ class Lineup {
     let draftGroupID: Int
     var slots: [LineupSlot]
     let salaryCap: Double
-    var players: [LineupPlayer]? {
+    var players: [Player]? {
         get { return _players() }
         set { _setPlayers(newValue) }
     }
     
-    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [LineupPlayer]? = nil) {
+    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [Player]? = nil) {
         self.id = id ?? -1
         self.name = name ?? "New Lineup"
         self.sportName = sportName
@@ -98,12 +98,12 @@ class Lineup {
         self.players = players
     }
     
-    func _players() -> [LineupPlayer]? {
+    func _players() -> [Player]? {
         let players = slots.flatMap { $0.player }
         return (players.count == slots.count) ? players : nil
     }
     
-    func _setPlayers(newValue: [LineupPlayer]?) {
+    func _setPlayers(newValue: [Player]?) {
         if let players = newValue where players.count == slots.count {
             players.enumerate().forEach { slots[$0].player = $1 }
         }
@@ -120,7 +120,7 @@ class Lineup {
             let players = try playersJSON.sortBy {
                 $0["idx"] as? Int ?? 0 // stdlib sort can't throw
             }.map {
-                try LineupPlayer(JSON: $0)
+                try Player(JSON: $0)
             }
             self.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players)
         } catch let error {
@@ -133,7 +133,7 @@ class Lineup {
 class LineupWithStart: Lineup {
     let start: NSDate
     
-    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [LineupPlayer]? = nil, start: NSDate) {
+    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [Player]? = nil, start: NSDate) {
         self.start = start
         super.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players)
     }
@@ -141,6 +141,11 @@ class LineupWithStart: Lineup {
     // Intitializer for empty/blank lineup
     convenience init(draftGroup: DraftGroup) {
         self.init(sportName: draftGroup.sportName, draftGroupID: draftGroup.id, start: draftGroup.start)
+    }
+    
+    // Copy
+    convenience init(lineup: LineupWithStart) {
+        self.init(id: lineup.id, name: lineup.name, sportName: lineup.sportName, draftGroupID: lineup.draftGroupID, players: lineup.players, start: lineup.start)
     }
 
 }

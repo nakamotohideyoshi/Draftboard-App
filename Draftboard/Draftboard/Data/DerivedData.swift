@@ -80,9 +80,10 @@ extension Lineup {
         return DerivedData.games(sportName: sportName, draftGroupID: draftGroupID)
     }
     
-    func getPlayersWithGames() -> Promise<[LineupPlayerWithGame]?> {
-        return getGames().then { games -> [LineupPlayerWithGame]? in
+    func getPlayersWithGames() -> Promise<[PlayerWithGame]?> {
+        return getGames().then { games -> [PlayerWithGame]? in
             guard let players = self.players else { return nil }
+            if let players = players as? [PlayerWithGame] { return players }
             
             let gamesByTeam = games.transform([String: Game]()) {
                 $0[$1.home.alias] = $1
