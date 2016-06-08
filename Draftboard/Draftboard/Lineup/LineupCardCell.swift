@@ -17,7 +17,7 @@ class LineupCardCell: UICollectionViewCell {
     let lineupView = UIView()
     var lineupDetailView: LineupDetailView? { didSet { didSetLineupView() } }
     
-    var createAction: (() -> Void)? = {}
+    var createAction: (() -> Void)?
     
     init() {
         super.init(frame: CGRectZero)

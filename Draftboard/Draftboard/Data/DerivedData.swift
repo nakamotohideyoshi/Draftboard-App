@@ -41,9 +41,11 @@ class DerivedData {
         }
     }
     class func upcomingDraftGroupChoices(sportName sportName: String) -> Promise<[Choice<DraftGroup>]> {
+        let df = NSDateFormatter()
+        df.dateFormat = "eeee, MMM d - h:mm a"
         return draftGroupsBySportName.get().then {
             $0[sportName]!.map {
-                let title = "\($0.start)"
+                let title = df.stringFromDate($0.start)
                 let subtitle = "\($0.contestCount) Contests, \($0.numGames) Games"
                 return Choice(title: title, subtitle: subtitle, value: $0)
             }
@@ -52,43 +54,13 @@ class DerivedData {
 }
 
 extension DerivedData {
-    class func teamsByAlias(sportName sportName: String) -> Promise<[String: Team]> {
-        return Data.sportsTeams[sportName].get().then { (teams: [Team]) -> [String: Team] in
-            var teamsByAlias = [String: Team]()
-            teams.forEach { teamsByAlias[$0.alias] = $0 }
-            return teamsByAlias
-        }
-    }
-    
     class func games(sportName sportName: String, draftGroupID: Int) -> Promise<[Game]> {
-        return when(Data.sportsTeams[sportName].get(), Data.boxscores[draftGroupID].get()).then {
-            (teams: [Team], boxscores: [Boxscore]) -> [Game] in
-            
-//            var teamsByAlias = [String: Team]()
-//            teams.forEach { teamsByAlias[$0.alias] = $0 }
-            
-//            var teamsBySRID = [String: Team]()
-//            teams.forEach { teamsBySRID[$0.srid] = $0 }
-            /*
-            var teamsByAlias = teams.keyBy { $0.alias }
-             */
+        return when(Data.sportsTeams[sportName].get(), Data.boxscores[draftGroupID].get()).then { (teams, boxscores) -> [Game] in
             let teamsBySRID = teams.keyBy { $0.srid }
             return boxscores.flatMap {
                 guard let home = teamsBySRID[$0.sridHome], away = teamsBySRID[$0.sridAway] else { return nil }
                 return Game(srid: $0.srid, home: home, away: away, start: $0.start)
             }
-            /*
-            var gamesByAlias = [String: Game]()
-            boxscores.forEach { boxscore in
-                let home = teamsBySRID[boxscore.sridHome]!
-                let away = teamsBySRID[boxscore.sridAway]!
-                let game = Game(srid: boxscore.srid, home: home, away: away, start: boxscore.start)
-                gamesByAlias[home.alias] = game
-                gamesByAlias[away.alias] = game
-            }
-            
-            return Array(gamesByAlias.values)
-            */
         }
     }
 }
@@ -108,31 +80,18 @@ extension Lineup {
         return DerivedData.games(sportName: sportName, draftGroupID: draftGroupID)
     }
     
-    func getPlayersWithInfo() -> Promise<[LineupPlayerWithGame?]> {
-        return getGames().then { games -> [LineupPlayerWithGame?] in
+    func getPlayersWithGames() -> Promise<[LineupPlayerWithGame]?> {
+        return getGames().then { games -> [LineupPlayerWithGame]? in
+            guard let players = self.players else { return nil }
+            
             let gamesByTeam = games.transform([String: Game]()) {
                 $0[$1.home.alias] = $1
                 $0[$1.away.alias] = $1
                 return $0
             }
-//            let playersWithGames: [LineupPlayerWithGame?] = self.slots.map {
-//                guard let player = $0.player else { return nil }
-//                return player.withGame(gamesByTeam[player.teamAlias]!)
-//            }
-//            return playersWithGames
-            return self.slots.map {
-                guard let player = $0.player else { return nil }
-                return player.withGame(gamesByTeam[player.teamAlias]!)
-            }
-
-//            let gamesByTeam = games.keyBy{$0.home.alias}.assign(games.keyBy{$0.away.alias})
-//            var gamesByTeam = [String: Game]()
-//            games.forEach {
-//                gamesByTeam[$0.home.alias] = $0
-//                gamesByTeam[$0.away.alias] = $0
-//            }
+            
+            return players.map { $0.withGame(gamesByTeam[$0.teamAlias]!) }
         }
-//        let players = slots.flatMap { $0.player }
     }
 }
 

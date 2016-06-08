@@ -93,28 +93,6 @@ class LineupDetailViewController: DraftboardViewController {
             }
             
         }
-        
-        /*
-        if let draftGroup = draftGroup {
-            let countdownView = CountdownView(date: draftGroup.start, size: 18.0, color: UIColor(0x46495e))
-    //            countdownView.frame = view.liveInValue.bounds
-    //            countdownView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            view.liveInValue.addSubview(countdownView)
-            countdownView.leftRancor.constraintEqualToRancor(view.liveInValue.leftRancor).active = true
-            countdownView.topRancor.constraintEqualToRancor(view.liveInValue.topRancor).active = true
-        }
-         */
-
-        /*
-        lineup?.getDraftGroup().then { draftGroup -> Void in
-            let countdownView = CountdownView(date: draftGroup.start, size: 18.0, color: UIColor(0x46495e))
-//            countdownView.frame = view.liveInValue.bounds
-//            countdownView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            view.liveInValue.addSubview(countdownView)
-            countdownView.leftRancor.constraintEqualToRancor(view.liveInValue.leftRancor).active = true
-            countdownView.topRancor.constraintEqualToRancor(view.liveInValue.topRancor).active = true
-        }
-         */
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
@@ -137,11 +115,6 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     func update() {
-        if let lineup = lineup {
-            lineup.getDraftGroup().then { draftGroup -> Void in
-                
-            }
-        }
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
@@ -153,7 +126,7 @@ class LineupDetailViewController: DraftboardViewController {
     // DraftboardTitlebarDatasource
     
     override func titlebarTitle() -> String {
-        return (lineup == nil) ? "NEW LINEUP" : "EDIT LINEUP"
+        return (lineup?.id > 0) ? "EDIT LINEUP" : "NEW LINEUP"
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType? {
@@ -178,28 +151,12 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     // UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return lineup?.playerIDs.count ?? 0
         return lineup?.slots.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
         
-//        if let lineup = lineup {
-//            let playerID = lineup.playerIDs[indexPath.row]
-//
-//            lineup.getDraftGroup().then { draftGroup in
-//                let player = draftGroup.players[0]
-//                player.gameSRID
-//            }
-//            when(lineup.getDraftGroup(), lineup.getPlayer(id: playerID)).then { (draftGroup, player) -> in
-//                
-//            }
-//        }
-        
-//        lineup?.getDraftGroup().then { draftGroup in
-//            cell.
-//        }
         if let slot = lineup?.slots[indexPath.row] {
             cell.positionLabel.text = slot.name
             if let player = slot.player {

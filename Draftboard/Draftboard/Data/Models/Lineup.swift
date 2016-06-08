@@ -17,8 +17,8 @@ class Sport {
         "mlb": 50_000.00,
     ]
     
-    static let slotTemplates = [
-        "nfl": [
+    static let slotTemplates: [String: () -> [LineupSlot]] = [
+        "nfl": {[
             LineupSlot(name: "QB", description: "Quarterback", positions: ["QB"]),
             LineupSlot(name: "RB", description: "Running Back", positions: ["RB", "FB"]),
             LineupSlot(name: "RB", description: "Running Back", positions: ["RB", "FB"]),
@@ -27,8 +27,8 @@ class Sport {
             LineupSlot(name: "TE", description: "Tight End", positions: ["TE"]),
             LineupSlot(name: "FX", description: "Flex Player", positions: ["RB", "FB", "WR", "TE"]),
             LineupSlot(name: "FX", description: "Flex Player", positions: ["RB", "FB", "WR", "TE"]),
-        ],
-        "nba": [
+        ]},
+        "nba": {[
             LineupSlot(name: "G", description: "Guard", positions: ["PG", "SG"]),
             LineupSlot(name: "G", description: "Guard", positions: ["PG", "SG"]),
             LineupSlot(name: "F", description: "Forward", positions: ["SF", "PF"]),
@@ -37,8 +37,8 @@ class Sport {
             LineupSlot(name: "FX", description: "Flex Player", positions: ["PG", "SG", "SF", "PF", "C"]),
             LineupSlot(name: "FX", description: "Flex Player", positions: ["PG", "SG", "SF", "PF", "C"]),
             LineupSlot(name: "FX", description: "Flex Player", positions: ["PG", "SG", "SF", "PF", "C"]),
-        ],
-        "nhl": [
+        ]},
+        "nhl": {[
             LineupSlot(name: "F", description: "Forward", positions: ["C", "LW", "RW"]),
             LineupSlot(name: "F", description: "Forward", positions: ["C", "LW", "RW"]),
             LineupSlot(name: "F", description: "Forward", positions: ["C", "LW", "RW"]),
@@ -47,8 +47,8 @@ class Sport {
             LineupSlot(name: "FX", description: "Flex Player", positions: ["C", "D", "LW", "RW"]),
             LineupSlot(name: "FX", description: "Flex Player", positions: ["C", "D", "LW", "RW"]),
             LineupSlot(name: "G", description: "Goaltender", positions: ["G"]),
-        ],
-        "mlb": [
+        ]},
+        "mlb": {[
             LineupSlot(name: "SP", description: "Starting Pitcher", positions: ["SP"]),
             LineupSlot(name: "C", description: "Catcher", positions: ["C"]),
             LineupSlot(name: "1B", description: "First Baseman", positions: ["1B", "DH"]),
@@ -58,11 +58,11 @@ class Sport {
             LineupSlot(name: "OF", description: "Outfielder", positions: ["LF", "CF", "RF"]),
             LineupSlot(name: "OF", description: "Outfielder", positions: ["LF", "CF", "RF"]),
             LineupSlot(name: "OF", description: "Outfielder", positions: ["LF", "CF", "RF"]),
-        ],
+        ]},
     ]
 }
 
-struct LineupSlot {
+class LineupSlot {
     let name: String
     let description: String
     let positions: [String]
@@ -76,62 +76,39 @@ struct LineupSlot {
     }
 }
 
-/*
-class NewLineup {
-    let id: Int
-    let sportName: String
-    let draftGroupID: String
-    let start: NSDate
-    let name: String
-    let slots: [LineupSlot]
-    var players: [Player] { return slots.map { $0.player! } }
-    let salaryCap: Double
-    
-    init(id: Int = -1, sportName: String, name: String = "", players: [Player] = []) {
-        self.id = id
-        self.sportName = sportName
-        self.name = name
-        self.slots = Sport.slotTemplates[sportName]!
-        self.salaryCap = NewSport.salaryCaps[sportName]!
-    }
-}
-
-class NewLineupWith: NewLineup {
-    
-}
- */
-
 class Lineup {
-    // Core
     let id: Int
     var name: String
     let sportName: String
     let draftGroupID: Int
     var slots: [LineupSlot]
-    // Extra
     let salaryCap: Double
-//    let start: NSDate
-//    let entries: Int
-//    let fees: Double
+    var players: [LineupPlayer]? {
+        get { return _players() }
+        set { _setPlayers(newValue) }
+    }
     
     init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [LineupPlayer]? = nil) {
         self.id = id ?? -1
         self.name = name ?? "New Lineup"
         self.sportName = sportName
         self.draftGroupID = draftGroupID
-        self.slots = Sport.slotTemplates[sportName]!
+        self.slots = Sport.slotTemplates[sportName]!()
         self.salaryCap = Sport.salaryCaps[sportName]!
-        for (i, slot) in self.slots.enumerate() {
-            slots[i].player = players?[i]
-        }
+        self.players = players
     }
     
+    func _players() -> [LineupPlayer]? {
+        let players = slots.flatMap { $0.player }
+        return (players.count == slots.count) ? players : nil
+    }
     
-//    // Intitializer for empty/blank lineup
-//    convenience init(draftGroup: DraftGroup) {
-//        self.init(sportName: draftGroup.sportName, draftGroupID: draftGroup.id)
-//    }
-    
+    func _setPlayers(newValue: [LineupPlayer]?) {
+        if let players = newValue where players.count == slots.count {
+            players.enumerate().forEach { slots[$0].player = $1 }
+        }
+    }
+
     // Initializer for api/lineup/upcoming
     convenience init(JSON: NSDictionary) throws {
         do {
@@ -175,117 +152,7 @@ extension Lineup {
     }
 }
 
-
 /*
-class MutableLineup {
-    var id: Int?
-    var name: String?
-    var draftGroupID: Int?
-    var playerIDs: [Int?] = []
-    
-    func copy() -> Lineup? {
-        if let id = id, name = name, draftGroupID = draftGroupID {
-            if !playerIDs.contains({$0 == nil}) {
-                return Lineup(id: id, name: name, draftGroupID: draftGroupID, playerIDs: playerIDs.map {$0!})
-            }
-        }
-        return nil
-    }
-}
-*/
-
-//class LineupWithInfo {
-//    let id: Int
-//    let name: String
-//    let draftGroup: DraftGroupWithInfo
-//    let players: [PlayerWithInfo]
-//}
-
-    /*
-    convenience init?(data: NSDictionary) {
-        self.init()
-        
-        // JSON
-        guard let dataID = data["id"] as? Int,
-            dataName = data["name"] as? String,
-            dataSport = data["sport"] as? String,
-            dataDraftGroup = data["draft_group"] as? Int
-        else { return nil }
-        
-        // Dependencies
-        guard let sport = Sport(name: dataSport)
-        else { return nil }
-        
-        // Other setup
-        let draftGroup = DraftGroup()
-        draftGroup.id = dataDraftGroup
-        
-        // Assignment
-        self.id = dataID
-        self.name = dataName
-        self.sport = sport
-        self.draftGroup = draftGroup
-    }
-    
-    convenience init?(upcomingData data: NSDictionary) {
-        self.init()
-        
-        // JSON
-        guard let dataID = data["id"] as? Int,
-            dataName = data["name"] as? String,
-            dataSport = data["sport"] as? String,
-            dataDraftGroup = data["draft_group"] as? Int,
-            dataPlayers = data["players"] as? [NSDictionary]
-        else {
-            log("Failed to parse JSON")
-            return nil
-        }
-        
-        // Dependencies
-        let players = dataPlayers.reverse().map { Player(lineupData: $0) }
-        guard players.count == dataPlayers.count,
-            let sport = Sport(name: dataSport)
-        else {
-            log("Failed to create dependencies")
-            return nil
-        }
-
-        // Other setup
-        let draftGroup = DraftGroup()
-        draftGroup.id = dataDraftGroup
-        
-        // Assignment
-        self.id = dataID
-        self.name = dataName
-        self.sport = sport
-        self.draftGroup = draftGroup
-        self.players = players
-    }
-}
-
-// Property observers
-extension Lineup {
-    func didSetSport(sport: Sport) {
-        if players.count == 0 {
-            let positionsCount = sport.positions.count
-            self.players = [Player?](count: positionsCount, repeatedValue: nil)
-        }
-    }
-    
-    func didSetDraftGroup(draftGroup: DraftGroup) {
-        if players.count > 0 && draftGroup.players.count > 0 {
-            for (i, player) in players.enumerate() {
-                for draftGroupPlayer in draftGroup.players {
-                    if player?.id == draftGroupPlayer.id {
-                        players[i] = draftGroupPlayer
-                    }
-                }
-            }
-        }
-        self.sport = draftGroup.sport
-    }
-}
-
 // Computed properties
 extension Lineup {
     private var flatPlayers: [Player] {
