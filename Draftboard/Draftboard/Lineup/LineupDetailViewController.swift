@@ -175,22 +175,9 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
         
         if let slot = lineup?.slots[indexPath.row] {
-            cell.positionLabel.text = slot.name
-            if let player = slot.player {
-                cell.avatarImageView.player = player
-                cell.nameLabel.text = player.shortName
-                if let player = player as? PlayerWithGame {
-                    cell.teamLabel.text = " - " + player.game.home.alias + " vs " + player.game.away.alias
-                } else {
-                    cell.teamLabel.text = " - " + player.teamAlias
-                }
-                cell.salaryLabel.text = Format.currency.stringFromNumber(player.salary ?? 0)
-            } else {
-                cell.avatarImageView.player = nil
-                cell.nameLabel.text = "Select \(slot.description)"
-            }
+            cell.setLineupSlot(slot)
+            cell.borderView.hidden = (slot === lineup?.slots.last)
         }
-        cell.borderView.hidden = (indexPath.row == (lineup?.slots.count ?? 0) - 1)
         
         return cell
     }

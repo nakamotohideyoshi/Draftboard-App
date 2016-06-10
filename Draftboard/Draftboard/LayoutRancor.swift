@@ -86,4 +86,8 @@ extension UIView {
         get { return LayoutRancor(view: self, attribute: .CenterY) }
     }
     
+    var baseLineRancor: LayoutRancor {
+        get { return LayoutRancor(view: self, attribute: .Baseline) }
+    }
+    
 }
