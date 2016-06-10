@@ -80,6 +80,9 @@
 		3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */; };
 		3ECA5F591CEFA36500DEDFC1 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */; };
 		3ECA5F821CF75A2300DEDFC1 /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F811CF75A2300DEDFC1 /* DerivedData.swift */; };
+		3EF777AD1D0B54CB002322F3 /* LineupDraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF777AC1D0B54CB002322F3 /* LineupDraftViewController.swift */; };
+		3EF777AF1D0B54D4002322F3 /* LineupDraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF777AE1D0B54D4002322F3 /* LineupDraftView.swift */; };
+		3EF777B11D0B5B6B002322F3 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF777B01D0B5B6B002322F3 /* TableView.swift */; };
 		5D0F7EAE1BC8504E00FBEE0A /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
 		5D0F7EB01BC86B4E00FBEE0A /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
 		5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CBFD01BDA8E7D006746B2 /* Team.swift */; };
@@ -282,6 +285,9 @@
 		3ECA5F811CF75A2300DEDFC1 /* DerivedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DerivedData.swift; sourceTree = "<group>"; };
 		3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		3EE452051BFBBCE70085FB6D /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
+		3EF777AC1D0B54CB002322F3 /* LineupDraftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftViewController.swift; sourceTree = "<group>"; };
+		3EF777AE1D0B54D4002322F3 /* LineupDraftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftView.swift; sourceTree = "<group>"; };
+		3EF777B01D0B5B6B002322F3 /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardArrowButton.swift; sourceTree = "<group>"; };
 		5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "card-bg.png"; sourceTree = "<group>"; };
 		5D1CBFD01BDA8E7D006746B2 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -620,6 +626,8 @@
 				3E192C3A1CEB88CE0021A31D /* LineupDetailView.swift */,
 				3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */,
 				3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */,
+				3EF777AC1D0B54CB002322F3 /* LineupDraftViewController.swift */,
+				3EF777AE1D0B54D4002322F3 /* LineupDraftView.swift */,
 				5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */,
 				5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */,
 				5D6237B41BB61F7B0007E62A /* LineupEditCellView.swift */,
@@ -650,6 +658,7 @@
 				3E608D911C1B72FC0085569D /* Format.swift */,
 				3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */,
 				3E447D6B1D0284F400BE7F12 /* Extensions.swift */,
+				3EF777B01D0B5B6B002322F3 /* TableView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -888,6 +897,7 @@
 				5D783ACC1BD97C54000D8494 /* Model.swift in Sources */,
 				3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */,
 				3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */,
+				3EF777AF1D0B54D4002322F3 /* LineupDraftView.swift in Sources */,
 				3ECA5F821CF75A2300DEDFC1 /* DerivedData.swift in Sources */,
 				5DF49CF01C1BA7DC00B371CE /* NotificationViewController.swift in Sources */,
 				5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */,
@@ -904,6 +914,7 @@
 				5D86F2771C19043D004E9655 /* LineupStatCurrencyView.swift in Sources */,
 				3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */,
 				3E04ECAC1D02138A00EE325C /* Boxscore.swift in Sources */,
+				3EF777AD1D0B54CB002322F3 /* LineupDraftViewController.swift in Sources */,
 				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
 				3E192C231CD93DF40021A31D /* APIRequest.swift in Sources */,
 				5D6237DD1BB6200B0007E62A /* DraftboardModalViewController.swift in Sources */,
@@ -982,6 +993,7 @@
 				5D6237C81BB61F7B0007E62A /* LineupListViewController.swift in Sources */,
 				5DAC07921C21DCC10002B97B /* DraftboardDetailCell.swift in Sources */,
 				5D6237D31BB61FB20007E62A /* LayoutRancor.swift in Sources */,
+				3EF777B11D0B5B6B002322F3 /* TableView.swift in Sources */,
 				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
 				3EB2CB671BFE473B00579F1B /* Data.swift in Sources */,

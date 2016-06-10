@@ -206,6 +206,10 @@ class LineupDetailView: UIView {
         footerBackgroundView.hidden = true
 //        footerShadowView.hidden = true
         
+        tableView.contentInset = UIEdgeInsetsMake(68, 0, 68, 0)
+        tableView.contentOffset = CGPointMake(0, -68)
+        tableView.scrollIndicatorInsets = tableView.contentInset
+
 
         editButton.addTarget(self, action: .editButtonTapped, forControlEvents: .TouchUpInside)
     }

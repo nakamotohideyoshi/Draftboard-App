@@ -8,7 +8,9 @@
 
 import UIKit
 
-class LineupPlayerTableView: UITableView {
+class LineupPlayerTableView: UITableView, CellAssociation {
+    
+    typealias Cell = LineupPlayerCell
     
     init() {
         super.init(frame: CGRectZero, style: .Plain)
@@ -20,18 +22,14 @@ class LineupPlayerTableView: UITableView {
     }
     
     func setup() {
-        allowsSelection = false
-        contentInset = UIEdgeInsetsMake(68, 0, 68, 0)
-        contentOffset = CGPointMake(0, -68)
         rowHeight = 48
-        scrollIndicatorInsets = contentInset
         separatorStyle = .None
-
-        registerClass(LineupPlayerCell.self, forCellReuseIdentifier: LineupPlayerCell.reuseIdentifier)
+        registerCellClass()
     }
     
-    func dequeueCellForIndexPath(indexPath: NSIndexPath) -> LineupPlayerCell {
-        return dequeueReusableCellWithIdentifier(LineupPlayerCell.reuseIdentifier, forIndexPath: indexPath) as! LineupPlayerCell
-    }
+//    func dequeueCellForIndexPath(indexPath: NSIndexPath) -> LineupPlayerCell {
+//        return dequeueReusableCellWithIdentifier(LineupPlayerCell.reuseIdentifier, forIndexPath: indexPath) as! LineupPlayerCell
+//    }
 
 }
+

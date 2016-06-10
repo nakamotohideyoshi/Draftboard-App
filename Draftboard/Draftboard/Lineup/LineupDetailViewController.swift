@@ -27,6 +27,8 @@ class LineupDetailViewController: DraftboardViewController {
     var uneditedLineup: LineupWithStart?
     var lineup: LineupWithStart?
     
+    var draftViewController = LineupDraftViewController()
+    
     convenience init(lineup: LineupWithStart) {
         self.init()
         self.lineup = lineup
@@ -80,12 +82,17 @@ class LineupDetailViewController: DraftboardViewController {
 //                footerView.configuration = .Normal
 //            }
 //        }
+        
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
         uneditedLineup = LineupWithStart(lineup: lineup!)
+        
+        Data.draftGroup[lineup!.draftGroupID].get().then { draftGroup in
+            self.draftViewController.allPlayers = draftGroup.players
+        }
         
         // Get game info for players
         lineup?.getPlayersWithGames().then { playersWithGames -> Void in
@@ -167,11 +174,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     // UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lineup?.slots.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
         
         if let slot = lineup?.slots[indexPath.row] {
@@ -184,16 +191,26 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     // UITableViewDelegate
     
+    func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if editing {
+            draftViewController.slot = lineup?.slots[indexPath.row]
+            self.navController?.pushViewController(draftViewController)
+        }
+    }
+    
 }
 
 private typealias TextFieldDelegate = LineupDetailViewController
 extension TextFieldDelegate: UITextFieldDelegate {
+    
     func textFieldDidEndEditing(textField: UITextField) {
         if nameField.text ?? "" == "" {
             nameField.placeholder = uneditedLineup?.name ?? "Lineup Name"
             nameField.text = uneditedLineup?.name ?? "Lineup Name"
         }
     }
+    
     func textFieldShouldReturn(_: UITextField) -> Bool {
         nameField.resignFirstResponder()
         return true

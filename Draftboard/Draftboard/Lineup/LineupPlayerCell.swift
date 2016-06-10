@@ -10,7 +10,6 @@ import UIKit
 
 class LineupPlayerCell: UITableViewCell {
     
-    static let reuseIdentifier = "LineupPlayerCell"
     static let teamFont = UIFont.openSans(size: 10.0)
     static let teamFontBold = UIFont.openSans(weight: .Semibold, size: 10.0)
     
@@ -26,7 +25,7 @@ class LineupPlayerCell: UITableViewCell {
     let borderView = UIView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Default, reuseIdentifier: LineupPlayerCell.reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
     
@@ -134,6 +133,7 @@ class LineupPlayerCell: UITableViewCell {
         setPlayer(slot.player)
         if slot.player == nil {
             nameLabel.text = "Select \(slot.description)"
+            nameLabel.textColor = UIColor(0x9c9faf)
         }
         positionLabel.text = slot.name
     }
@@ -155,6 +155,7 @@ class LineupPlayerCell: UITableViewCell {
         positionLabel.text = (player as? PlayerWithPosition)?.position
         avatarImageView.player = player
         nameLabel.text = player.shortName
+        nameLabel.textColor = UIColor(0x46495e)
         fppgLabel.text = "\(player.fppg)"
         salaryLabel.text = Format.currency.stringFromNumber(player.salary)
         nameTeamSeparatorLabel.hidden = false
