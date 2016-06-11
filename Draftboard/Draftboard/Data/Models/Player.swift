@@ -8,6 +8,15 @@
 
 import UIKit
 
+protocol HasPosition {
+    var position: String { get }
+}
+
+protocol HasGame {
+    var team: Team { get }
+    var game: Game { get }
+}
+
 class Player {
     let id: Int
     let name: String
@@ -43,7 +52,7 @@ class Player {
     }
 }
 
-class PlayerWithPosition: Player {
+class PlayerWithPosition: Player, HasPosition {
     let position: String
     
     init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, position: String) {
@@ -68,7 +77,7 @@ class PlayerWithPosition: Player {
     }
 }
 
-class PlayerWithGame: Player {
+class PlayerWithGame: Player, HasGame {
     let team: Team
     let game: Game
     
@@ -79,9 +88,26 @@ class PlayerWithGame: Player {
     }
 }
 
+class PlayerWithPositionAndGame: PlayerWithPosition, HasGame {
+    let team: Team
+    let game: Game
+    
+    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, position: String, game: Game) {
+        self.team = (teamAlias == game.home.alias) ? game.home : game.away
+        self.game = game
+        super.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position)
+    }
+}
+
 extension Player {
     func withGame(game: Game) -> PlayerWithGame {
         return PlayerWithGame(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, game: game)
+    }
+}
+
+extension PlayerWithPosition {
+    func withGame(game: Game) -> PlayerWithPositionAndGame {
+        return PlayerWithPositionAndGame(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position, game: game)
     }
 }
 

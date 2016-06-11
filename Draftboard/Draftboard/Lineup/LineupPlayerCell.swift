@@ -152,7 +152,7 @@ class LineupPlayerCell: UITableViewCell {
         }
         
         // Everything but team labels
-        positionLabel.text = (player as? PlayerWithPosition)?.position
+        positionLabel.text = (player as? HasPosition)?.position
         avatarImageView.player = player
         nameLabel.text = player.shortName
         nameLabel.textColor = UIColor(0x46495e)
@@ -161,7 +161,7 @@ class LineupPlayerCell: UITableViewCell {
         nameTeamSeparatorLabel.hidden = false
         
         // Game info if available
-        if let player = player as? PlayerWithGame {
+        if let player = player as? HasGame {
             homeLabel.text = player.game.home.alias
             awayLabel.text = player.game.away.alias
             homeLabel.font = (player.game.home === player.team) ? LineupPlayerCell.teamFontBold : LineupPlayerCell.teamFont

@@ -78,6 +78,12 @@ extension DraftGroup {
         return DraftGroupWithContestCount(id: id, sportName: sportName, start: start, numGames: numGames, contestCount: contestCount)
     }
 }
+
+extension DraftGroupWithPlayers {
+    func withPlayersWithGames(players: [PlayerWithPositionAndGame]) -> DraftGroupWithPlayers {
+        return DraftGroupWithPlayers(id: id, sportName: sportName, start: start, players: players)
+    }
+}
 /*
     convenience init?(upcomingData data: NSDictionary) {
         self.init()

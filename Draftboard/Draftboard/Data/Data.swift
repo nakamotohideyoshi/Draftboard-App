@@ -43,6 +43,7 @@ class Data {
 //}
 
 extension Lineup {
+    /*
     func getDraftGroup() -> Promise<DraftGroupWithPlayers> {
         return Data.draftGroup[draftGroupID].get()
     }
@@ -55,6 +56,7 @@ extension Lineup {
     func getPlayer(id id: Int) -> Promise<Player?> {
         return getPlayers().then { $0.filter { $0.id == id }.first }
     }
+ */
 //    func getPlayer(idx idx: Int) -> Promise<Player?> {
 //        return getPlayers().then { $0.filter { $0.id == id }.first }
 //    }

@@ -74,6 +74,7 @@ extension DerivedData {
     }
 }
 
+
 extension Lineup {
     
     func getGames() -> Promise<[Game]> {
@@ -94,6 +95,25 @@ extension Lineup {
             return players.map { $0.withGame(gamesByTeam[$0.teamAlias]!) }
         }
     }
+    
+    func getDraftGroup() -> Promise<DraftGroupWithPlayers> {
+        return Data.draftGroup[draftGroupID].get()
+    }
+    
+    func getDraftGroupWithPlayersWithGames() -> Promise<DraftGroupWithPlayers> {
+        return when(getDraftGroup(), getGames()).then { draftGroup, games -> DraftGroupWithPlayers in
+            let gamesByTeam = games.transform([String: Game]()) {
+                $0[$1.home.alias] = $1
+                $0[$1.away.alias] = $1
+                return $0
+            }
+            let players = draftGroup.players.map { player -> PlayerWithPositionAndGame in
+                player.withGame(gamesByTeam[player.teamAlias]!)
+            }
+            return draftGroup.withPlayersWithGames(players)
+        }
+    }
+
 }
 
 

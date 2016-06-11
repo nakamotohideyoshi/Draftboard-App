@@ -90,13 +90,13 @@ class LineupDetailViewController: DraftboardViewController {
         
         uneditedLineup = LineupWithStart(lineup: lineup!)
         
-        Data.draftGroup[lineup!.draftGroupID].get().then { draftGroup in
+        lineup?.getDraftGroupWithPlayersWithGames().then { draftGroup -> Void in
             self.draftViewController.allPlayers = draftGroup.players
         }
         
         // Get game info for players
-        lineup?.getPlayersWithGames().then { playersWithGames -> Void in
-            self.lineup?.players = playersWithGames
+        lineup?.getPlayersWithGames().then { players -> Void in
+            self.lineup?.players = players
             self.tableView.reloadData()
         }
         
