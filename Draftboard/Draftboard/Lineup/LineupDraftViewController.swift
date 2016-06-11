@@ -13,6 +13,8 @@ class LineupDraftViewController: DraftboardViewController {
 
     var lineupDraftView: LineupDraftView { return view as! LineupDraftView }
     var tableView: UITableView { return lineupDraftView.tableView }
+    
+//    var pickPlayerAction: ((Player) -> Void)?
 
     var slot: LineupSlot? {
         didSet {
@@ -72,6 +74,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = lineupDraftView.tableView.dequeueCellForIndexPath(indexPath)
         
+        cell.showAllInfo = true
+        
         if let player = players?[indexPath.row] {
             cell.setPlayer(player)
             cell.borderView.hidden = (slot === players?.last)
@@ -82,4 +86,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     // UITableViewDelegate
     
+    func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        slot?.player = players?[indexPath.row]
+        navController?.popViewController()
+//        if let player = players?[indexPath.row] {
+//            pickPlayerAction?(player)
+//        }
+    }
 }

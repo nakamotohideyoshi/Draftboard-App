@@ -10,8 +10,8 @@ import UIKit
 
 class LineupPlayerCell: UITableViewCell {
     
-    static let teamFont = UIFont.openSans(size: 10.0)
-    static let teamFontBold = UIFont.openSans(weight: .Semibold, size: 10.0)
+    private static let teamFont = UIFont.openSans(size: 10.0)
+    private static let teamFontBold = UIFont.openSans(weight: .Semibold, size: 10.0)
     
     let positionLabel = UILabel()
     let avatarImageView = AvatarImageView()
@@ -23,6 +23,8 @@ class LineupPlayerCell: UITableViewCell {
     let fppgLabel = UILabel()
     let salaryLabel = UILabel()
     let borderView = UIView()
+    
+    var showAllInfo: Bool = false
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -69,7 +71,7 @@ class LineupPlayerCell: UITableViewCell {
             nameTeamSeparatorLabel.centerYRancor.constraintEqualToRancor(nameLabel.centerYRancor),
             nameTeamSeparatorLabel.leftRancor.constraintEqualToRancor(nameLabel.rightRancor, constant: 2.0),
             
-            homeLabel.baseLineRancor.constraintEqualToRancor(nameTeamSeparatorLabel.baseLineRancor),
+            homeLabel.baseLineRancor.constraintEqualToRancor(nameLabel.baseLineRancor),
             homeLabel.leftRancor.constraintEqualToRancor(nameTeamSeparatorLabel.rightRancor, constant: 2.0),
             
             vsLabel.centerYRancor.constraintEqualToRancor(homeLabel.centerYRancor),
@@ -109,14 +111,12 @@ class LineupPlayerCell: UITableViewCell {
 
         nameTeamSeparatorLabel.font = .openSans(size: 13.0)
         nameTeamSeparatorLabel.textColor = UIColor(0x9c9faf)
-        nameTeamSeparatorLabel.text = "-"
 
         homeLabel.font = LineupPlayerCell.teamFont
         homeLabel.textColor = UIColor(0x9c9faf)
         
         vsLabel.font = LineupPlayerCell.teamFont
         vsLabel.textColor = UIColor(0x9c9faf)
-        vsLabel.text = " vs "
         
         awayLabel.font = LineupPlayerCell.teamFont
         awayLabel.textColor = UIColor(0x9c9faf)
@@ -126,7 +126,7 @@ class LineupPlayerCell: UITableViewCell {
         
         borderView.backgroundColor = UIColor(0xebedf2)
     }
-
+    
     func setLineupSlot(slot: LineupSlot?) {
         guard let slot = slot else { return }
 
@@ -146,8 +146,8 @@ class LineupPlayerCell: UITableViewCell {
             salaryLabel.text = nil
             homeLabel.text = nil
             awayLabel.text = nil
-            nameTeamSeparatorLabel.hidden = true
-            vsLabel.hidden = true
+            vsLabel.text = nil
+            nameTeamSeparatorLabel.text = nil
             return
         }
         
@@ -158,25 +158,25 @@ class LineupPlayerCell: UITableViewCell {
         nameLabel.textColor = UIColor(0x46495e)
         fppgLabel.text = "\(player.fppg)"
         salaryLabel.text = Format.currency.stringFromNumber(player.salary)
-        nameTeamSeparatorLabel.hidden = false
+        nameTeamSeparatorLabel.text = "-"
         
         // Game info if available
-        if let player = player as? HasGame {
+        if showAllInfo, let player = player as? HasGame {
             homeLabel.text = player.game.home.alias
             awayLabel.text = player.game.away.alias
             homeLabel.font = (player.game.home === player.team) ? LineupPlayerCell.teamFontBold : LineupPlayerCell.teamFont
             awayLabel.font = (player.game.away === player.team) ? LineupPlayerCell.teamFontBold : LineupPlayerCell.teamFont
             homeLabel.textColor = (player.game.home === player.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
             awayLabel.textColor = (player.game.away === player.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
-            vsLabel.hidden = false
+            vsLabel.text = " vs "
         }
         // Just the team alias
         else {
             homeLabel.text = player.teamAlias
             homeLabel.font = LineupPlayerCell.teamFont
             homeLabel.textColor = UIColor(0x9c9faf)
-            awayLabel.text = ""
-            vsLabel.hidden = true
+            awayLabel.text = nil
+            vsLabel.text = nil
         }
 
     }

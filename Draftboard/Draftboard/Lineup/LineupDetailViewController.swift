@@ -32,10 +32,15 @@ class LineupDetailViewController: DraftboardViewController {
     convenience init(lineup: LineupWithStart) {
         self.init()
         self.lineup = lineup
+        self.uneditedLineup = LineupWithStart(lineup: lineup)
     }
     
     override func loadView() {
         self.view = LineupDetailView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -83,21 +88,19 @@ class LineupDetailViewController: DraftboardViewController {
 //            }
 //        }
         
+        // Get game info for players
+        lineup?.getPlayersWithGames().then { players -> Void in
+            self.lineup?.players = players
+            self.tableView.reloadData()
+        }
+
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
-        uneditedLineup = LineupWithStart(lineup: lineup!)
-        
         lineup?.getDraftGroupWithPlayersWithGames().then { draftGroup -> Void in
             self.draftViewController.allPlayers = draftGroup.players
-        }
-        
-        // Get game info for players
-        lineup?.getPlayersWithGames().then { players -> Void in
-            self.lineup?.players = players
-            self.tableView.reloadData()
         }
         
         // Edit button
@@ -136,6 +139,7 @@ class LineupDetailViewController: DraftboardViewController {
                 vc.promise.then { index -> Void in
                     RootViewController.sharedInstance.popAlertViewController()
                     if index == 0 {
+                        self.lineup = self.uneditedLineup
                         self.navController?.popViewController()
                     }
                 }
@@ -180,6 +184,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
+        
+        cell.showAllInfo = editing
         
         if let slot = lineup?.slots[indexPath.row] {
             cell.setLineupSlot(slot)
