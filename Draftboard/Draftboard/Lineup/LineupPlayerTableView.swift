@@ -26,10 +26,6 @@ class LineupPlayerTableView: UITableView, CellAssociation {
         separatorStyle = .None
         registerCellClass()
     }
-    
-//    func dequeueCellForIndexPath(indexPath: NSIndexPath) -> LineupPlayerCell {
-//        return dequeueReusableCellWithIdentifier(LineupPlayerCell.reuseIdentifier, forIndexPath: indexPath) as! LineupPlayerCell
-//    }
 
 }
 

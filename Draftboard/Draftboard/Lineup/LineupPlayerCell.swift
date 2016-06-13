@@ -13,6 +13,7 @@ class LineupPlayerCell: UITableViewCell {
     private static let teamFont = UIFont.openSans(size: 10.0)
     private static let teamFontBold = UIFont.openSans(weight: .Semibold, size: 10.0)
     
+    let infoView = UIView()
     let positionLabel = UILabel()
     let avatarImageView = AvatarImageView()
     let nameLabel = UILabel()
@@ -44,12 +45,13 @@ class LineupPlayerCell: UITableViewCell {
     func addSubviews() {
         contentView.addSubview(positionLabel)
         contentView.addSubview(avatarImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(nameTeamSeparatorLabel)
-        contentView.addSubview(homeLabel)
-        contentView.addSubview(vsLabel)
-        contentView.addSubview(awayLabel)
-        contentView.addSubview(fppgLabel)
+        contentView.addSubview(infoView)
+        infoView.addSubview(nameLabel)
+        infoView.addSubview(nameTeamSeparatorLabel)
+        infoView.addSubview(homeLabel)
+        infoView.addSubview(vsLabel)
+        infoView.addSubview(awayLabel)
+        infoView.addSubview(fppgLabel)
         contentView.addSubview(salaryLabel)
         contentView.addSubview(borderView)
     }
@@ -65,8 +67,12 @@ class LineupPlayerCell: UITableViewCell {
             avatarImageView.widthRancor.constraintEqualToConstant(38.0),
             avatarImageView.heightRancor.constraintEqualToConstant(38.0),
             
-            nameLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            nameLabel.leftRancor.constraintEqualToRancor(avatarImageView.rightRancor, constant: 12.0),
+            infoView.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
+            infoView.leftRancor.constraintEqualToRancor(avatarImageView.rightRancor, constant: 12.0),
+            infoView.rightRancor.constraintEqualToRancor(salaryLabel.leftRancor, constant: -6.0),
+            
+            nameLabel.topRancor.constraintEqualToRancor(infoView.topRancor),
+            nameLabel.leftRancor.constraintEqualToRancor(infoView.leftRancor),
             
             nameTeamSeparatorLabel.centerYRancor.constraintEqualToRancor(nameLabel.centerYRancor),
             nameTeamSeparatorLabel.leftRancor.constraintEqualToRancor(nameLabel.rightRancor, constant: 2.0),
@@ -80,6 +86,10 @@ class LineupPlayerCell: UITableViewCell {
             awayLabel.centerYRancor.constraintEqualToRancor(vsLabel.centerYRancor),
             awayLabel.leftRancor.constraintEqualToRancor(vsLabel.rightRancor),
             
+            fppgLabel.topRancor.constraintEqualToRancor(nameLabel.bottomRancor),
+            fppgLabel.leftRancor.constraintEqualToRancor(nameLabel.leftRancor),
+            fppgLabel.bottomRancor.constraintEqualToRancor(infoView.bottomRancor),
+            
             salaryLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
             salaryLabel.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -18.0),
             
@@ -89,6 +99,7 @@ class LineupPlayerCell: UITableViewCell {
             borderView.heightRancor.constraintEqualToConstant(1.0)
         ]
         
+        infoView.translatesAutoresizingMaskIntoConstraints = false
         positionLabel.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -96,6 +107,7 @@ class LineupPlayerCell: UITableViewCell {
         homeLabel.translatesAutoresizingMaskIntoConstraints = false
         vsLabel.translatesAutoresizingMaskIntoConstraints = false
         awayLabel.translatesAutoresizingMaskIntoConstraints = false
+        fppgLabel.translatesAutoresizingMaskIntoConstraints = false
         salaryLabel.translatesAutoresizingMaskIntoConstraints = false
         borderView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -106,6 +118,8 @@ class LineupPlayerCell: UITableViewCell {
         positionLabel.font = .openSans(weight: .Semibold, size: 9.0)
         positionLabel.textColor = UIColor(0x9c9faf)
 
+        infoView.clipsToBounds = true
+        
         nameLabel.font = .openSans(size: 13.0)
         nameLabel.textColor = UIColor(0x46495e)
 
@@ -120,7 +134,10 @@ class LineupPlayerCell: UITableViewCell {
         
         awayLabel.font = LineupPlayerCell.teamFont
         awayLabel.textColor = UIColor(0x9c9faf)
-        
+
+        fppgLabel.font = .openSans(weight: .Semibold, size: 10.0)
+        fppgLabel.textColor = UIColor(0x9c9faf)
+
         salaryLabel.font = .oswald(size: 13.0)
         salaryLabel.textColor = UIColor(0x46495e)
         
@@ -156,7 +173,7 @@ class LineupPlayerCell: UITableViewCell {
         avatarImageView.player = player
         nameLabel.text = player.shortName
         nameLabel.textColor = UIColor(0x46495e)
-        fppgLabel.text = "\(player.fppg)"
+        fppgLabel.text = showAllInfo ? String(format: "%.1f FPPG", player.fppg) : nil
         salaryLabel.text = Format.currency.stringFromNumber(player.salary)
         nameTeamSeparatorLabel.text = "-"
         
