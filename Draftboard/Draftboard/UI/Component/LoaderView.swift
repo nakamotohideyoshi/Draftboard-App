@@ -9,76 +9,73 @@
 import UIKit
 
 class LoaderView: UIView {
-    var gradientImageView: UIImageView!
-    var mask: CAShapeLayer!
-    var ring: CAShapeLayer?
-    var spinning: Bool = false {
-        willSet(spinning) {
-            if (self.spinning != spinning) {
-                if (spinning) {
-                    self.gradientImageView.layer.addAnimation(spinningAnim(), forKey:"transform.rotation.z");
-                }
-                else {
-                    self.gradientImageView.layer.removeAllAnimations();
-                }
-            }
-        }
+    let gradientImageView = UIImageView()
+    var lineWidth: CGFloat = 2.0 { didSet { update() } }
+    
+    // Prune these when possible
+    var thickness: CGFloat = 0
+    var spinning: Bool = false
+    func resumeSpinning() { }
 
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        let gradientImage = UIImage(named: "loader-gradient")
-        gradientImageView = UIImageView(image: gradientImage)
-        gradientImageView.frame = frame;
-        
-        mask = CAShapeLayer()
-        mask.strokeColor = UIColor.redColor().CGColor
-        mask.fillColor = UIColor.clearColor().CGColor
-        
-        addSubview(gradientImageView)
-        gradientImageView.layer.mask = mask;
-        spinning = false
-        
-        if !CGRectEqualToRect(frame, CGRectZero) {
-            updateMask()
-        }
+    init() {
+        super.init(frame: CGRectZero)
+        setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override convenience init(frame: CGRect) {
+        self.init()
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        self.init()
+    }
+    
+    func setup() {
+        addSubviews()
+        addConstraints()
+        otherSetup()
+    }
+    
+    func addSubviews() {
+        addSubview(gradientImageView)
+    }
+
+    func addConstraints() {
+        let viewConstraints: [NSLayoutConstraint] = [
+            gradientImageView.topRancor.constraintEqualToRancor(topRancor),
+            gradientImageView.leftRancor.constraintEqualToRancor(leftRancor),
+            gradientImageView.rightRancor.constraintEqualToRancor(rightRancor),
+            gradientImageView.bottomRancor.constraintEqualToRancor(bottomRancor),
+        ]
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        gradientImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints(viewConstraints)
+    }
+    
+    func otherSetup() {
+        gradientImageView.image = UIImage(named: "loader-gradient")
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        updateMask()
+        update()
     }
     
-    func updateMask() {
-        let d = frame.size.width;
-        let r = d / 2;
-        
-        mask.path = arcWithRadius(r - thickness, progress: 1.0)
-        mask.frame = CGRectMake(0, 0, d, d)
-        mask.lineWidth = thickness;
-        
-        gradientImageView.frame = mask.frame
-    }
-    
-    var thickness: CGFloat = 2.0 {
-        didSet {
-            mask.lineWidth = thickness;
-        }
+    func update() {
+        let mask = CAShapeLayer()
+        mask.strokeColor = UIColor.redColor().CGColor
+        mask.fillColor = UIColor.clearColor().CGColor
+        mask.path = UIBezierPath(ovalInRect: CGRectInset(bounds, lineWidth, lineWidth)).CGPath
+        mask.frame = bounds
+        mask.lineWidth = lineWidth;
+
+        gradientImageView.layer.mask = mask
+        gradientImageView.layer.removeAllAnimations()
+        gradientImageView.layer.addAnimation(spinningAnim(), forKey: "spin")
     }
 
-    func resumeSpinning() {
-        if (spinning && !hidden) {
-            gradientImageView.layer.removeAllAnimations()
-            gradientImageView.layer.addAnimation(spinningAnim(), forKey: "transform.rotation.z")
-        }
-    }
-    
     func spinningAnim() -> CABasicAnimation {
         let anim = CABasicAnimation(keyPath: "transform.rotation.z")
         anim.toValue = NSNumber(double: M_PI * 2.0)
@@ -88,10 +85,4 @@ class LoaderView: UIView {
         return anim
     }
     
-    func arcWithRadius(radius: CGFloat, progress: CGFloat) -> CGPathRef {
-        let xy = frame.size.width / 2.0
-        let center = CGPointMake(xy, xy)
-        let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0.0, endAngle: CGFloat(M_PI) * 2.0 * progress, clockwise: true)
-        return path.CGPath;
-    }
 }

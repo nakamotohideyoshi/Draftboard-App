@@ -11,7 +11,8 @@ import UIKit
 class LineupDraftView: UIView {
     
     let tableView = LineupPlayerTableView()
-    
+    let loaderView = LoaderView()
+
     init() {
         super.init(frame: CGRectZero)
         setup()
@@ -33,6 +34,7 @@ class LineupDraftView: UIView {
     
     func addSubviews() {
         addSubview(tableView)
+        addSubview(loaderView)
     }
     
     func addConstraints() {
@@ -41,16 +43,21 @@ class LineupDraftView: UIView {
             tableView.leftRancor.constraintEqualToRancor(leftRancor),
             tableView.rightRancor.constraintEqualToRancor(rightRancor),
             tableView.bottomRancor.constraintEqualToRancor(bottomRancor),
+            
+            loaderView.widthRancor.constraintEqualToConstant(42.0),
+            loaderView.heightRancor.constraintEqualToConstant(42.0),
+            loaderView.centerXRancor.constraintEqualToRancor(centerXRancor),
+            loaderView.centerYRancor.constraintEqualToRancor(centerYRancor),
         ]
         
         translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+        loaderView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
     func otherSetup() {
-//        tableView.backgroundColor = .whiteColor()
     }
     
 }

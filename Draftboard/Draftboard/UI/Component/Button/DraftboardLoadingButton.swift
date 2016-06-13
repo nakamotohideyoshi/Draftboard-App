@@ -30,7 +30,7 @@ class DraftboardLoadingButton: DraftboardArrowButton {
     var loading: Bool = false {
         didSet {
             disabled = loading
-            loaderView.updateMask()
+//            loaderView.updateMask()
             
             if (loading) {
                 iconImageView.hidden = true

@@ -13,16 +13,12 @@ class LineupDraftViewController: DraftboardViewController {
 
     var lineupDraftView: LineupDraftView { return view as! LineupDraftView }
     var tableView: UITableView { return lineupDraftView.tableView }
+    var loaderView: LoaderView { return lineupDraftView.loaderView }
     
 //    var pickPlayerAction: ((Player) -> Void)?
 
-    var slot: LineupSlot? {
-        didSet {
-            players = allPlayers?.filter { slot?.positions.contains($0.position) ?? false }
-            tableView.reloadData()
-        }
-    }
-    var allPlayers: [PlayerWithPosition]?
+    var slot: LineupSlot? { didSet { update() } }
+    var allPlayers: [PlayerWithPosition]? { didSet { update() } }
     var players: [PlayerWithPosition]?
     
     override func loadView() {
@@ -30,11 +26,17 @@ class LineupDraftViewController: DraftboardViewController {
     }
     
     override func viewDidLoad() {
-        
         // Players
         tableView.delegate = self
         tableView.dataSource = self
-
+        update()
+    }
+    
+    func update() {
+        loaderView.hidden = (allPlayers != nil)
+        tableView.hidden = (allPlayers == nil)
+        players = allPlayers?.filter { slot?.positions.contains($0.position) ?? false }
+        tableView.reloadData()
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {

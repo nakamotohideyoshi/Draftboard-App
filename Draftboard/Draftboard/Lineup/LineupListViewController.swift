@@ -38,7 +38,6 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     
     func update() {
         lineupListView.loaderView.hidden = (lineupDetailViewControllers != nil)
-        lineupListView.loaderView.resumeSpinning()
         lineupListView.cardCollectionView.hidden = (lineupDetailViewControllers == nil)
         lineupListView.cardCollectionView.reloadData()
         lineupListView.cardCollectionView.setContentOffset(CGPointMake(1, 0), animated: false)
