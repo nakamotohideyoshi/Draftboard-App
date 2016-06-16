@@ -10,27 +10,16 @@ import UIKit
 
 @IBDesignable
 class AvatarImageView: UIView {
-    private var size: Int { return 96 }
+    private var size: Int { return 76 }
     private var circleImageView = UIImageView()
     private var playerImageView = UIImageView()
     var player: Player? {
         didSet {
-            var imageName = "player-default"
-            if let lastChar = player?.lastName.characters.first {
-                if "A" <= lastChar && lastChar < "F" {
-                    imageName = "playerA"
-                } else if "F" <= lastChar && lastChar < "K" {
-                    imageName = "playerB"
-                } else if "K" <= lastChar && lastChar < "P" {
-                    imageName = "playerC"
-                } else if "P" <= lastChar && lastChar < "U" {
-                    imageName = "playerD"
-                } else if "U" <= lastChar && lastChar <= "Z" {
-                    imageName = "playerE"
-                }
+            if let srid = player?.srid, image = UIImage(named: "PlayerPhotos/\(size)/\(srid)") {
+                playerImageView.image = image
+            } else {
+                playerImageView.image = UIImage(named: "PlayerPhotos/player-default-\(size)")
             }
-            let imagePath = "PlayerPhotos/\(imageName)-\(size)"
-            playerImageView.image = UIImage(named: imagePath)
         }
     }
 
