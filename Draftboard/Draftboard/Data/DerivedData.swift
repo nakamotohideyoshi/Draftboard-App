@@ -113,6 +113,10 @@ extension Lineup {
         return when(getDraftGroup(), getGamesByTeam()).then { draftGroup, gamesByTeam -> DraftGroupWithPlayers in
             let players = draftGroup.players.map { player -> PlayerWithPositionAndGame in
                 player.withGame(gamesByTeam[player.teamAlias]!)
+            }.sort { p1, p2 in
+                if p1.salary != p2.salary { return p1.salary > p2.salary }
+                if p1.fppg != p2.fppg { return p1.fppg > p2.fppg }
+                return p1.lastName < p2.lastName
             }
 
             return draftGroup.withPlayersWithGames(players)
