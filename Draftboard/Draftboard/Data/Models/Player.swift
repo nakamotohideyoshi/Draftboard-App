@@ -134,5 +134,10 @@ func ==(lhs: Player, rhs: Player) -> Bool {
     return lhs.id == rhs.id
 }
 
-extension Player: Equatable { }
+extension Player: Equatable {}
 
+extension Player: Hashable {
+    var hashValue: Int {
+        return srid.hashValue
+    }
+}

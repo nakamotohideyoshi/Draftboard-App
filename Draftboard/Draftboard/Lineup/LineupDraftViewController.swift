@@ -34,9 +34,18 @@ class LineupDraftViewController: DraftboardViewController {
     }
     
     func update() {
+        if !isViewLoaded() { return }
+        
         loaderView.hidden = (allPlayers != nil)
         tableView.hidden = (allPlayers == nil)
-        players = allPlayers?.filter { slot?.positions.contains($0.position) ?? false }
+        
+        let okPositions = Set(slot!.positions)
+        let draftedPlayers = Set(lineup.filledSlots.map { $0.player! })
+        players = allPlayers?.filter {
+            if !okPositions.contains($0.position) { return false }
+            if draftedPlayers.contains($0) { return false }
+            return true
+        }
         tableView.reloadData()
     }
     
