@@ -77,39 +77,44 @@ extension DerivedData {
 
 extension Lineup {
     
-    func getGames() -> Promise<[Game]> {
-        return DerivedData.games(sportName: sportName, draftGroupID: draftGroupID)
-    }
-    
-    func getPlayersWithGames() -> Promise<[PlayerWithGame]?> {
-        return getGames().then { games -> [PlayerWithGame]? in
-            guard let players = self.players else { return nil }
-            if let players = players as? [PlayerWithGame] { return players }
-            
-            let gamesByTeam = games.transform([String: Game]()) {
-                $0[$1.home.alias] = $1
-                $0[$1.away.alias] = $1
-                return $0
-            }
-            
-            return players.map { $0.withGame(gamesByTeam[$0.teamAlias]!) }
-        }
-    }
-    
     func getDraftGroup() -> Promise<DraftGroupWithPlayers> {
         return Data.draftGroup[draftGroupID].get()
     }
     
-    func getDraftGroupWithPlayersWithGames() -> Promise<DraftGroupWithPlayers> {
-        return when(getDraftGroup(), getGames()).then { draftGroup, games -> DraftGroupWithPlayers in
-            let gamesByTeam = games.transform([String: Game]()) {
+    func getGames() -> Promise<[Game]> {
+        return DerivedData.games(sportName: sportName, draftGroupID: draftGroupID)
+    }
+    
+    // Games keyed by both home and away alias
+    func getGamesByTeam() -> Promise<[String: Game]> {
+        return getGames().then { games -> [String: Game] in
+            return games.transform([String: Game]()) {
                 $0[$1.home.alias] = $1
                 $0[$1.away.alias] = $1
                 return $0
             }
+        }
+    }
+    
+    // Used by LineupDetailViewController
+    func getPlayersWithGames() -> Promise<[PlayerWithGame]?> {
+        return getGamesByTeam().then { gamesByTeam -> [PlayerWithGame]? in
+//            guard let players = self.players else { return nil }
+//            if let players = players as? [PlayerWithGame] { return players }
+            if let players = self.players {
+                return players.map { $0.withGame(gamesByTeam[$0.teamAlias]!) }
+            }
+            return nil
+        }
+    }
+    
+    // Used by LineupDraftViewController
+    func getDraftGroupWithPlayersWithGames() -> Promise<DraftGroupWithPlayers> {
+        return when(getDraftGroup(), getGamesByTeam()).then { draftGroup, gamesByTeam -> DraftGroupWithPlayers in
             let players = draftGroup.players.map { player -> PlayerWithPositionAndGame in
                 player.withGame(gamesByTeam[player.teamAlias]!)
             }
+
             return draftGroup.withPlayersWithGames(players)
         }
     }
