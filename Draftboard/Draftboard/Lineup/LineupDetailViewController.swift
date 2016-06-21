@@ -41,6 +41,8 @@ class LineupDetailViewController: DraftboardViewController {
     
     override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
+        lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
+        lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
     }
     
     override func viewDidLoad() {
@@ -98,7 +100,8 @@ class LineupDetailViewController: DraftboardViewController {
     
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        
+
+        draftViewController.lineup = lineup
         lineup?.getDraftGroupWithPlayersWithGames().then { draftGroup -> Void in
             self.draftViewController.allPlayers = draftGroup.players
         }
@@ -201,6 +204,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if editing {
             draftViewController.slot = lineup?.slots[indexPath.row]
+            draftViewController.scrollToFirstAffordablePlayer()
             self.navController?.pushViewController(draftViewController)
         }
     }

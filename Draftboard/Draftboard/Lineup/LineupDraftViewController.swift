@@ -17,6 +17,7 @@ class LineupDraftViewController: DraftboardViewController {
     
 //    var pickPlayerAction: ((Player) -> Void)?
 
+    var lineup: Lineup!
     var slot: LineupSlot? { didSet { update() } }
     var allPlayers: [PlayerWithPosition]? { didSet { update() } }
     var players: [PlayerWithPosition]?
@@ -38,6 +39,17 @@ class LineupDraftViewController: DraftboardViewController {
         players = allPlayers?.filter { slot?.positions.contains($0.position) ?? false }
         tableView.reloadData()
     }
+    
+    func scrollToFirstAffordablePlayer() {
+        guard let players = self.players else { return }
+
+        let index = players.indexOf { $0.salary <= lineup.totalSalaryRemaining } ?? (players.count - 1)
+        let row = max(index - 1, 0)
+        let indexPath = NSIndexPath(forRow: row, inSection: 0)
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+        tableView.flashScrollIndicators()
+    }
+
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if buttonType == .Back {
@@ -80,7 +92,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         
         if let player = players?[indexPath.row] {
             cell.setPlayer(player)
-            cell.borderView.hidden = (slot === players?.last)
+            cell.contentView.alpha = (player.salary <= lineup.totalSalaryRemaining) ? 1.0 : 0.5
+            cell.borderView.hidden = (player === players?.last)
         }
         
         return cell
