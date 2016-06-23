@@ -11,6 +11,7 @@ import UIKit
 class LineupDraftView: UIView {
     
     let tableView = LineupPlayerTableView()
+    let searchBar = UISearchBar()
     let loaderView = LoaderView()
 
     init() {
@@ -58,6 +59,8 @@ class LineupDraftView: UIView {
     }
     
     func otherSetup() {
+        searchBar.frame.size.height = 50
+        tableView.tableHeaderView = searchBar
     }
     
 }

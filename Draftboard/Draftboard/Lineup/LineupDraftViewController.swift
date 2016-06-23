@@ -13,6 +13,7 @@ class LineupDraftViewController: DraftboardViewController {
 
     var lineupDraftView: LineupDraftView { return view as! LineupDraftView }
     var tableView: UITableView { return lineupDraftView.tableView }
+    var searchBar: UISearchBar { return lineupDraftView.searchBar }
     var loaderView: LoaderView { return lineupDraftView.loaderView }
     
 //    var pickPlayerAction: ((Player) -> Void)?
@@ -27,10 +28,15 @@ class LineupDraftViewController: DraftboardViewController {
     }
     
     override func viewDidLoad() {
-        // Players
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         update()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        update()
+        scrollToFirstAffordablePlayer()
     }
     
     func update() {
@@ -41,9 +47,11 @@ class LineupDraftViewController: DraftboardViewController {
         
         let okPositions = Set(slot!.positions)
         let draftedPlayers = Set(lineup.filledSlots.map { $0.player! })
+        let searchPattern = searchBar.text?.searchPattern ?? ""
         players = allPlayers?.filter {
-            if !okPositions.contains($0.position) { return false }
             if draftedPlayers.contains($0) { return false }
+            if !okPositions.contains($0.position) { return false }
+            if !$0.name.matchesSearchPattern(searchPattern) { return false }
             return true
         }
         tableView.reloadData()
@@ -62,6 +70,7 @@ class LineupDraftViewController: DraftboardViewController {
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if buttonType == .Back {
+            searchBar.text = nil
             navController?.popViewController()
         }
     }
@@ -112,9 +121,47 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         slot?.player = players?[indexPath.row]
+        searchBar.text = nil
         navController?.popViewController()
-//        if let player = players?[indexPath.row] {
-//            pickPlayerAction?(player)
-//        }
     }
+    
+}
+
+private typealias ScrollViewDelegate = LineupDraftViewController
+extension ScrollViewDelegate: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_: UIScrollView) {
+        if (tableView.contentOffset.y >= searchBar.frame.size.height) && searchBar.isFirstResponder() {
+            searchBar.resignFirstResponder()
+        }
+    }
+
+}
+
+
+private typealias SearchBarDelegate = LineupDraftViewController
+extension SearchBarDelegate: UISearchBarDelegate {
+    
+    func searchBar(_: UISearchBar, textDidChange searchText: String) {
+        update()
+    }
+    
+}
+
+private extension String {
+    
+    var searchString: String {
+        return lowercaseString.stringByReplacingOccurrencesOfString("[^a-z ]", withString: "", options: .RegularExpressionSearch)
+    }
+    
+    var searchPattern: String {
+        guard characters.count > 0 else { return "" }
+        return searchString.stringByReplacingOccurrencesOfString("^| +", withString: ".*\\\\b", options: .RegularExpressionSearch)
+    }
+    
+    func matchesSearchPattern(pattern: String) -> Bool {
+        guard pattern.characters.count > 0 else { return true }
+        return searchString.rangeOfString(pattern, options: .RegularExpressionSearch) != nil
+    }
+    
 }

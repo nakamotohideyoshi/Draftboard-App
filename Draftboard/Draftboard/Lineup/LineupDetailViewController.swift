@@ -204,7 +204,6 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if editing {
             draftViewController.slot = lineup?.slots[indexPath.row]
-            draftViewController.scrollToFirstAffordablePlayer()
             self.navController?.pushViewController(draftViewController)
         }
     }
