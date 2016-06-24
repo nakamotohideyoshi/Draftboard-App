@@ -30,6 +30,8 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     }
     
     override func viewWillAppear(animated: Bool) {
+        // Reload what's already there
+        lineupListView.cardCollectionView.reloadData()
         // Get lineups
         DerivedData.upcomingLineupsWithStarts().then { lineups in
             self.lineupDetailViewControllers = lineups.map { LineupDetailViewController(lineup: $0) }

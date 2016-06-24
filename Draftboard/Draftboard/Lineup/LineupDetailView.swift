@@ -12,6 +12,7 @@ class LineupDetailView: UIView {
     
     let tableView = LineupPlayerTableView()
     let headerView = UIView()
+    let overlayView = UIControl()
     let footerView = LineupFooterView()
     
     // Header stuff
@@ -56,9 +57,10 @@ class LineupDetailView: UIView {
     
     func addSubviews() {
         addSubview(tableView)
+        addSubview(footerView)
+        addSubview(overlayView)
         addSubview(headerView)
         addSubview(headerShadowView)
-        addSubview(footerView)
 //        addSubview(footerShadowView)
         
         headerView.addSubview(sportIcon)
@@ -85,6 +87,11 @@ class LineupDetailView: UIView {
             headerShadowView.leftRancor.constraintEqualToRancor(headerView.leftRancor),
             headerShadowView.rightRancor.constraintEqualToRancor(headerView.rightRancor),
             headerShadowView.heightRancor.constraintEqualToConstant(45.0),
+            
+            overlayView.topRancor.constraintEqualToRancor(headerView.bottomRancor),
+            overlayView.leftRancor.constraintEqualToRancor(leftRancor),
+            overlayView.rightRancor.constraintEqualToRancor(rightRancor),
+            overlayView.bottomRancor.constraintEqualToRancor(bottomRancor),
             
             footerView.leftRancor.constraintEqualToRancor(leftRancor),
             footerView.rightRancor.constraintEqualToRancor(rightRancor),
@@ -125,6 +132,7 @@ class LineupDetailView: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerShadowView.translatesAutoresizingMaskIntoConstraints = false
         footerView.translatesAutoresizingMaskIntoConstraints = false
@@ -141,6 +149,10 @@ class LineupDetailView: UIView {
     }
     
     func otherSetup() {
+        overlayView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        overlayView.alpha = 0
+        overlayView.userInteractionEnabled = false
+        
         tableView.backgroundColor = .whiteColor()
         headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
         footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
@@ -216,6 +228,20 @@ class LineupDetailView: UIView {
     
     func editButtonTapped() {
         editAction()
+    }
+    
+    func hideOverlay() {
+        overlayView.userInteractionEnabled = false
+        UIView.animateWithDuration(0.25) {
+            self.overlayView.alpha = 0
+        }
+    }
+    
+    func showOverlay() {
+        overlayView.userInteractionEnabled = true
+        UIView.animateWithDuration(0.25) {
+            self.overlayView.alpha = 1.0
+        }
     }
     
 }

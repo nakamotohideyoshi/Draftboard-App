@@ -88,12 +88,22 @@ extension API_Endpoints {
         let path = "api/lineup/create/"
         let params = [
             "name": lineup.name,
-//            "players": lineup.playerIDs,
+            "players": lineup.players!.map { $0.id },
             "draft_group": lineup.draftGroupID
         ]
         return API.post(path, JSON: params)
     }
     
+    class func lineupEdit(lineup: Lineup) -> Promise<AnyObject> {
+        let path = "api/lineup/edit/"
+        let params = [
+            "name": lineup.name,
+            "players": lineup.players!.map { $0.id },
+            "lineup": lineup.id
+        ]
+        return API.post(path, JSON: params)
+    }
+
     
     class func lineupUpcoming() -> Promise<[Lineup]> {
         let path = "api/lineup/upcoming/"

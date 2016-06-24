@@ -43,6 +43,13 @@ class Data {
 //}
 
 extension Lineup {
+    func save() -> Promise<AnyObject> {
+        Data.upcomingLineups.clearCache()
+        if id < 0 {
+            return API.lineupCreate(self)
+        }
+        return API.lineupEdit(self)
+    }
     /*
     func getDraftGroup() -> Promise<DraftGroupWithPlayers> {
         return Data.draftGroup[draftGroupID].get()

@@ -62,6 +62,11 @@ class Cache<T> {
         return cachedOrFresh(maxCacheAge: maxCacheAge, minCacheAge: minCacheAge)
     }
     
+    // Remove cached value
+    func clearCache() {
+        cached.value = nil
+    }
+    
     init(defaultMaxCacheAge: NSTimeInterval = .OneHour, defaultMinCacheAge: NSTimeInterval = .OneMinute, endpoint: () -> Promise<T>) {
         self.endpoint = endpoint
         self.defaultMaxCacheAge = defaultMaxCacheAge

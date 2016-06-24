@@ -18,6 +18,7 @@ class LineupDetailViewController: DraftboardViewController {
      */
     
     var lineupDetailView: LineupDetailView { return view as! LineupDetailView }
+    var overlayView: UIControl { return lineupDetailView.overlayView }
     var tableView: UITableView { return lineupDetailView.tableView }
     var editButton: UIButton { return lineupDetailView.editButton }
     var flipButton: UIButton { return lineupDetailView.flipButton }
@@ -31,8 +32,8 @@ class LineupDetailViewController: DraftboardViewController {
     
     convenience init(lineup: LineupWithStart) {
         self.init()
-        self.lineup = lineup
-        self.uneditedLineup = LineupWithStart(lineup: lineup)
+        self.lineup = LineupWithStart(lineup: lineup)
+        self.uneditedLineup = lineup
     }
     
     override func loadView() {
@@ -40,12 +41,16 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        navController?.titlebar.updateElements()
         tableView.reloadData()
         lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
         lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
     }
     
     override func viewDidLoad() {
+        // Overlay
+        overlayView.addTarget(self, action: #selector(overlayTapped), forControlEvents: .TouchUpInside)
+        
         // Sport icon
         sportIcon.image = UIImage(named: "icon-baseball")
         
@@ -116,21 +121,34 @@ class LineupDetailViewController: DraftboardViewController {
         
         // Name field
         nameField.userInteractionEnabled = editing
-        nameField.clearButtonMode = editing ? .UnlessEditing : .Never
+        nameField.clearButtonMode = editing ? .Always : .Never
         
         // Footer
         lineupDetailView.footerView.configuration = editing ? .Editing : .Normal
+    }
+    
+    func overlayTapped() {
+        nameField.resignFirstResponder()
     }
     
     func update() {
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
+        nameField.resignFirstResponder()
+        
+        if (buttonType == .Value) {
+            uneditedLineup = lineup
+            lineup?.save().then { _ in
+                self.navController?.popViewController()
+            }
+        }
+
         if buttonType == .Back {
             if nameField.isFirstResponder() {
                 nameField.resignFirstResponder()
             }
-            let dirty = (nameField.text != uneditedLineup?.name) ||
+            let dirty = (lineup?.name != uneditedLineup?.name) ||
                 (lineup?.players != uneditedLineup?.players)
             if !dirty {
                 self.navController?.popViewController()
@@ -142,7 +160,6 @@ class LineupDetailViewController: DraftboardViewController {
                 vc.promise.then { index -> Void in
                     RootViewController.sharedInstance.popAlertViewController()
                     if index == 0 {
-                        self.lineup = self.uneditedLineup
                         self.navController?.popViewController()
                     }
                 }
@@ -165,7 +182,9 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType? {
-        return .DisabledValue
+        if lineup?.emptySlots.count > 0 { return .DisabledValue }
+        if lineup?.totalSalaryRemaining < 0 { return .DisabledValue }
+        return .Value
     }
 
     override func titlebarRightButtonText() -> String? {
@@ -213,11 +232,17 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
 private typealias TextFieldDelegate = LineupDetailViewController
 extension TextFieldDelegate: UITextFieldDelegate {
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_: UITextField) {
+        lineupDetailView.showOverlay()
+    }
+    
+    func textFieldDidEndEditing(_: UITextField) {
         if nameField.text ?? "" == "" {
             nameField.placeholder = uneditedLineup?.name ?? "Lineup Name"
             nameField.text = uneditedLineup?.name ?? "Lineup Name"
         }
+        lineup?.name = nameField.text!
+        lineupDetailView.hideOverlay()
     }
     
     func textFieldShouldReturn(_: UITextField) -> Bool {
@@ -226,6 +251,3 @@ extension TextFieldDelegate: UITextFieldDelegate {
     }
     
 }
-
-
-
