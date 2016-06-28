@@ -202,7 +202,7 @@ class LineupDetailView: UIView {
         flipButton.setImage(UIImage(named: "icon-flip"), forState: .Normal)
         flipButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 4, 4)
         
-        nameField.clearButtonEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
+        nameField.clearButtonEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 14)
         nameField.edgeInsets = UIEdgeInsetsMake(0, 44, 0, 0)
         nameField.clearButtonMode = .Never
         nameField.font = UIFont.openSansRegular()?.fontWithSize(16.0)

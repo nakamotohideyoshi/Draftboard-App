@@ -207,12 +207,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
         
+        let slot = lineup!.slots[indexPath.row]
         cell.showAllInfo = editing
-        
-        if let slot = lineup?.slots[indexPath.row] {
-            cell.setLineupSlot(slot)
-            cell.borderView.hidden = (slot === lineup?.slots.last)
-        }
+        cell.showActionButton = (editing && slot.player != nil) ? .Remove : nil
+        cell.borderView.hidden = (slot === lineup?.slots.last)
+        cell.setLineupSlot(slot)
         
         return cell
     }

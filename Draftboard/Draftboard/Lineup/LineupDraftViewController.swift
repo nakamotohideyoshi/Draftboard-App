@@ -106,13 +106,12 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = lineupDraftView.tableView.dequeueCellForIndexPath(indexPath)
         
+        let player = players![indexPath.row]
         cell.showAllInfo = true
-        
-        if let player = players?[indexPath.row] {
-            cell.setPlayer(player)
-            cell.contentView.alpha = (player.salary <= lineup.totalSalaryRemaining) ? 1.0 : 0.5
-            cell.borderView.hidden = (player === players?.last)
-        }
+        cell.showActionButton = .Add
+        cell.contentView.alpha = (player.salary <= lineup.totalSalaryRemaining) ? 1.0 : 0.5
+        cell.borderView.hidden = (player === players?.last)
+        cell.setPlayer(player)
         
         return cell
     }

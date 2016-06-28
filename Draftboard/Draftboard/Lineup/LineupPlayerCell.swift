@@ -10,6 +10,11 @@ import UIKit
 
 class LineupPlayerCell: UITableViewCell {
     
+    enum ActionButtonType {
+        case Add
+        case Remove
+    }
+    
     private static let teamFont = UIFont.openSans(size: 10.0)
     private static let teamFontBold = UIFont.openSans(weight: .Semibold, size: 10.0)
     
@@ -23,9 +28,14 @@ class LineupPlayerCell: UITableViewCell {
     let awayLabel = UILabel()
     let fppgLabel = UILabel()
     let salaryLabel = UILabel()
+    let addButton = UIButton()
+    let removeButton = UIButton()
     let borderView = UIView()
     
     var showAllInfo: Bool = false
+    var showActionButton: ActionButtonType? { didSet { updateActionButtons() } }
+    
+    var addButtonRightConstraint: NSLayoutConstraint?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,10 +63,14 @@ class LineupPlayerCell: UITableViewCell {
         infoView.addSubview(awayLabel)
         infoView.addSubview(fppgLabel)
         contentView.addSubview(salaryLabel)
+        contentView.addSubview(addButton)
+        contentView.addSubview(removeButton)
         contentView.addSubview(borderView)
     }
     
     func addConstraints() {
+        addButtonRightConstraint = addButton.rightRancor.constraintEqualToRancor(contentView.rightRancor)
+
         let viewConstraints: [NSLayoutConstraint] = [
             positionLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
             positionLabel.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 18.0),
@@ -90,14 +104,25 @@ class LineupPlayerCell: UITableViewCell {
             fppgLabel.leftRancor.constraintEqualToRancor(nameLabel.leftRancor),
             fppgLabel.bottomRancor.constraintEqualToRancor(infoView.bottomRancor),
             
-            salaryLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            salaryLabel.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -18.0),
+            addButton.heightRancor.constraintEqualToRancor(contentView.heightRancor),
+            addButton.widthRancor.constraintEqualToConstant(52.0),
+            addButton.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
+            addButtonRightConstraint!,
+            
+            removeButton.heightRancor.constraintEqualToRancor(addButton.heightRancor),
+            removeButton.widthRancor.constraintEqualToRancor(addButton.heightRancor),
+            removeButton.centerYRancor.constraintEqualToRancor(addButton.centerYRancor),
+            removeButton.centerXRancor.constraintEqualToRancor(addButton.centerXRancor),
+            
+            salaryLabel.centerYRancor.constraintEqualToRancor(addButton.centerYRancor),
+            salaryLabel.rightRancor.constraintEqualToRancor(addButton.leftRancor),
             
             borderView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 10.0),
             borderView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -10.0),
             borderView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor),
             borderView.heightRancor.constraintEqualToConstant(1.0)
         ]
+
         
         infoView.translatesAutoresizingMaskIntoConstraints = false
         positionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -109,6 +134,8 @@ class LineupPlayerCell: UITableViewCell {
         awayLabel.translatesAutoresizingMaskIntoConstraints = false
         fppgLabel.translatesAutoresizingMaskIntoConstraints = false
         salaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        removeButton.translatesAutoresizingMaskIntoConstraints = false
         borderView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
@@ -141,12 +168,20 @@ class LineupPlayerCell: UITableViewCell {
         salaryLabel.font = .oswald(size: 13.0)
         salaryLabel.textColor = UIColor(0x46495e)
         
+        addButton.setImage(UIImage(named: "icon-add"), forState: .Normal)
+        addButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
+        
+        removeButton.setImage(UIImage(named: "icon-remove"), forState: .Normal)
+        removeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
+        
         borderView.backgroundColor = UIColor(0xebedf2)
+        
+        updateActionButtons()
     }
     
     func setLineupSlot(slot: LineupSlot?) {
         guard let slot = slot else { return }
-
+        
         setPlayer(slot.player)
         if slot.player == nil {
             nameLabel.text = "Select \(slot.description)"
@@ -196,6 +231,13 @@ class LineupPlayerCell: UITableViewCell {
             vsLabel.text = nil
         }
 
+    }
+    
+    func updateActionButtons() {
+        addButtonRightConstraint?.constant = (showActionButton == nil) ? addButton.frame.width - 16.0 : 0
+        addButton.hidden = (showActionButton != .Add)
+        removeButton.hidden = (showActionButton != .Remove)
+        layoutIfNeeded()
     }
 }
 
