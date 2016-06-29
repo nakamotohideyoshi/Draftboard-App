@@ -12,7 +12,7 @@ class LineupDraftViewController: DraftboardViewController {
     
 
     var lineupDraftView: LineupDraftView { return view as! LineupDraftView }
-    var tableView: UITableView { return lineupDraftView.tableView }
+    var tableView: LineupPlayerTableView { return lineupDraftView.tableView }
     var searchBar: UISearchBar { return lineupDraftView.searchBar }
     var loaderView: LoaderView { return lineupDraftView.loaderView }
     
@@ -95,7 +95,7 @@ class LineupDraftViewController: DraftboardViewController {
 // MARK: -
 
 private typealias TableViewDelegate = LineupDraftViewController
-extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupPlayerCellActionButtonDelegate {
     
     // UITableViewDataSource
     
@@ -108,9 +108,10 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         
         let player = players![indexPath.row]
         cell.showAllInfo = true
-        cell.showActionButton = .Add
+        cell.showAddButton = true
         cell.contentView.alpha = (player.salary <= lineup.totalSalaryRemaining) ? 1.0 : 0.5
-        cell.borderView.hidden = (player === players?.last)
+        cell.showBottomBorder = player !== players?.last
+        cell.actionButtonDelegate = self
         cell.setPlayer(player)
         
         return cell
@@ -119,6 +120,13 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     // UITableViewDelegate
     
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // LineupPlayerCellActionButtonDelegate
+    
+    func actionButtonTappedForCell(cell: LineupPlayerCell) {
+        let indexPath = tableView.indexPathForCell(cell)!
         slot?.player = players?[indexPath.row]
         searchBar.text = nil
         navController?.popViewController()

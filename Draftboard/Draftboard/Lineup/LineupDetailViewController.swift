@@ -43,8 +43,7 @@ class LineupDetailViewController: DraftboardViewController {
     override func viewWillAppear(animated: Bool) {
         navController?.titlebar.updateElements()
         tableView.reloadData()
-        lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
-        lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
+        updateFooterStats()
     }
     
     override func viewDidLoad() {
@@ -72,11 +71,8 @@ class LineupDetailViewController: DraftboardViewController {
         
         // Fees / Entries
         
-        // Total salary remaining
-        lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
-        
-        // Average salary remaining
-        lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
+        // Total and average/player salary remaining
+        updateFooterStats()
 
         // Points
         
@@ -131,7 +127,10 @@ class LineupDetailViewController: DraftboardViewController {
         nameField.resignFirstResponder()
     }
     
-    func update() {
+    func updateFooterStats() {
+        // TODO: This stinks
+        lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
+        lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
@@ -196,7 +195,7 @@ class LineupDetailViewController: DraftboardViewController {
 // MARK: -
 
 private typealias TableViewDelegate = LineupDetailViewController
-extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupPlayerCellActionButtonDelegate {
     
     // UITableViewDataSource
     
@@ -209,8 +208,10 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         
         let slot = lineup!.slots[indexPath.row]
         cell.showAllInfo = editing
-        cell.showActionButton = (editing && slot.player != nil) ? .Remove : nil
-        cell.borderView.hidden = (slot === lineup?.slots.last)
+        cell.showAddButton = false
+        cell.showRemoveButton = editing && slot.player != nil
+        cell.showBottomBorder = slot !== lineup?.slots.last
+        cell.actionButtonDelegate = self
         cell.setLineupSlot(slot)
         
         return cell
@@ -220,10 +221,21 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if editing {
-            draftViewController.slot = lineup?.slots[indexPath.row]
+        
+        let slot = lineup!.slots[indexPath.row]
+        if slot.player == nil {
+            draftViewController.slot = slot
             self.navController?.pushViewController(draftViewController)
         }
+    }
+    
+    // LineupPlayerCellActionButtonDelegate
+    
+    func actionButtonTappedForCell(cell: LineupPlayerCell) {
+        let indexPath = tableView.indexPathForCell(cell)!
+        lineup!.slots[indexPath.row].player = nil
+        tableView.reloadData()
+        updateFooterStats()
     }
     
 }

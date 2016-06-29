@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LineupPlayerCellActionButtonDelegate {
+    func actionButtonTappedForCell(cell: LineupPlayerCell)
+}
+
 class LineupPlayerCell: UITableViewCell {
     
     enum ActionButtonType {
@@ -28,14 +32,16 @@ class LineupPlayerCell: UITableViewCell {
     let awayLabel = UILabel()
     let fppgLabel = UILabel()
     let salaryLabel = UILabel()
-    let addButton = UIButton()
-    let removeButton = UIButton()
+    let actionButton = UIButton()
     let borderView = UIView()
     
     var showAllInfo: Bool = false
-    var showActionButton: ActionButtonType? { didSet { updateActionButtons() } }
+    var showAddButton: Bool = false { didSet { if showAddButton { showRemoveButton = false }; updateActionButton() } }
+    var showRemoveButton: Bool = false { didSet { if showRemoveButton { showAddButton = false }; updateActionButton() } }
+    var showBottomBorder: Bool = true { didSet { updateBottomBorder() } }
     
-    var addButtonRightConstraint: NSLayoutConstraint?
+    var actionButtonRightConstraint: NSLayoutConstraint?
+    var actionButtonDelegate: LineupPlayerCellActionButtonDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,13 +69,12 @@ class LineupPlayerCell: UITableViewCell {
         infoView.addSubview(awayLabel)
         infoView.addSubview(fppgLabel)
         contentView.addSubview(salaryLabel)
-        contentView.addSubview(addButton)
-        contentView.addSubview(removeButton)
+        contentView.addSubview(actionButton)
         contentView.addSubview(borderView)
     }
     
     func addConstraints() {
-        addButtonRightConstraint = addButton.rightRancor.constraintEqualToRancor(contentView.rightRancor)
+        actionButtonRightConstraint = actionButton.rightRancor.constraintEqualToRancor(contentView.rightRancor)
 
         let viewConstraints: [NSLayoutConstraint] = [
             positionLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
@@ -104,18 +109,13 @@ class LineupPlayerCell: UITableViewCell {
             fppgLabel.leftRancor.constraintEqualToRancor(nameLabel.leftRancor),
             fppgLabel.bottomRancor.constraintEqualToRancor(infoView.bottomRancor),
             
-            addButton.heightRancor.constraintEqualToRancor(contentView.heightRancor),
-            addButton.widthRancor.constraintEqualToConstant(52.0),
-            addButton.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            addButtonRightConstraint!,
+            actionButton.heightRancor.constraintEqualToRancor(contentView.heightRancor),
+            actionButton.widthRancor.constraintEqualToConstant(52.0),
+            actionButton.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
+            actionButtonRightConstraint!,
             
-            removeButton.heightRancor.constraintEqualToRancor(addButton.heightRancor),
-            removeButton.widthRancor.constraintEqualToRancor(addButton.heightRancor),
-            removeButton.centerYRancor.constraintEqualToRancor(addButton.centerYRancor),
-            removeButton.centerXRancor.constraintEqualToRancor(addButton.centerXRancor),
-            
-            salaryLabel.centerYRancor.constraintEqualToRancor(addButton.centerYRancor),
-            salaryLabel.rightRancor.constraintEqualToRancor(addButton.leftRancor),
+            salaryLabel.centerYRancor.constraintEqualToRancor(actionButton.centerYRancor),
+            salaryLabel.rightRancor.constraintEqualToRancor(actionButton.leftRancor),
             
             borderView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 10.0),
             borderView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -10.0),
@@ -134,8 +134,7 @@ class LineupPlayerCell: UITableViewCell {
         awayLabel.translatesAutoresizingMaskIntoConstraints = false
         fppgLabel.translatesAutoresizingMaskIntoConstraints = false
         salaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        removeButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         borderView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
@@ -168,15 +167,12 @@ class LineupPlayerCell: UITableViewCell {
         salaryLabel.font = .oswald(size: 13.0)
         salaryLabel.textColor = UIColor(0x46495e)
         
-        addButton.setImage(UIImage(named: "icon-add"), forState: .Normal)
-        addButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
-        
-        removeButton.setImage(UIImage(named: "icon-remove"), forState: .Normal)
-        removeButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
+        actionButton.setImage(UIImage(named: "icon-add"), forState: .Normal)
+        actionButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
         
         borderView.backgroundColor = UIColor(0xebedf2)
         
-        updateActionButtons()
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), forControlEvents: .TouchUpInside)
     }
     
     func setLineupSlot(slot: LineupSlot?) {
@@ -233,11 +229,26 @@ class LineupPlayerCell: UITableViewCell {
 
     }
     
-    func updateActionButtons() {
-        addButtonRightConstraint?.constant = (showActionButton == nil) ? addButton.frame.width - 16.0 : 0
-        addButton.hidden = (showActionButton != .Add)
-        removeButton.hidden = (showActionButton != .Remove)
+    func updateActionButton() {
+        if showAddButton || showRemoveButton {
+            let imageName = showAddButton ? "icon-add" : "icon-remove"
+            actionButton.setImage(UIImage(named: imageName), forState: .Normal)
+            actionButtonRightConstraint?.constant = 0
+            actionButton.hidden = false
+        } else {
+            actionButtonRightConstraint?.constant = actionButton.frame.width - 16.0
+            actionButton.hidden = true
+        }
         layoutIfNeeded()
     }
+    
+    func updateBottomBorder() {
+        borderView.hidden = !showBottomBorder
+    }
+    
+    func actionButtonTapped() {
+        actionButtonDelegate?.actionButtonTappedForCell(self)
+    }
+
 }
 
