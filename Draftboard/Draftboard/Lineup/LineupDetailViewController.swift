@@ -235,6 +235,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         let indexPath = tableView.indexPathForCell(cell)!
         lineup!.slots[indexPath.row].player = nil
         tableView.reloadData()
+        navController?.updateTitlebar()
         updateFooterStats()
     }
     
