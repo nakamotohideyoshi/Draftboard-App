@@ -23,6 +23,8 @@ class LineupDraftViewController: DraftboardViewController {
     var allPlayers: [PlayerWithPosition]? { didSet { update() } }
     var players: [PlayerWithPosition]?
     
+    var scrollingToSearchBar: Bool = false
+    
     override func loadView() {
         self.view = LineupDraftView()
     }
@@ -73,6 +75,11 @@ class LineupDraftViewController: DraftboardViewController {
             searchBar.text = nil
             navController?.popViewController()
         }
+        if buttonType == .Search {
+            // See scrollViewDidEndScrollingAnimation where searchBar becomes firstResponder
+            scrollingToSearchBar = true
+            tableView.setContentOffset(CGPointMake(0, 0), animated: true)
+        }
     }
 
     // DraftboardTitlebarDatasource
@@ -87,7 +94,7 @@ class LineupDraftViewController: DraftboardViewController {
     }
     
     override func titlebarRightButtonType() -> TitlebarButtonType? {
-        return nil
+        return .Search
     }
 
 }
@@ -143,6 +150,13 @@ extension ScrollViewDelegate: UIScrollViewDelegate {
         }
     }
 
+    func scrollViewDidEndScrollingAnimation(_: UIScrollView) {
+        if (tableView.contentOffset.y == 0) && scrollingToSearchBar && !searchBar.isFirstResponder() {
+            searchBar.becomeFirstResponder()
+        }
+        scrollingToSearchBar = false
+    }
+    
 }
 
 
