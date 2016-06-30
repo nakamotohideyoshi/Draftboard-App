@@ -37,6 +37,7 @@ class LineupDraftViewController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        searchBar.text = nil
         update()
         scrollToFirstAffordablePlayer()
     }
@@ -68,11 +69,10 @@ class LineupDraftViewController: DraftboardViewController {
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
         tableView.flashScrollIndicators()
     }
-
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if buttonType == .Back {
-            searchBar.text = nil
+            searchBar.resignFirstResponder()
             navController?.popViewController()
         }
         if buttonType == .Search {
@@ -102,7 +102,7 @@ class LineupDraftViewController: DraftboardViewController {
 // MARK: -
 
 private typealias TableViewDelegate = LineupDraftViewController
-extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupPlayerCellActionButtonDelegate {
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     // UITableViewDataSource
     
@@ -130,12 +130,17 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+}
+
+private typealias ActionButtonDelegate = LineupDraftViewController
+extension ActionButtonDelegate: LineupPlayerCellActionButtonDelegate {
+
     // LineupPlayerCellActionButtonDelegate
     
     func actionButtonTappedForCell(cell: LineupPlayerCell) {
         let indexPath = tableView.indexPathForCell(cell)!
         slot?.player = players?[indexPath.row]
-        searchBar.text = nil
+        searchBar.resignFirstResponder()
         navController?.popViewController()
     }
     
