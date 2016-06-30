@@ -19,17 +19,14 @@ class LineupPlayerCell: UITableViewCell {
         case Remove
     }
     
-    private static let teamFont = UIFont.openSans(size: 10.0)
-    private static let teamFontBold = UIFont.openSans(weight: .Semibold, size: 10.0)
-    
     let infoView = UIView()
     let positionLabel = UILabel()
     let avatarImageView = AvatarImageView()
     let nameLabel = UILabel()
     let nameTeamSeparatorLabel = UILabel()
-    let homeLabel = UILabel()
-    let vsLabel = UILabel()
     let awayLabel = UILabel()
+    let vsLabel = UILabel()
+    let homeLabel = UILabel()
     let fppgLabel = UILabel()
     let salaryLabel = UILabel()
     let actionButton = UIButton()
@@ -65,9 +62,9 @@ class LineupPlayerCell: UITableViewCell {
         contentView.addSubview(infoView)
         infoView.addSubview(nameLabel)
         infoView.addSubview(nameTeamSeparatorLabel)
-        infoView.addSubview(homeLabel)
-        infoView.addSubview(vsLabel)
         infoView.addSubview(awayLabel)
+        infoView.addSubview(vsLabel)
+        infoView.addSubview(homeLabel)
         infoView.addSubview(fppgLabel)
         contentView.addSubview(salaryLabel)
         contentView.addSubview(actionButton)
@@ -97,14 +94,14 @@ class LineupPlayerCell: UITableViewCell {
             nameTeamSeparatorLabel.centerYRancor.constraintEqualToRancor(nameLabel.centerYRancor),
             nameTeamSeparatorLabel.leftRancor.constraintEqualToRancor(nameLabel.rightRancor, constant: 2.0),
             
-            homeLabel.baseLineRancor.constraintEqualToRancor(nameLabel.baseLineRancor),
-            homeLabel.leftRancor.constraintEqualToRancor(nameTeamSeparatorLabel.rightRancor, constant: 2.0),
+            awayLabel.baseLineRancor.constraintEqualToRancor(nameLabel.baseLineRancor),
+            awayLabel.leftRancor.constraintEqualToRancor(nameTeamSeparatorLabel.rightRancor, constant: 2.0),
             
-            vsLabel.centerYRancor.constraintEqualToRancor(homeLabel.centerYRancor),
-            vsLabel.leftRancor.constraintEqualToRancor(homeLabel.rightRancor),
+            vsLabel.centerYRancor.constraintEqualToRancor(awayLabel.centerYRancor),
+            vsLabel.leftRancor.constraintEqualToRancor(awayLabel.rightRancor),
 
-            awayLabel.centerYRancor.constraintEqualToRancor(vsLabel.centerYRancor),
-            awayLabel.leftRancor.constraintEqualToRancor(vsLabel.rightRancor),
+            homeLabel.centerYRancor.constraintEqualToRancor(vsLabel.centerYRancor),
+            homeLabel.leftRancor.constraintEqualToRancor(vsLabel.rightRancor),
             
             fppgLabel.topRancor.constraintEqualToRancor(nameLabel.bottomRancor),
             fppgLabel.leftRancor.constraintEqualToRancor(nameLabel.leftRancor),
@@ -130,9 +127,9 @@ class LineupPlayerCell: UITableViewCell {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameTeamSeparatorLabel.translatesAutoresizingMaskIntoConstraints = false
-        homeLabel.translatesAutoresizingMaskIntoConstraints = false
-        vsLabel.translatesAutoresizingMaskIntoConstraints = false
         awayLabel.translatesAutoresizingMaskIntoConstraints = false
+        vsLabel.translatesAutoresizingMaskIntoConstraints = false
+        homeLabel.translatesAutoresizingMaskIntoConstraints = false
         fppgLabel.translatesAutoresizingMaskIntoConstraints = false
         salaryLabel.translatesAutoresizingMaskIntoConstraints = false
         actionButton.translatesAutoresizingMaskIntoConstraints = false
@@ -153,14 +150,12 @@ class LineupPlayerCell: UITableViewCell {
         nameTeamSeparatorLabel.font = .openSans(size: 13.0)
         nameTeamSeparatorLabel.textColor = UIColor(0x9c9faf)
 
-        homeLabel.font = LineupPlayerCell.teamFont
-        homeLabel.textColor = UIColor(0x9c9faf)
+        awayLabel.textColor = UIColor(0x9c9faf)
         
-        vsLabel.font = LineupPlayerCell.teamFont
+        vsLabel.font = .openSans(size: 10.0)
         vsLabel.textColor = UIColor(0x9c9faf)
         
-        awayLabel.font = LineupPlayerCell.teamFont
-        awayLabel.textColor = UIColor(0x9c9faf)
+        homeLabel.textColor = UIColor(0x9c9faf)
 
         fppgLabel.font = .openSans(weight: .Semibold, size: 10.0)
         fppgLabel.textColor = UIColor(0x9c9faf)
@@ -193,8 +188,8 @@ class LineupPlayerCell: UITableViewCell {
             avatarImageView.player = nil
             fppgLabel.text = nil
             salaryLabel.text = nil
-            homeLabel.text = nil
             awayLabel.text = nil
+            homeLabel.text = nil
             vsLabel.text = nil
             nameTeamSeparatorLabel.text = nil
             return
@@ -210,21 +205,21 @@ class LineupPlayerCell: UITableViewCell {
         nameTeamSeparatorLabel.text = "-"
         
         // Game info if available
-        if showAllInfo, let player = player as? HasGame {
-            homeLabel.text = player.game.home.alias
-            awayLabel.text = player.game.away.alias
-            homeLabel.font = (player.game.home === player.team) ? LineupPlayerCell.teamFontBold : LineupPlayerCell.teamFont
-            awayLabel.font = (player.game.away === player.team) ? LineupPlayerCell.teamFontBold : LineupPlayerCell.teamFont
-            homeLabel.textColor = (player.game.home === player.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
-            awayLabel.textColor = (player.game.away === player.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
+        if showAllInfo, let p = player as? HasGame {
+            awayLabel.text = p.game.away.alias
+            homeLabel.text = p.game.home.alias
+            awayLabel.font = (p.game.away === p.team) ? .openSans(weight: .Semibold, size: 10.0) : .openSans(size: 10.0)
+            homeLabel.font = (p.game.home === p.team) ? .openSans(weight: .Semibold, size: 10.0) : .openSans(size: 10.0)
+            awayLabel.textColor = (p.game.away === p.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
+            homeLabel.textColor = (p.game.home === p.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
             vsLabel.text = " vs "
         }
         // Just the team alias
         else {
-            homeLabel.text = player.teamAlias
-            homeLabel.font = LineupPlayerCell.teamFont
-            homeLabel.textColor = UIColor(0x9c9faf)
-            awayLabel.text = nil
+            awayLabel.text = player.teamAlias
+            awayLabel.font = .openSans(size: 10.0)
+            awayLabel.textColor = UIColor(0x9c9faf)
+            homeLabel.text = nil
             vsLabel.text = nil
         }
 
