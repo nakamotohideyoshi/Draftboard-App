@@ -116,9 +116,9 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         let player = players![indexPath.row]
         cell.showAllInfo = true
         cell.showAddButton = true
-        cell.contentView.alpha = (player.salary <= lineup.totalSalaryRemaining) ? 1.0 : 0.5
         cell.showBottomBorder = player !== players?.last
         cell.actionButtonDelegate = self
+        cell.withinBudget = (player.salary <= lineup.totalSalaryRemaining)
         cell.setPlayer(player)
         
         return cell

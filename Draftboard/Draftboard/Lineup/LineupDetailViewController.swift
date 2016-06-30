@@ -211,6 +211,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         cell.showAddButton = false
         cell.showRemoveButton = editing && slot.player != nil
         cell.showBottomBorder = slot !== lineup?.slots.last
+        cell.withinBudget = true
         cell.actionButtonDelegate = self
         cell.setLineupSlot(slot)
         

@@ -39,6 +39,7 @@ class LineupPlayerCell: UITableViewCell {
     var showAddButton: Bool = false { didSet { if showAddButton { showRemoveButton = false }; updateActionButton() } }
     var showRemoveButton: Bool = false { didSet { if showRemoveButton { showAddButton = false }; updateActionButton() } }
     var showBottomBorder: Bool = true { didSet { updateBottomBorder() } }
+    var withinBudget: Bool = true { didSet { updateSalaryColor() } }
     
     var actionButtonRightConstraint: NSLayoutConstraint?
     var actionButtonDelegate: LineupPlayerCellActionButtonDelegate?
@@ -244,6 +245,10 @@ class LineupPlayerCell: UITableViewCell {
     
     func updateBottomBorder() {
         borderView.hidden = !showBottomBorder
+    }
+    
+    func updateSalaryColor() {
+        salaryLabel.textColor = withinBudget ? UIColor(0x46495e) : UIColor(0xe42e2f)
     }
     
     func actionButtonTapped() {
