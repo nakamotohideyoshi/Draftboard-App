@@ -130,7 +130,10 @@ class LineupDetailViewController: DraftboardViewController {
     func updateFooterStats() {
         // TODO: This stinks
         lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
+        lineupDetailView.footerView.totalSalaryRem.valueLabel.textColor = (lineup!.totalSalaryRemaining >= 0) ? UIColor(0x46495e) : UIColor(0xe42e2f)
         lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
+        lineupDetailView.footerView.avgSalaryRem.valueLabel.textColor = (lineup!.avgSalaryRemaining >= 0) ? UIColor(0x46495e) : UIColor(0xe42e2f)
+
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
