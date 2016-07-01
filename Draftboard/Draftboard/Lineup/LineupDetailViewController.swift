@@ -43,7 +43,9 @@ class LineupDetailViewController: DraftboardViewController {
     override func viewWillAppear(animated: Bool) {
         navController?.titlebar.updateElements()
         tableView.reloadData()
-        updateFooterStats()
+        delay(0.3) {
+            self.updateFooterStats()
+        }
     }
     
     override func viewDidLoad() {
@@ -255,7 +257,9 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         lineup!.slots[indexPath.row].player = nil
         tableView.reloadData()
         navController?.updateTitlebar()
-        updateFooterStats()
+        delay(0.1) {
+            self.updateFooterStats()
+        }
     }
     
 }
