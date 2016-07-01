@@ -129,11 +129,26 @@ class LineupDetailViewController: DraftboardViewController {
     
     func updateFooterStats() {
         // TODO: This stinks
-        lineupDetailView.footerView.totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.totalSalaryRemaining)
-        lineupDetailView.footerView.totalSalaryRem.valueLabel.textColor = (lineup!.totalSalaryRemaining >= 0) ? UIColor(0x46495e) : UIColor(0xe42e2f)
-        lineupDetailView.footerView.avgSalaryRem.valueLabel.text = Format.currency.stringFromNumber(lineup!.avgSalaryRemaining)
-        lineupDetailView.footerView.avgSalaryRem.valueLabel.textColor = (lineup!.avgSalaryRemaining >= 0) ? UIColor(0x46495e) : UIColor(0xe42e2f)
+        let totalValueLabel = lineupDetailView.footerView.totalSalaryRem.valueLabel
+        let totalValueEnd = lineup!.totalSalaryRemaining
+        let totalValueStart = Format.currency.numberFromString(totalValueLabel.text!)!.doubleValue
+        let totalValueDelta = totalValueEnd - totalValueStart
+        
+        let avgValueLabel = lineupDetailView.footerView.avgSalaryRem.valueLabel
+        let avgValueEnd = lineup!.avgSalaryRemaining
+        let avgValueStart = Format.currency.numberFromString(avgValueLabel.text!)!.doubleValue
+        let avgValueDelta = avgValueEnd - avgValueStart
 
+        let spring = Spring(stiffness: 8.0, damping: 0, velocity: 0.0)
+        spring.updateBlock = { (value) -> Void in
+            let totalValue = round((totalValueStart + (totalValueDelta * Double(value))) / 100) * 100
+            totalValueLabel.text = Format.currency.stringFromNumber(totalValue)
+            totalValueLabel.textColor = (totalValue >= 0) ? UIColor(0x46495e) : UIColor(0xe42e2f)
+            let avgValue = round((avgValueStart + (avgValueDelta * Double(value))) / 100) * 100
+            avgValueLabel.text = Format.currency.stringFromNumber(avgValue)
+            avgValueLabel.textColor = (avgValue >= 0) ? UIColor(0x46495e) : UIColor(0xe42e2f)
+        }
+        spring.start()
     }
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
