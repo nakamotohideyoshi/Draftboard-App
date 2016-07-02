@@ -15,6 +15,7 @@ class LineupCardCell: UICollectionViewCell {
     let shadowView = LineupCardShadowView()
     let createView = LineupCardCreateView()
     let lineupView = UIView()
+    let lineupEntryView = LineupEntryView()
     var lineupDetailView: LineupDetailView? { didSet { didSetLineupView() } }
     
     var createAction: (() -> Void)?
@@ -41,6 +42,7 @@ class LineupCardCell: UICollectionViewCell {
     func addSubviews() {
         contentView.addSubview(shadowView)
         contentView.addSubview(createView)
+        contentView.addSubview(lineupEntryView)
         contentView.addSubview(lineupView)
     }
     
@@ -60,11 +62,16 @@ class LineupCardCell: UICollectionViewCell {
             createView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
             createView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
             createView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
-
+            
             lineupView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
             lineupView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
             lineupView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
             lineupView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
+            
+            lineupEntryView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
+            lineupEntryView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
+            lineupEntryView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
+            lineupEntryView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
         ]
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +79,7 @@ class LineupCardCell: UICollectionViewCell {
         shadowView.translatesAutoresizingMaskIntoConstraints = false
         createView.translatesAutoresizingMaskIntoConstraints = false
         lineupView.translatesAutoresizingMaskIntoConstraints = false
+        lineupEntryView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }

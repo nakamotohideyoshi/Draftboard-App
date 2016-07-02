@@ -133,6 +133,17 @@ extension LineupListViewController: UICollectionViewDataSource, UICollectionView
             detailView.editAction = {
                 self.editLineup(lineup)
             }
+            detailView.flipAction = {
+                // TODO: This stinks
+                cell.lineupEntryView.tapAction = {
+                    UIView.transitionWithView(cell, duration: 0.3, options: .TransitionFlipFromLeft, animations: {
+                        cell.lineupView.hidden = false
+                    }, completion: nil)
+                }
+                UIView.transitionWithView(cell, duration: 0.3, options: .TransitionFlipFromRight, animations: {
+                    cell.lineupView.hidden = true
+                }, completion: nil)
+            }
         }
         
         // Flip card action

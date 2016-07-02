@@ -35,6 +35,7 @@ class LineupDetailView: UIView {
 //    }
     
     var editAction: () -> Void = {}
+    var flipAction: () -> Void = {}
     
     init() {
         super.init(frame: CGRectZero)
@@ -222,12 +223,16 @@ class LineupDetailView: UIView {
         tableView.contentOffset = CGPointMake(0, -68)
         tableView.scrollIndicatorInsets = tableView.contentInset
 
-
-        editButton.addTarget(self, action: .editButtonTapped, forControlEvents: .TouchUpInside)
+        editButton.addTarget(self, action: #selector(editButtonTapped), forControlEvents: .TouchUpInside)
+        flipButton.addTarget(self, action: #selector(flipButtonTapped), forControlEvents: .TouchUpInside)
     }
     
     func editButtonTapped() {
         editAction()
+    }
+    
+    func flipButtonTapped() {
+        flipAction()
     }
     
     func hideOverlay() {
@@ -584,8 +589,4 @@ class TextField: UITextField {
     override func clearButtonRectForBounds(bounds: CGRect) -> CGRect {
         return super.clearButtonRectForBounds(UIEdgeInsetsInsetRect(bounds, clearButtonEdgeInsets))
     }
-}
-
-private extension Selector {
-    static let editButtonTapped = #selector(LineupDetailView.editButtonTapped)
 }
