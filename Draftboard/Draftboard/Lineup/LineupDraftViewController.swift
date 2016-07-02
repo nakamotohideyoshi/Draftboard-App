@@ -77,6 +77,13 @@ class LineupDraftViewController: DraftboardViewController {
         }
         if buttonType == .Search {
             // See scrollViewDidEndScrollingAnimation where searchBar becomes firstResponder
+            if (tableView.contentOffset.y == 0) && !searchBar.isFirstResponder() {
+                searchBar.becomeFirstResponder()
+                return
+            }
+            if scrollingToSearchBar {
+                return
+            }
             scrollingToSearchBar = true
             tableView.setContentOffset(CGPointMake(0, 0), animated: true)
         }
@@ -159,6 +166,10 @@ extension ScrollViewDelegate: UIScrollViewDelegate {
         if (tableView.contentOffset.y == 0) && scrollingToSearchBar && !searchBar.isFirstResponder() {
             searchBar.becomeFirstResponder()
         }
+        scrollingToSearchBar = false
+    }
+    
+    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate decelerate: Bool) {
         scrollingToSearchBar = false
     }
     
