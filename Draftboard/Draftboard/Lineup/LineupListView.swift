@@ -53,7 +53,8 @@ class LineupListView: UIView {
             cardCollectionView.topRancor.constraintEqualToRancor(topRancor),
             cardCollectionView.leftRancor.constraintEqualToRancor(leftRancor, constant: -20.0),
             cardCollectionView.rightRancor.constraintEqualToRancor(rightRancor, constant: 20.0),
-            cardCollectionView.bottomRancor.constraintEqualToRancor(paginationView.topRancor),
+            cardCollectionView.bottomRancor.constraintEqualToRancor(bottomRancor, constant: -70.0),
+//            cardCollectionView.bottomRancor.constraintEqualToRancor(paginationView.topRancor),
             
             paginationView.leftRancor.constraintEqualToRancor(leftRancor),
             paginationView.rightRancor.constraintEqualToRancor(rightRancor),
@@ -63,7 +64,7 @@ class LineupListView: UIView {
             loaderView.widthRancor.constraintEqualToConstant(42.0),
             loaderView.heightRancor.constraintEqualToConstant(42.0),
             loaderView.centerXRancor.constraintEqualToRancor(centerXRancor),
-            loaderView.centerYRancor.constraintEqualToRancor(centerYRancor),
+            loaderView.centerYRancor.constraintEqualToRancor(centerYRancor, constant: -40.0),
         ]
 
         translatesAutoresizingMaskIntoConstraints = false
