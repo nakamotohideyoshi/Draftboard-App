@@ -183,6 +183,10 @@ extension SearchBarDelegate: UISearchBarDelegate {
         update()
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
 }
 
 private extension String {

@@ -59,6 +59,7 @@ class LineupDraftView: UIView {
     }
     
     func otherSetup() {
+        searchBar.returnKeyType = .Done
         searchBar.frame.size.height = 50
         tableView.tableHeaderView = searchBar
     }
