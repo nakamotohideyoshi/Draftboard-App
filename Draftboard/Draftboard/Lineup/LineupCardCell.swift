@@ -104,6 +104,7 @@ class LineupCardCell: UICollectionViewCell {
     }
     
     func didSetLineupView() {
+        lineupEntryView.hidden = (lineupDetailView == nil)
         lineupView.hidden = (lineupDetailView == nil)
         createView.hidden = (lineupDetailView != nil)
         if let lineupDetailView = lineupDetailView {
