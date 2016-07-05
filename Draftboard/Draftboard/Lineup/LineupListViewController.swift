@@ -42,8 +42,6 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         lineupListView.loaderView.hidden = (lineupDetailViewControllers != nil)
         lineupListView.cardCollectionView.hidden = (lineupDetailViewControllers == nil)
         lineupListView.cardCollectionView.reloadData()
-        lineupListView.cardCollectionView.setContentOffset(CGPointMake(1, 0), animated: false)
-        lineupListView.cardCollectionView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     // MARK: - Modals
@@ -159,12 +157,6 @@ extension LineupListViewController: UICollectionViewDataSource, UICollectionView
     
 }
 
-extension LineupListViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_: UIScrollView) {
-        lineupListView.cardCollectionView.updateCellTransforms()
-    }
-}
- 
 // MARK: -
  
 extension Array {
