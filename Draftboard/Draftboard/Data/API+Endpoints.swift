@@ -112,6 +112,19 @@ extension API_Endpoints {
         }
     }
     
+    class func contestPoolEntries() -> Promise<[ContestPoolEntry]> {
+        let path = "api/contest/contest-pools/entries/"
+        return API.get(path).then { (json: [NSDictionary]) -> [ContestPoolEntry] in
+            return try json.map { try ContestPoolEntry(JSON: $0) }
+        }
+    }
+    
+    class func contestUnregisterEntry(entry: LineupEntry) -> Promise<AnyObject> {
+        let path = "api/contest/unregister-entry/\(entry.id)/"
+        let params = [:]
+        return API.post(path, JSON: params)
+    }
+    
     class func prizeStructure(id id: Int) -> Promise<[NSDictionary]> {
         let path = "api/prize/\(id)/"
         return API.get(path).then { (data: NSDictionary) -> [NSDictionary] in

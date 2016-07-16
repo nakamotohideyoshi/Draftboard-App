@@ -93,6 +93,13 @@ class LineupDetailViewController: DraftboardViewController {
             self.lineup?.players = players
             self.tableView.reloadData()
         }
+        
+        lineup?.getEntries().then { entries -> Void in
+            let totalBuyin = entries.reduce(0) { $0 + $1.contest.buyin }
+            let feesText = Format.currency.stringFromNumber(totalBuyin)!
+            let text = "\(feesText) / \(entries.count)"
+            self.lineupDetailView.footerView.feesEntries.valueLabel.text = text
+        }
 
     }
     

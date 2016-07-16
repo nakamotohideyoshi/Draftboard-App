@@ -71,6 +71,8 @@
 		3E8A7E621D2733A30020681E /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E611D2733A30020681E /* Delay.swift */; };
 		3E8A7E641D273A220020681E /* LineupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E631D273A220020681E /* LineupEntryViewController.swift */; };
 		3E8A7E661D273A2C0020681E /* LineupEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E651D273A2B0020681E /* LineupEntryView.swift */; };
+		3E8A7E681D39C9C50020681E /* ContestPoolEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */; };
+		3E8A7E6A1D39D16C0020681E /* LineupEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E691D39D16C0020681E /* LineupEntry.swift */; };
 		3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
 		3E9DBAB01CB878860098BB77 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */; };
 		3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */; };
@@ -277,6 +279,8 @@
 		3E8A7E611D2733A30020681E /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		3E8A7E631D273A220020681E /* LineupEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryViewController.swift; sourceTree = "<group>"; };
 		3E8A7E651D273A2B0020681E /* LineupEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryView.swift; sourceTree = "<group>"; };
+		3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestPoolEntry.swift; sourceTree = "<group>"; };
+		3E8A7E691D39D16C0020681E /* LineupEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntry.swift; sourceTree = "<group>"; };
 		3E96695D1BED5C8B005179E0 /* Lineup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lineup.swift; sourceTree = "<group>"; };
 		3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Traversal.swift"; sourceTree = "<group>"; };
 		3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutRancor.swift; sourceTree = "<group>"; };
@@ -750,6 +754,8 @@
 				3E1870E71C05410F006641F8 /* Roster.swift */,
 				3E04ECA91D02132000EE325C /* Game.swift */,
 				3E04ECAB1D02138A00EE325C /* Boxscore.swift */,
+				3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */,
+				3E8A7E691D39D16C0020681E /* LineupEntry.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -922,6 +928,7 @@
 				3E192C1F1CCADE760021A31D /* LineupCardCollectionView.swift in Sources */,
 				5D86F2771C19043D004E9655 /* LineupStatCurrencyView.swift in Sources */,
 				3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */,
+				3E8A7E6A1D39D16C0020681E /* LineupEntry.swift in Sources */,
 				3E04ECAC1D02138A00EE325C /* Boxscore.swift in Sources */,
 				3EF777AD1D0B54CB002322F3 /* LineupDraftViewController.swift in Sources */,
 				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
@@ -930,6 +937,7 @@
 				3E73AADA1C850D89000E7D99 /* CountdownView.swift in Sources */,
 				5D6237DE1BB6200B0007E62A /* DraftboardNibControl.swift in Sources */,
 				3E19DA1D1C03B75000E6B53F /* LoaderView.swift in Sources */,
+				3E8A7E681D39C9C50020681E /* ContestPoolEntry.swift in Sources */,
 				3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */,
 				5D63D0A91BD6B711000215DF /* LineupSearchViewController.swift in Sources */,
 				5D6237DF1BB6200B0007E62A /* DraftboardNibView.swift in Sources */,

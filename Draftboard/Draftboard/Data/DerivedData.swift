@@ -123,6 +123,24 @@ extension Lineup {
         }
     }
 
+    func getEntries() -> Promise<[LineupEntry]> {
+        return DerivedData.entriesByLineup().then {
+            return $0[self.id] ?? []
+        }
+    }
+}
+
+extension DerivedData {
+    class func entriesByLineup() -> Promise<[Int: [LineupEntry]]> {
+        return when(Data.contestPoolEntries.get(), Data.contests.get()).then { entries, contests -> [Int: [LineupEntry]] in
+            let contestsByID = contests.keyBy { $0.id }
+            return entries.transform([Int: [LineupEntry]]()) {
+                $0[$1.lineupID] = $0[$1.lineupID] ?? []
+                $0[$1.lineupID]!.append(LineupEntry(id: $1.id, contest: contestsByID[$1.contestPoolID]!))
+                return $0
+            }
+        }
+    }
 }
 
 

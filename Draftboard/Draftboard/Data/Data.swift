@@ -18,6 +18,7 @@ class Data {
     static let draftGroups = Cache { API.draftGroupUpcoming() }
     static let draftGroup = MultiCache { id in API.draftGroup(id: id) }
     static let contests = Cache { API.contestLobby() }
+    static let contestPoolEntries = Cache { API.contestPoolEntries() }
 }
 
 //enum SortByOther: ErrorType {
@@ -41,6 +42,13 @@ class Data {
 //        }
 //    }
 //}
+
+extension LineupEntry {
+    func unregister() -> Promise<AnyObject> {
+        Data.contestPoolEntries.clearCache()
+        return API.contestUnregisterEntry(self)
+    }
+}
 
 extension Lineup {
     func save() -> Promise<AnyObject> {

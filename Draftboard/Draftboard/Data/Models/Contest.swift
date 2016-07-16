@@ -12,7 +12,7 @@ class Contest {
     
     let id: Int
     let name: String
-//    let buyin: Double
+    let buyin: Double
     let draftGroupID: Int
 //    let maxEntries: Int
     // let prizeStructure
@@ -21,9 +21,10 @@ class Contest {
 //    let currentEntries: Int
 //    let contestSize: Int
     
-    init(id: Int, name: String, draftGroupID: Int) {
+    init(id: Int, name: String, buyin: Double, draftGroupID: Int) {
         self.id = id
         self.name = name
+        self.buyin = buyin
         self.draftGroupID = draftGroupID
     }
     
@@ -31,8 +32,9 @@ class Contest {
         do {
             let id: Int = try json.get("id")
             let name: String = try json.get("name")
+            let buyin: Double = try json.get("buyin")
             let draftGroupID: Int = try json.get("draft_group")
-            self.init(id: id, name: name, draftGroupID: draftGroupID)
+            self.init(id: id, name: name, buyin: buyin, draftGroupID: draftGroupID)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
