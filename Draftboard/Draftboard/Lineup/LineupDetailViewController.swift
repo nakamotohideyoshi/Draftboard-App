@@ -25,30 +25,25 @@ class LineupDetailViewController: DraftboardViewController {
     var sportIcon: UIImageView { return lineupDetailView.sportIcon }
     var nameField: UITextField { return lineupDetailView.nameField }
     
-    var uneditedLineup: LineupWithStart?
-    var lineup: LineupWithStart?
+    private var untouchedLineup: LineupWithStart?
+    private var workingLineup: LineupWithStart?
+    var lineup: LineupWithStart? {
+        set { setLineup(newValue) }
+        get { return getLineup() }
+    }
     
     var draftViewController = LineupDraftViewController()
-    
-    convenience init(lineup: LineupWithStart) {
-        self.init()
-        self.lineup = LineupWithStart(lineup: lineup)
-        self.uneditedLineup = lineup
-    }
     
     override func loadView() {
         self.view = LineupDetailView()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        navController?.titlebar.updateElements()
-        tableView.reloadData()
-        delay(0.3) {
-            self.updateFooterStats()
-        }
-    }
-    
     override func viewDidLoad() {
+        // FIXME: Don't rely on lineup being non-nil
+        if lineup == nil {
+            let draftGroup = DraftGroup(id: 1, sportName: "nba", start: NSDate(), numGames: 0)
+            lineup = LineupWithStart(draftGroup: draftGroup)
+        }
         // Overlay
         overlayView.addTarget(self, action: #selector(overlayTapped), forControlEvents: .TouchUpInside)
         
@@ -101,6 +96,14 @@ class LineupDetailViewController: DraftboardViewController {
 
     }
     
+    override func viewWillAppear(animated: Bool) {
+        navController?.titlebar.updateElements()
+        tableView.reloadData()
+        delay(0.3) {
+            self.updateFooterStats()
+        }
+    }
+    
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
@@ -123,6 +126,15 @@ class LineupDetailViewController: DraftboardViewController {
         
         // Footer
         lineupDetailView.footerView.configuration = editing ? .Editing : .Normal
+    }
+    
+    func setLineup(newLineup: LineupWithStart?) {
+        untouchedLineup = newLineup
+        workingLineup = (newLineup == nil) ? nil : LineupWithStart(lineup: newLineup!)
+    }
+    
+    func getLineup() -> LineupWithStart? {
+        return workingLineup
     }
     
     func overlayTapped() {
@@ -157,7 +169,7 @@ class LineupDetailViewController: DraftboardViewController {
         nameField.resignFirstResponder()
         
         if (buttonType == .Value) {
-            uneditedLineup = lineup
+            untouchedLineup = lineup
             lineup?.save().then { _ in
                 self.navController?.popViewController()
             }
@@ -167,10 +179,11 @@ class LineupDetailViewController: DraftboardViewController {
             if nameField.isFirstResponder() {
                 nameField.resignFirstResponder()
             }
-            let dirty = (lineup?.name != uneditedLineup?.name) ||
-                (lineup?.players != uneditedLineup?.players)
+            let dirty = (lineup?.name != untouchedLineup?.name) ||
+                (lineup?.players != untouchedLineup?.players)
             if !dirty {
                 self.navController?.popViewController()
+
             } else {
                 let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
                 let actions = ["Abandon changes", "Keep working"]
@@ -273,8 +286,8 @@ extension TextFieldDelegate: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_: UITextField) {
         if nameField.text ?? "" == "" {
-            nameField.placeholder = uneditedLineup?.name ?? "Lineup Name"
-            nameField.text = uneditedLineup?.name ?? "Lineup Name"
+            nameField.placeholder = untouchedLineup?.name ?? "Lineup Name"
+            nameField.text = untouchedLineup?.name ?? "Lineup Name"
         }
         lineup?.name = nameField.text!
         lineupDetailView.hideOverlay()

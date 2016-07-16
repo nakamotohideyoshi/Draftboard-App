@@ -40,19 +40,24 @@ class AvatarImageView: UIView {
 
         self.addSubview(circleImageView)
     
-        circleImageView.translatesAutoresizingMaskIntoConstraints = false
-        circleImageView.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
-        circleImageView.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
-        circleImageView.topRancor.constraintEqualToRancor(self.topRancor).active = true
-        circleImageView.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
-            
+//        circleImageView.translatesAutoresizingMaskIntoConstraints = false
+//        circleImageView.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
+//        circleImageView.rightRancor.constraintEqualToRancor(self.rightRancor).active = true
+//        circleImageView.topRancor.constraintEqualToRancor(self.topRancor).active = true
+//        circleImageView.bottomRancor.constraintEqualToRancor(self.bottomRancor).active = true
+        
         self.addSubview(playerImageView)
         
-        playerImageView.translatesAutoresizingMaskIntoConstraints = false
-        playerImageView.leftRancor.constraintEqualToRancor(self.leftRancor, constant: 2.0).active = true
-        playerImageView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -2.0).active = true
-        playerImageView.topRancor.constraintEqualToRancor(self.topRancor, constant: 2.0).active = true
-        playerImageView.bottomRancor.constraintEqualToRancor(self.bottomRancor, constant: -2.0).active = true
+//        playerImageView.translatesAutoresizingMaskIntoConstraints = false
+//        playerImageView.leftRancor.constraintEqualToRancor(self.leftRancor, constant: 2.0).active = true
+//        playerImageView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -2.0).active = true
+//        playerImageView.topRancor.constraintEqualToRancor(self.topRancor, constant: 2.0).active = true
+//        playerImageView.bottomRancor.constraintEqualToRancor(self.bottomRancor, constant: -2.0).active = true
+    }
+    
+    override func layoutSubviews() {
+        circleImageView.frame = bounds
+        playerImageView.frame = CGRectInset(bounds, 2, 2)
     }
 
 }

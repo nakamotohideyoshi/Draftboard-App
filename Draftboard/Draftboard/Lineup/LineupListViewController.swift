@@ -12,15 +12,19 @@ import PromiseKit
 class LineupListViewController: DraftboardViewController, UIActionSheetDelegate {
     
     var lineupListView: LineupListView { return view as! LineupListView }
-    var lineupDetailViewControllers: [LineupDetailViewController]? { didSet { update() } }
+    var loaderView: LoaderView { return lineupListView.loaderView }
+    var cardCollectionView: LineupCardCollectionView { return lineupListView.cardCollectionView }
+    
+    var lineups: [LineupWithStart]? { didSet { didSetLineups() } }
+    var cardState: [LineupCardCellState] = []
     
     override func loadView() {
         view = LineupListView()
     }
     
     override func viewDidLoad() {
-        lineupListView.cardCollectionView.delegate = self
-        lineupListView.cardCollectionView.dataSource = self
+        cardCollectionView.delegate = self
+        cardCollectionView.dataSource = self
         
         // Hide pagination to start
         lineupListView.paginationHeight.constant = 20.0
@@ -31,17 +35,22 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     
     override func viewWillAppear(animated: Bool) {
         // Reload what's already there
-        lineupListView.cardCollectionView.reloadData()
+        cardCollectionView.reloadData()
         // Get lineups
-        DerivedData.upcomingLineupsWithStarts().then { lineups in
-            self.lineupDetailViewControllers = lineups.map { LineupDetailViewController(lineup: $0) }
+        DerivedData.upcomingLineupsWithStarts().then { lineups -> Void in
+            self.lineups = lineups
         }
     }
     
+    func didSetLineups() {
+        cardState = [LineupCardCellState](count: lineups?.count ?? 0, repeatedValue: LineupCardCellState())
+        update()
+    }
+    
     func update() {
-        lineupListView.loaderView.hidden = (lineupDetailViewControllers != nil)
-        lineupListView.cardCollectionView.hidden = (lineupDetailViewControllers == nil)
-        lineupListView.cardCollectionView.reloadData()
+        loaderView.hidden = (lineups != nil)
+        cardCollectionView.hidden = (lineups == nil)
+        cardCollectionView.reloadData()
     }
     
     // MARK: - Modals
@@ -65,17 +74,17 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     // MARK: - Create/Edit/Contests
     
     func createLineup() {
-        // FIXME: push vc immediately, assign lineup on data ready
         pickDraftGroup().then { draftGroup -> Void in
-            let lineup = LineupWithStart(draftGroup: draftGroup)
-            let vc = LineupDetailViewController(lineup: lineup)
+            let vc = LineupDetailViewController()
+            vc.lineup = LineupWithStart(draftGroup: draftGroup)
             vc.editing = true
             self.navController?.pushViewController(vc)
         }
     }
     
     func editLineup(lineup: LineupWithStart) {
-        let vc = LineupDetailViewController(lineup: lineup)
+        let vc = LineupDetailViewController()
+        vc.lineup = lineup
         vc.editing = true
         self.navController?.pushViewController(vc)
     }
@@ -105,48 +114,39 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     }
 }
 
-extension LineupListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+private typealias CollectionViewDelegate = LineupListViewController
+extension CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegate {
     
     // UICollectionViewDataSource
     
     func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // At least one
-        return max(1, lineupDetailViewControllers?.count ?? 0)
+        return max(1, lineups?.count ?? 0)
     }
     
     func collectionView(_: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = lineupListView.cardCollectionView.dequeueReusableCellForIndexPath(indexPath)
+        let lineup = lineups?[safe: indexPath.item]
         
-        // Draft lineup CTA, alternative to titlebar button
-        if cell.createAction == nil {
-            cell.createAction = { self.createLineup() }
-        }
+        cell.lineup = lineup
+        cell.createAction = { [weak self] in self?.createLineup() }
+        cell.entryFlipAction = { [weak cell] in cell?.showDetail() }
+        cell.detailFlipAction = { [weak cell] in cell?.showEntry() }
+        cell.detailEditAction = (lineup == nil) ? {} : { [weak self] in self?.editLineup(lineup!) }
+        
+        if let state = cardState[safe: indexPath.item] { cell.state = state }
 
-        // Set lineup
-        let vc = lineupDetailViewControllers?[safe: indexPath.row]
-        cell.lineupDetailView = vc?.lineupDetailView
-        
-        // Edit lineup action
-        if let detailView = vc?.lineupDetailView, lineup = vc?.lineup {
-            detailView.editAction = {
-                self.editLineup(lineup)
-            }
-            detailView.flipAction = {
-                // TODO: This stinks
-                cell.lineupEntryView.tapAction = {
-                    UIView.transitionWithView(cell, duration: 0.3, options: .TransitionFlipFromLeft, animations: {
-                        cell.lineupView.hidden = false
-                    }, completion: nil)
-                }
-                UIView.transitionWithView(cell, duration: 0.3, options: .TransitionFlipFromRight, animations: {
-                    cell.lineupView.hidden = true
-                }, completion: nil)
-            }
-        }
-        
-        // Flip card action
-        
         return cell
+    }
+    
+    // UICollectionViewDelegate
+    
+    func collectionView(_: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if lineups?.count ?? 0 != 0 {
+            let cell = cell as! LineupCardCell
+            cardState[indexPath.item] = cell.state
+        }
     }
 
     // UICollectionViewDelegateFlowLayout

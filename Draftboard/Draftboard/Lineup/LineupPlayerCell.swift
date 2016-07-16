@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LineupPlayerCellActionButtonDelegate {
+protocol LineupPlayerCellActionButtonDelegate: class {
     func actionButtonTappedForCell(cell: LineupPlayerCell)
 }
 
@@ -19,7 +19,6 @@ class LineupPlayerCell: UITableViewCell {
         case Remove
     }
     
-    let infoView = UIView()
     let positionLabel = UILabel()
     let avatarImageView = AvatarImageView()
     let nameLabel = UILabel()
@@ -32,14 +31,16 @@ class LineupPlayerCell: UITableViewCell {
     let actionButton = UIButton()
     let borderView = UIView()
     
+    let actionAddImage = UIImage(named: "icon-add")
+    let actionRemoveImage = UIImage(named: "icon-remove")
+    
     var showAllInfo: Bool = false
-    var showAddButton: Bool = false { didSet { if showAddButton { showRemoveButton = false }; updateActionButton() } }
-    var showRemoveButton: Bool = false { didSet { if showRemoveButton { showAddButton = false }; updateActionButton() } }
+    var showAddButton: Bool = false { didSet { didSetShowAddButton() } }
+    var showRemoveButton: Bool = false { didSet { didSetShowRemoveButton() } }
     var showBottomBorder: Bool = true { didSet { updateBottomBorder() } }
     var withinBudget: Bool = true { didSet { updateSalaryColor() } }
     
-    var actionButtonRightConstraint: NSLayoutConstraint?
-    var actionButtonDelegate: LineupPlayerCellActionButtonDelegate?
+    weak var actionButtonDelegate: LineupPlayerCellActionButtonDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,98 +53,28 @@ class LineupPlayerCell: UITableViewCell {
     
     func setup() {
         addSubviews()
-        addConstraints()
         setupSubviews()
     }
     
     func addSubviews() {
         contentView.addSubview(positionLabel)
         contentView.addSubview(avatarImageView)
-        contentView.addSubview(infoView)
-        infoView.addSubview(nameLabel)
-        infoView.addSubview(nameTeamSeparatorLabel)
-        infoView.addSubview(awayLabel)
-        infoView.addSubview(vsLabel)
-        infoView.addSubview(homeLabel)
-        infoView.addSubview(fppgLabel)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(nameTeamSeparatorLabel)
+        contentView.addSubview(awayLabel)
+        contentView.addSubview(vsLabel)
+        contentView.addSubview(homeLabel)
+        contentView.addSubview(fppgLabel)
+
         contentView.addSubview(salaryLabel)
         contentView.addSubview(actionButton)
         contentView.addSubview(borderView)
-    }
-    
-    func addConstraints() {
-        actionButtonRightConstraint = actionButton.rightRancor.constraintEqualToRancor(contentView.rightRancor)
-
-        let viewConstraints: [NSLayoutConstraint] = [
-            positionLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            positionLabel.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 18.0),
-            positionLabel.widthRancor.constraintEqualToConstant(18.0),
-            
-            avatarImageView.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            avatarImageView.leftRancor.constraintEqualToRancor(positionLabel.rightRancor, constant: 7.0),
-            avatarImageView.widthRancor.constraintEqualToConstant(38.0),
-            avatarImageView.heightRancor.constraintEqualToConstant(38.0),
-            
-            infoView.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            infoView.leftRancor.constraintEqualToRancor(avatarImageView.rightRancor, constant: 12.0),
-            infoView.rightRancor.constraintEqualToRancor(salaryLabel.leftRancor, constant: -6.0),
-            
-            nameLabel.topRancor.constraintEqualToRancor(infoView.topRancor),
-            nameLabel.leftRancor.constraintEqualToRancor(infoView.leftRancor),
-            
-            nameTeamSeparatorLabel.centerYRancor.constraintEqualToRancor(nameLabel.centerYRancor),
-            nameTeamSeparatorLabel.leftRancor.constraintEqualToRancor(nameLabel.rightRancor, constant: 2.0),
-            
-            awayLabel.baseLineRancor.constraintEqualToRancor(nameLabel.baseLineRancor),
-            awayLabel.leftRancor.constraintEqualToRancor(nameTeamSeparatorLabel.rightRancor, constant: 2.0),
-            
-            vsLabel.centerYRancor.constraintEqualToRancor(awayLabel.centerYRancor),
-            vsLabel.leftRancor.constraintEqualToRancor(awayLabel.rightRancor),
-
-            homeLabel.centerYRancor.constraintEqualToRancor(vsLabel.centerYRancor),
-            homeLabel.leftRancor.constraintEqualToRancor(vsLabel.rightRancor),
-            
-            fppgLabel.topRancor.constraintEqualToRancor(nameLabel.bottomRancor),
-            fppgLabel.leftRancor.constraintEqualToRancor(nameLabel.leftRancor),
-            fppgLabel.bottomRancor.constraintEqualToRancor(infoView.bottomRancor),
-            
-            actionButton.heightRancor.constraintEqualToRancor(contentView.heightRancor),
-            actionButton.widthRancor.constraintEqualToConstant(52.0),
-            actionButton.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
-            actionButtonRightConstraint!,
-            
-            salaryLabel.centerYRancor.constraintEqualToRancor(actionButton.centerYRancor),
-            salaryLabel.rightRancor.constraintEqualToRancor(actionButton.leftRancor),
-            
-            borderView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 10.0),
-            borderView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -10.0),
-            borderView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor),
-            borderView.heightRancor.constraintEqualToConstant(1.0)
-        ]
-
-        
-        infoView.translatesAutoresizingMaskIntoConstraints = false
-        positionLabel.translatesAutoresizingMaskIntoConstraints = false
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameTeamSeparatorLabel.translatesAutoresizingMaskIntoConstraints = false
-        awayLabel.translatesAutoresizingMaskIntoConstraints = false
-        vsLabel.translatesAutoresizingMaskIntoConstraints = false
-        homeLabel.translatesAutoresizingMaskIntoConstraints = false
-        fppgLabel.translatesAutoresizingMaskIntoConstraints = false
-        salaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        borderView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
     func setupSubviews() {
         positionLabel.font = .openSans(weight: .Semibold, size: 9.0)
         positionLabel.textColor = UIColor(0x9c9faf)
 
-        infoView.clipsToBounds = true
-        
         nameLabel.font = .openSans(size: 13.0)
         nameLabel.textColor = UIColor(0x46495e)
 
@@ -163,12 +94,51 @@ class LineupPlayerCell: UITableViewCell {
         salaryLabel.font = .oswald(size: 13.0)
         salaryLabel.textColor = UIColor(0x46495e)
         
-        actionButton.setImage(UIImage(named: "icon-add"), forState: .Normal)
         actionButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
         
         borderView.backgroundColor = UIColor(0xebedf2)
         
         actionButton.addTarget(self, action: #selector(actionButtonTapped), forControlEvents: .TouchUpInside)
+    }
+    
+    override func layoutSubviews() {
+        let nameLabelSize = nameLabel.sizeThatFits(CGSizeZero)
+        let nameTeamSeparatorLabelSize = nameTeamSeparatorLabel.sizeThatFits(CGSizeZero)
+        let awayLabelSize = awayLabel.sizeThatFits(CGSizeZero)
+        let vsLabelSize = vsLabel.sizeThatFits(CGSizeZero)
+        let homeLabelSize = homeLabel.sizeThatFits(CGSizeZero)
+        let fppgLabelSize = fppgLabel.sizeThatFits(CGSizeZero)
+        let salaryLabelSize = salaryLabel.sizeThatFits(CGSizeZero)
+        let actionButtonSize = CGSizeMake(52, bounds.height)
+        
+        let infoHeight = nameLabelSize.height + (showAllInfo ? fppgLabelSize.height + 2 : 0)
+        let nameLabelOriginY = fitToPixel(bounds.height / 2 - infoHeight / 2)
+        let awayLabelOriginY = nameLabelOriginY + fitToPixel(nameLabel.font.ascender - awayLabel.font.ascender)
+        let fppgLabelOriginY = nameLabelOriginY + nameLabelSize.height + 2
+        let salaryLabelOriginY = fitToPixel(bounds.height / 2 - salaryLabelSize.height / 2)
+        
+        let actionButtonOriginX = bounds.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 0)
+        let salaryLabelOriginX = bounds.width - salaryLabelSize.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 18)
+        
+        var x: CGFloat = 18
+        positionLabel.frame = CGRectMake(x, 0, 18, bounds.height)
+        x += 18 + 7
+        avatarImageView.frame = CGRectMake(x, bounds.height / 2 - 38 / 2, 38, 38)
+        x += 38 + 12
+        nameLabel.frame = CGRectMake(x, nameLabelOriginY, nameLabelSize.width, nameLabelSize.height)
+        x += nameLabelSize.width + 2
+        nameTeamSeparatorLabel.frame = CGRectMake(x, nameLabelOriginY, nameTeamSeparatorLabelSize.width, nameTeamSeparatorLabelSize.height)
+        x += nameTeamSeparatorLabelSize.width + 2
+        awayLabel.frame = CGRectMake(x, awayLabelOriginY, awayLabelSize.width, awayLabelSize.height)
+        x += awayLabelSize.width
+        vsLabel.frame = CGRectMake(x, awayLabelOriginY, vsLabelSize.width, vsLabelSize.height)
+        x += vsLabelSize.width
+        homeLabel.frame = CGRectMake(x, awayLabelOriginY, homeLabelSize.width, homeLabelSize.height)
+        x += homeLabelSize.width
+        fppgLabel.frame = CGRectMake(nameLabel.frame.origin.x, fppgLabelOriginY, fppgLabelSize.width, fppgLabelSize.height)
+        salaryLabel.frame = CGRectMake(salaryLabelOriginX, salaryLabelOriginY, salaryLabelSize.width, salaryLabelSize.height)
+        actionButton.frame = CGRectMake(actionButtonOriginX, 0, actionButtonSize.width, actionButtonSize.height)
+        borderView.frame = CGRectMake(10, bounds.height - 1, bounds.width - 20, 1)
     }
     
     func setLineupSlot(slot: LineupSlot?) {
@@ -225,17 +195,16 @@ class LineupPlayerCell: UITableViewCell {
 
     }
     
-    func updateActionButton() {
-        if showAddButton || showRemoveButton {
-            let imageName = showAddButton ? "icon-add" : "icon-remove"
-            actionButton.setImage(UIImage(named: imageName), forState: .Normal)
-            actionButtonRightConstraint?.constant = 0
-            actionButton.hidden = false
-        } else {
-            actionButtonRightConstraint?.constant = actionButton.frame.width - 16.0
-            actionButton.hidden = true
-        }
-        layoutIfNeeded()
+    func didSetShowAddButton() {
+        if showAddButton { showRemoveButton = false }
+        actionButton.setImage(actionAddImage, forState: .Normal)
+        actionButton.hidden = !(showAddButton || showRemoveButton)
+    }
+    
+    func didSetShowRemoveButton() {
+        if showRemoveButton { showAddButton = false }
+        actionButton.setImage(actionRemoveImage, forState: .Normal)
+        actionButton.hidden = !(showAddButton || showRemoveButton)
     }
     
     func updateBottomBorder() {
@@ -252,3 +221,7 @@ class LineupPlayerCell: UITableViewCell {
 
 }
 
+func fitToPixel(value: CGFloat) -> CGFloat {
+    let screen = UIScreen.mainScreen()
+    return ceil(screen.scale * value) / screen.scale
+}

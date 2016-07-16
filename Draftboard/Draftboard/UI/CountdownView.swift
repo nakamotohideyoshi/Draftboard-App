@@ -14,7 +14,6 @@ class CountdownView: UILabel {
     var color: UIColor { didSet { setup() } }
     private var textAttributes: [String: AnyObject]
     private var lastTimestamp: CFTimeInterval
-    private var widthConstraint: NSLayoutConstraint!
     
     init(date: NSDate = NSDate(), size: CGFloat = 10.0, color: UIColor = .whiteColor()) {
         self.date = date
@@ -24,13 +23,8 @@ class CountdownView: UILabel {
         self.lastTimestamp = 0
         super.init(frame: CGRectZero)
         
-        // Constraints
-        translatesAutoresizingMaskIntoConstraints = false
-        widthConstraint = widthRancor.constraintEqualToConstant(0)
-        widthConstraint.active = true
-
         // Tick
-        let displayLink = CADisplayLink(target: self, selector: .tick)
+        let displayLink = CADisplayLink(target: self, selector: #selector(tick))
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         
         setup()
@@ -44,12 +38,18 @@ class CountdownView: UILabel {
     func setup() {
         // Text attributes
         textAttributes[NSForegroundColorAttributeName] = color
-        textAttributes[NSFontAttributeName] = UIFont(name: "Oswald-Regular", size: size)
-        
-        // Constraints
-        widthConstraint.constant = 0
+        textAttributes[NSFontAttributeName] = UIFont.oswald(size: size)
         
         update()
+    }
+    
+    override func sizeThatFits(size: CGSize) -> CGSize {
+        // Size to fit :00 or :10 seconds to avoid excessive wiggling if centered
+        let components = dateComponents()
+        let (h, m, s) = (components.hour, components.minute, components.second)
+        var timeString = String(format: "%02d:%02d", h, m)
+        timeString += (s / 10 == 1) ? ":10" : ":00"
+        return (timeString as NSString).sizeWithAttributes(textAttributes)
     }
     
     func tick(displayLink: CADisplayLink) {
@@ -65,11 +65,8 @@ class CountdownView: UILabel {
         let (h, m, s) = (components.hour, components.minute, components.second)
         
         // Size to fit :00 or :10 seconds to avoid excessive wiggling
-        if widthConstraint.constant == 0 || s == 59 || s == 19 || s == 9 {
-            var timeString = String(format: "%02d:%02d", h, m)
-            timeString += (s / 10 == 1) ? ":10" : ":00"
-            attributedText = attributedTimeString(timeString)
-            widthConstraint.constant = sizeThatFits(CGSizeZero).width
+        if s == 19 || s == 9 {
+            superview?.setNeedsLayout()
         }
         
         // Real text, including seconds
@@ -92,8 +89,4 @@ class CountdownView: UILabel {
         let now = date.earlierDate(NSDate()) // Stop at zero
         return cal.components(units, fromDate: now, toDate: date, options: [])
     }
-}
-
-private extension Selector {
-    static let tick = #selector(CountdownView.tick(_:))
 }

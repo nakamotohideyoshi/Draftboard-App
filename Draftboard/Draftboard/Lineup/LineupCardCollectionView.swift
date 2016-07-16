@@ -63,6 +63,7 @@ class LineupCardCollectionView: UICollectionView {
             let cardPage = CGFloat(indexPathForCell(cardCell)!.item)
             // Page delta is number of pages from perfect center and can be negative
             let pageDelta = cardPage - currentPage
+            cardCell.userInteractionEnabled = (pageDelta == 0)
             cardCell.rotate(pageDelta)
             cardCell.fade(abs(pageDelta))
         }

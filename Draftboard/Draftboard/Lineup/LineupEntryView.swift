@@ -27,27 +27,17 @@ class LineupEntryView: UIView {
         self.init()
     }
     
+    override func layoutSubviews() {
+        tempLabel.frame = bounds
+    }
+    
     func setup() {
         addSubviews()
-        addConstraints()
         otherSetup()
     }
     
     func addSubviews() {
         addSubview(tempLabel)
-    }
-    
-    func addConstraints() {
-        let viewConstraints: [NSLayoutConstraint] = [
-            tempLabel.topRancor.constraintEqualToRancor(topRancor, constant: 30.0),
-            tempLabel.leftRancor.constraintEqualToRancor(leftRancor),
-            tempLabel.rightRancor.constraintEqualToRancor(rightRancor),
-        ]
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        tempLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
     func otherSetup() {
@@ -56,13 +46,6 @@ class LineupEntryView: UIView {
         tempLabel.textAlignment = .Center
         tempLabel.textColor = .blackColor()
         tempLabel.text = "Contest entries will go here!"
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
-        addGestureRecognizer(tap)
     }
     
-    func tapped() {
-        tapAction()
-    }
-
 }

@@ -8,17 +8,30 @@
 
 import UIKit
 
+class LineupCardCellState {
+    var flipped: Bool = false
+    var detailScrollOffset: CGPoint?
+    var entryScrollOffset: CGPoint?
+}
+
 class LineupCardCell: UICollectionViewCell {
     
     static let reuseIdentifier = "LineupCardCell"
     
     let shadowView = LineupCardShadowView()
     let createView = LineupCardCreateView()
-    let lineupView = UIView()
-    let lineupEntryView = LineupEntryView()
-    var lineupDetailView: LineupDetailView? { didSet { didSetLineupView() } }
     
-    var createAction: (() -> Void)?
+    let detailViewController = LineupDetailViewController()
+    let entryViewController = LineupEntryViewController()
+    
+    var lineup: LineupWithStart? { didSet { didSetLineup() } }
+    var state: LineupCardCellState { get { return getState() } set { setState(newValue) } }
+    var flipped: Bool = false
+    
+    var createAction: (() -> Void) = {}
+    var detailEditAction: (() -> Void) = {}
+    var detailFlipAction: (() -> Void) = {}
+    var entryFlipAction: (() -> Void) = {}
     
     init() {
         super.init(frame: CGRectZero)
@@ -33,92 +46,78 @@ class LineupCardCell: UICollectionViewCell {
         self.init()
     }
     
+    override func layoutSubviews() {
+        contentView.frame = bounds
+        shadowView.frame = CGRectMake(-40, bounds.height - 5, bounds.width + 80, 25)
+        createView.frame = CGRectInset(bounds, 2, 2)
+        detailViewController.view.frame = CGRectInset(bounds, 2, 2)
+        entryViewController.view.frame = CGRectInset(bounds, 2, 2)
+    }
+    
     func setup() {
         addSubviews()
-        addConstraints()
         otherSetup()
     }
     
     func addSubviews() {
         contentView.addSubview(shadowView)
         contentView.addSubview(createView)
-        contentView.addSubview(lineupEntryView)
-        contentView.addSubview(lineupView)
-    }
-    
-    func addConstraints() {
-        let viewConstraints: [NSLayoutConstraint] = [
-            contentView.topRancor.constraintEqualToRancor(topRancor),
-            contentView.leftRancor.constraintEqualToRancor(leftRancor),
-            contentView.rightRancor.constraintEqualToRancor(rightRancor),
-            contentView.bottomRancor.constraintEqualToRancor(bottomRancor),
-            
-            shadowView.topRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -5.0),
-            shadowView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: -40.0),
-            shadowView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: 40.0),
-            shadowView.heightRancor.constraintEqualToConstant(25.0),
-            
-            createView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
-            createView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
-            createView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
-            createView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
-            
-            lineupView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
-            lineupView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
-            lineupView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
-            lineupView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
-            
-            lineupEntryView.topRancor.constraintEqualToRancor(contentView.topRancor, constant: 2.0),
-            lineupEntryView.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 2.0),
-            lineupEntryView.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -2.0),
-            lineupEntryView.bottomRancor.constraintEqualToRancor(contentView.bottomRancor, constant: -2.0),
-        ]
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        createView.translatesAutoresizingMaskIntoConstraints = false
-        lineupView.translatesAutoresizingMaskIntoConstraints = false
-        lineupEntryView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activateConstraints(viewConstraints)
+        contentView.addSubview(entryViewController.view)
+        contentView.addSubview(detailViewController.view)
     }
     
     func otherSetup() {
-        contentView.backgroundColor = .clearColor()
-        
         shadowView.opaque = false
         shadowView.layer.rasterizationScale = UIScreen.mainScreen().scale
         shadowView.layer.shouldRasterize = true
         
-        shadowView.layer.allowsEdgeAntialiasing = true
-        createView.layer.allowsEdgeAntialiasing = true
-        lineupView.layer.allowsEdgeAntialiasing = true
-        
-        createView.addTarget(self, action: .createViewTapped, forControlEvents: .TouchUpInside)
+        createView.addTarget(self, action: #selector(createViewTapped), forControlEvents: .TouchUpInside)
+        detailViewController.lineupDetailView.editAction = { [weak self] in self?.detailEditAction() }
+        detailViewController.lineupDetailView.flipAction = { [weak self] in self?.detailFlipAction() }
+        entryViewController.flipAction = { [weak self] in self?.entryFlipAction() }
+    }
+    
+    func getState() -> LineupCardCellState {
+        let state = LineupCardCellState()
+        state.flipped = flipped
+        state.detailScrollOffset = detailViewController.tableView.contentOffset
+        return state
+    }
+    
+    func setState(state: LineupCardCellState) {
+        flipped = state.flipped
+        flipped ? showEntry(animated: false) : showDetail(animated: false)
+        if let offset = state.detailScrollOffset {
+            detailViewController.tableView.contentOffset = offset
+        }
+    }
+    
+    func showDetail(animated animated: Bool = true) {
+        flipped = false
+        let duration: NSTimeInterval = animated ? 0.5 : 0
+        let options: UIViewAnimationOptions = animated ? .TransitionFlipFromLeft : .TransitionNone
+        UIView.transitionFromView(entryViewController.view, toView: detailViewController.view, duration: duration, options: options, completion: nil)
+    }
+    
+    func showEntry(animated animated: Bool = true) {
+        flipped = true
+        let duration: NSTimeInterval = animated ? 0.5 : 0
+        let options: UIViewAnimationOptions = animated ? .TransitionFlipFromRight : .TransitionNone
+        UIView.transitionFromView(detailViewController.view, toView: entryViewController.view, duration: duration, options: options, completion: nil)
+    }
+    
+    func didSetLineup() {
+        createView.hidden = (lineup != nil)
+        detailViewController.lineup = lineup
+        detailViewController.view.hidden = (lineup == nil)
+        detailViewController.viewDidLoad()
+        entryViewController.lineup = lineup
+        entryViewController.view.hidden = (lineup == nil)
     }
     
     func createViewTapped() {
         createView.flashHighlightedState()
-        createAction?()
-    }
-    
-    func didSetLineupView() {
-        lineupEntryView.hidden = (lineupDetailView == nil)
-        lineupView.hidden = (lineupDetailView == nil)
-        createView.hidden = (lineupDetailView != nil)
-        if let lineupDetailView = lineupDetailView {
-            for subview in lineupView.subviews {
-                subview.removeFromSuperview()
-            }
-            lineupView.addSubview(lineupDetailView)
-            NSLayoutConstraint.activateConstraints([
-                lineupDetailView.topRancor.constraintEqualToRancor(lineupView.topRancor),
-                lineupDetailView.leftRancor.constraintEqualToRancor(lineupView.leftRancor),
-                lineupDetailView.rightRancor.constraintEqualToRancor(lineupView.rightRancor),
-                lineupDetailView.bottomRancor.constraintEqualToRancor(lineupView.bottomRancor),
-            ])
-        }
+        createAction()
     }
     
     func fade(amount: CGFloat) {
@@ -206,33 +205,20 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
         self.init()
     }
     
+    override func layoutSubviews() {
+        let titleLabelSize = titleLabel.sizeThatFits(CGSizeMake(bounds.width - 40, 0))
+        titleLabel.frame = CGRect(origin: CGPointMake(20, 20), size: titleLabelSize)
+        buttonLabel.frame = CGRectMake(20, bounds.height - 55, bounds.width - 40, 35)
+    }
+    
     func setup() {
         addSubviews()
-        addConstraints()
         otherSetup()
     }
     
     func addSubviews() {
         addSubview(titleLabel)
         addSubview(buttonLabel)
-    }
-    
-    func addConstraints() {
-        let viewConstraints: [NSLayoutConstraint] = [
-            titleLabel.topRancor.constraintEqualToRancor(topRancor, constant: 20.0),
-            titleLabel.leftRancor.constraintEqualToRancor(leftRancor, constant: 20.0),
-            
-            buttonLabel.leftRancor.constraintEqualToRancor(leftRancor, constant: 20.0),
-            buttonLabel.rightRancor.constraintEqualToRancor(rightRancor, constant: -20.0),
-            buttonLabel.bottomRancor.constraintEqualToRancor(bottomRancor, constant: -20.0),
-            buttonLabel.heightRancor.constraintEqualToConstant(35.0)
-        ]
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        buttonLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
     func otherSetup() {
@@ -280,8 +266,4 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
 protocol CancelableTouchControl {}
 extension CancelableTouchControl {
     var touchesShouldCancel: Bool { return true }
-}
-
-private extension Selector {
-    static let createViewTapped = #selector(LineupCardCell.createViewTapped)
 }

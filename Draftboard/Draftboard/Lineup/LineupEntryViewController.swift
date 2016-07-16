@@ -11,8 +11,8 @@ import UIKit
 class LineupEntryViewController: DraftboardViewController {
     
     var lineupEntryView: LineupEntryView { return view as! LineupEntryView }
-    
     var lineup: Lineup?
+    var flipAction: (() -> Void) = {}
 
     convenience init(lineup: Lineup) {
         self.init()
@@ -21,6 +21,15 @@ class LineupEntryViewController: DraftboardViewController {
     
     override func loadView() {
         self.view = LineupEntryView()
+    }
+    
+    override func viewDidLoad() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func tapped() {
+        flipAction()
     }
 
 }
