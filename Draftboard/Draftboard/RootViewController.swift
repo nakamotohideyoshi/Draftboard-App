@@ -198,6 +198,9 @@ extension RootViewController {
 extension RootViewController {
     
     func showLoginController() -> Promise<Void> {
+        if let vc = modalController.vcs.last as? LoginViewController {
+            return vc.promise
+        }
         let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
         pushModalViewController(vc, animated: true)
         return vc.promise
