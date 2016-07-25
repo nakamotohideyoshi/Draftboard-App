@@ -21,6 +21,8 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
     var completionHandler:((Bool)->Void)?
     var spring: Spring?
     
+    var contentViewOverlapsTabBar: Bool = false { didSet { didSetContentViewOverlapsTabBar() } }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,12 +50,18 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.topRancor.constraintEqualToRancor(view.topRancor).active = true
         contentView.rightRancor.constraintEqualToRancor(view.rightRancor).active = true
-//        contentView.bottomRancor.constraintEqualToRancor(tabBar.topRancor).active = true
         contentView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
-//        contentView.clipsToBounds = true
 
         switchNavController(lineupNC, animated: false)
+    }
+    
+    func didSetContentViewOverlapsTabBar() {
+        if contentViewOverlapsTabBar {
+            view.insertSubview(contentView, aboveSubview: tabBar)
+        } else {
+            view.insertSubview(contentView, belowSubview: tabBar)
+        }
     }
     
     func switchNavController(nc: DraftboardNavController, animated: Bool = true) {

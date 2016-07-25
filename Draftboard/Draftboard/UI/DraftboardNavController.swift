@@ -80,6 +80,12 @@ class DraftboardNavController: UIViewController {
         vcs.append(nvc)
         nvc.navController = self
         
+        // New view controller overlaps tab bar?
+        if nvc.overlapsTabBar != cvc?.overlapsTabBar {
+            let tc = RootViewController.sharedInstance.tabController
+            tc.contentViewOverlapsTabBar = nvc.overlapsTabBar
+        }
+        
         // Constrain new controller
         contentView.addSubview(nvc.view)
         nvc.view.translatesAutoresizingMaskIntoConstraints = false
@@ -155,6 +161,12 @@ class DraftboardNavController: UIViewController {
         // Animation complete
         completionHandler = { (complete: Bool) in
             cvc?.view.removeFromSuperview()
+            
+            // New view controller overlaps tab bar?
+            if nvc.overlapsTabBar != cvc?.overlapsTabBar {
+                let tc = RootViewController.sharedInstance.tabController
+                tc.contentViewOverlapsTabBar = nvc.overlapsTabBar
+            }
         }
         
         if (animated) {

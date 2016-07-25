@@ -10,6 +10,7 @@ import UIKit
 
 class LineupDraftViewController: DraftboardViewController {
     
+    override var overlapsTabBar: Bool { return true }
 
     var lineupDraftView: LineupDraftView { return view as! LineupDraftView }
     var tableView: LineupPlayerTableView { return lineupDraftView.tableView }

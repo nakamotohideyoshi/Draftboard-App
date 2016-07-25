@@ -17,6 +17,8 @@ class LineupDetailViewController: DraftboardViewController {
      * 3. A new blank lineup, editing
      */
     
+    override var overlapsTabBar: Bool { return true }
+    
     var lineupDetailView: LineupDetailView { return view as! LineupDetailView }
     var overlayView: UIControl { return lineupDetailView.overlayView }
     var tableView: UITableView { return lineupDetailView.tableView }

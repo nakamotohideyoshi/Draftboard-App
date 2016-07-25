@@ -11,6 +11,7 @@ import UIKit
 class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, DraftboardTitlebarDataSource {
     
     var navController: DraftboardNavController?
+    var overlapsTabBar: Bool { return false }
     
     override func viewDidLoad() {
         super.viewDidLoad()
