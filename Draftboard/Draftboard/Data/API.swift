@@ -43,7 +43,7 @@ private extension API_Private {
         // user1
 //    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjMxMzAsIm9yaWdfaWF0IjoxNDYzNDMxMTMwLCJ1c2VyX2lkIjo1fQ.G7C5AALFOpvNNQesjSjGOgJogcK0bAcpW-62bwqVvwA"
     // user3
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0Njg2ODk5NjEsInVzZXJfaWQiOjcsIm9yaWdfaWF0IjoxNDY2MDk3OTYxLCJlbWFpbCI6IiIsInVzZXJuYW1lIjoidXNlcjMifQ.l9bNa8KoYVwVxk_ITHQESMcrY2LKS2pjqRk92Wi6yws"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnX2lhdCI6MTQ2OTIyOTIzNywidXNlcl9pZCI6NywidXNlcm5hbWUiOiJ1c2VyMyIsImV4cCI6MTQ3MTgyMTIzNywiZW1haWwiOiIifQ.yyeSzGgik7HuOmXe5BRnzrIDDhqKGTaowAWHdUYq5pE"
 
     
     class func promise<T>(request: APIRequest) -> Promise<T> {
