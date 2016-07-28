@@ -11,15 +11,25 @@ import UIKit
 @IBDesignable
 class DraftboardView: UIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: CGRectZero)
+        setup()
+    }
+    
+    override convenience init(frame: CGRect) {
+        self.init()
+        self.frame = frame
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        self.init()
+    }
+    
+    func setup() {
+        // Override and call super.setup()
         self.layer.rasterizationScale = UIScreen.mainScreen().scale
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
         didSet {
             layer.borderColor = borderColor.CGColor

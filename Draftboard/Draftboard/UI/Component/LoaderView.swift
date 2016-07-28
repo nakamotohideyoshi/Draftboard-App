@@ -48,7 +48,7 @@ class LoaderView: UIView {
             gradientImageView.bottomRancor.constraintEqualToRancor(bottomRancor),
         ]
         
-        translatesAutoresizingMaskIntoConstraints = false
+//        translatesAutoresizingMaskIntoConstraints = false
         gradientImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)

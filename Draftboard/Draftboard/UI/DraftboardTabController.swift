@@ -27,7 +27,7 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         super.viewDidLoad()
         
         let lineupRvc = LineupListViewController()
-        let contestRvc = ContestsListController(nibName: "ContestsListController", bundle: nil)
+        let contestRvc = ContestListViewController()
         let profileRvc = AccountViewController(nibName: "AccountViewController", bundle: nil)
 
         lineupNC = DraftboardNavController(rootViewController: lineupRvc)
@@ -53,7 +53,8 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         contentView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
 
-        switchNavController(lineupNC, animated: false)
+//        switchNavController(lineupNC, animated: false)
+        tabBar.selectButtonAtIndex(1, animated: false)
     }
     
     func didSetContentViewOverlapsTabBar() {

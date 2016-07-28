@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias DraftboardColor = UIColor
+
 extension UIColor {
     
     convenience init(_ hex:UInt32, alpha:CGFloat = 1.0) {
@@ -26,7 +28,7 @@ extension UIColor {
     // Used for grey type across the app that isn't
     // white with an alpha component
     class func greyCool() -> UIColor {
-        return UIColor(0x6D718A)
+        return UIColor(0x4b545f)
     }
     
     // The brand green for draftboard This is used as an accent color
@@ -57,7 +59,7 @@ extension UIColor {
     
     // Background blue color used on the background of table views
     class func blueDarker() -> UIColor {
-        return UIColor(0x152133)
+        return UIColor(0x101722)
     }
     
     // Only used for injured status
