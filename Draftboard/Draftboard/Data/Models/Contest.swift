@@ -14,6 +14,8 @@ class Contest {
     let name: String
     let buyin: Double
     let draftGroupID: Int
+    let sportName: String
+    let skillLevelName: String
 //    let maxEntries: Int
     // let prizeStructure
 //    let prizePool: Double
@@ -21,11 +23,13 @@ class Contest {
 //    let currentEntries: Int
 //    let contestSize: Int
     
-    init(id: Int, name: String, buyin: Double, draftGroupID: Int) {
+    init(id: Int, name: String, buyin: Double, draftGroupID: Int, sportName: String, skillLevelName: String) {
         self.id = id
         self.name = name
         self.buyin = buyin
         self.draftGroupID = draftGroupID
+        self.sportName = sportName
+        self.skillLevelName = skillLevelName
     }
     
     convenience init(json: NSDictionary) throws {
@@ -34,7 +38,10 @@ class Contest {
             let name: String = try json.get("name")
             let buyin: Double = try json.get("buyin")
             let draftGroupID: Int = try json.get("draft_group")
-            self.init(id: id, name: name, buyin: buyin, draftGroupID: draftGroupID)
+            let sportName: String = try json.get("sport")
+            let skillLevel: NSDictionary = try json.get("skill_level")
+            let skillLevelName: String = try skillLevel.get("name")
+            self.init(id: id, name: name, buyin: buyin, draftGroupID: draftGroupID, sportName: sportName, skillLevelName: skillLevelName)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }

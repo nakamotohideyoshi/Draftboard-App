@@ -11,17 +11,20 @@ import UIKit
 class ContestListViewController: DraftboardViewController {
     
     var contestListView: ContestListView { return view as! ContestListView }
-    var sportFilter: UIView { return contestListView.sportFilter }
-    var skillFilter: UIView { return contestListView.skillFilter }
+    var sportControl: DraftboardSegmentedControl { return contestListView.sportControl }
+    var skillControl: DraftboardSegmentedControl { return contestListView.skillControl }
     var tableView: UITableView { return contestListView.tableView }
     var loaderView: LoaderView { return contestListView.loaderView }
     
-    var contests: [Contest]? { didSet { didSetContests() } }
+    var allContests: [Contest]?
+    var contests: [Contest]?
     
     override func loadView() {
         self.view = ContestListView()
         tableView.dataSource = self
         tableView.delegate = self
+        sportControl.indexChangedHandler = { [weak self] (_: Int) in print("fart 1"); self?.filterContests() }
+        skillControl.indexChangedHandler = { [weak self] (_: Int) in print("fart 2"); self?.filterContests() }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -29,18 +32,22 @@ class ContestListViewController: DraftboardViewController {
         tableView.reloadData()
         // Get lineups
         Data.contests.get().then { contests -> Void in
-            self.contests = contests
+            self.allContests = contests
+            self.filterContests()
+            self.update()
         }
     }
     
-    func didSetContests() {
-        update()
+    func filterContests() {
+        let sportName = sportControl.choices[sportControl.currentIndex]
+        let skillLevel = skillControl.choices[skillControl.currentIndex]
+        contests = allContests?.filter { $0.sportName == sportName && $0.skillLevelName == skillLevel }
+        tableView.reloadData()
     }
     
     func update() {
-        loaderView.hidden = (contests != nil)
-        tableView.hidden = (contests == nil)
-        tableView.reloadData()
+        loaderView.hidden = (allContests != nil)
+        tableView.hidden = (allContests == nil)
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType? {
@@ -62,29 +69,12 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         return contests?.count ?? 0
     }
 
-    func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        let headerLabel = UILabel()
-        headerView.addSubview(headerLabel)
-
-        headerView.frame = CGRectMake(0, 0, tableView.frame.width, tableView.sectionHeaderHeight)
-        headerView.backgroundColor = .greyCool()
-        
-        headerLabel.frame = headerView.bounds
-        headerLabel.textAlignment = .Center
-        headerLabel.textColor = .whiteColor()
-        headerLabel.font = .openSans(weight: .Semibold, size: 10)
-        headerLabel.text = "Contest Header".uppercaseString
-
-        return headerView
-    }
-    
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
         let contest = contests?[safe: indexPath.item]
         
-        cell.backgroundColor = UIColor.blueDarker().colorWithAlphaComponent(0.5)
+        cell.backgroundColor = .clearColor()
         cell.textLabel?.font = .openSans(size: 13)
         cell.textLabel?.textColor = .whiteColor()
         cell.textLabel?.text = contest?.name
@@ -99,15 +89,3 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-
-private typealias ScrollViewDelegate = ContestListViewController
-extension ScrollViewDelegate: UIScrollViewDelegate {
-    func scrollViewDidScroll(_: UIScrollView) {
-        if tableView.contentOffset.y < 0 {
-            tableView.scrollIndicatorInsets = UIEdgeInsetsMake(-tableView.contentOffset.y, 0, 0, 0)
-        } else {
-            tableView.scrollIndicatorInsets = UIEdgeInsetsZero
-        }
-    }
-}
-

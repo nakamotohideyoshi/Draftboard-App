@@ -10,31 +10,24 @@ import UIKit
 
 class ContestListView: DraftboardView {
     
-    let sportFilter = UIView()
-    let skillFilter = UIView()
+    let sportControl = DraftboardSegmentedControl(choices: ["mlb", "nfl"], textColor: .greyCool(), textSelectedColor: .whiteColor())
+    let skillControl = DraftboardSegmentedControl(choices: ["rookie", "veteran"], textColor: .greyCool(), textSelectedColor: .whiteColor())
     let tableView = UITableView()
     let loaderView = LoaderView()
-    let tableFooterView = UIView()
     
     override func setup() {
         super.setup()
         
         // Add subviews
-        addSubview(sportFilter)
-        addSubview(skillFilter)
+        addSubview(sportControl)
+        addSubview(skillControl)
         addSubview(tableView)
         addSubview(loaderView)
         
         // Configure subviews
-        tableView.backgroundColor = .clearColor()
+        tableView.backgroundColor = UIColor.blueDarker().colorWithAlphaComponent(0.5)
         tableView.indicatorStyle = .White
-        tableView.sectionHeaderHeight = 23
         tableView.separatorStyle = .None
-        tableView.tableFooterView = UIView()
-        tableView.tableFooterView?.backgroundColor = UIColor.blueDarker().colorWithAlphaComponent(0.5)
-        
-        sportFilter.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0.2)
-        skillFilter.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.2)
         
         loaderView.thickness = 2.0
         loaderView.spinning = true
@@ -44,10 +37,9 @@ class ContestListView: DraftboardView {
         let tabBarHeight = CGFloat(50)
         let filterHeight = CGFloat(50)
         
-        sportFilter.frame = CGRectMake(0, 0, bounds.width / 2, filterHeight)
-        skillFilter.frame = CGRectMake(bounds.width / 2, 0, bounds.width / 2, filterHeight)
+        sportControl.frame = CGRectMake(0, 0, bounds.width / 3, filterHeight)
+        skillControl.frame = CGRectMake(bounds.width / 2, 0, bounds.width / 2, filterHeight)
         tableView.frame = CGRectMake(0, filterHeight, bounds.width, bounds.height - filterHeight - tabBarHeight)
-        tableView.tableFooterView?.frame.size = tableView.frame.size
         loaderView.frame = CGRectMake(bounds.width / 2 - 42 / 2, bounds.height / 2 - 42 / 2 - tabBarHeight, 42, 42)
     }
     
