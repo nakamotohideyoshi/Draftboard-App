@@ -64,6 +64,8 @@
 		3E447D6C1D0284F400BE7F12 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E447D6B1D0284F400BE7F12 /* Extensions.swift */; };
 		3E4A0FF11D480FAE00EDB59F /* ContestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF01D480FAE00EDB59F /* ContestListViewController.swift */; };
 		3E4A0FF31D480FBD00EDB59F /* ContestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF21D480FBD00EDB59F /* ContestListView.swift */; };
+		3E4A0FF51D4C27F400EDB59F /* ContestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF41D4C27F400EDB59F /* ContestCell.swift */; };
+		3E4A0FF71D4FE84400EDB59F /* DraftboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF61D4FE84400EDB59F /* DraftboardTableViewCell.swift */; };
 		3E608D921C1B72FC0085569D /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E608D911C1B72FC0085569D /* Format.swift */; };
 		3E73AADA1C850D89000E7D99 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73AAD91C850D89000E7D99 /* CountdownView.swift */; };
 		3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
@@ -269,6 +271,8 @@
 		3E447D6B1D0284F400BE7F12 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3E4A0FF01D480FAE00EDB59F /* ContestListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestListViewController.swift; sourceTree = "<group>"; };
 		3E4A0FF21D480FBD00EDB59F /* ContestListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestListView.swift; sourceTree = "<group>"; };
+		3E4A0FF41D4C27F400EDB59F /* ContestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestCell.swift; sourceTree = "<group>"; };
+		3E4A0FF61D4FE84400EDB59F /* DraftboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardTableViewCell.swift; sourceTree = "<group>"; };
 		3E608D911C1B72FC0085569D /* Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		3E73AAD91C850D89000E7D99 /* CountdownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		3E7860BB1B9FB0E7004013AB /* Draftboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Draftboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -700,6 +704,7 @@
 				5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */,
 				5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */,
 				5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */,
+				3E4A0FF61D4FE84400EDB59F /* DraftboardTableViewCell.swift */,
 				5D4B873D1BB31B0100B58EDF /* DraftboardView.swift */,
 				5D9E99531BB615590017E332 /* DraftboardViewController.swift */,
 				3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */,
@@ -718,6 +723,7 @@
 			children = (
 				3E4A0FF01D480FAE00EDB59F /* ContestListViewController.swift */,
 				3E4A0FF21D480FBD00EDB59F /* ContestListView.swift */,
+				3E4A0FF41D4C27F400EDB59F /* ContestCell.swift */,
 				5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */,
 				3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */,
 				3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */,
@@ -1005,6 +1011,7 @@
 				5DE2D6331C0F915F0023D4DB /* DraftboardSegmentedControl.swift in Sources */,
 				5D5829D61BF2894700FFA7D8 /* CircleProgressView.swift in Sources */,
 				5DAC079B1C222F360002B97B /* DraftboardSegmentCell.swift in Sources */,
+				3E4A0FF51D4C27F400EDB59F /* ContestCell.swift in Sources */,
 				5D5386DA1BF534CF002CDAF3 /* LineupStatFeesView.swift in Sources */,
 				5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */,
 				3E447D6C1D0284F400BE7F12 /* Extensions.swift in Sources */,
@@ -1024,6 +1031,7 @@
 				3E4A0FF11D480FAE00EDB59F /* ContestListViewController.swift in Sources */,
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
 				3EB2CB671BFE473B00579F1B /* Data.swift in Sources */,
+				3E4A0FF71D4FE84400EDB59F /* DraftboardTableViewCell.swift in Sources */,
 				3C74CA531BE0528D0077DF0C /* ContestModel.swift in Sources */,
 				5DE1D6401BF2BC0F00C796ED /* LineupStatTimeView.swift in Sources */,
 				3C74CA471BE0516C0077DF0C /* ContestsListController.swift in Sources */,

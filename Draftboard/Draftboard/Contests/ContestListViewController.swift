@@ -71,13 +71,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell()
+        let cell = ContestCell()
         let contest = contests?[safe: indexPath.item]
-        
-        cell.backgroundColor = .clearColor()
-        cell.textLabel?.font = .openSans(size: 13)
-        cell.textLabel?.textColor = .whiteColor()
-        cell.textLabel?.text = contest?.name
+
+        cell.showBottomBorder = contest !== contests?.last
+        cell.configure(for: contest)
         
         return cell
     }
@@ -89,3 +87,5 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+

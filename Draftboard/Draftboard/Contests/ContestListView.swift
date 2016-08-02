@@ -27,6 +27,7 @@ class ContestListView: DraftboardView {
         // Configure subviews
         tableView.backgroundColor = UIColor.blueDarker().colorWithAlphaComponent(0.5)
         tableView.indicatorStyle = .White
+        tableView.rowHeight = 66
         tableView.separatorStyle = .None
         
         loaderView.thickness = 2.0
