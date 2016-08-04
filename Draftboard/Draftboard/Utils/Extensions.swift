@@ -61,6 +61,14 @@ extension Array {
         return sort { isOrderedBefore(getKey($0), getKey($1)) }
     }
     
+    // Like lodash's _.uniqBy
+    func uniqBy<T:Hashable>(@noescape getKey: Element -> T) -> [Element] {
+        var seen = [T: Bool]()
+        return filter { value in
+            seen.updateValue(true, forKey: getKey(value)) == nil
+        }
+    }
+
 //    // Somewhat similar to lodash's _.sortBy and _.orderBy
 //    func sortBy<T: Comparable>(@noescape getKey: Element throws -> T) rethrows -> [Element] {
 //        return try sort { try getKey($0) < getKey($1) }

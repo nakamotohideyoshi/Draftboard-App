@@ -96,7 +96,7 @@ class ContestCell: DraftboardTableViewCell {
     
     func configure(for contest: Contest?) {
         nameLabel.text = contest?.name ?? ""
-        prizesLabel.text = "1st: $400 | 2nd: $300 | 3rd: $200"
+        prizesLabel.text = contest?.payoutDescription
         entryCountLabel.text = "X2"
     }
     
