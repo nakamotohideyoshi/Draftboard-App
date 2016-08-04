@@ -25,6 +25,7 @@ class ContestListViewController: DraftboardViewController {
         tableView.delegate = self
         sportControl.indexChangedHandler = { [weak self] (_: Int) in self?.filterContests() }
         skillControl.indexChangedHandler = { [weak self] (_: Int) in self?.filterContests() }
+        update()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,6 +33,8 @@ class ContestListViewController: DraftboardViewController {
         tableView.reloadData()
         // Get lineups
         Data.contests.get().then { contests -> Void in
+            let contestSports = Set(contests.map { $0.sportName })
+            self.sportControl.choices = ["mlb", "nfl", "nba", "nhl"].filter { contestSports.contains($0) }
             self.allContests = contests
             self.filterContests()
             self.update()
@@ -48,6 +51,8 @@ class ContestListViewController: DraftboardViewController {
     func update() {
         loaderView.hidden = (allContests != nil)
         tableView.hidden = (allContests == nil)
+        sportControl.hidden = (allContests == nil)
+        skillControl.hidden = (allContests == nil)
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType? {

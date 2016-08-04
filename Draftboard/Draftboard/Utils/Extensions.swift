@@ -93,6 +93,15 @@ extension Array {
 
 }
 
+extension Array where Element: Hashable {
+    
+    // Like lodash's _.uniq
+    func uniq() -> [Element] {
+        return uniqBy { $0 }
+    }
+    
+}
+
 extension Dictionary {
     
     // Somewhat similar to lodash's _.assign, but not mutating

@@ -9,7 +9,12 @@
 import UIKit
 
 class DraftboardSegmentedControl: UIView {
-    var choices: [String]!
+    var choices: [String]! {
+        didSet {
+            subviews.forEach { $0.removeFromSuperview() }
+            setup()
+        }
+    }
     var controls: [DraftboardControlSegment]!
     var lineView: UIView!
     
