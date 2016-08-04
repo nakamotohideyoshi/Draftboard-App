@@ -23,8 +23,8 @@ class ContestListViewController: DraftboardViewController {
         self.view = ContestListView()
         tableView.dataSource = self
         tableView.delegate = self
-        sportControl.indexChangedHandler = { [weak self] (_: Int) in print("fart 1"); self?.filterContests() }
-        skillControl.indexChangedHandler = { [weak self] (_: Int) in print("fart 2"); self?.filterContests() }
+        sportControl.indexChangedHandler = { [weak self] (_: Int) in self?.filterContests() }
+        skillControl.indexChangedHandler = { [weak self] (_: Int) in self?.filterContests() }
     }
     
     override func viewWillAppear(animated: Bool) {

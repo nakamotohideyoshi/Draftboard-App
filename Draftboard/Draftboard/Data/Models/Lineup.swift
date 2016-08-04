@@ -60,6 +60,14 @@ class Sport {
             LineupSlot(name: "OF", description: "Outfielder", positions: ["LF", "CF", "RF"]),
         ]},
     ]
+    
+    static let icons = [
+        "nba": UIImage(named: "sport-icon-nba")!.imageWithRenderingMode(.AlwaysTemplate),
+        "nfl": UIImage(named: "sport-icon-nfl")!.imageWithRenderingMode(.AlwaysTemplate),
+        "nhl": UIImage(named: "sport-icon-nhl")!.imageWithRenderingMode(.AlwaysTemplate),
+        "mlb": UIImage(named: "sport-icon-mlb")!.imageWithRenderingMode(.AlwaysTemplate),
+    ]
+    
 }
 
 class LineupSlot {

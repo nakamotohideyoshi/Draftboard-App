@@ -47,7 +47,6 @@ class ContestCell: DraftboardTableViewCell {
         entryCountLabel.textAlignment = .Right
         entryCountLabel.textColor = UIColor(0x25bd5e)
         
-        sportIcon.image = UIImage(named: "icon-baseball")
         sportIcon.tintColor = UIColor(0x9c9faf)
         
         actionButton.setImage(UIImage(named: "icon-add"), forState: .Normal)
@@ -95,9 +94,18 @@ class ContestCell: DraftboardTableViewCell {
     }
     
     func configure(for contest: Contest?) {
-        nameLabel.text = contest?.name ?? ""
-        prizesLabel.text = contest?.payoutDescription
+        guard let contest = contest else {
+            nameLabel.text = nil
+            prizesLabel.text = nil
+            entryCountLabel.text = nil
+            sportIcon.image = nil
+            return
+        }
+        
+        nameLabel.text = contest.name
+        prizesLabel.text = contest.payoutDescription
         entryCountLabel.text = "X2"
+        sportIcon.image = Sport.icons[contest.sportName]
     }
     
     func updateBottomBorder() {
