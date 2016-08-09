@@ -21,6 +21,7 @@ class ContestCell: DraftboardTableViewCell {
     let actionButton = UIButton()
     let borderView = UIView()
     
+    var enableActionButton: Bool = false
     var showBottomBorder: Bool = true { didSet { updateBottomBorder() } }
     
     weak var actionButtonDelegate: ContestCellActionButtonDelegate?
@@ -120,7 +121,11 @@ class ContestCell: DraftboardTableViewCell {
         else {
             entryCountLabel.text = nil
             sportIcon.alpha = 0.3
-            actionButton.setImage(.actionButtonAdd, forState: .Normal)
+            if enableActionButton {
+                actionButton.setImage(.actionButtonAdd, forState: .Normal)
+            } else {
+                actionButton.setImage(.actionButtonAddGray, forState: .Normal)
+            }
         }
     }
     
@@ -137,6 +142,7 @@ class ContestCell: DraftboardTableViewCell {
 
 private extension UIImage {
     static let actionButtonAdd = UIImage(named: "contest-action-add")
+    static let actionButtonAddGray = UIImage(named: "contest-action-add-gray")
     static let actionButtonAddFilled = UIImage(named: "contest-action-add-filled")
     static let actionButtonAddFilledGray = UIImage(named: "contest-action-add-filled-gray")
 }

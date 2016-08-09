@@ -20,7 +20,7 @@ class ContestListViewController: DraftboardViewController {
     var allContests: [Contest]?
     var contests: [Contest]?
     var lineups: [Lineup]?
-    var contestLineups: [Int: Lineup]?
+    var contestLineups: [Int: [Lineup]]?
     var contestEntryCount: [Int: Int]?
     
     override func loadView() {
@@ -47,6 +47,16 @@ class ContestListViewController: DraftboardViewController {
         when(Data.contests.get(), Data.contestPoolEntries.get()).then { contests, entries -> Void in
             let contestEntries = entries.groupBy { $0.contestPoolID }
             self.allContests = contests.map { $0.withEntries(contestEntries[$0.id] ?? []) }
+            self.filterContests()
+            self.update()
+        }
+        
+        when(Data.contests.get(), Data.upcomingLineups.get()).then { contests, lineups -> Void in
+            let draftGroupLineups = lineups.groupBy { $0.draftGroupID }
+            self.contestLineups = contests.transform([Int: [Lineup]]()) { result, contest in
+                result[contest.id] = draftGroupLineups[contest.draftGroupID]
+                return result
+            }
             self.filterContests()
             self.update()
         }
@@ -89,8 +99,10 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
         
         let cell = ContestCell()
         let contest = contests?[safe: indexPath.item]
+        let eligibleLineups = contestLineups?[contest!.id]
 
         cell.showBottomBorder = contest !== contests?.last
+        cell.enableActionButton = eligibleLineups != nil
         cell.configure(for: contest)
         
         return cell
