@@ -47,9 +47,8 @@ class ContestCell: DraftboardTableViewCell {
         entryCountLabel.textAlignment = .Right
         entryCountLabel.textColor = UIColor(0x25bd5e)
         
-        sportIcon.tintColor = UIColor(0x9c9faf)
+        sportIcon.tintColor = .whiteColor()
         
-        actionButton.setImage(UIImage(named: "icon-add"), forState: .Normal)
         actionButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
         
         borderView.backgroundColor = .dividerOnDarkColor()
@@ -105,14 +104,24 @@ class ContestCell: DraftboardTableViewCell {
         nameLabel.text = contest.name
         prizesLabel.text = contest.payoutDescription
         sportIcon.image = Sport.icons[contest.sportName]
-        
-        // Entry count if available
-        if let c = contest as? HasEntries where c.entries.count > 0 {
-            entryCountLabel.text = "x\(c.entries.count)"
-        } else {
-            entryCountLabel.text = nil
-        }
 
+        let entryCount = (contest as? HasEntries)?.entries.count
+        // Entries
+        if entryCount > 0 {
+            entryCountLabel.text = "x\(entryCount!)"
+            sportIcon.alpha = 1
+            if entryCount < contest.maxEntries {
+                actionButton.setImage(.actionButtonAddFilled, forState: .Normal)
+            } else {
+                actionButton.setImage(.actionButtonAddFilledGray, forState: .Normal)
+            }
+        }
+        // No entries
+        else {
+            entryCountLabel.text = nil
+            sportIcon.alpha = 0.3
+            actionButton.setImage(.actionButtonAdd, forState: .Normal)
+        }
     }
     
     func updateBottomBorder() {
@@ -124,4 +133,10 @@ class ContestCell: DraftboardTableViewCell {
 //        actionButtonDelegate?.actionButtonTappedForCell(self)
     }
     
+}
+
+private extension UIImage {
+    static let actionButtonAdd = UIImage(named: "contest-action-add")
+    static let actionButtonAddFilled = UIImage(named: "contest-action-add-filled")
+    static let actionButtonAddFilledGray = UIImage(named: "contest-action-add-filled-gray")
 }

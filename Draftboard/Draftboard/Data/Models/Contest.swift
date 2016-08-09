@@ -15,6 +15,7 @@ class Contest {
     let buyin: Double
     let draftGroupID: Int
     let sportName: String
+    let maxEntries: Int
     let skillLevelName: String
     let start: NSDate
     let payoutSpots: [PayoutSpot]
@@ -27,12 +28,13 @@ class Contest {
         }
     }
     
-    init(id: Int, name: String, buyin: Double, draftGroupID: Int, sportName: String, skillLevelName: String, start: NSDate, payoutSpots: [PayoutSpot]) {
+    init(id: Int, name: String, buyin: Double, draftGroupID: Int, sportName: String, maxEntries: Int, skillLevelName: String, start: NSDate, payoutSpots: [PayoutSpot]) {
         self.id = id
         self.name = name
         self.buyin = buyin
         self.draftGroupID = draftGroupID
         self.sportName = sportName
+        self.maxEntries = maxEntries
         self.skillLevelName = skillLevelName
         self.start = start
         self.payoutSpots = payoutSpots
@@ -45,6 +47,7 @@ class Contest {
             let buyin: Double = try json.get("buyin")
             let draftGroupID: Int = try json.get("draft_group")
             let sportName: String = try json.get("sport")
+            let maxEntries: Int = try json.get("max_entries")
             // Skill level
             let skillLevel: NSDictionary = try json.get("skill_level")
             let skillLevelName: String = try skillLevel.get("name")
@@ -54,7 +57,7 @@ class Contest {
             let prizeStructure: NSDictionary = try json.get("prize_structure")
             let prizeRanks: [NSDictionary] = try prizeStructure.get("ranks")
             let payoutSpots: [PayoutSpot] = try prizeRanks.map { try PayoutSpot(json: $0) }
-            self.init(id: id, name: name, buyin: buyin, draftGroupID: draftGroupID, sportName: sportName, skillLevelName: skillLevelName, start: start, payoutSpots: payoutSpots)
+            self.init(id: id, name: name, buyin: buyin, draftGroupID: draftGroupID, sportName: sportName, maxEntries: maxEntries, skillLevelName: skillLevelName, start: start, payoutSpots: payoutSpots)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
