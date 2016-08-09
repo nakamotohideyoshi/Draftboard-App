@@ -55,7 +55,13 @@ extension API_Endpoints {
     class func contestLobby() -> Promise<[Contest]> {
         let path = "api/contest/lobby/"
         return API.get(path).then { (json: [NSDictionary]) -> [Contest] in
-            return try json.map { try Contest(json: $0) }
+            return try json.map {
+                try Contest(json: $0)
+            }.sort {
+                if $0.start != $1.start { return $0.start < $1.start }
+                if $0.buyin != $1.buyin { return $0.buyin > $1.buyin }
+                return $0.name < $1.name
+            }
         }
     }
     

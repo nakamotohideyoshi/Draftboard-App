@@ -23,7 +23,7 @@ class ContestCell: DraftboardTableViewCell {
     
     var showBottomBorder: Bool = true { didSet { updateBottomBorder() } }
     
-    weak var actionButtonDelegate: LineupPlayerCellActionButtonDelegate?
+    weak var actionButtonDelegate: ContestCellActionButtonDelegate?
     
     override func setup() {
         super.setup()
@@ -104,8 +104,15 @@ class ContestCell: DraftboardTableViewCell {
         
         nameLabel.text = contest.name
         prizesLabel.text = contest.payoutDescription
-        entryCountLabel.text = "X2"
         sportIcon.image = Sport.icons[contest.sportName]
+        
+        // Entry count if available
+        if let c = contest as? HasEntries where c.entries.count > 0 {
+            entryCountLabel.text = "x\(c.entries.count)"
+        } else {
+            entryCountLabel.text = nil
+        }
+
     }
     
     func updateBottomBorder() {

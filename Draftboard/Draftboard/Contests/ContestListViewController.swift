@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class ContestListViewController: DraftboardViewController {
     
@@ -18,6 +19,9 @@ class ContestListViewController: DraftboardViewController {
     
     var allContests: [Contest]?
     var contests: [Contest]?
+    var lineups: [Lineup]?
+    var contestLineups: [Int: Lineup]?
+    var contestEntryCount: [Int: Int]?
     
     override func loadView() {
         self.view = ContestListView()
@@ -36,6 +40,13 @@ class ContestListViewController: DraftboardViewController {
             let contestSports = Set(contests.map { $0.sportName })
             self.sportControl.choices = ["mlb", "nfl", "nba", "nhl"].filter { contestSports.contains($0) }
             self.allContests = contests
+            self.filterContests()
+            self.update()
+        }
+        
+        when(Data.contests.get(), Data.contestPoolEntries.get()).then { contests, entries -> Void in
+            let contestEntries = entries.groupBy { $0.contestPoolID }
+            self.allContests = contests.map { $0.withEntries(contestEntries[$0.id] ?? []) }
             self.filterContests()
             self.update()
         }
@@ -66,7 +77,7 @@ class ContestListViewController: DraftboardViewController {
 }
 
 private typealias TableViewDelegate = ContestListViewController
-extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, ContestCellActionButtonDelegate {
     
     // UITableViewDataSource
     
@@ -90,6 +101,16 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
+    // ContestCellActionButtonDelegate
+    
+    func actionButtonTappedForCell(cell: ContestCell) {
+        let indexPath = tableView.indexPathForCell(cell)!
+        let contest = contests?[safe: indexPath.item]
+        // Enter lineup into contest
+        
+    }
+
     
 }
 

@@ -72,6 +72,8 @@
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		3E8018AE1CB5A18300403528 /* LineupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8018AD1CB5A18300403528 /* LineupListView.swift */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
+		3E8713511D59313E00F25C60 /* ContestWithEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713501D59313E00F25C60 /* ContestWithEntries.swift */; };
+		3E8713531D59315200F25C60 /* PayoutSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713521D59315200F25C60 /* PayoutSpot.swift */; };
 		3E8A7E621D2733A30020681E /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E611D2733A30020681E /* Delay.swift */; };
 		3E8A7E641D273A220020681E /* LineupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E631D273A220020681E /* LineupEntryViewController.swift */; };
 		3E8A7E661D273A2C0020681E /* LineupEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E651D273A2B0020681E /* LineupEntryView.swift */; };
@@ -284,6 +286,8 @@
 		3E8018AD1CB5A18300403528 /* LineupListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListView.swift; sourceTree = "<group>"; };
 		3E80C2A91BC5F51C0031CE3F /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		3E832BC41BE2CB3900084621 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3E8713501D59313E00F25C60 /* ContestWithEntries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestWithEntries.swift; sourceTree = "<group>"; };
+		3E8713521D59315200F25C60 /* PayoutSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayoutSpot.swift; sourceTree = "<group>"; };
 		3E8A7E611D2733A30020681E /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		3E8A7E631D273A220020681E /* LineupEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryViewController.swift; sourceTree = "<group>"; };
 		3E8A7E651D273A2B0020681E /* LineupEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryView.swift; sourceTree = "<group>"; };
@@ -760,6 +764,8 @@
 				3E192C381CE6485E0021A31D /* LineupPlayer.swift */,
 				5D783ACE1BD97CAA000D8494 /* DDM.swift */,
 				5D783AD01BD97D09000D8494 /* Contest.swift */,
+				3E8713501D59313E00F25C60 /* ContestWithEntries.swift */,
+				3E8713521D59315200F25C60 /* PayoutSpot.swift */,
 				5D783AD21BD97D23000D8494 /* Sport.swift */,
 				5D1CBFD01BDA8E7D006746B2 /* Team.swift */,
 				3EB2CB731BFE763400579F1B /* DraftGroup.swift */,
@@ -935,6 +941,7 @@
 				5D6237DB1BB6200B0007E62A /* DraftboardImageView.swift in Sources */,
 				3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */,
 				3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */,
+				3E8713531D59315200F25C60 /* PayoutSpot.swift in Sources */,
 				5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */,
 				5D6237DC1BB6200B0007E62A /* DraftboardLabel.swift in Sources */,
 				3E192C1F1CCADE760021A31D /* LineupCardCollectionView.swift in Sources */,
@@ -1004,6 +1011,7 @@
 				3C74CA4E1BE051A00077DF0C /* DraftboardContestsCell.swift in Sources */,
 				5D6237BF1BB61F7B0007E62A /* LineupCardCellView.swift in Sources */,
 				3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */,
+				3E8713511D59313E00F25C60 /* ContestWithEntries.swift in Sources */,
 				5DE6A0651C1B38E5009481E6 /* DraftboardLoadingButton.swift in Sources */,
 				3E8A7E621D2733A30020681E /* Delay.swift in Sources */,
 				5D6237C11BB61F7B0007E62A /* LineupEditCellView.swift in Sources */,
