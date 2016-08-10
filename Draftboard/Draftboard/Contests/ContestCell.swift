@@ -134,8 +134,7 @@ class ContestCell: DraftboardTableViewCell {
     }
     
     func actionButtonTapped() {
-        print("action button tapped!")
-//        actionButtonDelegate?.actionButtonTappedForCell(self)
+        actionButtonDelegate?.actionButtonTappedForCell(self)
     }
     
 }

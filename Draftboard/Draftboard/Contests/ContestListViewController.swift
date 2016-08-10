@@ -103,6 +103,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
 
         cell.showBottomBorder = contest !== contests?.last
         cell.enableActionButton = eligibleLineups != nil
+        cell.actionButtonDelegate = self
         cell.configure(for: contest)
         
         return cell
@@ -119,7 +120,44 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     func actionButtonTappedForCell(cell: ContestCell) {
         let indexPath = tableView.indexPathForCell(cell)!
         let contest = contests?[safe: indexPath.item]
-        // Enter lineup into contest
+        let eligibleLineups = contestLineups?[contest!.id]
+        
+        // No eligible lineups
+        if eligibleLineups?.count ?? 0 == 0 {
+            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+            let actions = ["Got it"]
+            
+            vc.actions = actions
+            vc.promise.then { index -> Void in
+                RootViewController.sharedInstance.popAlertViewController()
+                if index == 0 {
+                    self.navController?.popViewController()
+                }
+            }
+            
+            RootViewController.sharedInstance.pushAlertViewController(vc)
+            vc.titleLabel.text = "NOPE"
+            vc.errorLabel.text = "You don't have any lineups eligible to enter this contest."
+        }
+        
+        // Max entries reached
+        if let contest = contest as? HasEntries where contest.maxEntriesReached {
+            let enteredLineup = eligibleLineups!.filter { $0.id == contest.entries[0].lineupID }[0]
+            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+            let actions = ["Cool"]
+            
+            vc.actions = actions
+            vc.promise.then { index -> Void in
+                RootViewController.sharedInstance.popAlertViewController()
+                if index == 0 {
+                    self.navController?.popViewController()
+                }
+            }
+            
+            RootViewController.sharedInstance.pushAlertViewController(vc)
+            vc.titleLabel.text = "MAXED"
+            vc.errorLabel.text = "You already have \(contest.maxEntries) entries with “\(enteredLineup.name)”. That's the limit."
+        }
         
     }
 

@@ -10,6 +10,14 @@ import Foundation
 
 protocol HasEntries {
     var entries: [ContestPoolEntry] { get }
+    var maxEntries: Int { get }
+    var maxEntriesReached: Bool { get }
+}
+
+extension HasEntries {
+    var maxEntriesReached: Bool {
+        return entries.count == maxEntries
+    }
 }
 
 class ContestWithEntries: Contest, HasEntries {
