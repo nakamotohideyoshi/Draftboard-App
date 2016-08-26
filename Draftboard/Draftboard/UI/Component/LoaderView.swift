@@ -79,7 +79,7 @@ class LoaderView: UIView {
     func spinningAnim() -> CABasicAnimation {
         let anim = CABasicAnimation(keyPath: "transform.rotation.z")
         anim.toValue = NSNumber(double: M_PI * 2.0)
-        anim.duration = 1.5
+        anim.duration = 0.75
         anim.cumulative = true
         anim.repeatCount = Float.infinity
         return anim

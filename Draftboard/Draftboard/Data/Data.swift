@@ -43,6 +43,15 @@ class Data {
 //    }
 //}
 
+extension Contest {
+    func enter(with lineup: Lineup) -> Promise<[ContestWithEntries]> {
+        return API.contestEnter(self, lineup: lineup).then { _ in
+            DerivedData.contestsWithEntries()
+        }
+    }
+}
+
+
 extension LineupEntry {
     func unregister() -> Promise<AnyObject> {
         Data.contestPoolEntries.clearCache()

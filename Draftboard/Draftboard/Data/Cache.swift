@@ -28,8 +28,8 @@ class Cache<T> {
             pending = endpoint().then { freshValue in
                 self.cached.value = freshValue
                 return Promise(freshValue)
-                }.always {
-                    self.pending = nil
+            }.always {
+                self.pending = nil
             }
         }
         return pending!

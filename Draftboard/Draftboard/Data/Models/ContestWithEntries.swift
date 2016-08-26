@@ -7,11 +7,11 @@
 //
 
 import Foundation
+import PromiseKit
 
-protocol HasEntries {
+protocol HasEntries: class {
     var entries: [ContestPoolEntry] { get }
     var maxEntries: Int { get }
-    var maxEntriesReached: Bool { get }
 }
 
 extension HasEntries {

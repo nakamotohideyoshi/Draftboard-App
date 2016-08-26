@@ -72,8 +72,14 @@ extension DerivedData {
             return lineups.map { $0.withStart(draftGroupsByID[$0.draftGroupID]!.start) }
         }
     }
+    
+    class func contestsWithEntries() -> Promise<[ContestWithEntries]> {
+        return when(Data.contests.get(), Data.contestPoolEntries.fresh()).then { contests, entries -> [ContestWithEntries] in
+            let contestEntries = entries.groupBy { $0.contestPoolID }
+            return contests.map { $0.withEntries(contestEntries[$0.id] ?? []) }
+        }
+    }
 }
-
 
 extension Lineup {
     

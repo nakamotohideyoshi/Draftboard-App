@@ -18,10 +18,13 @@ class ContestListViewController: DraftboardViewController {
     var loaderView: LoaderView { return contestListView.loaderView }
     
     var allContests: [Contest]?
+    var sportContests: [String: [Contest]]?
+    var skillLevelContests: [String: [Contest]]?
     var contests: [Contest]?
-    var lineups: [Lineup]?
+    
+    var enteredSkillLevel: String?
     var contestLineups: [Int: [Lineup]]?
-    var contestEntryCount: [Int: Int]?
+    var pendingEntries: [Int: [Promise<[ContestWithEntries]>]] = [:]
     
     override func loadView() {
         self.view = ContestListView()
@@ -35,20 +38,17 @@ class ContestListViewController: DraftboardViewController {
     override func viewWillAppear(animated: Bool) {
         // Reload what's already there
         tableView.reloadData()
-        // Get lineups
+        // Get contests
         Data.contests.get().then { contests -> Void in
-            let contestSports = Set(contests.map { $0.sportName })
-            self.sportControl.choices = ["mlb", "nfl", "nba", "nhl"].filter { contestSports.contains($0) }
-            self.allContests = contests
+            self.sportControl.choices = self.orderedSports(from: contests)
+            self.allContests = self.allContests ?? contests
             self.filterContests()
-            self.update()
         }
         
-        when(Data.contests.get(), Data.contestPoolEntries.get()).then { contests, entries -> Void in
-            let contestEntries = entries.groupBy { $0.contestPoolID }
-            self.allContests = contests.map { $0.withEntries(contestEntries[$0.id] ?? []) }
+        // Add entry data to contests
+        DerivedData.contestsWithEntries().then { contests -> Void in
+            self.allContests = contests
             self.filterContests()
-            self.update()
         }
         
         when(Data.contests.get(), Data.upcomingLineups.get()).then { contests, lineups -> Void in
@@ -58,15 +58,28 @@ class ContestListViewController: DraftboardViewController {
                 return result
             }
             self.filterContests()
-            self.update()
         }
     }
     
-    func filterContests() {
+    func orderedSports(from contests: [Contest]) -> [String] {
+        let contestSports = Set(contests.map { $0.sportName })
+        return Sport.names.filter { contestSports.contains($0) }
+    }
+    
+    func filterContests(reload reload: Bool = true) {
+        update()
+        
         let sportName = sportControl.choices[sportControl.currentIndex]
         let skillLevel = skillControl.choices[skillControl.currentIndex]
-        contests = allContests?.filter { $0.sportName == sportName && $0.skillLevelName == skillLevel }
-        tableView.reloadData()
+        let sportContests = allContests?.filter { $0.sportName == sportName }
+        let enteredContests = sportContests?.filter { ($0 as? HasEntries)?.entries.count > 0 }
+        
+        contests = sportContests?.filter { $0.skillLevelName == skillLevel }
+        enteredSkillLevel = enteredContests?.filter { $0.skillLevelName != "all" }.first?.skillLevelName
+
+        if reload {
+            tableView.reloadData()
+        }
     }
     
     func update() {
@@ -86,6 +99,108 @@ class ContestListViewController: DraftboardViewController {
     
 }
 
+// Contest Entry
+extension ContestListViewController {
+    
+    func pickLineup(from lineups: [Lineup]) -> Promise<Lineup> {
+        let mcc = DraftboardModalChoiceController<Lineup>()
+        mcc.autopickOnlyOption = true
+        mcc.titleText = "Choose an Eligible Lineup"
+        mcc.choiceData = lineups.map { Choice(title: $0.name, subtitle: "XYZ", value: $0) }
+        return mcc.promise()
+    }
+    
+    func confirmEntry(to contest: Contest, with lineup: Lineup) -> Promise<Lineup> {
+        let mcc = DraftboardModalChoiceController<Lineup>()
+        mcc.titleText = "Are You Sure?"
+        mcc.choiceData = [Choice(title: "Yes, enter \(contest.name)", subtitle: "With \"\(lineup.name)\"", value: lineup)]
+        return mcc.promise()
+    }
+    
+    func enterContest(contest: Contest, with lineup: Lineup) -> Promise<[ContestWithEntries]> {
+        RootViewController.sharedInstance.popModalViewController()
+        
+        // Find cell for contest
+        let indexPath = NSIndexPath(forRow: contests!.indexOf { $0.id == contest.id }!, inSection: 0)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        // Enter
+        let pending = contest.enter(with: lineup)
+        
+        // Save pending reference
+        pendingEntries[contest.id] = pendingEntries[contest.id] ?? []
+        pendingEntries[contest.id]?.append(pending)
+        
+        // Show pending status
+        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+
+        // Refresh contest entry info, regardless of success/failure
+        pending.always {
+            // Remove pending reference
+            let i = self.pendingEntries[contest.id]?.indexOf { $0 === pending }
+            self.pendingEntries[contest.id]?.removeAtIndex(i!)
+            
+            DerivedData.contestsWithEntries().then { contests -> Void in
+                // Contests with latest entry info
+                self.allContests = contests
+                self.filterContests(reload: false)
+            }.always {
+                // Hide pending status
+                if self.tableView.cellForRowAtIndexPath(indexPath) == cell {
+                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                } else {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        return pending
+    }
+    
+    func enterContest(contest: Contest) -> Promise<[ContestWithEntries]> {
+        let entries = (contest as? HasEntries)?.entries
+        let lineups = contestLineups?[contest.id]
+
+        // Conditions for entry
+        let hasReachedMaxEntries = entries?.count == contest.maxEntries
+        let hasEligibleLineups = lineups?.count > 0
+        let matchesSkillLevel = contest.matchesSkillLevel(enteredSkillLevel)
+        
+        guard !hasReachedMaxEntries else { return Promise(error: ContestEntryError.MaxEntered) }
+        guard hasEligibleLineups else { return Promise(error: ContestEntryError.NoEligibleLineups) }
+        guard matchesSkillLevel else { return Promise(error: ContestEntryError.WrongSkillLevel) }
+        
+        // Already entered?
+        if let enteredLineup = lineups?.filter({ $0.id == entries?.first?.lineupID }).first {
+            return enterContest(contest, with: enteredLineup)
+        }
+        
+        // First entry
+        return firstly {
+            self.pickLineup(from: lineups!)
+        }.then { lineup in
+            self.confirmEntry(to: contest, with: lineup)
+        }.then { lineup in
+            self.enterContest(contest, with: lineup)
+        }
+    }
+    
+    func showError(error: ErrorType) {
+        let error = error as? ContestEntryError ?? ContestEntryError.Unknown
+        let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+        
+        vc.actions = ["OK"]
+        vc.promise.then { _ -> Void in
+            RootViewController.sharedInstance.popAlertViewController()
+        }
+        
+        RootViewController.sharedInstance.pushAlertViewController(vc)
+        vc.titleLabel.text = error.title
+        vc.errorLabel.text = error.description
+    }
+    
+}
+
 private typealias TableViewDelegate = ContestListViewController
 extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, ContestCellActionButtonDelegate {
     
@@ -96,15 +211,23 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     }
 
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = ContestCell()
-        let contest = contests?[safe: indexPath.item]
-        let eligibleLineups = contestLineups?[contest!.id]
+        guard let contest = contests?[safe: indexPath.item] else { return cell }
+        
+        let entries = (contest as? HasEntries)?.entries
+        
+        let hasReachedMaxEntries = entries?.count == contest.maxEntries
+        let hasEligibleLineups = contestLineups?[contest.id]?.count > 0
+        let matchesSkillLevel = contest.matchesSkillLevel(enteredSkillLevel)
+        
+        let state = ContestCellState()
+        state.hasEntries = entries?.count > 0
+        state.hasPendingEntries = pendingEntries[contest.id]?.count > 0
+        state.canEnter = !hasReachedMaxEntries && hasEligibleLineups && matchesSkillLevel
 
         cell.showBottomBorder = contest !== contests?.last
-        cell.enableActionButton = eligibleLineups != nil
         cell.actionButtonDelegate = self
-        cell.configure(for: contest)
+        cell.configure(for: contest, state: state)
         
         return cell
     }
@@ -119,49 +242,47 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     
     func actionButtonTappedForCell(cell: ContestCell) {
         let indexPath = tableView.indexPathForCell(cell)!
-        let contest = contests?[safe: indexPath.item]
-        let eligibleLineups = contestLineups?[contest!.id]
+        let contest = contests![indexPath.item]
         
-        // No eligible lineups
-        if eligibleLineups?.count ?? 0 == 0 {
-            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
-            let actions = ["Got it"]
-            
-            vc.actions = actions
-            vc.promise.then { index -> Void in
-                RootViewController.sharedInstance.popAlertViewController()
-                if index == 0 {
-                    self.navController?.popViewController()
-                }
-            }
-            
-            RootViewController.sharedInstance.pushAlertViewController(vc)
-            vc.titleLabel.text = "NOPE"
-            vc.errorLabel.text = "You don't have any lineups eligible to enter this contest."
+        if pendingEntries[contest.id]?.count > 0 { return }
+        
+        enterContest(contest).error { (error: ErrorType) -> Void in
+            self.showError(error)
         }
-        
-        // Max entries reached
-        if let contest = contest as? HasEntries where contest.maxEntriesReached {
-            let enteredLineup = eligibleLineups!.filter { $0.id == contest.entries[0].lineupID }[0]
-            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
-            let actions = ["Cool"]
-            
-            vc.actions = actions
-            vc.promise.then { index -> Void in
-                RootViewController.sharedInstance.popAlertViewController()
-                if index == 0 {
-                    self.navController?.popViewController()
-                }
-            }
-            
-            RootViewController.sharedInstance.pushAlertViewController(vc)
-            vc.titleLabel.text = "MAXED"
-            vc.errorLabel.text = "You already have \(contest.maxEntries) entries with “\(enteredLineup.name)”. That's the limit."
-        }
-        
     }
 
-    
 }
 
+enum ContestEntryError: ErrorType {
+    case WrongSkillLevel
+    case NoEligibleLineups
+    case MaxEntered
+    case Unknown
+}
 
+extension ContestEntryError : CustomStringConvertible {
+    var title: String {
+        switch self {
+        case .WrongSkillLevel: return "Wrong Skill Level".uppercaseString
+        case .NoEligibleLineups: return "No Eligible Lineups".uppercaseString
+        case .MaxEntered: return "Max Entered".uppercaseString
+        case .Unknown: return "Error".uppercaseString
+        }
+    }
+    var description: String {
+        switch self {
+        case .WrongSkillLevel: return "You may only enter into 1 skill level per sport."
+        case .NoEligibleLineups: return "You have no lineups eligible to enter this contest."
+        case .MaxEntered: return "You have the maximum number of entries for this contest."
+        case .Unknown: return "Failed to enter contest."
+        }
+    }
+}
+
+private extension Contest {
+    func matchesSkillLevel(skillLevelInQuestion: String?) -> Bool {
+        if skillLevelInQuestion == nil { return true }
+        if skillLevelName == "all" { return true }
+        return skillLevelName == skillLevelInQuestion
+    }
+}

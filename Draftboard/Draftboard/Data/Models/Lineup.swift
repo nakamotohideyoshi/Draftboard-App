@@ -10,6 +10,8 @@ import UIKit
 
 class Sport {
     
+    static let names = ["mlb", "nfl", "nba", "nhl"]
+    
     static let salaryCaps = [
         "nba": 50_000.00,
         "nfl": 50_000.00,

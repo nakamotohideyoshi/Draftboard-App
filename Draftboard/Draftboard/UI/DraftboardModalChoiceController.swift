@@ -36,11 +36,12 @@ class Choice<T> {
 }
 
 class DraftboardModalChoiceController<T>: DraftboardModalViewController {
+    var autopickOnlyOption: Bool = false
     var delegate: DraftboardModalChoiceDelegate?
     var scrollView: UIScrollView!
     var titleLabel: DraftboardLabel!
     var closeButton: DraftboardButton!
-    var titleText: String!
+    var titleText: String! { didSet { reloadTitleLabel() } }
     var loaderView: LoaderView!
     
     var choiceData: [Choice<T>]? { didSet { reloadChoiceViews() } }
@@ -48,14 +49,15 @@ class DraftboardModalChoiceController<T>: DraftboardModalViewController {
     
     let (pendingPromise, fulfill, reject) = Promise<T>.pendingPromise()
     
-    init(title: String, choices: [Choice<T>]?) {
-        super.init(nibName: nil, bundle: nil)
-        choiceData = choices
-        titleText = title
+    override init() {
+        super.init()
+        viewDidLoad()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    convenience init(title: String, choices: [Choice<T>]?) {
+        self.init()
+        choiceData = choices
+        titleText = title
     }
     
     override func viewDidLoad() {
@@ -76,7 +78,9 @@ class DraftboardModalChoiceController<T>: DraftboardModalViewController {
         titleLabel = DraftboardLabel()
         titleLabel.font = UIFont(name: "Oswald-Regular", size: 15.0)
         titleLabel.textColor = .whiteColor()
-        titleLabel.text = titleText.uppercaseString
+        if titleText != nil {
+            titleLabel.text = titleText.uppercaseString
+        }
         
         scrollView.addSubview(titleLabel!)
         titleLabel!.translatesAutoresizingMaskIntoConstraints = false
@@ -122,6 +126,10 @@ class DraftboardModalChoiceController<T>: DraftboardModalViewController {
     }
     
     func promise() -> Promise<T> {
+        if choiceData?.count == 1 && autopickOnlyOption {
+            fulfill(choiceData![0].value)
+            return pendingPromise
+        }
         RootViewController.sharedInstance.pushModalViewController(self)
         return pendingPromise
     }
@@ -135,6 +143,11 @@ class DraftboardModalChoiceController<T>: DraftboardModalViewController {
     func didTapChoice(sender: DraftboardModalItemView) {
         fulfill(choiceData![sender.index].value)
 //        RootViewController.sharedInstance.didSelectModalChoice(sender.index)
+    }
+    
+    func reloadTitleLabel() {
+        if titleText == nil { return }
+        titleLabel.text = titleText.uppercaseString
     }
     
     func reloadChoiceViews() {

@@ -72,7 +72,7 @@ extension API_Endpoints {
     
     class func contestEnter(contest: Contest, lineup: Lineup) -> Promise<NSDictionary> {
         let path = "api/contest/enter-lineup/"
-        let params = ["contest": contest.id, "lineup": lineup.id]
+        let params = ["contest_pool": contest.id, "lineup": lineup.id]
         return API.post(path, JSON: params)
     }
     

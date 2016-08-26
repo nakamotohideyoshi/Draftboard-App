@@ -17,11 +17,11 @@ private typealias API_Public = API
 extension API_Public {
     
     static let agent = "Draftboard iOS" // + version?
-    static let baseURL = "http://www.draftboard.com/"
+    static let baseURL = "http://draftboard-dev.herokuapp.com/"
 
     class func request<T>(path: String, JSON: AnyObject? = nil) -> Promise<T> {
         let request = APIRequest(path, JSON: JSON)
-        request.errorConditions = [API.InvalidTokenCondition]
+        request.errorConditions = [API.InvalidTokenCondition, API.BadResponseCodeCondition]
         return API.promise(request)
     }
     
@@ -43,7 +43,7 @@ private extension API_Private {
         // user1
 //    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjMxMzAsIm9yaWdfaWF0IjoxNDYzNDMxMTMwLCJ1c2VyX2lkIjo1fQ.G7C5AALFOpvNNQesjSjGOgJogcK0bAcpW-62bwqVvwA"
     // user3
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnX2lhdCI6MTQ2OTIyOTIzNywidXNlcl9pZCI6NywidXNlcm5hbWUiOiJ1c2VyMyIsImV4cCI6MTQ3MTgyMTIzNywiZW1haWwiOiIifQ.yyeSzGgik7HuOmXe5BRnzrIDDhqKGTaowAWHdUYq5pE"
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IiIsImV4cCI6MTQ3NDQ5MTc3MCwidXNlcm5hbWUiOiJ1c2VyMyIsInVzZXJfaWQiOjcsIm9yaWdfaWF0IjoxNDcxODk5NzcwfQ.Czw4rag6k0DFDti_wETVcbjtMgz2TkR457YfERF1XSs"
 
     
     class func promise<T>(request: APIRequest) -> Promise<T> {

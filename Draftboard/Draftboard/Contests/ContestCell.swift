@@ -12,6 +12,12 @@ protocol ContestCellActionButtonDelegate: class {
     func actionButtonTappedForCell(cell: ContestCell)
 }
 
+class ContestCellState {
+    var hasEntries: Bool = false
+    var hasPendingEntries: Bool = false
+    var canEnter: Bool = false
+}
+
 class ContestCell: DraftboardTableViewCell {
     
     let nameLabel = UILabel()
@@ -19,6 +25,7 @@ class ContestCell: DraftboardTableViewCell {
     let entryCountLabel = UILabel()
     let sportIcon = UIImageView()
     let actionButton = UIButton()
+    let loaderView = LoaderView()
     let borderView = UIView()
     
     var enableActionButton: Bool = false
@@ -35,6 +42,7 @@ class ContestCell: DraftboardTableViewCell {
         contentView.addSubview(entryCountLabel)
         contentView.addSubview(sportIcon)
         contentView.addSubview(actionButton)
+        contentView.addSubview(loaderView)
         contentView.addSubview(borderView)
         
         // Visual settings
@@ -52,6 +60,8 @@ class ContestCell: DraftboardTableViewCell {
         
         actionButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
         
+        loaderView.lineWidth = 1.5
+        
         borderView.backgroundColor = .dividerOnDarkColor()
         
         // Behavioral settings
@@ -68,6 +78,7 @@ class ContestCell: DraftboardTableViewCell {
         let entryCountLabelSize = entryCountLabel.sizeThatFits(CGSizeZero)
         let actionButtonSize = CGSizeMake(52, boundsH)
         let sportIconSize = CGSizeMake(15, 15)
+        let loaderViewSize = CGSizeMake(20, 20)
         let borderViewSize = CGSizeMake(boundsW - 30, 1)
         
         let (nameLabelW, nameLabelH) = (nameLabelSize.width, nameLabelSize.height)
@@ -75,6 +86,7 @@ class ContestCell: DraftboardTableViewCell {
         let (entryCountLabelW, entryCountLabelH) = (entryCountLabelSize.width, entryCountLabelSize.height)
         let (actionButtonW, actionButtonH) = (actionButtonSize.width, actionButtonSize.height)
         let (sportIconW, sportIconH) = (sportIconSize.width, sportIconSize.height)
+        let (loaderViewW, loaderViewH) = (loaderViewSize.width, loaderViewSize.height)
         let (borderViewW, borderViewH) = (borderViewSize.width, borderViewSize.height)
         
         let nameLabelY = boundsH / 2 - (nameLabelH + prizesLabelH) / 2 - 1
@@ -83,6 +95,8 @@ class ContestCell: DraftboardTableViewCell {
         let entryCountLabelY = boundsH / 2 - entryCountLabelH / 2
         let actionButtonX = boundsW - actionButtonW
         let sportIconY = boundsH / 2 - sportIconH / 2
+        let loaderViewX = entryCountLabelX - loaderViewW
+        let loaderViewY = boundsH / 2 - loaderViewH / 2
         let borderViewY = boundsH - 1
         
         nameLabel.frame = CGRectMake(54, nameLabelY, nameLabelW, nameLabelH)
@@ -90,28 +104,25 @@ class ContestCell: DraftboardTableViewCell {
         entryCountLabel.frame = CGRectMake(entryCountLabelX, entryCountLabelY, entryCountLabelW, entryCountLabelH)
         sportIcon.frame = CGRectMake(15, sportIconY, sportIconW, sportIconH)
         actionButton.frame = CGRectMake(actionButtonX, 0, actionButtonW, actionButtonH)
+        loaderView.frame = CGRectMake(loaderViewX, loaderViewY, loaderViewW, loaderViewH)
         borderView.frame = CGRectMake(15, borderViewY, borderViewW, borderViewH)
     }
     
-    func configure(for contest: Contest?) {
-        guard let contest = contest else {
-            nameLabel.text = nil
-            prizesLabel.text = nil
-            entryCountLabel.text = nil
-            sportIcon.image = nil
-            return
-        }
-        
+    func configure(for contest: Contest, state: ContestCellState) {
         nameLabel.text = contest.name
         prizesLabel.text = contest.payoutDescription
         sportIcon.image = Sport.icons[contest.sportName]
+        
+        // Pending entries
+        loaderView.alpha = state.hasPendingEntries ? 0.5 : 0
+        actionButton.alpha = state.hasPendingEntries ? 0.5 : 1
 
-        let entryCount = (contest as? HasEntries)?.entries.count
         // Entries
-        if entryCount > 0 {
-            entryCountLabel.text = "x\(entryCount!)"
+        if state.hasEntries {
+            let entries = (contest as! HasEntries).entries
+            entryCountLabel.text = "   x\(entries.count)"
             sportIcon.alpha = 1
-            if entryCount < contest.maxEntries {
+            if state.canEnter {
                 actionButton.setImage(.actionButtonAddFilled, forState: .Normal)
             } else {
                 actionButton.setImage(.actionButtonAddFilledGray, forState: .Normal)
@@ -121,7 +132,7 @@ class ContestCell: DraftboardTableViewCell {
         else {
             entryCountLabel.text = nil
             sportIcon.alpha = 0.3
-            if enableActionButton {
+            if state.canEnter {
                 actionButton.setImage(.actionButtonAdd, forState: .Normal)
             } else {
                 actionButton.setImage(.actionButtonAddGray, forState: .Normal)
