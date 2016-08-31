@@ -103,10 +103,18 @@ class ContestListViewController: DraftboardViewController {
 extension ContestListViewController {
     
     func pickLineup(from lineups: [Lineup]) -> Promise<Lineup> {
+        let lineupEntryCount = allContests!.flatMap {
+            ($0 as! HasEntries).entries
+        }.uniqBy {
+            "\($0.contestPoolID)\($0.lineupID)"
+        }.countBy {
+            $0.lineupID
+        }
+        
         let mcc = DraftboardModalChoiceController<Lineup>()
         mcc.autopickOnlyOption = true
         mcc.titleText = "Choose an Eligible Lineup"
-        mcc.choiceData = lineups.map { Choice(title: $0.name, subtitle: "XYZ", value: $0) }
+        mcc.choiceData = lineups.map { Choice(title: $0.name, subtitle: "In \(lineupEntryCount[$0.id] ?? 0) Contests", value: $0) }
         return mcc.promise()
     }
     
