@@ -111,10 +111,9 @@ extension ContestListViewController {
     }
     
     func confirmEntry(to contest: Contest, with lineup: Lineup) -> Promise<Lineup> {
-        let mcc = DraftboardModalChoiceController<Lineup>()
-        mcc.titleText = "Are You Sure?"
-        mcc.choiceData = [Choice(title: "Yes, enter \(contest.name)", subtitle: "With \"\(lineup.name)\"", value: lineup)]
-        return mcc.promise()
+        let entryConfirmationVC = EntryConfirmationViewController()
+        entryConfirmationVC.configure(for: contest, lineup: lineup)
+        return entryConfirmationVC.promise().then { return Promise(lineup) }
     }
     
     func enterContest(contest: Contest, with lineup: Lineup) -> Promise<[ContestWithEntries]> {
@@ -241,9 +240,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     // ContestCellActionButtonDelegate
     
     func actionButtonTappedForCell(cell: ContestCell) {
-        let indexPath = tableView.indexPathForCell(cell)!
+        guard let indexPath = tableView.indexPathForCell(cell) else { return }
         let contest = contests![indexPath.item]
-        
         if pendingEntries[contest.id]?.count > 0 { return }
         
         enterContest(contest).error { (error: ErrorType) -> Void in

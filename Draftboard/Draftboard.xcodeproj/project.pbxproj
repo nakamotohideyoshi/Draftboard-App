@@ -81,6 +81,8 @@
 		3E8A7E6A1D39D16C0020681E /* LineupEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E691D39D16C0020681E /* LineupEntry.swift */; };
 		3E96695E1BED5C8B005179E0 /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
 		3E9DBAB01CB878860098BB77 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */; };
+		3E9FB8FF1D70F34700F55990 /* EntryConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB8FE1D70F34700F55990 /* EntryConfirmationViewController.swift */; };
+		3E9FB9011D70F35000F55990 /* EntryConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9001D70F35000F55990 /* EntryConfirmationView.swift */; };
 		3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */; };
 		3EB2CB671BFE473B00579F1B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB661BFE473B00579F1B /* Data.swift */; };
 		3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB731BFE763400579F1B /* DraftGroup.swift */; };
@@ -294,6 +296,8 @@
 		3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestPoolEntry.swift; sourceTree = "<group>"; };
 		3E8A7E691D39D16C0020681E /* LineupEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntry.swift; sourceTree = "<group>"; };
 		3E96695D1BED5C8B005179E0 /* Lineup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lineup.swift; sourceTree = "<group>"; };
+		3E9FB8FE1D70F34700F55990 /* EntryConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryConfirmationViewController.swift; sourceTree = "<group>"; };
+		3E9FB9001D70F35000F55990 /* EntryConfirmationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryConfirmationView.swift; sourceTree = "<group>"; };
 		3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Traversal.swift"; sourceTree = "<group>"; };
 		3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutRancor.swift; sourceTree = "<group>"; };
 		3EB2CB661BFE473B00579F1B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -728,6 +732,8 @@
 				3E4A0FF01D480FAE00EDB59F /* ContestListViewController.swift */,
 				3E4A0FF21D480FBD00EDB59F /* ContestListView.swift */,
 				3E4A0FF41D4C27F400EDB59F /* ContestCell.swift */,
+				3E9FB8FE1D70F34700F55990 /* EntryConfirmationViewController.swift */,
+				3E9FB9001D70F35000F55990 /* EntryConfirmationView.swift */,
 				5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */,
 				3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */,
 				3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */,
@@ -949,6 +955,7 @@
 				3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */,
 				3E8A7E6A1D39D16C0020681E /* LineupEntry.swift in Sources */,
 				3E04ECAC1D02138A00EE325C /* Boxscore.swift in Sources */,
+				3E9FB9011D70F35000F55990 /* EntryConfirmationView.swift in Sources */,
 				3EF777AD1D0B54CB002322F3 /* LineupDraftViewController.swift in Sources */,
 				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
 				3E192C231CD93DF40021A31D /* APIRequest.swift in Sources */,
@@ -987,6 +994,7 @@
 				5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */,
 				3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */,
 				5D88B0551C49E591002CA1BB /* ErrorViewController.swift in Sources */,
+				3E9FB8FF1D70F34700F55990 /* EntryConfirmationViewController.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
 				5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */,
 				3E04ECAA1D02132000EE325C /* Game.swift in Sources */,

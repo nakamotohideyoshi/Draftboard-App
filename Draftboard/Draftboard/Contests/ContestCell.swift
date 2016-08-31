@@ -116,6 +116,7 @@ class ContestCell: DraftboardTableViewCell {
         // Pending entries
         loaderView.alpha = state.hasPendingEntries ? 0.5 : 0
         actionButton.alpha = state.hasPendingEntries ? 0.5 : 1
+        userInteractionEnabled = !state.hasPendingEntries
 
         // Entries
         if state.hasEntries {
