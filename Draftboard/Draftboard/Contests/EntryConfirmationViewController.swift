@@ -30,6 +30,12 @@ class EntryConfirmationViewController: DraftboardModalViewController {
     }
     
     func promise() -> Promise<Void> {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey(App.DefaultsDontAskToConfirmEntry) {
+            fulfill()
+            return pendingPromise
+        }
+        
         RootViewController.sharedInstance.pushModalViewController(self)
         return pendingPromise
     }
@@ -43,6 +49,11 @@ class EntryConfirmationViewController: DraftboardModalViewController {
     }
     
     func tappedEnterButton() {
+        if dontAskSwitch.on {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(true, forKey: App.DefaultsDontAskToConfirmEntry)
+        }
+
         fulfill()
     }
     

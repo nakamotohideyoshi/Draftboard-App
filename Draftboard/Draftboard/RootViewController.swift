@@ -29,6 +29,8 @@ final class RootViewController: UIViewController {
         addModalControllerView(modalController.view)
         addModalControllerView(modalAlertController.view)
         setAppearanceProperties()
+        // Temporary
+        forgetDefaults()
         
     }
     
@@ -79,6 +81,11 @@ final class RootViewController: UIViewController {
             UIImageView.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = .greyCool()
             */
         }
+    }
+    
+    func forgetDefaults() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(false, forKey: App.DefaultsDontAskToConfirmEntry)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

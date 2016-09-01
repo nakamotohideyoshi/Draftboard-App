@@ -18,6 +18,7 @@ struct App {
     static var cachesPath = ""
     static var nibCache = [String: UINib]()
     static var DefaultsDidSeeNotifications = "draftboard_defaults_did_see_notifications"
+    static var DefaultsDontAskToConfirmEntry = "draftboard_defaults_dont_ask_to_confirm_entry"
     
     func roundToScreenPixel(v: CGFloat) -> CGFloat {
         return round(v * App.screenScale) / App.screenScale;
