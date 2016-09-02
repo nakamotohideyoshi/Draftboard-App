@@ -10,6 +10,7 @@ import UIKit
 
 protocol HasPosition {
     var position: String { get }
+    var teamSRID: String { get }
 }
 
 protocol HasGame {
@@ -54,9 +55,11 @@ class Player {
 
 class PlayerWithPosition: Player, HasPosition {
     let position: String
+    let teamSRID: String
     
-    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, position: String) {
+    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, position: String, teamSRID: String) {
         self.position = position
+        self.teamSRID = teamSRID
         super.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid)
     }
     
@@ -69,22 +72,12 @@ class PlayerWithPosition: Player, HasPosition {
             let fppg: Double = try json.get("fppg")
             let srid: String = try json.get("player_srid")
             let teamAlias: String = try json.get("team_alias")
+            let teamSRID: String = try json.get("team_srid")
             let position: String = try json.get("position")
-            self.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position)
+            self.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position, teamSRID: teamSRID)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
-    }
-}
-
-class PlayerWithGame: Player, HasGame {
-    let team: Team
-    let game: Game
-    
-    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, game: Game) {
-        self.team = (teamAlias == game.home.alias) ? game.home : game.away
-        self.game = game
-        super.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid)
     }
 }
 
@@ -92,22 +85,16 @@ class PlayerWithPositionAndGame: PlayerWithPosition, HasGame {
     let team: Team
     let game: Game
     
-    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, position: String, game: Game) {
+    init(id: Int, name: String, salary: Double, fppg: Double, teamAlias: String, srid: String, position: String, teamSRID: String, game: Game) {
         self.team = (teamAlias == game.home.alias) ? game.home : game.away
         self.game = game
-        super.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position)
-    }
-}
-
-extension Player {
-    func withGame(game: Game) -> PlayerWithGame {
-        return PlayerWithGame(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, game: game)
+        super.init(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position, teamSRID: teamSRID)
     }
 }
 
 extension PlayerWithPosition {
     func withGame(game: Game) -> PlayerWithPositionAndGame {
-        return PlayerWithPositionAndGame(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position, game: game)
+        return PlayerWithPositionAndGame(id: id, name: name, salary: salary, fppg: fppg, teamAlias: teamAlias, srid: srid, position: position, teamSRID: teamSRID, game: game)
     }
 }
 

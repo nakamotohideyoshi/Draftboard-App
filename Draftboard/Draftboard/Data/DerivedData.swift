@@ -95,22 +95,22 @@ extension Lineup {
     func getGamesByTeam() -> Promise<[String: Game]> {
         return getGames().then { games -> [String: Game] in
             return games.transform([String: Game]()) {
-                $0[$1.home.alias] = $1
-                $0[$1.away.alias] = $1
+                $0[$1.home.srid] = $1
+                $0[$1.away.srid] = $1
                 return $0
             }
         }
     }
     
     // Used by LineupDetailViewController
-    func getPlayersWithGames() -> Promise<[PlayerWithGame]?> {
-        return getGamesByTeam().then { gamesByTeam -> [PlayerWithGame]? in
-//            guard let players = self.players else { return nil }
-//            if let players = players as? [PlayerWithGame] { return players }
-            if let players = self.players {
-                return players.map { $0.withGame(gamesByTeam[$0.teamAlias]!) }
+    func getPlayersWithGames() -> Promise<[PlayerWithPositionAndGame]?> {
+        return when(getDraftGroup(), getGamesByTeam()).then { draftGroup, gamesByTeam -> [PlayerWithPositionAndGame]? in
+            guard let players = self.players else { return nil }
+            let playersWithGamesBySRID = draftGroup.players.transform([String: PlayerWithPositionAndGame]()) { result, player in
+                result[player.srid] = player.withGame(gamesByTeam[player.teamSRID]!)
+                return result
             }
-            return nil
+            return players.map { playersWithGamesBySRID[$0.srid]! }
         }
     }
     
@@ -118,7 +118,7 @@ extension Lineup {
     func getDraftGroupWithPlayersWithGames() -> Promise<DraftGroupWithPlayers> {
         return when(getDraftGroup(), getGamesByTeam()).then { draftGroup, gamesByTeam -> DraftGroupWithPlayers in
             let players = draftGroup.players.map { player -> PlayerWithPositionAndGame in
-                player.withGame(gamesByTeam[player.teamAlias]!)
+                player.withGame(gamesByTeam[player.teamSRID]!)
             }.sort { p1, p2 in
                 if p1.salary != p2.salary { return p1.salary > p2.salary }
                 if p1.fppg != p2.fppg { return p1.fppg > p2.fppg }
