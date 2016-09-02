@@ -50,7 +50,7 @@ class LineupDetailViewController: DraftboardViewController {
         overlayView.addTarget(self, action: #selector(overlayTapped), forControlEvents: .TouchUpInside)
         
         // Sport icon
-        sportIcon.image = UIImage(named: "icon-baseball")
+        sportIcon.image = Sport.icons[lineup!.sportName]
         
         // Lineup name
         nameField.delegate = self
