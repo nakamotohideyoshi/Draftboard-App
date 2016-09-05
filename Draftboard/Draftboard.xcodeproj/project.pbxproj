@@ -14,9 +14,9 @@
 		3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */; };
 		3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE11C0FA8D4009C3287 /* WithdrawView.swift */; };
 		3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */; };
-		3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */; };
+		3C74CA3C1BE050D50077DF0C /* ContestDetailViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA391BE050D50077DF0C /* ContestDetailViewControllerOld.swift */; };
 		3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA3A1BE050D50077DF0C /* PieChart.swift */; };
-		3C74CA3F1BE051070077DF0C /* ContestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA3E1BE051070077DF0C /* ContestDetailViewController.xib */; };
+		3C74CA3F1BE051070077DF0C /* ContestDetailViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA3E1BE051070077DF0C /* ContestDetailViewControllerOld.xib */; };
 		3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA421BE0513A0077DF0C /* ContestsHeaderCell.swift */; };
 		3C74CA451BE051530077DF0C /* ContestsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA441BE051530077DF0C /* ContestsHeaderCell.xib */; };
 		3C74CA471BE0516C0077DF0C /* ContestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA461BE0516C0077DF0C /* ContestsListController.swift */; };
@@ -225,9 +225,9 @@
 		3C6FBAE11C0FA8D4009C3287 /* WithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
 		3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
 		3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupMoneyPoint.swift; sourceTree = "<group>"; };
-		3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailViewController.swift; sourceTree = "<group>"; };
+		3C74CA391BE050D50077DF0C /* ContestDetailViewControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailViewControllerOld.swift; sourceTree = "<group>"; };
 		3C74CA3A1BE050D50077DF0C /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
-		3C74CA3E1BE051070077DF0C /* ContestDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestDetailViewController.xib; sourceTree = "<group>"; };
+		3C74CA3E1BE051070077DF0C /* ContestDetailViewControllerOld.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestDetailViewControllerOld.xib; sourceTree = "<group>"; };
 		3C74CA421BE0513A0077DF0C /* ContestsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsHeaderCell.swift; sourceTree = "<group>"; };
 		3C74CA441BE051530077DF0C /* ContestsHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestsHeaderCell.xib; sourceTree = "<group>"; };
 		3C74CA461BE0516C0077DF0C /* ContestsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsListController.swift; sourceTree = "<group>"; };
@@ -736,8 +736,8 @@
 				3E9FB9001D70F35000F55990 /* EntryConfirmationView.swift */,
 				5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */,
 				3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */,
-				3C74CA391BE050D50077DF0C /* ContestDetailViewController.swift */,
-				3C74CA3E1BE051070077DF0C /* ContestDetailViewController.xib */,
+				3C74CA391BE050D50077DF0C /* ContestDetailViewControllerOld.swift */,
+				3C74CA3E1BE051070077DF0C /* ContestDetailViewControllerOld.xib */,
 				3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */,
 				3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */,
 				3C74CA521BE0528D0077DF0C /* ContestModel.swift */,
@@ -867,7 +867,7 @@
 				5D4E63461BAB75D80033C4C2 /* OpenSans-ExtraBold.ttf in Resources */,
 				5D4E63471BAB75D80033C4C2 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				3C74CA4F1BE051A00077DF0C /* DraftboardContestsCell.xib in Resources */,
-				3C74CA3F1BE051070077DF0C /* ContestDetailViewController.xib in Resources */,
+				3C74CA3F1BE051070077DF0C /* ContestDetailViewControllerOld.xib in Resources */,
 				5DB14BF51C1218CD008E14A4 /* AccountViewController.xib in Resources */,
 				3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */,
 				3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */,
@@ -1007,7 +1007,7 @@
 				3E192C2F1CE40DBA0021A31D /* NSTimeInterval+Data.swift in Sources */,
 				5D6237BD1BB61F7B0007E62A /* LineupCardView.swift in Sources */,
 				3E192C2B1CDD153D0021A31D /* API+Date.swift in Sources */,
-				3C74CA3C1BE050D50077DF0C /* ContestDetailViewController.swift in Sources */,
+				3C74CA3C1BE050D50077DF0C /* ContestDetailViewControllerOld.swift in Sources */,
 				5D86F2751C18D2BB004E9655 /* DraftboardNavController+Cards.swift in Sources */,
 				5DD3C4E71C17AEAD0040DC71 /* LineupStatFooterView.swift in Sources */,
 				5D95604E1C60133900E58144 /* DraftboardToggleButton.swift in Sources */,

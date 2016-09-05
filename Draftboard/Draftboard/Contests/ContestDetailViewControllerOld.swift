@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContestDetailViewController: DraftboardViewController {
+class ContestDetailViewControllerOld: DraftboardViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
@@ -249,7 +249,7 @@ class ContestDetailViewController: DraftboardViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension ContestDetailViewController: UITableViewDataSource, UITableViewDelegate {
+extension ContestDetailViewControllerOld: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData[tableDataKey]!.count + 1
     }
@@ -284,7 +284,7 @@ extension ContestDetailViewController: UITableViewDataSource, UITableViewDelegat
 
 // MARK: - UIScrollViewDelegate
 
-extension ContestDetailViewController: UIScrollViewDelegate {
+extension ContestDetailViewControllerOld: UIScrollViewDelegate {
     
     func updateBackgroundForDelta(delta: CGFloat, total: CGFloat) {
         if (delta > total) {
@@ -349,8 +349,8 @@ extension ContestDetailViewController: UIScrollViewDelegate {
 }
 
 private extension Selector {
-    static let handleButtonTap = #selector(ContestDetailViewController.handleButtonTap(_:))
-    static let enterContestTap = #selector(ContestDetailViewController.enterContestTap(_:))
+    static let handleButtonTap = #selector(ContestDetailViewControllerOld.handleButtonTap(_:))
+    static let enterContestTap = #selector(ContestDetailViewControllerOld.enterContestTap(_:))
 }
 
 /*

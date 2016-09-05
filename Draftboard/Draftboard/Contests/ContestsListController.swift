@@ -269,7 +269,7 @@ extension ContestsListController: UITableViewDelegate, UITableViewDataSource {
 
         let contest = contests[indexPath.row]
 //        let entered = self.entries.contains(contest.id)
-        let cdvc = ContestDetailViewController(nibName: "ContestDetailViewController", bundle: nil)
+        let cdvc = ContestDetailViewControllerOld(nibName: "ContestDetailViewControllerOld", bundle: nil)
         cdvc.contest = contest
 //        cdvc.contestEntered = entered
         self.navController?.pushViewController(cdvc)
