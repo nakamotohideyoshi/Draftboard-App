@@ -69,8 +69,8 @@ class ContestListViewController: DraftboardViewController {
     func filterContests(reload reload: Bool = true) {
         update()
         
-        let sportName = sportControl.choices[sportControl.currentIndex]
-        let skillLevel = skillControl.choices[skillControl.currentIndex]
+        let sportName = sportControl.choices[safe: sportControl.currentIndex]
+        let skillLevel = skillControl.choices[safe: skillControl.currentIndex]
         let sportContests = allContests?.filter { $0.sportName == sportName }
         let enteredContests = sportContests?.filter { ($0 as? HasEntries)?.entries.count > 0 }
         
