@@ -40,7 +40,7 @@ class LineupDraftView: UIView {
     
     func addConstraints() {
         let viewConstraints: [NSLayoutConstraint] = [
-            tableView.topRancor.constraintEqualToRancor(topRancor),
+            tableView.topRancor.constraintEqualToRancor(topRancor, constant: 76.0),
             tableView.leftRancor.constraintEqualToRancor(leftRancor),
             tableView.rightRancor.constraintEqualToRancor(rightRancor),
             tableView.bottomRancor.constraintEqualToRancor(bottomRancor),
@@ -48,7 +48,7 @@ class LineupDraftView: UIView {
             loaderView.widthRancor.constraintEqualToConstant(42.0),
             loaderView.heightRancor.constraintEqualToConstant(42.0),
             loaderView.centerXRancor.constraintEqualToRancor(centerXRancor),
-            loaderView.centerYRancor.constraintEqualToRancor(centerYRancor),
+            loaderView.centerYRancor.constraintEqualToRancor(centerYRancor, constant: 36.0),
         ]
         
         translatesAutoresizingMaskIntoConstraints = false

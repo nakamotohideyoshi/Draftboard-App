@@ -17,7 +17,7 @@ private typealias API_Public = API
 extension API_Public {
     
     static let agent = "Draftboard iOS" // + version?
-    static let baseURL = "http://www.draftboard.com/"
+    static let baseURL = "http://draftboard-dev.herokuapp.com/"
 
     class func request<T>(path: String, JSON: AnyObject? = nil) -> Promise<T> {
         let request = APIRequest(path, JSON: JSON)
@@ -43,7 +43,7 @@ private extension API_Private {
         // user1
 //    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjMxMzAsIm9yaWdfaWF0IjoxNDYzNDMxMTMwLCJ1c2VyX2lkIjo1fQ.G7C5AALFOpvNNQesjSjGOgJogcK0bAcpW-62bwqVvwA"
     // user3
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IiIsImV4cCI6MTQ3NDQ5MTc3MCwidXNlcm5hbWUiOiJ1c2VyMyIsInVzZXJfaWQiOjcsIm9yaWdfaWF0IjoxNDcxODk5NzcwfQ.Czw4rag6k0DFDti_wETVcbjtMgz2TkR457YfERF1XSs"
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IiIsIm9yaWdfaWF0IjoxNDczMTEwMDM5LCJ1c2VyX2lkIjo3LCJleHAiOjE0NzU3MDIwMzksInVzZXJuYW1lIjoidXNlcjMifQ.8r-kNc_nDqMuN3-h5Rayk-_azNBtO6mifZItUAxm26g"
 
     
     class func promise<T>(request: APIRequest) -> Promise<T> {

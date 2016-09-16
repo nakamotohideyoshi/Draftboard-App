@@ -48,7 +48,8 @@ class CountdownView: UILabel {
         let components = dateComponents()
         let (h, m, s) = (components.hour, components.minute, components.second)
         var timeString = String(format: "%02d:%02d", h, m)
-        timeString += (s / 10 == 1) ? ":10" : ":00"
+//        timeString += (s / 10 == 1) ? ":10" : ":00"
+        timeString += ":00"
         return (timeString as NSString).sizeWithAttributes(textAttributes)
     }
     
@@ -65,7 +66,8 @@ class CountdownView: UILabel {
         let (h, m, s) = (components.hour, components.minute, components.second)
         
         // Size to fit :00 or :10 seconds to avoid excessive wiggling
-        if s == 19 || s == 9 {
+        // if s == 59 || s == 19 || s == 9 {
+        if s == 59 {
             superview?.setNeedsLayout()
         }
         

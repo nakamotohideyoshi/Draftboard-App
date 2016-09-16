@@ -219,7 +219,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
 
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = ContestCell()
-        guard let contest = contests?[safe: indexPath.item] else { return cell }
+        guard let contest = contests?[safe: indexPath.row] else { return cell }
         
         let entries = (contest as? HasEntries)?.entries
         
@@ -242,7 +242,9 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     // UITableViewDelegate
     
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let detailVC = ContestDetailViewController()
+        detailVC.contest = contests?[safe: indexPath.row]
+        navController?.pushViewController(detailVC)
     }
     
     // ContestCellActionButtonDelegate

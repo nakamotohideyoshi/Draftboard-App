@@ -73,10 +73,14 @@ class LineupDetailView: UIView {
     
     
     override func layoutSubviews() {
-        tableView.frame = bounds
-        headerView.frame = CGRectMake(0, 0, bounds.width, 68)
+        let screenH = RootViewController.sharedInstance.view.bounds.height
+        let boundsH = bounds.height
+        let titleBarH: CGFloat = (boundsH == screenH) ? 76 : 0
+        
+        tableView.frame = CGRectMake(0, titleBarH, bounds.width, bounds.height - titleBarH)
+        headerView.frame = CGRectMake(0, titleBarH, bounds.width, 68)
         headerShadowView.frame = CGRectMake(0, 0, bounds.width, 45)
-        overlayView.frame = CGRectMake(0, headerView.frame.height, bounds.width, bounds.height - headerView.frame.height)
+        overlayView.frame = CGRectMake(0, titleBarH + headerView.frame.height, bounds.width, bounds.height - headerView.frame.height - titleBarH)
         footerView.frame = CGRectMake(0, bounds.height - 68, bounds.width, 68)
         
         sportIcon.frame = CGRectMake(17, headerView.bounds.height * 0.5 - 13 * 0.5, 13, 13)

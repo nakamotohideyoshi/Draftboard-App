@@ -35,13 +35,14 @@ class ContestListView: DraftboardView {
     }
     
     override func layoutSubviews() {
+        let titleBarHeight = CGFloat(76)
         let tabBarHeight = CGFloat(50)
         let filterHeight = CGFloat(50)
         
-        sportControl.frame = CGRectMake(0, 0, bounds.width / 3, filterHeight)
-        skillControl.frame = CGRectMake(bounds.width / 2, 0, bounds.width / 2, filterHeight)
-        tableView.frame = CGRectMake(0, filterHeight, bounds.width, bounds.height - filterHeight - tabBarHeight)
-        loaderView.frame = CGRectMake(bounds.width / 2 - 42 / 2, bounds.height / 2 - 42 / 2 - tabBarHeight, 42, 42)
+        sportControl.frame = CGRectMake(0, titleBarHeight, bounds.width / 3, filterHeight)
+        skillControl.frame = CGRectMake(bounds.width / 2, titleBarHeight, bounds.width / 2, filterHeight)
+        tableView.frame = CGRectMake(0, titleBarHeight + filterHeight, bounds.width, bounds.height - titleBarHeight - filterHeight - tabBarHeight)
+        loaderView.frame = CGRectMake(bounds.width / 2 - 42 / 2, titleBarHeight / 2 + bounds.height / 2 - 42 / 2 - tabBarHeight, 42, 42)
     }
     
 }
