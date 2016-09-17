@@ -70,6 +70,28 @@ class Sport {
         "mlb": UIImage(named: "sport-icon-mlb")!.imageWithRenderingMode(.AlwaysTemplate),
     ]
     
+    static let scoring = [
+        "nba": [
+            "Point: 1 pt",
+            "Assist: 1.5 pts",
+            "Rebound: 1.25 pts",
+            "Steal: 2 pts",
+            "Block: 2 pts",
+            "Turnover: -0.5 pts",
+        ],
+        "nfl": [
+            "Passing Yard: 0.04 pts",
+            "Passing TD: 4 pts",
+            "Interception: -1 pts",
+            "Reception: 0.5 pts",
+            "Receiving Yard: 0.1 pts",
+            "Receiving TD: 6 pts",
+            "Rushing Yard: 0.1 pts",
+            "Rushing TD: 6 pts",
+            "2 Point Conversion: 2 pts",
+            "Fumble: -0.1 pts",
+        ]
+    ]
 }
 
 class LineupSlot {
