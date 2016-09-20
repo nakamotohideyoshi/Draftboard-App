@@ -26,8 +26,8 @@
 		3C74CA4F1BE051A00077DF0C /* DraftboardContestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */; };
 		3C74CA511BE051D90077DF0C /* MoneyBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA501BE051D90077DF0C /* MoneyBar.swift */; };
 		3C74CA531BE0528D0077DF0C /* ContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA521BE0528D0077DF0C /* ContestModel.swift */; };
-		3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */; };
-		3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */; };
+		3CB0586D1BE28C95002343BD /* PlayerDetailViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586B1BE28C95002343BD /* PlayerDetailViewControllerOld.swift */; };
+		3CB0586E1BE28C95002343BD /* PlayerDetailViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0586C1BE28C95002343BD /* PlayerDetailViewControllerOld.xib */; };
 		3CB058711BE2CA01002343BD /* GlobalFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */; };
 		3CB058721BE2CA01002343BD /* GlobalFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */; };
 		3CB630A81C10A19000ACEAD3 /* DepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB630A61C10A19000ACEAD3 /* DepositView.swift */; };
@@ -247,8 +247,8 @@
 		3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardContestsCell.xib; sourceTree = "<group>"; };
 		3C74CA501BE051D90077DF0C /* MoneyBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyBar.swift; sourceTree = "<group>"; };
 		3C74CA521BE0528D0077DF0C /* ContestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestModel.swift; sourceTree = "<group>"; };
-		3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewController.swift; sourceTree = "<group>"; };
-		3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailViewController.xib; sourceTree = "<group>"; };
+		3CB0586B1BE28C95002343BD /* PlayerDetailViewControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewControllerOld.swift; sourceTree = "<group>"; };
+		3CB0586C1BE28C95002343BD /* PlayerDetailViewControllerOld.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerDetailViewControllerOld.xib; sourceTree = "<group>"; };
 		3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFilterViewController.swift; sourceTree = "<group>"; };
 		3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlobalFilterViewController.xib; sourceTree = "<group>"; };
 		3CB630A61C10A19000ACEAD3 /* DepositView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositView.swift; sourceTree = "<group>"; };
@@ -697,8 +697,8 @@
 				5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */,
 				5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */,
 				5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */,
-				3CB0586B1BE28C95002343BD /* PlayerDetailViewController.swift */,
-				3CB0586C1BE28C95002343BD /* PlayerDetailViewController.xib */,
+				3CB0586B1BE28C95002343BD /* PlayerDetailViewControllerOld.swift */,
+				3CB0586C1BE28C95002343BD /* PlayerDetailViewControllerOld.xib */,
 				5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */,
 				5D5386D91BF534CF002CDAF3 /* LineupStatFeesView.swift */,
 				5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */,
@@ -908,7 +908,7 @@
 				3C74CA3F1BE051070077DF0C /* ContestDetailViewControllerOld.xib in Resources */,
 				5DB14BF51C1218CD008E14A4 /* AccountViewController.xib in Resources */,
 				3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */,
-				3CB0586E1BE28C95002343BD /* PlayerDetailViewController.xib in Resources */,
+				3CB0586E1BE28C95002343BD /* PlayerDetailViewControllerOld.xib in Resources */,
 				5D4E63481BAB75D80033C4C2 /* OpenSans-Italic.ttf in Resources */,
 				3CB630A91C10A19000ACEAD3 /* DepositView.xib in Resources */,
 				5D4E63491BAB75D80033C4C2 /* OpenSans-Light.ttf in Resources */,
@@ -1083,7 +1083,7 @@
 				5D3C726C1BF11EE3005A27B1 /* GlobalFilterItem.swift in Sources */,
 				5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */,
 				3E192C391CE6485E0021A31D /* LineupPlayer.swift in Sources */,
-				3CB0586D1BE28C95002343BD /* PlayerDetailViewController.swift in Sources */,
+				3CB0586D1BE28C95002343BD /* PlayerDetailViewControllerOld.swift in Sources */,
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
 				3C6FBAE31C0FA8D4009C3287 /* WithdrawView.swift in Sources */,
 				5D6237C81BB61F7B0007E62A /* LineupListViewController.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class PlayerDetailViewController: DraftboardViewController {
+class PlayerDetailViewControllerOld: DraftboardViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
@@ -170,7 +170,7 @@ class PlayerDetailViewController: DraftboardViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension PlayerDetailViewController: UITableViewDataSource, UITableViewDelegate {
+extension PlayerDetailViewControllerOld: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playerUpdates.count
     }
@@ -205,7 +205,7 @@ extension PlayerDetailViewController: UITableViewDataSource, UITableViewDelegate
 
 // MARK: - UIScrollViewDelegate
 
-extension PlayerDetailViewController: UIScrollViewDelegate {
+extension PlayerDetailViewControllerOld: UIScrollViewDelegate {
     
     func updateBackgroundForDelta(delta: CGFloat, total: CGFloat) {
         if (delta > total) {
