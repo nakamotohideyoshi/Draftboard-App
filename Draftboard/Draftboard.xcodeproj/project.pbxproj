@@ -72,6 +72,12 @@
 		3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
 		3E8018AE1CB5A18300403528 /* LineupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8018AD1CB5A18300403528 /* LineupListView.swift */; };
 		3E832BC51BE2CB3900084621 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
+		3E83CCC31D91CCBA00324EB2 /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC21D91CCBA00324EB2 /* PlayerDetailViewController.swift */; };
+		3E83CCC51D91D01500324EB2 /* PlayerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC41D91D01500324EB2 /* PlayerDetailView.swift */; };
+		3E83CCC71D91D0A800324EB2 /* PlayerDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC61D91D0A800324EB2 /* PlayerDetailHeaderView.swift */; };
+		3E83CCC91D91D0BB00324EB2 /* PlayerDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC81D91D0BB00324EB2 /* PlayerDetailTableView.swift */; };
+		3E83CCCB1D91D0C600324EB2 /* PlayerDetailPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */; };
+		3E83CCCD1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCCC1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift */; };
 		3E8713511D59313E00F25C60 /* ContestWithEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713501D59313E00F25C60 /* ContestWithEntries.swift */; };
 		3E8713531D59315200F25C60 /* PayoutSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713521D59315200F25C60 /* PayoutSpot.swift */; };
 		3E8A7E621D2733A30020681E /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E611D2733A30020681E /* Delay.swift */; };
@@ -298,6 +304,12 @@
 		3E8018AD1CB5A18300403528 /* LineupListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupListView.swift; sourceTree = "<group>"; };
 		3E80C2A91BC5F51C0031CE3F /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		3E832BC41BE2CB3900084621 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3E83CCC21D91CCBA00324EB2 /* PlayerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewController.swift; sourceTree = "<group>"; };
+		3E83CCC41D91D01500324EB2 /* PlayerDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailView.swift; sourceTree = "<group>"; };
+		3E83CCC61D91D0A800324EB2 /* PlayerDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailHeaderView.swift; sourceTree = "<group>"; };
+		3E83CCC81D91D0BB00324EB2 /* PlayerDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailTableView.swift; sourceTree = "<group>"; };
+		3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailPanelView.swift; sourceTree = "<group>"; };
+		3E83CCCC1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailTableViewCell.swift; sourceTree = "<group>"; };
 		3E8713501D59313E00F25C60 /* ContestWithEntries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestWithEntries.swift; sourceTree = "<group>"; };
 		3E8713521D59315200F25C60 /* PayoutSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayoutSpot.swift; sourceTree = "<group>"; };
 		3E8A7E611D2733A30020681E /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
@@ -511,6 +523,19 @@
 			path = "Third Party";
 			sourceTree = "<group>";
 		};
+		3E83CCC11D91CC9700324EB2 /* PlayerDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3E83CCC21D91CCBA00324EB2 /* PlayerDetailViewController.swift */,
+				3E83CCC41D91D01500324EB2 /* PlayerDetailView.swift */,
+				3E83CCC81D91D0BB00324EB2 /* PlayerDetailTableView.swift */,
+				3E83CCCC1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift */,
+				3E83CCC61D91D0A800324EB2 /* PlayerDetailHeaderView.swift */,
+				3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */,
+			);
+			name = PlayerDetail;
+			sourceTree = "<group>";
+		};
 		3E9FB9081D8A0A6300F55990 /* ContestDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -707,6 +732,7 @@
 				5DD3C4E41C17AE630040DC71 /* DraftboardFooterView.swift */,
 				5DD3C4E61C17AEAD0040DC71 /* LineupStatFooterView.swift */,
 				5DA644A21C56A27500B44DC5 /* LineupCardToggle.swift */,
+				3E83CCC11D91CC9700324EB2 /* PlayerDetail */,
 			);
 			path = Lineup;
 			sourceTree = "<group>";
@@ -977,6 +1003,7 @@
 				3EF777AF1D0B54D4002322F3 /* LineupDraftView.swift in Sources */,
 				3ECA5F821CF75A2300DEDFC1 /* DerivedData.swift in Sources */,
 				5DF49CF01C1BA7DC00B371CE /* NotificationViewController.swift in Sources */,
+				3E83CCCD1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift in Sources */,
 				5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */,
 				3E192C351CE515C90021A31D /* Data+Old.swift in Sources */,
 				5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */,
@@ -1010,6 +1037,7 @@
 				5D6237E01BB6200B0007E62A /* DraftboardView.swift in Sources */,
 				5D783AD31BD97D23000D8494 /* Sport.swift in Sources */,
 				3E9FB9051D7E2F6000F55990 /* ContestDetailView.swift in Sources */,
+				3E83CCCB1D91D0C600324EB2 /* PlayerDetailPanelView.swift in Sources */,
 				3E4A0FF31D480FBD00EDB59F /* ContestListView.swift in Sources */,
 				3E192C291CDAB84B0021A31D /* NSDictionary+API.swift in Sources */,
 				5DCFB8981C52953F00924EC7 /* DraftboardPagination.swift in Sources */,
@@ -1021,7 +1049,10 @@
 				3E192C271CDAB75F0021A31D /* API+Errors.swift in Sources */,
 				5D6237D71BB61FFB0007E62A /* UIColor+DraftboardColors.swift in Sources */,
 				5D6237D81BB61FFB0007E62A /* DraftboardTabBar.swift in Sources */,
+				3E83CCC31D91CCBA00324EB2 /* PlayerDetailViewController.swift in Sources */,
+				3E83CCC51D91D01500324EB2 /* PlayerDetailView.swift in Sources */,
 				3E192C211CCAE35C0021A31D /* LineupCardCell.swift in Sources */,
+				3E83CCC91D91D0BB00324EB2 /* PlayerDetailTableView.swift in Sources */,
 				5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */,
 				3E8A7E641D273A220020681E /* LineupEntryViewController.swift in Sources */,
 				5DAC07941C21DCC60002B97B /* DraftboardDetailListItem.swift in Sources */,
@@ -1052,6 +1083,7 @@
 				3E192C2F1CE40DBA0021A31D /* NSTimeInterval+Data.swift in Sources */,
 				5D6237BD1BB61F7B0007E62A /* LineupCardView.swift in Sources */,
 				3E192C2B1CDD153D0021A31D /* API+Date.swift in Sources */,
+				3E83CCC71D91D0A800324EB2 /* PlayerDetailHeaderView.swift in Sources */,
 				3C74CA3C1BE050D50077DF0C /* ContestDetailViewControllerOld.swift in Sources */,
 				5D86F2751C18D2BB004E9655 /* DraftboardNavController+Cards.swift in Sources */,
 				5DD3C4E71C17AEAD0040DC71 /* LineupStatFooterView.swift in Sources */,

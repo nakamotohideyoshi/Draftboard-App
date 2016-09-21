@@ -53,8 +53,8 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         contentView.bottomRancor.constraintEqualToRancor(view.bottomRancor).active = true
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
 
-//        switchNavController(lineupNC, animated: false)
-        tabBar.selectButtonAtIndex(1, animated: false)
+        switchNavController(lineupNC, animated: false)
+//        tabBar.selectButtonAtIndex(1, animated: false)
     }
     
     func didSetContentViewOverlapsTabBar() {

@@ -270,6 +270,12 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
             draftViewController.slot = slot
             self.navController?.pushViewController(draftViewController)
         }
+        
+        if let player = slot.player {
+            let playerDetailViewController = PlayerDetailViewController()
+            playerDetailViewController.player = player
+            self.navController?.pushViewController(playerDetailViewController)
+        }
     }
     
     // LineupPlayerCellActionButtonDelegate

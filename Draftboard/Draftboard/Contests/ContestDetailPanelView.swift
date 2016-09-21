@@ -62,7 +62,6 @@ class ContestDetailPanelView: DraftboardView {
         enterButton.frame = CGRectMake(enterButtonX, enterButtonY, enterButtonW, enterButtonH)
         entryCountLabel.frame = CGRectMake(entryCountLabelX, entryCountLabelY, entryCountLabelW, entryCountLabelH)
         segmentedControl.frame = CGRectMake(segmentedControlX, segmentedControlY, segmentedControlW, segmentedControlH)
-
     }
     
     override func sizeThatFits(size: CGSize) -> CGSize {
