@@ -11,6 +11,8 @@ import UIKit
 class PlayerDetailHeaderView: DraftboardView {
     
     let avatarView = UIImageView()
+    let avatarHaloView = UIImageView()
+    let avatarLoaderView = LoaderView()
     let nextGameLabel = DraftboardTextLabel()
     let posStatView = ModalStatView()
     let salaryStatView = ModalStatView()
@@ -19,11 +21,15 @@ class PlayerDetailHeaderView: DraftboardView {
     override func setup() {
         super.setup()
         
+        addSubview(avatarHaloView)
+        addSubview(avatarLoaderView)
         addSubview(avatarView)
         addSubview(nextGameLabel)
         addSubview(posStatView)
         addSubview(salaryStatView)
         addSubview(fppgStatView)
+        
+        avatarHaloView.image = UIImage(named: "player-halo")
         
         nextGameLabel.font = .openSans(weight: .Bold, size: 10)
         nextGameLabel.kern = 1.1
@@ -47,6 +53,16 @@ class PlayerDetailHeaderView: DraftboardView {
         let avatarViewX = fitToPixel(boundsW / 2 - avatarViewW / 2)
         let avatarViewY = CGFloat(20)
         
+        let avatarHaloViewW = CGFloat(200)
+        let avatarHaloViewH = CGFloat(200)
+        let avatarHaloViewX = avatarViewX + fitToPixel(avatarViewW / 2 - avatarHaloViewW / 2)
+        let avatarHaloViewY = avatarViewY + fitToPixel(avatarViewH / 2 - avatarHaloViewH / 2)
+
+        let avatarLoaderViewW = CGFloat(42)
+        let avatarLoaderViewH = CGFloat(42)
+        let avatarLoaderViewX = avatarViewX + fitToPixel(avatarViewW / 2 - avatarLoaderViewW / 2)
+        let avatarLoaderViewY = avatarViewY + fitToPixel(avatarViewH / 2 - avatarLoaderViewH / 2)
+        
         let nextGameLabelSize = nextGameLabel.sizeThatFits(CGSizeZero)
         let nextGameLabelW = nextGameLabelSize.width
         let nextGameLabelH = nextGameLabelSize.height
@@ -59,6 +75,8 @@ class PlayerDetailHeaderView: DraftboardView {
         let statViewY = nextGameLabelY + nextGameLabelH + 25
 
         avatarView.frame = CGRectMake(avatarViewX, avatarViewY, avatarViewW, avatarViewH)
+        avatarHaloView.frame = CGRectMake(avatarHaloViewX, avatarHaloViewY, avatarHaloViewW, avatarHaloViewH)
+        avatarLoaderView.frame = CGRectMake(avatarLoaderViewX, avatarLoaderViewY, avatarLoaderViewW, avatarLoaderViewH)
         nextGameLabel.frame = CGRectMake(nextGameLabelX, nextGameLabelY, nextGameLabelW, nextGameLabelH)
         posStatView.frame = CGRectMake(statViewX, statViewY, statViewW, statViewH)
         salaryStatView.frame = CGRectMake(statViewX + statViewW, statViewY, statViewW, statViewH)

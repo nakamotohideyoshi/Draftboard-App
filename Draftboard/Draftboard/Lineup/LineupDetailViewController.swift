@@ -273,6 +273,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         
         if let player = slot.player {
             let playerDetailViewController = PlayerDetailViewController()
+            playerDetailViewController.sportName = lineup?.sportName
             playerDetailViewController.player = player
             self.navController?.pushViewController(playerDetailViewController)
         }

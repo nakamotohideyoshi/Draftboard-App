@@ -17,6 +17,8 @@ class PlayerDetailViewController: DraftboardViewController {
     var headerView: PlayerDetailHeaderView { return playerDetailView.headerView }
     var panelView: PlayerDetailPanelView { return playerDetailView.panelView }
     var avatarView: UIImageView { return playerDetailView.avatarView }
+    var avatarHaloView: UIImageView { return playerDetailView.avatarHaloView }
+    var avatarLoaderView: LoaderView { return playerDetailView.avatarLoaderView }
     var nextGameLabel: DraftboardTextLabel { return playerDetailView.nextGameLabel }
     var posStatView: ModalStatView { return playerDetailView.posStatView }
     var salaryStatView: ModalStatView { return playerDetailView.salaryStatView }
@@ -24,6 +26,7 @@ class PlayerDetailViewController: DraftboardViewController {
     var draftButton: DraftboardTextButton { return playerDetailView.draftButton }
     var segmentedControl: DraftboardSegmentedControl { return playerDetailView.segmentedControl }
     
+    var sportName: String?
     var player: Player?
     
     override func loadView() {
@@ -32,43 +35,14 @@ class PlayerDetailViewController: DraftboardViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        segmentedControl.indexChangedHandler = { [weak self] (_: Int) in self?.filter() }
-        
-        if let srid = player?.srid {
-            avatarView.image = UIImage(named: "PlayerPhotos/76/\(srid)")
-        }
-        if let game = (player as? PlayerWithPositionAndGame)?.game {
-            let df = NSDateFormatter()
-            let calendar = NSCalendar.currentCalendar()
-            let startsToday = calendar.isDateInToday(game.start)
-            let startsTomorrow = calendar.isDateInTomorrow(game.start)
-
-            let teamsText = "\(game.away.alias) @ \(game.home.alias)"
-            
-            df.dateFormat = "h:mm a"
-            let timeText = df.stringFromDate(game.start)
-            
-            df.dateFormat = "eeee"
-            let dayText = (startsToday || startsTomorrow) ?
-                (startsToday ? "Today" : "Tomorrow") :
-                (df.stringFromDate(game.start))
-            
-            let nextGameText = "\(teamsText) — \(timeText) \(dayText)"
-            nextGameLabel.text = nextGameText.uppercaseString
-        }
-        if let position = (player as? PlayerWithPosition)?.position {
-            posStatView.valueLabel.text = position.uppercaseString
-        }
-        if let salary = player?.salary {
-            salaryStatView.valueLabel.text = Format.currency.stringFromNumber(salary)
-        }
-        if let fppg = player?.fppg {
-            fppgStatView.valueLabel.text = String(format: "%.1f", fppg)
-        }
+        setPlayerImage()
+        setGameText()
+        setStatValues()
         
         draftButton.label.text = "Draft Player".uppercaseString
         
         segmentedControl.choices = ["Updates", "Game Log"]
+        segmentedControl.indexChangedHandler = { [weak self] (_: Int) in self?.filter() }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -82,6 +56,73 @@ class PlayerDetailViewController: DraftboardViewController {
         tableView.flashScrollIndicators()
         let last = tableView.indexPathsForVisibleRows!.last!
         tableView.scrollToRowAtIndexPath(last, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+    }
+    
+    func setPlayerImage() {
+        guard let srid = player?.srid, sportName = sportName else { return }
+        
+        let cachesDir = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+        let cachedImageDir = "\(cachesDir)/384/"
+        let cachedImagePath = "\(cachedImageDir)/\(srid).png"
+        let netImageBaseURL = "https://static-players.draftboard.com"
+        let netImageURL = "\(netImageBaseURL)/\(sportName)/384/\(srid).png"
+        
+        _ = try? NSFileManager.defaultManager().createDirectoryAtPath(cachedImageDir, withIntermediateDirectories: true, attributes: nil)
+        
+        avatarView.layer.opacity = 0
+        avatarHaloView.layer.opacity = 0
+        avatarLoaderView.hidden = false
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            var data = NSData(contentsOfFile: cachedImagePath)
+            if data == nil {
+                data = NSData(contentsOfURL: NSURL(string: netImageURL)!)
+                data?.writeToFile(cachedImagePath, atomically: true)
+            }
+            let image = UIImage(data: data ?? NSData())
+            dispatch_async(dispatch_get_main_queue(), {
+                self.avatarView.image = image
+                self.avatarHaloView.layer.transform = CATransform3DMakeRotation(-0.5, 0, 0, 1)
+                self.avatarLoaderView.hidden = true
+                UIView.animateWithDuration(0.5) {
+                    self.avatarView.layer.opacity = 1
+                }
+                UIView.animateWithDuration(1.5, delay: 0, options: .CurveEaseOut, animations: {
+                    self.avatarHaloView.layer.opacity = 1
+                    self.avatarHaloView.layer.transform = CATransform3DIdentity
+                }, completion: nil)
+            })
+        }
+    }
+    
+    func setGameText() {
+        guard let game = (player as? PlayerWithPositionAndGame)?.game else { return }
+        
+        let df = NSDateFormatter()
+        let calendar = NSCalendar.currentCalendar()
+        let startsToday = calendar.isDateInToday(game.start)
+        let startsTomorrow = calendar.isDateInTomorrow(game.start)
+        
+        let teamsText = "\(game.away.alias) @ \(game.home.alias)"
+        
+        df.dateFormat = "h:mm a"
+        let timeText = df.stringFromDate(game.start)
+        
+        df.dateFormat = "eeee"
+        let dayText = (startsToday || startsTomorrow) ?
+            (startsToday ? "Today" : "Tomorrow") :
+            (df.stringFromDate(game.start))
+        
+        let nextGameText = "\(teamsText) — \(timeText) \(dayText)"
+        nextGameLabel.text = nextGameText.uppercaseString
+    }
+    
+    func setStatValues() {
+        guard let player = player, position = (player as? PlayerWithPosition)?.position else { return }
+
+        posStatView.valueLabel.text = position.uppercaseString
+        salaryStatView.valueLabel.text = Format.currency.stringFromNumber(player.salary)
+        fppgStatView.valueLabel.text = String(format: "%.1f", player.fppg)
     }
     
     // Titlebar

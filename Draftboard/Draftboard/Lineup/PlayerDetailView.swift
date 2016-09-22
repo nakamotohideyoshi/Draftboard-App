@@ -16,6 +16,8 @@ class PlayerDetailView: DraftboardView {
     var draftButton: DraftboardTextButton { return panelView.draftButton }
     var segmentedControl: DraftboardSegmentedControl { return panelView.segmentedControl }
     var avatarView: UIImageView { return headerView.avatarView }
+    var avatarHaloView: UIImageView { return headerView.avatarHaloView }
+    var avatarLoaderView: LoaderView { return headerView.avatarLoaderView }
     var nextGameLabel: DraftboardTextLabel { return headerView.nextGameLabel }
     var posStatView: ModalStatView { return headerView.posStatView }
     var salaryStatView: ModalStatView { return headerView.salaryStatView }
