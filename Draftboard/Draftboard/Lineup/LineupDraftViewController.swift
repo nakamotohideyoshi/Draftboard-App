@@ -136,6 +136,13 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        if let player = players?[indexPath.row] {
+            let playerDetailViewController = PlayerDetailViewController()
+            playerDetailViewController.sportName = lineup?.sportName
+            playerDetailViewController.player = player
+            self.navController?.pushViewController(playerDetailViewController)
+        }
     }
     
 }
