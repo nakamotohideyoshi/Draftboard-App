@@ -96,7 +96,7 @@ class PlayerDetailViewController: DraftboardViewController {
     }
     
     func setGameText() {
-        guard let game = (player as? PlayerWithPositionAndGame)?.game else { return }
+        guard let player = player, game = (player as? PlayerWithPositionAndGame)?.game else { return }
         
         let df = NSDateFormatter()
         let calendar = NSCalendar.currentCalendar()
@@ -115,6 +115,14 @@ class PlayerDetailViewController: DraftboardViewController {
         
         let nextGameText = "\(teamsText) — \(timeText) \(dayText)"
         nextGameLabel.text = nextGameText.uppercaseString
+        
+        // Make player team white
+        let teamString = "\\b\(player.teamAlias)\\b"
+        let teamColor = UIColor.whiteColor()
+        let teamRange = (nextGameText as NSString).rangeOfString(teamString, options: .RegularExpressionSearch)
+        let nextGameAttributedText = NSMutableAttributedString(attributedString: nextGameLabel.attributedText!)
+        nextGameAttributedText.addAttribute(NSForegroundColorAttributeName, value: teamColor, range: teamRange)
+        nextGameLabel.attributedText = nextGameAttributedText
     }
     
     func setStatValues() {
