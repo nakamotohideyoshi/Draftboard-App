@@ -66,6 +66,7 @@ class PlayerDetailViewController: DraftboardViewController {
         let cachedImagePath = "\(cachedImageDir)/\(srid).png"
         let netImageBaseURL = "https://static-players.draftboard.com"
         let netImageURL = "\(netImageBaseURL)/\(sportName)/384/\(srid).png"
+        let defaultImageName = "PlayerPhotos/player-default-256"
         
         _ = try? NSFileManager.defaultManager().createDirectoryAtPath(cachedImageDir, withIntermediateDirectories: true, attributes: nil)
         
@@ -79,7 +80,11 @@ class PlayerDetailViewController: DraftboardViewController {
                 data = NSData(contentsOfURL: NSURL(string: netImageURL)!)
                 data?.writeToFile(cachedImagePath, atomically: true)
             }
-            let image = UIImage(data: data ?? NSData())
+            var image = UIImage(data: data ?? NSData())
+            if image == nil {
+                image = UIImage(named: defaultImageName)?.imageWithRenderingMode(.AlwaysTemplate)
+                self.avatarView.tintColor = .blueDark()
+            }
             dispatch_async(dispatch_get_main_queue(), {
                 self.avatarView.image = image
                 self.avatarHaloView.layer.transform = CATransform3DMakeRotation(-0.5, 0, 0, 1)
