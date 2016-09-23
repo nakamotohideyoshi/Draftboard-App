@@ -106,8 +106,16 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        navController?.titlebar.updateElements()
+        let selectedIndexPath = tableView.indexPathForSelectedRow
+        tableView.allowsSelection = (navController != nil)
         tableView.reloadData()
+        if let indexPath = selectedIndexPath {
+            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+            delay(0.15) {
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            }
+        }
+        navController?.titlebar.updateElements()
         delay(0.3) {
             self.updateFooterStats()
         }
@@ -263,19 +271,17 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
     // UITableViewDelegate
     
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let slot = lineup!.slots[indexPath.row]
-        if slot.player == nil {
-            draftViewController.slot = slot
-            self.navController?.pushViewController(draftViewController)
-        }
-        
-        if let player = slot.player {
+        let slot = lineup?.slots[safe: indexPath.row]
+        if let player = slot?.player {
             let playerDetailViewController = PlayerDetailViewController()
             playerDetailViewController.sportName = lineup?.sportName
             playerDetailViewController.player = player
-            self.navController?.pushViewController(playerDetailViewController)
+            navController?.pushViewController(playerDetailViewController)
+        } else {
+            draftViewController.slot = slot
+            navController?.pushViewController(draftViewController)
         }
     }
     
