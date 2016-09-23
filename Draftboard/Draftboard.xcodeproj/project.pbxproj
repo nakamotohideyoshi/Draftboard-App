@@ -118,7 +118,7 @@
 		5D26FC6E1BBEE0A600ACF127 /* LabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */; };
 		5D26FC701BBEE0BD00ACF127 /* LabeledField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */; };
 		5D26FC721BBEE77300ACF127 /* AccountSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */; };
-		5D26FC741BBEE78700ACF127 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC731BBEE78700ACF127 /* AccountViewController.swift */; };
+		5D26FC741BBEE78700ACF127 /* AccountViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC731BBEE78700ACF127 /* AccountViewControllerOld.swift */; };
 		5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */; };
 		5D26FC7C1BBF228400ACF127 /* DraftboardSegmentedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */; };
 		5D26FC7E1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */; };
@@ -196,7 +196,7 @@
 		5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07971C222ED70002B97B /* DraftboardButtonHeader.swift */; };
 		5DAC079B1C222F360002B97B /* DraftboardSegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC079A1C222F360002B97B /* DraftboardSegmentCell.swift */; };
 		5DAF71761BF3C00F00CB972F /* AvatarPMRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */; };
-		5DB14BF51C1218CD008E14A4 /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */; };
+		5DB14BF51C1218CD008E14A4 /* AccountViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB14BF41C1218CD008E14A4 /* AccountViewControllerOld.xib */; };
 		5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */; };
 		5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */; };
 		5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */; };
@@ -352,7 +352,7 @@
 		5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledField.swift; sourceTree = "<group>"; };
 		5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabeledField.xib; sourceTree = "<group>"; };
 		5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSettingsView.xib; sourceTree = "<group>"; };
-		5D26FC731BBEE78700ACF127 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		5D26FC731BBEE78700ACF127 /* AccountViewControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewControllerOld.swift; sourceTree = "<group>"; };
 		5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentedView.swift; sourceTree = "<group>"; };
 		5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftboardSegmentedView.xib; sourceTree = "<group>"; };
 		5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentedButton.swift; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		5DAC07971C222ED70002B97B /* DraftboardButtonHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardButtonHeader.swift; sourceTree = "<group>"; };
 		5DAC079A1C222F360002B97B /* DraftboardSegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardSegmentCell.swift; sourceTree = "<group>"; };
 		5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPMRView.swift; sourceTree = "<group>"; };
-		5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		5DB14BF41C1218CD008E14A4 /* AccountViewControllerOld.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewControllerOld.xib; sourceTree = "<group>"; };
 		5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestConfirmationModal.swift; sourceTree = "<group>"; };
 		5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardModalChoiceController.swift; sourceTree = "<group>"; };
@@ -601,8 +601,8 @@
 				5D88B0541C49E591002CA1BB /* ErrorViewController.xib */,
 				5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */,
 				5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */,
-				5D26FC731BBEE78700ACF127 /* AccountViewController.swift */,
-				5DB14BF41C1218CD008E14A4 /* AccountViewController.xib */,
+				5D26FC731BBEE78700ACF127 /* AccountViewControllerOld.swift */,
+				5DB14BF41C1218CD008E14A4 /* AccountViewControllerOld.xib */,
 				3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */,
 				3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */,
 				5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */,
@@ -932,7 +932,7 @@
 				5D4E63471BAB75D80033C4C2 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				3C74CA4F1BE051A00077DF0C /* DraftboardContestsCell.xib in Resources */,
 				3C74CA3F1BE051070077DF0C /* ContestDetailViewControllerOld.xib in Resources */,
-				5DB14BF51C1218CD008E14A4 /* AccountViewController.xib in Resources */,
+				5DB14BF51C1218CD008E14A4 /* AccountViewControllerOld.xib in Resources */,
 				3CC6E80F1C12059E000F05F7 /* ChangePasswordViewController.xib in Resources */,
 				3CB0586E1BE28C95002343BD /* PlayerDetailViewControllerOld.xib in Resources */,
 				5D4E63481BAB75D80033C4C2 /* OpenSans-Italic.ttf in Resources */,
@@ -1009,7 +1009,7 @@
 				5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */,
 				3E9FB9101D8A0F9700F55990 /* DraftboardTextButton.swift in Sources */,
 				3E192C3B1CEB88CE0021A31D /* LineupDetailView.swift in Sources */,
-				5D26FC741BBEE78700ACF127 /* AccountViewController.swift in Sources */,
+				5D26FC741BBEE78700ACF127 /* AccountViewControllerOld.swift in Sources */,
 				5D6237DB1BB6200B0007E62A /* DraftboardImageView.swift in Sources */,
 				3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */,
 				3C74CA3B1BE050D50077DF0C /* LineupMoneyPoint.swift in Sources */,

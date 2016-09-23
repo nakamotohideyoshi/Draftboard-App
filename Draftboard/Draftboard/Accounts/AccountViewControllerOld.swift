@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: DraftboardViewController {
+class AccountViewControllerOld: DraftboardViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
     
@@ -105,5 +105,5 @@ class AccountViewController: DraftboardViewController {
 }
 
 private extension Selector {
-    static let didTapChangePassword = #selector(AccountViewController.didTapChangePassword(_:))
+    static let didTapChangePassword = #selector(AccountViewControllerOld.didTapChangePassword(_:))
 }
