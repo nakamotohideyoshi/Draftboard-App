@@ -28,7 +28,7 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
         
         let lineupRvc = LineupListViewController()
         let contestRvc = ContestListViewController()
-        let profileRvc = AccountViewControllerOld(nibName: "AccountViewControllerOld", bundle: nil)
+        let profileRvc = AccountViewController()
 
         lineupNC = DraftboardNavController(rootViewController: lineupRvc)
         contestNC = DraftboardNavController(rootViewController: contestRvc)

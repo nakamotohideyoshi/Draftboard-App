@@ -78,6 +78,9 @@
 		3E83CCC91D91D0BB00324EB2 /* PlayerDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC81D91D0BB00324EB2 /* PlayerDetailTableView.swift */; };
 		3E83CCCB1D91D0C600324EB2 /* PlayerDetailPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */; };
 		3E83CCCD1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCCC1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift */; };
+		3E83CCD21D95CF7500324EB2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCD11D95CF7500324EB2 /* AccountViewController.swift */; };
+		3E83CCD41D95CF8500324EB2 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCD31D95CF8500324EB2 /* AccountView.swift */; };
+		3E83CCD61D95D2EE00324EB2 /* DraftboardLabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCD51D95D2EE00324EB2 /* DraftboardLabeledField.swift */; };
 		3E8713511D59313E00F25C60 /* ContestWithEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713501D59313E00F25C60 /* ContestWithEntries.swift */; };
 		3E8713531D59315200F25C60 /* PayoutSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713521D59315200F25C60 /* PayoutSpot.swift */; };
 		3E8A7E621D2733A30020681E /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E611D2733A30020681E /* Delay.swift */; };
@@ -310,6 +313,9 @@
 		3E83CCC81D91D0BB00324EB2 /* PlayerDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailTableView.swift; sourceTree = "<group>"; };
 		3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailPanelView.swift; sourceTree = "<group>"; };
 		3E83CCCC1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailTableViewCell.swift; sourceTree = "<group>"; };
+		3E83CCD11D95CF7500324EB2 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		3E83CCD31D95CF8500324EB2 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		3E83CCD51D95D2EE00324EB2 /* DraftboardLabeledField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftboardLabeledField.swift; sourceTree = "<group>"; };
 		3E8713501D59313E00F25C60 /* ContestWithEntries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestWithEntries.swift; sourceTree = "<group>"; };
 		3E8713521D59315200F25C60 /* PayoutSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayoutSpot.swift; sourceTree = "<group>"; };
 		3E8A7E611D2733A30020681E /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
@@ -482,6 +488,7 @@
 		3E7860BD1B9FB0E7004013AB /* Draftboard */ = {
 			isa = PBXGroup;
 			children = (
+				3E83CCCE1D95CF2B00324EB2 /* Account (New) */,
 				5DE6C5961BD04891005A4DC6 /* Utils */,
 				5D26FC6C1BBEE02D00ACF127 /* Account */,
 				3EB2CB651BFE403A00579F1B /* Data */,
@@ -534,6 +541,16 @@
 				3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */,
 			);
 			name = PlayerDetail;
+			sourceTree = "<group>";
+		};
+		3E83CCCE1D95CF2B00324EB2 /* Account (New) */ = {
+			isa = PBXGroup;
+			children = (
+				3E83CCD11D95CF7500324EB2 /* AccountViewController.swift */,
+				3E83CCD31D95CF8500324EB2 /* AccountView.swift */,
+			);
+			name = "Account (New)";
+			path = Account;
 			sourceTree = "<group>";
 		};
 		3E9FB9081D8A0A6300F55990 /* ContestDetail */ = {
@@ -785,6 +802,7 @@
 				3E9FB90D1D8A0F6000F55990 /* DraftboardControl.swift */,
 				3E9FB90F1D8A0F9700F55990 /* DraftboardTextButton.swift */,
 				3E9FB9111D8A0FB700F55990 /* DraftboardTextLabel.swift */,
+				3E83CCD51D95D2EE00324EB2 /* DraftboardLabeledField.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1016,6 +1034,7 @@
 				3E8713531D59315200F25C60 /* PayoutSpot.swift in Sources */,
 				5D7648E91BEAD1B40070D5A3 /* DraftboardModalNavController.swift in Sources */,
 				5D6237DC1BB6200B0007E62A /* DraftboardLabel.swift in Sources */,
+				3E83CCD61D95D2EE00324EB2 /* DraftboardLabeledField.swift in Sources */,
 				3E192C1F1CCADE760021A31D /* LineupCardCollectionView.swift in Sources */,
 				5D86F2771C19043D004E9655 /* LineupStatCurrencyView.swift in Sources */,
 				3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */,
@@ -1070,6 +1089,7 @@
 				3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */,
 				5D88B0551C49E591002CA1BB /* ErrorViewController.swift in Sources */,
 				3E9FB8FF1D70F34700F55990 /* EntryConfirmationViewController.swift in Sources */,
+				3E83CCD41D95CF8500324EB2 /* AccountView.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
 				3E9FB90C1D8A0EBF00F55990 /* ContestDetailPanelView.swift in Sources */,
 				5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */,
@@ -1138,6 +1158,7 @@
 				5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */,
 				5D6237CB1BB61F9B0007E62A /* AppDelegate.swift in Sources */,
 				3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */,
+				3E83CCD21D95CF7500324EB2 /* AccountViewController.swift in Sources */,
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
 				3E8A7E661D273A2C0020681E /* LineupEntryView.swift in Sources */,
 				5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */,

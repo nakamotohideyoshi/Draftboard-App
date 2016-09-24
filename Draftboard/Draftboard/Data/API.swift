@@ -18,6 +18,7 @@ extension API_Public {
     
     static let agent = "Draftboard iOS" // + version?
     static let baseURL = "http://draftboard-dev.herokuapp.com/"
+    static var username: String?
 
     class func request<T>(path: String, JSON: AnyObject? = nil) -> Promise<T> {
         let request = APIRequest(path, JSON: JSON)
@@ -38,12 +39,12 @@ extension API_Public {
 private typealias API_Private = API
 private extension API_Private {
 
-//    static var token: String?
-    static var token: String? =
+    static var token: String?
+//    static var token: String? =
         // user1
 //    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiZW1haWwiOiIiLCJleHAiOjE0NjYwMjMxMzAsIm9yaWdfaWF0IjoxNDYzNDMxMTMwLCJ1c2VyX2lkIjo1fQ.G7C5AALFOpvNNQesjSjGOgJogcK0bAcpW-62bwqVvwA"
     // user3
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IiIsIm9yaWdfaWF0IjoxNDczMTEwMDM5LCJ1c2VyX2lkIjo3LCJleHAiOjE0NzU3MDIwMzksInVzZXJuYW1lIjoidXNlcjMifQ.8r-kNc_nDqMuN3-h5Rayk-_azNBtO6mifZItUAxm26g"
+//    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IiIsIm9yaWdfaWF0IjoxNDczMTEwMDM5LCJ1c2VyX2lkIjo3LCJleHAiOjE0NzU3MDIwMzksInVzZXJuYW1lIjoidXNlcjMifQ.8r-kNc_nDqMuN3-h5Rayk-_azNBtO6mifZItUAxm26g"
 
     
     class func promise<T>(request: APIRequest) -> Promise<T> {
@@ -119,7 +120,13 @@ extension API_Endpoints {
         return API.post(path, JSON: params).then { (data: NSDictionary) -> Void in
             let token: String = try data.get("token")
             API.token = token
+            API.username = username
         }
+    }
+    
+    class func deauth() {
+        API.token = nil
+        API.username = nil
     }
     
 }
