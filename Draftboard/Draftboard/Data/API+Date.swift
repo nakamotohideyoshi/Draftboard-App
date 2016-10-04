@@ -14,7 +14,7 @@ extension API {
         guard let date = dateFormatter.dateFromString(s) else {
             throw APIError.InvalidDateString(s)
         }
-        return date
+        return date.dateByAddingTimeInterval(API.replayerTimeDelta)
     }
     
     // https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/DataFormatting/Articles/dfDateFormatting10_4.html#//apple_ref/doc/uid/TP40002369-SW5
@@ -24,6 +24,22 @@ extension API {
         f.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
         f.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         return f
+    }()
+    
+    private static var replayerTimeDelta: NSTimeInterval = {
+        if let contestsURL = NSURL(string: API.baseURL + "contests/"),
+            contestsData = NSData(contentsOfURL: contestsURL),
+            contestsString = NSString(data: contestsData, encoding: NSUTF8StringEncoding)
+        {
+            let searchString = "(?<=replayerTimeDelta: )[0-9]+"
+            let timeDeltaRange = contestsString.rangeOfString(searchString, options: .RegularExpressionSearch)
+            let timeDeltaString = contestsString.substringWithRange(timeDeltaRange)
+            if let timeDeltaInt = Int(timeDeltaString) {
+                print("Replayer time delta:", timeDeltaInt)
+                return NSTimeInterval(timeDeltaInt)
+            }
+        }
+        return 0
     }()
     
 }

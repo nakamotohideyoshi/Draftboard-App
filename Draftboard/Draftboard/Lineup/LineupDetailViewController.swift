@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PusherSwift
 
 class LineupDetailViewController: DraftboardViewController {
     
@@ -27,12 +28,14 @@ class LineupDetailViewController: DraftboardViewController {
     var sportIcon: UIImageView { return lineupDetailView.sportIcon }
     var nameField: UITextField { return lineupDetailView.nameField }
     
+    let pusher = Pusher(key: "961cebaf8b45649cc786")
     private var untouchedLineup: LineupWithStart?
     private var workingLineup: LineupWithStart?
     var lineup: LineupWithStart? {
         set { setLineup(newValue) }
         get { return getLineup() }
     }
+    var points = [Int: Double]()
     
     var draftViewController = LineupDraftViewController()
     
@@ -118,6 +121,33 @@ class LineupDetailViewController: DraftboardViewController {
         navController?.titlebar.updateElements()
         delay(0.3) {
             self.updateFooterStats()
+        }
+        
+        if lineup?.isLive == true {
+            lineupDetailView.footerView.configuration = .Live
+            editButton.hidden = true
+            
+            API.draftGroupFantasyPoints(id: lineup!.draftGroupID).then { points -> Void in
+                self.points = points
+                self.tableView.reloadData()
+            }.then { _ -> Void in
+                self.pusher.connect()
+                self.pusher.subscribe("anson_nfl_stats").bind("player") { data in
+                    guard let data = data as? NSDictionary else { return }
+                    let playerIDs = self.lineup?.players?.map { $0.id }
+                    do {
+                        let fields: NSDictionary = try data.get("fields")
+                        let playerID: Int = try fields.get("player_id")
+                        let playerPoints: Double = try fields.get("fantasy_points")
+                        self.points[playerID] = playerPoints
+                        if playerIDs?.contains(playerID) == true {
+                            self.tableView.reloadData()
+                        }
+                    } catch let error {
+                        print(error)
+                    }
+                }
+            }
         }
     }
     
@@ -264,6 +294,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         cell.withinBudget = true
         cell.actionButtonDelegate = self
         cell.setLineupSlot(slot)
+        if lineup?.isLive == true {
+            let playerID = slot.player?.id ?? -100
+            let playerPoints = points[playerID] ?? 0
+            cell.salaryLabel.text = Format.points.stringFromNumber(playerPoints)
+        }
         
         return cell
     }

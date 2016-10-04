@@ -12,6 +12,7 @@ final class Format {
     static let currency = CurrencyNumberFormatter()
     static let date = Format.dateFormatter()
     static let ordinal = OrdinalNumberFormatter()
+    static let points = PointsNumberFormatter()
 
     private init() {}
     
@@ -20,6 +21,21 @@ final class Format {
         f.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
         f.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         return f
+    }
+}
+
+class PointsNumberFormatter: NSNumberFormatter {
+    override func stringFromNumber(number: NSNumber) -> String? {
+        let points = number.doubleValue
+        if points == Double(Int(points)) {
+            maximumFractionDigits = 0
+        } else if points * 10 == Double(Int(points * 10)) {
+            maximumFractionDigits = 1
+        } else {
+            maximumFractionDigits = 2
+        }
+        minimumIntegerDigits = 1
+        return super.stringFromNumber(points)
     }
 }
 

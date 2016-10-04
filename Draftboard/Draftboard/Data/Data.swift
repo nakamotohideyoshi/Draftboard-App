@@ -15,6 +15,7 @@ class Data {
     }
     static let boxscores = MultiCache { draftGroupID in API.draftGroupBoxscores(draftGroupID: draftGroupID) }
     static let upcomingLineups = Cache { API.lineupUpcoming() }
+    static let liveLineups = Cache { API.lineupLive() }
     static let draftGroups = Cache { API.draftGroupUpcoming() }
     static let draftGroup = MultiCache { id in API.draftGroup(id: id) }
     static let contests = Cache { API.contestLobby() }

@@ -164,6 +164,7 @@ class Lineup {
 
 class LineupWithStart: Lineup {
     let start: NSDate
+    var isLive: Bool { return NSDate() > start }
     
     init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [Player]? = nil, start: NSDate) {
         self.start = start

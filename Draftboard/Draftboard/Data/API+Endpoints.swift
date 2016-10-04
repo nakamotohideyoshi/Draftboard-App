@@ -38,6 +38,22 @@ extension API_Endpoints {
 //        }
 //    }
     
+    
+    class func draftGroupFantasyPoints(id id: Int) -> Promise<[Int: Double]> {
+        let path = "api/draft-group/fantasy-points/2/"
+        return API.get(path).then { (json: NSDictionary) -> [Int: Double] in
+            let players: [String: NSDictionary] = try json.get("players")
+            let playerValues = Array(players.values)
+            return playerValues.transform([Int: Double]()) { result, value in
+                let id: Int = (try? value.get("id")) ?? -1
+                let fp: Double = (try? value.get("fp")) ?? -100
+                result[id] = fp
+                return result
+            }
+        }
+    }
+
+    
     class func draftGroupUpcoming() -> Promise<[DraftGroup]> {
         let path = "api/draft-group/upcoming/"
         return API.get(path).then { (json: [NSDictionary]) -> [DraftGroup] in
@@ -113,6 +129,13 @@ extension API_Endpoints {
     
     class func lineupUpcoming() -> Promise<[Lineup]> {
         let path = "api/lineup/upcoming/"
+        return API.get(path).then { (json: [NSDictionary]) -> [Lineup] in
+            return try json.map { try Lineup(JSON: $0) }
+        }
+    }
+    
+    class func lineupLive() -> Promise<[Lineup]> {
+        let path = "api/lineup/live/"
         return API.get(path).then { (json: [NSDictionary]) -> [Lineup] in
             return try json.map { try Lineup(JSON: $0) }
         }

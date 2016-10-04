@@ -301,7 +301,7 @@ class LineupFooterView: UIView {
         avgSalaryRem.frame = CGRectMake(width * 2, 0, width, bounds.height)
         points.frame = CGRectMake(0, 0, width, bounds.height)
         winnings.frame = CGRectMake(width, 0, width, bounds.height)
-        pmr.frame = CGRectMake(bounds.width, 0, width, bounds.height)
+        pmr.frame = CGRectMake(width * 2, 0, width, bounds.height)
         topBorderView.frame = CGRectMake(0, 0, bounds.width, 1)
     }
     
@@ -338,7 +338,7 @@ class LineupFooterView: UIView {
 
     func update() {
         if configuration == .Normal {
-            layoutIfNeeded()
+            setNeedsLayout()
             countdown.alpha = 1
             feesEntries.alpha = 1
             totalSalaryRem.alpha = 0
@@ -347,7 +347,7 @@ class LineupFooterView: UIView {
             winnings.alpha = 0
             pmr.alpha = 0
         } else if configuration == .Editing {
-            layoutIfNeeded()
+            setNeedsLayout()
             countdown.alpha = 1
             feesEntries.alpha = 0
             totalSalaryRem.alpha = 1
@@ -356,7 +356,7 @@ class LineupFooterView: UIView {
             winnings.alpha = 0
             pmr.alpha = 0
         } else if configuration == .Live {
-            layoutIfNeeded()
+            setNeedsLayout()
             countdown.alpha = 0
             feesEntries.alpha = 0
             totalSalaryRem.alpha = 0

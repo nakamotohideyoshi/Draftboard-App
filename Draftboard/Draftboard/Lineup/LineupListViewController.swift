@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import PusherSwift
 
 class LineupListViewController: DraftboardViewController, UIActionSheetDelegate {
     
@@ -37,7 +38,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         // Reload what's already there
         cardCollectionView.reloadData()
         // Get lineups
-        DerivedData.upcomingLineupsWithStarts().then { lineups -> Void in
+        DerivedData.allLineupsWithStarts().then { lineups -> Void in
             self.lineups = lineups
         }
     }

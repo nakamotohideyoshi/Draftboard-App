@@ -66,8 +66,12 @@ extension DerivedData {
 }
 
 extension DerivedData {
-    class func upcomingLineupsWithStarts() -> Promise<[LineupWithStart]> {
-        return when(Data.draftGroups.get(), Data.upcomingLineups.get()).then { (draftGroups, lineups) -> [LineupWithStart] in
+    class func allLineupsWithStarts() -> Promise<[LineupWithStart]> {
+        var lineups = [Lineup]()
+        return when(Data.upcomingLineups.get(), Data.liveLineups.get()).then { upcoming, live -> Promise<[DraftGroupWithPlayers]> in
+            lineups = upcoming + live
+            return when(lineups.map { Data.draftGroup[$0.draftGroupID].get() })
+        }.then { draftGroups -> [LineupWithStart] in
             let draftGroupsByID = draftGroups.keyBy { $0.id }
             return lineups.map { $0.withStart(draftGroupsByID[$0.draftGroupID]!.start) }
         }
