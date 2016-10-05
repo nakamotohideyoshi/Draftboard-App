@@ -33,6 +33,7 @@ extension API {
         {
             let searchString = "(?<=replayerTimeDelta: )[0-9]+"
             let timeDeltaRange = contestsString.rangeOfString(searchString, options: .RegularExpressionSearch)
+            if timeDeltaRange.location == NSNotFound { return 0 }
             let timeDeltaString = contestsString.substringWithRange(timeDeltaRange)
             if let timeDeltaInt = Int(timeDeltaString) {
                 print("Replayer time delta:", timeDeltaInt)

@@ -40,7 +40,7 @@ extension API_Endpoints {
     
     
     class func draftGroupFantasyPoints(id id: Int) -> Promise<[Int: Double]> {
-        let path = "api/draft-group/fantasy-points/2/"
+        let path = "api/draft-group/fantasy-points/\(id)/"
         return API.get(path).then { (json: NSDictionary) -> [Int: Double] in
             let players: [String: NSDictionary] = try json.get("players")
             let playerValues = Array(players.values)

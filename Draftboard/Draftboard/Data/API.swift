@@ -17,7 +17,8 @@ private typealias API_Public = API
 extension API_Public {
     
     static let agent = "Draftboard iOS" // + version?
-    static let baseURL = "http://localhost:8000/"
+    static let baseURL = "https://www.draftboard.com/"
+//    static let baseURL = "http://localhost:8000/"
     static var username: String?
 
     class func request<T>(path: String, JSON: AnyObject? = nil) -> Promise<T> {

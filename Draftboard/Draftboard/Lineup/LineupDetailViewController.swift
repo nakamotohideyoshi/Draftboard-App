@@ -123,10 +123,14 @@ class LineupDetailViewController: DraftboardViewController {
             self.updateFooterStats()
         }
         
+        
+        lineupDetailView.footerView.configuration = .Normal
+        editButton.hidden = false
+
         if lineup?.isLive == true {
             lineupDetailView.footerView.configuration = .Live
             editButton.hidden = true
-            
+
             API.draftGroupFantasyPoints(id: lineup!.draftGroupID).then { points -> Void in
                 self.points = points
                 self.tableView.reloadData()
