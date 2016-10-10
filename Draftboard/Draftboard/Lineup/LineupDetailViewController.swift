@@ -28,14 +28,13 @@ class LineupDetailViewController: DraftboardViewController {
     var sportIcon: UIImageView { return lineupDetailView.sportIcon }
     var nameField: UITextField { return lineupDetailView.nameField }
     
-    let pusher = Pusher(key: "961cebaf8b45649cc786")
     private var untouchedLineup: LineupWithStart?
     private var workingLineup: LineupWithStart?
     var lineup: LineupWithStart? {
         set { setLineup(newValue) }
         get { return getLineup() }
     }
-    var points = [Int: Double]()
+    var draftGroupPoints: DraftGroupPoints?
     
     var draftViewController = LineupDraftViewController()
     
@@ -46,7 +45,7 @@ class LineupDetailViewController: DraftboardViewController {
     override func viewDidLoad() {
         // FIXME: Don't rely on lineup being non-nil
         if lineup == nil {
-            let draftGroup = DraftGroup(id: 1, sportName: "nba", start: NSDate(), numGames: 0)
+            let draftGroup = DraftGroup(id: 1, sportName: "nba", start: .distantFuture(), numGames: 0)
             lineup = LineupWithStart(draftGroup: draftGroup)
         }
         // Overlay
@@ -123,34 +122,22 @@ class LineupDetailViewController: DraftboardViewController {
             self.updateFooterStats()
         }
         
-        
-        lineupDetailView.footerView.configuration = .Normal
-        editButton.hidden = false
+        if lineup?.isLive == false {
+            lineupDetailView.footerView.configuration = editing ? .Editing : .Normal
+            editButton.hidden = false
+        }
 
         if lineup?.isLive == true {
             lineupDetailView.footerView.configuration = .Live
             editButton.hidden = true
 
-            API.draftGroupFantasyPoints(id: lineup!.draftGroupID).then { points -> Void in
-                self.points = points
-                self.tableView.reloadData()
-            }.then { _ -> Void in
-                self.pusher.connect()
-                self.pusher.subscribe("anson_nfl_stats").bind("player") { data in
-                    guard let data = data as? NSDictionary else { return }
-                    let playerIDs = self.lineup?.players?.map { $0.id }
-                    do {
-                        let fields: NSDictionary = try data.get("fields")
-                        let playerID: Int = try fields.get("player_id")
-                        let playerPoints: Double = try fields.get("fantasy_points")
-                        self.points[playerID] = playerPoints
-                        if playerIDs?.contains(playerID) == true {
-                            self.tableView.reloadData()
-                        }
-                    } catch let error {
-                        print(error)
-                    }
-                }
+            lineup?.getDraftGroup().then { draftGroup in
+                return draftGroup.getPoints()
+            }.then { draftGroupPoints -> Void in
+                self.draftGroupPoints = draftGroupPoints
+                self.draftGroupPoints?.delegate = self
+                self.draftGroupPoints?.updateRealtime()
+                self.updatePoints()
             }
         }
     }
@@ -190,6 +177,13 @@ class LineupDetailViewController: DraftboardViewController {
     
     func overlayTapped() {
         nameField.resignFirstResponder()
+    }
+    
+    func updatePoints() {
+        tableView.reloadData()
+        if let lineup = lineup, points = draftGroupPoints?.pointsForLineup(lineup) {
+            lineupDetailView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
+        }
     }
     
     func updateFooterStats() {
@@ -299,9 +293,12 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         cell.actionButtonDelegate = self
         cell.setLineupSlot(slot)
         if lineup?.isLive == true {
-            let playerID = slot.player?.id ?? -100
-            let playerPoints = points[playerID] ?? 0
-            cell.salaryLabel.text = Format.points.stringFromNumber(playerPoints)
+            if let player = slot.player, draftGroupPoints = draftGroupPoints {
+                let playerPoints = draftGroupPoints.pointsForPlayer(player)
+                cell.salaryLabel.text = Format.points.stringFromNumber(playerPoints)
+            } else {
+                cell.salaryLabel.text = ""
+            }
         }
         
         return cell
@@ -360,3 +357,12 @@ extension TextFieldDelegate: UITextFieldDelegate {
     }
     
 }
+
+private typealias PointsListener = LineupDetailViewController
+extension PointsListener: DraftGroupPointsListener {
+    func pointsChanged(playerID: Int) {
+        let lineupPlayerIDs = lineup!.players!.map { $0.id }
+        if lineupPlayerIDs.contains(playerID) { self.updatePoints() }
+    }
+}
+

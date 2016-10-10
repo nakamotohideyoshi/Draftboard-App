@@ -106,3 +106,19 @@ extension DraftGroup {
 //    func getGames() -> Promise<
 }
 
+extension DraftGroupWithPlayers {
+    func getPoints() -> Promise<DraftGroupPoints> {
+        return Data.pointsForDraftGroup(id: id)
+    }
+}
+
+extension Data {
+    class func pointsForDraftGroup(id id: Int) -> Promise<DraftGroupPoints> {
+        return API.draftGroupFantasyPoints(id: id).then { points -> DraftGroupPoints in
+            let draftGroupPoints = DraftGroupPoints()
+            draftGroupPoints.points = points
+            return draftGroupPoints
+        }
+    }
+}
+
