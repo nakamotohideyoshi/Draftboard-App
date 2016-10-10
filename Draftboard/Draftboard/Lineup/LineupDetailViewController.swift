@@ -96,6 +96,7 @@ class LineupDetailViewController: DraftboardViewController {
         lineup?.getPlayersWithGames().then { players -> Void in
             self.lineup?.players = players
             self.tableView.reloadData()
+            self.viewWillAppear(false)
         }
         
         lineup?.getEntries().then { entries -> Void in
@@ -139,6 +140,8 @@ class LineupDetailViewController: DraftboardViewController {
                 self.draftGroupPoints?.updateRealtime()
                 self.updatePoints()
             }
+            
+            API.contestAllLineups(id: 1)
         }
     }
     

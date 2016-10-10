@@ -92,6 +92,13 @@ extension API_Endpoints {
         return API.post(path, JSON: params)
     }
     
+    class func contestAllLineups(id id: Int) {
+        let path = "api/contest/all-lineups/\(id)/"
+        API.get(path).then { (hexString: String) -> Void in
+            print(hexString)
+        }
+    }
+    
     class func sportsInjuries(sportName: String) -> Promise<[Int: String]> {
         let path = "api/sports/injuries/\(sportName)/"
         return API.get(path).then { (data: [NSDictionary]) -> [Int: String] in

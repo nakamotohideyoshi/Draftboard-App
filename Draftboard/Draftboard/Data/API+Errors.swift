@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 enum APIError: ErrorType {
-    case InvalidJSON(String?, ErrorType)
+    case InvalidJSON(NSData)
     case JSONKeyNotFound(Any, Any)
     case JSONTypeMismatch(Any, Any.Type)
     case InvalidToken(APIRequest)

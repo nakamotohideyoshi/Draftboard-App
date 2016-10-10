@@ -17,8 +17,9 @@ private typealias API_Public = API
 extension API_Public {
     
     static let agent = "Draftboard iOS" // + version?
-    static let baseURL = "https://www.draftboard.com/"
-//    static let baseURL = "http://localhost:8000/"
+//    static let baseURL = "https://www.draftboard.com/"
+//    static let baseURL = "http://192.168.0.104:8000/"
+    static let baseURL = "http://localhost:8000/"
     static var username: String?
 
     class func request<T>(path: String, JSON: AnyObject? = nil) -> Promise<T> {
@@ -93,13 +94,12 @@ private extension API_Private {
     }
 
     class func deserialize<T>(data: NSData) -> Promise<T> {
-        // Deserialize
-        let object: AnyObject
-        do {
-            object = try NSJSONSerialization.JSONObjectWithData(data, options: [.AllowFragments])
-        } catch let error {
-            let dataString = String(data: data, encoding: NSUTF8StringEncoding)
-            return Promise<T>(error: APIError.InvalidJSON(dataString, error))
+        let deserialized = (try? NSJSONSerialization.JSONObjectWithData(data, options: [.AllowFragments])) ??
+            String(data: data, encoding: NSUTF8StringEncoding)
+
+        // Deserialize or try as String
+        guard let object = deserialized else {
+            return Promise<T>(error: APIError.InvalidJSON(data))
         }
         
         // Cast as T
