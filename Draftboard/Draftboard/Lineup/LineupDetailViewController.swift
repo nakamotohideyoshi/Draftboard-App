@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 import PusherSwift
 
 class LineupDetailViewController: DraftboardViewController {
@@ -34,7 +35,9 @@ class LineupDetailViewController: DraftboardViewController {
         set { setLineup(newValue) }
         get { return getLineup() }
     }
-    var draftGroupPoints: DraftGroupPoints?
+
+    var liveDraftGroup: LiveDraftGroup?
+    var liveContests: [LiveContest]?
     
     var draftViewController = LineupDraftViewController()
     
@@ -132,16 +135,17 @@ class LineupDetailViewController: DraftboardViewController {
             lineupDetailView.footerView.configuration = .Live
             editButton.hidden = true
 
-            lineup?.getDraftGroup().then { draftGroup in
-                return draftGroup.getPoints()
-            }.then { draftGroupPoints -> Void in
-                self.draftGroupPoints = draftGroupPoints
-                self.draftGroupPoints?.delegate = self
-                self.draftGroupPoints?.updateRealtime()
-                self.updatePoints()
+            if liveDraftGroup == nil {
+                Data.liveContests(for: lineup!).then { draftGroup, contests -> Void in
+                    contests.forEach { $0.listener = self }
+                    draftGroup.listeners.append(self)
+                    draftGroup.startRealtime()
+                    self.liveDraftGroup = draftGroup
+                    self.liveContests = contests
+                    self.updatePoints()
+                    self.updateTimeRemaining()
+                }
             }
-            
-            API.contestAllLineups(id: 1)
         }
     }
     
@@ -184,9 +188,16 @@ class LineupDetailViewController: DraftboardViewController {
     
     func updatePoints() {
         tableView.reloadData()
-        if let lineup = lineup, points = draftGroupPoints?.pointsForLineup(lineup) {
-            lineupDetailView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
-        }
+        let myLineup = LiveLineup()
+        myLineup.players = lineup!.players!.map { $0.id }
+        let points = liveDraftGroup!.points(for: myLineup)
+        lineupDetailView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
+    }
+    
+    func updateTimeRemaining() {
+        let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
+        let timeRemaining = games.reduce(0) { $0 + (liveDraftGroup!.timeRemaining[$1] ?? 0) }
+        lineupDetailView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
     }
     
     func updateFooterStats() {
@@ -296,8 +307,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         cell.actionButtonDelegate = self
         cell.setLineupSlot(slot)
         if lineup?.isLive == true {
-            if let player = slot.player, draftGroupPoints = draftGroupPoints {
-                let playerPoints = draftGroupPoints.pointsForPlayer(player)
+            if let player = slot.player, liveDraftGroup = liveDraftGroup {
+                let playerPoints = liveDraftGroup.points(for: player.id)
                 cell.salaryLabel.text = Format.points.stringFromNumber(playerPoints)
             } else {
                 cell.salaryLabel.text = ""
@@ -361,11 +372,17 @@ extension TextFieldDelegate: UITextFieldDelegate {
     
 }
 
-private typealias PointsListener = LineupDetailViewController
-extension PointsListener: DraftGroupPointsListener {
-    func pointsChanged(playerID: Int) {
-        let lineupPlayerIDs = lineup!.players!.map { $0.id }
-        if lineupPlayerIDs.contains(playerID) { self.updatePoints() }
+private typealias LiveListener = LineupDetailViewController
+extension LiveListener: LiveDraftGroupListener, LiveContestListener {
+    func pointsChanged(player: LivePlayer) {
+        updatePoints()
+    }
+    func timeRemainingChanged(game: LiveGame) {
+        print("ldvc time remaining changed!")
+        updateTimeRemaining()
+    }
+    func rankChanged() {
+        print("ldvc rank changed!")
     }
 }
 

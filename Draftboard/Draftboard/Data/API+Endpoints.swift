@@ -43,16 +43,30 @@ extension API_Endpoints {
         let path = "api/draft-group/fantasy-points/\(id)/"
         return API.get(path).then { (json: NSDictionary) -> [Int: Double] in
             let players: [String: NSDictionary] = try json.get("players")
-            let playerValues = Array(players.values)
-            return playerValues.transform([Int: Double]()) { result, value in
-                let id: Int = (try? value.get("id")) ?? -1
-                let fp: Double = (try? value.get("fp")) ?? -100
-                result[id] = fp
+            return Array(players.values).transform([Int: Double]()) { result, value in
+//                let id: Int = (try? value.get("id")) ?? -1
+//                let fp: Double = (try? value.get("fp")) ?? -100
+                result[try! value.get("id")] = try! value.get("fp")
                 return result
             }
         }
     }
-
+    
+    class func sportsScoreboardGames(sportName sportName: String) -> Promise<[String: Double]> {
+        let path = "api/sports/scoreboard-games/\(sportName)/"
+        return API.get(path).then { (json: [String: NSDictionary]) -> [String: Double] in
+            var timeRemaining = [String: Double]()
+            for (srid, game) in json {
+                let status: String = try game.get("status")
+                if status == "inprogress" {
+                    let boxscoreDict: NSDictionary = try game.get("boxscore")
+                    let boxscore = try RealtimeGameBoxscore(JSON: boxscoreDict)
+                    timeRemaining[boxscore.game] = boxscore.timeRemaining
+                }
+            }
+            return timeRemaining
+        }
+    }
     
     class func draftGroupUpcoming() -> Promise<[DraftGroup]> {
         let path = "api/draft-group/upcoming/"
@@ -81,6 +95,11 @@ extension API_Endpoints {
         }
     }
     
+    class func contestInfo(id id: Int) -> Promise<Contest> {
+        let path = "api/contest/info/contest_pool/\(id)/"
+        return API.get(path).then { try Contest(json: $0) }
+    }
+    
     class func contestEntries() -> Promise<[NSDictionary]> {
         let path = "api/contest/current-entries/"
         return API.get(path)
@@ -92,11 +111,9 @@ extension API_Endpoints {
         return API.post(path, JSON: params)
     }
     
-    class func contestAllLineups(id id: Int) {
+    class func contestAllLineups(id id: Int) -> Promise<String> {
         let path = "api/contest/all-lineups/\(id)/"
-        API.get(path).then { (hexString: String) -> Void in
-            print(hexString)
-        }
+        return API.get(path)
     }
     
     class func sportsInjuries(sportName: String) -> Promise<[Int: String]> {
@@ -146,6 +163,11 @@ extension API_Endpoints {
         return API.get(path).then { (json: [NSDictionary]) -> [Lineup] in
             return try json.map { try Lineup(JSON: $0) }
         }
+    }
+    
+    class func lineupCurrent() -> Promise<[NSDictionary]> {
+        let path = "api/lineup/current/"
+        return API.get(path)
     }
     
     class func contestPoolEntries() -> Promise<[ContestPoolEntry]> {

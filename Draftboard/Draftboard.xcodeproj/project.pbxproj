@@ -109,6 +109,13 @@
 		3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */; };
 		3EB4BD891C72A62200CD760B /* PlayerPhotos in Resources */ = {isa = PBXBuildFile; fileRef = 3EB4BD881C72A62200CD760B /* PlayerPhotos */; };
 		3EB4BD8B1C73D06400CD760B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */; };
+		3EC4EDF71DB164C700D20914 /* LiveContest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDF61DB164C600D20914 /* LiveContest.swift */; };
+		3EC4EDF91DB164DC00D20914 /* LiveDraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDF81DB164DC00D20914 /* LiveDraftGroup.swift */; };
+		3EC4EDFB1DB16BED00D20914 /* LiveLineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDFA1DB16BED00D20914 /* LiveLineup.swift */; };
+		3EC4EDFD1DB16C4C00D20914 /* RealtimePlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDFC1DB16C4C00D20914 /* RealtimePlayerStat.swift */; };
+		3EC4EDFF1DB16C5700D20914 /* RealtimeGameBoxscore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDFE1DB16C5700D20914 /* RealtimeGameBoxscore.swift */; };
+		3EC4EE011DB1801000D20914 /* LivePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EE001DB1801000D20914 /* LivePlayer.swift */; };
+		3EC4EE031DB1802000D20914 /* LiveGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EE021DB1802000D20914 /* LiveGame.swift */; };
 		3ECA5F551CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */; };
 		3ECA5F571CEE7DE500DEDFC1 /* LineupPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */; };
 		3ECA5F591CEFA36500DEDFC1 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */; };
@@ -332,6 +339,13 @@
 		3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLConnection+Promise.swift"; sourceTree = "<group>"; };
 		3EB4BD881C72A62200CD760B /* PlayerPhotos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PlayerPhotos; sourceTree = "<group>"; };
 		3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		3EC4EDF61DB164C600D20914 /* LiveContest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveContest.swift; sourceTree = "<group>"; };
+		3EC4EDF81DB164DC00D20914 /* LiveDraftGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDraftGroup.swift; sourceTree = "<group>"; };
+		3EC4EDFA1DB16BED00D20914 /* LiveLineup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveLineup.swift; sourceTree = "<group>"; };
+		3EC4EDFC1DB16C4C00D20914 /* RealtimePlayerStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimePlayerStat.swift; sourceTree = "<group>"; };
+		3EC4EDFE1DB16C5700D20914 /* RealtimeGameBoxscore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeGameBoxscore.swift; sourceTree = "<group>"; };
+		3EC4EE001DB1801000D20914 /* LivePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePlayer.swift; sourceTree = "<group>"; };
+		3EC4EE021DB1802000D20914 /* LiveGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveGame.swift; sourceTree = "<group>"; };
 		3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerTableView.swift; sourceTree = "<group>"; };
 		3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupPlayerCell.swift; sourceTree = "<group>"; };
 		3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
@@ -602,6 +616,20 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		3EC4EDF51DB14C1100D20914 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				3EC4EDF61DB164C600D20914 /* LiveContest.swift */,
+				3EC4EDF81DB164DC00D20914 /* LiveDraftGroup.swift */,
+				3EC4EDFA1DB16BED00D20914 /* LiveLineup.swift */,
+				3EC4EE001DB1801000D20914 /* LivePlayer.swift */,
+				3EC4EE021DB1802000D20914 /* LiveGame.swift */,
+				3EC4EDFC1DB16C4C00D20914 /* RealtimePlayerStat.swift */,
+				3EC4EDFE1DB16C5700D20914 /* RealtimeGameBoxscore.swift */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
 		5D26FC6C1BBEE02D00ACF127 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -853,6 +881,7 @@
 				3E04ECAB1D02138A00EE325C /* Boxscore.swift */,
 				3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */,
 				3E8A7E691D39D16C0020681E /* LineupEntry.swift */,
+				3EC4EDF51DB14C1100D20914 /* Live */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1014,6 +1043,7 @@
 				5DF49CF01C1BA7DC00B371CE /* NotificationViewController.swift in Sources */,
 				3E83CCCD1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift in Sources */,
 				5DB887B51BEC02B0004E156C /* DraftboardModalChoiceController.swift in Sources */,
+				3EC4EE011DB1801000D20914 /* LivePlayer.swift in Sources */,
 				3E192C351CE515C90021A31D /* Data+Old.swift in Sources */,
 				5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */,
 				3E9FB9101D8A0F9700F55990 /* DraftboardTextButton.swift in Sources */,
@@ -1032,6 +1062,7 @@
 				3E8A7E6A1D39D16C0020681E /* LineupEntry.swift in Sources */,
 				3E04ECAC1D02138A00EE325C /* Boxscore.swift in Sources */,
 				3E9FB9011D70F35000F55990 /* EntryConfirmationView.swift in Sources */,
+				3EC4EDF71DB164C700D20914 /* LiveContest.swift in Sources */,
 				3EF777AD1D0B54CB002322F3 /* LineupDraftViewController.swift in Sources */,
 				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
 				3E192C231CD93DF40021A31D /* APIRequest.swift in Sources */,
@@ -1078,12 +1109,14 @@
 				5D783AC91BD94847000D8494 /* Player.swift in Sources */,
 				5DB14BF91C12498B008E14A4 /* ContestConfirmationModal.swift in Sources */,
 				3EB2CB791BFE813500579F1B /* NSURLConnection+Promise.swift in Sources */,
+				3EC4EDF91DB164DC00D20914 /* LiveDraftGroup.swift in Sources */,
 				5D88B0551C49E591002CA1BB /* ErrorViewController.swift in Sources */,
 				3E9FB8FF1D70F34700F55990 /* EntryConfirmationViewController.swift in Sources */,
 				3E83CCD41D95CF8500324EB2 /* AccountView.swift in Sources */,
 				5D7648EB1BEAD70F0070D5A3 /* DraftboardModalItemView.swift in Sources */,
 				3E9FB90C1D8A0EBF00F55990 /* ContestDetailPanelView.swift in Sources */,
 				5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */,
+				3EC4EE031DB1802000D20914 /* LiveGame.swift in Sources */,
 				3E04ECAA1D02132000EE325C /* Game.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
 				5D6237D41BB61FD60007E62A /* ResultsViewController.swift in Sources */,
@@ -1117,6 +1150,8 @@
 				5D5829D61BF2894700FFA7D8 /* CircleProgressView.swift in Sources */,
 				5DAC079B1C222F360002B97B /* DraftboardSegmentCell.swift in Sources */,
 				3E9FB9121D8A0FB700F55990 /* DraftboardTextLabel.swift in Sources */,
+				3EC4EDFD1DB16C4C00D20914 /* RealtimePlayerStat.swift in Sources */,
+				3EC4EDFF1DB16C5700D20914 /* RealtimeGameBoxscore.swift in Sources */,
 				3E4A0FF51D4C27F400EDB59F /* ContestCell.swift in Sources */,
 				5D5386DA1BF534CF002CDAF3 /* LineupStatFeesView.swift in Sources */,
 				5D783ACF1BD97CAA000D8494 /* DDM.swift in Sources */,
@@ -1135,6 +1170,7 @@
 				3EF777B11D0B5B6B002322F3 /* TableView.swift in Sources */,
 				3CDCF9C11BE411BB00F75BF2 /* LoginViewController.swift in Sources */,
 				3E4A0FF11D480FAE00EDB59F /* ContestListViewController.swift in Sources */,
+				3EC4EDFB1DB16BED00D20914 /* LiveLineup.swift in Sources */,
 				5D901CE81BBB41F200E85374 /* DraftboardTabBarButton.swift in Sources */,
 				3EB2CB671BFE473B00579F1B /* Data.swift in Sources */,
 				3E4A0FF71D4FE84400EDB59F /* DraftboardTableViewCell.swift in Sources */,

@@ -102,23 +102,61 @@ extension Player {
 }
  */
 
-extension DraftGroup {
-//    func getGames() -> Promise<
-}
-
-extension DraftGroupWithPlayers {
-    func getPoints() -> Promise<DraftGroupPoints> {
-        return Data.pointsForDraftGroup(id: id)
-    }
-}
-
 extension Data {
-    class func pointsForDraftGroup(id id: Int) -> Promise<DraftGroupPoints> {
-        return API.draftGroupFantasyPoints(id: id).then { points -> DraftGroupPoints in
-            let draftGroupPoints = DraftGroupPoints()
-            draftGroupPoints.points = points
-            return draftGroupPoints
+//    class func liveContestLineups(id id: Int) -> Promise<LiveContest> { }
+
+    class func liveDraftGroup(id id: Int, sportName: String) -> Promise<LiveDraftGroup> {
+        return when(API.draftGroupFantasyPoints(id: id), API.sportsScoreboardGames(sportName: sportName)).then { points, timeRemaining -> LiveDraftGroup in
+            let draftGroup = LiveDraftGroup()
+            draftGroup.id = id
+            draftGroup.points = points
+            draftGroup.timeRemaining = timeRemaining
+            return draftGroup
         }
     }
-}
+    
+    class func liveContests() -> Promise<[Int: [LiveContest]]> {
+        // Get contests (not pools)
+        return API.lineupCurrent().then { lineups -> [Int: [LiveContest]] in
+            var lineupContests = [Int: [LiveContest]]()
+            for lineup in lineups {
+                let id: Int = try! lineup.get("id")
+                let sport: String = try! lineup.get("sport")
+                let draftGroup: Int = try! lineup.get("draft_group")
+                let contestsByPool: [String: [Int]] = try! lineup.get("contests_by_pool")
+                lineupContests[id] = []
+                for (pool, contests) in contestsByPool {
+                    for contest in contests {
+                        let liveContest = LiveContest()
+                        liveContest.id = contest
+                        liveContest.sportName = sport
+                        liveContest.poolID = Int(pool)!
+                        liveContest.draftGroupID = draftGroup
+                        API.contestAllLineups(id: contest).then { hexString -> Void in
+                            liveContest.setLineups(hexString: hexString, sportName: sport)
+                            for l in liveContest.lineups {
+                                print(l.players)
+                            }
+                        }
+                        API.contestInfo(id: Int(pool)!).then { contest in
+                            liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
+                        }
+                        lineupContests[id]?.append(liveContest)
+                    }
+                }
+            }
+            return lineupContests
+        }
+    }
 
+    class func liveContests(for lineup: Lineup) -> Promise<(LiveDraftGroup, [LiveContest])> {
+        return when(liveContests(), liveDraftGroup(id: lineup.draftGroupID, sportName: lineup.sportName)).then { contests, draftGroup -> (LiveDraftGroup, [LiveContest]) in
+            let contests = contests[lineup.id] ?? []
+            print("data - live contests", contests)
+            draftGroup.listeners = contests.map { $0 as LiveDraftGroupListener }
+            contests.forEach { $0.draftGroup = draftGroup }
+            return (draftGroup, contests)
+        }
+    }
+
+}

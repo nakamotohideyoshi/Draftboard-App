@@ -19,55 +19,21 @@ class Realtime {
         return pusher.subscribe(channelName)
     }
     
-    class func onPlayerStats(callback: (PlayerStats) -> Void) {
+    class func onPlayerStat(callback: (RealtimePlayerStat) -> Void) {
         statsChannel.bind("player") { data in
             guard let json = data as? NSDictionary else { return }
-            if let stats = try? PlayerStats(JSON: json) {
-                callback(stats)
+            if let stat = try? RealtimePlayerStat(JSON: json) {
+                callback(stat)
             }
         }
     }
-}
-
-class PlayerStats {
-    let playerID: Int
-    let points: Double
     
-    init(playerID: Int, points: Double) {
-        self.playerID = playerID
-        self.points = points
-    }
-    
-    convenience init(JSON json: NSDictionary) throws {
-        let fields: NSDictionary = try json.get("fields")
-        let playerID: Int = try fields.get("player_id")
-        let points: Double = try fields.get("fantasy_points")
-        self.init(playerID: playerID, points: points)
-    }
-}
-
-protocol DraftGroupPointsListener: class {
-    func pointsChanged(playerID: Int)
-}
-
-class DraftGroupPoints {
-    var points: [Int: Double] = [:]
-    weak var delegate: DraftGroupPointsListener?
-    
-    func pointsForPlayer(player: Player) -> Double {
-        return points[player.id] ?? 0
-    }
-    
-    func pointsForLineup(lineup: Lineup) -> Double {
-        let players = lineup.players ?? []
-        return players.reduce(0) { $0 + pointsForPlayer($1) }
-    }
-    
-    func updateRealtime() {
-        
-        Realtime.onPlayerStats { stats in
-            self.points[stats.playerID] = stats.points
-            self.delegate?.pointsChanged(stats.playerID)
+    class func onGameBoxscore(callback: (RealtimeGameBoxscore) -> Void) {
+        boxscoresChannel.bind("game") { data in
+            guard let json = data as? NSDictionary else { return }
+            if let boxscore = try? RealtimeGameBoxscore(JSON: json) {
+                callback(boxscore)
+            }
         }
     }
 }
