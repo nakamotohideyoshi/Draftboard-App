@@ -144,6 +144,7 @@ class LineupDetailViewController: DraftboardViewController {
                     self.liveContests = contests
                     self.updatePoints()
                     self.updateTimeRemaining()
+                    self.updateWinnings()
                 }
             }
         }
@@ -198,6 +199,15 @@ class LineupDetailViewController: DraftboardViewController {
         let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
         let timeRemaining = games.reduce(0) { $0 + (liveDraftGroup!.timeRemaining[$1] ?? 0) }
         lineupDetailView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
+    }
+    
+    func updateWinnings() {
+        let winnings = liveContests!.reduce(0) { total, contest -> Double in
+            let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
+            let payout = contest.prizes[safe: rank] ?? 0
+            return total + payout
+        }
+        lineupDetailView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
     }
     
     func updateFooterStats() {
@@ -383,6 +393,7 @@ extension LiveListener: LiveDraftGroupListener, LiveContestListener {
     }
     func rankChanged() {
         print("ldvc rank changed!")
+        updateWinnings()
     }
 }
 
