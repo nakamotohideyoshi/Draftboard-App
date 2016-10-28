@@ -196,6 +196,7 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     func updateTimeRemaining() {
+        tableView.reloadData()
         let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
         let timeRemaining = games.reduce(0) { $0 + (liveDraftGroup!.timeRemaining[$1] ?? 0) }
         lineupDetailView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
@@ -322,6 +323,12 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
                 cell.salaryLabel.text = Format.points.stringFromNumber(playerPoints)
             } else {
                 cell.salaryLabel.text = ""
+            }
+            if let player = slot.player as? PlayerWithPositionAndGame, liveDraftGroup = liveDraftGroup {
+                let playerTimeRemaining = liveDraftGroup.timeRemaining[player.game.srid] ?? 60
+                cell.timeRemainingView.remaining = playerTimeRemaining / 60
+            } else {
+                cell.timeRemainingView.remaining = 0
             }
         }
         

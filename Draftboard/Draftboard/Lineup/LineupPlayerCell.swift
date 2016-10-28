@@ -21,6 +21,7 @@ class LineupPlayerCell: UITableViewCell {
     
     let positionLabel = UILabel()
     let avatarImageView = AvatarImageView()
+    let timeRemainingView = TimeRemainingView()
     let nameLabel = UILabel()
     let nameTeamSeparatorLabel = UILabel()
     let awayLabel = UILabel()
@@ -59,6 +60,7 @@ class LineupPlayerCell: UITableViewCell {
     func addSubviews() {
         contentView.addSubview(positionLabel)
         contentView.addSubview(avatarImageView)
+        contentView.addSubview(timeRemainingView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(nameTeamSeparatorLabel)
         contentView.addSubview(awayLabel)
@@ -124,6 +126,7 @@ class LineupPlayerCell: UITableViewCell {
         positionLabel.frame = CGRectMake(x, 0, 18, bounds.height)
         x += 18 + 7
         avatarImageView.frame = CGRectMake(x, bounds.height / 2 - 38 / 2, 38, 38)
+        timeRemainingView.frame = avatarImageView.frame
         x += 38 + 12
         nameLabel.frame = CGRectMake(x, nameLabelOriginY, nameLabelSize.width, nameLabelSize.height)
         x += nameLabelSize.width + 2

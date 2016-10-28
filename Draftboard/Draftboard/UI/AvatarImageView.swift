@@ -35,10 +35,10 @@ class AvatarImageView: UIView {
     
     func setup() {
         player = nil
-        let circlePath = "PlayerPhotos/player-background-\(size)"
-        circleImageView.image = UIImage(named: circlePath)
+//        let circlePath = "PlayerPhotos/player-background-\(size)"
+//        circleImageView.image = UIImage(named: circlePath)
 
-        self.addSubview(circleImageView)
+//        self.addSubview(circleImageView)
     
 //        circleImageView.translatesAutoresizingMaskIntoConstraints = false
 //        circleImageView.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
@@ -56,7 +56,7 @@ class AvatarImageView: UIView {
     }
     
     override func layoutSubviews() {
-        circleImageView.frame = bounds
+//        circleImageView.frame = bounds
         playerImageView.frame = CGRectInset(bounds, 2, 2)
     }
 
