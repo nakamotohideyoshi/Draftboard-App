@@ -138,7 +138,8 @@ extension Data {
                                 print(l.players)
                             }
                         }
-                        API.contestInfo(id: Int(pool)!).then { contest in
+                        API.contestInfo(id: Int(pool)!).then { contest -> Void in
+                            liveContest.contestName = contest.name
                             liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
                         }
                         lineupContests[id]?.append(liveContest)

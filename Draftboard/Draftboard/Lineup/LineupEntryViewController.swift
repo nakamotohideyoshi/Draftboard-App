@@ -19,6 +19,9 @@ class LineupEntryViewController: DraftboardViewController {
     var lineup: LineupWithStart? { didSet { viewDidLoad() } }
     var entries: [LineupEntry] = [] { didSet { tableView.reloadData() } }
     
+    var liveDraftGroup: LiveDraftGroup?
+    var liveContests: [LiveContest]?
+    
     var flipAction: (() -> Void) = {}
 
     override func loadView() {
@@ -28,12 +31,12 @@ class LineupEntryViewController: DraftboardViewController {
     override func viewDidLoad() {
         // FIXME: Don't rely on lineup being non-nil
         if lineup == nil {
-            let draftGroup = DraftGroup(id: 1, sportName: "nba", start: NSDate(), numGames: 0)
+            let draftGroup = DraftGroup(id: 1, sportName: "nba", start: NSDate.distantFuture(), numGames: 0)
             lineup = LineupWithStart(draftGroup: draftGroup)
         }
         
         // Sport icon
-        sportIcon.image = UIImage(named: "icon-baseball")
+        sportIcon.image = Sport.icons[lineup!.sportName]
         
         // Lineup name
         nameLabel.text = lineup!.name
@@ -51,6 +54,13 @@ class LineupEntryViewController: DraftboardViewController {
         // Countdown
         lineupEntryView.footerView.countdown.countdownView.date = lineup!.start
         
+        // Get game info for players
+        lineup?.getPlayersWithGames().then { players -> Void in
+            self.lineup?.players = players
+            self.tableView.reloadData()
+            self.viewWillAppear(false)
+        }
+
         lineup?.getEntries().then { entries -> Void in
             self.entries = entries
             self.tableView.reloadData()
@@ -63,8 +73,57 @@ class LineupEntryViewController: DraftboardViewController {
         flipButton.addTarget(self, action: #selector(flipButtonTapped), forControlEvents: .TouchUpInside)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        if lineup?.isLive == false {
+            lineupEntryView.footerView.configuration = .Normal
+        }
+        
+        if lineup?.isLive == true {
+            lineupEntryView.footerView.configuration = .Live
+            
+            if liveDraftGroup == nil {
+                Data.liveContests(for: lineup!).then { draftGroup, contests -> Void in
+                    contests.forEach { $0.listener = self }
+                    draftGroup.listeners.append(self)
+                    draftGroup.startRealtime()
+                    self.liveDraftGroup = draftGroup
+                    self.liveContests = contests
+                    self.updatePoints()
+                    self.updateTimeRemaining()
+                    self.updateWinnings()
+                }
+            }
+        }
+
+    }
+    
     func flipButtonTapped() {
         flipAction()
+    }
+    
+    func updatePoints() {
+        tableView.reloadData()
+        let myLineup = LiveLineup()
+        myLineup.players = lineup!.players!.map { $0.id }
+        let points = liveDraftGroup!.points(for: myLineup)
+        lineupEntryView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
+    }
+    
+    func updateTimeRemaining() {
+        tableView.reloadData()
+        let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
+        let timeRemaining = games.reduce(0) { $0 + (liveDraftGroup!.timeRemaining[$1] ?? 0) }
+        lineupEntryView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
+    }
+    
+    func updateWinnings() {
+        tableView.reloadData()
+        let winnings = liveContests!.reduce(0) { total, contest -> Double in
+            let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
+            let payout = contest.prizes[safe: rank] ?? 0
+            return total + payout
+        }
+        lineupEntryView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
     }
 
 }
@@ -75,18 +134,26 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     // UITableViewDataSource
     
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if lineup?.isLive == true {
+            return liveContests?.count ?? 0
+        }
         return entries.count
     }
     
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = LineupEntryCell()
         
-        let entry = entries[indexPath.row]
-        cell.nameLabel.text = entry.contest.name
-        cell.feesLabel.text = Format.currency.stringFromNumber(entry.contest.buyin)!
-//        let action = {
-//            entry.unregister()
-//        }
+        if lineup?.isLive == true {
+            let contest = liveContests![indexPath.row]
+            let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
+            let payout = contest.prizes[safe: rank] ?? 0
+            cell.nameLabel.text = contest.contestName
+            cell.feesLabel.text = Format.ordinal.stringFromNumber(rank + 1)! + " / " + Format.currency.stringFromNumber(payout)!
+        } else {
+            let entry = entries[indexPath.row]
+            cell.nameLabel.text = entry.contest.name
+            cell.feesLabel.text = Format.currency.stringFromNumber(entry.contest.buyin)!
+        }
         
         return cell
     }
@@ -98,6 +165,24 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+private typealias LiveListener = LineupEntryViewController
+extension LiveListener: LiveDraftGroupListener, LiveContestListener {
+    func pointsChanged(player: LivePlayer) {
+        print("entry vc time remaining changed!")
+        updatePoints()
+    }
+    func timeRemainingChanged(game: LiveGame) {
+        print("entry vc time remaining changed!")
+        updateTimeRemaining()
+    }
+    func rankChanged() {
+        print("entry vc rank changed!")
+        updateWinnings()
+    }
+}
+
+
 
 class LineupEntryCell: UITableViewCell {
     
