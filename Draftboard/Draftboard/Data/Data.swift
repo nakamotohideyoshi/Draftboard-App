@@ -109,6 +109,7 @@ extension Data {
         return when(API.draftGroupFantasyPoints(id: id), API.sportsScoreboardGames(sportName: sportName)).then { points, timeRemaining -> LiveDraftGroup in
             let draftGroup = LiveDraftGroup()
             draftGroup.id = id
+            draftGroup.sportName = sportName
             draftGroup.points = points
             draftGroup.timeRemaining = timeRemaining
             return draftGroup

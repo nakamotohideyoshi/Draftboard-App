@@ -58,11 +58,10 @@ extension API_Endpoints {
             var timeRemaining = [String: Double]()
             for (srid, game) in json {
                 if let boxscoreDict: NSDictionary = try? game.get("boxscore") {
-                    let boxscore = try RealtimeGameBoxscore(JSON: boxscoreDict)
+                    let boxscore = try RealtimeGameBoxscore(JSON: boxscoreDict, sportName: sportName)
                     timeRemaining[boxscore.game] = boxscore.timeRemaining
                 } else {
-                    let sportGameDuration = 4.0 * 15.0
-                    timeRemaining[srid] = sportGameDuration
+                    timeRemaining[srid] = Sport.gameDuration[sportName]!
                 }
             }
             return timeRemaining

@@ -92,6 +92,25 @@ class Sport {
             "Fumble: -0.1 pts",
         ]
     ]
+    
+    static let periods = [
+        "nba": 4.0,
+        "nfl": 4.0,
+        "nhl": 3.0
+    ]
+    
+    static let periodMinutes = [
+        "nba": 12.0,
+        "nfl": 15.0,
+        "nhl": 20.0
+    ]
+    
+    static let gameDuration = [
+        "nba": periods["nba"]! * periodMinutes["nba"]!,
+        "nfl": periods["nfl"]! * periodMinutes["nfl"]!,
+        "nhl": periods["nhl"]! * periodMinutes["nhl"]!,
+        "mlb": 18.0 // Half-innings
+    ]
 }
 
 class LineupSlot {

@@ -10,6 +10,7 @@ import Foundation
 
 class LiveDraftGroup {
     var id = 0
+    var sportName = ""
     var points = [LivePlayer: Double]()
     var timeRemaining = [LiveGame: Double]()
     var listeners = [LiveDraftGroupListener]()
@@ -22,12 +23,16 @@ class LiveDraftGroup {
         return lineup.players.reduce(0) { $0 + points(for: $1) }
     }
     
+    func timeRemaining(for game: LiveGame) -> Double {
+        return timeRemaining[game] ?? Sport.gameDuration[sportName]!
+    }
+    
     func startRealtime() {
-        Realtime.onPlayerStat { stat in
+        Realtime.onPlayerStat(for: sportName) { stat in
             self.points[stat.player] = stat.points
             self.listeners.forEach { $0.pointsChanged(stat.player) }
         }
-        Realtime.onGameBoxscore { boxscore in
+        Realtime.onGameBoxscore(for: sportName) { boxscore in
             self.timeRemaining[boxscore.game] = boxscore.timeRemaining
             self.listeners.forEach { $0.timeRemainingChanged(boxscore.game) }
         }

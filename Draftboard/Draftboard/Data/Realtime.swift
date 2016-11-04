@@ -10,16 +10,16 @@ import Foundation
 import PusherSwift
 
 class Realtime {
+    static var prefix = "anson_"
     static var pusher = Pusher(key: "961cebaf8b45649cc786") // Dev
-    static var statsChannel = { return Realtime.getChannel("anson_nfl_stats") }()
-    static var boxscoresChannel = { return Realtime.getChannel("anson_boxscores") }()
     
     class func getChannel(channelName: String) -> PusherChannel {
         pusher.connect()
-        return pusher.subscribe(channelName)
+        return pusher.subscribe(prefix + channelName)
     }
     
-    class func onPlayerStat(callback: (RealtimePlayerStat) -> Void) {
+    class func onPlayerStat(for sportName: String, callback: RealtimePlayerStat -> Void) {
+        let statsChannel = getChannel(sportName + "_stats")
         statsChannel.bind("player") { data in
             guard let json = data as? NSDictionary else { return }
             if let stat = try? RealtimePlayerStat(JSON: json) {
@@ -28,10 +28,11 @@ class Realtime {
         }
     }
     
-    class func onGameBoxscore(callback: (RealtimeGameBoxscore) -> Void) {
+    class func onGameBoxscore(for sportName: String, callback: RealtimeGameBoxscore -> Void) {
+        let boxscoresChannel = getChannel("boxscores")
         boxscoresChannel.bind("game") { data in
             guard let json = data as? NSDictionary else { return }
-            if let boxscore = try? RealtimeGameBoxscore(JSON: json) {
+            if let boxscore = try? RealtimeGameBoxscore(JSON: json, sportName: sportName) {
                 callback(boxscore)
             }
         }

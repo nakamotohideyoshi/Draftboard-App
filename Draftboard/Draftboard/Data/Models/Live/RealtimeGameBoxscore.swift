@@ -17,7 +17,7 @@ class RealtimeGameBoxscore {
         self.timeRemaining = timeRemaining
     }
     
-    convenience init(JSON json: NSDictionary) throws {
+    convenience init(JSON json: NSDictionary, sportName: String) throws {
         let game: LiveGame = try json.get("srid_game")
         let quarter: Double = try json.get("quarter")
         let clock: String = try json.get("clock")
@@ -31,8 +31,8 @@ class RealtimeGameBoxscore {
         let clockSeconds = clockMinSec[1]
         
         // Sport-specific constants
-        let sportPeriods = 4.0
-        let sportPeriodMinutes = 15.0
+        let sportPeriods = Sport.periods[sportName]!
+        let sportPeriodMinutes = Sport.periodMinutes[sportName]!
         
         // Determine remaining minutes based on quarters
         let remainingPeriods = (currentPeriod > sportPeriods) ? 0 : sportPeriods - currentPeriod;
