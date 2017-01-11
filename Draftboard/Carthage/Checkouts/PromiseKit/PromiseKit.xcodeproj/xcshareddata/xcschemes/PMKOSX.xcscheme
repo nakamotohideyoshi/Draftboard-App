@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -55,6 +55,16 @@
                BlueprintIdentifier = "63CA14481AE9FBD000223904"
                BuildableName = "PMKOSXCategoryTests.xctest"
                BlueprintName = "PMKOSXCategoryTests"
+               ReferencedContainer = "container:PromiseKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "17470C421CBF8A9D004FBBB8"
+               BuildableName = "PMKDefaultDispatchQueueTests.xctest"
+               BlueprintName = "PMKDefaultDispatchQueueTests"
                ReferencedContainer = "container:PromiseKit.xcodeproj">
             </BuildableReference>
          </TestableReference>

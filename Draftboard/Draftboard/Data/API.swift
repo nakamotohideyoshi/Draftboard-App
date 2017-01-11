@@ -17,9 +17,9 @@ private typealias API_Public = API
 extension API_Public {
     
     static let agent = "Draftboard iOS" // + version?
-//    static let baseURL = "https://www.draftboard.com/"
+    static let baseURL = "https://www.draftboard.com/"
 //    static let baseURL = "http://192.168.0.104:8000/"
-    static let baseURL = "http://localhost:8000/"
+//    static let baseURL = "http://localhost:8000/"
     static var username: String?
 
     class func request<T>(path: String, JSON: AnyObject? = nil) -> Promise<T> {
@@ -66,7 +66,7 @@ private extension API_Private {
                 if let error = _error {
                     return reject(URLError.UnderlyingCocoaError(request, _data, _response, error))
                 }
-                guard let data = _data, response = _response as? NSHTTPURLResponse else {
+                guard let data = _data, let response = _response as? NSHTTPURLResponse else {
                     return reject(URLError.BadResponse(request, _data, _response))
                 }
                 guard let string = String(data: data, encoding: NSUTF8StringEncoding) else {

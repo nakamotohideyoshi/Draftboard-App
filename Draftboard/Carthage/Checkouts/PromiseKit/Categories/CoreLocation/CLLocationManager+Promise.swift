@@ -20,6 +20,11 @@ extension CLLocationManager {
         case Always
         case WhenInUse
     }
+
+    private class func promiseDoneForLocationManager(manager: CLLocationManager) -> Void {
+        manager.delegate = nil
+        manager.stopUpdatingLocation()
+    }
   
     /**
       @return A new promise that fulfills with the most recent CLLocation.
@@ -39,8 +44,7 @@ extension CLLocationManager {
         yield(manager)
         manager.startUpdatingLocation()
         manager.promise.always {
-            manager.delegate = nil
-            manager.stopUpdatingLocation()
+            CLLocationManager.promiseDoneForLocationManager(manager)
         }
         return manager.promise
     }
@@ -49,19 +53,28 @@ extension CLLocationManager {
 private class LocationManager: CLLocationManager, CLLocationManagerDelegate {
     let (promise, fulfill, reject) = LocationPromise.foo()
 
-#if os(iOS)
+#if os(iOS) || swift(>=2.3)
     @objc func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         fulfill(locations)
+        CLLocationManager.promiseDoneForLocationManager(manager)
     }
 #else
     @objc func locationManager(manager: CLLocationManager, didUpdateLocations ll: [AnyObject]) {
         let locations = ll as! [CLLocation]
         fulfill(locations)
+        CLLocationManager.promiseDoneForLocationManager(manager)
     }
 #endif
 
     @objc func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        reject(error)
+        switch error {
+        case let error as CLError where error == .LocationUnknown:
+            // Apple docs say you should just ignore this error
+            break
+        default:
+            reject(error)
+            CLLocationManager.promiseDoneForLocationManager(manager)
+        }
     }
 }
 
@@ -83,7 +96,10 @@ extension CLLocationManager {
 
 @available(iOS 8, *)
 private class AuthorizationCatcher: CLLocationManager, CLLocationManagerDelegate {
-    let (promise, fulfill, _) = Promise<CLAuthorizationStatus>.pendingPromise()
+    /// Hack to fix https://github.com/mxcl/PromiseKit/issues/415
+    private class AuthorizationStatusPromise: Promise<CLAuthorizationStatus> {}
+
+    let (promise, fulfill, _) = AuthorizationStatusPromise.pendingPromise()
     var retainCycle: AnyObject?
 
     init(auther: (CLLocationManager)->()) {
@@ -137,18 +153,21 @@ private func auther(requestAuthorizationType: CLLocationManager.RequestAuthoriza
 }
 
 #else
-    private func auther(requestAuthorizationType: CLLocationManager.RequestAuthorizationType) -> (CLLocationManager -> Void)
-    {
-        return { _ in }
-    }
+
+private func auther(requestAuthorizationType: CLLocationManager.RequestAuthorizationType) -> (CLLocationManager -> Void) {
+    return { _ in }
+}
+
 #endif
 
 
 public class LocationPromise: Promise<CLLocation> {
+    /// Hack to fix https://github.com/mxcl/PromiseKit/issues/415
+    private class LocationsPromise: Promise<[CLLocation]> {}
 
     // convoluted for concurrency guarantees
 
-    private let (parentPromise, fulfill, reject) = Promise<[CLLocation]>.pendingPromise()
+    private let (parentPromise, fulfill, reject) = LocationsPromise.pendingPromise()
 
     public func allResults() -> Promise<[CLLocation]> {
         return parentPromise

@@ -180,8 +180,8 @@ class LineupCardShadowView: UIView {
         let clear = UIColor(white: 0, alpha: 0).CGColor
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [black, clear], [0, 1.0])
         let context = UIGraphicsGetCurrentContext()
-        CGContextScaleCTM(context, 1.0, bounds.height / bounds.width)
-        CGContextDrawRadialGradient(context, gradient, center, 0, center, radius, [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+        CGContextScaleCTM(context!, 1.0, bounds.height / bounds.width)
+        CGContextDrawRadialGradient(context!, gradient!, center, 0, center, radius, [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
     }
 }
 

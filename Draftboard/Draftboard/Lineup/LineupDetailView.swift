@@ -198,7 +198,7 @@ private class HeaderBackgroundView: UIView {
         let clear = UIColor(white: 1, alpha: 0).CGColor
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [white, clear], [0, 1.0])
         let context = UIGraphicsGetCurrentContext()
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(bounds.width * 0.3, bounds.height * 0.25), CGPointMake(bounds.width * 0.28, bounds.height * 1.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+        CGContextDrawLinearGradient(context!, gradient!, CGPointMake(bounds.width * 0.3, bounds.height * 0.25), CGPointMake(bounds.width * 0.28, bounds.height * 1.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
     }
 }
 
@@ -208,7 +208,7 @@ private class FooterBackgroundView: UIView {
         let clear = UIColor(white: 1, alpha: 0).CGColor
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [white, clear], [0, 1.0])
         let context = UIGraphicsGetCurrentContext()
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(bounds.width * 0.3, bounds.height * 0.75), CGPointMake(bounds.width * 0.28, bounds.height * 0.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
+        CGContextDrawLinearGradient(context!, gradient!, CGPointMake(bounds.width * 0.3, bounds.height * 0.75), CGPointMake(bounds.width * 0.28, bounds.height * 0.0), [.DrawsBeforeStartLocation, .DrawsAfterEndLocation])
     }
     
 }
@@ -219,7 +219,7 @@ private class HeaderShadowView: UIView {
         let clear = UIColor(white: 0, alpha: 0).CGColor
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [black, clear], [0, 1.0])
         let context = UIGraphicsGetCurrentContext()
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, 0), CGPointMake(0, bounds.height), [])
+        CGContextDrawLinearGradient(context!, gradient!, CGPointMake(0, 0), CGPointMake(0, bounds.height), [])
     }
 }
 
@@ -229,7 +229,7 @@ private class FooterShadowView: UIView {
         let clear = UIColor(white: 0, alpha: 0).CGColor
         let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [black, clear], [0, 1.0])
         let context = UIGraphicsGetCurrentContext()
-        CGContextDrawLinearGradient(context, gradient, CGPointMake(0, bounds.height), CGPointMake(0, 0), [])
+        CGContextDrawLinearGradient(context!, gradient!, CGPointMake(0, bounds.height), CGPointMake(0, 0), [])
     }
 }
 

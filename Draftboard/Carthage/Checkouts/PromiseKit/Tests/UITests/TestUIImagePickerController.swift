@@ -8,7 +8,7 @@ class UITest_UIImagePickerController_Swift: PMKiOSUITestCase {
         let table = app.tables
         table.cells.staticTexts["1"].tap()
         table.cells.elementBoundByIndex(0).tap()
-        app.navigationBars["Moments"].buttons["Cancel"].tap()
+        app.navigationBars.buttons["Cancel"].tap()
 
         XCTAssertTrue(value)
     }
@@ -31,7 +31,7 @@ class UITest_UIImagePickerController_Swift: PMKiOSUITestCase {
         let tablesQuery = app.tables
         tablesQuery.staticTexts["3"].tap()
         tablesQuery.childrenMatchingType(.Cell).elementBoundByIndex(0).tap()
-        app.collectionViews.childrenMatchingType(.Cell).matchingIdentifier("Photo, Landscape, August 08, 2012, 4:55 PM").elementBoundByIndex(0).tap()
+        app.collectionViews.childrenMatchingType(.Cell).matchingPredicate(NSPredicate(format: "SELF.label BEGINSWITH %@", argumentArray: ["Photo, Landscape, August 08, 2012"])).elementBoundByIndex(0).tap()
 
         XCTAssertTrue(value)
     }
@@ -41,7 +41,7 @@ class UITest_UIImagePickerController_Swift: PMKiOSUITestCase {
         let tablesQuery = app.tables
         tablesQuery.staticTexts["4"].tap()
         tablesQuery.buttons["Moments"].tap()
-        app.collectionViews.childrenMatchingType(.Cell).matchingIdentifier("Photo, Landscape, August 08, 2012, 4:55 PM").elementBoundByIndex(0).tap()
+        app.collectionViews.childrenMatchingType(.Cell).matchingPredicate(NSPredicate(format: "SELF.label BEGINSWITH %@", argumentArray: ["Photo, Landscape, August 08, 2012"])).elementBoundByIndex(0).tap()
 
         XCTAssertTrue(value)
     }

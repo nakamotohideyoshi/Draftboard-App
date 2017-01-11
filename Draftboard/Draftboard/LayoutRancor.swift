@@ -87,7 +87,7 @@ extension UIView {
     }
     
     var baseLineRancor: LayoutRancor {
-        get { return LayoutRancor(view: self, attribute: .Baseline) }
+        get { return LayoutRancor(view: self, attribute: .LastBaseline) }
     }
     
 }

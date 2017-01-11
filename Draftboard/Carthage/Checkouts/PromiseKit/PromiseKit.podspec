@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.version = $1
 
   s.source = { :git => "https://github.com/mxcl/#{s.name}.git", :tag => s.version }
-  s.license = { :type => 'MIT', :text => '@see README' }
+  s.license = 'MIT'
   s.summary = 'A delightful Promises implementation for iOS and OS X.'
   s.homepage = 'http://promisekit.org'
   s.description = 'UIActionSheet UIAlertView CLLocationManager MFMailComposeViewController ACAccountStore StoreKit SKRequest SKProductRequest blocks'
@@ -64,6 +64,12 @@ Pod::Spec.new do |s|
     ss.osx.deployment_target = '10.10'
   end
 
+  s.subspec 'CoreBluetooth' do |ss|
+    ss.ios.source_files = ss.osx.source_files = 'Categories/CoreBluetooth/*'
+    ss.dependency 'PromiseKit/CorePromise'
+    ss.frameworks = 'CoreBluetooth'
+  end
+
   s.subspec 'CorePromise' do |ss|
     hh = Dir['Sources/*.h'] - Dir['Sources/*+Private.h']
     
@@ -80,13 +86,19 @@ Pod::Spec.new do |s|
     ss.dependency 'PromiseKit/CorePromise'
     ss.frameworks = 'CoreLocation'
   end
+
+  s.subspec 'EventKit' do |ss|
+    ss.ios.source_files = 'Categories/EventKit/*'
+    ss.dependency 'PromiseKit/CorePromise'
+    ss.ios.frameworks = 'EventKit'
+  end
   
   s.subspec 'Foundation' do |ss|
     ss.ios.source_files = Dir['Categories/Foundation/*'] - Dir['Categories/Foundation/NSTask*']
     ss.osx.source_files = 'Categories/Foundation/*'
-    ss.watchos.source_files = Dir['Categories/Foundation/*'] - Dir['Categories/Foundation/NSTask*', 'Categories/Foundation/NSURL*']
+    ss.watchos.source_files = Dir['Categories/Foundation/*'] - Dir['Categories/Foundation/NSTask*', 'Categories/Foundation/NSURLConnection*']
     ss.dependency 'PromiseKit/CorePromise'
-    ss.dependency 'OMGHTTPURLRQ', '~> 3.1.0'
+    ss.dependency 'OMGHTTPURLRQ', '~> 3.2.0'
     ss.frameworks = 'Foundation'
   end
   
@@ -121,7 +133,7 @@ Pod::Spec.new do |s|
     ss.ios.source_files = 'Categories/QuartzCore/*'
 	ss.osx.source_files = 'Categories/QuartzCore/*'
     ss.dependency 'PromiseKit/CorePromise'
-    ss.frameworks = 'QuartzCore'
+    ss.ios.frameworks = ss.osx.frameworks = 'QuartzCore'
   end
 
   s.subspec 'Social' do |ss|
@@ -132,7 +144,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'StoreKit' do |ss|
-    ss.ios.source_files = ss.osx.source_files = 'Categories/StoreKit/*'
+    ss.ios.source_files = ss.osx.source_files = ss.tvos.source_files = 'Categories/StoreKit/*'
     ss.dependency 'PromiseKit/CorePromise'
     ss.frameworks = 'StoreKit'
   end
@@ -149,4 +161,11 @@ Pod::Spec.new do |s|
     ss.ios.frameworks = 'UIKit'
   end
 
+  s.subspec 'WatchConnectivity' do |ss|
+    ss.source_files = 'Categories/WatchConnectivity/*'
+    ss.dependency 'PromiseKit/CorePromise'
+    ss.frameworks = 'WatchConnectivity'
+    ss.ios.deployment_target = '8.0' # Watch Connectivity only works in iOS 9 but apps with a deployment target of 8.0 can still include it because of the availability check
+    ss.watchos.deployment_target = '2.0'
+  end
 end
