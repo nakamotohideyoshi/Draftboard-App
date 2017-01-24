@@ -187,7 +187,13 @@ class LineupCardShadowView: UIView {
 
 class LineupCardCreateView: UIControl, CancelableTouchControl {
     
+    let bgImageView = UIImageView()
+    let logoImageView = UIImageView()
+    let circleImageView = UIImageView()
+    let circleView = UIView()
     let titleLabel = UILabel()
+    let subTitleLabel = UILabel()
+    let arrowImageView = UIImageView()
     let buttonLabel = UILabel()
     
     override var highlighted: Bool { didSet { didSetHighlighted() } }
@@ -206,33 +212,80 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
     }
     
     override func layoutSubviews() {
-        let titleLabelSize = titleLabel.sizeThatFits(CGSizeMake(bounds.width - 40, 0))
-        titleLabel.frame = CGRect(origin: CGPointMake(20, 20), size: titleLabelSize)
+        bgImageView.frame = bounds
+        logoImageView.frame = CGRect(x: 0, y: 0, width: 33, height: 27)
+        logoImageView.center = CGPoint(x: center.x, y: 90)
+        circleImageView.frame = CGRect(x: 0, y: 0, width: bounds.size.width * 0.7, height: bounds.size.width * 0.7)
+        circleImageView.center = CGPoint(x: center.x, y: center.y + 20)
         buttonLabel.frame = CGRectMake(20, bounds.height - 55, bounds.width - 40, 35)
     }
     
     func setup() {
         addSubviews()
+        addConstraints()
         otherSetup()
     }
     
     func addSubviews() {
-        addSubview(titleLabel)
-        addSubview(buttonLabel)
+        addSubview(bgImageView)
+        addSubview(logoImageView)
+        addSubview(circleImageView)
+        circleView.addSubview(titleLabel)
+        circleView.addSubview(subTitleLabel)
+        circleView.addSubview(arrowImageView)
+        addSubview(circleView)
+        //addSubview(buttonLabel)
+    }
+    
+    func addConstraints() {
+        let viewConstraints: [NSLayoutConstraint] = [
+            circleView.centerXRancor.constraintEqualToRancor(circleImageView.centerXRancor),
+            circleView.centerYRancor.constraintEqualToRancor(circleImageView.centerYRancor),
+            circleView.widthRancor.constraintEqualToRancor(circleImageView.widthRancor),
+            titleLabel.topRancor.constraintEqualToRancor(circleView.topRancor),
+            titleLabel.centerXRancor.constraintEqualToRancor(circleView.centerXRancor),
+            subTitleLabel.topRancor.constraintEqualToRancor(titleLabel.bottomRancor),
+            subTitleLabel.centerXRancor.constraintEqualToRancor(circleView.centerXRancor),
+            arrowImageView.widthRancor.constraintEqualToConstant(36),
+            arrowImageView.heightRancor.constraintEqualToConstant(5),
+            arrowImageView.topRancor.constraintEqualToRancor(subTitleLabel.bottomRancor, constant: 5),
+            arrowImageView.centerXRancor.constraintEqualToRancor(circleView.centerXRancor),
+            arrowImageView.bottomRancor.constraintEqualToRancor(circleView.bottomRancor)
+            
+            ]
+        circleView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints(viewConstraints)
     }
     
     func otherSetup() {
-        // Label
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.maximumLineHeight = 54.0
-        let font = UIFont(name: "Oswald-Bold", size: 50.0)!
-        titleLabel.attributedText = NSAttributedString(string: "IT’S\nANYONE’S\nGAME.", attributes: [
-            NSBaselineOffsetAttributeName: font.descender,
-            NSFontAttributeName: font,
-            NSParagraphStyleAttributeName: paragraphStyle,
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-        ])
-        titleLabel.numberOfLines = 0
+        // Background Image
+        bgImageView.image = UIImage(named: "create-card-bg")
+        bgImageView.contentMode = .ScaleAspectFill
+        // Logo Image
+        logoImageView.image = UIImage(named: "logo-create-card")
+        logoImageView.contentMode = .ScaleAspectFill
+        // Circle BackgroundImage
+        circleImageView.image = UIImage(named: "create-card-circle")
+        circleImageView.contentMode = .ScaleAspectFill
+        
+        titleLabel.font = UIFont(name: "Oswald-Regular", size: 18)
+        titleLabel.text = "IT'S ANYONE'S GAME"
+        titleLabel.textAlignment = .Center
+        titleLabel.textColor = .whiteColor()
+        titleLabel.sizeToFit()
+        
+        subTitleLabel.font = UIFont(name: "OpenSans-SemiBold", size: 10)
+        subTitleLabel.text = "CREATE A LINEUP"
+        subTitleLabel.textAlignment = .Center
+        subTitleLabel.textColor = UIColor(0x8f9195)
+        subTitleLabel.sizeToFit()
+        
+        arrowImageView.image = UIImage(named: "icon-green-arrow")
+        arrowImageView.contentMode = .ScaleAspectFill
         
         // Button
         buttonLabel.font = UIFont(name: "OpenSans-Bold", size: 10)
