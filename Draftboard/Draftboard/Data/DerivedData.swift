@@ -45,8 +45,9 @@ class DerivedData {
         df.dateFormat = "eeee, MMM d - h:mm a"
         return draftGroupsBySportName.get().then {
             $0[sportName]!.map {
-                let title = df.stringFromDate($0.start)
-                let subtitle = "\($0.contestCount) Contests, \($0.numGames) Games"
+                let title = "\(sportName.uppercaseString) - \(df.stringFromDate($0.start))"
+                //let subtitle = "\($0.contestCount) Contests, \($0.numGames) Games"
+                let subtitle = "\($0.numGames) Games"
                 return Choice(title: title, subtitle: subtitle, value: $0)
             }
         }

@@ -58,13 +58,14 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
 
     func pickDraftGroup() -> Promise<DraftGroup> {
         // Use two modal choice controllers to pick an upcoming draft group
-        return firstly {
-            let mcc = DraftboardModalChoiceController<String>(title: "CHOOSE A SPORT", choices: nil)
-            DerivedData.upcomingSportChoices().then { mcc.choiceData = $0 }
-            return mcc.promise()
-        }.then { (sportName: String) -> Promise<DraftGroup> in
+//        return firstly {
+//            let mcc = DraftboardModalChoiceController<String>(title: "CHOOSE A SPORT", choices: nil)
+//            DerivedData.upcomingSportChoices().then { mcc.choiceData = $0 }
+//            return mcc.promise()
+//        }.then { (sportName: String) -> Promise<DraftGroup> in
+        return firstly { () -> Promise<DraftGroup> in
             let mcc = DraftboardModalChoiceController<DraftGroup>(title: "CHOOSE A START TIME", choices: nil)
-            DerivedData.upcomingDraftGroupChoices(sportName: sportName).then { mcc.choiceData = $0 }
+            DerivedData.upcomingDraftGroupChoices(sportName: "nba").then { mcc.choiceData = $0 }
             return mcc.promise()
         }.then { draftGroup -> DraftGroup in
             RootViewController.sharedInstance.popModalViewController()
