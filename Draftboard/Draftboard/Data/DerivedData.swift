@@ -42,11 +42,24 @@ class DerivedData {
     }
     class func upcomingDraftGroupChoices(sportName sportName: String) -> Promise<[Choice<DraftGroup>]> {
         let df = NSDateFormatter()
-        df.dateFormat = "eeee, MMM d - h:mm a"
+        
         return draftGroupsBySportName.get().then {
             $0[sportName]!.map {
-                let title = "\(sportName.uppercaseString) - \(df.stringFromDate($0.start))"
-                //let subtitle = "\($0.contestCount) Contests, \($0.numGames) Games"
+                let calendar = NSCalendar.currentCalendar()
+                let date1 = calendar.startOfDayForDate(NSDate.init())
+                let date2 = calendar.startOfDayForDate($0.start)
+                let components = calendar.components(NSCalendarUnit.Day, fromDate: date1, toDate: date2, options: [])
+                var title = ""
+                if (components.day == 0) {
+                    df.dateFormat = "h:mm a"
+                    title = "\(sportName.uppercaseString) - Today & \(df.stringFromDate($0.start))"
+                } else if (components.day == 1) {
+                    df.dateFormat = "h:mm a"
+                    title = "\(sportName.uppercaseString) - Tomorrow & \(df.stringFromDate($0.start))"
+                } else {
+                    df.dateFormat = "eeee & h:mm a"
+                    title = "\(sportName.uppercaseString) - \(df.stringFromDate($0.start))"
+                }
                 let subtitle = "\($0.numGames) Games"
                 return Choice(title: title, subtitle: subtitle, value: $0)
             }
