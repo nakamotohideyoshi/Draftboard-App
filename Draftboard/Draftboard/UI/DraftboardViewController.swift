@@ -88,6 +88,44 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
         return attrStr
     }
     
+    func titlebarSubtitle() -> String? {
+        return "".uppercaseString
+    }
+    
+    func titlebarAttributedSubtitle() -> NSMutableAttributedString? {
+        
+        // We really need a string, not nil
+        let str = self.titlebarSubtitle()
+        if (str == nil) {
+            return nil
+        }
+        
+        // Create attributed string
+        let attrStr = NSMutableAttributedString(string: str!)
+        
+        // Kerning
+        let wholeStr = NSMakeRange(0, attrStr.length)
+        attrStr.addAttribute(NSKernAttributeName, value: 0.0, range: wholeStr)
+        
+        // Font
+        if let font = UIFont.draftboardTitlebarSubtitleFont() {
+            attrStr.addAttribute(NSFontAttributeName, value: font, range: wholeStr)
+        }
+        
+        // Line height
+        let pStyle = NSMutableParagraphStyle()
+        pStyle.lineHeightMultiple = 1.0
+        pStyle.lineBreakMode = .ByTruncatingMiddle
+        pStyle.alignment = .Center
+        attrStr.addAttribute(NSParagraphStyleAttributeName, value: pStyle, range: wholeStr)
+        
+        // Color
+        attrStr.addAttribute(NSForegroundColorAttributeName, value: UIColor(0x8f9195), range: wholeStr)
+        
+        // Done
+        return attrStr
+    }
+    
     func footerType() -> FooterType {
         return .None
     }

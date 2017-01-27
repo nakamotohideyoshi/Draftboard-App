@@ -22,6 +22,8 @@ protocol DraftboardTitlebarDelegate {
 protocol DraftboardTitlebarDataSource {
     func titlebarTitle() -> String?
     func titlebarAttributedTitle() -> NSMutableAttributedString?
+    func titlebarSubtitle() -> String?
+    func titlebarAttributedSubtitle() -> NSMutableAttributedString?
     func titlebarLeftButtonType() -> TitlebarButtonType?
     func titlebarRightButtonType() -> TitlebarButtonType?
     func titlebarLeftButtonText() -> String?
@@ -33,6 +35,7 @@ protocol DraftboardTitlebarDataSource {
 class DraftboardTitlebar: UIView {
     
     var titleLabel: UILabel?
+    var subtitleLabel: UILabel?
     var rightButton: DraftboardTitlebarButton?
     var leftButton: DraftboardTitlebarButton?
     var bgView: UIImageView!
@@ -43,11 +46,13 @@ class DraftboardTitlebar: UIView {
     var newLeftButton: DraftboardTitlebarButton?
     var newRightButton: DraftboardTitlebarButton?
     var newTitleLabel: UILabel?
+    var newSubtitleLabel: UILabel?
     var newBgHidden: Bool = false
     
     var leftButtonChanged = false
     var rightButtonChanged = false
     var titleLabelChanged = false
+    var subtitleLabelChanged = false
     var bgHiddenChanged = false
     
     var bgHidden = false
@@ -74,7 +79,7 @@ class DraftboardTitlebar: UIView {
         let newLeftButtonType = dataSource?.titlebarLeftButtonType()
         let newRightButtonType = dataSource?.titlebarRightButtonType()
         let newTitleText = dataSource?.titlebarTitle()
-        
+        let newSubtitleText = dataSource?.titlebarSubtitle()
         // Background value
         if let ds = dataSource {
             newBgHidden = ds.titlebarBgHidden()
@@ -86,6 +91,7 @@ class DraftboardTitlebar: UIView {
         leftButtonChanged = newLeftButtonType != leftButton?.buttonType
         rightButtonChanged = newRightButtonType != rightButton?.buttonType
         titleLabelChanged = newTitleText != titleLabel?.text
+        subtitleLabelChanged = newSubtitleText != subtitleLabel?.text
         bgHiddenChanged = newBgHidden != bgHidden
         
         // Different left button
@@ -133,6 +139,13 @@ class DraftboardTitlebar: UIView {
             newTitleLabel = titleLabelWithText(newTitleText)
             addSubview(newTitleLabel!)
             constrainLabel(newTitleLabel!)
+        }
+        
+        // Different subtitle
+        if (subtitleLabelChanged) {
+            newSubtitleLabel = subtitleLabelWithText(newTitleText)
+            addSubview(newSubtitleLabel!)
+            constrainSubtitleLabel(newSubtitleLabel!)
         }
     }
     
@@ -194,6 +207,9 @@ class DraftboardTitlebar: UIView {
         newTitleLabel?.alpha = 0.0
         newTitleLabel?.layer.transform = inT
         
+        newSubtitleLabel?.alpha = 0.0
+        newSubtitleLabel?.layer.transform = inT
+        
         // Completion handler
         completionHandler = { (complete: Bool) in
             self.completeTransition(complete)
@@ -222,6 +238,14 @@ class DraftboardTitlebar: UIView {
                 
                 self.newTitleLabel?.alpha = 1.0
                 self.newTitleLabel?.layer.transform = idT
+            }
+            
+            if (self.subtitleLabelChanged) {
+                self.subtitleLabel?.alpha = 0
+                self.subtitleLabel?.layer.transform = ouT
+                
+                self.newSubtitleLabel?.alpha = 1.0
+                self.newSubtitleLabel?.layer.transform = idT
             }
             
             if (self.bgHiddenChanged) {
@@ -258,6 +282,13 @@ class DraftboardTitlebar: UIView {
             titleLabel = newTitleLabel
             newTitleLabel = nil
         }
+        
+        if (self.subtitleLabelChanged) {
+            subtitleLabel?.removeFromSuperview()
+            subtitleLabel = newSubtitleLabel
+            newSubtitleLabel = nil
+        }
+
         
         if (self.bgHiddenChanged) {
             if (complete) {
@@ -297,6 +328,25 @@ class DraftboardTitlebar: UIView {
         label.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 0.5).active = true
     }
     
+    // MARK: Subtitle
+    
+    func subtitleLabelWithText(text: String?) -> UILabel {
+        let label = UILabel()
+        
+        label.textAlignment = .Center
+        label.numberOfLines = 2
+        label.attributedText = dataSource?.titlebarAttributedSubtitle()
+        
+        return label
+    }
+    
+    func constrainSubtitleLabel(label: UILabel) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerYRancor.constraintEqualToRancor(self.centerYRancor, constant: 20).active = true
+        label.centerXRancor.constraintEqualToRancor(self.centerXRancor).active = true
+        label.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 0.5).active = true
+    }
+    
     // MARK: Buttons
     
     func constrainButton(button: DraftboardTitlebarButton) {
@@ -327,6 +377,35 @@ class DraftboardTitlebar: UIView {
         }
             
         self.constrainButton(button)
+    }
+    
+    func setSubtitle(subtitle:String, color:UIColor) {
+        if subtitleLabel != nil {
+            // Create attributed string
+            let attrStr = NSMutableAttributedString(string: subtitle.uppercaseString)
+            
+            // Kerning
+            let wholeStr = NSMakeRange(0, attrStr.length)
+            attrStr.addAttribute(NSKernAttributeName, value: 0.0, range: wholeStr)
+            
+            // Font
+            if let font = UIFont.draftboardTitlebarSubtitleFont() {
+                attrStr.addAttribute(NSFontAttributeName, value: font, range: wholeStr)
+            }
+            
+            // Line height
+            let pStyle = NSMutableParagraphStyle()
+            pStyle.lineHeightMultiple = 1.0
+            pStyle.lineBreakMode = .ByTruncatingMiddle
+            pStyle.alignment = .Center
+            attrStr.addAttribute(NSParagraphStyleAttributeName, value: pStyle, range: wholeStr)
+            
+            // Color
+            attrStr.addAttribute(NSForegroundColorAttributeName, value: color, range: wholeStr)
+            
+            subtitleLabel?.attributedText = attrStr
+            
+        }
     }
 }
 

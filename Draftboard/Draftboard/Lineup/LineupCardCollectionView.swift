@@ -73,7 +73,7 @@ class LineupCardCollectionView: UICollectionView {
         return (view as? CancelableTouchControl)?.touchesShouldCancel ??
             super.touchesShouldCancelInContentView(view)
     }
-    
+
 }
 
 // MARK: -

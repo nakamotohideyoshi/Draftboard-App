@@ -52,6 +52,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         loaderView.hidden = (lineups != nil)
         cardCollectionView.hidden = (lineups == nil)
         cardCollectionView.reloadData()
+        updateSubtitle()
     }
     
     // MARK: - Modals
@@ -114,6 +115,31 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     override func titlebarRightButtonType() -> TitlebarButtonType? {
         return .Plus
     }
+    
+    func updateSubtitle() {
+        let currentPage = Int(self.cardCollectionView.contentOffset.x / self.cardCollectionView.cardSize.width)
+        let lineup = lineups?[safe: currentPage]
+        if lineups != nil {
+            if lineup == nil {
+                self.navController?.titlebar.setSubtitle("No lineups", color: UIColor(0x8f9195))
+            } else {
+                if lineup?.isLive == true {
+                    self.navController?.titlebar.setSubtitle("Live", color: .greenDraftboard())
+                } else {
+                    self.navController?.titlebar.setSubtitle("Upcoming", color: UIColor(0x8f9195))
+                }
+            }
+        }
+    }
+}
+
+private typealias ScrollViewDelegate = LineupListViewController
+extension ScrollViewDelegate: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        if scrollView == cardCollectionView {
+            updateSubtitle()
+        }
+    }
 }
 
 private typealias CollectionViewDelegate = LineupListViewController
@@ -138,7 +164,7 @@ extension CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDe
         cell.detailEditAction = (lineup == nil) ? {} : { [weak self] in self?.editLineup(lineup!) }
         
         if let state = cardState[safe: indexPath.item] { cell.state = state }
-
+        
         return cell
     }
     
