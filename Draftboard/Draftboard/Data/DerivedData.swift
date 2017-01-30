@@ -52,12 +52,12 @@ class DerivedData {
                 var title = ""
                 if (components.day == 0) {
                     df.dateFormat = "h:mm a"
-                    title = "\(sportName.uppercaseString) - Today & \(df.stringFromDate($0.start))"
+                    title = "\(sportName.uppercaseString) - Today @ \(df.stringFromDate($0.start))"
                 } else if (components.day == 1) {
                     df.dateFormat = "h:mm a"
-                    title = "\(sportName.uppercaseString) - Tomorrow & \(df.stringFromDate($0.start))"
+                    title = "\(sportName.uppercaseString) - Tomorrow @ \(df.stringFromDate($0.start))"
                 } else {
-                    df.dateFormat = "eeee & h:mm a"
+                    df.dateFormat = "eeee @ h:mm a"
                     title = "\(sportName.uppercaseString) - \(df.stringFromDate($0.start))"
                 }
                 let subtitle = "\($0.numGames) Games"
