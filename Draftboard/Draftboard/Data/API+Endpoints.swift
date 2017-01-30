@@ -132,8 +132,12 @@ extension API_Endpoints {
     
     class func lineupCreate(lineup: Lineup) -> Promise<AnyObject> {
         let path = "api/lineup/create/"
+        let teamAliases = lineup.players!.map { $0.teamAlias }
+        let randomIndex = Int(arc4random_uniform(UInt32(teamAliases.count)))
+        let lineupName = teamAliases[randomIndex] + "'s Lineup"
+        
         let params = [
-            "name": lineup.name,
+            "name": lineupName,
             "players": lineup.players!.map { $0.id },
             "draft_group": lineup.draftGroupID
         ]
