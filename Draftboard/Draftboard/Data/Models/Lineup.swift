@@ -138,14 +138,16 @@ class Lineup {
         get { return _players() }
         set { _setPlayers(newValue) }
     }
+    var contests:[Int]
     
-    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [Player]? = nil) {
+    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [Player]? = nil, contests: [Int] = []) {
         self.id = id ?? -1
         self.name = name ?? "New Lineup"
         self.sportName = sportName
         self.draftGroupID = draftGroupID
         self.slots = Sport.slotTemplates[sportName]!()
         self.salaryCap = Sport.salaryCaps[sportName]!
+        self.contests = contests
         self.players = players
     }
     
@@ -173,7 +175,16 @@ class Lineup {
             }.map {
                 try Player(JSON: $0)
             }
-            self.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players)
+            var contests:[Int] = []
+            if (JSON["contests_by_pool"] != nil) {
+                let contestsByPool = JSON["contests_by_pool"] as! NSDictionary
+                for (_, value) in contestsByPool {
+                    contests += value as! [Int]
+                }
+            } else {
+                
+            }
+            self.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players, contests:contests)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
@@ -185,9 +196,9 @@ class LineupWithStart: Lineup {
     let start: NSDate
     var isLive: Bool { return NSDate() > start }
     
-    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [Player]? = nil, start: NSDate) {
+    init(id: Int? = nil, name: String? = nil, sportName: String, draftGroupID: Int, players: [Player]? = nil, start: NSDate, contests: [Int] = []) {
         self.start = start
-        super.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players)
+        super.init(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players, contests: contests)
     }
     
     // Intitializer for empty/blank lineup
@@ -205,7 +216,7 @@ class LineupWithStart: Lineup {
 extension Lineup {
     func withStart(start: NSDate) -> LineupWithStart {
         let players = slots.flatMap { $0.player }
-        return LineupWithStart(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players, start: start)
+        return LineupWithStart(id: id, name: name, sportName: sportName, draftGroupID: draftGroupID, players: players, start: start, contests: contests)
     }
 }
 

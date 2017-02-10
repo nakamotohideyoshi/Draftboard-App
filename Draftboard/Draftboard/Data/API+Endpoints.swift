@@ -95,6 +95,14 @@ extension API_Endpoints {
         }
     }
     
+    class func contestStatus(id id: Int) -> Promise<String> {
+        let path = "api/contest/info/\(id)/"
+        return API.get(path).then { (JSON: NSDictionary) -> String in
+            let status: String = try JSON.get("status")
+            return status
+        }
+    }
+    
     class func contestInfo(id id: Int) -> Promise<Contest> {
         let path = "api/contest/info/contest_pool/\(id)/"
         return API.get(path).then { try Contest(json: $0) }

@@ -125,6 +125,14 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
             } else {
                 if lineup?.isLive == true {
                     self.navController?.titlebar.setSubtitle("Live", color: .greenDraftboard())
+                    DerivedData.getLineupStatus((lineup?.contests)!).then { statuses -> Void in
+                        if statuses.count > 0 {
+                            let status = statuses[0]
+                            if status == "completed" || status == "closed" || status == "cancelled" {
+                                self.navController?.titlebar.setSubtitle("Completed", color: UIColor(0x8f9195))
+                            }
+                        }
+                    }
                 } else {
                     self.navController?.titlebar.setSubtitle("Upcoming", color: UIColor(0x8f9195))
                 }

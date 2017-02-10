@@ -20,6 +20,7 @@ class Data {
     static let draftGroup = MultiCache { id in API.draftGroup(id: id) }
     static let contests = Cache { API.contestLobby() }
     static let contestPoolEntries = Cache(defaultMaxCacheAge: 10, defaultMinCacheAge: 10) { API.contestPoolEntries() }
+    static let contestGroup = MultiCache { id in API.contestStatus(id: id) }
 }
 
 //enum SortByOther: ErrorType {

@@ -97,6 +97,12 @@ extension DerivedData {
             return contests.map { $0.withEntries(contestEntries[$0.id] ?? []) }
         }
     }
+    
+    class func getLineupStatus(contests: [Int]) -> Promise<[String]> {
+        return when(contests.map { Data.contestGroup[$0].get() }).then { status -> [String] in
+            return status
+        }
+    }
 }
 
 extension Lineup {
