@@ -119,9 +119,13 @@ class LineupEntryViewController: DraftboardViewController {
     func updateWinnings() {
         tableView.reloadData()
         let winnings = liveContests!.reduce(0) { total, contest -> Double in
-            let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
-            let payout = contest.prizes[safe: rank] ?? 0
-            return total + payout
+            if contest.lineups.count > 0 {
+                let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
+                let payout = contest.prizes[safe: rank] ?? 0
+                return total + payout
+            } else {
+                return total
+            }
         }
         lineupEntryView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
     }
