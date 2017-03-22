@@ -19,6 +19,8 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     var lineups: [LineupWithStart]? { didSet { didSetLineups() } }
     var cardState: [LineupCardCellState] = []
     
+    var timer = NSTimer()
+    
     override func loadView() {
         view = LineupListView()
     }
@@ -43,9 +45,14 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        timer.invalidate()
+    }
+    
     func didSetLineups() {
         cardState = [LineupCardCellState](count: lineups?.count ?? 0, repeatedValue: LineupCardCellState())
         update()
+        timer = NSTimer.scheduledTimerWithTimeInterval(300.0, target: self, selector: #selector(LineupListViewController.updateLineupStats), userInfo: nil, repeats: true)
     }
     
     func update() {
@@ -53,6 +60,18 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         cardCollectionView.hidden = (lineups == nil)
         cardCollectionView.reloadData()
         updateSubtitle()
+    }
+    
+    func updateLineupStats() {
+        
+        let currentPage = Int(self.cardCollectionView.contentOffset.x / self.cardCollectionView.cardSize.width)
+        if lineups != nil {
+            if self.cardCollectionView.cellForItemAtIndexPath(NSIndexPath.init(forItem: currentPage, inSection: 0)) != nil {
+                let currentCell = self.cardCollectionView.cellForItemAtIndexPath(NSIndexPath.init(forItem: currentPage, inSection: 0)) as! LineupCardCell
+                currentCell.detailViewController.fetchLiveStats()
+            }
+            
+        }
     }
     
     // MARK: - Modals
@@ -119,6 +138,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     func updateSubtitle() {
         let currentPage = Int(self.cardCollectionView.contentOffset.x / self.cardCollectionView.cardSize.width)
         let lineup = lineups?[safe: currentPage]
+        
         if lineups != nil {
             if lineup == nil {
                 self.navController?.titlebar.setSubtitle("No lineups", color: UIColor(0x8f9195))

@@ -150,6 +150,27 @@ class LineupDetailViewController: DraftboardViewController {
         }
     }
     
+    func fetchLiveStats() {
+        
+        if lineup?.isLive == true {
+            lineupDetailView.footerView.configuration = .Live
+            editButton.hidden = true
+            
+            Data.liveContests(for: lineup!).then { draftGroup, contests -> Void in
+                contests.forEach { $0.listener = self }
+                draftGroup.listeners.append(self)
+                draftGroup.startRealtime()
+                self.liveDraftGroup = draftGroup
+                self.liveContests = contests
+                self.updatePoints()
+                self.updateTimeRemaining()
+                self.updateWinnings()
+                
+            }
+            
+        }
+    }
+    
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
@@ -396,6 +417,7 @@ extension TextFieldDelegate: UITextFieldDelegate {
 private typealias LiveListener = LineupDetailViewController
 extension LiveListener: LiveDraftGroupListener, LiveContestListener {
     func pointsChanged(player: LivePlayer) {
+        print("points changed!")
         updatePoints()
     }
     func timeRemainingChanged(game: LiveGame) {
