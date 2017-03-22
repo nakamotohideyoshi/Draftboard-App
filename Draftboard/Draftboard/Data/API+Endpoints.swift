@@ -57,9 +57,15 @@ extension API_Endpoints {
         return API.get(path).then { (json: [String: NSDictionary]) -> [String: Double] in
             var timeRemaining = [String: Double]()
             for (srid, game) in json {
+                print("****", game)
                 if let boxscoreDict: NSDictionary = try? game.get("boxscore") {
-                    let boxscore = try RealtimeGameBoxscore(JSON: boxscoreDict, sportName: sportName)
-                    timeRemaining[boxscore.game] = boxscore.timeRemaining
+                    if let _: NSDictionary = try? boxscoreDict.get("quarter") {
+                        let boxscore = try RealtimeGameBoxscore(JSON: boxscoreDict, sportName: sportName)
+                        timeRemaining[boxscore.game] = boxscore.timeRemaining
+                    } else {
+                        timeRemaining[srid] = Sport.gameDuration[sportName]!
+                    }
+                    
                 } else {
                     timeRemaining[srid] = Sport.gameDuration[sportName]!
                 }
