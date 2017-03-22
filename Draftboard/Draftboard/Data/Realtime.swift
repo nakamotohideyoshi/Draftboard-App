@@ -11,11 +11,11 @@ import PusherSwift
 
 class Realtime {
     static var prefix = "anson_"
-    static var pusher = Pusher(key: "961cebaf8b45649cc786") // Dev
+    static var pusher = Pusher(key: "9754d03a7816e43abb64") // Dev
     
     class func getChannel(channelName: String) -> PusherChannel {
         pusher.connect()
-        return pusher.subscribe(prefix + channelName)
+        return pusher.subscribe(channelName)
     }
     
     class func onPlayerStat(for sportName: String, callback: RealtimePlayerStat -> Void) {
