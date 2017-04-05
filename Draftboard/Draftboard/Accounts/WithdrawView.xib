@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="OpenSans-Bold.ttf">
+        <array key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-        </mutableArray>
-        <mutableArray key="OpenSans-Regular.ttf">
+        </array>
+        <array key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
-        </mutableArray>
-        <mutableArray key="Oswald-Bold.ttf">
+        </array>
+        <array key="Oswald-Bold.ttf">
             <string>Oswald-Bold</string>
-            <string>Oswald-Bold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawView">
@@ -48,23 +49,20 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZW-vV-cuO" userLabel="Balance Container">
                                             <rect key="frame" x="0.0" y="0.0" width="145" height="126"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CURRENT BALANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-pS-cM2" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT BALANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WM3-pS-cM2" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="48" width="96" height="14"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$999.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-7b-V8b" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="58" width="94" height="39"/>
-                                                    <animations/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-7b-V8b" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="25" y="57.5" width="94" height="39"/>
                                                     <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="26"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="126" id="5kB-kV-jU6"/>
                                                 <constraint firstItem="WM3-pS-cM2" firstAttribute="centerX" secondItem="fZW-vV-cuO" secondAttribute="centerX" id="9MK-iM-xif"/>
@@ -81,23 +79,20 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Us7-bM-ZVJ" userLabel="Pending Container">
                                             <rect key="frame" x="145" y="0.0" width="145" height="126"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$99.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoG-kx-IMb" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="33" y="58" width="79" height="39"/>
-                                                    <animations/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoG-kx-IMb" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="33" y="57.5" width="79" height="39"/>
                                                     <fontDescription key="fontDescription" name="Oswald-Bold" family="Oswald" pointSize="26"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PENDING BONUS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-Dc-fko" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                                    <rect key="frame" x="30" y="48" width="85" height="14"/>
-                                                    <animations/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENDING BONUS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-Dc-fko" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                                    <rect key="frame" x="30.5" y="48" width="85" height="14"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="sBB-Dc-fko" firstAttribute="centerX" secondItem="Us7-bM-ZVJ" secondAttribute="centerX" id="2hb-Gn-aqm"/>
                                                 <constraint firstItem="sBB-Dc-fko" firstAttribute="centerY" secondItem="Us7-bM-ZVJ" secondAttribute="centerY" constant="-8" id="EDj-iY-NHe"/>
@@ -126,7 +121,6 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKD-Rz-Wul" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="15" y="127" width="290" height="50"/>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="btV-tF-LVT"/>
                                     </constraints>
@@ -137,7 +131,6 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktd-pt-bX1" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="15" y="177" width="290" height="50"/>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="1GZ-HF-Nle"/>
                                     </constraints>
@@ -152,15 +145,13 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payment-paypal" translatesAutoresizingMaskIntoConstraints="NO" id="uRn-rh-PLs">
                                             <rect key="frame" x="10" y="20" width="30" height="20"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="Vlf-J9-iHU"/>
                                                 <constraint firstAttribute="width" constant="30" id="kLd-dn-AVE"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
-                                    <animations/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="ZEA-Wa-Is7"/>
                                         <constraint firstItem="uRn-rh-PLs" firstAttribute="leading" secondItem="CNj-pt-33r" secondAttribute="leading" constant="10" id="oER-MJ-HZe"/>
@@ -169,7 +160,6 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-U8-cc6" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="15" y="287" width="290" height="50"/>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="veg-al-P5h"/>
                                     </constraints>
@@ -179,24 +169,21 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Social Security Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6i-bIZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                                    <rect key="frame" x="15" y="357" width="133" height="15"/>
-                                    <animations/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Security Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6i-bIZ" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                    <rect key="frame" x="15" y="357" width="132.5" height="15"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
-                                    <color key="textColor" red="0.42661195993423462" green="0.44114261865615845" blue="0.54481643438339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.35160538554191589" green="0.36195576190948486" blue="0.47066661715507507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSv-d7-HXi" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSv-d7-HXi" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="15" y="372" width="290" height="45"/>
-                                    <animations/>
                                     <string key="text">You have requested to withdraw more than $600 and by Federal Law we are required to associate your winnings with your Social Security Number.</string>
                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
-                                    <color key="textColor" red="0.42661195993423462" green="0.44114261865615845" blue="0.54481643438339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.35160538554191589" green="0.36195576190948486" blue="0.47066661715507507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12L-sP-xUm" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12L-sP-xUm" customClass="DraftboardButton" customModule="Draftboard" customModuleProvider="target">
                                     <rect key="frame" x="15" y="437" width="290" height="50"/>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="Ag0-Ap-Trc"/>
                                     </constraints>
@@ -234,8 +221,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <animations/>
-                    <color key="backgroundColor" red="0.08235294118" green="0.12941176469999999" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.08235294118" green="0.12941176469999999" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="IBB-9e-MNU" firstAttribute="centerX" secondItem="sKm-du-xs9" secondAttribute="centerX" id="BZP-bd-kSy"/>
                         <constraint firstItem="IBB-9e-MNU" firstAttribute="centerY" secondItem="sKm-du-xs9" secondAttribute="centerY" id="Naf-nu-eaf"/>
@@ -255,8 +241,7 @@
                     </variation>
                 </view>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="sKm-du-xs9" secondAttribute="bottom" id="B6R-RD-osa"/>
                 <constraint firstItem="sKm-du-xs9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GWT-4U-2jd"/>

@@ -13,9 +13,22 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var loginContainer: UIView!
     @IBOutlet weak var loginButton: DraftboardLoadingButton!
     @IBOutlet var passwordField: LabeledField!
     @IBOutlet var loginField: LabeledField!
+    @IBOutlet weak var rememberSwitch: UISwitch!
+    
+    @IBOutlet weak var signupContainer: UIView!
+    @IBOutlet weak var fullNameField: LabeledField!
+    @IBOutlet weak var usernameField: LabeledField!
+    @IBOutlet weak var emailField: LabeledField!
+    @IBOutlet weak var signupPasswordField: LabeledField!
+    @IBOutlet weak var birthField: LabeledField!
+    @IBOutlet weak var zipcodeField: LabeledField!
+    @IBOutlet weak var signupButton: DraftboardLoadingButton!
+    let segmentedControl = DraftboardSegmentedControl(choices: [], textColor: .greyCool(), textSelectedColor: .greenDraftboard())
     
     var logoPosition: CGPoint?
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -27,6 +40,12 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         
         loginField.delegate = self
         passwordField.delegate = self
+        fullNameField.delegate = self
+        usernameField.delegate = self
+        emailField.delegate = self
+        signupPasswordField.delegate = self
+        birthField.delegate = self
+        zipcodeField.delegate = self
         
         tapGestureRecognizer = UITapGestureRecognizer()
         tapGestureRecognizer.addTarget(self, action: .didTap)
@@ -47,9 +66,51 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         passwordField.textField.addTarget(self, action: .passwordChanged, forControlEvents: .EditingChanged)
         loginField.textField.addTarget(self, action: .loginChanged, forControlEvents: .EditingChanged)
         
+        signupButton.addTarget(self, action: .didTapSignup, forControlEvents: .TouchUpInside)
+        signupButton.userInteractionEnabled = false
+        signupButton.iconImageView.hidden = true
+        signupButton.disabled = true
+        
+        fullNameField.textField.addTarget(self, action: .fullnameChanged, forControlEvents: .EditingChanged)
+        usernameField.textField.addTarget(self, action: .usernameChanged, forControlEvents: .EditingChanged)
+        emailField.textField.addTarget(self, action: .emailChanged, forControlEvents: .EditingChanged)
+        signupPasswordField.textField.addTarget(self, action: .signupPasswordChanged, forControlEvents: .EditingChanged)
+        birthField.textField.addTarget(self, action: .birthChanged, forControlEvents: .EditingChanged)
+        zipcodeField.textField.addTarget(self, action: .zipcodeChanged, forControlEvents: .EditingChanged)
+        
         scrollView.scrollEnabled = false
+        signupContainer.hidden = true
         
         logoPosition = logoImageView.layer.position
+        
+        segmentedControl.choices = ["LOG IN", "SIGN UP"]
+        segmentedControl.indexChangedHandler = { [weak self] (_: Int) in self?.changeView() }
+        view.addSubview(segmentedControl)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let boundsSize = self.view.bounds.size
+        let boundsW = boundsSize.width
+
+        let segmentedControlW = boundsW - 80
+        let segmentedControlH = CGFloat(50)
+        let segmentedControlX = fitToPixel(boundsW / 2 - segmentedControlW / 2)
+        let segmentedControlY = (logoPosition?.y)! + logoImageView.bounds.height + 8
+        segmentedControl.frame = CGRectMake(segmentedControlX, segmentedControlY, segmentedControlW, segmentedControlH)
+    }
+    
+    func changeView() {
+        if (segmentedControl.currentIndex == 0) {
+            scrollView.scrollEnabled = false
+            loginContainer.hidden = false
+            signupContainer.hidden = true
+        } else {
+            scrollView.scrollEnabled = true
+            loginContainer.hidden = true
+            signupContainer.hidden = false
+        }
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
@@ -72,6 +133,30 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         updateButtonStatus()
     }
     
+    func fullnameChanged(textField: UITextField) {
+        updateSignupButtonStatus()
+    }
+    
+    func usernameChanged(textField: UITextField) {
+        updateSignupButtonStatus()
+    }
+    
+    func emailChanged(textField: UITextField) {
+        updateSignupButtonStatus()
+    }
+    
+    func signupPasswordChanged(textField: UITextField) {
+        updateSignupButtonStatus()
+    }
+    
+    func birthChanged(textField: UITextField) {
+        updateSignupButtonStatus()
+    }
+    
+    func zipcodeChanged(textField: UITextField) {
+        updateSignupButtonStatus()
+    }
+    
     func updateButtonStatus() {
         let validPassword = passwordValid(passwordField.textField.text)
         let validUsername = usernameValid(loginField.textField.text)
@@ -87,6 +172,28 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
             loginButton.userInteractionEnabled = false
             loginButton.iconImageView.hidden = true
             loginButton.disabled = true
+        }
+    }
+    
+    func updateSignupButtonStatus() {
+        let validFullname = fullnameValid(fullNameField.textField.text)
+        let validUsername = signupUsernameValid(usernameField.textField.text)
+        let validEmail = emailValid(emailField.textField.text)
+        let validPassword = signupPasswordValid(signupPasswordField.textField.text)
+        let validBirth = birthValid(birthField.textField.text)
+        let validZipcode = zipcodeValid(zipcodeField.textField.text)
+        
+        if validFullname && validUsername && validEmail && validPassword && validBirth && validZipcode {
+            if signupButton.disabled {
+                signupButton.userInteractionEnabled = true
+                signupButton.iconImageView.hidden = false
+                signupButton.disabled = false
+            }
+        }
+        else if !signupButton.disabled {
+            signupButton.userInteractionEnabled = false
+            signupButton.iconImageView.hidden = true
+            signupButton.disabled = true
         }
     }
     
@@ -122,10 +229,128 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         return false
     }
     
+    func fullnameValid(fullname: String?) -> Bool {
+        if fullname == nil {
+            return false
+        }
+        
+        let trimmedString = fullname!.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
+        
+        if trimmedString.characters.count > 0 {
+            let fullNameArr: [String] = trimmedString.componentsSeparatedByString(" ")
+            if fullNameArr.count != 2 {
+                return false
+            } else {
+                return true
+            }
+        }
+        
+        return false
+    }
+
+    func signupUsernameValid(username: String?) -> Bool {
+        if username == nil {
+            return false
+        }
+        
+        let trimmedString = username!.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
+        
+        if trimmedString.characters.count > 0 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func emailValid(email: String?) -> Bool {
+        if email == nil {
+            return false
+        }
+        
+        let trimmedString = email!.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
+        
+        if trimmedString.characters.count > 0 {
+            return true
+        }
+        
+        return false
+    }
+
+    func signupPasswordValid(password: String?) -> Bool {
+        if password == nil {
+            return false
+        }
+        
+        let trimmedString = password!.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
+        
+        if trimmedString.characters.count > 0 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func birthValid(birth: String?) -> Bool {
+        if birth == nil {
+            return false
+        }
+        
+        let trimmedString = birth!.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
+        
+        if trimmedString.characters.count > 0 {
+            let birthdayArr: [String] = trimmedString.componentsSeparatedByString("/")
+            if birthdayArr.count != 3 {
+                return false
+            } else {
+                if birthdayArr[0].characters.count == 2 && birthdayArr[1].characters.count == 2 && birthdayArr[2].characters.count == 4 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func zipcodeValid(zipcode: String?) -> Bool {
+        if zipcode == nil {
+            return false
+        }
+        
+        let trimmedString = zipcode!.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        )
+        
+        if trimmedString.characters.count > 0 {
+            return true
+        }
+        
+        return false
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        login()
-        self.loginButton.loading = true
-        self.loginButton.userInteractionEnabled = false
+        if (segmentedControl.currentIndex == 0) {
+            login()
+            self.loginButton.loading = true
+            self.loginButton.userInteractionEnabled = false
+        }
+//        } else {
+//            signup()
+//            self.signupButton.loading = true
+//            self.signupButton.userInteractionEnabled = false
+//        }
+        
         textField.resignFirstResponder()
         return true
     }
@@ -134,6 +359,13 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         login()
         self.loginButton.loading = true
         self.loginButton.userInteractionEnabled = false
+        self.view.endEditing(true)
+    }
+    
+    func didTapSignup(signupButton: DraftboardLoadingButton) {
+        signup()
+        self.signupButton.loading = true
+        self.signupButton.userInteractionEnabled = false
         self.view.endEditing(true)
     }
     
@@ -156,6 +388,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     
     func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        scrollView.setContentOffset(CGPoint(x:0, y:-scrollView.contentInset.top), animated: true)
         animateLogo(1.0)
     }
     
@@ -168,6 +401,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
             self.logoImageView.layer.position = CGPointMake(self.logoPosition!.x, self.logoPosition!.y - offset)
             self.logoImageView.alpha = alpha
+            self.segmentedControl.alpha = alpha
         }) { (completed) -> Void in
             // nothing
         }
@@ -177,7 +411,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         let username = loginField.textField.text ?? ""
         let password = passwordField.textField.text ?? ""
         
-        API.auth(username: username, password: password).then { () -> Void in
+        API.auth(username: username, password: password, remember: rememberSwitch.on).then { () -> Void in
             self.fulfill()
             self.leave()
         }.error { error in
@@ -226,6 +460,71 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         }
     }
     
+    func signup() {
+        let fullname = fullNameField.textField.text ?? ""
+        let fullnameArr = fullname.componentsSeparatedByString(" ")
+        let firstname = fullnameArr[0]
+        let lastname = fullnameArr[1]
+        let username = usernameField.textField.text ?? ""
+        let email = emailField.textField.text ?? ""
+        let password = signupPasswordField.textField.text ?? ""
+        let birthday = birthField.textField.text ?? ""
+        let birthdayArr = birthday.componentsSeparatedByString("/")
+        let birthYear = birthdayArr[2]
+        let birthMonth = birthdayArr[0]
+        let birthDay = birthdayArr[1]
+        let zipcode = zipcodeField.textField.text ?? ""
+        
+        API.signup(firstname: firstname, lastname: lastname, username: username, email: email, password: password, birthYear: birthYear, birthMonth: birthMonth, birthDay: birthDay, zipcode: zipcode).then { () -> Void in
+            
+            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+            let actions = ["Log In"]
+            
+            vc.actions = actions
+            vc.promise.then { index -> Void in
+                // Log In
+                RootViewController.sharedInstance.popAlertViewController()
+                self.segmentedControl.updateSelectionLine(0, animated: true)
+                self.scrollView.setContentOffset(CGPoint(x:0, y:-self.scrollView.contentInset.top), animated: true)
+                self.scrollView.scrollEnabled = false
+                self.loginContainer.hidden = false
+                self.signupContainer.hidden = true
+            }
+            
+            RootViewController.sharedInstance.pushAlertViewController(vc)
+            vc.titleLabel.text = "Sign Up"
+            vc.errorLabel.text = "Account Created"
+        
+        }.error { error in
+            var finalErrorText = "LoginViewController"
+            
+            if case let URLError.BadResponse(_, data, _) = error,
+                let d = data,
+                json = try? NSJSONSerialization.JSONObjectWithData(d, options: []) as? NSDictionary,
+                errorArray = json?["non_field_errors"] as? [String],
+                errorText = errorArray.first
+            {
+                finalErrorText = errorText
+            }
+            
+            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+            let actions = ["Try Again"]
+            
+            vc.actions = actions
+            vc.promise.then { index -> Void in
+                
+                // Try again
+                RootViewController.sharedInstance.popAlertViewController()
+            }
+            
+            self.signupButton.userInteractionEnabled = true
+            self.signupButton.loading = false
+            
+            RootViewController.sharedInstance.pushAlertViewController(vc)
+            vc.errorLabel.text = finalErrorText
+        }
+    }
+    
     func cancel() {
         self.reject(APIError.Whatever)
         self.leave()
@@ -242,6 +541,13 @@ private extension Selector {
     static let keyboardWillHide = #selector(LoginViewController.keyboardWillHide(_:))
     static let keyboardWillShow = #selector(LoginViewController.keyboardWillShow(_:))
     static let didTapLogin = #selector(LoginViewController.didTapLogin(_:))
+    static let didTapSignup = #selector(LoginViewController.didTapSignup(_:))
     static let passwordChanged = #selector(LoginViewController.passwordChanged(_:))
     static let loginChanged = #selector(LoginViewController.loginChanged(_:))
+    static let fullnameChanged = #selector(LoginViewController.fullnameChanged(_:))
+    static let usernameChanged = #selector(LoginViewController.usernameChanged(_:))
+    static let emailChanged = #selector(LoginViewController.emailChanged(_:))
+    static let signupPasswordChanged = #selector(LoginViewController.signupPasswordChanged(_:))
+    static let birthChanged = #selector(LoginViewController.birthChanged(_:))
+    static let zipcodeChanged = #selector(LoginViewController.zipcodeChanged(_:))
 }

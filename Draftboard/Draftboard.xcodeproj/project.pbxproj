@@ -922,8 +922,9 @@
 				TargetAttributes = {
 					3E7860BA1B9FB0E7004013AB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = Z3T2U2R53B;
+						DevelopmentTeam = EFXZ3T8NYM;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1309,7 +1310,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = EFXZ3T8NYM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1322,9 +1324,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.draftboard;
+				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.db;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "eb6a9a87-3e4d-4c56-a7c9-eab384fe2f14";
+				PROVISIONING_PROFILE_SPECIFIER = DraftboardAdhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -1338,7 +1341,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = EFXZ3T8NYM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1351,9 +1355,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.draftboard;
+				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.db;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "eb6a9a87-3e4d-4c56-a7c9-eab384fe2f14";
+				PROVISIONING_PROFILE_SPECIFIER = DraftboardAdhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;

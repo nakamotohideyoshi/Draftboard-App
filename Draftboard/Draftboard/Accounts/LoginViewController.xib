@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Oswald-Regular.ttf">
+            <string>Oswald-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="birthField" destination="Xfs-uf-wXA" id="tyc-ie-ZAr"/>
+                <outlet property="emailField" destination="RVx-mE-VzF" id="Lvr-7Z-sSc"/>
+                <outlet property="fullNameField" destination="Ygw-eY-BUB" id="bxN-TG-d8o"/>
                 <outlet property="loginButton" destination="1XO-l8-dAf" id="6OD-yL-rRe"/>
+                <outlet property="loginContainer" destination="4bR-3r-Aib" id="NHy-jh-SqF"/>
                 <outlet property="loginField" destination="2kz-Pv-XKj" id="9ql-hV-q0i"/>
                 <outlet property="logoImageView" destination="CDt-ih-wf1" id="F2T-ww-ZT4"/>
                 <outlet property="passwordField" destination="qb0-JJ-cIu" id="Cgq-uT-jJ5"/>
+                <outlet property="rememberSwitch" destination="GjC-M9-d8B" id="uRw-Jb-myp"/>
                 <outlet property="scrollView" destination="6Rf-Cs-6ar" id="wC3-4I-eDe"/>
+                <outlet property="signupButton" destination="NEF-DK-GBi" id="ys7-PA-hS3"/>
+                <outlet property="signupContainer" destination="c0O-7b-XbV" id="HFa-Kt-wcn"/>
+                <outlet property="signupPasswordField" destination="Cg7-gU-NDu" id="dvO-z3-Uc1"/>
+                <outlet property="usernameField" destination="Z4M-hp-kaY" id="BEu-As-6Yx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="zipcodeField" destination="UWc-Lo-aja" id="l3S-5d-HPj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,11 +40,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field-floor" translatesAutoresizingMaskIntoConstraints="NO" id="nxw-SB-CCW">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQP-3X-iJG" userLabel="logoContainer">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="447"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-login" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-ih-wf1">
-                            <rect key="frame" x="166" y="186" width="64" height="55"/>
+                            <rect key="frame" x="166" y="108" width="64" height="55"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="KkW-lu-0bj"/>
                                 <constraint firstAttribute="width" constant="64" id="UBi-lT-inJ"/>
@@ -33,7 +55,7 @@
                         </imageView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="CDt-ih-wf1" firstAttribute="centerY" secondItem="aQP-3X-iJG" secondAttribute="centerY" constant="-10" id="2p9-sP-A92"/>
+                        <constraint firstItem="CDt-ih-wf1" firstAttribute="top" secondItem="aQP-3X-iJG" secondAttribute="top" constant="108" id="2VA-1d-uje"/>
                         <constraint firstItem="CDt-ih-wf1" firstAttribute="centerX" secondItem="aQP-3X-iJG" secondAttribute="centerX" constant="10" id="LcT-ul-tAQ"/>
                     </constraints>
                 </view>
@@ -41,10 +63,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJV-dH-EVN">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bR-3r-Aib" userLabel="loginContainer">
-                                    <rect key="frame" x="15" y="447" width="345" height="220"/>
+                                    <rect key="frame" x="15" y="350" width="345" height="270"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2kz-Pv-XKj" userLabel="loginField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
@@ -68,9 +90,32 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2M-yg-cUv">
+                                            <rect key="frame" x="0.0" y="100" width="345" height="50"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KEEP ME LOGGED IN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkI-Ln-LNL">
+                                                    <rect key="frame" x="10" y="17.5" width="120" height="14"/>
+                                                    <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="12"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GjC-M9-d8B">
+                                                    <rect key="frame" x="276" y="9.5" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.14901960784313725" green="0.77647058823529413" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="GjC-M9-d8B" firstAttribute="centerY" secondItem="I2M-yg-cUv" secondAttribute="centerY" id="C1S-dl-MPt"/>
+                                                <constraint firstItem="hkI-Ln-LNL" firstAttribute="leading" secondItem="I2M-yg-cUv" secondAttribute="leading" constant="10" id="KhT-NM-bJS"/>
+                                                <constraint firstAttribute="height" constant="50" id="ReT-Ba-W8A"/>
+                                                <constraint firstItem="hkI-Ln-LNL" firstAttribute="centerY" secondItem="I2M-yg-cUv" secondAttribute="centerY" id="V6o-OF-AM8"/>
+                                                <constraint firstAttribute="trailing" secondItem="GjC-M9-d8B" secondAttribute="trailing" constant="20" id="yYn-8o-uNu"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1XO-l8-dAf" customClass="DraftboardLoadingButton" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="35" y="135" width="276" height="50"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <rect key="frame" x="10" y="185" width="325" height="50"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="TkO-DQ-FBZ"/>
                                             </constraints>
@@ -82,16 +127,19 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="2kz-Pv-XKj" firstAttribute="top" secondItem="4bR-3r-Aib" secondAttribute="top" id="6hl-1j-FYU"/>
-                                        <constraint firstItem="1XO-l8-dAf" firstAttribute="width" secondItem="4bR-3r-Aib" secondAttribute="width" multiplier="0.8" id="8BS-Ny-dpD"/>
-                                        <constraint firstAttribute="height" constant="220" id="AX4-HY-Gh8"/>
+                                        <constraint firstAttribute="height" constant="270" id="AX4-HY-Gh8"/>
                                         <constraint firstItem="2kz-Pv-XKj" firstAttribute="leading" secondItem="4bR-3r-Aib" secondAttribute="leading" id="CV3-Uo-5eT"/>
                                         <constraint firstItem="qb0-JJ-cIu" firstAttribute="top" secondItem="1XO-l8-dAf" secondAttribute="bottom" id="I4C-Jh-0i5"/>
                                         <constraint firstAttribute="trailing" secondItem="2kz-Pv-XKj" secondAttribute="trailing" id="M3D-br-pFg"/>
-                                        <constraint firstItem="1XO-l8-dAf" firstAttribute="top" secondItem="qb0-JJ-cIu" secondAttribute="bottom" constant="35" id="QRd-9x-zTp"/>
-                                        <constraint firstItem="1XO-l8-dAf" firstAttribute="centerX" secondItem="4bR-3r-Aib" secondAttribute="centerX" id="XPV-EJ-WZZ"/>
+                                        <constraint firstItem="1XO-l8-dAf" firstAttribute="top" secondItem="qb0-JJ-cIu" secondAttribute="bottom" constant="85" id="QRd-9x-zTp"/>
+                                        <constraint firstItem="I2M-yg-cUv" firstAttribute="leading" secondItem="4bR-3r-Aib" secondAttribute="leading" id="UJs-07-hL8"/>
+                                        <constraint firstAttribute="trailing" secondItem="1XO-l8-dAf" secondAttribute="trailing" constant="10" id="XHO-Zk-VXv"/>
+                                        <constraint firstAttribute="trailing" secondItem="I2M-yg-cUv" secondAttribute="trailing" id="cII-hW-NbK"/>
                                         <constraint firstItem="qb0-JJ-cIu" firstAttribute="leading" secondItem="4bR-3r-Aib" secondAttribute="leading" id="fV0-NT-Pih"/>
+                                        <constraint firstItem="1XO-l8-dAf" firstAttribute="leading" secondItem="4bR-3r-Aib" secondAttribute="leading" constant="10" id="hEc-va-xXw"/>
                                         <constraint firstItem="qb0-JJ-cIu" firstAttribute="top" secondItem="2kz-Pv-XKj" secondAttribute="bottom" id="jKA-WT-Nvq"/>
                                         <constraint firstAttribute="height" secondItem="2kz-Pv-XKj" secondAttribute="height" multiplier="2" id="mNN-4b-UI7"/>
+                                        <constraint firstItem="I2M-yg-cUv" firstAttribute="top" secondItem="qb0-JJ-cIu" secondAttribute="bottom" id="pXR-26-HyU"/>
                                         <constraint firstAttribute="trailing" secondItem="qb0-JJ-cIu" secondAttribute="trailing" id="tNl-hK-cFJ"/>
                                     </constraints>
                                     <variation key="default">
@@ -101,11 +149,116 @@
                                         </mask>
                                     </variation>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c0O-7b-XbV" userLabel="signupContainer">
+                                    <rect key="frame" x="15" y="350" width="345" height="450"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ygw-eY-BUB" userLabel="fullNameField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="hZo-57-diW"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="full name"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="full name"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4M-hp-kaY" userLabel="usernameField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="50" width="345" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="XgZ-sB-BO0"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="username"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="username"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVx-mE-VzF" userLabel="emailField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="100" width="345" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="NYT-p8-LoY"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="email"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="email"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-gU-NDu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="150" width="345" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="WY7-Or-Poc"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="password"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="password"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="secureEntry" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xfs-uf-wXA" userLabel="birthField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="200" width="345" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="4EJ-Sl-aNO"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="date of birth"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="MM/DD/YYYY"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWc-Lo-aja" userLabel="zipcodeField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="250" width="345" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Ps2-4v-Ze5"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="zip code"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="zip code"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEF-DK-GBi" userLabel="Signup Button" customClass="DraftboardLoadingButton" customModule="Draftboard" customModuleProvider="target">
+                                            <rect key="frame" x="10" y="355" width="325" height="50"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Sov-t0-OuA"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="SIGN UP"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Xfs-uf-wXA" secondAttribute="trailing" id="0nG-c9-HmO"/>
+                                        <constraint firstAttribute="trailing" secondItem="Cg7-gU-NDu" secondAttribute="trailing" id="0yR-1Y-v1X"/>
+                                        <constraint firstItem="NEF-DK-GBi" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" constant="10" id="1ih-q5-EJs"/>
+                                        <constraint firstItem="RVx-mE-VzF" firstAttribute="top" secondItem="Z4M-hp-kaY" secondAttribute="bottom" id="5BB-3r-nb5"/>
+                                        <constraint firstAttribute="trailing" secondItem="Z4M-hp-kaY" secondAttribute="trailing" id="AC0-wT-8RH"/>
+                                        <constraint firstAttribute="height" constant="450" id="KMQ-Rn-FFb"/>
+                                        <constraint firstItem="Xfs-uf-wXA" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="LA8-VP-797"/>
+                                        <constraint firstItem="RVx-mE-VzF" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="MI8-Up-WOR"/>
+                                        <constraint firstItem="UWc-Lo-aja" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="P54-2l-FWS"/>
+                                        <constraint firstItem="Cg7-gU-NDu" firstAttribute="top" secondItem="RVx-mE-VzF" secondAttribute="bottom" id="Q6s-wd-89k"/>
+                                        <constraint firstItem="Cg7-gU-NDu" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="RJD-c6-8r9"/>
+                                        <constraint firstItem="Z4M-hp-kaY" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="TF1-JW-zQi"/>
+                                        <constraint firstAttribute="trailing" secondItem="UWc-Lo-aja" secondAttribute="trailing" id="UiQ-YF-lO6"/>
+                                        <constraint firstItem="Ygw-eY-BUB" firstAttribute="top" secondItem="c0O-7b-XbV" secondAttribute="top" id="YRk-f4-XeK"/>
+                                        <constraint firstItem="Ygw-eY-BUB" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="bIo-yE-UTk"/>
+                                        <constraint firstAttribute="trailing" secondItem="RVx-mE-VzF" secondAttribute="trailing" id="ead-yu-jWL"/>
+                                        <constraint firstItem="UWc-Lo-aja" firstAttribute="top" secondItem="Xfs-uf-wXA" secondAttribute="bottom" id="gX0-yP-6ka"/>
+                                        <constraint firstItem="Z4M-hp-kaY" firstAttribute="top" secondItem="Ygw-eY-BUB" secondAttribute="bottom" id="nDP-BG-hdC"/>
+                                        <constraint firstItem="NEF-DK-GBi" firstAttribute="top" secondItem="UWc-Lo-aja" secondAttribute="bottom" constant="55" id="pHc-Yq-gWI"/>
+                                        <constraint firstAttribute="trailing" secondItem="NEF-DK-GBi" secondAttribute="trailing" constant="10" id="q7q-Tj-Qp3"/>
+                                        <constraint firstItem="Xfs-uf-wXA" firstAttribute="top" secondItem="Cg7-gU-NDu" secondAttribute="bottom" id="xpp-pu-avV"/>
+                                        <constraint firstAttribute="trailing" secondItem="Ygw-eY-BUB" secondAttribute="trailing" id="zT1-Mp-G1p"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="4bR-3r-Aib" secondAttribute="bottom" id="46C-b0-VS4"/>
+                                <constraint firstAttribute="height" constant="800" id="C3k-DG-S2h"/>
+                                <constraint firstItem="4bR-3r-Aib" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" constant="350" id="CcY-wY-SAD"/>
+                                <constraint firstItem="c0O-7b-XbV" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" constant="350" id="LfV-HO-eZE"/>
+                                <constraint firstAttribute="trailing" secondItem="c0O-7b-XbV" secondAttribute="trailing" constant="15" id="O5H-2P-LMi"/>
                                 <constraint firstAttribute="trailing" secondItem="4bR-3r-Aib" secondAttribute="trailing" constant="15" id="VxX-Up-VmR"/>
                                 <constraint firstItem="4bR-3r-Aib" firstAttribute="leading" secondItem="NJV-dH-EVN" secondAttribute="leading" constant="15" id="bjM-XM-dZg"/>
+                                <constraint firstItem="c0O-7b-XbV" firstAttribute="leading" secondItem="NJV-dH-EVN" secondAttribute="leading" constant="15" id="ttp-rq-Pdj"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -117,25 +270,27 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="0.074509803921568626" green="0.10196078431372549" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.074509803921568626" green="0.10196078431372549" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4gV-Nr-lFS"/>
                 <constraint firstItem="6Rf-Cs-6ar" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5mI-wP-gWd"/>
                 <constraint firstItem="2kz-Pv-XKj" firstAttribute="top" secondItem="aQP-3X-iJG" secondAttribute="bottom" id="6Gh-NG-Zjp"/>
+                <constraint firstAttribute="bottom" secondItem="nxw-SB-CCW" secondAttribute="bottom" id="7Af-5p-elh"/>
+                <constraint firstItem="nxw-SB-CCW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="94V-rF-391"/>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AhF-pG-O0X"/>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BFn-88-Rlk"/>
+                <constraint firstAttribute="trailing" secondItem="nxw-SB-CCW" secondAttribute="trailing" id="Bim-Ck-KPf"/>
                 <constraint firstAttribute="trailing" secondItem="aQP-3X-iJG" secondAttribute="trailing" id="Dnm-30-Due"/>
-                <constraint firstItem="NJV-dH-EVN" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="E3o-5L-Mqo"/>
                 <constraint firstItem="NJV-dH-EVN" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="Hcz-Bj-IaP"/>
                 <constraint firstAttribute="trailing" secondItem="6Rf-Cs-6ar" secondAttribute="trailing" id="I5u-Bc-9a6"/>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Mua-6y-iEK"/>
                 <constraint firstItem="6Rf-Cs-6ar" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S4G-sQ-VTG"/>
+                <constraint firstItem="nxw-SB-CCW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TTN-kS-ekK"/>
                 <constraint firstAttribute="bottom" secondItem="aQP-3X-iJG" secondAttribute="bottom" constant="220" id="VrD-hp-cP0"/>
                 <constraint firstAttribute="bottom" secondItem="6Rf-Cs-6ar" secondAttribute="bottom" id="oxX-xh-CGN"/>
                 <constraint firstItem="aQP-3X-iJG" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.67" id="syv-W3-Tei"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="4gV-Nr-lFS"/>
@@ -144,10 +299,11 @@
                     <exclude reference="6Gh-NG-Zjp"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="420.5" y="507.5"/>
+            <point key="canvasLocation" x="-104" y="106"/>
         </view>
     </objects>
     <resources>
+        <image name="field-floor" width="375" height="667"/>
         <image name="logo-login" width="64" height="55"/>
     </resources>
 </document>

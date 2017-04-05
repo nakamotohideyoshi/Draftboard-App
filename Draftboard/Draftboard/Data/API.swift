@@ -115,19 +115,35 @@ private extension API_Private {
 private typealias API_Endpoints = API
 extension API_Endpoints {
     
-    class func auth(username username: String, password: String) -> Promise<Void> {
+    class func auth(username username: String, password: String, remember: Bool) -> Promise<Void> {
         let path = "api-token-auth/"
         let params = ["username": username, "password": password]
         return API.post(path, JSON: params).then { (data: NSDictionary) -> Void in
             let token: String = try data.get("token")
             API.token = token
             API.username = username
+            if remember {
+                NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token")
+                NSUserDefaults.standardUserDefaults().setObject(username, forKey: "username")
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }
+        }
+    }
+    
+    class func signup(firstname firstname: String, lastname: String, username: String, email: String, password: String, birthYear: String, birthMonth: String, birthDay: String, zipcode: String) -> Promise<Void> {
+        let path = "api/account/register/"
+        let params = ["first": firstname, "last": lastname, "username": username, "email": email, "password": password, "birth_year": birthYear, "birth_month": birthMonth, "birth_day": birthDay, "postal_code": zipcode]
+        return API.post(path, JSON: params).then { (data: NSDictionary) -> Void in
+            
         }
     }
     
     class func deauth() {
         API.token = nil
         API.username = nil
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("token")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
 }
@@ -137,6 +153,10 @@ private extension APIRequest {
     func auth() {
         if let token = API.token {
             setValue("JWT " + token, forHTTPHeaderField: "Authorization")
+        } else if let token = NSUserDefaults.standardUserDefaults().stringForKey("token") {
+            setValue("JWT " + token, forHTTPHeaderField: "Authorization")
+            API.token = token
+            API.username = NSUserDefaults.standardUserDefaults().stringForKey("username")
         }
     }
     

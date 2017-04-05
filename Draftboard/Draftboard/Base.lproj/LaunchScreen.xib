@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,7 +22,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="447"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-login" translatesAutoresizingMaskIntoConstraints="NO" id="HoA-Vn-qnc">
-                            <rect key="frame" x="166" y="186" width="64" height="55"/>
+                            <rect key="frame" x="165.5" y="186" width="64" height="55"/>
                         </imageView>
                     </subviews>
                     <constraints>
@@ -27,7 +31,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.058823529411764705" green="0.098039215686274508" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.058823529411764705" green="0.098039215686274508" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="diO-bH-DGx" secondAttribute="bottom" id="ACz-hv-d6i"/>
                 <constraint firstAttribute="bottom" secondItem="dSX-KH-Vdx" secondAttribute="bottom" constant="220" id="KGa-aK-kfS"/>
@@ -39,7 +43,6 @@
                 <constraint firstAttribute="trailing" secondItem="dSX-KH-Vdx" secondAttribute="trailing" id="idm-uW-3pY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="669.5" y="418"/>
         </view>
     </objects>

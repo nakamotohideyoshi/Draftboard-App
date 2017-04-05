@@ -36,7 +36,7 @@ class AccountViewController: DraftboardViewController {
             logoutButton.label.alpha = 0.5
             logoutButton.backgroundColor = .greyCool()
             self.logoutButton.layer.borderColor = UIColor.greyCool().CGColor
-            logoutButton.userInteractionEnabled = false
+            logoutButton.userInteractionEnabled = true
         }
     }
     
@@ -44,6 +44,7 @@ class AccountViewController: DraftboardViewController {
         API.deauth()
         logoutButton.userInteractionEnabled = false
         logoutButton.label.text = "Logged Out".uppercaseString
+        logoutButton.label.sizeToFit()
         UIView.animateWithDuration(0.25) {
             self.usernameField.alpha = 0
             self.logoutButton.label.alpha = 0.5
