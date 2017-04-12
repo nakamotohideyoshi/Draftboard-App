@@ -96,13 +96,15 @@ class Sport {
     static let periods = [
         "nba": 4.0,
         "nfl": 4.0,
-        "nhl": 3.0
+        "nhl": 3.0,
+        "mlb": 9.0
     ]
     
     static let periodMinutes = [
         "nba": 12.0,
         "nfl": 15.0,
-        "nhl": 20.0
+        "nhl": 20.0,
+        "mlb": 6.0
     ]
     
     static let gameDuration = [
