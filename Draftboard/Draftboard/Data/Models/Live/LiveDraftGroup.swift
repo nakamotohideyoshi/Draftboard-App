@@ -24,7 +24,8 @@ class LiveDraftGroup {
     }
     
     func timeRemaining(for game: LiveGame) -> Double {
-        return timeRemaining[game] ?? 0
+        return timeRemaining[game] ?? Sport.gameDuration[sportName]!
+        //return timeRemaining[game] ?? 0
     }
     
     func startRealtime() {
