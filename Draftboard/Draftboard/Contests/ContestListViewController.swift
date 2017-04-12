@@ -37,6 +37,8 @@ class ContestListViewController: DraftboardViewController {
     
     override func viewWillAppear(animated: Bool) {
         // Reload what's already there
+        sportControl.updateSelectionLine(0, animated: false)
+        skillControl.updateSelectionLine(0, animated: false)
         tableView.reloadData()
         // Get contests
         Data.contests.get().then { contests -> Void in
