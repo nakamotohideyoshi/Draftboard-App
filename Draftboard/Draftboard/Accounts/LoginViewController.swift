@@ -27,6 +27,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     @IBOutlet weak var signupPasswordField: LabeledField!
     @IBOutlet weak var birthField: LabeledField!
     @IBOutlet weak var zipcodeField: LabeledField!
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var signupButton: DraftboardLoadingButton!
     let segmentedControl = DraftboardSegmentedControl(choices: [], textColor: .greyCool(), textSelectedColor: .greenDraftboard())
     
@@ -85,7 +86,26 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         
         segmentedControl.choices = ["LOG IN", "SIGN UP"]
         segmentedControl.indexChangedHandler = { [weak self] (_: Int) in self?.changeView() }
-        view.addSubview(segmentedControl)
+        scrollView.addSubview(segmentedControl)
+        
+        descriptionTextView.dataDetectorTypes = .Link
+        descriptionTextView.editable = false
+        descriptionTextView.backgroundColor = .clearColor()
+        let text = "Clicking \"Sign Up\" confirms you agree to our Terms of Service and Privacy Policy."
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.4
+        let attributes = [
+            NSFontAttributeName: UIFont.openSans(size: 10),
+            NSForegroundColorAttributeName: UIColor.whiteLowOpacity(),
+            NSParagraphStyleAttributeName: paragraphStyle
+        ]
+        let attributedText = NSMutableAttributedString(string: text, attributes: attributes)
+        attributedText.addAttributes([NSLinkAttributeName: "https://www.draftboard.com/terms-conditions/"], range: NSMakeRange(45, 16))
+        attributedText.addAttributes([NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue], range: NSMakeRange(45, 16))
+        attributedText.addAttributes([NSLinkAttributeName: "https://www.draftboard.com/privacy-policy/"], range: NSMakeRange(66, 14))
+        attributedText.addAttributes([NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue], range: NSMakeRange(66, 14))
+        descriptionTextView.attributedText = attributedText
+        descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: UIColor.greenDraftboard()]
     }
     
     override func viewDidLayoutSubviews() {

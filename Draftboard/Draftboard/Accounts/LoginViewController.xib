@@ -18,6 +18,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
                 <outlet property="birthField" destination="Xfs-uf-wXA" id="tyc-ie-ZAr"/>
+                <outlet property="descriptionTextView" destination="ST8-VX-MBb" id="48s-3U-5rm"/>
                 <outlet property="emailField" destination="RVx-mE-VzF" id="Lvr-7Z-sSc"/>
                 <outlet property="fullNameField" destination="Ygw-eY-BUB" id="bxN-TG-d8o"/>
                 <outlet property="loginButton" destination="1XO-l8-dAf" id="6OD-yL-rRe"/>
@@ -43,28 +44,29 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="field-floor" translatesAutoresizingMaskIntoConstraints="NO" id="nxw-SB-CCW">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQP-3X-iJG" userLabel="logoContainer">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="447"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-login" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-ih-wf1">
-                            <rect key="frame" x="166" y="108" width="64" height="55"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="55" id="KkW-lu-0bj"/>
-                                <constraint firstAttribute="width" constant="64" id="UBi-lT-inJ"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="CDt-ih-wf1" firstAttribute="top" secondItem="aQP-3X-iJG" secondAttribute="top" constant="108" id="2VA-1d-uje"/>
-                        <constraint firstItem="CDt-ih-wf1" firstAttribute="centerX" secondItem="aQP-3X-iJG" secondAttribute="centerX" constant="10" id="LcT-ul-tAQ"/>
-                    </constraints>
-                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Rf-Cs-6ar">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJV-dH-EVN">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                             <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQP-3X-iJG" userLabel="logoContainer">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-login" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-ih-wf1">
+                                            <rect key="frame" x="166" y="108" width="64" height="55"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="55" id="KkW-lu-0bj"/>
+                                                <constraint firstAttribute="width" constant="64" id="UBi-lT-inJ"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="CDt-ih-wf1" firstAttribute="top" secondItem="aQP-3X-iJG" secondAttribute="top" constant="108" id="2VA-1d-uje"/>
+                                        <constraint firstItem="CDt-ih-wf1" firstAttribute="centerX" secondItem="aQP-3X-iJG" secondAttribute="centerX" constant="10" id="LcT-ul-tAQ"/>
+                                        <constraint firstAttribute="height" constant="270" id="ya5-PC-5bk"/>
+                                    </constraints>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bR-3r-Aib" userLabel="loginContainer">
                                     <rect key="frame" x="15" y="350" width="345" height="270"/>
                                     <subviews>
@@ -94,7 +96,7 @@
                                             <rect key="frame" x="0.0" y="100" width="345" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KEEP ME LOGGED IN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkI-Ln-LNL">
-                                                    <rect key="frame" x="10" y="17.5" width="120" height="14"/>
+                                                    <rect key="frame" x="10" y="15.5" width="91.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -211,10 +213,20 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="zip code"/>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="zip code"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Clicking &quot;Sign Up&quot; confirms you agree to our Terms of Service and Privacy Policy." translatesAutoresizingMaskIntoConstraints="NO" id="ST8-VX-MBb">
+                                            <rect key="frame" x="0.0" y="340" width="345" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="uUb-Pg-7Pa"/>
+                                            </constraints>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEF-DK-GBi" userLabel="Signup Button" customClass="DraftboardLoadingButton" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="355" width="325" height="50"/>
+                                            <rect key="frame" x="10" y="430" width="325" height="50"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="Sov-t0-OuA"/>
@@ -240,24 +252,30 @@
                                         <constraint firstItem="Z4M-hp-kaY" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="TF1-JW-zQi"/>
                                         <constraint firstAttribute="trailing" secondItem="UWc-Lo-aja" secondAttribute="trailing" id="UiQ-YF-lO6"/>
                                         <constraint firstItem="Ygw-eY-BUB" firstAttribute="top" secondItem="c0O-7b-XbV" secondAttribute="top" id="YRk-f4-XeK"/>
+                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="leading" secondItem="UWc-Lo-aja" secondAttribute="leading" id="ZfF-hD-TZ0"/>
                                         <constraint firstItem="Ygw-eY-BUB" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="bIo-yE-UTk"/>
+                                        <constraint firstItem="NEF-DK-GBi" firstAttribute="top" secondItem="ST8-VX-MBb" secondAttribute="bottom" constant="40" id="cLj-B1-o4z"/>
                                         <constraint firstAttribute="trailing" secondItem="RVx-mE-VzF" secondAttribute="trailing" id="ead-yu-jWL"/>
                                         <constraint firstItem="UWc-Lo-aja" firstAttribute="top" secondItem="Xfs-uf-wXA" secondAttribute="bottom" id="gX0-yP-6ka"/>
                                         <constraint firstItem="Z4M-hp-kaY" firstAttribute="top" secondItem="Ygw-eY-BUB" secondAttribute="bottom" id="nDP-BG-hdC"/>
-                                        <constraint firstItem="NEF-DK-GBi" firstAttribute="top" secondItem="UWc-Lo-aja" secondAttribute="bottom" constant="55" id="pHc-Yq-gWI"/>
                                         <constraint firstAttribute="trailing" secondItem="NEF-DK-GBi" secondAttribute="trailing" constant="10" id="q7q-Tj-Qp3"/>
+                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="top" secondItem="UWc-Lo-aja" secondAttribute="bottom" constant="40" id="vet-5e-5HY"/>
+                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="trailing" secondItem="UWc-Lo-aja" secondAttribute="trailing" id="wea-9T-pbJ"/>
                                         <constraint firstItem="Xfs-uf-wXA" firstAttribute="top" secondItem="Cg7-gU-NDu" secondAttribute="bottom" id="xpp-pu-avV"/>
                                         <constraint firstAttribute="trailing" secondItem="Ygw-eY-BUB" secondAttribute="trailing" id="zT1-Mp-G1p"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="800" id="C3k-DG-S2h"/>
+                                <constraint firstItem="aQP-3X-iJG" firstAttribute="leading" secondItem="NJV-dH-EVN" secondAttribute="leading" id="4rV-fr-9eQ"/>
+                                <constraint firstItem="aQP-3X-iJG" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" id="9h6-LG-35N"/>
+                                <constraint firstAttribute="height" constant="900" id="C3k-DG-S2h"/>
                                 <constraint firstItem="4bR-3r-Aib" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" constant="350" id="CcY-wY-SAD"/>
                                 <constraint firstItem="c0O-7b-XbV" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" constant="350" id="LfV-HO-eZE"/>
                                 <constraint firstAttribute="trailing" secondItem="c0O-7b-XbV" secondAttribute="trailing" constant="15" id="O5H-2P-LMi"/>
                                 <constraint firstAttribute="trailing" secondItem="4bR-3r-Aib" secondAttribute="trailing" constant="15" id="VxX-Up-VmR"/>
                                 <constraint firstItem="4bR-3r-Aib" firstAttribute="leading" secondItem="NJV-dH-EVN" secondAttribute="leading" constant="15" id="bjM-XM-dZg"/>
+                                <constraint firstAttribute="trailing" secondItem="aQP-3X-iJG" secondAttribute="trailing" id="eSR-9a-bUM"/>
                                 <constraint firstItem="c0O-7b-XbV" firstAttribute="leading" secondItem="NJV-dH-EVN" secondAttribute="leading" constant="15" id="ttp-rq-Pdj"/>
                             </constraints>
                         </view>
@@ -272,33 +290,17 @@
             </subviews>
             <color key="backgroundColor" red="0.074509803921568626" green="0.10196078431372549" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="aQP-3X-iJG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4gV-Nr-lFS"/>
                 <constraint firstItem="6Rf-Cs-6ar" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5mI-wP-gWd"/>
-                <constraint firstItem="2kz-Pv-XKj" firstAttribute="top" secondItem="aQP-3X-iJG" secondAttribute="bottom" id="6Gh-NG-Zjp"/>
                 <constraint firstAttribute="bottom" secondItem="nxw-SB-CCW" secondAttribute="bottom" id="7Af-5p-elh"/>
                 <constraint firstItem="nxw-SB-CCW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="94V-rF-391"/>
-                <constraint firstItem="aQP-3X-iJG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AhF-pG-O0X"/>
-                <constraint firstItem="aQP-3X-iJG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BFn-88-Rlk"/>
                 <constraint firstAttribute="trailing" secondItem="nxw-SB-CCW" secondAttribute="trailing" id="Bim-Ck-KPf"/>
-                <constraint firstAttribute="trailing" secondItem="aQP-3X-iJG" secondAttribute="trailing" id="Dnm-30-Due"/>
                 <constraint firstItem="NJV-dH-EVN" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="Hcz-Bj-IaP"/>
                 <constraint firstAttribute="trailing" secondItem="6Rf-Cs-6ar" secondAttribute="trailing" id="I5u-Bc-9a6"/>
-                <constraint firstItem="aQP-3X-iJG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Mua-6y-iEK"/>
                 <constraint firstItem="6Rf-Cs-6ar" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S4G-sQ-VTG"/>
                 <constraint firstItem="nxw-SB-CCW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TTN-kS-ekK"/>
-                <constraint firstAttribute="bottom" secondItem="aQP-3X-iJG" secondAttribute="bottom" constant="220" id="VrD-hp-cP0"/>
                 <constraint firstAttribute="bottom" secondItem="6Rf-Cs-6ar" secondAttribute="bottom" id="oxX-xh-CGN"/>
-                <constraint firstItem="aQP-3X-iJG" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.67" id="syv-W3-Tei"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="4gV-Nr-lFS"/>
-                    <exclude reference="BFn-88-Rlk"/>
-                    <exclude reference="syv-W3-Tei"/>
-                    <exclude reference="6Gh-NG-Zjp"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="-104" y="106"/>
         </view>
     </objects>
