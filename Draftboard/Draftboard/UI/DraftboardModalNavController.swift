@@ -34,6 +34,14 @@ class DraftboardModalNavController: UIViewController {
         contentView.leftRancor.constraintEqualToRancor(view.leftRancor).active = true
     }
     
+    func hideBlurEffect() {
+        blurView.hidden = true
+    }
+    
+    func showBlurEffect() {
+        blurView.hidden = false
+    }
+    
     func addBlurEffect() {
         blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
         self.view.addSubview(blurView)

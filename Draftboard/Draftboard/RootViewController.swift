@@ -156,7 +156,12 @@ extension RootViewController {
 
 extension RootViewController {
     
-    func pushAlertViewController(nvc: DraftboardModalViewController, animated: Bool = true) {
+    func pushAlertViewController(nvc: DraftboardModalViewController, withBlur: Bool = true, animated: Bool = true) {
+        if withBlur {
+            modalAlertController.showBlurEffect()
+        } else {
+            modalAlertController.hideBlurEffect()
+        }
         modalAlertController.pushViewController(nvc, animated: animated)
         if (modalAlertController.vcs.count == 1) {
             showAlertViewController(animated)

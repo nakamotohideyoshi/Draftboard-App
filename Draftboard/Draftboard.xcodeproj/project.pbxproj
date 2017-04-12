@@ -229,6 +229,8 @@
 		5DF49CF01C1BA7DC00B371CE /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */; };
 		5DF49CF11C1BA7DC00B371CE /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */; };
 		934B5EE01BB5B42C00502FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B29F6ACE1E9BF89400E0A75A /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */; };
+		B29F6ACF1E9BF89400E0A75A /* LockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -456,6 +458,8 @@
 		5DF14B3D1BB21A4200C3F07C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
+		B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
+		B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,6 +659,8 @@
 				5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */,
 				3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */,
 				3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */,
+				B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */,
+				B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */,
 			);
 			name = Account;
 			path = Accounts;
@@ -957,6 +963,7 @@
 				3E7860CB1B9FB0E7004013AB /* LaunchScreen.xib in Resources */,
 				3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */,
 				5DAC07961C21DE680002B97B /* DraftboardDetailCell.xib in Resources */,
+				B29F6ACF1E9BF89400E0A75A /* LockViewController.xib in Resources */,
 				3E9DBAB01CB878860098BB77 /* WithdrawView.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D6237C01BB61F7B0007E62A /* LineupCardCellView.xib in Resources */,
@@ -1070,6 +1077,7 @@
 				3E9FB9011D70F35000F55990 /* EntryConfirmationView.swift in Sources */,
 				3EC4EDF71DB164C700D20914 /* LiveContest.swift in Sources */,
 				3EF777AD1D0B54CB002322F3 /* LineupDraftViewController.swift in Sources */,
+				B29F6ACE1E9BF89400E0A75A /* LockViewController.swift in Sources */,
 				5D54F4351BF29AF2005BB87F /* LineupStatView.swift in Sources */,
 				3E192C231CD93DF40021A31D /* APIRequest.swift in Sources */,
 				5D6237DD1BB6200B0007E62A /* DraftboardModalViewController.swift in Sources */,

@@ -194,16 +194,27 @@ extension ContestListViewController {
     
     func showError(error: ErrorType) {
         let error = error as? ContestEntryError ?? ContestEntryError.Unknown
-        let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
-        
-        vc.actions = ["OK"]
-        vc.promise.then { _ -> Void in
-            RootViewController.sharedInstance.popAlertViewController()
+        if (error == .WrongSkillLevel) {
+            let vc = LockViewController(nibName: "LockViewController", bundle: nil)
+            vc.promise.then { _ -> Void in
+                RootViewController.sharedInstance.popAlertViewController()
+            }
+            RootViewController.sharedInstance.pushAlertViewController(vc, withBlur: false)
+            vc.titleLabel.text = sportControl.choices[sportControl.currentIndex].uppercaseString + " " + skillControl.choices[skillControl.currentIndex].uppercaseString + " lobby locked".uppercaseString
+            vc.msgLabel.text = "You are currently entered in one or more " + sportControl.choices[sportControl.currentIndex].uppercaseString + " " + enteredSkillLevel!.capitalizedString + " contests. To enter " + sportControl.choices[sportControl.currentIndex].uppercaseString + " " + skillControl.choices[skillControl.currentIndex].capitalizedString + " contests please deregister from all " + sportControl.choices[sportControl.currentIndex].uppercaseString + " " + enteredSkillLevel!.capitalizedString + " contests."
+        } else {
+            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+            
+            vc.actions = ["OK"]
+            vc.promise.then { _ -> Void in
+                RootViewController.sharedInstance.popAlertViewController()
+            }
+            
+            RootViewController.sharedInstance.pushAlertViewController(vc)
+            vc.titleLabel.text = error.title
+            vc.errorLabel.text = error.description
         }
         
-        RootViewController.sharedInstance.pushAlertViewController(vc)
-        vc.titleLabel.text = error.title
-        vc.errorLabel.text = error.description
     }
     
 }
@@ -271,7 +282,7 @@ enum ContestEntryError: ErrorType {
 extension ContestEntryError : CustomStringConvertible {
     var title: String {
         switch self {
-        case .WrongSkillLevel: return "Wrong Skill Level".uppercaseString
+        case .WrongSkillLevel: return "Skill Level Unavailable".uppercaseString
         case .NoEligibleLineups: return "No Eligible Lineups".uppercaseString
         case .MaxEntered: return "Max Entered".uppercaseString
         case .Unknown: return "Error".uppercaseString
