@@ -123,6 +123,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     
     func changeView() {
         if (segmentedControl.currentIndex == 0) {
+            scrollView.setContentOffset(CGPoint(x:0, y:-scrollView.contentInset.top), animated: true)
             scrollView.scrollEnabled = false
             loginContainer.hidden = false
             signupContainer.hidden = true
