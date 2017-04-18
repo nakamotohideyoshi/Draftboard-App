@@ -111,9 +111,13 @@ class LineupEntryViewController: DraftboardViewController {
     
     func updateTimeRemaining() {
         tableView.reloadData()
-        let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
-        let timeRemaining = games.reduce(0) { $0 + liveDraftGroup!.timeRemaining(for: $1) }
-        lineupEntryView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
+        if (lineup!.isLive && liveContests?.count == 0) {
+            lineupEntryView.footerView.pmr.valueLabel.text = String(format: "%.0f", 0)
+        } else {
+            let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
+            let timeRemaining = games.reduce(0) { $0 + liveDraftGroup!.timeRemaining(for: $1) }
+            lineupEntryView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
+        }
     }
     
     func updateWinnings() {
