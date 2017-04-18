@@ -256,7 +256,7 @@ class DraftboardNavController: UIViewController {
                 startPos.y + (deltaPos.y * value)
             )
             
-            vc.view.alpha = max(abs(value - 1), 0.6)
+            //vc.view.alpha = max(abs(value - 1), 0.6)
         }
         
         return spring
