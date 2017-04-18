@@ -136,10 +136,12 @@ extension Data {
                         liveContest.draftGroupID = draftGroup
                         API.contestAllLineups(id: contest).then { hexString -> Void in
                             liveContest.setLineups(hexString: hexString, sportName: sport)
+                            print("live contest lineups", liveContest.lineups)
                             for l in liveContest.lineups {
                                 print(l.players)
                             }
                         }
+                        print("pool ID", pool)
                         API.contestInfo(id: Int(pool)!).then { contest -> Void in
                             liveContest.contestName = contest.name
                             liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
@@ -161,5 +163,27 @@ extension Data {
             return (draftGroup, contests)
         }
     }
-
+    
+    class func getWinnings(for lineup: LineupWithStart) -> Promise<Int> {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
+        return API.playHistory(dateFormatter.stringFromDate(lineup.start)).then { history -> Int in
+            var winnings = 0
+            if let lineups: [NSDictionary] = try? history.get("lineups") {
+                for l in lineups {
+                    let id: Int = try! l.get("id")
+                    if (id == lineup.id) {
+                        let entries: [NSDictionary] = try! l.get("entries")
+                        for entry in entries {
+                            let payout: NSDictionary = try! entry.get("payout")
+                            let amount: Int = try! payout.get("amount")
+                            winnings = winnings + amount
+                        }
+                    }
+                }
+            }
+            return winnings
+        }
+    }
 }
