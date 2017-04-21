@@ -164,21 +164,25 @@ extension Data {
         }
     }
     
-    class func getWinnings(for lineup: LineupWithStart) -> Promise<Int> {
+    class func getWinnings(for lineup: LineupWithStart) -> Promise<Double> {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
-        return API.playHistory(dateFormatter.stringFromDate(lineup.start)).then { history -> Int in
-            var winnings = 0
+        print(dateFormatter.stringFromDate(lineup.start))
+        return API.playHistory(dateFormatter.stringFromDate(lineup.start)).then { history -> Double in
+            var winnings = 0.0
             if let lineups: [NSDictionary] = try? history.get("lineups") {
                 for l in lineups {
                     let id: Int = try! l.get("id")
                     if (id == lineup.id) {
                         let entries: [NSDictionary] = try! l.get("entries")
                         for entry in entries {
-                            let payout: NSDictionary = try! entry.get("payout")
-                            let amount: Int = try! payout.get("amount")
-                            winnings = winnings + amount
+                            if let payout: NSDictionary = try? entry.get("payout") {
+                                let amount: Double = try! payout.get("amount")
+                                winnings = winnings + amount
+                            } else {
+                                winnings = winnings + 0.0
+                            }
                         }
                     }
                 }
