@@ -73,11 +73,18 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         signupButton.disabled = true
         
         fullNameField.textField.addTarget(self, action: .fullnameChanged, forControlEvents: .EditingChanged)
+        fullNameField.textField.keyboardType = .EmailAddress
         usernameField.textField.addTarget(self, action: .usernameChanged, forControlEvents: .EditingChanged)
+        usernameField.textField.keyboardType = .EmailAddress
         emailField.textField.addTarget(self, action: .emailChanged, forControlEvents: .EditingChanged)
+        emailField.textField.keyboardType = .EmailAddress
         signupPasswordField.textField.addTarget(self, action: .signupPasswordChanged, forControlEvents: .EditingChanged)
+        signupPasswordField.textField.keyboardType = .EmailAddress
         birthField.textField.addTarget(self, action: .birthChanged, forControlEvents: .EditingChanged)
+        birthField.textField.keyboardType = .NumberPad
+        birthField.labelType = .Birthday
         zipcodeField.textField.addTarget(self, action: .zipcodeChanged, forControlEvents: .EditingChanged)
+        zipcodeField.textField.keyboardType = .NumberPad
         
         scrollView.scrollEnabled = false
         signupContainer.hidden = true

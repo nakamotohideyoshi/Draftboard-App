@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct LabeledFieldType : OptionSetType {
+    let rawValue: Int
+    static let Normal = LabeledFieldType(rawValue: 0)
+    static let Birthday = LabeledFieldType(rawValue: 1 << 0)
+}
+
 @IBDesignable
 class LabeledField: DraftboardNibView, UITextFieldDelegate {
     @IBOutlet weak var borderTopView: UIView!
@@ -19,6 +25,7 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
     @IBOutlet weak var bottomBorderHeightConstraint: NSLayoutConstraint!
     
     var delegate: UITextFieldDelegate?
+    var labelType: LabeledFieldType = .Normal
     
     override func willAwakeFromNib() {
         borderBottomView.hidden = true
@@ -43,6 +50,22 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
         }
         
         textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if (labelType == .Birthday) {
+            let currentText = textField.text
+            if (string != "") {
+                if currentText!.characters.count == 2 {
+                    textField.text = currentText! + "/"
+                } else if currentText!.characters.count == 5 {
+                    textField.text = currentText! + "/"
+                } else if currentText!.characters.count == 10 {
+                    return false
+                }
+            }
+        }
         return true
     }
     
