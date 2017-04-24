@@ -29,8 +29,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9KK-KS-zFv">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.062745098039215685" green="0.090196078431372548" blue="0.13333333333333333" alpha="0.69558189655172409" colorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yh9-9A-mCW">
-                    <rect key="frame" x="39" y="249" width="296" height="171"/>
+                    <rect key="frame" x="39" y="248" width="296" height="171"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-lock" translatesAutoresizingMaskIntoConstraints="NO" id="V5d-oF-bBO">
                             <rect key="frame" x="137" y="35" width="22" height="27"/>
@@ -71,8 +75,12 @@
                 </view>
             </subviews>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="9KK-KS-zFv" secondAttribute="bottom" id="42Z-nf-koU"/>
+                <constraint firstAttribute="trailing" secondItem="9KK-KS-zFv" secondAttribute="trailing" id="OhW-bV-UM2"/>
+                <constraint firstItem="9KK-KS-zFv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S1h-pw-rhe"/>
                 <constraint firstItem="Yh9-9A-mCW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UAd-z1-gmV"/>
                 <constraint firstItem="Yh9-9A-mCW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="m79-rW-mSU"/>
+                <constraint firstItem="9KK-KS-zFv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="znj-Qw-kBe"/>
             </constraints>
         </view>
     </objects>

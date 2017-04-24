@@ -82,6 +82,17 @@ class ContestListViewController: DraftboardViewController {
         if reload {
             tableView.reloadData()
         }
+        
+        if enteredSkillLevel != nil && enteredSkillLevel != skillLevel {
+            let vc = LockViewController(nibName: "LockViewController", bundle: nil)
+            vc.promise.then { _ -> Void in
+                RootViewController.sharedInstance.popAlertViewController()
+                self.skillControl.updateSelectionLine(self.skillControl.choices.indexOf(self.enteredSkillLevel!)!, animated: true)
+            }
+            RootViewController.sharedInstance.pushAlertViewController(vc, withBlur: false)
+            vc.titleLabel.text = sportControl.choices[sportControl.currentIndex].uppercaseString + " " + skillControl.choices[skillControl.currentIndex].uppercaseString + " lobby locked".uppercaseString
+            vc.msgLabel.text = "You are currently entered in one or more " + sportControl.choices[sportControl.currentIndex].uppercaseString + " " + enteredSkillLevel!.capitalizedString + " contests. To enter " + sportControl.choices[sportControl.currentIndex].uppercaseString + " " + skillControl.choices[skillControl.currentIndex].capitalizedString + " contests please deregister from all " + sportControl.choices[sportControl.currentIndex].uppercaseString + " " + enteredSkillLevel!.capitalizedString + " contests."
+        }
     }
     
     func update() {
