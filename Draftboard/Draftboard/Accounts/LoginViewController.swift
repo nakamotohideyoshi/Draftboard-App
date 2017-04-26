@@ -65,7 +65,9 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         loginButton.disabled = true
         
         passwordField.textField.addTarget(self, action: .passwordChanged, forControlEvents: .EditingChanged)
+        passwordField.textField.tag = 12
         loginField.textField.addTarget(self, action: .loginChanged, forControlEvents: .EditingChanged)
+        loginField.textField.tag = 11
         
         signupButton.addTarget(self, action: .didTapSignup, forControlEvents: .TouchUpInside)
         signupButton.userInteractionEnabled = false
@@ -73,18 +75,22 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         signupButton.disabled = true
         
         fullNameField.textField.addTarget(self, action: .fullnameChanged, forControlEvents: .EditingChanged)
-        fullNameField.textField.keyboardType = .EmailAddress
+        fullNameField.textField.tag = 1
         usernameField.textField.addTarget(self, action: .usernameChanged, forControlEvents: .EditingChanged)
-        usernameField.textField.keyboardType = .EmailAddress
+        usernameField.textField.tag = 2
         emailField.textField.addTarget(self, action: .emailChanged, forControlEvents: .EditingChanged)
+        emailField.textField.tag = 3
         emailField.textField.keyboardType = .EmailAddress
         signupPasswordField.textField.addTarget(self, action: .signupPasswordChanged, forControlEvents: .EditingChanged)
-        signupPasswordField.textField.keyboardType = .EmailAddress
+        signupPasswordField.textField.tag = 4
         birthField.textField.addTarget(self, action: .birthChanged, forControlEvents: .EditingChanged)
+        birthField.textField.tag = 5
         birthField.textField.keyboardType = .NumberPad
         birthField.labelType = .Birthday
         zipcodeField.textField.addTarget(self, action: .zipcodeChanged, forControlEvents: .EditingChanged)
+        zipcodeField.textField.tag = 6
         zipcodeField.textField.keyboardType = .NumberPad
+        zipcodeField.labelType = .Zipcode
         
         scrollView.scrollEnabled = false
         signupContainer.hidden = true
@@ -416,11 +422,29 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     
     func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        scrollView.setContentOffset(CGPoint(x:0, y:-scrollView.contentInset.top), animated: true)
+        if segmentedControl.currentIndex == 1 {
+            var emptyField: UITextField!
+            for index in 1...6 {
+                let inputField = signupContainer.viewWithTag(index) as! UITextField!
+                if inputField.text == "" {
+                    emptyField = inputField
+                    break
+                }
+            }
+            if emptyField != nil {
+                scrollView.setContentOffset(CGPoint(x:0, y:-scrollView.contentInset.top), animated: true)
+            } else {
+                scrollView.setContentOffset(CGPoint(x:0, y:scrollView.contentSize.height - scrollView.bounds.size.height), animated: true)
+            }
+        } else {
+            scrollView.setContentOffset(CGPoint(x:0, y:-scrollView.contentInset.top), animated: true)
+        }
+        scrollView.scrollEnabled = true
         animateLogo(1.0)
     }
     
     func keyboardWillShow(notification: NSNotification) {
+        scrollView.scrollEnabled = false
         animateLogo(0.0, offset: -40.0)
     }
     

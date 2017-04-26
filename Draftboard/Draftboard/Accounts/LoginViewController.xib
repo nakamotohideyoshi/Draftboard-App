@@ -77,7 +77,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="username"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="username@email.com"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="user@email.com"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb0-JJ-cIu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
@@ -87,7 +87,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Password"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="password"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Required"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="secureEntry" value="YES"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
                                             </userDefinedRuntimeAttributes>
@@ -161,7 +161,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="full name"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="full name"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Your first and last names"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4M-hp-kaY" userLabel="usernameField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
@@ -171,7 +171,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="username"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="username"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="How you appear to other users"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVx-mE-VzF" userLabel="emailField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
@@ -181,7 +181,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="email"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="email"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="This also serves as your login"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-gU-NDu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
@@ -191,7 +191,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="password"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="password"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Minimum 8 characters"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="secureEntry" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
@@ -212,7 +212,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="zip code"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="zip code"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Your current residence"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
