@@ -229,8 +229,12 @@
 		5DF49CF01C1BA7DC00B371CE /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */; };
 		5DF49CF11C1BA7DC00B371CE /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */; };
 		934B5EE01BB5B42C00502FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B26405A81EB6E39000DF6B61 /* TeamColors.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26405A71EB6E39000DF6B61 /* TeamColors.plist */; };
 		B29F6ACE1E9BF89400E0A75A /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */; };
 		B29F6ACF1E9BF89400E0A75A /* LockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */; };
+		B2DC21761EB3DFED001E4C4F /* PlayerGameDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DC21751EB3DFED001E4C4F /* PlayerGameDetailView.swift */; };
+		B2E076931EBB22480052F593 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E076921EBB22480052F593 /* Report.swift */; };
+		B2E076951EBB305C0052F593 /* PlayerReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E076941EBB305C0052F593 /* PlayerReportCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -458,8 +462,12 @@
 		5DF14B3D1BB21A4200C3F07C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
+		B26405A71EB6E39000DF6B61 /* TeamColors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TeamColors.plist; sourceTree = "<group>"; };
 		B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockViewController.xib; sourceTree = "<group>"; };
+		B2DC21751EB3DFED001E4C4F /* PlayerGameDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerGameDetailView.swift; sourceTree = "<group>"; };
+		B2E076921EBB22480052F593 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		B2E076941EBB305C0052F593 /* PlayerReportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerReportCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,8 +556,10 @@
 				3E83CCC41D91D01500324EB2 /* PlayerDetailView.swift */,
 				3E83CCC81D91D0BB00324EB2 /* PlayerDetailTableView.swift */,
 				3E83CCCC1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift */,
+				B2E076941EBB305C0052F593 /* PlayerReportCell.swift */,
 				3E83CCC61D91D0A800324EB2 /* PlayerDetailHeaderView.swift */,
 				3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */,
+				B2DC21751EB3DFED001E4C4F /* PlayerGameDetailView.swift */,
 			);
 			name = PlayerDetail;
 			sourceTree = "<group>";
@@ -594,6 +604,7 @@
 				3ECA5F811CF75A2300DEDFC1 /* DerivedData.swift */,
 				3E272EA91C2880390023B303 /* TeamNames.swift */,
 				3E192C361CE55BE50021A31D /* Realtime.swift */,
+				B26405A71EB6E39000DF6B61 /* TeamColors.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -890,6 +901,7 @@
 				3E04ECAB1D02138A00EE325C /* Boxscore.swift */,
 				3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */,
 				3E8A7E691D39D16C0020681E /* LineupEntry.swift */,
+				B2E076921EBB22480052F593 /* Report.swift */,
 				3EC4EDF51DB14C1100D20914 /* Live */,
 			);
 			path = Models;
@@ -964,6 +976,7 @@
 				3C5A6F091C16559E00C030B3 /* PermissionViewController.xib in Resources */,
 				5DAC07961C21DE680002B97B /* DraftboardDetailCell.xib in Resources */,
 				B29F6ACF1E9BF89400E0A75A /* LockViewController.xib in Resources */,
+				B26405A81EB6E39000DF6B61 /* TeamColors.plist in Resources */,
 				3E9DBAB01CB878860098BB77 /* WithdrawView.xib in Resources */,
 				3E7860C81B9FB0E7004013AB /* Images.xcassets in Resources */,
 				5D6237C01BB61F7B0007E62A /* LineupCardCellView.xib in Resources */,
@@ -1131,6 +1144,7 @@
 				3E9FB90C1D8A0EBF00F55990 /* ContestDetailPanelView.swift in Sources */,
 				5DAC07981C222ED70002B97B /* DraftboardButtonHeader.swift in Sources */,
 				3EC4EE031DB1802000D20914 /* LiveGame.swift in Sources */,
+				B2DC21761EB3DFED001E4C4F /* PlayerGameDetailView.swift in Sources */,
 				3E04ECAA1D02132000EE325C /* Game.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
 				5D6237D41BB61FD60007E62A /* ResultsViewController.swift in Sources */,
@@ -1140,6 +1154,7 @@
 				5D6237D51BB61FD60007E62A /* RootViewController.swift in Sources */,
 				3E192C2F1CE40DBA0021A31D /* NSTimeInterval+Data.swift in Sources */,
 				5D6237BD1BB61F7B0007E62A /* LineupCardView.swift in Sources */,
+				B2E076931EBB22480052F593 /* Report.swift in Sources */,
 				3E192C2B1CDD153D0021A31D /* API+Date.swift in Sources */,
 				3E83CCC71D91D0A800324EB2 /* PlayerDetailHeaderView.swift in Sources */,
 				3C74CA3C1BE050D50077DF0C /* ContestDetailViewControllerOld.swift in Sources */,
@@ -1197,6 +1212,7 @@
 				5D9A32211BCD72A0006C758B /* DraftboardNavController.swift in Sources */,
 				3EB2CB741BFE763400579F1B /* DraftGroup.swift in Sources */,
 				5D901CEA1BBB5E7800E85374 /* UIFont+DraftboardFonts.swift in Sources */,
+				B2E076951EBB305C0052F593 /* PlayerReportCell.swift in Sources */,
 				5D6237CB1BB61F9B0007E62A /* AppDelegate.swift in Sources */,
 				3EA71E191C1A714100D1BC12 /* UIView+Traversal.swift in Sources */,
 				3E83CCD21D95CF7500324EB2 /* AccountViewController.swift in Sources */,

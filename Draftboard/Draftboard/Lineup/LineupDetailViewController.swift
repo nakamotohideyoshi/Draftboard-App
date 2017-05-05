@@ -229,7 +229,6 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     func updateWinnings() {
-        print("update winnings")
         if (lineup!.isLive && liveContests?.count == 0) {
             Data.getWinnings(for: lineup!).then { winnings -> Void in
                 self.lineupDetailView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
@@ -246,7 +245,6 @@ class LineupDetailViewController: DraftboardViewController {
                     return total
                 }
             }
-            print("****", winnings)
             lineupDetailView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
         }
     }
@@ -338,7 +336,7 @@ class LineupDetailViewController: DraftboardViewController {
 // MARK: -
 
 private typealias TableViewDelegate = LineupDetailViewController
-extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupPlayerCellActionButtonDelegate {
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupPlayerCellActionButtonDelegate, PlayerDetailDraftButtonDelegate {
     
     // UITableViewDataSource
     
@@ -385,6 +383,9 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
             let playerDetailViewController = PlayerDetailViewController()
             playerDetailViewController.sportName = lineup?.sportName
             playerDetailViewController.player = player
+            playerDetailViewController.showRemoveButton = true
+            playerDetailViewController.draftButtonDelegate = self
+            playerDetailViewController.indexPath = indexPath
             navController?.pushViewController(playerDetailViewController)
         } else {
             draftViewController.slot = slot
@@ -402,6 +403,17 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         delay(0.1) {
             self.updateFooterStats()
         }
+    }
+    
+    // PlayerDetailDraftButtonDelegate
+    func draftButtonTapped(indexPath: NSIndexPath) {
+        lineup!.slots[indexPath.row].player = nil
+        tableView.reloadData()
+        navController?.updateTitlebar()
+        delay(0.1) {
+            self.updateFooterStats()
+        }
+        navController?.popViewController()
     }
     
 }

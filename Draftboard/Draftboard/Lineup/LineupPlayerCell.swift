@@ -27,6 +27,7 @@ class LineupPlayerCell: UITableViewCell {
     let awayLabel = UILabel()
     let vsLabel = UILabel()
     let homeLabel = UILabel()
+    let timeLabel = UILabel()
     let fppgLabel = UILabel()
     let salaryLabel = UILabel()
     let actionButton = UIButton()
@@ -66,6 +67,7 @@ class LineupPlayerCell: UITableViewCell {
         contentView.addSubview(awayLabel)
         contentView.addSubview(vsLabel)
         contentView.addSubview(homeLabel)
+        contentView.addSubview(timeLabel)
         contentView.addSubview(fppgLabel)
 
         contentView.addSubview(salaryLabel)
@@ -89,6 +91,9 @@ class LineupPlayerCell: UITableViewCell {
         vsLabel.textColor = UIColor(0x9c9faf)
         
         homeLabel.textColor = UIColor(0x9c9faf)
+        
+        timeLabel.font = .openSans(weight: .Semibold, size: 10.0)
+        timeLabel.textColor = UIColor(0x9c9faf)
 
         fppgLabel.font = .openSans(weight: .Semibold, size: 10.0)
         fppgLabel.textColor = UIColor(0x9c9faf)
@@ -109,14 +114,15 @@ class LineupPlayerCell: UITableViewCell {
         let awayLabelSize = awayLabel.sizeThatFits(CGSizeZero)
         let vsLabelSize = vsLabel.sizeThatFits(CGSizeZero)
         let homeLabelSize = homeLabel.sizeThatFits(CGSizeZero)
+        let timeLabelSize = timeLabel.sizeThatFits(CGSizeZero)
         let fppgLabelSize = fppgLabel.sizeThatFits(CGSizeZero)
         let salaryLabelSize = salaryLabel.sizeThatFits(CGSizeZero)
         let actionButtonSize = CGSizeMake(52, bounds.height)
         
-        let infoHeight = nameLabelSize.height + (showAllInfo ? fppgLabelSize.height + 2 : 0)
+        let infoHeight = nameLabelSize.height + (showAllInfo ? awayLabelSize.height + 2 : 0)
         let nameLabelOriginY = fitToPixel(bounds.height / 2 - infoHeight / 2)
-        let awayLabelOriginY = nameLabelOriginY + fitToPixel(nameLabel.font.ascender - awayLabel.font.ascender)
-        let fppgLabelOriginY = nameLabelOriginY + nameLabelSize.height + 2
+        let fppgLabelOriginY = nameLabelOriginY + fitToPixel(nameLabel.font.ascender - fppgLabel.font.ascender)
+        let awayLabelOriginY = nameLabelOriginY + nameLabelSize.height + 2
         let salaryLabelOriginY = fitToPixel(bounds.height / 2 - salaryLabelSize.height / 2)
         
         let actionButtonOriginX = bounds.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 0)
@@ -132,13 +138,17 @@ class LineupPlayerCell: UITableViewCell {
         x += nameLabelSize.width + 2
         nameTeamSeparatorLabel.frame = CGRectMake(x, nameLabelOriginY, nameTeamSeparatorLabelSize.width, nameTeamSeparatorLabelSize.height)
         x += nameTeamSeparatorLabelSize.width + 2
-        awayLabel.frame = CGRectMake(x, awayLabelOriginY, awayLabelSize.width, awayLabelSize.height)
-        x += awayLabelSize.width
-        vsLabel.frame = CGRectMake(x, awayLabelOriginY, vsLabelSize.width, vsLabelSize.height)
-        x += vsLabelSize.width
-        homeLabel.frame = CGRectMake(x, awayLabelOriginY, homeLabelSize.width, homeLabelSize.height)
-        x += homeLabelSize.width
-        fppgLabel.frame = CGRectMake(nameLabel.frame.origin.x, fppgLabelOriginY, fppgLabelSize.width, fppgLabelSize.height)
+        fppgLabel.frame = CGRectMake(x, fppgLabelOriginY, fppgLabelSize.width, fppgLabelSize.height)
+        
+        var x1 = nameLabel.frame.origin.x
+        awayLabel.frame = CGRectMake(x1, awayLabelOriginY, awayLabelSize.width, awayLabelSize.height)
+        x1 += awayLabelSize.width
+        vsLabel.frame = CGRectMake(x1, awayLabelOriginY, vsLabelSize.width, vsLabelSize.height)
+        x1 += vsLabelSize.width
+        homeLabel.frame = CGRectMake(x1, awayLabelOriginY, homeLabelSize.width, homeLabelSize.height)
+        x1 += homeLabelSize.width + 2
+        timeLabel.frame = CGRectMake(x1, awayLabelOriginY, timeLabelSize.width, timeLabelSize.height)
+        
         salaryLabel.frame = CGRectMake(salaryLabelOriginX, salaryLabelOriginY, salaryLabelSize.width, salaryLabelSize.height)
         actionButton.frame = CGRectMake(actionButtonOriginX, 0, actionButtonSize.width, actionButtonSize.height)
         borderView.frame = CGRectMake(10, bounds.height - 1, bounds.width - 20, 1)
@@ -171,9 +181,9 @@ class LineupPlayerCell: UITableViewCell {
         // Everything but team labels
         positionLabel.text = (player as? HasPosition)?.position
         avatarImageView.player = player
-        nameLabel.text = player.shortName
+        nameLabel.text = player.name
         nameLabel.textColor = UIColor(0x46495e)
-        fppgLabel.text = showAllInfo ? String(format: "%.1f FPPG", player.fppg) : nil
+        fppgLabel.text = String(format: "%.1f FPPG", player.fppg)
         salaryLabel.text = Format.currency.stringFromNumber(player.salary)
         nameTeamSeparatorLabel.text = "-"
         
@@ -186,14 +196,19 @@ class LineupPlayerCell: UITableViewCell {
             awayLabel.textColor = (p.game.away === p.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
             homeLabel.textColor = (p.game.home === p.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
             vsLabel.text = " vs "
+            let df = NSDateFormatter()
+            df.dateFormat = "h:mm a"
+            timeLabel.text = df.stringFromDate(p.game.start)
         }
         // Just the team alias
         else {
             awayLabel.text = player.teamAlias
             awayLabel.font = .openSans(size: 10.0)
             awayLabel.textColor = UIColor(0x9c9faf)
+            awayLabel.text = nil
             homeLabel.text = nil
             vsLabel.text = nil
+            timeLabel.text = nil
         }
 
     }

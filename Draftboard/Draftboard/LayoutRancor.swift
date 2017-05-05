@@ -22,6 +22,10 @@ class LayoutRancor : NSObject {
         return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: rancor.view, attribute: rancor.attribute, multiplier: 1, constant: 0)
     }
     
+    func constraintEqualToRancor(rancor: LayoutRancor!, multiplierValue: CGFloat) -> NSLayoutConstraint! {
+        return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: rancor.view, attribute: rancor.attribute, multiplier: multiplierValue, constant: 0)
+    }
+    
     func constraintEqualToRancor(rancor: LayoutRancor!, constant: CGFloat) -> NSLayoutConstraint! {
         return NSLayoutConstraint(item: view, attribute: attribute, relatedBy: .Equal, toItem: rancor.view, attribute: rancor.attribute, multiplier: 1, constant: constant)
     }

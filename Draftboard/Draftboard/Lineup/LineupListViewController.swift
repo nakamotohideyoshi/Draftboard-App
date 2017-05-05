@@ -85,10 +85,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
 //        }.then { (sportName: String) -> Promise<DraftGroup> in
         return firstly { () -> Promise<DraftGroup> in
             let mcc = DraftboardModalChoiceController<DraftGroup>(title: "CHOOSE A START TIME", choices: nil)
-            when(DerivedData.upcomingDraftGroupChoices(sportName: "nba"), DerivedData.upcomingDraftGroupChoices(sportName: "mlb")).then { (nbaChoices, mlbChoices) in
-                mcc.choiceData = nbaChoices + mlbChoices
-            }
-            //DerivedData.upcomingDraftGroupChoices(sportName: sportName).then { mcc.choiceData = $0 }
+            DerivedData.upcomingDraftGroupChoices().then { mcc.choiceData = $0 }
             return mcc.promise()
         }.then { draftGroup -> DraftGroup in
             RootViewController.sharedInstance.popModalViewController()

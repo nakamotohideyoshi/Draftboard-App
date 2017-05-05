@@ -145,10 +145,12 @@ class ModalStatView: DraftboardView {
     var titleLabel = UILabel()
     var valueLabel = UILabel()
     let rightBorderView = UIView()
+    let leftBorderView = UIView()
     
     override func setup() {
         addSubview(titleLabel)
         addSubview(valueLabel)
+        addSubview(leftBorderView)
         addSubview(rightBorderView)
         
         titleLabel.font = .openSans(weight: .Semibold, size: 9)
@@ -159,6 +161,8 @@ class ModalStatView: DraftboardView {
         valueLabel.textColor = .whiteColor()
         valueLabel.textAlignment = .Center
         
+        leftBorderView.hidden = true
+        leftBorderView.backgroundColor = UIColor(0x57616c)
         rightBorderView.backgroundColor = UIColor(0x57616c)
     }
     
@@ -176,6 +180,7 @@ class ModalStatView: DraftboardView {
         
         titleLabel.frame = CGRectMake(0, titleLabelY, boundsW, titleLabelH)
         valueLabel.frame = CGRectMake(0, valueLabelY, boundsW, valueLabelH)
+        leftBorderView.frame = CGRectMake(0, 0, 1.5, bounds.height)
         rightBorderView.frame = CGRectMake(bounds.width - 1.5, 0, 1.5, bounds.height)
     }
     

@@ -14,6 +14,7 @@ class PlayerDetailHeaderView: DraftboardView {
     let avatarHaloView = UIImageView()
     let avatarLoaderView = LoaderView()
     let nextGameLabel = DraftboardTextLabel()
+    let teamNameLabel = DraftboardTextLabel()
     let posStatView = ModalStatView()
     let salaryStatView = ModalStatView()
     let fppgStatView = ModalStatView()
@@ -25,6 +26,7 @@ class PlayerDetailHeaderView: DraftboardView {
         addSubview(avatarLoaderView)
         addSubview(avatarView)
         addSubview(nextGameLabel)
+        addSubview(teamNameLabel)
         addSubview(posStatView)
         addSubview(salaryStatView)
         addSubview(fppgStatView)
@@ -36,10 +38,19 @@ class PlayerDetailHeaderView: DraftboardView {
         nextGameLabel.textAlignment = .Center
         nextGameLabel.textColor = UIColor(0x9c9faf)
         
+        teamNameLabel.font = .openSans(weight: .Bold, size: 10)
+        teamNameLabel.kern = 1.1
+        teamNameLabel.textAlignment = .Center
+        teamNameLabel.textColor = UIColor(0xffffff)
+        
         posStatView.titleLabel.text = "Pos".uppercaseString
-        salaryStatView.titleLabel.text = "Salary".uppercaseString
         fppgStatView.titleLabel.text = "Avg FPPG".uppercaseString
         fppgStatView.rightBorderView.hidden = true
+        salaryStatView.titleLabel.text = "Salary".uppercaseString
+        salaryStatView.rightBorderView.hidden = true
+        salaryStatView.leftBorderView.hidden = false
+        
+        fppgStatView.valueLabel.font = .oswald(size: 30)
     }
     
     override func layoutSubviews() {
@@ -69,18 +80,26 @@ class PlayerDetailHeaderView: DraftboardView {
         let nextGameLabelX = fitToPixel(boundsW / 2 - nextGameLabelW / 2)
         let nextGameLabelY = avatarViewY + avatarViewH + 25
         
-        let statViewW = fitToPixel((boundsW - 80) / 3)
+        let teamNameLabelSize = teamNameLabel.sizeThatFits(CGSizeZero)
+        let teamNameLabelW = teamNameLabelSize.width
+        let teamNameLabelH = teamNameLabelSize.height
+        let teamNameLabelX = fitToPixel(boundsW / 2 - teamNameLabelW / 2)
+        let teamNameLabelY = avatarViewY + avatarViewH + 25
+        
+        let statViewW = fitToPixel((boundsW - 20) / 3)
         let statViewH = CGFloat(55)
-        let statViewX = CGFloat(40)
+        let statViewX = CGFloat(10)
         let statViewY = nextGameLabelY + nextGameLabelH + 25
 
         avatarView.frame = CGRectMake(avatarViewX, avatarViewY, avatarViewW, avatarViewH)
         avatarHaloView.frame = CGRectMake(avatarHaloViewX, avatarHaloViewY, avatarHaloViewW, avatarHaloViewH)
         avatarLoaderView.frame = CGRectMake(avatarLoaderViewX, avatarLoaderViewY, avatarLoaderViewW, avatarLoaderViewH)
         nextGameLabel.frame = CGRectMake(nextGameLabelX, nextGameLabelY, nextGameLabelW, nextGameLabelH)
+        teamNameLabel.frame = CGRectMake(teamNameLabelX, teamNameLabelY, teamNameLabelW, teamNameLabelH)
         posStatView.frame = CGRectMake(statViewX, statViewY, statViewW, statViewH)
-        salaryStatView.frame = CGRectMake(statViewX + statViewW, statViewY, statViewW, statViewH)
-        fppgStatView.frame = CGRectMake(statViewX + statViewW * 2, statViewY, statViewW, statViewH)
+        fppgStatView.frame = CGRectMake(statViewX + statViewW, statViewY - 5, statViewW, statViewH)
+        salaryStatView.frame = CGRectMake(statViewX + statViewW * 2, statViewY, statViewW, statViewH)
+        
     }
     
     override func sizeThatFits(size: CGSize) -> CGSize {

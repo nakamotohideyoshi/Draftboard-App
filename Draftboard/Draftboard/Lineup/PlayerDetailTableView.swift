@@ -24,6 +24,7 @@ class PlayerDetailTableView: DraftboardTableView {
         wrapperView?.maskView?.backgroundColor = .whiteColor()
         
         registerClass(PlayerDetailTableViewCell.self, forCellReuseIdentifier: String(PlayerDetailTableViewCell))
+        registerClass(PlayerReportCell.self, forCellReuseIdentifier: String(PlayerReportCell))
     }
     
     override func layoutSubviews() {

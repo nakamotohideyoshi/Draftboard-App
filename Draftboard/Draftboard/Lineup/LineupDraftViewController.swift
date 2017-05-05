@@ -110,7 +110,7 @@ class LineupDraftViewController: DraftboardViewController {
 // MARK: -
 
 private typealias TableViewDelegate = LineupDraftViewController
-extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerDetailDraftButtonDelegate {
     
     // UITableViewDataSource
     
@@ -141,10 +141,19 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
             let playerDetailViewController = PlayerDetailViewController()
             playerDetailViewController.sportName = lineup?.sportName
             playerDetailViewController.player = player
+            playerDetailViewController.showAddButton = true
+            playerDetailViewController.indexPath = indexPath
+            playerDetailViewController.draftButtonDelegate = self
             self.navController?.pushViewController(playerDetailViewController)
         }
     }
     
+    func draftButtonTapped(indexPath: NSIndexPath) {
+        slot?.player = players?[indexPath.row]
+        searchBar.resignFirstResponder()
+        navController?.popViewController()
+        navController?.popViewController()
+    }
 }
 
 private typealias ActionButtonDelegate = LineupDraftViewController

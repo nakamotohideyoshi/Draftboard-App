@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PlayerDetailDraftButtonDelegate: class {
+    func draftButtonTapped(indexPath: NSIndexPath)
+}
+
 class PlayerDetailViewController: DraftboardViewController {
     
     override var overlapsTabBar: Bool { return true }
@@ -20,33 +24,56 @@ class PlayerDetailViewController: DraftboardViewController {
     var avatarHaloView: UIImageView { return playerDetailView.avatarHaloView }
     var avatarLoaderView: LoaderView { return playerDetailView.avatarLoaderView }
     var nextGameLabel: DraftboardTextLabel { return playerDetailView.nextGameLabel }
+    var teamNameLabel: DraftboardTextLabel { return playerDetailView.teamNameLabel }
     var posStatView: ModalStatView { return playerDetailView.posStatView }
     var salaryStatView: ModalStatView { return playerDetailView.salaryStatView }
     var fppgStatView: ModalStatView { return playerDetailView.fppgStatView }
     var draftButton: DraftboardTextButton { return playerDetailView.draftButton }
+    var gameDetailView: PlayerGameDetailView { return playerDetailView.gameDetailView }
     var segmentedControl: DraftboardSegmentedControl { return playerDetailView.segmentedControl }
+    var showAddButton: Bool = false { didSet { didSetShowAddButton() } }
+    var showRemoveButton: Bool = false { didSet { didSetShowRemoveButton() } }
     
     var sportName: String?
     var player: Player?
+    var reports: [Report]?
+    var indexPath: NSIndexPath?
+    weak var draftButtonDelegate: PlayerDetailDraftButtonDelegate?
     
     override func loadView() {
         view = PlayerDetailView()
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 45
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         setPlayerImage()
         setGameText()
         setStatValues()
         
+        nextGameLabel.hidden = true
+        
         draftButton.label.text = "Draft Player".uppercaseString
         
         segmentedControl.choices = ["Updates", "Game Log"]
         segmentedControl.indexChangedHandler = { [weak self] (_: Int) in self?.filter() }
+        
+        draftButton.addTarget(self, action: #selector(draftButtonTapped), forControlEvents: .TouchUpInside)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        player?.getPlayerReports(srid: (player?.srid)!).then { reports -> Void in
+            self.reports = reports
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         tableView.contentOffset = CGPointMake(0, -tableView.contentInset.top)
+        player?.getPlayerStatus(sportName: sportName!).then { status in
+            self.navController?.titlebar.setSubtitle(status, color: .redDraftboard())
+        }
     }
     
     func filter() {
@@ -101,7 +128,7 @@ class PlayerDetailViewController: DraftboardViewController {
     }
     
     func setGameText() {
-        guard let player = player, game = (player as? PlayerWithPositionAndGame)?.game else { return }
+        guard let player = player, game = (player as? PlayerWithPositionAndGame)?.game, team = (player as? PlayerWithPositionAndGame)?.team else { return }
         
         let df = NSDateFormatter()
         let calendar = NSCalendar.currentCalendar()
@@ -128,6 +155,11 @@ class PlayerDetailViewController: DraftboardViewController {
         let nextGameAttributedText = NSMutableAttributedString(attributedString: nextGameLabel.attributedText!)
         nextGameAttributedText.addAttribute(NSForegroundColorAttributeName, value: teamColor, range: teamRange)
         nextGameLabel.attributedText = nextGameAttributedText
+        
+        teamNameLabel.text = team.city.uppercaseString + " " + team.name.uppercaseString
+        
+        gameDetailView.sportName = sportName
+        gameDetailView.game = game
     }
     
     func setStatValues() {
@@ -138,6 +170,25 @@ class PlayerDetailViewController: DraftboardViewController {
         fppgStatView.valueLabel.text = String(format: "%.1f", player.fppg)
     }
     
+    func didSetShowAddButton() {
+        if showAddButton { showRemoveButton = false }
+        draftButton.backgroundColor = .greenDraftboard()
+        draftButton.layer.borderColor = UIColor.greenDraftboard().CGColor
+        draftButton.label.text = "Draft Player".uppercaseString
+        draftButton.hidden = !(showAddButton || showRemoveButton)
+    }
+    
+    func didSetShowRemoveButton() {
+        if showRemoveButton { showAddButton = false }
+        draftButton.backgroundColor = .redDraftboard()
+        draftButton.layer.borderColor = UIColor.redDraftboard().CGColor
+        draftButton.label.text = "Drop Player".uppercaseString
+        draftButton.hidden = !(showAddButton || showRemoveButton)
+    }
+    
+    func draftButtonTapped() {
+        draftButtonDelegate?.draftButtonTapped(indexPath!)
+    }
     // Titlebar
     
     override func titlebarTitle() -> String? {
@@ -164,15 +215,29 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     // UITableViewDataSource
     
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10 + segmentedControl.currentIndex * 15
+        if segmentedControl.currentIndex == 0 {
+            return reports?.count ?? 0
+        } else {
+            return 10
+        }
     }
     
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(String(PlayerDetailTableViewCell), forIndexPath: indexPath)
-        let subsectionName = segmentedControl.choices[segmentedControl.currentIndex]
-        cell.textLabel?.text = "\(subsectionName) Row \(indexPath.row + 1)"
-        
-        return cell
+        if segmentedControl.currentIndex == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(PlayerReportCell), forIndexPath: indexPath) as! PlayerReportCell
+            let report = reports![indexPath.row]
+            cell.timeLabel.text = report.dayAgo
+            cell.titleLabel1.text = report.headline
+            cell.contentLabel1.text = report.notes
+            cell.titleLabel2.text = "Analysis"
+            cell.contentLabel2.text = report.analysis
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(PlayerDetailTableViewCell), forIndexPath: indexPath)
+            let subsectionName = segmentedControl.choices[segmentedControl.currentIndex]
+            cell.textLabel?.text = "\(subsectionName) Row \(indexPath.row + 1)"
+            return cell
+        }
     }
     
     // UITableViewDelegate

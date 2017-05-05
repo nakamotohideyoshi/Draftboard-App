@@ -12,7 +12,7 @@ import PromiseKit
 class DerivedData {
     private static var draftGroupsBySportName = Cache(defaultMaxCacheAge: .OneMinute, defaultMinCacheAge: .OneMinute) {
         return when(Data.draftGroups.get(), Data.contests.get()).then {
-            (draftGroups, contests) -> [String: [DraftGroupWithContestCount]] in
+            (draftGroups, contests) -> [DraftGroupWithContestCount] in
             
             var contestCounts = contests.countBy { $0.draftGroupID }
             return draftGroups.map {
@@ -24,27 +24,24 @@ class DerivedData {
             }.sortBy {
                 // Order by start date
                 $0.start
-            }.groupBy {
-                // Organize by sport name
-                $0.sportName
             }
             
         }
     }
-    class func upcomingSportChoices() -> Promise<[Choice<String>]> {
-        return draftGroupsBySportName.get().then {
-            $0.map { (sportName, draftGroups) in
-                let title = sportName.uppercaseString
-                let subtitle = "\(draftGroups.reduce(0) { $0 + $1.contestCount }) Contests"
-                return Choice(title: title, subtitle: subtitle, value: sportName)
-            }
-        }
-    }
-    class func upcomingDraftGroupChoices(sportName sportName: String) -> Promise<[Choice<DraftGroup>]> {
+//    class func upcomingSportChoices() -> Promise<[Choice<String>]> {
+//        return draftGroupsBySportName.get().then {
+//            $0.map { (sportName, draftGroups) in
+//                let title = sportName.uppercaseString
+//                let subtitle = "\(draftGroups.reduce(0) { $0 + $1.contestCount }) Contests"
+//                return Choice(title: title, subtitle: subtitle, value: sportName)
+//            }
+//        }
+//    }
+    class func upcomingDraftGroupChoices() -> Promise<[Choice<DraftGroup>]> {
         let df = NSDateFormatter()
         
         return draftGroupsBySportName.get().then {
-            $0[sportName]!.map {
+            $0.map {
                 let calendar = NSCalendar.currentCalendar()
                 let date1 = calendar.startOfDayForDate(NSDate.init())
                 let date2 = calendar.startOfDayForDate($0.start)
@@ -52,13 +49,13 @@ class DerivedData {
                 var title = ""
                 if (components.day == 0) {
                     df.dateFormat = "h:mm a"
-                    title = "\(sportName.uppercaseString) - Today @ \(df.stringFromDate($0.start))"
+                    title = "\($0.sportName.uppercaseString) - Today @ \(df.stringFromDate($0.start))"
                 } else if (components.day == 1) {
                     df.dateFormat = "h:mm a"
-                    title = "\(sportName.uppercaseString) - Tomorrow @ \(df.stringFromDate($0.start))"
+                    title = "\($0.sportName.uppercaseString) - Tomorrow @ \(df.stringFromDate($0.start))"
                 } else {
                     df.dateFormat = "eeee @ h:mm a"
-                    title = "\(sportName.uppercaseString) - \(df.stringFromDate($0.start))"
+                    title = "\($0.sportName.uppercaseString) - \(df.stringFromDate($0.start))"
                 }
                 let subtitle = "\($0.numGames) Games"
                 return Choice(title: title, subtitle: subtitle, value: $0)
@@ -160,6 +157,40 @@ extension Lineup {
     }
 }
 
+extension Player {
+    func getPlayerStatus(sportName sportName: String) -> Promise<String> {
+        let path = "api/sports/player-status/\(sportName)/"
+        return API.get(path).then { (json: NSDictionary) -> String in
+            let playerUpdates: [NSDictionary] = try json.get("player_updates")
+            
+            let playerStatuses: [NSDictionary] = try playerUpdates.filter {
+                try $0.get("player_srid") == self.srid
+            }
+            if playerStatuses.count == 0 {
+                return ""
+            } else {
+                let playerStatus: NSDictionary = playerStatuses.first!
+                let status:String = try playerStatus.get("status")
+                switch status {
+                    case "active":
+                        return ""
+                    case "OUT":
+                        return "OUT"
+                    case "GTD":
+                        return "GAME-TIME DECISION"
+                    default:
+                        return ""
+                }
+            }
+        }
+    }
+    func getPlayerReports(srid srid: String) -> Promise<[Report]> {
+        let path = "api/sports/updates/player/\(srid)/"
+        return API.get(path).then { (json: [NSDictionary]) -> [Report] in
+            return try json.map { try Report.init(json: $0) }
+        }
+    }
+}
 extension DerivedData {
     class func entriesByLineup() -> Promise<[Int: [LineupEntry]]> {
         return when(Data.contestPoolEntries.get(), Data.contests.get()).then { entries, contests -> [Int: [LineupEntry]] in
