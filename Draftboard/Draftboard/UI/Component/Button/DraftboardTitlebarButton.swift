@@ -17,6 +17,7 @@ struct TitlebarButtonType : OptionSetType {
     static let Close = TitlebarButtonType(rawValue: 1 << 3)
     static let Search = TitlebarButtonType(rawValue: 1 << 4)
     static let DisabledValue = TitlebarButtonType(rawValue: 1 << 5)
+    static let Countdown = TitlebarButtonType(rawValue: 1 << 6)
 }
 
 class DraftboardTitlebarButton: DraftboardButton {

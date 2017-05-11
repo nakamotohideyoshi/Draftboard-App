@@ -38,6 +38,7 @@ class DraftboardTitlebar: UIView {
     var subtitleLabel: UILabel?
     var rightButton: DraftboardTitlebarButton?
     var leftButton: DraftboardTitlebarButton?
+    var countdownView: CountdownView?
     var bgView: UIImageView!
     
     var delegate: DraftboardTitlebarDelegate?
@@ -45,6 +46,7 @@ class DraftboardTitlebar: UIView {
     
     var newLeftButton: DraftboardTitlebarButton?
     var newRightButton: DraftboardTitlebarButton?
+    var newCountdownView: CountdownView?
     var newTitleLabel: UILabel?
     var newSubtitleLabel: UILabel?
     var newBgHidden: Bool = false
@@ -89,7 +91,7 @@ class DraftboardTitlebar: UIView {
         
         // Different title
         leftButtonChanged = newLeftButtonType != leftButton?.buttonType
-        rightButtonChanged = newRightButtonType != rightButton?.buttonType
+        rightButtonChanged = (newRightButtonType != rightButton?.buttonType) || (newRightButtonType != .Countdown && countdownView != nil)
         titleLabelChanged = newTitleText != titleLabel?.text
         subtitleLabelChanged = newSubtitleText != subtitleLabel?.text
         bgHiddenChanged = newBgHidden != bgHidden
@@ -119,18 +121,25 @@ class DraftboardTitlebar: UIView {
             
             // Create new right button
             if let buttonType = newRightButtonType {
-                newRightButton = DraftboardTitlebarButton(type: buttonType)
-                newRightButton?.addTarget(self, action: .didTapButton, forControlEvents: .TouchUpInside)
-                
-                if (buttonType == .Value || buttonType == .DisabledValue) {
-                    if let textValue = dataSource?.titlebarRightButtonText() {
-                        newRightButton!.textValue = textValue
+                if buttonType == .Countdown {
+                    newCountdownView = CountdownView()
+                    newCountdownView?.size = 15
+                    addSubview(newCountdownView!)
+                    constrainCountdownView(newCountdownView!)
+                } else {
+                    newRightButton = DraftboardTitlebarButton(type: buttonType)
+                    newRightButton?.addTarget(self, action: .didTapButton, forControlEvents: .TouchUpInside)
+                    
+                    if (buttonType == .Value || buttonType == .DisabledValue) {
+                        if let textValue = dataSource?.titlebarRightButtonText() {
+                            newRightButton!.textValue = textValue
+                        }
                     }
+                    
+                    // Position button
+                    addSubview(newRightButton!)
+                    constrainRightButton(newRightButton!)
                 }
-                
-                // Position button
-                addSubview(newRightButton!)
-                constrainRightButton(newRightButton!)
             }
         }
         
@@ -275,6 +284,9 @@ class DraftboardTitlebar: UIView {
             rightButton?.removeFromSuperview()
             rightButton = newRightButton
             newRightButton = nil
+            countdownView?.removeFromSuperview()
+            countdownView = newCountdownView
+            newCountdownView = nil
         }
         
         if (self.titleLabelChanged) {
@@ -377,6 +389,14 @@ class DraftboardTitlebar: UIView {
         }
             
         self.constrainButton(button)
+    }
+    
+    func constrainCountdownView(countdownView: CountdownView) {
+        countdownView.translatesAutoresizingMaskIntoConstraints = false
+        countdownView.topRancor.constraintEqualToRancor(self.topRancor, constant: 10.0).active = true
+        countdownView.bottomRancor.constraintEqualToRancor(self.bottomRancor, constant: -10.0).active = true
+        countdownView.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: 0.16).active = true
+        countdownView.rightRancor.constraintEqualToRancor(self.rightRancor, constant: -10.0).active = true
     }
     
     func setSubtitle(subtitle:String, color:UIColor) {

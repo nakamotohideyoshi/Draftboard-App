@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct SegmentAlignment : OptionSetType {
+    let rawValue: Int
+    static let Left = SegmentAlignment(rawValue: 0)
+    static let Center = SegmentAlignment(rawValue: 1 << 0)
+}
+
 class DraftboardSegmentedControl: UIView {
     var choices: [String]! {
         didSet {
@@ -23,15 +29,28 @@ class DraftboardSegmentedControl: UIView {
     
     var textColor: UIColor!
     var textSelectedColor: UIColor!
+    var textSize: CGFloat!
+    var showSelectionLine: Bool?
     
     var indexChangedHandler:((Int)->Void)?
     var currentIndex = 0
     
-    init(choices _choices: [String], textColor _textColor: UIColor, textSelectedColor _textSelectedColor: UIColor) {
+    var alignment: SegmentAlignment = .Center {
+        didSet {
+            subviews.forEach { $0.removeFromSuperview() }
+            setup()
+        }
+    }
+    
+    var spaceBetween: CGFloat = 15.0
+    
+    init(choices _choices: [String], textColor _textColor: UIColor, textSelectedColor _textSelectedColor: UIColor, textSize _textSize: CGFloat = 10.0, showSelectionLine _showSelectionLine: Bool = true) {
         super.init(frame: CGRectMake(0.0, 0.0, 100.0, 100.0))
         choices = _choices
         textColor = _textColor
         textSelectedColor = _textSelectedColor
+        showSelectionLine = _showSelectionLine
+        textSize = _textSize
         self.setup()
     }
     
@@ -48,18 +67,27 @@ class DraftboardSegmentedControl: UIView {
         // Create controls
         var lastControl: UIControl?
         for (_, choice) in choices.enumerate() {
-            let control = DraftboardControlSegment(textValue: choice, textColor: textColor, textSelectedColor: textSelectedColor)
+            let control = DraftboardControlSegment(textValue: choice, textColor: textColor, textSelectedColor: textSelectedColor, textSize: textSize)
             
             self.addSubview(control)
             control.translatesAutoresizingMaskIntoConstraints = false
-            control.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: choiceWidth).active = true
+            if alignment == .Left {
+                let controlSize = control.sizeThatFits(bounds.size)
+                control.widthRancor.constraintEqualToConstant(controlSize.width).active = true
+            } else {
+                control.widthRancor.constraintEqualToRancor(self.widthRancor, multiplier: choiceWidth).active = true
+            }
             control.heightRancor.constraintEqualToRancor(self.heightRancor).active = true
             control.topRancor.constraintEqualToRancor(self.topRancor).active = true
-            
+
             control.addTarget(self, action: .buttonTap, forControlEvents: .TouchDown)
             
             if (lastControl != nil) {
-                control.leftRancor.constraintEqualToRancor(lastControl?.rightRancor).active = true
+                if alignment == .Left {
+                    control.leftRancor.constraintEqualToRancor(lastControl?.rightRancor, constant: spaceBetween).active = true
+                } else {
+                    control.leftRancor.constraintEqualToRancor(lastControl?.rightRancor).active = true
+                }
             }
             else {
                 control.leftRancor.constraintEqualToRancor(self.leftRancor).active = true
@@ -85,6 +113,10 @@ class DraftboardSegmentedControl: UIView {
             
             lineConstraint = lineView.leftRancor.constraintEqualToRancor(firstControl.label.leftRancor)
             lineConstraint!.active = true
+        }
+        
+        if (!showSelectionLine!) {
+            lineView.hidden = true
         }
     }
     
@@ -162,6 +194,10 @@ class DraftboardSegmentedControl: UIView {
         // Fire off handler
         indexChangedHandler?(currentIndex);
     }
+    
+    func setupFont() {
+        
+    }
 }
 
 class DraftboardControlSegment: UIControl {
@@ -169,15 +205,17 @@ class DraftboardControlSegment: UIControl {
     
     var textColor: UIColor!
     var textSelectedColor: UIColor!
+    var textSize: CGFloat!
     
-    init(textValue: String, textColor _textColor: UIColor, textSelectedColor _textSelectedColor: UIColor) {
+    init(textValue: String, textColor _textColor: UIColor, textSelectedColor _textSelectedColor: UIColor, textSize _textSize: CGFloat) {
         super.init(frame: CGRectZero)
         
         textColor = _textColor
         textSelectedColor = _textSelectedColor
+        textSize = _textSize
         
         label = DraftboardLabel(frame: CGRectMake(0.0, 0.0, 100.0, 20.0))
-        label.font = UIFont(name: "OpenSans-Bold", size: 10.0)
+        label.font = .oswald(size: textSize)
         label.textAlignment = .Center
         label.textColor = _textColor
         label.letterSpacing = 1.0
@@ -201,6 +239,11 @@ class DraftboardControlSegment: UIControl {
                 label.textColor = textColor
             }
         }
+    }
+    
+    override func sizeThatFits(size: CGSize) -> CGSize {
+        let labelSize = label.sizeThatFits(CGSizeZero)
+        return CGSize(width: labelSize.width, height: size.height)
     }
 }
 

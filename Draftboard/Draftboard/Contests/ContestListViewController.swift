@@ -43,6 +43,7 @@ class ContestListViewController: DraftboardViewController {
         // Get contests
         Data.contests.get().then { contests -> Void in
             self.sportControl.choices = self.orderedSports(from: contests)
+            self.sportControl.alignment = .Left
             self.allContests = self.allContests ?? contests
             self.filterContests()
         }
@@ -78,7 +79,9 @@ class ContestListViewController: DraftboardViewController {
         
         contests = sportContests?.filter { $0.skillLevelName == skillLevel }
         enteredSkillLevel = enteredContests?.filter { $0.skillLevelName != "all" }.first?.skillLevelName
-
+        
+        self.navController?.titlebar.countdownView?.date = (contests?.first?.start)!
+        
         if reload {
             tableView.reloadData()
         }
@@ -104,6 +107,10 @@ class ContestListViewController: DraftboardViewController {
     
     override func titlebarLeftButtonType() -> TitlebarButtonType? {
         return nil
+    }
+    
+    override func titlebarRightButtonType() -> TitlebarButtonType? {
+        return .Countdown
     }
     
     override func titlebarTitle() -> String? {

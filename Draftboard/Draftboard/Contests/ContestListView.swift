@@ -10,8 +10,8 @@ import UIKit
 
 class ContestListView: DraftboardView {
     
-    let sportControl = DraftboardSegmentedControl(choices: ["mlb", "nfl"], textColor: .greyCool(), textSelectedColor: .whiteColor())
-    let skillControl = DraftboardSegmentedControl(choices: ["rookie", "veteran"], textColor: .greyCool(), textSelectedColor: .whiteColor())
+    let sportControl = DraftboardSegmentedControl(choices: ["mlb", "nfl"], textColor: .greyCool(), textSelectedColor: .whiteColor(), textSize: 22, showSelectionLine: false)
+    let skillControl = DraftboardSegmentedControl(choices: ["rookie", "veteran"], textColor: .greyCool(), textSelectedColor: .whiteColor(), textSize: 15, showSelectionLine: false)
     let tableView = UITableView()
     let loaderView = LoaderView()
     
@@ -39,8 +39,8 @@ class ContestListView: DraftboardView {
         let tabBarHeight = CGFloat(50)
         let filterHeight = CGFloat(50)
         
-        sportControl.frame = CGRectMake(0, titleBarHeight, bounds.width / 3, filterHeight)
-        skillControl.frame = CGRectMake(bounds.width / 2, titleBarHeight, bounds.width / 2, filterHeight)
+        sportControl.frame = CGRectMake(20, titleBarHeight, bounds.width / 3, filterHeight)
+        skillControl.frame = CGRectMake(bounds.width * 0.6, titleBarHeight, bounds.width * 0.36, filterHeight)
         tableView.frame = CGRectMake(0, titleBarHeight + filterHeight, bounds.width, bounds.height - titleBarHeight - filterHeight - tabBarHeight)
         loaderView.frame = CGRectMake(bounds.width / 2 - 42 / 2, titleBarHeight / 2 + bounds.height / 2 - 42 / 2 - tabBarHeight, 42, 42)
     }
