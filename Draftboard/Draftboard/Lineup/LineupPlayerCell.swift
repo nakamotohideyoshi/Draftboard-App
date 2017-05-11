@@ -175,6 +175,7 @@ class LineupPlayerCell: UITableViewCell {
             homeLabel.text = nil
             vsLabel.text = nil
             nameTeamSeparatorLabel.text = nil
+            timeLabel.text = nil
             return
         }
         
