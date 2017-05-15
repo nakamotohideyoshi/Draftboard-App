@@ -21,6 +21,9 @@ class Data {
     static let contests = Cache { API.contestLobby() }
     static let contestPoolEntries = Cache(defaultMaxCacheAge: 10, defaultMinCacheAge: 10) { API.contestPoolEntries() }
     static let contestGroup = MultiCache { id in API.contestStatus(id: id) }
+    static let mlbPlayerGameLogs = MultiCache { id in API.getMLBPlayerGameLogs(playerID: id) }
+    static let nbaPlayerGameLogs = MultiCache { id in API.getNBAPlayerGameLogs(playerID: id) }
+    static let playerReports = MultiCache { srid in API.getPlayerReports(srid: srid) }
 }
 
 //enum SortByOther: ErrorType {
@@ -168,7 +171,7 @@ extension Data {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
-        print(dateFormatter.stringFromDate(lineup.start))
+        
         return API.playHistory(dateFormatter.stringFromDate(lineup.start)).then { history -> Double in
             var winnings = 0.0
             if let lineups: [NSDictionary] = try? history.get("lineups") {

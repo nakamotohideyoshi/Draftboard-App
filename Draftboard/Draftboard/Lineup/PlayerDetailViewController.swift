@@ -37,6 +37,7 @@ class PlayerDetailViewController: DraftboardViewController {
     var sportName: String?
     var player: Player?
     var reports: [Report]?
+    var gameLogs: NSArray?
     var indexPath: NSIndexPath?
     weak var draftButtonDelegate: PlayerDetailDraftButtonDelegate?
     
@@ -47,6 +48,7 @@ class PlayerDetailViewController: DraftboardViewController {
         tableView.delegate = self
         tableView.estimatedRowHeight = 45
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.allowsSelection = false
         
         setPlayerImage()
         setGameText()
@@ -63,8 +65,12 @@ class PlayerDetailViewController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        player?.getPlayerReports(srid: (player?.srid)!).then { reports -> Void in
+        player?.getPlayerReports().then { reports -> Void in
             self.reports = reports
+            self.tableView.reloadData()
+        }
+        player?.getPlayerGameLog(sportName: sportName!).then { gameLogs -> Void in
+            self.gameLogs = gameLogs
             self.tableView.reloadData()
         }
     }
@@ -81,8 +87,10 @@ class PlayerDetailViewController: DraftboardViewController {
         tableView.reloadData()
         tableView.contentOffset.y = contentOffsetY
         tableView.flashScrollIndicators()
-        let last = tableView.indexPathsForVisibleRows!.last!
-        tableView.scrollToRowAtIndexPath(last, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        if tableView.indexPathsForVisibleRows?.last != nil {
+            let last = tableView.indexPathsForVisibleRows!.last!
+            tableView.scrollToRowAtIndexPath(last, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        }
     }
     
     func setPlayerImage() {
@@ -218,7 +226,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         if segmentedControl.currentIndex == 0 {
             return reports?.count ?? 0
         } else {
-            return 10
+            if gameLogs == nil {
+                return 0
+            } else {
+                return gameLogs!.count + 1
+            }
         }
     }
     
@@ -233,10 +245,62 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
             cell.contentLabel2.text = report.analysis
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(PlayerDetailTableViewCell), forIndexPath: indexPath)
-            let subsectionName = segmentedControl.choices[segmentedControl.currentIndex]
-            cell.textLabel?.text = "\(subsectionName) Row \(indexPath.row + 1)"
-            return cell
+            if sportName == "mlb" {
+                let position = (player as? PlayerWithPositionAndGame)?.position
+                if position == "SP" {
+                    if indexPath.row == 0 {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(MLBPitcherGameLogHeaderCell), forIndexPath: indexPath)
+                        
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(MLBPitcherGameLogCell), forIndexPath: indexPath) as! MLBPitcherGameLogCell
+                        let gameLog: MLBPitcherGameLog = gameLogs![indexPath.row - 1] as! MLBPitcherGameLog
+                        
+                        cell.dateLabel.text = gameLog.date
+                        cell.oppLabel.text = gameLog.opp
+                        cell.resultLabel.text = ""
+                        cell.ipLabel.text = NSString(format:"%d", gameLog.ip) as String
+                        cell.hLabel.text = NSString(format:"%d", gameLog.h) as String
+                        cell.erLabel.text = NSString(format:"%d", gameLog.er) as String
+                        cell.bbLabel.text = NSString(format:"%d", gameLog.bb) as String
+                        cell.soLabel.text = NSString(format:"%d", gameLog.so) as String
+                        cell.fpLabel.text = NSString(format:"%.2f", gameLog.fp) as String
+                        
+                        return cell
+                    }
+                } else {
+                    if indexPath.row == 0 {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(MLBHitterGameLogHeaderCell), forIndexPath: indexPath)
+                        
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(MLBHitterGameLogCell), forIndexPath: indexPath) as! MLBHitterGameLogCell
+                        let gameLog: MLBHitterGameLog = gameLogs![indexPath.row - 1] as! MLBHitterGameLog
+                        
+                        cell.dateLabel.text = gameLog.date
+                        cell.oppLabel.text = gameLog.opp
+                        cell.abLabel.text = ""
+                        cell.rLabel.text = NSString(format:"%d", gameLog.r) as String
+                        cell.hLabel.text = NSString(format:"%d", gameLog.h) as String
+                        cell.doublesLabel.text = NSString(format:"%d", gameLog.doubles) as String
+                        cell.triplesLabel.text = NSString(format:"%d", gameLog.triples) as String
+                        cell.hrLabel.text = NSString(format:"%d", gameLog.hr) as String
+                        cell.rbiLabel.text = NSString(format:"%d", gameLog.rbi) as String
+                        cell.bbLabel.text = NSString(format:"%d", gameLog.bb) as String
+                        cell.sbLabel.text = NSString(format:"%d", gameLog.sb) as String
+                        cell.fpLabel.text = NSString(format:"%.2f", gameLog.fp) as String
+                        
+                        return cell
+                    }
+                }
+                
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier(String(PlayerDetailTableViewCell), forIndexPath: indexPath)
+                let subsectionName = segmentedControl.choices[segmentedControl.currentIndex]
+                cell.textLabel?.text = "\(subsectionName) Row \(indexPath.row + 1)"
+                return cell
+            }
+            
         }
     }
     

@@ -52,5 +52,4 @@ class Report {
             throw APIError.ModelError(self.dynamicType, error)
         }
     }
-    
 }

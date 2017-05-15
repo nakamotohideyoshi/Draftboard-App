@@ -25,6 +25,10 @@ class PlayerDetailTableView: DraftboardTableView {
         
         registerClass(PlayerDetailTableViewCell.self, forCellReuseIdentifier: String(PlayerDetailTableViewCell))
         registerClass(PlayerReportCell.self, forCellReuseIdentifier: String(PlayerReportCell))
+        registerClass(MLBPitcherGameLogHeaderCell.self, forCellReuseIdentifier: String(MLBPitcherGameLogHeaderCell))
+        registerClass(MLBPitcherGameLogCell.self, forCellReuseIdentifier: String(MLBPitcherGameLogCell))
+        registerClass(MLBHitterGameLogHeaderCell.self, forCellReuseIdentifier: String(MLBHitterGameLogHeaderCell))
+        registerClass(MLBHitterGameLogCell.self, forCellReuseIdentifier: String(MLBHitterGameLogCell))
     }
     
     override func layoutSubviews() {

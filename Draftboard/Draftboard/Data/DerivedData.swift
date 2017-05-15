@@ -184,10 +184,102 @@ extension Player {
             }
         }
     }
-    func getPlayerReports(srid srid: String) -> Promise<[Report]> {
-        let path = "api/sports/updates/player/\(srid)/"
-        return API.get(path).then { (json: [NSDictionary]) -> [Report] in
-            return try json.map { try Report.init(json: $0) }
+    
+    func getPlayerReports() -> Promise<[Report]> {
+        return Data.playerReports[srid].get().then { reports in
+            return reports
+        }
+    }
+    
+    func getPlayerGameLog(sportName sportName: String) -> Promise<NSArray> {
+        let team = (self as? PlayerWithPositionAndGame)?.team
+        let position = (self as? PlayerWithPositionAndGame)?.position
+        
+        if sportName == "mlb" {
+            return when(Data.mlbPlayerGameLogs[id].get(), Data.sportsTeams[sportName].get()).then { (result, teams) -> NSArray in
+                if result.count == 0 {
+                    return []
+                } else {
+                    let gameLogs = result[0]
+                    let teamsBySRID = teams.keyBy { $0.srid }
+                    
+                    if position == "SP" {
+                        let startArr: [String] = try! gameLogs.get("start")
+                        let homeTeams: [String] = try! gameLogs.get("srid_home")
+                        let awayTeams: [String] = try! gameLogs.get("srid_away")
+                        let ipValues: [Int] = try! gameLogs.get("ip_1")
+                        let hValues: [Int] = try! gameLogs.get("h")
+                        let erValues: [Int] = try! gameLogs.get("er")
+                        let bbValues: [Int] = try! gameLogs.get("bb")
+                        let soValues: [Int] = try! gameLogs.get("ktotal")
+                        let fpValues: [Double] = try! gameLogs.get("fp")
+                        
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "MMM dd"
+                        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
+                        
+                        var gameStats = [MLBPitcherGameLog] ()
+                        
+                        for (i, value) in startArr.enumerate() {
+                            let startDate:NSDate = try API.dateFromString(value)
+                            let start:String = dateFormatter.stringFromDate(startDate)
+                            let homeTeam: String = homeTeams[i]
+                            let awayTeam: String = awayTeams[i]
+                            var opp = ""
+                            if homeTeam == team?.srid {
+                                opp = (teamsBySRID[awayTeam]?.alias)!
+                            }
+                            if awayTeam == team?.srid {
+                                opp = "@" + (teamsBySRID[homeTeam]?.alias)!
+                            }
+                            let gameStat: MLBPitcherGameLog = MLBPitcherGameLog.init(date: start, opp: opp, result: "", ip: ipValues[i], h: hValues[i], er: erValues[i], bb: bbValues[i], so: soValues[i], fp: fpValues[i])
+                            gameStats.append(gameStat)
+                        }
+                        return gameStats
+                    } else {
+                        let startArr: [String] = try! gameLogs.get("start")
+                        let homeTeams: [String] = try! gameLogs.get("srid_home")
+                        let awayTeams: [String] = try! gameLogs.get("srid_away")
+                        let rValues: [Int] = try! gameLogs.get("r")
+                        let hValues: [Int] = try! gameLogs.get("h")
+                        let doubleValues: [Int] = try! gameLogs.get("d")
+                        let tripleValues: [Int] = try! gameLogs.get("t")
+                        let hrValues: [Int] = try! gameLogs.get("hr")
+                        let rbiValues: [Int] = try! gameLogs.get("rbi")
+                        let bbValues: [Int] = try! gameLogs.get("bb")
+                        let hbpValues: [Int] = try! gameLogs.get("hbp")
+                        let sbValues: [Int] = try! gameLogs.get("sb")
+                        let fpValues: [Double] = try! gameLogs.get("fp")
+                        
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "MMM dd"
+                        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
+                        
+                        var gameStats = [MLBHitterGameLog] ()
+                        
+                        for (i, value) in startArr.enumerate() {
+                            let startDate:NSDate = try API.dateFromString(value)
+                            let start:String = dateFormatter.stringFromDate(startDate)
+                            let homeTeam: String = homeTeams[i]
+                            let awayTeam: String = awayTeams[i]
+                            var opp = ""
+                            if homeTeam == team?.srid {
+                                opp = (teamsBySRID[awayTeam]?.alias)!
+                            }
+                            if awayTeam == team?.srid {
+                                opp = "@" + (teamsBySRID[homeTeam]?.alias)!
+                            }
+                            let gameStat: MLBHitterGameLog = MLBHitterGameLog.init(date: start, opp: opp, ab: 0, r: rValues[i], h: hValues[i], doubles: doubleValues[i], triples: tripleValues[i], hr: hrValues[i], rbi: rbiValues[i], bb: bbValues[i] + hbpValues[i], sb: sbValues[i], fp: fpValues[i])
+                            gameStats.append(gameStat)
+                        }
+                        return gameStats
+                    }
+                }
+            }
+        } else {
+            return Data.nbaPlayerGameLogs[id].get().then { gameLogs in
+                return []
+            }
         }
     }
 }

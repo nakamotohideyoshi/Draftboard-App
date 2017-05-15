@@ -255,4 +255,24 @@ extension API_Endpoints {
         }
     }
     
+    class func getPlayerReports(srid srid: String) -> Promise<[Report]> {
+        let path = "api/sports/updates/player/\(srid)/"
+        return API.get(path).then { (json: [NSDictionary]) -> [Report] in
+            return try json.map { try Report.init(json: $0) }
+        }
+    }
+    
+    class func getMLBPlayerGameLogs(playerID playerID: Int) -> Promise<[NSDictionary]> {
+        let path = "api/sports/player/history/mlb/20/\(playerID)/"
+        return API.get(path).then { (json: [NSDictionary]) -> [NSDictionary] in
+            return json
+        }
+    }
+    
+    class func getNBAPlayerGameLogs(playerID playerID: Int) -> Promise<[NSDictionary]> {
+        let path = "api/sports/player/history/nba/20/\(playerID)/"
+        return API.get(path).then { (json: [NSDictionary]) -> [NSDictionary] in
+            return json
+        }
+    }
 }
