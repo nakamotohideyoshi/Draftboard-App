@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class ContestDetailViewController: DraftboardViewController {
     
@@ -25,6 +26,10 @@ class ContestDetailViewController: DraftboardViewController {
     var segmentedControl: DraftboardSegmentedControl { return contestDetailView.segmentedControl }
     
     var contest: Contest?
+    var games: [Game]?
+    var users: [String]?
+    var myEntries: [ContestPoolEntry]? { return (contest as? HasEntries)?.entries }
+    var scoring: NSDictionary?
     
     override func loadView() {
         view = ContestDetailView()
@@ -42,9 +47,21 @@ class ContestDetailViewController: DraftboardViewController {
         
         enterButton.label.text = "Enter Contest".uppercaseString
 
-        entryCountLabel.text = "? of ? Max Entries"
+        entryCountLabel.text = NSString(format: "%d of %d Max Entries", (myEntries?.count)!, (contest?.maxEntries)!) as String
 
-        segmentedControl.choices = ["Payout", "Entries", "Scoring", "Games"]
+        segmentedControl.choices = ["My Entries", "Entries", "Prizes", "Games", "Scoring"]
+        
+        if let path = NSBundle.mainBundle().pathForResource("Scoring", ofType: "plist") {
+            scoring = NSDictionary(contentsOfFile: path)
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        when(DerivedData.games(sportName: contest!.sportName, draftGroupID: contest!.draftGroupID), contest!.registeredUsers()).then { games, users -> Void in
+            self.games = games.sortBy { $0.start }
+            self.users = users
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,8 +73,10 @@ class ContestDetailViewController: DraftboardViewController {
         tableView.reloadData()
         tableView.contentOffset.y = contentOffsetY
         tableView.flashScrollIndicators()
-        let last = tableView.indexPathsForVisibleRows!.last!
-        tableView.scrollToRowAtIndexPath(last, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        if tableView.indexPathsForVisibleRows?.last != nil {
+            let last = tableView.indexPathsForVisibleRows!.last!
+            tableView.scrollToRowAtIndexPath(last, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        }
     }
     
     // Titlebar
@@ -75,26 +94,133 @@ class ContestDetailViewController: DraftboardViewController {
             navController?.popViewController()
         }
     }
-
 }
 
+// MARK: -
+private typealias MyEntryDelegate = ContestDetailViewController
+extension MyEntryDelegate: MyEntryCellDelegate {
+    func updateData() {
+        DerivedData.contestsWithEntries().then { contests -> Void in
+            self.contest = contests.filter { $0.id == self.contest?.id }.last
+            self.entryCountLabel.text = NSString(format: "%d of %d Max Entries", (self.myEntries?.count)!, (self.contest?.maxEntries)!) as String
+            self.entrantsStatView.valueLabel.text = "\(self.contest?.currentEntries ?? 0)"
+            self.tableView.reloadData()
+        }
+    }
+}
 // MARK: -
 
 private typealias TableViewDelegate = ContestDetailViewController
 extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     // UITableViewDataSource
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if segmentedControl.currentIndex == 4 {
+            return 2
+        } else {
+            return 1
+        }
+    }
     
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 + segmentedControl.currentIndex * 5
+        if segmentedControl.currentIndex == 0 {
+            return (myEntries?.count)!
+        } else if segmentedControl.currentIndex == 1 {
+            return (users != nil) ? (users?.count)! : 0
+        } else if segmentedControl.currentIndex == 2 {
+            return (contest?.payoutSpots.count)!
+        } else if segmentedControl.currentIndex == 3 {
+            return (games != nil) ? (games?.count)! : 0
+        } else if segmentedControl.currentIndex == 4 {
+            let mlbScoring = scoring!["mlb"] as! NSDictionary
+            let hittersScoring = mlbScoring["hitter"] as! NSArray
+            let pitchersScoring = mlbScoring["pitcher"] as! NSArray
+            if section == 0 {
+                return hittersScoring.count + 1
+            } else {
+                return pitchersScoring.count + 1
+            }
+        } else {
+            return 5 + segmentedControl.currentIndex * 5
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if segmentedControl.currentIndex == 4 {
+            if indexPath.row == 0 {
+                if indexPath.section == 0{
+                    return 30
+                } else {
+                    return 50
+                }
+            } else {
+                return 35
+            }
+        } else {
+            return 40
+        }
     }
     
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailTableViewCell), forIndexPath: indexPath)
-        let subsectionName = segmentedControl.choices[segmentedControl.currentIndex]
-        cell.textLabel?.text = "\(subsectionName) Row \(indexPath.row + 1)"
+        if segmentedControl.currentIndex == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailMyEntryCell), forIndexPath: indexPath) as! ContestDetailMyEntryCell
+            cell.entry = myEntries![indexPath.row]
+            cell.delegate = self
+            
+            return cell
+        } else if segmentedControl.currentIndex == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailEntryCell), forIndexPath: indexPath) as! ContestDetailEntryCell
+            cell.usernameLabel.text = users![indexPath.row]
+            
+            return cell
+        } else if segmentedControl.currentIndex == 2 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailPrizeCell), forIndexPath: indexPath) as! ContestDetailPrizeCell
+            cell.payoutSpot = contest?.payoutSpots[indexPath.row]
+            
+            return cell
+        } else if segmentedControl.currentIndex == 3 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailGameCell), forIndexPath: indexPath) as! ContestDetailGameCell
+            cell.game = games![indexPath.row]
+            
+            return cell
+        } else if segmentedControl.currentIndex == 4 {
+            if indexPath.section == 0 {
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailScoringHeaderCell), forIndexPath: indexPath) as! ContestDetailScoringHeaderCell
+                    cell.titleLabel.text = "Hitters".uppercaseString
+                    
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailScoringCell), forIndexPath: indexPath) as! ContestDetailScoringCell
+                    let mlbScoring = scoring!["mlb"] as! NSDictionary
+                    let scores = mlbScoring["hitter"] as! NSArray
+                    cell.score = scores[indexPath.row - 1] as? NSDictionary
+                    
+                    return cell
+                }
+            } else {
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailScoringHeaderCell), forIndexPath: indexPath) as! ContestDetailScoringHeaderCell
+                    cell.titleLabel.text = "Pitchers".uppercaseString
+                    
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailScoringCell), forIndexPath: indexPath) as! ContestDetailScoringCell
+                    let mlbScoring = scoring!["mlb"] as! NSDictionary
+                    let scores = mlbScoring["pitcher"] as! NSArray
+                    cell.score = scores[indexPath.row - 1] as? NSDictionary
+                    
+                    return cell
+                }
+            }
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailTableViewCell), forIndexPath: indexPath)
+            let subsectionName = segmentedControl.choices[segmentedControl.currentIndex]
+            cell.textLabel?.text = "\(subsectionName) Row \(indexPath.row + 1)"
+            
+            return cell
+        }
         
-        return cell
     }
     
     // UITableViewDelegate

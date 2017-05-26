@@ -129,6 +129,11 @@ extension API_Endpoints {
         return API.get(path)
     }
     
+    class func contestRegisteredUsers(id id: Int) -> Promise<[NSDictionary]> {
+        let path = "api/contest/registered-users/\(id)/"
+        return API.get(path)
+    }
+    
     class func sportsInjuries(sportName: String) -> Promise<[Int: String]> {
         let path = "api/sports/injuries/\(sportName)/"
         return API.get(path).then { (data: [NSDictionary]) -> [Int: String] in
@@ -200,6 +205,12 @@ extension API_Endpoints {
     }
     
     class func contestUnregisterEntry(entry: LineupEntry) -> Promise<AnyObject> {
+        let path = "api/contest/unregister-entry/\(entry.id)/"
+        let params = [:]
+        return API.post(path, JSON: params)
+    }
+    
+    class func contestUnregisterEntry(entry: ContestPoolEntry) -> Promise<AnyObject> {
         let path = "api/contest/unregister-entry/\(entry.id)/"
         let params = [:]
         return API.post(path, JSON: params)

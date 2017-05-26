@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>mlb</key>
+	<dict>
+		<key>hitter</key>
+		<array>
+			<dict>
+				<key>point</key>
+				<integer>3</integer>
+				<key>stat</key>
+				<string>Single</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>6</integer>
+				<key>stat</key>
+				<string>Double</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>9</integer>
+				<key>stat</key>
+				<string>Triple</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>12</integer>
+				<key>stat</key>
+				<string>Home Run</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>3</integer>
+				<key>stat</key>
+				<string>Walk</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>3</integer>
+				<key>stat</key>
+				<string>Hit By Pitch</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>2</integer>
+				<key>stat</key>
+				<string>Run</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>2</integer>
+				<key>stat</key>
+				<string>Run Batted In</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>6</integer>
+				<key>stat</key>
+				<string>Stolen Base</string>
+			</dict>
+		</array>
+		<key>pitcher</key>
+		<array>
+			<dict>
+				<key>point</key>
+				<integer>3</integer>
+				<key>stat</key>
+				<string>Strikeout</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>1</integer>
+				<key>stat</key>
+				<string>Out Recorded</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>-3</integer>
+				<key>stat</key>
+				<string>Earned Run</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>-1</integer>
+				<key>stat</key>
+				<string>Hit Allowed</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>-1</integer>
+				<key>stat</key>
+				<string>Walk Allowed</string>
+			</dict>
+			<dict>
+				<key>point</key>
+				<integer>-1</integer>
+				<key>stat</key>
+				<string>Hit Batter</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>

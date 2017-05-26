@@ -54,10 +54,31 @@ extension Contest {
             DerivedData.contestsWithEntries()
         }
     }
+    
+    func registeredUsers() -> Promise<[String]> {
+        return API.contestRegisteredUsers(id: id).then { (results:[NSDictionary]) -> [String] in
+            return results.map { res in
+                var username: String = ""
+                do {
+                    username = try res.get("username")
+                } catch _ {
+                    return ""
+                }
+                return username
+            }
+        }
+    }
 }
 
 
 extension LineupEntry {
+    func unregister() -> Promise<AnyObject> {
+        Data.contestPoolEntries.clearCache()
+        return API.contestUnregisterEntry(self)
+    }
+}
+
+extension ContestPoolEntry {
     func unregister() -> Promise<AnyObject> {
         Data.contestPoolEntries.clearCache()
         return API.contestUnregisterEntry(self)

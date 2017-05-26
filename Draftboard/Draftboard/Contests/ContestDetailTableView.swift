@@ -24,6 +24,13 @@ class ContestDetailTableView: DraftboardTableView {
         wrapperView?.maskView?.backgroundColor = .whiteColor()
         
         registerClass(ContestDetailTableViewCell.self, forCellReuseIdentifier: String(ContestDetailTableViewCell))
+        registerClass(ContestDetailTableViewHeaderCell.self, forCellReuseIdentifier: String(ContestDetailTableViewHeaderCell))
+        registerClass(ContestDetailMyEntryCell.self, forCellReuseIdentifier: String(ContestDetailMyEntryCell))
+        registerClass(ContestDetailEntryCell.self, forCellReuseIdentifier: String(ContestDetailEntryCell))
+        registerClass(ContestDetailPrizeCell.self, forCellReuseIdentifier: String(ContestDetailPrizeCell))
+        registerClass(ContestDetailGameCell.self, forCellReuseIdentifier: String(ContestDetailGameCell))
+        registerClass(ContestDetailScoringCell.self, forCellReuseIdentifier: String(ContestDetailScoringCell))
+        registerClass(ContestDetailScoringHeaderCell.self, forCellReuseIdentifier: String(ContestDetailScoringHeaderCell))
     }
     
     override func layoutSubviews() {

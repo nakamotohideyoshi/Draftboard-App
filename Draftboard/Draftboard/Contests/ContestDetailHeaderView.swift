@@ -48,7 +48,7 @@ class ContestDetailHeaderView: DraftboardView {
         sLabel.text = "S"
         
         prizeStatView.titleLabel.text = "Prizes".uppercaseString
-        entrantsStatView.titleLabel.text = "Entrants".uppercaseString
+        entrantsStatView.titleLabel.text = "Entries".uppercaseString
         feeStatView.titleLabel.text = "Fee".uppercaseString
         feeStatView.rightBorderView.hidden = true
     }
