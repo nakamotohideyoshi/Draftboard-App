@@ -26,6 +26,7 @@ class ContestDetailTableView: DraftboardTableView {
         registerClass(ContestDetailTableViewCell.self, forCellReuseIdentifier: String(ContestDetailTableViewCell))
         registerClass(ContestDetailTableViewHeaderCell.self, forCellReuseIdentifier: String(ContestDetailTableViewHeaderCell))
         registerClass(ContestDetailMyEntryCell.self, forCellReuseIdentifier: String(ContestDetailMyEntryCell))
+        registerClass(ContestDetailGDescriptionCell.self, forCellReuseIdentifier: String(ContestDetailGDescriptionCell))
         registerClass(ContestDetailEntryCell.self, forCellReuseIdentifier: String(ContestDetailEntryCell))
         registerClass(ContestDetailPrizeCell.self, forCellReuseIdentifier: String(ContestDetailPrizeCell))
         registerClass(ContestDetailGameCell.self, forCellReuseIdentifier: String(ContestDetailGameCell))

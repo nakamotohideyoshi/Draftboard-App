@@ -200,7 +200,7 @@ extension API_Endpoints {
     class func contestPoolEntries() -> Promise<[ContestPoolEntry]> {
         let path = "api/contest/contest-pools/entries/"
         return API.get(path).then { (json: [NSDictionary]) -> [ContestPoolEntry] in
-            return try json.map { try ContestPoolEntry(JSON: $0) }
+            return try json.map { try ContestPoolEntry(JSON: $0) }.sortBy{ $0.id }
         }
     }
     

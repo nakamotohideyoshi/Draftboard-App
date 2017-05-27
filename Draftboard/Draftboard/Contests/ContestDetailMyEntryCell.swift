@@ -15,15 +15,23 @@ protocol MyEntryCellDelegate: class {
 class ContestDetailMyEntryCell: DraftboardTableViewCell {
 
     let lineupNameLabel = DraftboardLabel()
+    let guaranteedLabel = DraftboardLabel()
     let removeButton = DraftboardTextButton()
     let borderView = UIView()
-    
     var entry: ContestPoolEntry? {
         didSet {
             setupContestPoolEntry()
         }
     }
-    
+    var guaranteed: Bool = false {
+        didSet {
+            if guaranteed {
+                guaranteedLabel.hidden = false
+            } else {
+                guaranteedLabel.hidden = true
+            }
+        }
+    }
     var delegate: MyEntryCellDelegate? = nil
     
     override func setup() {
@@ -34,6 +42,7 @@ class ContestDetailMyEntryCell: DraftboardTableViewCell {
     
     func addSubviews() {
         contentView.addSubview(lineupNameLabel)
+        contentView.addSubview(guaranteedLabel)
         contentView.addSubview(removeButton)
         contentView.addSubview(borderView)
     }
@@ -43,6 +52,14 @@ class ContestDetailMyEntryCell: DraftboardTableViewCell {
         lineupNameLabel.textColor = UIColor(0x192436)
         lineupNameLabel.letterSpacing = 0.5
         lineupNameLabel.textAlignment = .Center
+        
+        guaranteedLabel.font = .openSans(weight: .Semibold, size: 10)
+        guaranteedLabel.textColor = .whiteColor()
+        guaranteedLabel.letterSpacing = 0.5
+        guaranteedLabel.textAlignment = .Center
+        guaranteedLabel.backgroundColor = UIColor.greenDraftboard()
+        guaranteedLabel.attributedText = NSAttributedString(string: "G ", attributes: [NSBackgroundColorAttributeName: UIColor.greenDraftboard()])
+        guaranteedLabel.hidden = true
         
         removeButton.label.text = "Remove Entry"
         removeButton.label.textColor = UIColor.greenDraftboard()
@@ -55,12 +72,15 @@ class ContestDetailMyEntryCell: DraftboardTableViewCell {
     
     func addConstraints() {
         lineupNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        guaranteedLabel.translatesAutoresizingMaskIntoConstraints = false
         removeButton.translatesAutoresizingMaskIntoConstraints = false
         borderView.translatesAutoresizingMaskIntoConstraints = false
         
         let viewConstraints: [NSLayoutConstraint] = [
             lineupNameLabel.leftRancor.constraintEqualToRancor(contentView.leftRancor, constant: 20),
             lineupNameLabel.centerYRancor.constraintEqualToRancor(contentView.centerYRancor),
+            guaranteedLabel.leftRancor.constraintEqualToRancor(lineupNameLabel.rightRancor, constant: 5),
+            guaranteedLabel.centerYRancor.constraintEqualToRancor(lineupNameLabel.centerYRancor),
             removeButton.widthRancor.constraintEqualToConstant(97),
             removeButton.heightRancor.constraintEqualToConstant(27),
             removeButton.rightRancor.constraintEqualToRancor(contentView.rightRancor, constant: -20),

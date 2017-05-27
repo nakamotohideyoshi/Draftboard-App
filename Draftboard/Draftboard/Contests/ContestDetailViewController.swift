@@ -28,7 +28,7 @@ class ContestDetailViewController: DraftboardViewController {
     var contest: Contest?
     var games: [Game]?
     var users: [String]?
-    var myEntries: [ContestPoolEntry]? { return (contest as? HasEntries)?.entries }
+    var myEntries: [ContestPoolEntry]? { return (contest as? HasEntries)?.entries ?? [] }
     var scoring: NSDictionary?
     
     override func loadView() {
@@ -124,7 +124,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.currentIndex == 0 {
-            return (myEntries?.count)!
+            return ((myEntries?.count)! == 0) ? 0 : (myEntries?.count)! + 1
         } else if segmentedControl.currentIndex == 1 {
             return (users != nil) ? (users?.count)! : 0
         } else if segmentedControl.currentIndex == 2 {
@@ -146,7 +146,13 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if segmentedControl.currentIndex == 4 {
+        if segmentedControl.currentIndex == 0 {
+            if indexPath.row == myEntries?.count {
+                return 100
+            } else {
+                return 40
+            }
+        } else if segmentedControl.currentIndex == 4 {
             if indexPath.row == 0 {
                 if indexPath.section == 0{
                     return 30
@@ -163,11 +169,17 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if segmentedControl.currentIndex == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailMyEntryCell), forIndexPath: indexPath) as! ContestDetailMyEntryCell
-            cell.entry = myEntries![indexPath.row]
-            cell.delegate = self
-            
-            return cell
+            if indexPath.row == myEntries?.count {
+                let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailGDescriptionCell), forIndexPath: indexPath) as! ContestDetailGDescriptionCell
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailMyEntryCell), forIndexPath: indexPath) as! ContestDetailMyEntryCell
+                cell.entry = myEntries![indexPath.row]
+                cell.delegate = self
+                cell.guaranteed = indexPath.row == 0
+                return cell
+            }
         } else if segmentedControl.currentIndex == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(String(ContestDetailEntryCell), forIndexPath: indexPath) as! ContestDetailEntryCell
             cell.usernameLabel.text = users![indexPath.row]
