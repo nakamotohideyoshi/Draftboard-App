@@ -239,6 +239,20 @@ extension ContestListViewController {
     
 }
 
+private typealias ButtonDelegate = ContestListViewController
+extension ButtonDelegate: EnterButtonDelegate {
+    func tappedEnterButton(contest contest: Contest, completionHandler: ((Bool) -> Void)) {
+        if pendingEntries[contest.id]?.count > 0 { return }
+        
+        enterContest(contest).always{
+            completionHandler(true)
+        }.error { (error: ErrorType) -> Void in
+            completionHandler(false)
+            self.showError(error)
+        }
+    }
+}
+
 private typealias TableViewDelegate = ContestListViewController
 extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, ContestCellActionButtonDelegate {
     
@@ -275,6 +289,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailVC = ContestDetailViewController()
         detailVC.contest = contests?[safe: indexPath.row]
+        detailVC.delegate = self
         navController?.pushViewController(detailVC)
     }
     

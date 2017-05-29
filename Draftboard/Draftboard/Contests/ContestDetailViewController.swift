@@ -9,6 +9,9 @@
 import UIKit
 import PromiseKit
 
+protocol EnterButtonDelegate: class {
+    func tappedEnterButton(contest contest:Contest, completionHandler: ((Bool)->Void))
+}
 class ContestDetailViewController: DraftboardViewController {
     
     override var overlapsTabBar: Bool { return true }
@@ -30,6 +33,7 @@ class ContestDetailViewController: DraftboardViewController {
     var users: [String]?
     var myEntries: [ContestPoolEntry]? { return (contest as? HasEntries)?.entries ?? [] }
     var scoring: NSDictionary?
+    var delegate: EnterButtonDelegate?
     
     override func loadView() {
         view = ContestDetailView()
@@ -46,7 +50,8 @@ class ContestDetailViewController: DraftboardViewController {
         feeStatView.valueLabel.text = Format.currency.stringFromNumber(contest?.buyin ?? 0)
         
         enterButton.label.text = "Enter Contest".uppercaseString
-
+        enterButton.addTarget(self, action: #selector(tappedEnterButton), forControlEvents: .TouchUpInside)
+        
         entryCountLabel.text = NSString(format: "%d of %d Max Entries", (myEntries?.count)!, (contest?.maxEntries)!) as String
 
         segmentedControl.choices = ["My Entries", "Entries", "Prizes", "Games", "Scoring"]
@@ -77,6 +82,16 @@ class ContestDetailViewController: DraftboardViewController {
             let last = tableView.indexPathsForVisibleRows!.last!
             tableView.scrollToRowAtIndexPath(last, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
+    }
+    
+    func tappedEnterButton() {
+        enterButton.label.text = "Entering...".uppercaseString
+        delegate?.tappedEnterButton(contest: contest!, completionHandler: { (finished) in
+            if finished {
+                self.updateData()
+            }
+            self.enterButton.label.text = "Enter Contest".uppercaseString
+        })
     }
     
     // Titlebar
