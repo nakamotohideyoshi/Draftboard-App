@@ -276,6 +276,114 @@ extension Player {
                     }
                 }
             }
+        } else if sportName == "nfl" {
+            return when(Data.nflPlayerGameLogs[id].get(), Data.sportsTeams[sportName].get()).then { (result, teams) -> NSArray in
+                if result.count == 0 {
+                    return []
+                } else {
+                    let gameLogs = result[0]
+                    let teamsBySRID = teams.keyBy { $0.srid }
+                    
+                    if position == "QB" {
+                        let startArr: [String] = try! gameLogs.get("start")
+                        let homeTeams: [String] = try! gameLogs.get("srid_home")
+                        let awayTeams: [String] = try! gameLogs.get("srid_away")
+                        let passYdsValues: [Int] = try! gameLogs.get("pass_yds")
+                        let passTdValues: [Int] = try! gameLogs.get("pass_td")
+                        let passIntValues: [Int] = try! gameLogs.get("pass_int")
+                        let rushYdsValues: [Int] = try! gameLogs.get("rush_yds")
+                        let rushTdValues: [Int] = try! gameLogs.get("rush_td")
+                        let fpValues: [Double] = try! gameLogs.get("fp")
+                        
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "MMM dd"
+                        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
+                        
+                        var gameStats = [NFLQBGameLog] ()
+                        
+                        for (i, value) in startArr.enumerate() {
+                            let startDate:NSDate = try API.dateFromString(value)
+                            let start:String = dateFormatter.stringFromDate(startDate)
+                            let homeTeam: String = homeTeams[i]
+                            let awayTeam: String = awayTeams[i]
+                            var opp = ""
+                            if homeTeam == team?.srid {
+                                opp = (teamsBySRID[awayTeam]?.alias)!
+                            }
+                            if awayTeam == team?.srid {
+                                opp = "@" + (teamsBySRID[homeTeam]?.alias)!
+                            }
+                            let gameStat: NFLQBGameLog = NFLQBGameLog.init(date: start, opp: opp, pass_yds: passYdsValues[i], pass_td: passTdValues[i], pass_int: passIntValues[i], rush_yds: rushYdsValues[i], rush_td: rushTdValues[i], fp: fpValues[i])
+                            gameStats.append(gameStat)
+                        }
+                        return gameStats
+                    } else if position == "RB" {
+                        let startArr: [String] = try! gameLogs.get("start")
+                        let homeTeams: [String] = try! gameLogs.get("srid_home")
+                        let awayTeams: [String] = try! gameLogs.get("srid_away")
+                        let rushYdsValues: [Int] = try! gameLogs.get("rush_yds")
+                        let rushTdValues: [Int] = try! gameLogs.get("rush_td")
+                        let recRecValues: [Int] = try! gameLogs.get("rec_rec")
+                        let recYdsValues: [Int] = try! gameLogs.get("rec_yds")
+                        let recTdValues: [Int] = try! gameLogs.get("rec_td")
+                        let fpValues: [Double] = try! gameLogs.get("fp")
+                        
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "MMM dd"
+                        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
+                        
+                        var gameStats = [NFLRBGameLog] ()
+                        
+                        for (i, value) in startArr.enumerate() {
+                            let startDate:NSDate = try API.dateFromString(value)
+                            let start:String = dateFormatter.stringFromDate(startDate)
+                            let homeTeam: String = homeTeams[i]
+                            let awayTeam: String = awayTeams[i]
+                            var opp = ""
+                            if homeTeam == team?.srid {
+                                opp = (teamsBySRID[awayTeam]?.alias)!
+                            }
+                            if awayTeam == team?.srid {
+                                opp = "@" + (teamsBySRID[homeTeam]?.alias)!
+                            }
+                            let gameStat: NFLRBGameLog = NFLRBGameLog.init(date: start, opp: opp, rush_yds: rushYdsValues[i], rush_td: rushTdValues[i], rec_rec: recRecValues[i], rec_yds: recYdsValues[i], rec_td: recTdValues[i], fp: fpValues[i])
+                            gameStats.append(gameStat)
+                        }
+                        return gameStats
+                    } else {
+                        let startArr: [String] = try! gameLogs.get("start")
+                        let homeTeams: [String] = try! gameLogs.get("srid_home")
+                        let awayTeams: [String] = try! gameLogs.get("srid_away")
+                        let recRecValues: [Int] = try! gameLogs.get("rec_rec")
+                        let recYdsValues: [Int] = try! gameLogs.get("rec_yds")
+                        let recTdValues: [Int] = try! gameLogs.get("rec_td")
+                        let fpValues: [Double] = try! gameLogs.get("fp")
+                        
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "MMM dd"
+                        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
+                        
+                        var gameStats = [NFLGameLog] ()
+                        
+                        for (i, value) in startArr.enumerate() {
+                            let startDate:NSDate = try API.dateFromString(value)
+                            let start:String = dateFormatter.stringFromDate(startDate)
+                            let homeTeam: String = homeTeams[i]
+                            let awayTeam: String = awayTeams[i]
+                            var opp = ""
+                            if homeTeam == team?.srid {
+                                opp = (teamsBySRID[awayTeam]?.alias)!
+                            }
+                            if awayTeam == team?.srid {
+                                opp = "@" + (teamsBySRID[homeTeam]?.alias)!
+                            }
+                            let gameStat: NFLGameLog = NFLGameLog.init(date: start, opp: opp, rec_rec: recRecValues[i], rec_yds: recYdsValues[i], rec_td: recTdValues[i], fp: fpValues[i])
+                            gameStats.append(gameStat)
+                        }
+                        return gameStats
+                    }
+                }
+            }
         } else {
             return Data.nbaPlayerGameLogs[id].get().then { gameLogs in
                 return []

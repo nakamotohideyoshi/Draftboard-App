@@ -23,6 +23,7 @@ class Data {
     static let contestGroup = MultiCache { id in API.contestStatus(id: id) }
     static let mlbPlayerGameLogs = MultiCache { id in API.getMLBPlayerGameLogs(playerID: id) }
     static let nbaPlayerGameLogs = MultiCache { id in API.getNBAPlayerGameLogs(playerID: id) }
+    static let nflPlayerGameLogs = MultiCache { id in API.getNFLPlayerGameLogs(playerID: id) }
     static let playerReports = MultiCache { srid in API.getPlayerReports(srid: srid) }
 }
 

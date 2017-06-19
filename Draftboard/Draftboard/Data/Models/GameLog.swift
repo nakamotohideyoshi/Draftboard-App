@@ -64,3 +64,67 @@ class MLBHitterGameLog {
     }
 }
 
+class NFLQBGameLog {
+    
+    let date: String
+    let opp: String
+    let pass_yds: Int
+    let pass_td: Int
+    let pass_int: Int
+    let rush_yds: Int
+    let rush_td: Int
+    let fp: Double
+    
+    init(date: String, opp: String, pass_yds: Int, pass_td: Int, pass_int: Int, rush_yds: Int, rush_td: Int, fp: Double) {
+        self.date = date
+        self.opp = opp
+        self.pass_yds = pass_yds
+        self.pass_td = pass_td
+        self.pass_int = pass_int
+        self.rush_yds = rush_yds
+        self.rush_td = rush_td
+        self.fp = fp
+    }
+}
+
+class NFLRBGameLog {
+    
+    let date: String
+    let opp: String
+    let rush_yds: Int
+    let rush_td: Int
+    let rec_rec: Int
+    let rec_yds: Int
+    let rec_td: Int
+    let fp: Double
+    
+    init(date: String, opp: String, rush_yds: Int, rush_td: Int, rec_rec: Int, rec_yds: Int, rec_td: Int, fp: Double) {
+        self.date = date
+        self.opp = opp
+        self.rush_yds = rush_yds
+        self.rush_td = rush_td
+        self.rec_rec = rec_rec
+        self.rec_yds = rec_yds
+        self.rec_td = rec_td
+        self.fp = fp
+    }
+}
+
+class NFLGameLog {
+    
+    let date: String
+    let opp: String
+    let rec_rec: Int
+    let rec_yds: Int
+    let rec_td: Int
+    let fp: Double
+    
+    init(date: String, opp: String, rec_rec: Int, rec_yds: Int, rec_td: Int, fp: Double) {
+        self.date = date
+        self.opp = opp
+        self.rec_rec = rec_rec
+        self.rec_yds = rec_yds
+        self.rec_td = rec_td
+        self.fp = fp
+    }
+}

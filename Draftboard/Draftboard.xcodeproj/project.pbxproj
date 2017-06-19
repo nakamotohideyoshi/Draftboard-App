@@ -232,6 +232,12 @@
 		B22450131EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */; };
 		B22450151EC54C560098BC24 /* MLBPitcherGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */; };
 		B26405A81EB6E39000DF6B61 /* TeamColors.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26405A71EB6E39000DF6B61 /* TeamColors.plist */; };
+		B26962571EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962561EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift */; };
+		B26962591EF7B2A100FF1F50 /* NFLQBGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962581EF7B2A100FF1F50 /* NFLQBGameLogCell.swift */; };
+		B269625B1EF8264500FF1F50 /* NFLRBGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269625A1EF8264500FF1F50 /* NFLRBGameLogHeaderCell.swift */; };
+		B269625D1EF827C200FF1F50 /* NFLRBGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269625C1EF827C200FF1F50 /* NFLRBGameLogCell.swift */; };
+		B269625F1EF82A8E00FF1F50 /* NFLGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269625E1EF82A8E00FF1F50 /* NFLGameLogHeaderCell.swift */; };
+		B26962611EF82AB700FF1F50 /* NFLGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962601EF82AB700FF1F50 /* NFLGameLogCell.swift */; };
 		B2787D371EC5A40F00F2DDB8 /* GameLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D361EC5A40F00F2DDB8 /* GameLog.swift */; };
 		B2787D391EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */; };
 		B2787D3B1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */; };
@@ -479,6 +485,12 @@
 		B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogCell.swift; sourceTree = "<group>"; };
 		B26405A71EB6E39000DF6B61 /* TeamColors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TeamColors.plist; sourceTree = "<group>"; };
+		B26962561EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLQBGameLogHeaderCell.swift; sourceTree = "<group>"; };
+		B26962581EF7B2A100FF1F50 /* NFLQBGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLQBGameLogCell.swift; sourceTree = "<group>"; };
+		B269625A1EF8264500FF1F50 /* NFLRBGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLRBGameLogHeaderCell.swift; sourceTree = "<group>"; };
+		B269625C1EF827C200FF1F50 /* NFLRBGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLRBGameLogCell.swift; sourceTree = "<group>"; };
+		B269625E1EF82A8E00FF1F50 /* NFLGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLGameLogHeaderCell.swift; sourceTree = "<group>"; };
+		B26962601EF82AB700FF1F50 /* NFLGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLGameLogCell.swift; sourceTree = "<group>"; };
 		B2787D361EC5A40F00F2DDB8 /* GameLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLog.swift; sourceTree = "<group>"; };
 		B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBHitterGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBHitterGameLogCell.swift; sourceTree = "<group>"; };
@@ -592,6 +604,12 @@
 				B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */,
 				B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */,
 				B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */,
+				B26962561EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift */,
+				B26962581EF7B2A100FF1F50 /* NFLQBGameLogCell.swift */,
+				B269625A1EF8264500FF1F50 /* NFLRBGameLogHeaderCell.swift */,
+				B269625C1EF827C200FF1F50 /* NFLRBGameLogCell.swift */,
+				B269625E1EF82A8E00FF1F50 /* NFLGameLogHeaderCell.swift */,
+				B26962601EF82AB700FF1F50 /* NFLGameLogCell.swift */,
 			);
 			name = PlayerDetail;
 			sourceTree = "<group>";
@@ -1117,6 +1135,7 @@
 				3EC4EE011DB1801000D20914 /* LivePlayer.swift in Sources */,
 				3E192C351CE515C90021A31D /* Data+Old.swift in Sources */,
 				5D6237E31BB620320007E62A /* DraftboardRoundButton.swift in Sources */,
+				B26962591EF7B2A100FF1F50 /* NFLQBGameLogCell.swift in Sources */,
 				3E9FB9101D8A0F9700F55990 /* DraftboardTextButton.swift in Sources */,
 				3E192C3B1CEB88CE0021A31D /* LineupDetailView.swift in Sources */,
 				5D26FC741BBEE78700ACF127 /* AccountViewControllerOld.swift in Sources */,
@@ -1129,6 +1148,7 @@
 				3E83CCD61D95D2EE00324EB2 /* DraftboardLabeledField.swift in Sources */,
 				3E192C1F1CCADE760021A31D /* LineupCardCollectionView.swift in Sources */,
 				5D86F2771C19043D004E9655 /* LineupStatCurrencyView.swift in Sources */,
+				B26962611EF82AB700FF1F50 /* NFLGameLogCell.swift in Sources */,
 				3CC6E80E1C12059E000F05F7 /* ChangePasswordViewController.swift in Sources */,
 				3E8A7E6A1D39D16C0020681E /* LineupEntry.swift in Sources */,
 				3E04ECAC1D02138A00EE325C /* Boxscore.swift in Sources */,
@@ -1148,6 +1168,7 @@
 				3C74CA3D1BE050D50077DF0C /* PieChart.swift in Sources */,
 				5D63D0A91BD6B711000215DF /* LineupSearchViewController.swift in Sources */,
 				5D6237DF1BB6200B0007E62A /* DraftboardNibView.swift in Sources */,
+				B269625B1EF8264500FF1F50 /* NFLRBGameLogHeaderCell.swift in Sources */,
 				5D6237E01BB6200B0007E62A /* DraftboardView.swift in Sources */,
 				B2787D391EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift in Sources */,
 				5D783AD31BD97D23000D8494 /* Sport.swift in Sources */,
@@ -1156,6 +1177,7 @@
 				3E4A0FF31D480FBD00EDB59F /* ContestListView.swift in Sources */,
 				3E192C291CDAB84B0021A31D /* NSDictionary+API.swift in Sources */,
 				5DCFB8981C52953F00924EC7 /* DraftboardPagination.swift in Sources */,
+				B269625D1EF827C200FF1F50 /* NFLRBGameLogCell.swift in Sources */,
 				5D6237E11BB6200B0007E62A /* DraftboardViewController.swift in Sources */,
 				3E9FB9031D7E2F2300F55990 /* ContestDetailViewController.swift in Sources */,
 				3E07C6AF1CEE437400423CCC /* LineupDetailViewController.swift in Sources */,
@@ -1174,6 +1196,7 @@
 				5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */,
 				5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */,
 				3E9FB90A1D8A0AD900F55990 /* ContestDetailTableView.swift in Sources */,
+				B269625F1EF82A8E00FF1F50 /* NFLGameLogHeaderCell.swift in Sources */,
 				5D9A321D1BCD6591006C758B /* DraftboardFilterButton.swift in Sources */,
 				5D6237D91BB61FFB0007E62A /* DraftboardTitlebar.swift in Sources */,
 				3CB630A81C10A19000ACEAD3 /* DepositView.swift in Sources */,
@@ -1258,6 +1281,7 @@
 				3EB2CB671BFE473B00579F1B /* Data.swift in Sources */,
 				3E4A0FF71D4FE84400EDB59F /* DraftboardTableViewCell.swift in Sources */,
 				3C74CA531BE0528D0077DF0C /* ContestModel.swift in Sources */,
+				B26962571EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift in Sources */,
 				3E9FB9141D8B0C5B00F55990 /* ContestDetailTableViewCell.swift in Sources */,
 				5DE1D6401BF2BC0F00C796ED /* LineupStatTimeView.swift in Sources */,
 				3C74CA471BE0516C0077DF0C /* ContestsListController.swift in Sources */,

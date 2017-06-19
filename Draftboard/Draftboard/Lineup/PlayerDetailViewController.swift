@@ -65,6 +65,7 @@ class PlayerDetailViewController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        print("player id ---->", player!.id)
         player?.getPlayerReports().then { reports -> Void in
             self.reports = reports
             self.tableView.reloadData()
@@ -294,6 +295,68 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
                 
+            } else if sportName == "nfl" {
+                let position = (player as? PlayerWithPositionAndGame)?.position
+                
+                if position == "QB" {
+                    if indexPath.row == 0 {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(NFLQBGameLogHeaderCell), forIndexPath: indexPath)
+                        
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(NFLQBGameLogCell), forIndexPath: indexPath) as! NFLQBGameLogCell
+                        let gameLog: NFLQBGameLog = gameLogs![indexPath.row - 1] as! NFLQBGameLog
+                        
+                        cell.dateLabel.text = gameLog.date
+                        cell.oppLabel.text = gameLog.opp
+                        cell.passYdsLabel.text = NSString(format:"%d", gameLog.pass_yds) as String
+                        cell.passTdLabel.text = NSString(format:"%d", gameLog.pass_td) as String
+                        cell.passIntLabel.text = NSString(format:"%d", gameLog.pass_int) as String
+                        cell.rushYdsLabel.text = NSString(format:"%d", gameLog.rush_yds) as String
+                        cell.rushTdLabel.text = NSString(format:"%d", gameLog.rush_td) as String
+                        cell.fpLabel.text = NSString(format:"%.2f", gameLog.fp) as String
+                        
+                        return cell
+                    }
+                } else if position == "RB" {
+                    if indexPath.row == 0 {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(NFLRBGameLogHeaderCell), forIndexPath: indexPath)
+                        
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(NFLRBGameLogCell), forIndexPath: indexPath) as! NFLRBGameLogCell
+                        let gameLog: NFLRBGameLog = gameLogs![indexPath.row - 1] as! NFLRBGameLog
+                        
+                        cell.dateLabel.text = gameLog.date
+                        cell.oppLabel.text = gameLog.opp
+                        cell.rushYdsLabel.text = NSString(format:"%d", gameLog.rush_yds) as String
+                        cell.rushTdLabel.text = NSString(format:"%d", gameLog.rush_td) as String
+                        cell.recRecLabel.text = NSString(format:"%d", gameLog.rec_rec) as String
+                        cell.recYdsLabel.text = NSString(format:"%d", gameLog.rec_yds) as String
+                        cell.recTdLabel.text = NSString(format:"%d", gameLog.rec_td) as String
+                        cell.fpLabel.text = NSString(format:"%.2f", gameLog.fp) as String
+                        
+                        return cell
+                    }
+                } else {
+                    if indexPath.row == 0 {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(NFLGameLogHeaderCell), forIndexPath: indexPath)
+                        
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCellWithIdentifier(String(NFLGameLogCell), forIndexPath: indexPath) as! NFLGameLogCell
+                        let gameLog: NFLGameLog = gameLogs![indexPath.row - 1] as! NFLGameLog
+                        
+                        cell.dateLabel.text = gameLog.date
+                        cell.oppLabel.text = gameLog.opp
+                        cell.recRecLabel.text = NSString(format:"%d", gameLog.rec_rec) as String
+                        cell.recYdsLabel.text = NSString(format:"%d", gameLog.rec_yds) as String
+                        cell.recTdLabel.text = NSString(format:"%d", gameLog.rec_td) as String
+                        cell.fpLabel.text = NSString(format:"%.2f", gameLog.fp) as String
+                        
+                        return cell
+                    }
+                }
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier(String(PlayerDetailTableViewCell), forIndexPath: indexPath)
                 let subsectionName = segmentedControl.choices[segmentedControl.currentIndex]

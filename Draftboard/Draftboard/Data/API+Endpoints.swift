@@ -286,4 +286,11 @@ extension API_Endpoints {
             return json
         }
     }
+    
+    class func getNFLPlayerGameLogs(playerID playerID: Int) -> Promise<[NSDictionary]> {
+        let path = "api/sports/player/history/nfl/20/\(playerID)/"
+        return API.get(path).then { (json: [NSDictionary]) -> [NSDictionary] in
+            return json
+        }
+    }
 }
