@@ -107,7 +107,7 @@ class NFLQBGameLogHeaderCell: UITableViewCell {
         fpLabel.font = .openSans(weight: .Semibold, size: 8)
         fpLabel.textColor = .whiteColor()
         fpLabel.letterSpacing = 0.5
-        fpLabel.text = "FPPG"
+        fpLabel.text = "FP"
     }
     
     func addConstraints() {
