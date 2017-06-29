@@ -18,9 +18,15 @@ class RealtimePlayerStat {
     }
     
     convenience init(JSON json: NSDictionary) throws {
-        let fields: NSDictionary = try json.get("fields")
-        let player: Int = try fields.get("player_id")
-        let points: Double = try fields.get("fantasy_points")
-        self.init(player: player, points: points)
+        do {
+            let fields: NSDictionary = try json.get("fields")
+            let player: Int = try fields.get("player_id")
+            let points: Double = try fields.get("fantasy_points")
+            self.init(player: player, points: points)
+        } catch {
+            let player: Int = try json.get("player_id")
+            let points: Double = try json.get("fantasy_points")
+            self.init(player: player, points: points)
+        }
     }
 }
