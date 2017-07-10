@@ -16,13 +16,17 @@ class LineupDraftViewController: DraftboardViewController {
     var tableView: LineupPlayerTableView { return lineupDraftView.tableView }
     var searchBar: UISearchBar { return lineupDraftView.searchBar }
     var loaderView: LoaderView { return lineupDraftView.loaderView }
-    
+    var gamesView: LineupDraftGamesView { return lineupDraftView.gamesView }
+    var gamesTableView: LineupDraftGamesTableView { return gamesView.tableView }
+    var gamesViewHeight: NSLayoutConstraint!
 //    var pickPlayerAction: ((Player) -> Void)?
 
     var lineup: Lineup!
     var slot: LineupSlot? { didSet { update() } }
     var allPlayers: [PlayerWithPosition]? { didSet { update() } }
     var players: [PlayerWithPosition]?
+    var games: [Game]?
+    var selectedGame: Game?
     
     var scrollingToSearchBar: Bool = false
     
@@ -33,6 +37,8 @@ class LineupDraftViewController: DraftboardViewController {
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
+        gamesTableView.delegate = self
+        gamesTableView.dataSource = self
         searchBar.delegate = self
         update()
     }
@@ -41,6 +47,13 @@ class LineupDraftViewController: DraftboardViewController {
         searchBar.text = nil
         update()
         scrollToFirstAffordablePlayer()
+        DerivedData.games(sportName: lineup.sportName, draftGroupID: lineup.draftGroupID).then { games -> Void in
+            self.games = games
+            let cellCount = min(5, games.count)
+            self.gamesViewHeight = self.gamesView.heightRancor.constraintEqualToConstant(165 + CGFloat(cellCount * 72))
+            self.gamesViewHeight.active = true
+            self.gamesTableView.reloadData()
+        }
     }
     
     func update() {
@@ -56,6 +69,7 @@ class LineupDraftViewController: DraftboardViewController {
             if draftedPlayers.contains($0) { return false }
             if !okPositions.contains($0.position) { return false }
             if !$0.name.matchesSearchPattern(searchPattern) { return false }
+            if selectedGame != nil && ($0 as? HasGame)?.game.srid != selectedGame?.srid { return false }
             return true
         }
         tableView.reloadData()
@@ -89,12 +103,20 @@ class LineupDraftViewController: DraftboardViewController {
             tableView.setContentOffset(CGPointMake(0, 0), animated: true)
         }
     }
+    
+    override func didTapSubtitle() {
+        gamesView.hidden = !gamesView.hidden
+    }
 
     // DraftboardTitlebarDatasource
     
     override func titlebarTitle() -> String {
         let slotName = slot?.description ?? "Player"
         return "Select \(slotName)".uppercaseString
+    }
+    
+    override func titlebarSubtitle() -> String? {
+        return "All Games".uppercaseString
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -114,37 +136,79 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
     
     // UITableViewDataSource
     
-    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return players?.count ?? 0
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (tableView === gamesTableView) {
+            if games == nil {
+                return 0
+            } else {
+                return games!.count + 1
+            }
+        } else {
+            return players?.count ?? 0
+        }
     }
     
-    func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = lineupDraftView.tableView.dequeueCellForIndexPath(indexPath)
-        
-        let player = players![indexPath.row]
-        cell.showAllInfo = true
-        cell.showAddButton = true
-        cell.showBottomBorder = player !== players?.last
-        cell.actionButtonDelegate = self
-        cell.withinBudget = (player.salary <= lineup.totalSalaryRemaining)
-        cell.setPlayer(player)
-        
-        return cell
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if tableView === gamesTableView {
+            if indexPath.row == 0 {
+                return 53
+            } else {
+                return 72
+            }
+        } else {
+            return 48
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if (tableView === gamesTableView) {
+            let cell = gamesTableView.dequeueCellForIndexPath(indexPath)
+            
+            let game = indexPath.row == 0 ? nil : games![safe: indexPath.row - 1]
+            cell.setGame(game)
+            if indexPath.row == 0 {
+                cell.selectedGame = selectedGame === nil
+            } else {
+                cell.selectedGame = selectedGame === game
+            }
+            
+            
+            return cell
+        } else {
+            let cell = lineupDraftView.tableView.dequeueCellForIndexPath(indexPath)
+            
+            let player = players![indexPath.row]
+            cell.showAllInfo = true
+            cell.showAddButton = true
+            cell.showBottomBorder = player !== players?.last
+            cell.actionButtonDelegate = self
+            cell.withinBudget = (player.salary <= lineup.totalSalaryRemaining)
+            cell.setPlayer(player)
+            
+            return cell
+        }
     }
     
     // UITableViewDelegate
     
-    func tableView(_: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-        if let player = players?[indexPath.row] {
-            let playerDetailViewController = PlayerDetailViewController()
-            playerDetailViewController.sportName = lineup?.sportName
-            playerDetailViewController.player = player
-            playerDetailViewController.showAddButton = true
-            playerDetailViewController.indexPath = indexPath
-            playerDetailViewController.draftButtonDelegate = self
-            self.navController?.pushViewController(playerDetailViewController)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView === gamesTableView {
+            selectedGame = indexPath.row == 0 ? nil : games![safe: indexPath.row - 1]
+            gamesTableView.reloadData()
+            gamesView.hidden = !gamesView.hidden
+            update()
+        } else {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
+            if let player = players?[indexPath.row] {
+                let playerDetailViewController = PlayerDetailViewController()
+                playerDetailViewController.sportName = lineup?.sportName
+                playerDetailViewController.player = player
+                playerDetailViewController.showAddButton = true
+                playerDetailViewController.indexPath = indexPath
+                playerDetailViewController.draftButtonDelegate = self
+                self.navController?.pushViewController(playerDetailViewController)
+            }
         }
     }
     

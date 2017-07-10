@@ -30,6 +30,10 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
         print("DraftboardViewController::didTapTitlebarButton:", buttonType)
     }
     
+    func didTapSubtitle() {
+         print("DraftboardViewController::didTapSubtitle")
+    }
+    
     func titlebarLeftButtonType() -> TitlebarButtonType? {
         return .Menu
     }
@@ -90,6 +94,10 @@ class DraftboardViewController: UIViewController, DraftboardTitlebarDelegate, Dr
     
     func titlebarSubtitle() -> String? {
         return "".uppercaseString
+    }
+    
+    func titlebarSubtitleColor() -> UIColor? {
+        return UIColor.greenDraftboard()
     }
     
     func titlebarAttributedSubtitle() -> NSMutableAttributedString? {

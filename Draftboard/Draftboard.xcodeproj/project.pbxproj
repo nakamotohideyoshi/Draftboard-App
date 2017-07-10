@@ -252,6 +252,9 @@
 		B2A4B7DF1ED6815A002493FD /* ContestDetailEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7DE1ED6815A002493FD /* ContestDetailEntryCell.swift */; };
 		B2A4B7E11ED68701002493FD /* ContestDetailMyEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7E01ED68701002493FD /* ContestDetailMyEntryCell.swift */; };
 		B2A4B7E31ED8B994002493FD /* ContestDetailGDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7E21ED8B994002493FD /* ContestDetailGDescriptionCell.swift */; };
+		B2CC40D31F1329D800D88E64 /* LineupDraftGamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D21F1329D800D88E64 /* LineupDraftGamesView.swift */; };
+		B2CC40D51F13D72800D88E64 /* LineupDraftGamesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D41F13D72800D88E64 /* LineupDraftGamesTableView.swift */; };
+		B2CC40D71F13D8F700D88E64 /* LineupDraftGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D61F13D8F700D88E64 /* LineupDraftGameCell.swift */; };
 		B2DC21761EB3DFED001E4C4F /* PlayerGameDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DC21751EB3DFED001E4C4F /* PlayerGameDetailView.swift */; };
 		B2E076931EBB22480052F593 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E076921EBB22480052F593 /* Report.swift */; };
 		B2E076951EBB305C0052F593 /* PlayerReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E076941EBB305C0052F593 /* PlayerReportCell.swift */; };
@@ -505,6 +508,9 @@
 		B2A4B7DE1ED6815A002493FD /* ContestDetailEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailEntryCell.swift; sourceTree = "<group>"; };
 		B2A4B7E01ED68701002493FD /* ContestDetailMyEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailMyEntryCell.swift; sourceTree = "<group>"; };
 		B2A4B7E21ED8B994002493FD /* ContestDetailGDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailGDescriptionCell.swift; sourceTree = "<group>"; };
+		B2CC40D21F1329D800D88E64 /* LineupDraftGamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftGamesView.swift; sourceTree = "<group>"; };
+		B2CC40D41F13D72800D88E64 /* LineupDraftGamesTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftGamesTableView.swift; sourceTree = "<group>"; };
+		B2CC40D61F13D8F700D88E64 /* LineupDraftGameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftGameCell.swift; sourceTree = "<group>"; };
 		B2DC21751EB3DFED001E4C4F /* PlayerGameDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerGameDetailView.swift; sourceTree = "<group>"; };
 		B2E076921EBB22480052F593 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		B2E076941EBB305C0052F593 /* PlayerReportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerReportCell.swift; sourceTree = "<group>"; };
@@ -827,6 +833,9 @@
 				3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */,
 				3EF777AC1D0B54CB002322F3 /* LineupDraftViewController.swift */,
 				3EF777AE1D0B54D4002322F3 /* LineupDraftView.swift */,
+				B2CC40D21F1329D800D88E64 /* LineupDraftGamesView.swift */,
+				B2CC40D41F13D72800D88E64 /* LineupDraftGamesTableView.swift */,
+				B2CC40D61F13D8F700D88E64 /* LineupDraftGameCell.swift */,
 				3E8A7E631D273A220020681E /* LineupEntryViewController.swift */,
 				3E8A7E651D273A2B0020681E /* LineupEntryView.swift */,
 				5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */,
@@ -1195,6 +1204,7 @@
 				5DAC07941C21DCC60002B97B /* DraftboardDetailListItem.swift in Sources */,
 				5DE6C5981BD052FE005A4DC6 /* Spring.swift in Sources */,
 				5D26FC761BBF211600ACF127 /* DraftboardSegmentedView.swift in Sources */,
+				B2CC40D71F13D8F700D88E64 /* LineupDraftGameCell.swift in Sources */,
 				3E9FB90A1D8A0AD900F55990 /* ContestDetailTableView.swift in Sources */,
 				B269625F1EF82A8E00FF1F50 /* NFLGameLogHeaderCell.swift in Sources */,
 				5D9A321D1BCD6591006C758B /* DraftboardFilterButton.swift in Sources */,
@@ -1266,6 +1276,7 @@
 				3CDC73601BF1472B00DDF60E /* ContestLiveDetailViewController.swift in Sources */,
 				5D3C726C1BF11EE3005A27B1 /* GlobalFilterItem.swift in Sources */,
 				5D9A32231BCD7BDA006C758B /* DraftboardTabController.swift in Sources */,
+				B2CC40D31F1329D800D88E64 /* LineupDraftGamesView.swift in Sources */,
 				3E192C391CE6485E0021A31D /* LineupPlayer.swift in Sources */,
 				3CB0586D1BE28C95002343BD /* PlayerDetailViewControllerOld.swift in Sources */,
 				5D6237C51BB61F7B0007E62A /* LineupEditViewController.swift in Sources */,
@@ -1297,6 +1308,7 @@
 				3E83CCD21D95CF7500324EB2 /* AccountViewController.swift in Sources */,
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
 				3E8A7E661D273A2C0020681E /* LineupEntryView.swift in Sources */,
+				B2CC40D51F13D72800D88E64 /* LineupDraftGamesTableView.swift in Sources */,
 				5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */,
 				3E8018AE1CB5A18300403528 /* LineupListView.swift in Sources */,
 				B2787D3B1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift in Sources */,

@@ -17,12 +17,14 @@ enum TitlebarTransitionStyle {
 
 protocol DraftboardTitlebarDelegate {
     func didTapTitlebarButton(buttonType: TitlebarButtonType)
+    func didTapSubtitle()
 }
 
 protocol DraftboardTitlebarDataSource {
     func titlebarTitle() -> String?
     func titlebarAttributedTitle() -> NSMutableAttributedString?
     func titlebarSubtitle() -> String?
+    func titlebarSubtitleColor() -> UIColor?
     func titlebarAttributedSubtitle() -> NSMutableAttributedString?
     func titlebarLeftButtonType() -> TitlebarButtonType?
     func titlebarRightButtonType() -> TitlebarButtonType?
@@ -60,6 +62,8 @@ class DraftboardTitlebar: UIView {
     var bgHidden = false
     var completionHandler:((Bool)->Void)?
     
+    var tapGestureRecognizer: UITapGestureRecognizer!
+    
     convenience init() {
         self.init(frame: CGRectZero)
         
@@ -72,6 +76,10 @@ class DraftboardTitlebar: UIView {
         bgView.rightRancor.constraintEqualToRancor(rightRancor).active = true
         bgView.bottomRancor.constraintEqualToRancor(bottomRancor).active = true
         bgView.topRancor.constraintEqualToRancor(topRancor).active = true
+        
+        tapGestureRecognizer = UITapGestureRecognizer()
+        tapGestureRecognizer.addTarget(self, action: .didTapSubtitle)
+        
     }
     
     func updateElements() {
@@ -153,6 +161,8 @@ class DraftboardTitlebar: UIView {
         // Different subtitle
         if (subtitleLabelChanged) {
             newSubtitleLabel = subtitleLabelWithText(newTitleText)
+            newSubtitleLabel?.userInteractionEnabled = true
+            newSubtitleLabel?.addGestureRecognizer(tapGestureRecognizer)
             addSubview(newSubtitleLabel!)
             constrainSubtitleLabel(newSubtitleLabel!)
         }
@@ -321,6 +331,10 @@ class DraftboardTitlebar: UIView {
         delegate?.didTapTitlebarButton(sender.buttonType!)
     }
     
+    func didTapSubtitle(gestureRecognizer: UITapGestureRecognizer) {
+        delegate?.didTapSubtitle()
+    }
+    
     // MARK: Title
     
     func titleLabelWithText(text: String?) -> UILabel {
@@ -348,6 +362,7 @@ class DraftboardTitlebar: UIView {
         label.textAlignment = .Center
         label.numberOfLines = 2
         label.attributedText = dataSource?.titlebarAttributedSubtitle()
+        label.textColor = dataSource?.titlebarSubtitleColor()
         
         return label
     }
@@ -431,4 +446,5 @@ class DraftboardTitlebar: UIView {
 
 private extension Selector {
     static let didTapButton = #selector(DraftboardTitlebar.didTapButton(_:))
+    static let didTapSubtitle = #selector(DraftboardTitlebar.didTapSubtitle(_:))
 }
