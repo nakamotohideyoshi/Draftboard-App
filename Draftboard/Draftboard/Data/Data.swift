@@ -161,12 +161,7 @@ extension Data {
                         liveContest.draftGroupID = draftGroup
                         API.contestAllLineups(id: contest).then { hexString -> Void in
                             liveContest.setLineups(hexString: hexString, sportName: sport)
-                            print("live contest lineups", liveContest.lineups)
-                            for l in liveContest.lineups {
-                                print(l.players)
-                            }
                         }
-                        print("pool ID", pool)
                         API.contestInfo(id: Int(pool)!).then { contest -> Void in
                             liveContest.contestName = contest.name
                             liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
