@@ -56,9 +56,9 @@ class ContestDetailMyEntryCell: DraftboardTableViewCell {
         guaranteedLabel.font = .openSans(weight: .Semibold, size: 10)
         guaranteedLabel.textColor = .whiteColor()
         guaranteedLabel.letterSpacing = 0.5
-        guaranteedLabel.textAlignment = .Center
+        guaranteedLabel.textAlignment = .Left
         guaranteedLabel.backgroundColor = UIColor.greenDraftboard()
-        guaranteedLabel.attributedText = NSAttributedString(string: "G ", attributes: [NSBackgroundColorAttributeName: UIColor.greenDraftboard()])
+        guaranteedLabel.attributedText = NSAttributedString(string: " G ", attributes: [NSBackgroundColorAttributeName: UIColor.greenDraftboard()])
         guaranteedLabel.hidden = true
         
         removeButton.label.text = "Remove Entry"
