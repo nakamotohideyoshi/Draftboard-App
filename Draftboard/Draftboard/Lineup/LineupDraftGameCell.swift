@@ -48,7 +48,6 @@ class LineupDraftGameCell: UITableViewCell {
         gameLabel.font = .oswald(size: 16)
         gameLabel.textColor = UIColor.whiteColor()
         gameLabel.letterSpacing = 0.5
-        gameLabel.text = "phi @ los".uppercaseString
         
         timeLabel.font = UIFont.openSans(weight: .Semibold, size: 10)
         timeLabel.textColor = UIColor(0xb0b2c1)
@@ -93,7 +92,7 @@ class LineupDraftGameCell: UITableViewCell {
             return
         }
         
-        gameLabel.text = game.away.alias + "@" + game.home.alias
+        gameLabel.text = game.away.alias + " @ " + game.home.alias
         let df = NSDateFormatter()
         df.dateFormat = "h:mm a"
         timeLabel.text = df.stringFromDate(game.start)

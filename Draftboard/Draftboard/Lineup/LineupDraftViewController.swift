@@ -73,6 +73,12 @@ class LineupDraftViewController: DraftboardViewController {
             return true
         }
         tableView.reloadData()
+        
+        if selectedGame != nil {
+            self.navController?.titlebar.setSubtitle((selectedGame?.away.alias)! + " @ " + (selectedGame?.home.alias)! , color: .greenDraftboard())
+        } else {
+            self.navController?.titlebar.setSubtitle("all games".uppercaseString, color: .greenDraftboard())
+        }
     }
     
     func scrollToFirstAffordablePlayer() {
@@ -105,7 +111,7 @@ class LineupDraftViewController: DraftboardViewController {
     }
     
     override func didTapSubtitle() {
-        gamesView.hidden = !gamesView.hidden
+        gamesView.toggleView()
     }
 
     // DraftboardTitlebarDatasource
@@ -195,8 +201,13 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
         if tableView === gamesTableView {
             selectedGame = indexPath.row == 0 ? nil : games![safe: indexPath.row - 1]
             gamesTableView.reloadData()
-            gamesView.hidden = !gamesView.hidden
             update()
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.gamesView.toggleView()
+                })
+            }
         } else {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             

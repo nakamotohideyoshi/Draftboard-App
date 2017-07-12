@@ -57,10 +57,18 @@ class LineupDraftGamesView: UIView {
     
     func otherSetup() {
         backgroundColor = UIColor.clearColor()
-        hidden = true
+        alpha = 0
         
         bgImageView.image = UIImage(named: "games-view-bg")?.resizableImageWithCapInsets(UIEdgeInsetsMake(100, 100, 100, 100), resizingMode: .Stretch)
         bgImageView.contentMode = .ScaleToFill
         
+    }
+    
+    func toggleView() {
+        UIView.animateWithDuration(0.3, animations: {
+            self.alpha = 1 - self.alpha
+        }, completion: { (value: Bool) in
+                
+        })
     }
 }
