@@ -45,14 +45,19 @@ class LineupDraftViewController: DraftboardViewController {
     
     override func viewWillAppear(animated: Bool) {
         searchBar.text = nil
-        update()
+        
         scrollToFirstAffordablePlayer()
-        DerivedData.games(sportName: lineup.sportName, draftGroupID: lineup.draftGroupID).then { games -> Void in
-            self.games = games
-            let cellCount = min(5, games.count)
-            self.gamesViewHeight = self.gamesView.heightRancor.constraintEqualToConstant(165 + CGFloat(cellCount * 72))
-            self.gamesViewHeight.active = true
-            self.gamesTableView.reloadData()
+        
+        if games == nil {
+            DerivedData.games(sportName: lineup.sportName, draftGroupID: lineup.draftGroupID).then { games -> Void in
+                self.games = games.sortBy { $0.start }
+                let cellCount = min(5, games.count)
+                self.gamesViewHeight = self.gamesView.heightRancor.constraintEqualToConstant(165 + CGFloat(cellCount * 72))
+                self.gamesViewHeight.active = true
+                self.update()
+            }
+        } else {
+            update()
         }
     }
     
@@ -73,12 +78,15 @@ class LineupDraftViewController: DraftboardViewController {
             return true
         }
         tableView.reloadData()
+        self.gamesTableView.reloadData()
         
         if selectedGame != nil {
             self.navController?.titlebar.setSubtitle((selectedGame?.away.alias)! + " @ " + (selectedGame?.home.alias)! , color: .greenDraftboard())
         } else {
             self.navController?.titlebar.setSubtitle("all games".uppercaseString, color: .greenDraftboard())
         }
+        
+        
     }
     
     func scrollToFirstAffordablePlayer() {
@@ -122,7 +130,11 @@ class LineupDraftViewController: DraftboardViewController {
     }
     
     override func titlebarSubtitle() -> String? {
-        return "All Games".uppercaseString
+        if selectedGame != nil {
+            return (selectedGame?.away.alias)! + " @ " + (selectedGame?.home.alias)!
+        } else {
+            return "All Games".uppercaseString
+        }
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -175,7 +187,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
             if indexPath.row == 0 {
                 cell.selectedGame = selectedGame === nil
             } else {
-                cell.selectedGame = selectedGame === game
+                cell.selectedGame = selectedGame?.srid === game?.srid
             }
             
             

@@ -20,6 +20,8 @@ extension API_Public {
     static let baseURL = "https://www.draftboard.com/"
 //    static let baseURL = "http://192.168.0.104:8000/"
 //    static let baseURL = "http://localhost:8000/"
+//    static let baseURL = "https://delorean.draftboard.com/"
+    
     static var username: String?
 
     class func request<T>(path: String, JSON: AnyObject? = nil) -> Promise<T> {
