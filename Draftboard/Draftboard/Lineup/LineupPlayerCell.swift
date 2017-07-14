@@ -84,7 +84,8 @@ class LineupPlayerCell: UITableViewCell {
 
         nameTeamSeparatorLabel.font = .openSans(size: 13.0)
         nameTeamSeparatorLabel.textColor = UIColor(0x9c9faf)
-
+        nameTeamSeparatorLabel.hidden = true
+        
         awayLabel.textColor = UIColor(0x9c9faf)
         
         vsLabel.font = .openSans(size: 10.0)
@@ -121,12 +122,13 @@ class LineupPlayerCell: UITableViewCell {
         
         let infoHeight = nameLabelSize.height + (showAllInfo ? awayLabelSize.height + 2 : 0)
         let nameLabelOriginY = fitToPixel(bounds.height / 2 - infoHeight / 2)
-        let fppgLabelOriginY = nameLabelOriginY + fitToPixel(nameLabel.font.ascender - fppgLabel.font.ascender)
+        let fppgLabelOriginY = nameLabelOriginY + nameLabelSize.height + 2
         let awayLabelOriginY = nameLabelOriginY + nameLabelSize.height + 2
-        let salaryLabelOriginY = fitToPixel(bounds.height / 2 - salaryLabelSize.height / 2)
+        let salaryLabelOriginY = fitToPixel(bounds.height / 2 - infoHeight / 2)
         
         let actionButtonOriginX = bounds.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 0)
         let salaryLabelOriginX = bounds.width - salaryLabelSize.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 18)
+        let fppgLabelOriginX = bounds.width - fppgLabelSize.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 18)
         
         var x: CGFloat = 18
         positionLabel.frame = CGRectMake(x, 0, 18, bounds.height)
@@ -138,7 +140,7 @@ class LineupPlayerCell: UITableViewCell {
         x += nameLabelSize.width + 2
         nameTeamSeparatorLabel.frame = CGRectMake(x, nameLabelOriginY, nameTeamSeparatorLabelSize.width, nameTeamSeparatorLabelSize.height)
         x += nameTeamSeparatorLabelSize.width + 2
-        fppgLabel.frame = CGRectMake(x, fppgLabelOriginY, fppgLabelSize.width, fppgLabelSize.height)
+        fppgLabel.frame = CGRectMake(fppgLabelOriginX, fppgLabelOriginY, fppgLabelSize.width, fppgLabelSize.height)
         
         var x1 = nameLabel.frame.origin.x
         awayLabel.frame = CGRectMake(x1, awayLabelOriginY, awayLabelSize.width, awayLabelSize.height)
@@ -210,6 +212,7 @@ class LineupPlayerCell: UITableViewCell {
             homeLabel.text = nil
             vsLabel.text = nil
             timeLabel.text = nil
+            fppgLabel.text = nil
         }
 
     }

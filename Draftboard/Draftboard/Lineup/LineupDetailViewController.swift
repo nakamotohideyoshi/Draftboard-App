@@ -348,7 +348,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
         
         let slot = lineup!.slots[indexPath.row]
-        cell.showAllInfo = editing
+        cell.showAllInfo = true
         cell.showAddButton = false
         cell.showRemoveButton = editing && slot.player != nil
         cell.showBottomBorder = slot !== lineup?.slots.last
