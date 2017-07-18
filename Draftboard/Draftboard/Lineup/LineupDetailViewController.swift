@@ -359,8 +359,10 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
             if let player = slot.player, liveDraftGroup = liveDraftGroup {
                 let playerPoints = liveDraftGroup.points(for: player.id)
                 cell.salaryLabel.text = Format.points.stringFromNumber(playerPoints)
+                cell.fppgLabel.text = Format.currency.stringFromNumber(player.salary)
             } else {
                 cell.salaryLabel.text = ""
+                cell.fppgLabel.text = ""
             }
             if let player = slot.player as? PlayerWithPositionAndGame, liveDraftGroup = liveDraftGroup {
                 let playerTimeRemaining = liveDraftGroup.timeRemaining(for: player.game.srid)

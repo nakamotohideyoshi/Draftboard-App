@@ -16,9 +16,18 @@ class LineupDraftViewController: DraftboardViewController {
     var tableView: LineupPlayerTableView { return lineupDraftView.tableView }
     var searchBar: UISearchBar { return lineupDraftView.searchBar }
     var loaderView: LoaderView { return lineupDraftView.loaderView }
+    var filterView: LineupDraftFilterView { return lineupDraftView.filterView }
+    var selectedGame: Game? { return filterView.selectedGame }
+    var selectedSortOption: SortOption? { return filterView.selectedSortOption }
     var gamesView: LineupDraftGamesView { return lineupDraftView.gamesView }
+    var menuView: UIView { return lineupDraftView.gamesView.menuView }
     var gamesTableView: LineupDraftGamesTableView { return gamesView.tableView }
-    var gamesViewHeight: NSLayoutConstraint!
+    var menuViewHeight: NSLayoutConstraint!
+    var sortView: LineupDraftSortMenuView { return lineupDraftView.sortView }
+    var sortMenuView: UIView { return lineupDraftView.sortView.menuView }
+    var sortMenuViewHeight: NSLayoutConstraint!
+    var sortMenuTableView: LineupDraftSortMenuTableView { return sortView.tableView }
+    var sortOptions: [SortOption]?
 //    var pickPlayerAction: ((Player) -> Void)?
 
     var lineup: Lineup!
@@ -26,7 +35,6 @@ class LineupDraftViewController: DraftboardViewController {
     var allPlayers: [PlayerWithPosition]? { didSet { update() } }
     var players: [PlayerWithPosition]?
     var games: [Game]?
-    var selectedGame: Game?
     
     var scrollingToSearchBar: Bool = false
     
@@ -39,7 +47,17 @@ class LineupDraftViewController: DraftboardViewController {
         tableView.dataSource = self
         gamesTableView.delegate = self
         gamesTableView.dataSource = self
+        sortMenuTableView.delegate = self
+        sortMenuTableView.dataSource = self
         searchBar.delegate = self
+        filterView.delegate = self
+        lineupDraftView.bringSubviewToFront(filterView)
+        
+        sortOptions = [.Salary, .FPoint]
+        self.sortMenuViewHeight = self.sortMenuView.heightRancor.constraintEqualToConstant(110 + CGFloat(sortOptions!.count * 40))
+        self.sortMenuViewHeight.active = true
+        sortMenuTableView.scrollEnabled = false
+        
         update()
     }
     
@@ -52,12 +70,26 @@ class LineupDraftViewController: DraftboardViewController {
             DerivedData.games(sportName: lineup.sportName, draftGroupID: lineup.draftGroupID).then { games -> Void in
                 self.games = games.sortBy { $0.start }
                 let cellCount = min(5, games.count)
-                self.gamesViewHeight = self.gamesView.heightRancor.constraintEqualToConstant(165 + CGFloat(cellCount * 72))
-                self.gamesViewHeight.active = true
+                self.menuViewHeight = self.menuView.heightRancor.constraintEqualToConstant(165 + CGFloat(cellCount * 72))
+                self.menuViewHeight.active = true
+                if games.count < 6 {
+                    self.gamesTableView.scrollEnabled = false
+                } else {
+                    self.gamesTableView.scrollEnabled = true
+                }
                 self.update()
             }
         } else {
             update()
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if gamesView.alpha == 1 {
+            gamesView.toggleView()
+        }
+        if sortView.alpha == 1 {
+            sortView.toggleView()
         }
     }
     
@@ -76,17 +108,29 @@ class LineupDraftViewController: DraftboardViewController {
             if !$0.name.matchesSearchPattern(searchPattern) { return false }
             if selectedGame != nil && ($0 as? HasGame)?.game.srid != selectedGame?.srid { return false }
             return true
+        }.sort { p1, p2 in
+            if selectedSortOption == .Salary {
+                if p1.salary != p2.salary {
+                    if filterView.desc == true {
+                        return p1.salary > p2.salary
+                    } else {
+                        return p1.salary < p2.salary
+                    }
+                }
+            } else if selectedSortOption == .FPoint {
+                if p1.fppg != p2.fppg {
+                    if filterView.desc == true {
+                        return p1.fppg > p2.fppg
+                    } else {
+                        return p1.fppg < p2.fppg
+                    }
+                }
+            }
+            return p1.lastName < p2.lastName
         }
         tableView.reloadData()
         self.gamesTableView.reloadData()
-        
-        if selectedGame != nil {
-            self.navController?.titlebar.setSubtitle((selectedGame?.away.alias)! + " @ " + (selectedGame?.home.alias)! , color: .greenDraftboard())
-        } else {
-            self.navController?.titlebar.setSubtitle("all games".uppercaseString, color: .greenDraftboard())
-        }
-        
-        
+        self.sortMenuTableView.reloadData()
     }
     
     func scrollToFirstAffordablePlayer() {
@@ -118,23 +162,11 @@ class LineupDraftViewController: DraftboardViewController {
         }
     }
     
-    override func didTapSubtitle() {
-        gamesView.toggleView()
-    }
-
     // DraftboardTitlebarDatasource
     
     override func titlebarTitle() -> String {
         let slotName = slot?.description ?? "Player"
         return "Select \(slotName)".uppercaseString
-    }
-    
-    override func titlebarSubtitle() -> String? {
-        if selectedGame != nil {
-            return (selectedGame?.away.alias)! + " @ " + (selectedGame?.home.alias)!
-        } else {
-            return "All Games".uppercaseString
-        }
     }
     
     override func titlebarLeftButtonType() -> TitlebarButtonType {
@@ -161,6 +193,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
             } else {
                 return games!.count + 1
             }
+        } else if (tableView === sortMenuTableView) {
+          return sortOptions!.count
         } else {
             return players?.count ?? 0
         }
@@ -173,6 +207,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
             } else {
                 return 72
             }
+        } else if tableView === sortMenuTableView {
+            return 40
         } else {
             return 48
         }
@@ -190,6 +226,22 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
                 cell.selectedGame = selectedGame?.srid === game?.srid
             }
             
+            
+            return cell
+        } else if (tableView === sortMenuTableView) {
+            let cell = sortMenuTableView.dequeueCellForIndexPath(indexPath)
+            
+            let option = sortOptions![indexPath.row]
+            if option == .Salary {
+                cell.optionLabel.text = "salary".uppercaseString
+            } else {
+                cell.optionLabel.text = "fppg".uppercaseString
+            }
+            if selectedSortOption == option {
+                cell.selectedOption = true
+            } else {
+                cell.selectedOption = false
+            }
             
             return cell
         } else {
@@ -211,15 +263,13 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView === gamesTableView {
-            selectedGame = indexPath.row == 0 ? nil : games![safe: indexPath.row - 1]
+            filterView.selectedGame = indexPath.row == 0 ? nil : games![safe: indexPath.row - 1]
             gamesTableView.reloadData()
             update()
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.gamesView.toggleView()
-                })
-            }
+        } else if tableView === sortMenuTableView {
+            filterView.selectedSortOption = sortOptions![indexPath.row]
+            sortMenuTableView.reloadData()
+            update()
         } else {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             
@@ -291,6 +341,28 @@ extension SearchBarDelegate: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
+}
+
+private typealias FilterViewDelegate = LineupDraftViewController
+extension FilterViewDelegate: LineupDraftFilterViewDelegate {
+    func didTapGameSelectView() {
+        if sortView.alpha == 1 {
+            sortView.toggleView()
+        }
+        gamesView.toggleView()
+    }
+    
+    func didTapSortView() {
+        filterView.desc = !filterView.desc
+        update()
+    }
+    
+    func didTapSortButton() {
+        if gamesView.alpha == 1 {
+            gamesView.toggleView()
+        }
+        sortView.toggleView()
+    }
 }
 
 private extension String {

@@ -1,18 +1,18 @@
 //
-//  LineupDraftGamesView.swift
+//  LineupDraftSortMenuView.swift
 //  Draftboard
 //
-//  Created by devguru on 7/10/17.
+//  Created by devguru on 7/15/17.
 //  Copyright © 2017 Rally Interactive. All rights reserved.
 //
 
 import UIKit
 
-class LineupDraftGamesView: UIView {
-    
+class LineupDraftSortMenuView: UIView {
+
     let menuView = UIView()
     let bgImageView = UIImageView()
-    let tableView = LineupDraftGamesTableView()
+    let tableView = LineupDraftSortMenuTableView()
     
     init() {
         super.init(frame: CGRectZero)
@@ -41,8 +41,8 @@ class LineupDraftGamesView: UIView {
     
     func addConstraints() {
         let viewConstraints: [NSLayoutConstraint] = [
-            menuView.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 1),
-            menuView.leftRancor.constraintEqualToRancor(leftRancor, constant: -45),
+            menuView.widthRancor.constraintEqualToRancor(widthRancor, multiplier: 0.656),
+            menuView.rightRancor.constraintEqualToRancor(rightRancor, constant: 45),
             menuView.topRancor.constraintEqualToRancor(topRancor, constant: 60.0),
             bgImageView.topRancor.constraintEqualToRancor(menuView.topRancor),
             bgImageView.leftRancor.constraintEqualToRancor(menuView.leftRancor),
@@ -64,7 +64,7 @@ class LineupDraftGamesView: UIView {
     func otherSetup() {
         alpha = 0
         
-        bgImageView.image = UIImage(named: "games-view-bg")?.resizableImageWithCapInsets(UIEdgeInsetsMake(100, 100, 100, 100), resizingMode: .Stretch)
+        bgImageView.image = UIImage(named: "sort-dropdown-bg")?.resizableImageWithCapInsets(UIEdgeInsetsMake(90, 90, 90, 90), resizingMode: .Stretch)
         bgImageView.contentMode = .ScaleToFill
         
         let tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: .didTapView)
@@ -75,7 +75,7 @@ class LineupDraftGamesView: UIView {
     func toggleView() {
         UIView.animateWithDuration(0.3, animations: {
             self.alpha = 1 - self.alpha
-        }, completion: { (value: Bool) in
+            }, completion: { (value: Bool) in
                 
         })
     }
@@ -91,5 +91,5 @@ class LineupDraftGamesView: UIView {
 }
 
 private extension Selector {
-    static let didTapView = #selector(LineupDraftGamesView.didTapView(_:))
+    static let didTapView = #selector(LineupDraftSortMenuView.didTapView(_:))
 }
