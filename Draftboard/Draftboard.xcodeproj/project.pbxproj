@@ -256,6 +256,7 @@
 		B2A4B7DF1ED6815A002493FD /* ContestDetailEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7DE1ED6815A002493FD /* ContestDetailEntryCell.swift */; };
 		B2A4B7E11ED68701002493FD /* ContestDetailMyEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7E01ED68701002493FD /* ContestDetailMyEntryCell.swift */; };
 		B2A4B7E31ED8B994002493FD /* ContestDetailGDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7E21ED8B994002493FD /* ContestDetailGDescriptionCell.swift */; };
+		B2B437731F273C3C006392D8 /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B437721F273C3C006392D8 /* Sentry.framework */; };
 		B2CC40D31F1329D800D88E64 /* LineupDraftGamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D21F1329D800D88E64 /* LineupDraftGamesView.swift */; };
 		B2CC40D51F13D72800D88E64 /* LineupDraftGamesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D41F13D72800D88E64 /* LineupDraftGamesTableView.swift */; };
 		B2CC40D71F13D8F700D88E64 /* LineupDraftGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D61F13D8F700D88E64 /* LineupDraftGameCell.swift */; };
@@ -516,6 +517,7 @@
 		B2A4B7DE1ED6815A002493FD /* ContestDetailEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailEntryCell.swift; sourceTree = "<group>"; };
 		B2A4B7E01ED68701002493FD /* ContestDetailMyEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailMyEntryCell.swift; sourceTree = "<group>"; };
 		B2A4B7E21ED8B994002493FD /* ContestDetailGDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestDetailGDescriptionCell.swift; sourceTree = "<group>"; };
+		B2B437721F273C3C006392D8 /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
 		B2CC40D21F1329D800D88E64 /* LineupDraftGamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftGamesView.swift; sourceTree = "<group>"; };
 		B2CC40D41F13D72800D88E64 /* LineupDraftGamesTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftGamesTableView.swift; sourceTree = "<group>"; };
 		B2CC40D61F13D8F700D88E64 /* LineupDraftGameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftGameCell.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2B437731F273C3C006392D8 /* Sentry.framework in Frameworks */,
 				5DE6A0671C1B8B5E009481E6 /* CoreLocation.framework in Frameworks */,
 				5DE2D6341C0F969D0023D4DB /* OMGHTTPURLRQ.framework in Frameworks */,
 				5DE2D6351C0F96A50023D4DB /* PromiseKit.framework in Frameworks */,
@@ -546,6 +549,7 @@
 				3E7860BD1B9FB0E7004013AB /* Draftboard */,
 				3E7860BC1B9FB0E7004013AB /* Products */,
 				3E80C25C1BC5F5010031CE3F /* Third Party */,
+				B2B437711F273C3C006392D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -996,6 +1000,14 @@
 			name = LineupDraftFilterView;
 			sourceTree = "<group>";
 		};
+		B2B437711F273C3C006392D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2B437721F273C3C006392D8 /* Sentry.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1126,6 +1138,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/OMGHTTPURLRQ.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PusherSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
 			);
 			outputPaths = (
 			);
@@ -1464,10 +1477,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.db;
+				PRODUCT_BUNDLE_IDENTIFIER = com.draftboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "eb6a9a87-3e4d-4c56-a7c9-eab384fe2f14";
-				PROVISIONING_PROFILE_SPECIFIER = DraftboardAdhoc;
+				PROVISIONING_PROFILE_SPECIFIER = DraftboardAppStore;
 				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -1495,10 +1508,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.db;
+				PRODUCT_BUNDLE_IDENTIFIER = com.draftboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "eb6a9a87-3e4d-4c56-a7c9-eab384fe2f14";
-				PROVISIONING_PROFILE_SPECIFIER = DraftboardAdhoc;
+				PROVISIONING_PROFILE_SPECIFIER = DraftboardAppStore;
 				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;

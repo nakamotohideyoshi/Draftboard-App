@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Sentry
 
 // Globals
 struct App {
@@ -38,6 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         preloadKeyboard()
+        
+        // Create a Sentry client and start crash handler
+        do {
+            Client.setSharedClient(try Client(dsn: "https://8e0e173559564a609ec59ba27023b52d:db9f5293b7164f2f90a01f5ceabf10cf@sentry.io/160196"))
+            try Client.sharedClient()!.startCrashHandler()
+        } catch let error {
+            print("\(error)")
+            // Wrong DSN or KSCrash not installed
+        }
         
         return true
     }

@@ -1,3 +1,4 @@
 github "mxcl/OMGHTTPURLRQ" "3.1.1"
 github "mxcl/PromiseKit" "3.5.1"
 github "pusher/pusher-websocket-swift" "swift-2.3"
+github "getsentry/sentry-cocoa" "3.2.0"
