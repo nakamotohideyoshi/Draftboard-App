@@ -15,11 +15,11 @@ class AvatarImageView: UIView {
     private var playerImageView = UIImageView()
     var player: Player? {
         didSet {
-            if let srid = player?.srid, image = UIImage(named: "PlayerPhotos/\(size)/\(srid)") {
-                playerImageView.image = image
-            } else {
+//            if let srid = player?.srid, image = UIImage(named: "PlayerPhotos/\(size)/\(srid)") {
+//                playerImageView.image = image
+//            } else {
                 playerImageView.image = UIImage(named: "PlayerPhotos/player-default-\(size)")
-            }
+//            }
         }
     }
 

@@ -82,6 +82,8 @@ class ContestDetailViewController: DraftboardViewController {
         if tableView.indexPathsForVisibleRows?.last != nil {
             let last = tableView.indexPathsForVisibleRows!.last!
             tableView.scrollToRowAtIndexPath(last, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        } else {
+            tableView.setContentOffset(CGPointMake(0, -tableView.contentInset.top), animated: false)
         }
     }
     
