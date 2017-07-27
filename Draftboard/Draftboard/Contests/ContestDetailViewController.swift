@@ -20,6 +20,7 @@ class ContestDetailViewController: DraftboardViewController {
     var tableView: ContestDetailTableView { return contestDetailView.tableView }
     var headerView: ContestDetailHeaderView { return contestDetailView.headerView }
     var panelView: ContestDetailPanelView { return contestDetailView.panelView }
+    var backgroundView: UIView { return contestDetailView.backgroundView }
     var countdownView: CountdownView { return contestDetailView.countdownView }
     var prizeStatView: ModalStatView { return contestDetailView.prizeStatView }
     var entrantsStatView: ModalStatView { return contestDetailView.entrantsStatView }
@@ -265,7 +266,6 @@ extension ContestDetailViewController: UIScrollViewDelegate {
         let panelViewH = panelView.frame.height
         let contentOffsetY = tableView.contentOffset.y
         let contentInsetTop = tableView.contentInset.top
-        
         let percentage = (contentOffsetY + contentInsetTop) / headerViewH
         let clampedPercentage = max(0, min(1, percentage))
 
@@ -273,11 +273,13 @@ extension ContestDetailViewController: UIScrollViewDelegate {
         let headerViewOpacity = 1 - clampedPercentage
         let headerViewTranslateY = (percentage > 0 ? 0.1 : 0.3) * percentage * headerViewH
         let panelViewTranslateY = (percentage < 1) ? 0 : contentOffsetY + contentInsetTop - headerViewH
+        let backgroundViewTranslateY = (percentage < 0) ? contentInsetTop * -percentage * 0.8 : 0
         
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(indicatorInsetTop, 0, 0, 0)
         headerView.layer.opacity = Float(headerViewOpacity)
         headerView.layer.transform = CATransform3DMakeTranslation(0, headerViewTranslateY, 0)
         panelView.layer.transform = CATransform3DMakeTranslation(0, panelViewTranslateY, 0)
+        backgroundView.layer.transform = CATransform3DMakeTranslation(0, backgroundViewTranslateY, 0)
         countdownView.layer.opacity = Float(headerViewOpacity)
     }
     
