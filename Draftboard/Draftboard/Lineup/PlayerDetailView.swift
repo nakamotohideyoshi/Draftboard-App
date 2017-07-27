@@ -10,6 +10,7 @@ import UIKit
 
 class PlayerDetailView: DraftboardView {
     
+    let backgroundView = UIView()
     let tableView = PlayerDetailTableView()
     let headerView = PlayerDetailHeaderView()
     let panelView = PlayerDetailPanelView()
@@ -29,9 +30,12 @@ class PlayerDetailView: DraftboardView {
         super.setup()
         
         // Add subviews
+        addSubview(backgroundView)
         addSubview(tableView)
         tableView.addSubview(headerView)
         tableView.addSubview(panelView)
+        
+        backgroundView.backgroundColor = UIColor.whiteColor()
     }
     
     override func layoutSubviews() {
@@ -55,6 +59,10 @@ class PlayerDetailView: DraftboardView {
         let panelViewX = CGFloat(0)
         let panelViewY = headerViewY + headerViewH
         
+        let backgroundViewX = CGFloat(0)
+        let backgroundViewY = panelViewY + 30
+        let backgroundViewW = boundsW
+        let backgroundViewH = boundsH - backgroundViewY
         // Within self:
         
         let tableViewX = CGFloat(0)
@@ -72,6 +80,7 @@ class PlayerDetailView: DraftboardView {
         headerView.frame = CGRectMake(headerViewX, headerViewY - tableViewInsetTop, headerViewW, headerViewH)
         panelView.frame = CGRectMake(panelViewX, panelViewY - tableViewInsetTop, panelViewW, panelViewH)
         tableView.frame = CGRectMake(tableViewX, tableViewY, tableViewW, tableViewH)
+        backgroundView.frame = CGRectMake(backgroundViewX, backgroundViewY, backgroundViewW, backgroundViewH)
         
         tableView.contentInset = UIEdgeInsetsMake(tableViewInsetTop, 0, 0, 0)
         tableView.wrapperMaskFrame = CGRectMake(tableViewWrapperMaskX, tableViewWrapperMaskY, tableViewWrapperMaskW, tableViewWrapperMaskH)

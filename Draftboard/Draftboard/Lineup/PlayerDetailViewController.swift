@@ -20,6 +20,7 @@ class PlayerDetailViewController: DraftboardViewController {
     var tableView: PlayerDetailTableView { return playerDetailView.tableView }
     var headerView: PlayerDetailHeaderView { return playerDetailView.headerView }
     var panelView: PlayerDetailPanelView { return playerDetailView.panelView }
+    var backgroundView: UIView { return playerDetailView.backgroundView }
     var avatarView: UIImageView { return playerDetailView.avatarView }
     var avatarHaloView: UIImageView { return playerDetailView.avatarHaloView }
     var avatarLoaderView: LoaderView { return playerDetailView.avatarLoaderView }
@@ -390,11 +391,13 @@ extension PlayerDetailViewController: UIScrollViewDelegate {
         let headerViewOpacity = 1 - clampedPercentage
         let headerViewTranslateY = (percentage > 0 ? 0.1 : 0.3) * percentage * headerViewH
         let panelViewTranslateY = (percentage < 1) ? 0 : contentOffsetY + contentInsetTop - headerViewH
+        let backgroundViewTranslateY = (percentage < 0) ? contentInsetTop * -percentage * 0.8 : 0
         
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(indicatorInsetTop, 0, 0, 0)
         headerView.layer.opacity = Float(headerViewOpacity)
         headerView.layer.transform = CATransform3DMakeTranslation(0, headerViewTranslateY, 0)
         panelView.layer.transform = CATransform3DMakeTranslation(0, panelViewTranslateY, 0)
+        backgroundView.layer.transform = CATransform3DMakeTranslation(0, backgroundViewTranslateY, 0)
         avatarView.layer.opacity = Float(headerViewOpacity)
     }
     

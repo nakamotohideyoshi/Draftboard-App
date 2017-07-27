@@ -17,8 +17,8 @@ class PlayerDetailTableView: DraftboardTableView {
         
         backgroundColor = .clearColor()
         
-        tableFooterView = UIView()
-        tableFooterView?.backgroundColor = .whiteColor()
+        //tableFooterView = UIView()
+        //tableFooterView?.backgroundColor = .whiteColor()
         
         wrapperView?.maskView = UIView()
         wrapperView?.maskView?.backgroundColor = .whiteColor()
@@ -41,18 +41,18 @@ class PlayerDetailTableView: DraftboardTableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let boundsW = bounds.size.width
-        let boundsH = bounds.size.height
+//        let boundsW = bounds.size.width
+//        let boundsH = bounds.size.height
         let boundsY = bounds.origin.y
         
-        let contentH = contentSize.height
+//        let contentH = contentSize.height
         
-        let tableFooterViewW = boundsW
-        let tableFooterViewH = boundsH
-        let tableFooterViewX = CGFloat(0)
-        let tableFooterViewY = contentH
+//        let tableFooterViewW = boundsW
+//        let tableFooterViewH = boundsH
+//        let tableFooterViewX = CGFloat(0)
+//        let tableFooterViewY = contentH
         
-        tableFooterView?.frame = CGRectMake(tableFooterViewX, tableFooterViewY, tableFooterViewW, tableFooterViewH)
+//        tableFooterView?.frame = CGRectMake(tableFooterViewX, tableFooterViewY, tableFooterViewW, tableFooterViewH)
         
         if let frame = wrapperMaskFrame {
             wrapperView?.maskView?.frame = CGRectOffset(frame, 0, boundsY)
