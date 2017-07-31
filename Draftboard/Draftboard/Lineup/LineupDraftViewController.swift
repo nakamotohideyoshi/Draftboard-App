@@ -64,8 +64,6 @@ class LineupDraftViewController: DraftboardViewController {
     override func viewWillAppear(animated: Bool) {
         searchBar.text = nil
         
-        scrollToFirstAffordablePlayer()
-        
         if games == nil {
             DerivedData.games(sportName: lineup.sportName, draftGroupID: lineup.draftGroupID).then { games -> Void in
                 self.games = games.sortBy { $0.start }
@@ -78,9 +76,11 @@ class LineupDraftViewController: DraftboardViewController {
                     self.gamesTableView.scrollEnabled = true
                 }
                 self.update()
+                self.scrollToFirstAffordablePlayer()
             }
         } else {
             update()
+            scrollToFirstAffordablePlayer()
         }
     }
     
