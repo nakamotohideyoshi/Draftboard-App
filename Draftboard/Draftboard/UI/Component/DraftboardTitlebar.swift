@@ -421,7 +421,7 @@ class DraftboardTitlebar: UIView {
             
             // Kerning
             let wholeStr = NSMakeRange(0, attrStr.length)
-            attrStr.addAttribute(NSKernAttributeName, value: 0.0, range: wholeStr)
+            attrStr.addAttribute(NSKernAttributeName, value: 1.0, range: wholeStr)
             
             // Font
             if let font = UIFont.draftboardTitlebarSubtitleFont() {
