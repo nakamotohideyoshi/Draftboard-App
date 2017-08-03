@@ -66,8 +66,9 @@ class LineupEntryViewController: DraftboardViewController {
             self.tableView.reloadData()
             let totalBuyin = entries.reduce(0) { $0 + $1.contest.buyin }
             let feesText = Format.currency.stringFromNumber(totalBuyin)!
-            let text = "\(feesText) / \(entries.count)"
-            self.lineupEntryView.footerView.feesEntries.valueLabel.text = text
+            let text = "\(entries.count)"
+            self.lineupEntryView.footerView.fees.valueLabel.text = feesText
+            self.lineupEntryView.footerView.entries.valueLabel.text = text
         }
         
         flipButton.addTarget(self, action: #selector(flipButtonTapped), forControlEvents: .TouchUpInside)

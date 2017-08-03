@@ -20,9 +20,14 @@ class LineupDetailView: UIView {
     let nameField = TextField()
     let editButton = UIButton()
     let flipButton = UIButton()
-    let columnLabel = UILabel()
+    let columnLabel = DraftboardLabel()
     let headerBorderView = UIView()
     private let headerShadowView = HeaderShadowView()
+    
+    // TableView stuff
+    let whiteBackgroundView = UIView()
+    private let tableTopShadowView = TableTopShadowView()
+    private let tableBottomShadowView = TableBottomShadowView()
     
     // Footer stuff
 //    private let footerShadowView = FooterShadowView()
@@ -52,10 +57,14 @@ class LineupDetailView: UIView {
     
     func setup() {
         addSubviews()
+        addConstraints()
         otherSetup()
     }
     
     func addSubviews() {
+        addSubview(whiteBackgroundView)
+        addSubview(tableTopShadowView)
+        addSubview(tableBottomShadowView)
         addSubview(tableView)
         addSubview(footerView)
         addSubview(overlayView)
@@ -78,6 +87,9 @@ class LineupDetailView: UIView {
         let titleBarH: CGFloat = (boundsH == screenH) ? 76 : 0
         
         tableView.frame = CGRectMake(0, titleBarH, bounds.width, bounds.height - titleBarH)
+        whiteBackgroundView.frame = CGRectMake(0, titleBarH, bounds.width, bounds.height - titleBarH)
+        tableTopShadowView.frame = CGRectMake(0, titleBarH + 68, bounds.width, 48)
+        tableBottomShadowView.frame = CGRectMake(0, bounds.height - 116, bounds.width, 48)
         headerView.frame = CGRectMake(0, titleBarH, bounds.width, 68)
         headerShadowView.frame = CGRectMake(0, 0, bounds.width, 45)
         overlayView.frame = CGRectMake(0, titleBarH + headerView.frame.height, bounds.width, bounds.height - headerView.frame.height - titleBarH)
@@ -90,12 +102,22 @@ class LineupDetailView: UIView {
         headerBorderView.frame = CGRectMake(0, headerView.bounds.height - 1, headerView.bounds.width, 1)
     }
     
+    func addConstraints() {
+        let viewConstraints: [NSLayoutConstraint] = [
+            columnLabel.bottomRancor.constraintEqualToRancor(headerView.bottomRancor, constant: -2),
+            columnLabel.rightRancor.constraintEqualToRancor(headerView.rightRancor, constant: -18)
+        ]
+        
+        columnLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activateConstraints(viewConstraints)
+    }
+    
     func otherSetup() {
         overlayView.backgroundColor = UIColor(white: 0, alpha: 0.5)
         overlayView.alpha = 0
         overlayView.userInteractionEnabled = false
-        
-        tableView.backgroundColor = .whiteColor()
+        whiteBackgroundView.backgroundColor = .whiteColor()
+        tableView.backgroundColor = .clearColor()
         headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
         footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
         headerShadowView.hidden = true
@@ -151,6 +173,11 @@ class LineupDetailView: UIView {
         nameField.textColor = UIColor(0x46495e)
         nameField.returnKeyType = .Done
         nameField.userInteractionEnabled = false
+        
+        columnLabel.font = .openSans(weight: .Semibold, size: 7)
+        columnLabel.textColor = UIColor(0x6d718a)
+        columnLabel.letterSpacing = 0.5
+        columnLabel.text = "Salary".uppercaseString
         
         headerBorderView.backgroundColor = UIColor(0xebedf2)
         
@@ -233,6 +260,26 @@ private class FooterShadowView: UIView {
     }
 }
 
+private class TableTopShadowView: UIView {
+    override func drawRect(rect: CGRect) {
+        let gray = UIColor(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0).CGColor
+        let white = UIColor(white: 1, alpha: 1).CGColor
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [gray, white], [0, 1.0])
+        let context = UIGraphicsGetCurrentContext()
+        CGContextDrawLinearGradient(context!, gradient!, CGPointMake(0, 0), CGPointMake(0, bounds.height), [])
+    }
+}
+
+private class TableBottomShadowView: UIView {
+    override func drawRect(rect: CGRect) {
+        let gray = UIColor(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0).CGColor
+        let white = UIColor(white: 1, alpha: 1).CGColor
+        let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), [white, gray], [0, 1.0])
+        let context = UIGraphicsGetCurrentContext()
+        CGContextDrawLinearGradient(context!, gradient!, CGPointMake(0, 0), CGPointMake(0, bounds.height), [])
+    }
+}
+
 //protocol StatFooterDataSource {
 //    func footerStatAvgSalary() -> Double?
 //    func footerStatRemSalary() -> Double?
@@ -251,7 +298,8 @@ class LineupFooterView: UIView {
     var configuration: FooterConfiguration = .Normal { didSet { update() } }
     
     let countdown = CountdownStatView()
-    let feesEntries = StatView()
+    let fees = StatView()
+    let entries = StatView()
     let totalSalaryRem = StatView()
     let avgSalaryRem = StatView()
     let points = StatView()
@@ -279,7 +327,8 @@ class LineupFooterView: UIView {
     
     func addSubviews() {
         addSubview(countdown)
-        addSubview(feesEntries)
+        addSubview(fees)
+        addSubview(entries)
         addSubview(totalSalaryRem)
         addSubview(avgSalaryRem)
         addSubview(points)
@@ -289,14 +338,15 @@ class LineupFooterView: UIView {
     }
     
     override func layoutSubviews() {
-        // [ countdown | feesEntries ]
+        // [ countdown | fees | entries ]
         // [ countdown | totalSalaryRem | avgSalaryRem ]
         // [ points | winnings | pmr ]
 
         // Half width for Normal, third width for Editing or Live
-        let width = ((configuration == .Normal) ? 0.5 : 0.333) * bounds.width + 1
+        let width = 0.333 * bounds.width + 1
         countdown.frame = CGRectMake(0, 0, width, bounds.height)
-        feesEntries.frame = CGRectMake(width, 0, width, bounds.height)
+        fees.frame = CGRectMake(width, 0, width, bounds.height)
+        entries.frame = CGRectMake(width * 2, 0, width, bounds.height)
         totalSalaryRem.frame = CGRectMake(width, 0, width, bounds.height)
         avgSalaryRem.frame = CGRectMake(width * 2, 0, width, bounds.height)
         points.frame = CGRectMake(0, 0, width, bounds.height)
@@ -315,8 +365,11 @@ class LineupFooterView: UIView {
         countdown.titleLabel.text = "LIVE IN"
         countdown.countdownView.date = NSDate().dateByAddingTimeInterval(60)
         
-        feesEntries.titleLabel.text = "FEES / ENTRIES"
-        feesEntries.valueLabel.text = "\(Format.currency.stringFromNumber(0.00)!) / \(0)"
+        fees.titleLabel.text = "FEES"
+        fees.valueLabel.text = "\(Format.currency.stringFromNumber(0.00)!)"
+        
+        entries.titleLabel.text = "ENTRIES"
+        entries.valueLabel.text = "\(0)"
         
         totalSalaryRem.titleLabel.text = "REM. SALARY"
         totalSalaryRem.valueLabel.text = Format.currency.stringFromNumber(0.00)!
@@ -340,7 +393,8 @@ class LineupFooterView: UIView {
         if configuration == .Normal {
             setNeedsLayout()
             countdown.alpha = 1
-            feesEntries.alpha = 1
+            fees.alpha = 1
+            entries.alpha = 1
             totalSalaryRem.alpha = 0
             avgSalaryRem.alpha = 0
             points.alpha = 0
@@ -349,7 +403,8 @@ class LineupFooterView: UIView {
         } else if configuration == .Editing {
             setNeedsLayout()
             countdown.alpha = 1
-            feesEntries.alpha = 0
+            fees.alpha = 0
+            entries.alpha = 0
             totalSalaryRem.alpha = 1
             avgSalaryRem.alpha = 1
             points.alpha = 0
@@ -358,7 +413,8 @@ class LineupFooterView: UIView {
         } else if configuration == .Live {
             setNeedsLayout()
             countdown.alpha = 0
-            feesEntries.alpha = 0
+            fees.alpha = 0
+            entries.alpha = 0
             totalSalaryRem.alpha = 0
             avgSalaryRem.alpha = 0
             points.alpha = 1
@@ -408,7 +464,7 @@ class StatView: UIView {
     
     override func layoutSubviews() {
         let originX = bounds.width * 0.5 - 40
-        let width = bounds.width - originX
+        let width = bounds.width - originX * 2
         
         titleLabel.frame = CGRectMake(originX, 13, width, 10)
         valueLabel.frame = CGRectMake(originX, 28, width, 20)
@@ -418,9 +474,11 @@ class StatView: UIView {
     func otherSetup() {
         titleLabel.font = .openSans(weight: .Semibold, size: 8.0)
         titleLabel.textColor = UIColor(0x09c9faf)
+        titleLabel.textAlignment = .Center
 
         valueLabel.font = .oswald(size: 18.0)
         valueLabel.textColor = UIColor(0x46495e)
+        valueLabel.textAlignment = .Center
         
         rightBorderView.backgroundColor = UIColor(0xebedf2)
     }

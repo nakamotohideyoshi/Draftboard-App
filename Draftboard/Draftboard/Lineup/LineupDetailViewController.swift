@@ -96,6 +96,7 @@ class LineupDetailViewController: DraftboardViewController {
 //        }
         
         // Get game info for players
+        print("call getPlayersWithGames")
         lineup?.getPlayersWithGames().then { players -> Void in
             self.lineup?.players = players
             self.tableView.reloadData()
@@ -105,8 +106,9 @@ class LineupDetailViewController: DraftboardViewController {
         lineup?.getEntries().then { entries -> Void in
             let totalBuyin = entries.reduce(0) { $0 + $1.contest.buyin }
             let feesText = Format.currency.stringFromNumber(totalBuyin)!
-            let text = "\(feesText) / \(entries.count)"
-            self.lineupDetailView.footerView.feesEntries.valueLabel.text = text
+            let text = "\(entries.count)"
+            self.lineupDetailView.footerView.fees.valueLabel.text = feesText
+            self.lineupDetailView.footerView.entries.valueLabel.text = text
         }
 
     }
@@ -129,12 +131,14 @@ class LineupDetailViewController: DraftboardViewController {
         if lineup?.isLive == false {
             lineupDetailView.footerView.configuration = editing ? .Editing : .Normal
             editButton.hidden = false
+            lineupDetailView.columnLabel.text = "Salary".uppercaseString
         }
 
         if lineup?.isLive == true {
             lineupDetailView.footerView.configuration = .Live
             editButton.hidden = true
-
+            lineupDetailView.columnLabel.text = "PTS"
+            
             if liveDraftGroup == nil {
                 Data.liveContests(for: lineup!).then { draftGroup, contests -> Void in
                     contests.forEach { $0.listener = self }

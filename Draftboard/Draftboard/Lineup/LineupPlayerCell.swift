@@ -76,6 +76,9 @@ class LineupPlayerCell: UITableViewCell {
     }
     
     func setupSubviews() {
+        backgroundColor = .clearColor()
+        contentView.backgroundColor = .clearColor()
+        
         positionLabel.font = .openSans(weight: .Semibold, size: 9.0)
         positionLabel.textColor = UIColor(0x9c9faf)
 
@@ -198,7 +201,7 @@ class LineupPlayerCell: UITableViewCell {
             homeLabel.font = (p.game.home === p.team) ? .openSans(weight: .Semibold, size: 10.0) : .openSans(size: 10.0)
             awayLabel.textColor = (p.game.away === p.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
             homeLabel.textColor = (p.game.home === p.team) ? UIColor(0x46495e) : UIColor(0x9c9faf)
-            vsLabel.text = " vs "
+            vsLabel.text = " @ "
             let df = NSDateFormatter()
             df.dateFormat = "h:mm a"
             timeLabel.text = df.stringFromDate(p.game.start)
