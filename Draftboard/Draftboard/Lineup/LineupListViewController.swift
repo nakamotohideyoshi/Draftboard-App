@@ -144,20 +144,12 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
                 self.navController?.titlebar.setSubtitle("No lineups", color: UIColor(0x8f9195))
             } else {
                 if lineup?.isLive == true {
-                    DerivedData.getLineupStatus((lineup?.contests)!).then { statuses -> Void in
-                        if statuses.count > 0 {
-                            var count = 0
-                            for status in statuses {
-                                if status == "completed" || status == "closed" || status == "cancelled" {
-                                    count += 1
-                                }
-                            }
-                            
-                            if count == statuses.count {
-                                self.navController?.titlebar.setSubtitle("Completed", color: UIColor(0x8f9195))
-                            } else {
-                                self.navController?.titlebar.setSubtitle("Live", color: .greenDraftboard())
-                            }
+                    self.navController?.titlebar.setSubtitle("", color: .clearColor())
+                    lineup?.isFinished().then { finished -> Void in
+                        if (finished) {
+                            self.navController?.titlebar.setSubtitle("Finished", color: UIColor(0x8f9195))
+                        } else {
+                            self.navController?.titlebar.setSubtitle("Live", color: .greenDraftboard())
                         }
                     }
                 } else {

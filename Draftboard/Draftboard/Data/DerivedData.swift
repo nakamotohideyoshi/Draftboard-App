@@ -155,6 +155,26 @@ extension Lineup {
             return $0[self.id] ?? []
         }
     }
+    
+    func isFinished() -> Promise<Bool> {
+        return DerivedData.getLineupStatus(contests).then { statuses -> Bool in
+            if statuses.count > 0 {
+                var count = 0
+                for status in statuses {
+                    if status == "completed" || status == "closed" || status == "cancelled" {
+                        count += 1
+                    }
+                }
+                if count == statuses.count {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return true
+            }
+        }
+    }
 }
 
 extension Player {
