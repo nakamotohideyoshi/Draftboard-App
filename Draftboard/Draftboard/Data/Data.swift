@@ -142,42 +142,53 @@ extension Data {
         }
     }
     
-    class func liveContests() -> Promise<[Int: [LiveContest]]> {
+    class func liveContests(forLineup lineup: Lineup) -> Promise<[LiveContest]> {
         // Get contests (not pools)
-        return API.lineupCurrent().then { lineups -> [Int: [LiveContest]] in
-            var lineupContests = [Int: [LiveContest]]()
-            for lineup in lineups {
-                let id: Int = try! lineup.get("id")
-                let sport: String = try! lineup.get("sport")
-                let draftGroup: Int = try! lineup.get("draft_group")
-                let contestsByPool: [String: [Int]] = try! lineup.get("contests_by_pool")
-                lineupContests[id] = []
-                for (pool, contests) in contestsByPool {
-                    for contest in contests {
-                        let liveContest = LiveContest()
-                        liveContest.id = contest
-                        liveContest.sportName = sport
-                        liveContest.poolID = Int(pool)!
-                        liveContest.draftGroupID = draftGroup
-                        API.contestAllLineups(id: contest).then { hexString -> Void in
-                            liveContest.setLineups(hexString: hexString, sportName: sport)
+        return Promise<[LiveContest]> { fulfill, reject in
+            API.lineupCurrent().then { lineups -> Void in
+                var lineupContests: [LiveContest] = []
+                let filtered: NSDictionary? = lineups.filter { $0["id"] as! Int == lineup.id }.first
+                if filtered == nil {
+                    fulfill(lineupContests)
+                } else {
+                    let sport: String = try! filtered!.get("sport")
+                    let draftGroup: Int = try! filtered!.get("draft_group")
+                    let contestsByPool: [String: [Int]] = try! filtered!.get("contests_by_pool")
+                    var contestCount = 0
+                    var finishedCount = 0
+                    for (_, contests) in contestsByPool {
+                        for _ in contests {
+                            contestCount += 1
                         }
-                        API.contestInfo(id: Int(pool)!).then { contest -> Void in
-                            liveContest.contestName = contest.name
-                            liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
+                    }
+                    
+                    for (pool, contests) in contestsByPool {
+                        for contest in contests {
+                            let liveContest = LiveContest()
+                            liveContest.id = contest
+                            liveContest.sportName = sport
+                            liveContest.poolID = Int(pool)!
+                            liveContest.draftGroupID = draftGroup
+                            when(API.contestAllLineups(id: contest), API.contestInfo(id: Int(pool)!)).then { hexString, contest -> Void in
+                                liveContest.setLineups(hexString: hexString, sportName: sport)
+                                liveContest.contestName = contest.name
+                                liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
+                                lineupContests.append(liveContest)
+                                finishedCount += 1
+                                if (contestCount == finishedCount) {
+                                    fulfill(lineupContests)
+                                }
+                            }
                         }
-                        lineupContests[id]?.append(liveContest)
                     }
                 }
             }
-            return lineupContests
         }
     }
 
     class func liveContests(for lineup: Lineup) -> Promise<(LiveDraftGroup, [LiveContest])> {
-        return when(liveContests(), liveDraftGroup(id: lineup.draftGroupID, sportName: lineup.sportName)).then { contests, draftGroup -> (LiveDraftGroup, [LiveContest]) in
-            let contests = contests[lineup.id] ?? []
-            print("data - live contests", contests)
+        return when(liveContests(forLineup: lineup), liveDraftGroup(id: lineup.draftGroupID, sportName: lineup.sportName)).then { contests, draftGroup -> (LiveDraftGroup, [LiveContest]) in
+            //print("data - live contests", contests)
             draftGroup.listeners = contests.map { $0 as LiveDraftGroupListener }
             contests.forEach { $0.draftGroup = draftGroup }
             return (draftGroup, contests)
