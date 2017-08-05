@@ -175,6 +175,25 @@ extension Lineup {
             }
         }
     }
+    
+    func getEntriesForFinished() -> Promise<[NSDictionary]> {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
+        
+        return API.playHistory(dateFormatter.stringFromDate((self as! LineupWithStart).start)).then { history -> [NSDictionary] in
+            if let lineups: [NSDictionary] = try? history.get("lineups") {
+                for l in lineups {
+                    let id: Int = try! l.get("id")
+                    if (id == self.id) {
+                        let entries: [NSDictionary] = try! l.get("entries")
+                        return entries
+                    }
+                }
+            }
+            return []
+        }
+    }
 }
 
 extension Player {
