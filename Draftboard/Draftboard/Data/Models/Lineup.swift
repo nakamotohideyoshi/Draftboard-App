@@ -266,7 +266,7 @@ class LineupWithStart: Lineup {
     
     // Copy
     convenience init(lineup: LineupWithStart) {
-        self.init(id: lineup.id, name: lineup.name, sportName: lineup.sportName, draftGroupID: lineup.draftGroupID, players: lineup.players, start: lineup.start)
+        self.init(id: lineup.id, name: lineup.name, sportName: lineup.sportName, draftGroupID: lineup.draftGroupID, players: lineup.players, start: lineup.start, contests: lineup.contests)
     }
 
 }
