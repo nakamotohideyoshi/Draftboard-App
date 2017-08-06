@@ -124,10 +124,11 @@ class LineupPlayerCell: UITableViewCell {
         let actionButtonSize = CGSizeMake(52, bounds.height)
         
         let infoHeight = nameLabelSize.height + (showAllInfo ? awayLabelSize.height + 2 : 0)
+        let salaryInfoHeight = salaryLabelSize.height + fppgLabelSize.height + 2
         let nameLabelOriginY = fitToPixel(bounds.height / 2 - infoHeight / 2)
-        let fppgLabelOriginY = nameLabelOriginY + nameLabelSize.height + 2
         let awayLabelOriginY = nameLabelOriginY + nameLabelSize.height + 2
-        let salaryLabelOriginY = fitToPixel(bounds.height / 2 - infoHeight / 2)
+        let salaryLabelOriginY = fitToPixel(bounds.height / 2 - salaryInfoHeight / 2)
+        let fppgLabelOriginY = salaryLabelOriginY + salaryLabelSize.height + 2
         
         let actionButtonOriginX = bounds.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 0)
         let salaryLabelOriginX = bounds.width - salaryLabelSize.width - ((showAddButton || showRemoveButton) ? actionButtonSize.width : 18)
