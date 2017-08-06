@@ -119,7 +119,7 @@ class LineupDetailView: UIView {
         whiteBackgroundView.backgroundColor = .whiteColor()
         tableView.backgroundColor = .clearColor()
         headerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
-        footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
+        //footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.95)
         headerShadowView.hidden = true
 //        footerShadowView.hidden = true
         headerShadowView.opaque = false
@@ -139,7 +139,7 @@ class LineupDetailView: UIView {
             footerEffectView.frame = footerView.bounds
             footerEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             footerView.insertSubview(footerEffectView, atIndex: 0)
-            footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.85)
+            //footerView.backgroundColor = UIColor(white: 1.0, alpha: 0.85)
         }
         
         let headerBackgroundView = HeaderBackgroundView()
@@ -290,9 +290,10 @@ private class TableBottomShadowView: UIView {
 class LineupFooterView: UIView {
     
     enum FooterConfiguration {
-        case Normal  // [ countdown | feesEntries ]
+        case Normal  // [ countdown | fees | entries ]
         case Editing // [ countdown | totalSalaryRem | avgSalaryRem ]
-        case Live    // [ points | winnings | pmr ]
+        case Live    // [ pmr | winnings | points ]
+        case Finished // [ entries | won | points ]
     }
     
     var configuration: FooterConfiguration = .Normal { didSet { update() } }
@@ -305,6 +306,7 @@ class LineupFooterView: UIView {
     let points = StatView()
     let winnings = StatView()
     let pmr = StatView()
+    let finishedEntries = StatView()
     let topBorderView = UIView()
 
     init() {
@@ -331,16 +333,18 @@ class LineupFooterView: UIView {
         addSubview(entries)
         addSubview(totalSalaryRem)
         addSubview(avgSalaryRem)
-        addSubview(points)
-        addSubview(winnings)
         addSubview(pmr)
+        addSubview(winnings)
+        addSubview(points)
+        addSubview(finishedEntries)
         addSubview(topBorderView)
     }
     
     override func layoutSubviews() {
         // [ countdown | fees | entries ]
         // [ countdown | totalSalaryRem | avgSalaryRem ]
-        // [ points | winnings | pmr ]
+        // [ pmr | winnings | points ]
+        // [ entries | won | points ]
 
         // Half width for Normal, third width for Editing or Live
         let width = 0.333 * bounds.width + 1
@@ -349,14 +353,15 @@ class LineupFooterView: UIView {
         entries.frame = CGRectMake(width * 2, 0, width, bounds.height)
         totalSalaryRem.frame = CGRectMake(width, 0, width, bounds.height)
         avgSalaryRem.frame = CGRectMake(width * 2, 0, width, bounds.height)
-        points.frame = CGRectMake(0, 0, width, bounds.height)
+        pmr.frame = CGRectMake(0, 0, width, bounds.height)
         winnings.frame = CGRectMake(width, 0, width, bounds.height)
-        pmr.frame = CGRectMake(width * 2, 0, width, bounds.height)
+        points.frame = CGRectMake(width * 2, 0, width, bounds.height)
+        finishedEntries.frame = CGRectMake(0, 0, width, bounds.height)
         topBorderView.frame = CGRectMake(0, 0, bounds.width, 1)
     }
     
     func otherSetup() {
-        backgroundColor = .whiteColor()
+        backgroundColor = UIColor(white: 1.0, alpha: 0.85)
         clipsToBounds = true
         
         topBorderView.backgroundColor = UIColor(0xebedf2)
@@ -386,6 +391,9 @@ class LineupFooterView: UIView {
         pmr.titleLabel.text = "PMR"
         pmr.valueLabel.text = "\(0)"
         
+        finishedEntries.titleLabel.text = "ENTRIES"
+        finishedEntries.valueLabel.text = "\(0)"
+        
         update()
     }
 
@@ -400,6 +408,7 @@ class LineupFooterView: UIView {
             points.alpha = 0
             winnings.alpha = 0
             pmr.alpha = 0
+            finishedEntries.alpha = 0
         } else if configuration == .Editing {
             setNeedsLayout()
             countdown.alpha = 1
@@ -410,6 +419,7 @@ class LineupFooterView: UIView {
             points.alpha = 0
             winnings.alpha = 0
             pmr.alpha = 0
+            finishedEntries.alpha = 0
         } else if configuration == .Live {
             setNeedsLayout()
             countdown.alpha = 0
@@ -420,6 +430,33 @@ class LineupFooterView: UIView {
             points.alpha = 1
             winnings.alpha = 1
             pmr.alpha = 1
+            finishedEntries.alpha = 0
+        } else if configuration == .Finished {
+            setNeedsLayout()
+            countdown.alpha = 0
+            fees.alpha = 0
+            entries.alpha = 0
+            totalSalaryRem.alpha = 0
+            avgSalaryRem.alpha = 0
+            points.alpha = 1
+            winnings.alpha = 1
+            pmr.alpha = 0
+            finishedEntries.alpha = 1
+        }
+        
+        if (configuration == .Live || configuration == .Finished) {
+            for subview in subviews {
+                if let statView = subview as? StatView {
+                    if let countdownView = statView as? CountdownStatView {
+                        countdownView.countdownView.color = .whiteColor()
+                    } else {
+                        statView.valueLabel.textColor = .whiteColor()
+                    }
+                    statView.backgroundColor = .greyCool()
+                    statView.rightBorderView.backgroundColor = UIColor(0x5f626d)
+                }
+            }
+            topBorderView.backgroundColor = UIColor(0x5f626d)
         }
     }
 }
