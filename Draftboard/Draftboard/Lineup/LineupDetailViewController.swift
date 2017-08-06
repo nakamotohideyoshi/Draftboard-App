@@ -46,6 +46,7 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     override func viewDidLoad() {
+        print("view did load for lineup", lineup != nil ? lineup!.id : "empty", lineup != nil ? lineup?.name : "emtpy")
         // FIXME: Don't rely on lineup being non-nil
         if lineup == nil {
             let draftGroup = DraftGroup(id: 1, sportName: "nba", start: .distantFuture(), numGames: 0)
@@ -96,7 +97,6 @@ class LineupDetailViewController: DraftboardViewController {
 //        }
         
         // Get game info for players
-        print("call getPlayersWithGames")
         lineup?.getPlayersWithGames().then { players -> Void in
             self.lineup?.players = players
             self.tableView.reloadData()
@@ -114,6 +114,7 @@ class LineupDetailViewController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        print("view will appear for lineup ", lineup!.id, lineup?.name)
         let selectedIndexPath = tableView.indexPathForSelectedRow
         tableView.allowsSelection = (navController != nil)
         tableView.reloadData()
@@ -132,6 +133,19 @@ class LineupDetailViewController: DraftboardViewController {
             lineupDetailView.footerView.configuration = editing ? .Editing : .Normal
             editButton.hidden = false
             lineupDetailView.columnLabel.text = "Salary".uppercaseString
+            
+            for subview in lineupDetailView.footerView.subviews {
+                if let statView = subview as? StatView {
+                    if let countdownView = statView as? CountdownStatView {
+                        countdownView.countdownView.color = UIColor(0x46495e)
+                    } else {
+                        statView.valueLabel.textColor = UIColor(0x46495e)
+                    }
+                    statView.backgroundColor = .clearColor()
+                    statView.rightBorderView.backgroundColor = UIColor(0xebedf2)
+                }
+            }
+            lineupDetailView.footerView.topBorderView.backgroundColor = UIColor(0xebedf2)
         }
 
         if lineup?.isLive == true {
@@ -151,11 +165,31 @@ class LineupDetailViewController: DraftboardViewController {
                     self.updateWinnings()
                 }
             }
+            
+            
+            lineup?.isFinished().then { finished -> Void in
+                if (finished) {
+                    self.lineupDetailView.footerView.configuration = .Finished
+                    self.lineupDetailView.footerView.winnings.titleLabel.text = "Won".uppercaseString
+                    self.lineup?.getEntriesForFinished().then { entries -> Void in
+                        self.lineupDetailView.footerView.finishedEntries.valueLabel.text = "\(entries.count)"
+                    }
+                } else {
+                    self.lineupDetailView.footerView.configuration = .Live
+                    self.lineupDetailView.footerView.winnings.titleLabel.text = "Winning".uppercaseString
+                }
+            }
         }
     }
     
+    func emptyViewData() {
+        workingLineup = nil
+        untouchedLineup = nil
+        liveDraftGroup = nil
+        liveContests = nil
+    }
+    
     func fetchLiveStats() {
-        
         if lineup?.isLive == true {
             lineupDetailView.footerView.configuration = .Live
             editButton.hidden = true
@@ -172,6 +206,18 @@ class LineupDetailViewController: DraftboardViewController {
                 
             }
             
+            lineup?.isFinished().then { finished -> Void in
+                if (finished) {
+                    self.lineupDetailView.footerView.configuration = .Finished
+                    self.lineupDetailView.footerView.winnings.titleLabel.text = "Won".uppercaseString
+                    self.lineup?.getEntriesForFinished().then { entries -> Void in
+                        self.lineupDetailView.footerView.finishedEntries.valueLabel.text = "\(entries.count)"
+                    }
+                } else {
+                    self.lineupDetailView.footerView.configuration = .Live
+                    self.lineupDetailView.footerView.winnings.titleLabel.text = "Winning".uppercaseString
+                }
+            }
         }
     }
     
@@ -216,8 +262,10 @@ class LineupDetailViewController: DraftboardViewController {
         tableView.reloadData()
         let myLineup = LiveLineup()
         myLineup.players = lineup!.players!.map { $0.id }
-        let points = liveDraftGroup!.points(for: myLineup)
-        lineupDetailView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
+        if liveDraftGroup != nil {
+            let points = liveDraftGroup!.points(for: myLineup)
+            lineupDetailView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
+        }
     }
     
     func updateTimeRemaining() {
@@ -241,8 +289,6 @@ class LineupDetailViewController: DraftboardViewController {
             let winnings = liveContests!.reduce(0) { total, contest -> Double in
                 if contest.lineups.count > 0 {
                     let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
-                    //print("rank", rank)
-                    //print("prizes", contest.prizes)
                     let payout = contest.prizes[safe: rank] ?? 0
                     return total + payout
                 } else {
@@ -351,29 +397,31 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
     func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = lineupDetailView.tableView.dequeueCellForIndexPath(indexPath)
         
-        let slot = lineup!.slots[indexPath.row]
+        let slot = lineup!.slots[safe: indexPath.row]
         cell.showAllInfo = true
         cell.showAddButton = false
-        cell.showRemoveButton = editing && slot.player != nil
+        cell.showRemoveButton = editing && slot!.player != nil
         cell.showBottomBorder = slot !== lineup?.slots.last
         cell.withinBudget = true
         cell.actionButtonDelegate = self
         cell.setLineupSlot(slot)
         if lineup?.isLive == true {
-            if let player = slot.player, liveDraftGroup = liveDraftGroup {
+            if let player = slot!.player, liveDraftGroup = liveDraftGroup {
                 let playerPoints = liveDraftGroup.points(for: player.id)
                 cell.salaryLabel.text = Format.points.stringFromNumber(playerPoints)
-                cell.fppgLabel.text = Format.currency.stringFromNumber(player.salary)
+                cell.fppgLabel.text = ""
             } else {
                 cell.salaryLabel.text = ""
                 cell.fppgLabel.text = ""
             }
-            if let player = slot.player as? PlayerWithPositionAndGame, liveDraftGroup = liveDraftGroup {
+            if let player = slot!.player as? PlayerWithPositionAndGame, liveDraftGroup = liveDraftGroup {
                 let playerTimeRemaining = liveDraftGroup.timeRemaining(for: player.game.srid)
                 cell.timeRemainingView.remaining = playerTimeRemaining / Sport.gameDuration[lineup!.sportName]!
             } else {
                 cell.timeRemainingView.remaining = 0
             }
+        } else {
+            cell.timeRemainingView.remaining = 0
         }
         
         return cell
@@ -450,15 +498,15 @@ extension TextFieldDelegate: UITextFieldDelegate {
 private typealias LiveListener = LineupDetailViewController
 extension LiveListener: LiveDraftGroupListener, LiveContestListener {
     func pointsChanged(player: LivePlayer) {
-        print("points changed!")
+        //print("points changed!")
         updatePoints()
     }
     func timeRemainingChanged(game: LiveGame) {
-        print("ldvc time remaining changed!")
+        //print("ldvc time remaining changed!")
         updateTimeRemaining()
     }
     func rankChanged() {
-        print("ldvc rank changed!")
+        //print("ldvc rank changed!")
         updateWinnings()
     }
 }

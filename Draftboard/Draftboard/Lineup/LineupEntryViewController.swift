@@ -106,8 +106,10 @@ class LineupEntryViewController: DraftboardViewController {
         tableView.reloadData()
         let myLineup = LiveLineup()
         myLineup.players = lineup!.players!.map { $0.id }
-        let points = liveDraftGroup!.points(for: myLineup)
-        lineupEntryView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
+        if liveDraftGroup != nil {
+            let points = liveDraftGroup!.points(for: myLineup)
+            lineupEntryView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
+        }
     }
     
     func updateTimeRemaining() {
@@ -178,15 +180,15 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
 private typealias LiveListener = LineupEntryViewController
 extension LiveListener: LiveDraftGroupListener, LiveContestListener {
     func pointsChanged(player: LivePlayer) {
-        print("entry vc points changed!")
+        //print("entry vc points changed!")
         updatePoints()
     }
     func timeRemainingChanged(game: LiveGame) {
-        print("entry vc time remaining changed!")
+        //print("entry vc time remaining changed!")
         updateTimeRemaining()
     }
     func rankChanged() {
-        print("entry vc rank changed!")
+        //print("entry vc rank changed!")
         updateWinnings()
     }
 }

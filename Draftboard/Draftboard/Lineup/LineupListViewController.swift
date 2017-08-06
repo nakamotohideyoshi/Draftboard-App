@@ -33,12 +33,13 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         lineupListView.paginationHeight.constant = 20.0
         lineupListView.paginationView.hidden = true
         
-        update()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         // Reload what's already there
-        cardCollectionView.reloadData()
+        lineups = nil
+        update()
         // Get lineups
         DerivedData.allLineupsWithStarts().then { lineups -> Void in
             self.lineups = lineups
@@ -165,6 +166,9 @@ extension ScrollViewDelegate: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         if scrollView == cardCollectionView {
             updateSubtitle()
+//            let currentPage = Int(self.cardCollectionView.contentOffset.x / self.cardCollectionView.cardSize.width)
+//            let currentCell = self.cardCollectionView.cellForItemAtIndexPath(NSIndexPath.init(forItem: currentPage, inSection: 0)) as! LineupCardCell
+//            currentCell.lineup = lineups?[safe: currentPage]
         }
     }
 }
