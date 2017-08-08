@@ -172,6 +172,7 @@ extension Data {
                             when(API.contestAllLineups(id: contest), API.contestInfo(id: Int(pool)!)).then { hexString, contest -> Void in
                                 liveContest.setLineups(hexString: hexString, sportName: sport)
                                 liveContest.contestName = contest.name
+                                liveContest.contestSize = contest.contestSize
                                 liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
                                 lineupContests.append(liveContest)
                                 finishedCount += 1

@@ -76,10 +76,16 @@ class LineupEntryViewController: DraftboardViewController {
     override func viewWillAppear(animated: Bool) {
         if lineup?.isLive == false {
             lineupEntryView.footerView.configuration = .Normal
+            lineupEntryView.columnLabel1.text = "Remove".uppercaseString
+            lineupEntryView.columnLabel2.text = "Contest".uppercaseString
+            lineupEntryView.columnLabel3.text = "Fee".uppercaseString
         }
         
         if lineup?.isLive == true {
             lineupEntryView.footerView.configuration = .Live
+            lineupEntryView.columnLabel1.text = "Contest".uppercaseString
+            lineupEntryView.columnLabel2.text = "".uppercaseString
+            lineupEntryView.columnLabel3.text = "Pos / Winning".uppercaseString
             
             if liveDraftGroup == nil {
                 Data.liveContests(for: lineup!).then { draftGroup, contests -> Void in
@@ -150,23 +156,55 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
         return entries.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(String(LineupEntryUpcomingCell), forIndexPath: indexPath) as! LineupEntryUpcomingCell
-        cell.actionButtonDelegate = self
-        
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if lineup?.isLive == true {
+            return 60.0
+        }
+        return 40.0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if lineup?.isLive == true {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(LineupEntryLiveCell), forIndexPath: indexPath) as! LineupEntryLiveCell
             let contest = liveContests![indexPath.row]
             let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
             let payout = contest.prizes[safe: rank] ?? 0
             cell.nameLabel.text = contest.contestName
-            cell.feesLabel.text = Format.ordinal.stringFromNumber(rank + 1)! + " / " + Format.currency.stringFromNumber(payout)!
+            cell.posLabel.text = Format.ordinal.stringFromNumber(rank + 1)!
+            cell.winningLabel.text = Format.currency.stringFromNumber(payout)!
+            if contest.contestSize == 10 {
+                cell.posBarContainer.hidden = false
+                cell.firstHHPosBar.hidden = true
+                cell.secondHHPosBar.hidden = true
+                let limit = 10 - contest.prizes.count
+                for i in 0...limit {
+                    cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x5f626d)
+                }
+                for i in limit...9 {
+                    cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x307655)
+                }
+                cell.posBarContainer.subviews[9 - rank].backgroundColor = UIColor(0x00e956)
+            } else {
+                cell.posBarContainer.hidden = true
+                cell.firstHHPosBar.hidden = false
+                cell.secondHHPosBar.hidden = false
+                cell.firstHHPosBar.backgroundColor = UIColor(0x5f626d)
+                cell.secondHHPosBar.backgroundColor = UIColor(0x307655)
+                if rank == 0 {
+                    cell.secondHHPosBar.backgroundColor = .whiteColor()
+                } else {
+                    cell.firstHHPosBar.backgroundColor = .whiteColor()
+                }
+            }
+            return cell
         } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(LineupEntryUpcomingCell), forIndexPath: indexPath) as! LineupEntryUpcomingCell
+            cell.actionButtonDelegate = self
             let entry = entries[indexPath.row]
             cell.nameLabel.text = entry.contest.name
             cell.feesLabel.text = Format.currency.stringFromNumber(entry.contest.buyin)!
+            return cell
         }
-        
-        return cell
     }
     
     // UITableViewDelegate

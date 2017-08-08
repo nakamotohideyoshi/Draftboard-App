@@ -12,6 +12,7 @@ class LiveContest {
     var id = 0
     var sportName = ""
     var contestName = ""
+    var contestSize = 0
     var poolID = 0
     var draftGroupID = 0
     var draftGroup = LiveDraftGroup() { didSet { rankLineups() } }

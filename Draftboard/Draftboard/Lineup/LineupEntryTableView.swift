@@ -25,6 +25,7 @@ class LineupEntryTableView: UITableView {
         backgroundColor = UIColor(0x37414d)
         
         registerClass(LineupEntryUpcomingCell.self, forCellReuseIdentifier: String(LineupEntryUpcomingCell))
+        registerClass(LineupEntryLiveCell.self, forCellReuseIdentifier: String(LineupEntryLiveCell))
     }
 
 }

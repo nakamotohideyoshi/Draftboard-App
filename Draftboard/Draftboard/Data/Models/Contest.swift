@@ -18,6 +18,7 @@ class Contest {
     let maxEntries: Int
     let prizePool: Double
     let currentEntries: Int
+    let contestSize: Int
     let skillLevelName: String
     let start: NSDate
     let payoutSpots: [PayoutSpot]
@@ -30,7 +31,7 @@ class Contest {
         }
     }
     
-    init(id: Int, name: String, buyin: Double, draftGroupID: Int, sportName: String, maxEntries: Int, prizePool: Double, currentEntries: Int, skillLevelName: String, start: NSDate, payoutSpots: [PayoutSpot]) {
+    init(id: Int, name: String, buyin: Double, draftGroupID: Int, sportName: String, maxEntries: Int, prizePool: Double, currentEntries: Int, contestSize: Int, skillLevelName: String, start: NSDate, payoutSpots: [PayoutSpot]) {
         self.id = id
         self.name = name
         self.buyin = buyin
@@ -39,6 +40,7 @@ class Contest {
         self.maxEntries = maxEntries
         self.prizePool = prizePool
         self.currentEntries = currentEntries
+        self.contestSize = contestSize
         self.skillLevelName = skillLevelName
         self.start = start
         self.payoutSpots = payoutSpots
@@ -54,6 +56,7 @@ class Contest {
             let maxEntries: Int = try json.get("max_entries")
             let prizePool: Double = try json.get("prize_pool")
             let currentEntries: Int = try json.get("current_entries")
+            let contestSize: Int = try json.get("contest_size")
             // Skill level
             let skillLevel: NSDictionary = try json.get("skill_level")
             let skillLevelName: String = try skillLevel.get("name")
@@ -63,7 +66,7 @@ class Contest {
             let prizeStructure: NSDictionary = try json.get("prize_structure")
             let prizeRanks: [NSDictionary] = try prizeStructure.get("ranks")
             let payoutSpots: [PayoutSpot] = try prizeRanks.map { try PayoutSpot(json: $0) }
-            self.init(id: id, name: name, buyin: buyin, draftGroupID: draftGroupID, sportName: sportName, maxEntries: maxEntries, prizePool: prizePool, currentEntries: currentEntries, skillLevelName: skillLevelName, start: start, payoutSpots: payoutSpots)
+            self.init(id: id, name: name, buyin: buyin, draftGroupID: draftGroupID, sportName: sportName, maxEntries: maxEntries, prizePool: prizePool, currentEntries: currentEntries, contestSize: contestSize, skillLevelName: skillLevelName, start: start, payoutSpots: payoutSpots)
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }

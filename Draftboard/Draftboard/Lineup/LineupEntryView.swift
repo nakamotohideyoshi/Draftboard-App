@@ -70,11 +70,11 @@ class LineupEntryView: UIView {
     func addConstraints() {
         let viewConstraints: [NSLayoutConstraint] = [
             columnLabel1.bottomRancor.constraintEqualToRancor(headerView.bottomRancor, constant: -2),
-            columnLabel1.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 7),
+            columnLabel1.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 10),
             columnLabel2.bottomRancor.constraintEqualToRancor(headerView.bottomRancor, constant: -2),
             columnLabel2.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 50),
             columnLabel3.bottomRancor.constraintEqualToRancor(headerView.bottomRancor, constant: -2),
-            columnLabel3.rightRancor.constraintEqualToRancor(headerView.rightRancor, constant: -7),
+            columnLabel3.rightRancor.constraintEqualToRancor(headerView.rightRancor, constant: -5),
         ]
         
         columnLabel1.translatesAutoresizingMaskIntoConstraints = false
