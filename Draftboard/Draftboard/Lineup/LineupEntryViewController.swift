@@ -11,7 +11,7 @@ import UIKit
 class LineupEntryViewController: DraftboardViewController {
     
     var lineupEntryView: LineupEntryView { return view as! LineupEntryView }
-    var tableView: UITableView { return lineupEntryView.tableView }
+    var tableView: LineupEntryTableView { return lineupEntryView.tableView }
     var flipButton: UIButton { return lineupEntryView.flipButton }
     var sportIcon: UIImageView { return lineupEntryView.sportIcon }
     var nameLabel: UILabel { return lineupEntryView.nameLabel }
@@ -48,8 +48,7 @@ class LineupEntryViewController: DraftboardViewController {
         // Players
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 40
-//        tableView.rowHeight = 
+        
         
         // Countdown
         lineupEntryView.footerView.countdown.countdownView.date = lineup!.start
@@ -140,7 +139,7 @@ class LineupEntryViewController: DraftboardViewController {
 }
 
 private typealias TableViewDelegate = LineupEntryViewController
-extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
+extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupEntryUpcomingCellActionButtonDelegate {
     
     // UITableViewDataSource
     
@@ -151,8 +150,9 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         return entries.count
     }
     
-    func tableView(_: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = LineupEntryCell()
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(String(LineupEntryUpcomingCell), forIndexPath: indexPath) as! LineupEntryUpcomingCell
+        cell.actionButtonDelegate = self
         
         if lineup?.isLive == true {
             let contest = liveContests![indexPath.row]
@@ -175,6 +175,21 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    // LineupEntryUpcomingCellActionButtonDelegate
+    
+    func removeButtonTappedForCell(cell: LineupEntryUpcomingCell) {
+        let indexPath = tableView.indexPathForCell(cell)!
+        let entry = entries[indexPath.row]
+        entry.unregister().then { result -> Void in
+            self.entries.removeAtIndex(indexPath.row)
+            self.tableView.reloadData()
+            let totalBuyin = self.entries.reduce(0) { $0 + $1.contest.buyin }
+            let feesText = Format.currency.stringFromNumber(totalBuyin)!
+            let text = "\(self.entries.count)"
+            self.lineupEntryView.footerView.fees.valueLabel.text = feesText
+            self.lineupEntryView.footerView.entries.valueLabel.text = text
+        }
+    }
 }
 
 private typealias LiveListener = LineupEntryViewController
@@ -192,54 +207,3 @@ extension LiveListener: LiveDraftGroupListener, LiveContestListener {
         updateWinnings()
     }
 }
-
-
-
-class LineupEntryCell: UITableViewCell {
-    
-    let nameLabel = UILabel()
-    let feesLabel = UILabel()
-    let borderView = UIView()
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
-    }
-    
-    required convenience init?(coder: NSCoder) {
-        self.init()
-    }
-    
-    override func layoutSubviews() {
-        nameLabel.frame = CGRectMake(18, 0, bounds.width - 80, bounds.height)
-        feesLabel.frame = CGRectMake(bounds.width - 80, 0, 62, bounds.height)
-        borderView.frame = CGRectMake(0, bounds.height - 1, bounds.width, 1)
-    }
-
-    func setup() {
-        addSubviews()
-        setupSubviews()
-    }
-    
-    func addSubviews() {
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(feesLabel)
-        contentView.addSubview(borderView)
-    }
-    
-    func setupSubviews() {
-        backgroundColor = .clearColor()
-        
-        nameLabel.font = .openSans(size: 11)
-        nameLabel.textColor = .whiteColor()
-        
-        feesLabel.font = UIFont.oswald(size: 12)
-        feesLabel.textColor = .whiteColor()
-        feesLabel.textAlignment = .Right
-
-        borderView.backgroundColor = UIColor(0x5f626d)
-    }
-
-}
-
-

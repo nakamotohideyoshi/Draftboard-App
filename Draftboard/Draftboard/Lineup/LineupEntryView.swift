@@ -10,7 +10,7 @@ import UIKit
 
 class LineupEntryView: UIView {
     
-    let tableView = UITableView()
+    let tableView = LineupEntryTableView()
     let headerView = UIView()
     let footerView = LineupFooterView()
     
@@ -18,6 +18,9 @@ class LineupEntryView: UIView {
     let sportIcon = UIImageView()
     let nameLabel = UILabel()
     let flipButton = UIButton()
+    let columnLabel1 = DraftboardLabel()
+    let columnLabel2 = DraftboardLabel()
+    let columnLabel3 = DraftboardLabel()
     let headerBorderView = UIView()
     
     init() {
@@ -46,6 +49,7 @@ class LineupEntryView: UIView {
     
     func setup() {
         addSubviews()
+        addConstraints()
         otherSetup()
     }
     
@@ -57,13 +61,30 @@ class LineupEntryView: UIView {
         headerView.addSubview(sportIcon)
         headerView.addSubview(nameLabel)
         headerView.addSubview(flipButton)
+        headerView.addSubview(columnLabel1)
+        headerView.addSubview(columnLabel2)
+        headerView.addSubview(columnLabel3)
         headerView.addSubview(headerBorderView)
     }
     
-    func otherSetup() {
+    func addConstraints() {
+        let viewConstraints: [NSLayoutConstraint] = [
+            columnLabel1.bottomRancor.constraintEqualToRancor(headerView.bottomRancor, constant: -2),
+            columnLabel1.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 7),
+            columnLabel2.bottomRancor.constraintEqualToRancor(headerView.bottomRancor, constant: -2),
+            columnLabel2.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 50),
+            columnLabel3.bottomRancor.constraintEqualToRancor(headerView.bottomRancor, constant: -2),
+            columnLabel3.rightRancor.constraintEqualToRancor(headerView.rightRancor, constant: -7),
+        ]
         
-        tableView.backgroundColor = UIColor(0x4b545f)
-        tableView.separatorStyle = .None
+        columnLabel1.translatesAutoresizingMaskIntoConstraints = false
+        columnLabel2.translatesAutoresizingMaskIntoConstraints = false
+        columnLabel3.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activateConstraints(viewConstraints)
+    }
+    
+    func otherSetup() {
+
         headerView.backgroundColor = UIColor(0x4b545f)
         headerView.alpha = 0.9
         footerView.backgroundColor = UIColor(0x4b545f)
@@ -89,6 +110,21 @@ class LineupEntryView: UIView {
         
         nameLabel.font = UIFont.openSans(size: 16)
         nameLabel.textColor = .whiteColor()
+        
+        columnLabel1.font = .openSans(weight: .Semibold, size: 7)
+        columnLabel1.textColor = .whiteColor()
+        columnLabel1.letterSpacing = 0.5
+        columnLabel1.text = "Remove".uppercaseString
+        
+        columnLabel2.font = .openSans(weight: .Semibold, size: 7)
+        columnLabel2.textColor = .whiteColor()
+        columnLabel2.letterSpacing = 0.5
+        columnLabel2.text = "Contest".uppercaseString
+        
+        columnLabel3.font = .openSans(weight: .Semibold, size: 7)
+        columnLabel3.textColor = .whiteColor()
+        columnLabel3.letterSpacing = 0.5
+        columnLabel3.text = "Fee".uppercaseString
         
         headerBorderView.backgroundColor = UIColor(0x5f626d)
         footerView.topBorderView.backgroundColor = UIColor(0x5f626d)

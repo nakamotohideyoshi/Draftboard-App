@@ -102,14 +102,6 @@ class LineupDetailViewController: DraftboardViewController {
             self.tableView.reloadData()
             self.viewWillAppear(false)
         }
-        
-        lineup?.getEntries().then { entries -> Void in
-            let totalBuyin = entries.reduce(0) { $0 + $1.contest.buyin }
-            let feesText = Format.currency.stringFromNumber(totalBuyin)!
-            let text = "\(entries.count)"
-            self.lineupDetailView.footerView.fees.valueLabel.text = feesText
-            self.lineupDetailView.footerView.entries.valueLabel.text = text
-        }
 
     }
     
@@ -127,6 +119,14 @@ class LineupDetailViewController: DraftboardViewController {
         navController?.titlebar.updateElements()
         delay(0.3) {
             self.updateFooterStats()
+        }
+        
+        lineup?.getEntries().then { entries -> Void in
+            let totalBuyin = entries.reduce(0) { $0 + $1.contest.buyin }
+            let feesText = Format.currency.stringFromNumber(totalBuyin)!
+            let text = "\(entries.count)"
+            self.lineupDetailView.footerView.fees.valueLabel.text = feesText
+            self.lineupDetailView.footerView.entries.valueLabel.text = text
         }
         
         if lineup?.isLive == false {
