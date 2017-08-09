@@ -183,7 +183,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
                 for i in limit...9 {
                     cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x307655)
                 }
-                cell.posBarContainer.subviews[9 - rank].backgroundColor = UIColor(0x00e956)
+                if rank < contest.prizes.count {
+                    cell.posBarContainer.subviews[9 - rank].backgroundColor = UIColor(0x00e956)
+                } else {
+                    cell.posBarContainer.subviews[9 - rank].backgroundColor = .whiteColor()
+                }
             } else {
                 cell.posBarContainer.hidden = true
                 cell.firstHHPosBar.hidden = false
@@ -191,7 +195,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
                 cell.firstHHPosBar.backgroundColor = UIColor(0x5f626d)
                 cell.secondHHPosBar.backgroundColor = UIColor(0x307655)
                 if rank == 0 {
-                    cell.secondHHPosBar.backgroundColor = .whiteColor()
+                    cell.secondHHPosBar.backgroundColor = UIColor(0x00e956)
                 } else {
                     cell.firstHHPosBar.backgroundColor = .whiteColor()
                 }
