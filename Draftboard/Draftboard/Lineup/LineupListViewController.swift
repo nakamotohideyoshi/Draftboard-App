@@ -86,7 +86,8 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
 //        }.then { (sportName: String) -> Promise<DraftGroup> in
         return firstly { () -> Promise<DraftGroup> in
             let mcc = DraftboardModalChoiceController<DraftGroup>(title: "CHOOSE A START TIME", choices: nil)
-            DerivedData.upcomingDraftGroupChoices().then { mcc.choiceData = $0 }
+            DerivedData.upcomingDraftGroupChoices(self.lineups!).then { mcc.choiceData = $0 }
+            mcc.titleText = "Create or Edit Lineups"
             return mcc.promise()
         }.then { draftGroup -> DraftGroup in
             RootViewController.sharedInstance.popModalViewController()
@@ -99,7 +100,12 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     func createLineup() {
         pickDraftGroup().then { draftGroup -> Void in
             let vc = LineupDetailViewController()
-            vc.lineup = LineupWithStart(draftGroup: draftGroup)
+            let existingLineup = self.lineups!.filter { $0.sportName == draftGroup.sportName && $0.isLive == false }.last
+            if (existingLineup != nil) {
+                vc.lineup = existingLineup
+            } else {
+                vc.lineup = LineupWithStart(draftGroup: draftGroup)
+            }
             vc.editing = true
             self.navController?.pushViewController(vc)
         }
@@ -118,7 +124,9 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     
     override func didTapTitlebarButton(buttonType: TitlebarButtonType) {
         if (buttonType == .Plus) {
-            createLineup()
+            if lineups != nil {
+                createLineup()
+            }
         }
     }
     

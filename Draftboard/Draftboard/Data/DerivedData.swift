@@ -37,7 +37,7 @@ class DerivedData {
 //            }
 //        }
 //    }
-    class func upcomingDraftGroupChoices() -> Promise<[Choice<DraftGroup>]> {
+    class func upcomingDraftGroupChoices(lineups: [LineupWithStart] = []) -> Promise<[Choice<DraftGroup>]> {
         let df = NSDateFormatter()
         
         return draftGroupsBySportName.get().then {
@@ -57,8 +57,15 @@ class DerivedData {
                     df.dateFormat = "eeee @ h:mm a"
                     title = "\($0.sportName.uppercaseString) - \(df.stringFromDate($0.start))"
                 }
-                let subtitle = "\($0.numGames) Games"
-                return Choice(title: title, subtitle: subtitle, value: $0)
+                
+                let currentSportName = $0.sportName
+                let alreadyExists = lineups.filter { $0.sportName == currentSportName && $0.isLive == false }.count
+                var subtitle = "\($0.numGames) Games"
+                if (alreadyExists > 0) {
+                    subtitle = "\($0.sportName) lineup already created".uppercaseString
+                }
+                
+                return Choice(title: title, subtitle: subtitle, value: $0, editing: alreadyExists > 0)
             }
         }
     }

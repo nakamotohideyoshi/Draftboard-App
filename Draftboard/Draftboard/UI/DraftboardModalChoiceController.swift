@@ -27,11 +27,13 @@ class Choice<T> {
     let title: String
     let subtitle: String?
     let value: T
+    let editing: Bool
     
-    init(title: String, subtitle: String?, value: T) {
+    init(title: String, subtitle: String?, value: T, editing: Bool = false) {
         self.title = title
         self.subtitle = subtitle
         self.value = value
+        self.editing = editing
     }
 }
 
@@ -173,6 +175,15 @@ class DraftboardModalChoiceController<T>: DraftboardModalViewController {
 //            let subtitle = data["subtitle"] as? String ?? ""
             let subtitle = data.subtitle ?? ""
             let choiceView = DraftboardModalItemView(title: title, subtitle: subtitle)
+            
+            // Show Proper Icon
+            if data.editing {
+                choiceView.iconArrow.hidden = true
+                choiceView.iconEdit.hidden = false
+            } else {
+                choiceView.iconArrow.hidden = false
+                choiceView.iconEdit.hidden = true
+            }
             
             // Add choice to scroll view
             scrollView.addSubview(choiceView)

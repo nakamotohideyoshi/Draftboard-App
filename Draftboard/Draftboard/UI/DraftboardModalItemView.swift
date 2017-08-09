@@ -16,6 +16,7 @@ class DraftboardModalItemView: DraftboardNibControl {
     @IBOutlet weak var subtitleLabel: DraftboardLabel!
     @IBOutlet weak var selectedView: UIView!
     @IBOutlet weak var iconArrow: UIImageView!
+    @IBOutlet weak var iconEdit: UIImageView!
     
     var index: Int!
     
@@ -36,6 +37,8 @@ class DraftboardModalItemView: DraftboardNibControl {
         let tintColor = iconArrow.tintColor
         iconArrow.tintColor = nil
         iconArrow.tintColor = tintColor
+        iconEdit.tintColor = nil
+        iconEdit.tintColor = tintColor
         
         titleLabel.text = titleText.uppercaseString
         subtitleLabel.text = subtitleText.uppercaseString
