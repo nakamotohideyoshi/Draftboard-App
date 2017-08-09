@@ -18,6 +18,8 @@ class LineupEntryViewController: DraftboardViewController {
 
     var lineup: LineupWithStart? { didSet { viewDidLoad() } }
     var entries: [LineupEntry] = [] { didSet { tableView.reloadData() } }
+    var finishedEntries: [LineupFinishedEntry] = [] { didSet { tableView.reloadData() } }
+    var lineupFinished: Bool = false
     
     var liveDraftGroup: LiveDraftGroup?
     var liveContests: [LiveContest]?
@@ -99,6 +101,25 @@ class LineupEntryViewController: DraftboardViewController {
                     self.updateWinnings()
                 }
             }
+            
+            lineup?.isFinished().then { finished -> Void in
+                if (finished) {
+                    self.lineupEntryView.footerView.configuration = .Finished
+                    self.lineupEntryView.footerView.winnings.titleLabel.text = "Won".uppercaseString
+                    self.lineupEntryView.columnLabel3.text = "Pos / Won".uppercaseString
+                    self.lineup?.getEntriesForFinished().then { entries -> Void in
+                        self.lineupEntryView.footerView.finishedEntries.valueLabel.text = "\(entries.count)"
+                        self.lineupFinished = true
+                        self.finishedEntries = entries
+                    }
+                } else {
+                    self.lineupEntryView.footerView.configuration = .Live
+                    self.lineupEntryView.footerView.winnings.titleLabel.text = "Winning".uppercaseString
+                    self.lineupEntryView.columnLabel3.text = "Pos / Winning".uppercaseString
+                    self.lineupFinished = false
+                    self.finishedEntries = []
+                }
+            }
         }
 
     }
@@ -151,7 +172,12 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
     
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         if lineup?.isLive == true {
-            return liveContests?.count ?? 0
+            if lineupFinished {
+                return finishedEntries.count
+            } else {
+                return liveContests?.count ?? 0
+            }
+            
         }
         return entries.count
     }
@@ -166,38 +192,89 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if lineup?.isLive == true {
             let cell = tableView.dequeueReusableCellWithIdentifier(String(LineupEntryLiveCell), forIndexPath: indexPath) as! LineupEntryLiveCell
-            let contest = liveContests![indexPath.row]
-            let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
-            let payout = contest.prizes[safe: rank] ?? 0
-            cell.nameLabel.text = contest.contestName
-            cell.posLabel.text = Format.ordinal.stringFromNumber(rank + 1)!
-            cell.winningLabel.text = Format.currency.stringFromNumber(payout)!
-            if contest.contestSize == 10 {
-                cell.posBarContainer.hidden = false
-                cell.firstHHPosBar.hidden = true
-                cell.secondHHPosBar.hidden = true
-                let limit = 10 - contest.prizes.count
-                for i in 0...limit {
-                    cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x5f626d)
-                }
-                for i in limit...9 {
-                    cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x307655)
-                }
-                if rank < contest.prizes.count {
-                    cell.posBarContainer.subviews[9 - rank].backgroundColor = UIColor(0x00e956)
+            if lineupFinished {
+                let finishedEntry = finishedEntries[indexPath.row]
+                cell.nameLabel.text = finishedEntry.contestName
+                cell.posLabel.text = Format.ordinal.stringFromNumber(finishedEntry.finalRank)!
+                cell.winningLabel.text = Format.currency.stringFromNumber(finishedEntry.payout)!
+                
+                if finishedEntry.contestName.rangeOfString("H2H") != nil {
+                    cell.posBarContainer.hidden = true
+                    cell.firstHHPosBar.hidden = false
+                    cell.secondHHPosBar.hidden = false
+                    cell.firstHHPosBar.backgroundColor = UIColor(0x5f626d)
+                    cell.secondHHPosBar.backgroundColor = UIColor(0x307655)
+                    let rank = finishedEntry.finalRank - 1
+                    if rank == 0 {
+                        cell.secondHHPosBar.backgroundColor = UIColor(0x00e956)
+                    } else {
+                        cell.firstHHPosBar.backgroundColor = .whiteColor()
+                    }
                 } else {
-                    cell.posBarContainer.subviews[9 - rank].backgroundColor = .whiteColor()
+                    cell.posBarContainer.hidden = false
+                    cell.firstHHPosBar.hidden = true
+                    cell.secondHHPosBar.hidden = true
+                    let rank = finishedEntry.finalRank - 1
+                    if finishedEntry.contestName.rangeOfString("Tourney ") != nil {
+                        for i in 0...7 {
+                            cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x5f626d)
+                        }
+                        for i in 7...9 {
+                            cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x307655)
+                        }
+                        if rank < 3 {
+                            cell.posBarContainer.subviews[9 - rank].backgroundColor = UIColor(0x00e956)
+                        } else {
+                            cell.posBarContainer.subviews[9 - rank].backgroundColor = .whiteColor()
+                        }
+                    } else {
+                        for i in 0...5 {
+                            cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x5f626d)
+                        }
+                        for i in 5...9 {
+                            cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x307655)
+                        }
+                        if rank < 5 {
+                            cell.posBarContainer.subviews[9 - rank].backgroundColor = UIColor(0x00e956)
+                        } else {
+                            cell.posBarContainer.subviews[9 - rank].backgroundColor = .whiteColor()
+                        }
+                    }
                 }
             } else {
-                cell.posBarContainer.hidden = true
-                cell.firstHHPosBar.hidden = false
-                cell.secondHHPosBar.hidden = false
-                cell.firstHHPosBar.backgroundColor = UIColor(0x5f626d)
-                cell.secondHHPosBar.backgroundColor = UIColor(0x307655)
-                if rank == 0 {
-                    cell.secondHHPosBar.backgroundColor = UIColor(0x00e956)
+                let contest = liveContests![indexPath.row]
+                let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
+                let payout = contest.prizes[safe: rank] ?? 0
+                cell.nameLabel.text = contest.contestName
+                cell.posLabel.text = Format.ordinal.stringFromNumber(rank + 1)!
+                cell.winningLabel.text = Format.currency.stringFromNumber(payout)!
+                if contest.contestSize == 10 {
+                    cell.posBarContainer.hidden = false
+                    cell.firstHHPosBar.hidden = true
+                    cell.secondHHPosBar.hidden = true
+                    let limit = 10 - contest.prizes.count
+                    for i in 0...limit {
+                        cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x5f626d)
+                    }
+                    for i in limit...9 {
+                        cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x307655)
+                    }
+                    if rank < contest.prizes.count {
+                        cell.posBarContainer.subviews[9 - rank].backgroundColor = UIColor(0x00e956)
+                    } else {
+                        cell.posBarContainer.subviews[9 - rank].backgroundColor = .whiteColor()
+                    }
                 } else {
-                    cell.firstHHPosBar.backgroundColor = .whiteColor()
+                    cell.posBarContainer.hidden = true
+                    cell.firstHHPosBar.hidden = false
+                    cell.secondHHPosBar.hidden = false
+                    cell.firstHHPosBar.backgroundColor = UIColor(0x5f626d)
+                    cell.secondHHPosBar.backgroundColor = UIColor(0x307655)
+                    if rank == 0 {
+                        cell.secondHHPosBar.backgroundColor = UIColor(0x00e956)
+                    } else {
+                        cell.firstHHPosBar.backgroundColor = .whiteColor()
+                    }
                 }
             }
             return cell

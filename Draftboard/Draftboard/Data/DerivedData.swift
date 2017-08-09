@@ -176,18 +176,18 @@ extension Lineup {
         }
     }
     
-    func getEntriesForFinished() -> Promise<[NSDictionary]> {
+    func getEntriesForFinished() -> Promise<[LineupFinishedEntry]> {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
         
-        return API.playHistory(dateFormatter.stringFromDate((self as! LineupWithStart).start)).then { history -> [NSDictionary] in
+        return API.playHistory(dateFormatter.stringFromDate((self as! LineupWithStart).start)).then { history -> [LineupFinishedEntry] in
             if let lineups: [NSDictionary] = try? history.get("lineups") {
                 for l in lineups {
                     let id: Int = try! l.get("id")
                     if (id == self.id) {
                         let entries: [NSDictionary] = try! l.get("entries")
-                        return entries
+                        return try entries.map{ try LineupFinishedEntry.init(JSON: $0) }
                     }
                 }
             }
