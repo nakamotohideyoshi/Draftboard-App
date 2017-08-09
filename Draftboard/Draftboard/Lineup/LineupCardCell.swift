@@ -273,20 +273,25 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
         logoImageView.image = UIImage(named: "logo-create-card")
         logoImageView.contentMode = .ScaleAspectFill
         // Circle BackgroundImage
+        circleView.userInteractionEnabled = false
+        
         circleImageView.image = UIImage(named: "create-card-circle")
         circleImageView.contentMode = .ScaleAspectFill
+        circleImageView.userInteractionEnabled = false
         
         titleLabel.font = UIFont(name: "Oswald-Regular", size: 18)
         titleLabel.text = "IT'S ANYONE'S GAME"
         titleLabel.textAlignment = .Center
         titleLabel.textColor = .whiteColor()
         titleLabel.sizeToFit()
+        titleLabel.userInteractionEnabled = false
         
         subTitleLabel.font = UIFont(name: "OpenSans-SemiBold", size: 10)
         subTitleLabel.text = "CREATE A LINEUP"
         subTitleLabel.textAlignment = .Center
         subTitleLabel.textColor = UIColor(0x8f9195)
         subTitleLabel.sizeToFit()
+        subTitleLabel.userInteractionEnabled = false
         
         arrowImageView.image = UIImage(named: "icon-green-arrow")
         arrowImageView.contentMode = .ScaleAspectFill
@@ -299,6 +304,7 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
         buttonLabel.layer.allowsEdgeAntialiasing = true
         buttonLabel.layer.borderWidth = 0.5
         buttonLabel.layer.borderColor = UIColor.greenDraftboard().CGColor
+        buttonLabel.userInteractionEnabled = false
         
         // Self
         backgroundColor = .blueMediumDark()
