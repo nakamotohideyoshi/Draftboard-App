@@ -215,7 +215,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
                     cell.firstHHPosBar.hidden = true
                     cell.secondHHPosBar.hidden = true
                     let rank = finishedEntry.finalRank - 1
-                    if finishedEntry.contestName.rangeOfString("Tourney ") != nil {
+                    if finishedEntry.contestName.rangeOfString("Tourney") != nil {
                         for i in 0...7 {
                             cell.posBarContainer.subviews[i].backgroundColor = UIColor(0x5f626d)
                         }
