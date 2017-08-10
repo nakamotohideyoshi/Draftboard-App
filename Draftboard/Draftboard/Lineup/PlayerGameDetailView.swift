@@ -10,14 +10,15 @@ import UIKit
 
 class PlayerGameDetailView:DraftboardView {
     
-    var awayTeamScore = UILabel()
-    var awayTeamCity = UILabel()
-    var awayTeamName = UILabel()
-    var homeTeamScore = UILabel()
-    var homeTeamCity = UILabel()
-    var homeTeamName = UILabel()
-    var atSign = UILabel()
-    var startTime = UILabel()
+    var awayTeamScore = DraftboardLabel()
+    var awayTeamCity = DraftboardLabel()
+    var awayTeamName = DraftboardLabel()
+    var homeTeamScore = DraftboardLabel()
+    var homeTeamCity = DraftboardLabel()
+    var homeTeamName = DraftboardLabel()
+    var atSign = DraftboardLabel()
+    var atSignImageView = UIImageView()
+    var startTime = DraftboardLabel()
     let bottomBorderView = UIView()
     var game: Game? { didSet { setupGame() } }
     var sportName: String?
@@ -38,6 +39,7 @@ class PlayerGameDetailView:DraftboardView {
         addSubview(homeTeamCity)
         addSubview(homeTeamName)
         addSubview(atSign)
+        addSubview(atSignImageView)
         addSubview(startTime)
         addSubview(bottomBorderView)
         
@@ -48,6 +50,7 @@ class PlayerGameDetailView:DraftboardView {
         awayTeamCity.font = .openSans(weight: .Semibold, size: 9)
         awayTeamCity.textColor = UIColor(0xfbb101)
         awayTeamCity.textAlignment = .Center
+        awayTeamCity.letterSpacing = 0.5
         
         awayTeamName.font = .oswald(size: 15)
         awayTeamName.textColor = UIColor(0x942229)
@@ -60,18 +63,23 @@ class PlayerGameDetailView:DraftboardView {
         homeTeamCity.font = .openSans(weight: .Semibold, size: 9)
         homeTeamCity.textColor = UIColor(0xfbb101)
         homeTeamCity.textAlignment = .Center
+        homeTeamCity.letterSpacing = 0.5
         
         homeTeamName.font = .oswald(size: 15)
         homeTeamName.textColor = UIColor(0x942229)
         homeTeamName.textAlignment = .Center
         
-        atSign.font = .oswald(weight: .Light, size: 100)
-        atSign.textColor = UIColor(0xe4e7eb)
+        atSign.font = .oswald(weight: .Light, size: 75)
+        atSign.textColor = UIColor(0xe6eaef)
         atSign.textAlignment = .Center
         atSign.text = "@"
+        atSign.hidden = true
         
-        startTime.font = .oswald(size: 15)
-        startTime.textColor = UIColor(0x45505b)
+        
+        atSignImageView.image = UIImage(named: "icon-atsign")
+        
+        startTime.font = .openSans(weight: .Semibold, size: 10)
+        startTime.textColor = UIColor(0x192436)
         startTime.textAlignment = .Center
         
         bottomBorderView.backgroundColor = UIColor(0xd0d2da)
@@ -82,22 +90,24 @@ class PlayerGameDetailView:DraftboardView {
     
     func addConstraints() {
         let viewConstraints: [NSLayoutConstraint] = [
-            awayTeamScore.centerXRancor.constraintEqualToRancor(centerXRancor, multiplierValue: 0.5),
+            awayTeamScore.centerXRancor.constraintEqualToRancor(centerXRancor, multiplierValue: 0.35),
             awayTeamScore.topRancor.constraintEqualToRancor(topRancor),
             awayTeamCity.centerXRancor.constraintEqualToRancor(awayTeamScore.centerXRancor),
-            awayTeamCity.topRancor.constraintEqualToRancor(awayTeamScore.bottomRancor, constant: 10.0),
+            awayTeamCity.topRancor.constraintEqualToRancor(awayTeamScore.bottomRancor),
             awayTeamName.centerXRancor.constraintEqualToRancor(awayTeamScore.centerXRancor),
-            awayTeamName.topRancor.constraintEqualToRancor(awayTeamCity.bottomRancor, constant: 0.0),
-            homeTeamScore.centerXRancor.constraintEqualToRancor(centerXRancor, multiplierValue: 1.5),
+            awayTeamName.topRancor.constraintEqualToRancor(awayTeamCity.bottomRancor, constant: -awayTeamName.font.ascender + awayTeamName.font.capHeight),
+            homeTeamScore.centerXRancor.constraintEqualToRancor(centerXRancor, multiplierValue: 1.65),
             homeTeamScore.topRancor.constraintEqualToRancor(topRancor),
             homeTeamCity.centerXRancor.constraintEqualToRancor(homeTeamScore.centerXRancor),
-            homeTeamCity.topRancor.constraintEqualToRancor(homeTeamScore.bottomRancor, constant: 10.0),
+            homeTeamCity.topRancor.constraintEqualToRancor(homeTeamScore.bottomRancor),
             homeTeamName.centerXRancor.constraintEqualToRancor(homeTeamScore.centerXRancor),
-            homeTeamName.topRancor.constraintEqualToRancor(homeTeamCity.bottomRancor, constant: 0.0),
+            homeTeamName.topRancor.constraintEqualToRancor(homeTeamCity.bottomRancor, constant: -homeTeamName.font.ascender + homeTeamName.font.capHeight),
+            atSign.centerXRancor.constraintEqualToRancor(centerXRancor),
+            atSign.topRancor.constraintEqualToRancor(topRancor, constant: -atSign.font.ascender + atSign.font.capHeight + awayTeamScore.font.ascender - awayTeamScore.font.capHeight),
             startTime.centerXRancor.constraintEqualToRancor(centerXRancor),
-            startTime.topRancor.constraintEqualToRancor(topRancor, constant: 20),
-            atSign.centerXRancor.constraintEqualToRancor(startTime.centerXRancor),
-            atSign.centerYRancor.constraintEqualToRancor(startTime.centerYRancor),
+            startTime.centerYRancor.constraintEqualToRancor(atSign.centerYRancor),
+            atSignImageView.centerXRancor.constraintEqualToRancor(centerXRancor),
+            atSignImageView.topRancor.constraintEqualToRancor(topRancor, constant: awayTeamScore.font.ascender - awayTeamScore.font.capHeight),
         ]
         awayTeamScore.translatesAutoresizingMaskIntoConstraints = false
         awayTeamCity.translatesAutoresizingMaskIntoConstraints = false
@@ -107,6 +117,7 @@ class PlayerGameDetailView:DraftboardView {
         homeTeamName.translatesAutoresizingMaskIntoConstraints = false
         startTime.translatesAutoresizingMaskIntoConstraints = false
         atSign.translatesAutoresizingMaskIntoConstraints = false
+        atSignImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activateConstraints(viewConstraints)
     }
