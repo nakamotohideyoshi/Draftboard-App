@@ -11,6 +11,8 @@ import UIKit
 class NFLRBGameLogHeaderCell: UITableViewCell {
     
     let headerView = UIView()
+    let greyBackgroundView = UIView()
+    let columnLabel = DraftboardLabel()
     let rushLabel = DraftboardLabel()
     let recLabel = DraftboardLabel()
     let dateLabel = DraftboardLabel()
@@ -39,6 +41,8 @@ class NFLRBGameLogHeaderCell: UITableViewCell {
     
     func addSubviews() {
         contentView.addSubview(headerView)
+        headerView.addSubview(greyBackgroundView)
+        headerView.addSubview(columnLabel)
         headerView.addSubview(recLabel)
         headerView.addSubview(rushLabel)
         headerView.addSubview(dateLabel)
@@ -53,59 +57,65 @@ class NFLRBGameLogHeaderCell: UITableViewCell {
     
     func setupSubviews() {
         headerView.backgroundColor = .greyCool()
+        greyBackgroundView.backgroundColor = UIColor(0xe4e5e7)
         
-        rushLabel.font = .openSans(weight: .Semibold, size: 8)
+        columnLabel.font = .openSans(weight: .Semibold, size: 9)
+        columnLabel.textColor = .whiteColor()
+        columnLabel.letterSpacing = 0.5
+        columnLabel.text = "game log".uppercaseString
+        
+        rushLabel.font = .openSans(weight: .Semibold, size: 9)
         rushLabel.textColor = .whiteColor()
         rushLabel.letterSpacing = 0.5
         rushLabel.text = "rushing".uppercaseString
         
-        recLabel.font = .openSans(weight: .Semibold, size: 8)
+        recLabel.font = .openSans(weight: .Semibold, size: 9)
         recLabel.textColor = .whiteColor()
         recLabel.letterSpacing = 0.5
         recLabel.text = "receiving".uppercaseString
         
         dateLabel.font = .openSans(weight: .Semibold, size: 8)
-        dateLabel.textColor = .whiteColor()
+        dateLabel.textColor = UIColor(0x192436)
         dateLabel.letterSpacing = 0.5
         dateLabel.text = "DATE"
         
         oppLabel.font = .openSans(weight: .Semibold, size: 8)
-        oppLabel.textColor = .whiteColor()
+        oppLabel.textColor = UIColor(0x192436)
         oppLabel.letterSpacing = 0.5
         oppLabel.text = "OPP"
         
         rushYdsLabel.font = .openSans(weight: .Semibold, size: 8)
-        rushYdsLabel.textColor = .whiteColor()
+        rushYdsLabel.textColor = UIColor(0x192436)
         rushYdsLabel.letterSpacing = 0.5
         rushYdsLabel.textAlignment = .Center
         rushYdsLabel.text = "YDS"
         
         rushTdLabel.font = .openSans(weight: .Semibold, size: 8)
-        rushTdLabel.textColor = .whiteColor()
+        rushTdLabel.textColor = UIColor(0x192436)
         rushTdLabel.letterSpacing = 0.5
         rushTdLabel.textAlignment = .Center
         rushTdLabel.text = "TD"
         
         recRecLabel.font = .openSans(weight: .Semibold, size: 8)
-        recRecLabel.textColor = .whiteColor()
+        recRecLabel.textColor = UIColor(0x192436)
         recRecLabel.letterSpacing = 0.5
         recRecLabel.textAlignment = .Center
         recRecLabel.text = "rec".uppercaseString
         
         recYdsLabel.font = .openSans(weight: .Semibold, size: 8)
-        recYdsLabel.textColor = .whiteColor()
+        recYdsLabel.textColor = UIColor(0x192436)
         recYdsLabel.letterSpacing = 0.5
         recYdsLabel.textAlignment = .Center
         recYdsLabel.text = "yds".uppercaseString
         
         recTdLabel.font = .openSans(weight: .Semibold, size: 8)
-        recTdLabel.textColor = .whiteColor()
+        recTdLabel.textColor = UIColor(0x192436)
         recTdLabel.letterSpacing = 0.5
         recTdLabel.textAlignment = .Center
         recTdLabel.text = "td".uppercaseString
         
         fpLabel.font = .openSans(weight: .Semibold, size: 8)
-        fpLabel.textColor = .whiteColor()
+        fpLabel.textColor = UIColor(0x192436)
         fpLabel.letterSpacing = 0.5
         fpLabel.text = "FP"
     }
@@ -119,6 +129,10 @@ class NFLRBGameLogHeaderCell: UITableViewCell {
             headerView.bottomRancor.constraintEqualToRancor(bottomRancor),
             headerView.widthRancor.constraintEqualToRancor(contentView.widthRancor, multiplier: 1.0, constant: -30),
             headerView.heightRancor.constraintEqualToConstant(39),
+            greyBackgroundView.centerXRancor.constraintEqualToRancor(centerXRancor),
+            greyBackgroundView.bottomRancor.constraintEqualToRancor(bottomRancor),
+            greyBackgroundView.widthRancor.constraintEqualToRancor(contentView.widthRancor, multiplier: 1.0, constant: -30),
+            greyBackgroundView.heightRancor.constraintEqualToConstant(19),
             dateLabel.leftRancor.constraintEqualToRancor(headerView.leftRancor, constant: 5),
             dateLabel.widthRancor.constraintEqualToConstant(50),
             dateLabel.centerYRancor.constraintEqualToRancor(headerView.centerYRancor, multiplierValue: 1.5),
@@ -143,6 +157,8 @@ class NFLRBGameLogHeaderCell: UITableViewCell {
             fpLabel.widthRancor.constraintEqualToConstant(40),
             fpLabel.leftRancor.constraintEqualToRancor(recTdLabel.rightRancor, constant: 10),
             fpLabel.centerYRancor.constraintEqualToRancor(headerView.centerYRancor, multiplierValue: 1.5),
+            columnLabel.leftRancor.constraintEqualToRancor(dateLabel.leftRancor),
+            columnLabel.centerYRancor.constraintEqualToRancor(headerView.centerYRancor, multiplierValue: 0.5),
             rushLabel.leftRancor.constraintEqualToRancor(rushYdsLabel.leftRancor, constant: colWidth / 2 - rushYdsLabel.frame.size.width / 2),
             rushLabel.centerYRancor.constraintEqualToRancor(headerView.centerYRancor, multiplierValue: 0.5),
             recLabel.leftRancor.constraintEqualToRancor(recRecLabel.leftRancor, constant: colWidth / 2 - recRecLabel.frame.size.width / 2),
@@ -151,6 +167,8 @@ class NFLRBGameLogHeaderCell: UITableViewCell {
         ]
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
+        greyBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        columnLabel.translatesAutoresizingMaskIntoConstraints = false
         recLabel.translatesAutoresizingMaskIntoConstraints = false
         rushLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
