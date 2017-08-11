@@ -260,9 +260,9 @@ class LineupDetailViewController: DraftboardViewController {
     
     func updatePoints() {
         tableView.reloadData()
-        let myLineup = LiveLineup()
-        myLineup.players = lineup!.players!.map { $0.id }
         if liveDraftGroup != nil {
+            let myLineup = LiveLineup()
+            myLineup.players = lineup!.players!.map { $0.id }
             let points = liveDraftGroup!.points(for: myLineup)
             lineupDetailView.footerView.points.valueLabel.text = Format.points.stringFromNumber(points)
         }
@@ -273,9 +273,11 @@ class LineupDetailViewController: DraftboardViewController {
         if (lineup!.isLive && liveContests?.count == 0) {
             lineupDetailView.footerView.pmr.valueLabel.text = String(format: "%.0f", 0)
         } else {
-            let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
-            let timeRemaining = games.reduce(0) { $0 + liveDraftGroup!.timeRemaining(for: $1) }
-            lineupDetailView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
+            if liveDraftGroup != nil {
+                let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
+                let timeRemaining = games.reduce(0) { $0 + liveDraftGroup!.timeRemaining(for: $1) }
+                lineupDetailView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
+            }
         }
         
     }
