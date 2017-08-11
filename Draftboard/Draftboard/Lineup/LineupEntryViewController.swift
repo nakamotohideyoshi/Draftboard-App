@@ -152,17 +152,22 @@ class LineupEntryViewController: DraftboardViewController {
     }
     
     func updateWinnings() {
-        tableView.reloadData()
-        let winnings = liveContests!.reduce(0) { total, contest -> Double in
-            if contest.lineups.count > 0 {
-                let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
-                let payout = contest.prizes[safe: rank] ?? 0
-                return total + payout
-            } else {
-                return total
+        if (lineup!.isLive && liveContests?.count == 0) {
+            Data.getWinnings(for: lineup!).then { winnings -> Void in
+                self.lineupEntryView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
             }
+        } else {
+            let winnings = liveContests!.reduce(0) { total, contest -> Double in
+                if contest.lineups.count > 0 {
+                    let rank = Int(contest.lineups.indexOf { $0.id == lineup!.id }!)
+                    let payout = contest.prizes[safe: rank] ?? 0
+                    return total + payout
+                } else {
+                    return total
+                }
+            }
+            lineupEntryView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
         }
-        lineupEntryView.footerView.winnings.valueLabel.text = Format.currency.stringFromNumber(winnings)
     }
 
 }
