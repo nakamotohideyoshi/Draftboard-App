@@ -31,9 +31,13 @@ class LineupFinishedEntry {
             let contest: NSDictionary = try JSON.get("contest")
             let contestID: Int = try contest.get("id")
             let contestName: String = try contest.get("name")
-            let payoutData: NSDictionary = try JSON.get("payout")
-            let payout: Double = try payoutData.get("amount")
-            self.init(id: id, finalRank: finalRank, contestID: contestID, contestName: contestName, payout: payout)
+            do {
+                let payoutData: NSDictionary = try JSON.get("payout")
+                let payout: Double = try payoutData.get("amount")
+                self.init(id: id, finalRank: finalRank, contestID: contestID, contestName: contestName, payout: payout)
+            } catch _ {
+                self.init(id: id, finalRank: finalRank, contestID: contestID, contestName: contestName, payout: 0.0)
+            }
         } catch let error {
             throw APIError.ModelError(self.dynamicType, error)
         }
