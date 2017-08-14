@@ -80,7 +80,9 @@ class ContestListViewController: DraftboardViewController {
         contests = sportContests?.filter { $0.skillLevelName == skillLevel }
         enteredSkillLevel = enteredContests?.filter { $0.skillLevelName != "all" }.first?.skillLevelName
         
-        self.navController?.titlebar.countdownView?.date = (contests?.first?.start)!
+        if contests!.first != nil {
+            self.navController?.titlebar.countdownView?.date = (contests?.first?.start)!
+        }
         
         if reload {
             tableView.reloadData()
