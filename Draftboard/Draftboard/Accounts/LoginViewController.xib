@@ -77,7 +77,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="username"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="user@email.com"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Required"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb0-JJ-cIu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
@@ -181,7 +181,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="email"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="This also serves as your login"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="user@email.com"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-gU-NDu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
