@@ -113,62 +113,6 @@ class Sport {
         "nhl": periods["nhl"]! * periodMinutes["nhl"]!,
         "mlb": 18.0 // Half-innings
     ]
-    
-    static let colors = [
-        "mlb": [
-
-//            "29dd9a87-5bcc-4774-80c3-7f50d985068b": [0x333366, 0x231F20, 0xC4CED4],
-//            "a7723160-10b7-4277-a309-d8dd95a8ae65": [0xFD5A1E, 0x000000, 0x8B6F4E],
-//            "12079497-e414-450a-8bf2-29f91de646bf": [0xCE1141, 0x13274F],
-//            "4f735188-37c8-473d-ae32-1f7e34ccf892": [0xBA0021, 0x003263],
-//            "d52d5339-cbdd-43f3-9dfa-a42fd588b9a3": [0x002D62, 0xFEC325, 0x7F411C, 0xA0AAB2],
-//            "55714da8-fcaf-4574-8443-59bfb511a524": [0xCC3433, 0x0E3386],
-//            "f246a5e5-afdb-479c-9aaa-c68beeda7af6": [0xFF5910, 0x002D72],
-//            "d89bed32-3aee-4407-99e3-4103641b999a": [0xAB0003, 0x11225B],
-//            "03556285-bdbb-4576-a06d-42f71f46ddc5": [0xFF6600, 0x0077C8, 0xFFD100, 0x000000],
-//            "2142e1ba-3b40-445c-b8bb-f1f8b1054220": [0x284898, 0xE81828],
-//            "1d678440-b4b1-4954-9b39-70afb3ebbcfa": [0x134A8E, 0x1D2D5C, 0xE8291C],
-//            "25507be1-6a68-4267-bd82-e097d94b359b": [0xA71930, 0x000000, 0xE3D4AD],
-//            "bdc11650-6f74-49c4-875e-778aeb7632d9": [0x092C5C, 0x8FBCE6, 0xF5D130],
-//            "75729d34-bca7-4a0f-b3df-6f26c6ad3719": [0xDF4601, 0x000000],
-//            "833a51a9-0d84-410f-bd77-da08c3e5e26e": [0x004687, 0xC09A5B],
-//            "80715d0d-0d2a-450f-a970-1b9a3b18c7e7": [0xE31937, 0x002B5C],
-//            "575c19b7-4052-41c2-9f0a-1c5813d02f99": [0x0C2C56, 0x0C2C56],
-//            "27a59d3b-ff7c-48ea-b016-4798f560f5e1": [0x003831, 0xEFB21E],
-//            "d99f919b-1534-4516-8e8a-9cd106c6d8cd": [0xC0111F, 0x003278]
-            
-            //            "ef64da7f-cfaf-4300-87b0-9313386b977c": [UIColor(0xEF3E42), UIColor(0x005A9C)],
-            //            "c874a065-c115-4e7d-b0f0-235584fb0e6f": [UIColor(0xC6011F), UIColor(0x000000)],
-            //            "44671792-dc02-4fdd-a5ad-f5f17edaa9d7": [UIColor(0xC41E3A), UIColor(0x000066), UIColor(0xFEDB00)],
-            //            "47f490cd-2f58-4ef7-9dfd-2ad6ba6c1ae8": [UIColor(0x000000), UIColor(0xC4CED4)],
-            //            "aa34e0ed-f342-4ec6-b774-c79b47b60e2d": [UIColor(0x002B5C), UIColor(0xD31145)],
-            //            "93941372-eb4c-4c40-aced-fe3267174393": [UIColor(0xBD3039), UIColor(0x0D2B56)],
-            //            "43a39081-52b4-4f93-ad29-da7f329ea960": [UIColor(0x0C2C56), UIColor(0x005C5C), UIColor(0xC4CED4)],
-            //            "481dfe7e-5dab-46ab-a49f-9dcc2b6e2cfd": [UIColor(0xFDB827), UIColor(0x000000)],
-            //            "a09ec676-f887-43dc-bbb3-cf4bbaee9a18": [UIColor(0xE4002B), UIColor(0x003087)],
-            //            "eb21dadd-8f10-4095-8bf3-dfb3b779f107": [UIColor(0x002D62), UIColor(0xEB6E1F)],
-            //            "dcfd5266-00ce-442c-bc09-264cd20cf455": [UIColor(0x0A2351), UIColor(0xB6922E)],
-            //            "29dd9a87-5bcc-4774-80c3-7f50d985068b": [UIColor(0x333366), UIColor(0x231F20), UIColor(0xC4CED4)],
-            //            "a7723160-10b7-4277-a309-d8dd95a8ae65": [UIColor(0xFD5A1E), UIColor(0x000000), UIColor(0x8B6F4E)],
-            //            "12079497-e414-450a-8bf2-29f91de646bf": [UIColor(0xCE1141), UIColor(0x13274F)],
-            //            "4f735188-37c8-473d-ae32-1f7e34ccf892": [UIColor(0xBA0021), UIColor(0x003263)],
-            //            "d52d5339-cbdd-43f3-9dfa-a42fd588b9a3": [UIColor(0x002D62), UIColor(0xFEC325), UIColor(0x7F411C), UIColor(0xA0AAB2)],
-            //            "55714da8-fcaf-4574-8443-59bfb511a524": [UIColor(0xCC3433), UIColor(0x0E3386)],
-            //            "f246a5e5-afdb-479c-9aaa-c68beeda7af6": [UIColor(0xFF5910), UIColor(0x002D72)],
-            //            "d89bed32-3aee-4407-99e3-4103641b999a": [UIColor(0xAB0003), UIColor(0x11225B)],
-            //            "03556285-bdbb-4576-a06d-42f71f46ddc5": [UIColor(0xFF6600), UIColor(0x0077C8), UIColor(0xFFD100), UIColor(0x000000)],
-            //            "2142e1ba-3b40-445c-b8bb-f1f8b1054220": [UIColor(0x284898), UIColor(0xE81828)],
-            //            "1d678440-b4b1-4954-9b39-70afb3ebbcfa": [UIColor(0x134A8E), UIColor(0x1D2D5C), UIColor(0xE8291C)],
-            //            "25507be1-6a68-4267-bd82-e097d94b359b": [UIColor(0xA71930), UIColor(0x000000), UIColor(0xE3D4AD)],
-            //            "bdc11650-6f74-49c4-875e-778aeb7632d9": [UIColor(0x092C5C), UIColor(0x8FBCE6), UIColor(0xF5D130)],
-            //            "75729d34-bca7-4a0f-b3df-6f26c6ad3719": [UIColor(0xDF4601), UIColor(0x000000)],
-            //            "833a51a9-0d84-410f-bd77-da08c3e5e26e": [UIColor(0x004687), UIColor(0xC09A5B)],
-            //            "80715d0d-0d2a-450f-a970-1b9a3b18c7e7": [UIColor(0xE31937), UIColor(0x002B5C)],
-            //            "575c19b7-4052-41c2-9f0a-1c5813d02f99": [UIColor(0x0C2C56), UIColor(0x0C2C56)],
-            //            "27a59d3b-ff7c-48ea-b016-4798f560f5e1": [UIColor(0x003831), UIColor(0xEFB21E)],
-            //            "d99f919b-1534-4516-8e8a-9cd106c6d8cd": [UIColor(0xC0111F), UIColor(0x003278)]
-        ]
-    ]
 }
 
 class LineupSlot {
