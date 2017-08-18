@@ -224,6 +224,8 @@ extension Player {
                         return "OUT"
                     case "GTD":
                         return "GAME-TIME DECISION"
+                    case "QUESTIONABLE":
+                        return "QUESTIONABLE"
                     default:
                         return ""
                 }
