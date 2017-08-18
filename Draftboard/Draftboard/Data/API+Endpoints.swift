@@ -269,7 +269,8 @@ extension API_Endpoints {
     class func getPlayerReports(srid srid: String) -> Promise<[Report]> {
         let path = "api/sports/updates/player/\(srid)/"
         return API.get(path).then { (json: [NSDictionary]) -> [Report] in
-            return try json.map { try Report.init(json: $0) }
+            let news: [NSDictionary] = json.filter { $0["category"] as! String == "news" }
+            return try news.map { try Report.init(json: $0) }
         }
     }
     
