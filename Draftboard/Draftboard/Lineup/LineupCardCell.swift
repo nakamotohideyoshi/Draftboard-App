@@ -32,7 +32,7 @@ class LineupCardCell: UICollectionViewCell {
     var detailEditAction: (() -> Void) = {}
     var detailFlipAction: (() -> Void) = {}
     var entryFlipAction: (() -> Void) = {}
-    
+    var showPlayerAction: ((player: Player, sportName: String) -> Void) = {_ in }
     init() {
         super.init(frame: CGRectZero)
         setup()
@@ -74,6 +74,7 @@ class LineupCardCell: UICollectionViewCell {
         createView.addTarget(self, action: #selector(createViewTapped), forControlEvents: .TouchUpInside)
         detailViewController.lineupDetailView.editAction = { [weak self] in self?.detailEditAction() }
         detailViewController.lineupDetailView.flipAction = { [weak self] in self?.detailFlipAction() }
+        detailViewController.showPlayerAction = { player, sportName in self.showPlayerAction(player: player, sportName: sportName) }
         entryViewController.flipAction = { [weak self] in self?.entryFlipAction() }
     }
     

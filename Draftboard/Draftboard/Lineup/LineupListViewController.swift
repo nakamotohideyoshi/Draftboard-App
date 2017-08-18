@@ -117,7 +117,15 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         vc.editing = true
         self.navController?.pushViewController(vc)
     }
-
+    
+    func showPlayer(player: Player, sportName: String) {
+        let playerDetailViewController = PlayerDetailViewController()
+        playerDetailViewController.sportName = sportName
+        playerDetailViewController.player = player
+        playerDetailViewController.showAddButton = false
+        playerDetailViewController.showRemoveButton = false
+        navController?.pushViewController(playerDetailViewController)
+    }
 // MARK: -
 
     // DraftboardTitlebarDelegate
@@ -201,7 +209,7 @@ extension CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDe
         cell.entryFlipAction = { [weak cell] in cell?.showDetail() }
         cell.detailFlipAction = { [weak cell] in cell?.showEntry() }
         cell.detailEditAction = (lineup == nil) ? {} : { [weak self] in self?.editLineup(lineup!) }
-        
+        cell.showPlayerAction = { player, sportName in self.showPlayer(player, sportName: sportName) }
         if let state = cardState[safe: indexPath.item] { cell.state = state }
         
         return cell

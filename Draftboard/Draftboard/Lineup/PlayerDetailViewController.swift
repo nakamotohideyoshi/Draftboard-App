@@ -20,6 +20,7 @@ class PlayerDetailViewController: DraftboardViewController {
     var tableView: PlayerDetailTableView { return playerDetailView.tableView }
     var headerView: PlayerDetailHeaderView { return playerDetailView.headerView }
     var panelView: PlayerDetailPanelView { return playerDetailView.panelView }
+    var statsView: DraftboardView { return panelView.statsView }
     var backgroundView: UIView { return playerDetailView.backgroundView }
     var avatarView: UIImageView { return playerDetailView.avatarView }
     var avatarHaloView: UIImageView { return playerDetailView.avatarHaloView }
@@ -54,6 +55,7 @@ class PlayerDetailViewController: DraftboardViewController {
         setPlayerImage()
         setGameText()
         setStatValues()
+        setGameStatValues()
         
         nextGameLabel.hidden = true
         
@@ -63,6 +65,14 @@ class PlayerDetailViewController: DraftboardViewController {
         segmentedControl.indexChangedHandler = { [weak self] (_: Int) in self?.filter() }
         
         draftButton.addTarget(self, action: #selector(draftButtonTapped), forControlEvents: .TouchUpInside)
+        print("player detail")
+        Realtime.onPlayerRawStat(for: sportName!) { stat in
+            print("*****", stat)
+            let srid: String = try! stat.get("srid_player")
+            if srid == self.player?.srid {
+                self.setGameStatValues(statData: stat)
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -182,12 +192,293 @@ class PlayerDetailViewController: DraftboardViewController {
         fppgStatView.valueLabel.text = String(format: "%.1f", player.fppg)
     }
     
+    func setGameStatValues(statData data: NSDictionary? = nil) {
+        guard let player = player, position = (player as? PlayerWithPosition)?.position else { return }
+        statsView.subviews.forEach { $0.removeFromSuperview() }
+        if (sportName == "nfl") {
+            if (position == "QB") {
+                var startX = CGFloat(20)
+                var labels = ["pass yd", "pass td", "int", "rush yd", "rush td"]
+                var values: [Int] = []
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let pass_yds: Int = try! data!.get("pass_yds")
+                    values.append(pass_yds)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let pass_td: Int = try! data!.get("pass_td")
+                    values.append(pass_td)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let ints: Int = try! data!.get("ints")
+                    values.append(ints)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rush_yds: Int = try! data!.get("rush_yds")
+                    values.append(rush_yds)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rush_td: Int = try! data!.get("rush_td")
+                    let off_fum_rec_td: Int = try! data!.get("off_fum_rec_td")
+                    values.append(rush_td + off_fum_rec_td)
+                }
+                if (data != nil) {
+                    let rec_rec: Int = try! data!.get("rec_rec")
+                    if rec_rec != 0 {
+                        labels.append("rec")
+                        values.append(rec_rec)
+                    }
+                    let rec_yds: Int = try! data!.get("rec_yds")
+                    if rec_yds != 0 {
+                        labels.append("rec yd")
+                        values.append(rec_yds)
+                    }
+                    let rec_td: Int = try! data!.get("rec_td")
+                    if rec_td != 0 {
+                        labels.append("rec td")
+                        values.append(rec_td)
+                    }
+                    let ret_punt_td: Int = try! data!.get("ret_punt_td")
+                    let ret_kick_td: Int = try! data!.get("ret_kick_td")
+                    let ret_td = ret_punt_td + ret_kick_td
+                    if ret_td != 0 {
+                        labels.append("ret td")
+                        values.append(ret_td)
+                    }
+                    let two_pt_conv: Int = try! data!.get("two_pt_conv")
+                    if two_pt_conv != 0 {
+                        labels.append("2pc")
+                        values.append(two_pt_conv)
+                    }
+                    let off_fum_lost: Int = try! data!.get("off_fum_lost")
+                    if off_fum_lost != 0 {
+                        labels.append("fum")
+                        values.append(off_fum_lost)
+                    }
+                }
+                var index = 0
+                labels.forEach { label in
+                    let fieldLabel = DraftboardLabel()
+                    fieldLabel.font = .openSans(weight: .Semibold, size: 8)
+                    fieldLabel.textColor = UIColor(0x9c9faf)
+                    fieldLabel.textAlignment = .Center
+                    fieldLabel.text = label.uppercaseString
+                    fieldLabel.frame = CGRectMake(startX, 20, 40, 10)
+                    statsView.addSubview(fieldLabel)
+                    
+                    let valueLabel = DraftboardLabel()
+                    valueLabel.font = .oswald(size: 18)
+                    valueLabel.textColor = .whiteColor()
+                    valueLabel.textAlignment = .Center
+                    valueLabel.text = Format.points.stringFromNumber(values[index])
+                    valueLabel.frame = CGRectMake(startX, 35, 40, 20)
+                    statsView.addSubview(valueLabel)
+                    
+                    startX += 50
+                    index += 1
+                }
+            } else if (position == "RB") {
+                var startX = CGFloat(20)
+                var labels = ["rush yd", "rush td", "rec", "rec yd", "rec td"]
+                var values: [Int] = []
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rush_yds: Int = try! data!.get("rush_yds")
+                    values.append(rush_yds)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rush_td: Int = try! data!.get("rush_td")
+                    let off_fum_rec_td: Int = try! data!.get("off_fum_rec_td")
+                    values.append(rush_td + off_fum_rec_td)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rec_rec: Int = try! data!.get("rec_rec")
+                    values.append(rec_rec)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rec_yds: Int = try! data!.get("rec_yds")
+                    values.append(rec_yds)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rec_td: Int = try! data!.get("rec_td")
+                    values.append(rec_td)
+                }
+                if (data != nil) {
+                    let ret_punt_td: Int = try! data!.get("ret_punt_td")
+                    let ret_kick_td: Int = try! data!.get("ret_kick_td")
+                    let ret_td = ret_punt_td + ret_kick_td
+                    if ret_td != 0 {
+                        labels.append("ret td")
+                        values.append(ret_td)
+                    }
+                    let off_fum_lost: Int = try! data!.get("off_fum_lost")
+                    if off_fum_lost != 0 {
+                        labels.append("fum")
+                        values.append(off_fum_lost)
+                    }
+                    let pass_yds: Int = try! data!.get("pass_yds")
+                    if pass_yds != 0 {
+                        labels.append("pass yd")
+                        values.append(pass_yds)
+                    }
+                    let pass_td: Int = try! data!.get("pass_td")
+                    if pass_td != 0 {
+                        labels.append("pass td")
+                        values.append(pass_td)
+                    }
+                    let ints: Int = try! data!.get("ints")
+                    if ints != 0 {
+                        labels.append("int")
+                        values.append(ints)
+                    }
+                    
+                    let two_pt_conv: Int = try! data!.get("two_pt_conv")
+                    if two_pt_conv != 0 {
+                        labels.append("2pc")
+                        values.append(two_pt_conv)
+                    }
+                    
+                }
+                var index = 0
+                labels.forEach { label in
+                    let fieldLabel = DraftboardLabel()
+                    fieldLabel.font = .openSans(weight: .Semibold, size: 8)
+                    fieldLabel.textColor = UIColor(0x9c9faf)
+                    fieldLabel.textAlignment = .Center
+                    fieldLabel.text = label.uppercaseString
+                    fieldLabel.frame = CGRectMake(startX, 20, 40, 10)
+                    statsView.addSubview(fieldLabel)
+                    
+                    let valueLabel = DraftboardLabel()
+                    valueLabel.font = .oswald(size: 18)
+                    valueLabel.textColor = .whiteColor()
+                    valueLabel.textAlignment = .Center
+                    valueLabel.text = Format.points.stringFromNumber(values[index])
+                    valueLabel.frame = CGRectMake(startX, 35, 40, 20)
+                    statsView.addSubview(valueLabel)
+                    
+                    startX += 50
+                    index += 1
+                }
+            } else {
+                var startX = CGFloat(20)
+                var labels = ["rec", "rec yd", "rec td"]
+                var values: [Int] = []
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rec_rec: Int = try! data!.get("rec_rec")
+                    values.append(rec_rec)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rec_yds: Int = try! data!.get("rec_yds")
+                    values.append(rec_yds)
+                }
+                if (data == nil) {
+                    values.append(0)
+                } else {
+                    let rec_td: Int = try! data!.get("rec_td")
+                    values.append(rec_td)
+                }
+                if (data != nil) {
+                    let rush_yds: Int = try! data!.get("rush_yds")
+                    if rush_yds != 0 {
+                        labels.append("rush yd")
+                        values.append(rush_yds)
+                    }
+                    var rush_td: Int = try! data!.get("rush_td")
+                    let off_fum_rec_td: Int = try! data!.get("off_fum_rec_td")
+                    rush_td += off_fum_rec_td
+                    if rush_td != 0 {
+                        labels.append("rush td")
+                        values.append(rush_td)
+                    }
+                    let ret_punt_td: Int = try! data!.get("ret_punt_td")
+                    let ret_kick_td: Int = try! data!.get("ret_kick_td")
+                    let ret_td = ret_punt_td + ret_kick_td
+                    if ret_td != 0 {
+                        labels.append("ret td")
+                        values.append(ret_td)
+                    }
+                    let pass_yds: Int = try! data!.get("pass_yds")
+                    if pass_yds != 0 {
+                        labels.append("pass yd")
+                        values.append(pass_yds)
+                    }
+                    let pass_td: Int = try! data!.get("pass_td")
+                    if pass_td != 0 {
+                        labels.append("pass td")
+                        values.append(pass_td)
+                    }
+                    let ints: Int = try! data!.get("ints")
+                    if ints != 0 {
+                        labels.append("int")
+                        values.append(ints)
+                    }
+                    
+                    let two_pt_conv: Int = try! data!.get("two_pt_conv")
+                    if two_pt_conv != 0 {
+                        labels.append("2pc")
+                        values.append(two_pt_conv)
+                    }
+                    let off_fum_lost: Int = try! data!.get("off_fum_lost")
+                    if off_fum_lost != 0 {
+                        labels.append("fum")
+                        values.append(off_fum_lost)
+                    }
+                }
+                var index = 0
+                labels.forEach { label in
+                    let fieldLabel = DraftboardLabel()
+                    fieldLabel.font = .openSans(weight: .Semibold, size: 8)
+                    fieldLabel.textColor = UIColor(0x9c9faf)
+                    fieldLabel.textAlignment = .Center
+                    fieldLabel.text = label.uppercaseString
+                    fieldLabel.frame = CGRectMake(startX, 20, 40, 10)
+                    statsView.addSubview(fieldLabel)
+                    
+                    let valueLabel = DraftboardLabel()
+                    valueLabel.font = .oswald(size: 18)
+                    valueLabel.textColor = .whiteColor()
+                    valueLabel.textAlignment = .Center
+                    valueLabel.text = Format.points.stringFromNumber(values[index])
+                    valueLabel.frame = CGRectMake(startX, 35, 40, 20)
+                    statsView.addSubview(valueLabel)
+                    
+                    startX += 50
+                    index += 1
+                }
+            }
+        }
+    }
+    
     func didSetShowAddButton() {
         if showAddButton { showRemoveButton = false }
         draftButton.backgroundColor = .greenDraftboard()
         draftButton.layer.borderColor = UIColor.greenDraftboard().CGColor
         draftButton.label.text = "Draft Player".uppercaseString
         draftButton.hidden = !(showAddButton || showRemoveButton)
+        statsView.hidden = showAddButton || showRemoveButton
     }
     
     func didSetShowRemoveButton() {
@@ -196,6 +487,7 @@ class PlayerDetailViewController: DraftboardViewController {
         draftButton.layer.borderColor = UIColor.redDraftboard().CGColor
         draftButton.label.text = "Drop Player".uppercaseString
         draftButton.hidden = !(showAddButton || showRemoveButton)
+        statsView.hidden = showAddButton || showRemoveButton
     }
     
     func draftButtonTapped() {

@@ -11,7 +11,8 @@ import PusherSwift
 
 class Realtime {
     static var prefix = "anson_"
-    static var pusher = Pusher(key: "9754d03a7816e43abb64") // Dev
+    //static var pusher = Pusher(key: "9754d03a7816e43abb64") // Prod
+    static var pusher = Pusher(key: "49224807c21863bf259b") // Staging
     
     class func getChannel(channelName: String) -> PusherChannel {
         pusher.connect()
@@ -25,6 +26,14 @@ class Realtime {
             if let stat = try? RealtimePlayerStat(JSON: json) {
                 callback(stat)
             }
+        }
+    }
+    
+    class func onPlayerRawStat(for sportName: String, callback: NSDictionary -> Void) {
+        let statsChannel = getChannel(sportName + "_stats")
+        statsChannel.bind("player") { data in
+            guard let json = data as? NSDictionary else { return }
+            callback(json)
         }
     }
     

@@ -32,6 +32,7 @@ class PlayerGameDetailView:DraftboardView {
     }
     
     override func setup() {
+        super.setup()
         addSubview(awayTeamScore)
         addSubview(awayTeamCity)
         addSubview(awayTeamName)
@@ -91,23 +92,23 @@ class PlayerGameDetailView:DraftboardView {
     func addConstraints() {
         let viewConstraints: [NSLayoutConstraint] = [
             awayTeamScore.centerXRancor.constraintEqualToRancor(centerXRancor, multiplierValue: 0.35),
-            awayTeamScore.topRancor.constraintEqualToRancor(topRancor),
+            awayTeamScore.topRancor.constraintEqualToRancor(topRancor, constant: 15),
             awayTeamCity.centerXRancor.constraintEqualToRancor(awayTeamScore.centerXRancor),
             awayTeamCity.topRancor.constraintEqualToRancor(awayTeamScore.bottomRancor),
             awayTeamName.centerXRancor.constraintEqualToRancor(awayTeamScore.centerXRancor),
             awayTeamName.topRancor.constraintEqualToRancor(awayTeamCity.bottomRancor, constant: -awayTeamName.font.ascender + awayTeamName.font.capHeight),
             homeTeamScore.centerXRancor.constraintEqualToRancor(centerXRancor, multiplierValue: 1.65),
-            homeTeamScore.topRancor.constraintEqualToRancor(topRancor),
+            homeTeamScore.topRancor.constraintEqualToRancor(topRancor, constant: 15),
             homeTeamCity.centerXRancor.constraintEqualToRancor(homeTeamScore.centerXRancor),
             homeTeamCity.topRancor.constraintEqualToRancor(homeTeamScore.bottomRancor),
             homeTeamName.centerXRancor.constraintEqualToRancor(homeTeamScore.centerXRancor),
             homeTeamName.topRancor.constraintEqualToRancor(homeTeamCity.bottomRancor, constant: -homeTeamName.font.ascender + homeTeamName.font.capHeight),
             atSign.centerXRancor.constraintEqualToRancor(centerXRancor),
-            atSign.topRancor.constraintEqualToRancor(topRancor, constant: -atSign.font.ascender + atSign.font.capHeight + awayTeamScore.font.ascender - awayTeamScore.font.capHeight),
+            atSign.topRancor.constraintEqualToRancor(topRancor, constant: 15 - atSign.font.ascender + atSign.font.capHeight + awayTeamScore.font.ascender - awayTeamScore.font.capHeight),
             startTime.centerXRancor.constraintEqualToRancor(centerXRancor),
             startTime.centerYRancor.constraintEqualToRancor(atSign.centerYRancor),
             atSignImageView.centerXRancor.constraintEqualToRancor(centerXRancor),
-            atSignImageView.topRancor.constraintEqualToRancor(topRancor, constant: awayTeamScore.font.ascender - awayTeamScore.font.capHeight),
+            atSignImageView.topRancor.constraintEqualToRancor(topRancor, constant: 15 + awayTeamScore.font.ascender - awayTeamScore.font.capHeight),
         ]
         awayTeamScore.translatesAutoresizingMaskIntoConstraints = false
         awayTeamCity.translatesAutoresizingMaskIntoConstraints = false

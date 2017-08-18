@@ -41,6 +41,8 @@ class LineupDetailViewController: DraftboardViewController {
     
     var draftViewController = LineupDraftViewController()
     
+    var showPlayerAction: (player: Player, sportName: String) -> Void = {_ in}
+    
     override func loadView() {
         self.view = LineupDetailView()
     }
@@ -152,6 +154,7 @@ class LineupDetailViewController: DraftboardViewController {
             lineupDetailView.footerView.configuration = .Live
             editButton.hidden = true
             lineupDetailView.columnLabel.text = "PTS"
+            tableView.allowsSelection = true
             
             if liveDraftGroup == nil {
                 Data.liveContests(for: lineup!).then { draftGroup, contests -> Void in
@@ -435,18 +438,23 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
 //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let slot = lineup?.slots[safe: indexPath.row]
-        if let player = slot?.player {
-            let playerDetailViewController = PlayerDetailViewController()
-            playerDetailViewController.sportName = lineup?.sportName
-            playerDetailViewController.player = player
-            playerDetailViewController.showRemoveButton = true
-            playerDetailViewController.draftButtonDelegate = self
-            playerDetailViewController.indexPath = indexPath
-            navController?.pushViewController(playerDetailViewController)
+        if editing == true {
+            if let player = slot?.player {
+                let playerDetailViewController = PlayerDetailViewController()
+                playerDetailViewController.sportName = lineup?.sportName
+                playerDetailViewController.player = player
+                playerDetailViewController.showRemoveButton = true
+                playerDetailViewController.draftButtonDelegate = self
+                playerDetailViewController.indexPath = indexPath
+                navController?.pushViewController(playerDetailViewController)
+            } else {
+                draftViewController.slot = slot
+                navController?.pushViewController(draftViewController)
+            }
         } else {
-            draftViewController.slot = slot
-            navController?.pushViewController(draftViewController)
+            self.showPlayerAction(player: (slot?.player)!, sportName: (lineup?.sportName)!)
         }
+        
     }
     
     // LineupPlayerCellActionButtonDelegate

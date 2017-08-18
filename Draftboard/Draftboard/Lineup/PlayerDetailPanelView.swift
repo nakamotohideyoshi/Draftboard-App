@@ -14,12 +14,14 @@ class PlayerDetailPanelView: DraftboardView {
     let draftButton = DraftboardTextButton()
     //let shadowView = DraftButtonShadowView()
     let gameDetailView = PlayerGameDetailView()
+    let statsView = PlayerDetailStatsView()
     let segmentedControl = DraftboardSegmentedControl(choices: [], textColor: .greyCool(), textSelectedColor: .greenDraftboard())
     
     override func setup() {
         super.setup()
         
         addSubview(backgroundView)
+        addSubview(statsView)
         addSubview(draftButton)
         //addSubview(shadowView)
         addSubview(gameDetailView)
@@ -44,8 +46,13 @@ class PlayerDetailPanelView: DraftboardView {
         let draftButtonX = fitToPixel(boundsW / 2 - draftButtonW / 2)
         let draftButtonY = CGFloat(0)
         
+        let statsViewW = boundsW
+        let statsViewH = CGFloat(75)
+        let statsViewX = CGFloat(0)
+        let statsViewY = CGFloat(-12)
+        
         let gameDetailViewW = boundsW
-        let gameDetailViewH = CGFloat(85)
+        let gameDetailViewH = CGFloat(100)
         let gameDetailViewX = CGFloat(0)
         let gameDetailViewY = draftButtonY + draftButtonH + 15
         
@@ -60,6 +67,7 @@ class PlayerDetailPanelView: DraftboardView {
         let backgroundViewH = boundsH - backgroundViewY
         
         backgroundView.frame = CGRectMake(backgroundViewX, backgroundViewY, backgroundViewW, backgroundViewH)
+        statsView.frame = CGRectMake(statsViewX, statsViewY, statsViewW, statsViewH)
         draftButton.frame = CGRectMake(draftButtonX, draftButtonY, draftButtonW, draftButtonH)
         //shadowView.frame = CGRectMake(draftButtonX - 40, draftButtonY + draftButtonH - 15, draftButtonW + 80, 25)
         gameDetailView.frame = CGRectMake(gameDetailViewX, gameDetailViewY, gameDetailViewW, gameDetailViewH)
@@ -70,7 +78,7 @@ class PlayerDetailPanelView: DraftboardView {
         let draftButtonH = CGFloat(50)
         let draftButtonY = CGFloat(0)
         
-        let gameDetailViewH = CGFloat(85)
+        let gameDetailViewH = CGFloat(100)
         let gameDetailViewY = draftButtonY + draftButtonH + 15
         
         let segmentedControlH = CGFloat(50)

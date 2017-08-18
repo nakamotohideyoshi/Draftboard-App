@@ -230,6 +230,7 @@
 		5DF49CF11C1BA7DC00B371CE /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */; };
 		934B5EE01BB5B42C00502FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B20C305F1F3ABAC300BA4668 /* LineupFinishedEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */; };
+		B20C30611F3F97F100BA4668 /* PlayerDetailStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */; };
 		B22450131EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */; };
 		B22450151EC54C560098BC24 /* MLBPitcherGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */; };
 		B2395E701F39AF5F006498B6 /* LineupEntryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */; };
@@ -495,6 +496,7 @@
 		5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
 		B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupFinishedEntry.swift; sourceTree = "<group>"; };
+		B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailStatsView.swift; sourceTree = "<group>"; };
 		B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogCell.swift; sourceTree = "<group>"; };
 		B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryTableView.swift; sourceTree = "<group>"; };
@@ -625,6 +627,7 @@
 				B2E076941EBB305C0052F593 /* PlayerReportCell.swift */,
 				3E83CCC61D91D0A800324EB2 /* PlayerDetailHeaderView.swift */,
 				3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */,
+				B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */,
 				B2DC21751EB3DFED001E4C4F /* PlayerGameDetailView.swift */,
 				B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */,
 				B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */,
@@ -1192,6 +1195,7 @@
 				B26962591EF7B2A100FF1F50 /* NFLQBGameLogCell.swift in Sources */,
 				3E9FB9101D8A0F9700F55990 /* DraftboardTextButton.swift in Sources */,
 				3E192C3B1CEB88CE0021A31D /* LineupDetailView.swift in Sources */,
+				B20C30611F3F97F100BA4668 /* PlayerDetailStatsView.swift in Sources */,
 				5D26FC741BBEE78700ACF127 /* AccountViewControllerOld.swift in Sources */,
 				5D6237DB1BB6200B0007E62A /* DraftboardImageView.swift in Sources */,
 				3C5A6F081C16559E00C030B3 /* PermissionViewController.swift in Sources */,
