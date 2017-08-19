@@ -37,7 +37,8 @@ class ErrorViewController: DraftboardModalViewController {
                 let button = DraftboardButton()
                 button.textValue = buttonText.uppercaseString
                 button.addTarget(self, action: .didTapAction, forControlEvents: .TouchUpInside)
-                
+                button.addTarget(self, action: .didTapDownAction, forControlEvents: .TouchDown)
+                button.addTarget(self, action: .didTapUpOutsideAction, forControlEvents: .TouchUpOutside)
                 // Style button
                 button.textBold = true;
                 if (i < actions.count - 1) {
@@ -74,8 +75,36 @@ class ErrorViewController: DraftboardModalViewController {
         let x = buttons.indexOf{$0 === button}
         fulfill(x!)
     }
+    
+    func didTapUpOutsideAction(button: DraftboardButton) {
+        var i = 0
+        buttons.forEach {
+            if (i < actions!.count - 1) {
+                $0.bgColor = .whiteColor()
+                $0.bgHighlightColor = .greenDraftboard()
+                $0.textColor = .greyCool()
+            } else {
+                $0.bgColor = .greenDraftboard()
+                $0.bgHighlightColor = .greenDraftboardDarker()
+                $0.textColor = .whiteColor()
+            }
+            i += 1
+        }
+    }
+    
+    func didTapDownAction(button: DraftboardButton) {
+        buttons.forEach {
+            if $0 !== button {
+                $0.bgColor = .whiteColor()
+                $0.bgHighlightColor = .greenDraftboard()
+                $0.textColor = .greyCool()
+            }
+        }
+    }
 }
 
 private extension Selector {
     static let didTapAction = #selector(ErrorViewController.didTapAction(_:))
+    static let didTapDownAction = #selector(ErrorViewController.didTapDownAction(_:))
+    static let didTapUpOutsideAction = #selector(ErrorViewController.didTapUpOutsideAction(_:))
 }
