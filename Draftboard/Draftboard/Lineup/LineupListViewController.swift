@@ -69,9 +69,9 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         if lineups != nil {
             if self.cardCollectionView.cellForItemAtIndexPath(NSIndexPath.init(forItem: currentPage, inSection: 0)) != nil {
                 let currentCell = self.cardCollectionView.cellForItemAtIndexPath(NSIndexPath.init(forItem: currentPage, inSection: 0)) as! LineupCardCell
-                currentCell.detailViewController.fetchLiveStats()
+                currentCell.detailViewController.viewWillAppear(false)
+                currentCell.entryViewController.viewWillAppear(false)
             }
-            
         }
     }
     
