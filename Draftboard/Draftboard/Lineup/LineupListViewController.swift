@@ -73,6 +73,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
                 currentCell.entryViewController.viewWillAppear(false)
             }
         }
+        updateSubtitle()
     }
     
     // MARK: - Modals
