@@ -294,4 +294,12 @@ extension API_Endpoints {
             return json
         }
     }
+    
+    class func getPlayerStatuses(sportName sportName: String) -> Promise<[NSDictionary]> {
+        let path = "api/sports/player-status/\(sportName)/"
+        return API.get(path).then { (json: NSDictionary) -> [NSDictionary] in
+            let playerUpdates: [NSDictionary] = try json.get("player_updates")
+            return playerUpdates
+        }
+    }
 }

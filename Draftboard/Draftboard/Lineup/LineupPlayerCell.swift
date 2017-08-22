@@ -22,6 +22,7 @@ class LineupPlayerCell: UITableViewCell {
     let positionLabel = UILabel()
     let avatarImageView = AvatarImageView()
     let timeRemainingView = TimeRemainingView()
+    let statusLabel = UILabel()
     let nameLabel = UILabel()
     let nameTeamSeparatorLabel = UILabel()
     let awayLabel = UILabel()
@@ -62,6 +63,7 @@ class LineupPlayerCell: UITableViewCell {
         contentView.addSubview(positionLabel)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(timeRemainingView)
+        contentView.addSubview(statusLabel)
         contentView.addSubview(nameLabel)
         contentView.addSubview(nameTeamSeparatorLabel)
         contentView.addSubview(awayLabel)
@@ -81,7 +83,14 @@ class LineupPlayerCell: UITableViewCell {
         
         positionLabel.font = .openSans(weight: .Semibold, size: 9.0)
         positionLabel.textColor = UIColor(0x9c9faf)
-
+        
+        statusLabel.font = .openSans(weight: .Semibold, size: 7.0)
+        statusLabel.textColor = .whiteColor()
+        statusLabel.textAlignment = .Center
+        statusLabel.layer.cornerRadius = 7
+        statusLabel.clipsToBounds = true
+        statusLabel.hidden = true
+        
         nameLabel.font = .openSans(size: 13.0)
         nameLabel.textColor = UIColor(0x46495e)
 
@@ -139,6 +148,7 @@ class LineupPlayerCell: UITableViewCell {
         x += 18 + 7
         avatarImageView.frame = CGRectMake(x, bounds.height / 2 - 38 / 2, 38, 38)
         timeRemainingView.frame = avatarImageView.frame
+        statusLabel.frame = CGRectMake(55, bounds.height / 2 - 38 / 2 + 27, 14, 14)
         x += 38 + 12
         nameLabel.frame = CGRectMake(x, nameLabelOriginY, nameLabelSize.width, nameLabelSize.height)
         x += nameLabelSize.width + 2
@@ -219,6 +229,25 @@ class LineupPlayerCell: UITableViewCell {
             fppgLabel.text = nil
         }
 
+    }
+    
+    func setPlayerStatus(status: String) {
+        if status == "Questionable".uppercaseString {
+            statusLabel.text = "Q"
+            statusLabel.backgroundColor = .orangeDraftboard()
+            statusLabel.hidden = false
+        } else if status == "Doubtful".uppercaseString {
+            statusLabel.text = "D"
+            statusLabel.backgroundColor = .redDraftboard()
+            statusLabel.hidden = false
+        } else if status == "OUT" || status == "IR" || status == "IR-R" || status == "NFI" || status == "PUP-R" || status == "PUP-P" || status == "INACTIVE" {
+            statusLabel.text = "O"
+            statusLabel.backgroundColor = .redDraftboard()
+            statusLabel.hidden = false
+        } else {
+            statusLabel.hidden = true
+            backgroundColor = .whiteColor()
+        }
     }
     
     func didSetShowAddButton() {

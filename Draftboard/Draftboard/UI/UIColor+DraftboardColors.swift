@@ -67,6 +67,10 @@ extension UIColor {
         return UIColor(0xe42e2f)
     }
     
+    class func orangeDraftboard() -> UIColor {
+        return UIColor(0xe88214)
+    }
+    
     //
     // MARK: - Specific color implementations
     //

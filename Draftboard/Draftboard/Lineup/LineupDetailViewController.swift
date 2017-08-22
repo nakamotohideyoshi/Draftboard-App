@@ -38,6 +38,7 @@ class LineupDetailViewController: DraftboardViewController {
 
     var liveDraftGroup: LiveDraftGroup?
     var liveContests: [LiveContest]?
+    var playerStatuses: [NSDictionary]?
     
     var draftViewController = LineupDraftViewController()
     
@@ -99,8 +100,9 @@ class LineupDetailViewController: DraftboardViewController {
 //        }
         
         // Get game info for players
-        lineup?.getPlayersWithGames().then { players -> Void in
+        when(lineup!.getPlayersWithGames(), Data.playerStatuses[lineup!.sportName].get()).then { players, statuses -> Void in
             self.lineup?.players = players
+            self.playerStatuses = statuses
             self.tableView.reloadData()
             self.viewWillAppear(false)
         }
@@ -378,6 +380,24 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         cell.withinBudget = true
         cell.actionButtonDelegate = self
         cell.setLineupSlot(slot)
+        if let player = slot!.player {
+            if playerStatuses != nil {
+                let statuses: [NSDictionary] = try! playerStatuses!.filter {
+                    try $0.get("player_srid") == player.srid
+                }
+                if statuses.count == 0 {
+                    cell.setPlayerStatus("")
+                } else {
+                    let playerStatus: NSDictionary = statuses.first!
+                    let status:String = try! playerStatus.get("status")
+                    cell.setPlayerStatus(status)
+                }
+            } else {
+                cell.setPlayerStatus("")
+            }
+        } else {
+            cell.setPlayerStatus("")
+        }
         if lineup?.isLive == true {
             if let player = slot!.player, liveDraftGroup = liveDraftGroup {
                 let playerPoints = liveDraftGroup.points(for: player.id)
