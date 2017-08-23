@@ -35,6 +35,7 @@ class LineupDraftViewController: DraftboardViewController {
     var allPlayers: [PlayerWithPosition]? { didSet { update() } }
     var players: [PlayerWithPosition]?
     var games: [Game]?
+    var playerStatuses: [NSDictionary]?
     
     var scrollingToSearchBar: Bool = false
     
@@ -254,7 +255,20 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, PlayerD
             cell.actionButtonDelegate = self
             cell.withinBudget = (player.salary <= lineup.totalSalaryRemaining)
             cell.setPlayer(player)
-            
+            if playerStatuses != nil {
+                let statuses: [NSDictionary] = try! playerStatuses!.filter {
+                    try $0.get("player_srid") == player.srid
+                }
+                if statuses.count == 0 {
+                    cell.setPlayerStatus("")
+                } else {
+                    let playerStatus: NSDictionary = statuses.first!
+                    let status:String = try! playerStatus.get("status")
+                    cell.setPlayerStatus(status)
+                }
+            } else {
+                cell.setPlayerStatus("")
+            }
             return cell
         }
     }

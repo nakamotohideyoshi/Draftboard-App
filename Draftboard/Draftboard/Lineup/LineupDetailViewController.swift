@@ -118,6 +118,7 @@ class LineupDetailViewController: DraftboardViewController {
             tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
             delay(0.15) {
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                self.tableView.reloadData()
             }
         }
         navController?.titlebar.updateElements()
@@ -437,6 +438,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
                 navController?.pushViewController(playerDetailViewController)
             } else {
                 draftViewController.slot = slot
+                draftViewController.playerStatuses = playerStatuses
                 navController?.pushViewController(draftViewController)
             }
         } else {
