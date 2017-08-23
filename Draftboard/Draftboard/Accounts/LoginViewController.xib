@@ -77,7 +77,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="username"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Required"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value=" "/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qb0-JJ-cIu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
@@ -87,9 +87,9 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Password"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Required"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="secureEntry" value="YES"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value=" "/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2M-yg-cUv">
@@ -216,11 +216,12 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Clicking &quot;Sign Up&quot; confirms you agree to our Terms of Service and Privacy Policy." translatesAutoresizingMaskIntoConstraints="NO" id="ST8-VX-MBb">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ST8-VX-MBb">
                                             <rect key="frame" x="0.0" y="340" width="345" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="uUb-Pg-7Pa"/>
                                             </constraints>
+                                            <string key="text">Clicking "Create Account" confirms you’re 18 (19 in NE or Canada, 21 in MA) and agree to our Terms of Service and Privacy Policy.</string>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -233,7 +234,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="SIGN UP"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CREATE ACCOUNT"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>

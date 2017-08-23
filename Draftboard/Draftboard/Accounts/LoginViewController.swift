@@ -104,7 +104,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         descriptionTextView.dataDetectorTypes = .Link
         descriptionTextView.editable = false
         descriptionTextView.backgroundColor = .clearColor()
-        let text = "Clicking \"Sign Up\" confirms you agree to our Terms of Service and Privacy Policy."
+        let text = "Clicking \"Create Account\" confirms you’re 18 (19 in NE or Canada, 21 in MA) and agree to our Terms of Service and Privacy Policy."
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.4
         let attributes = [
@@ -113,10 +113,10 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
             NSParagraphStyleAttributeName: paragraphStyle
         ]
         let attributedText = NSMutableAttributedString(string: text, attributes: attributes)
-        attributedText.addAttributes([NSLinkAttributeName: "https://www.draftboard.com/terms-conditions/"], range: NSMakeRange(45, 16))
-        attributedText.addAttributes([NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue], range: NSMakeRange(45, 16))
-        attributedText.addAttributes([NSLinkAttributeName: "https://www.draftboard.com/privacy-policy/"], range: NSMakeRange(66, 14))
-        attributedText.addAttributes([NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue], range: NSMakeRange(66, 14))
+        attributedText.addAttributes([NSLinkAttributeName: "https://www.draftboard.com/terms-of-service/"], range: NSMakeRange(93, 16))
+        attributedText.addAttributes([NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue], range: NSMakeRange(93, 16))
+        attributedText.addAttributes([NSLinkAttributeName: "https://www.draftboard.com/privacy-policy/"], range: NSMakeRange(114, 14))
+        attributedText.addAttributes([NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue], range: NSMakeRange(114, 14))
         descriptionTextView.attributedText = attributedText
         descriptionTextView.linkTextAttributes = [NSForegroundColorAttributeName: UIColor.greenDraftboard()]
     }
