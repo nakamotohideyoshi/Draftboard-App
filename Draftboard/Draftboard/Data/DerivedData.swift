@@ -217,17 +217,14 @@ extension Player {
             } else {
                 let playerStatus: NSDictionary = playerStatuses.first!
                 let status:String = try playerStatus.get("status")
-                switch status {
-                    case "active":
-                        return ""
-                    case "OUT":
-                        return "OUT"
-                    case "GTD":
-                        return "GAME-TIME DECISION"
-                    case "QUESTIONABLE":
-                        return "QUESTIONABLE"
-                    default:
-                        return ""
+                if status == "Questionable".uppercaseString {
+                    return status
+                } else if status == "Doubtful".uppercaseString {
+                    return status
+                } else if status == "OUT" || status == "IR" || status == "IR-R" || status == "NFI" || status == "PUP-R" || status == "PUP-P" || status == "INACTIVE" {
+                    return "OUT"
+                } else {
+                    return ""
                 }
             }
         }
