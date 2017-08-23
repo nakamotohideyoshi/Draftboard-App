@@ -319,7 +319,7 @@ class LineupDetailViewController: DraftboardViewController {
 
             } else {
                 let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
-                let actions = ["Abandon changes", "Keep working"]
+                let actions = ["Discard changes", "Keep working"]
                 
                 vc.actions = actions
                 vc.promise.then { index -> Void in
@@ -330,8 +330,8 @@ class LineupDetailViewController: DraftboardViewController {
                 }
                 
                 RootViewController.sharedInstance.pushAlertViewController(vc)
-                vc.titleLabel.text = "REALLY?"
-                vc.errorLabel.text = "You'll lose your changes if you leave without saving."
+                vc.titleLabel.text = "Cancel Lineup Edit".uppercaseString
+                vc.errorLabel.text = "You will lose your changes if you leave without saving."
             }
         }
     }
