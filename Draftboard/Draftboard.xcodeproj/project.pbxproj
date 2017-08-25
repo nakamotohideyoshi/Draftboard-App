@@ -231,6 +231,7 @@
 		934B5EE01BB5B42C00502FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B20C305F1F3ABAC300BA4668 /* LineupFinishedEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */; };
 		B20C30611F3F97F100BA4668 /* PlayerDetailStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */; };
+		B22246171F4FB82500F406E6 /* LineupEntryStandingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22246161F4FB82500F406E6 /* LineupEntryStandingCell.swift */; };
 		B22450131EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */; };
 		B22450151EC54C560098BC24 /* MLBPitcherGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */; };
 		B2395E701F39AF5F006498B6 /* LineupEntryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */; };
@@ -497,6 +498,7 @@
 		5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
 		B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupFinishedEntry.swift; sourceTree = "<group>"; };
 		B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailStatsView.swift; sourceTree = "<group>"; };
+		B22246161F4FB82500F406E6 /* LineupEntryStandingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryStandingCell.swift; sourceTree = "<group>"; };
 		B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogCell.swift; sourceTree = "<group>"; };
 		B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryTableView.swift; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 				B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */,
 				B2395E711F39B397006498B6 /* LineupEntryUpcomingCell.swift */,
 				B2395E731F3A370D006498B6 /* LineupEntryLiveCell.swift */,
+				B22246161F4FB82500F406E6 /* LineupEntryStandingCell.swift */,
 				5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */,
 				5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */,
 				5D6237B41BB61F7B0007E62A /* LineupEditCellView.swift */,
@@ -1239,6 +1242,7 @@
 				B269625D1EF827C200FF1F50 /* NFLRBGameLogCell.swift in Sources */,
 				5D6237E11BB6200B0007E62A /* DraftboardViewController.swift in Sources */,
 				3E9FB9031D7E2F2300F55990 /* ContestDetailViewController.swift in Sources */,
+				B22246171F4FB82500F406E6 /* LineupEntryStandingCell.swift in Sources */,
 				3E07C6AF1CEE437400423CCC /* LineupDetailViewController.swift in Sources */,
 				3E1870E81C05410F006641F8 /* Roster.swift in Sources */,
 				3E9FB90E1D8A0F6000F55990 /* DraftboardControl.swift in Sources */,

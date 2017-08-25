@@ -26,6 +26,7 @@ class LineupEntryTableView: UITableView {
         
         registerClass(LineupEntryUpcomingCell.self, forCellReuseIdentifier: String(LineupEntryUpcomingCell))
         registerClass(LineupEntryLiveCell.self, forCellReuseIdentifier: String(LineupEntryLiveCell))
+        registerClass(LineupEntryStandingCell.self, forCellReuseIdentifier: String(LineupEntryStandingCell))
     }
 
 }
