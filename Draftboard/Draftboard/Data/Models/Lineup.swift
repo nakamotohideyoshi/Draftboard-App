@@ -243,3 +243,24 @@ extension Lineup {
         return totalSalaryRemaining / Double(emptySlots.count)
     }
 }
+
+class LineupUsername {
+    let id: Int
+    let username: String
+    
+    init(id: Int, username: String) {
+        self.id = id
+        self.username = username
+    }
+    
+    convenience init(JSON: NSDictionary) throws {
+        do {
+            let id: Int = try JSON.get("id")
+            let user: NSDictionary = try JSON.get("user")
+            let username: String = try user.get("username")
+            self.init(id: id, username: username)
+        } catch let error {
+            throw APIError.ModelError(self.dynamicType, error)
+        }
+    }
+}

@@ -17,6 +17,7 @@ class LiveContest {
     var draftGroupID = 0
     var draftGroup = LiveDraftGroup() { didSet { rankLineups() } }
     var lineups = [LiveLineup]()
+    var usernames = [LineupUsername]()
     var prizes = [Double]()
     var listener: LiveContestListener?
     
@@ -48,6 +49,11 @@ class LiveContest {
         }
         
         self.lineups = lineups
+    }
+    
+    func getUsername(lineupID: Int) -> String {
+        let lineupUsername: LineupUsername = usernames.filter { $0.id == lineupID }.first!
+        return lineupUsername.username
     }
     
     func rankLineups() {

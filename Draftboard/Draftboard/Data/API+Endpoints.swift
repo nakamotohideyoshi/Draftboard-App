@@ -302,4 +302,11 @@ extension API_Endpoints {
             return playerUpdates
         }
     }
+    
+    class func getLineupUsernames(contestID contestID: Int) -> Promise<[LineupUsername]> {
+        let path = "api/lineup/usernames/"
+        return API.post(path, JSON: ["contest_id": contestID]).then { (json: [NSDictionary]) -> [LineupUsername] in
+            return try json.map { try LineupUsername.init(JSON: $0) }
+        }
+    }
 }

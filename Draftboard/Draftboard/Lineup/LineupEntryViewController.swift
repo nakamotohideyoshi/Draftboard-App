@@ -336,7 +336,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
             let contest = liveContests![indexPath.section]
             let lineup = contest.lineups[indexPath.row - 1]
             cell.rankLabel.text = "\(indexPath.row)"
-            cell.usernameLabel.text = "\(lineup.id)"
+            cell.usernameLabel.text = contest.getUsername(lineup.id)
             
             let rank = Int(contest.lineups.indexOf { $0.id == lineup.id }!)
             let payout = contest.prizes[safe: rank] ?? 0

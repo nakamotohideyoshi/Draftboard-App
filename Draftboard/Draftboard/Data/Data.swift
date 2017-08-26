@@ -26,6 +26,7 @@ class Data {
     static let nflPlayerGameLogs = MultiCache { id in API.getNFLPlayerGameLogs(playerID: id) }
     static let playerReports = MultiCache { srid in API.getPlayerReports(srid: srid) }
     static let playerStatuses = MultiCache { sportName in API.getPlayerStatuses(sportName: sportName) }
+    static let getLineupUsernames = MultiCache { contestID in API.getLineupUsernames(contestID: contestID) }
 }
 
 //enum SortByOther: ErrorType {
@@ -170,8 +171,9 @@ extension Data {
                             liveContest.sportName = sport
                             liveContest.poolID = Int(pool)!
                             liveContest.draftGroupID = draftGroup
-                            when(API.contestAllLineups(id: contest), API.contestInfo(id: Int(pool)!)).then { hexString, contest -> Void in
+                            when(API.contestAllLineups(id: contest), API.contestInfo(id: Int(pool)!), Data.getLineupUsernames[contest].get()).then { hexString, contest, usernames -> Void in
                                 liveContest.setLineups(hexString: hexString, sportName: sport)
+                                liveContest.usernames = usernames
                                 liveContest.contestName = contest.name
                                 liveContest.contestSize = contest.contestSize
                                 liveContest.prizes = contest.payoutSpots.sortBy { $0.rank }.map { $0.value }
