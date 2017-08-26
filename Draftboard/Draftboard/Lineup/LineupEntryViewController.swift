@@ -161,7 +161,13 @@ class LineupEntryViewController: DraftboardViewController {
             lineupEntryView.footerView.pmr.valueLabel.text = String(format: "%.0f", 0)
         } else {
             if liveDraftGroup != nil {
-                let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
+                //let games = (lineup!.players as! [PlayerWithPositionAndGame]).map { $0.game.srid }
+                var games: [String] = []
+                for player in lineup!.players! {
+                    if let p = player as? PlayerWithPositionAndGame {
+                        games.append(p.game.srid)
+                    }
+                }
                 let timeRemaining = games.reduce(0) { $0 + liveDraftGroup!.timeRemaining(for: $1) }
                 lineupEntryView.footerView.pmr.valueLabel.text = String(format: "%.0f", timeRemaining)
             }
