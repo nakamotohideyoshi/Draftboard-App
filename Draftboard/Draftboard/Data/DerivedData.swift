@@ -198,20 +198,20 @@ extension Lineup {
                             print(entriesJSON)
                             let entries: [LineupFinishedEntry] = try entriesJSON.map{ try LineupFinishedEntry.init(JSON: $0) }
                             var results: [LineupFinishedEntry] = []
-//                            var count = 0
-//                            for entry in entries {
-//                                Data.getContestResult[entry.contestID].get().then { json -> Void in
-//                                    let ranked_entries: [NSDictionary] = try! json.get("ranked_entries")
-//                                    let newEntry = entry
-//                                    let rankedEntries: [FinishedRankedEntry] = try! ranked_entries.map { try FinishedRankedEntry.init(JSON: $0) }
-//                                    newEntry.entries = rankedEntries
-//                                    results.append(newEntry)
-//                                    count += 1
-//                                    if (count == entries.count) {
-//                                        fulfill(results)
-//                                    }
-//                                }
-//                            }
+                            var count = 0
+                            for entry in entries {
+                                Data.getContestResult[entry.contestID].get().then { json -> Void in
+                                    let ranked_entries: [NSDictionary] = try! json.get("ranked_entries")
+                                    let newEntry = entry
+                                    let rankedEntries: [FinishedRankedEntry] = try! ranked_entries.map { try FinishedRankedEntry.init(JSON: $0) }
+                                    newEntry.entries = rankedEntries
+                                    results.append(newEntry)
+                                    count += 1
+                                    if (count == entries.count) {
+                                        fulfill(results)
+                                    }
+                                }
+                            }
                             fulfill(entries)
                         }
                     }
