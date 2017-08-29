@@ -15,13 +15,15 @@ class LineupFinishedEntry {
     let contestID: Int
     let contestName: String
     let payout: Double
+    var entries: [FinishedRankedEntry]
     
-    init(id: Int, finalRank: Int, contestID: Int, contestName: String, payout: Double) {
+    init(id: Int, finalRank: Int, contestID: Int, contestName: String, payout: Double, rankedEntries: [FinishedRankedEntry] = []) {
         self.id = id
         self.finalRank = finalRank
         self.contestID = contestID
         self.contestName = contestName
         self.payout = payout
+        self.entries = rankedEntries
     }
     
     convenience init(JSON: NSDictionary) throws {

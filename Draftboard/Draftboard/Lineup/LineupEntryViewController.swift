@@ -127,6 +127,7 @@ class LineupEntryViewController: DraftboardViewController {
                     self.lineup?.getEntriesForFinished().then { entries -> Void in
                         self.lineupEntryView.footerView.finishedEntries.valueLabel.text = "\(entries.count)"
                         self.lineupFinished = true
+                        self.cellStatuses = [StandingCellStatus](count: entries.count, repeatedValue: .Closed)
                         self.finishedEntries = entries
                     }
                 } else {
@@ -135,6 +136,7 @@ class LineupEntryViewController: DraftboardViewController {
                     self.lineupEntryView.columnLabel3.text = "Pos / Winning".uppercaseString
                     self.lineupFinished = false
                     self.finishedEntries = []
+                    self.cellStatuses = []
                 }
             }
         }
@@ -214,15 +216,19 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         if lineup?.isLive == true {
             if lineupFinished {
+                let status = cellStatuses![section]
+                if status == .Open {
+                    let entry = finishedEntries[section]
+                    return entry.entries.count + 1
+                }
                 return 1
             } else {
                 let status = cellStatuses![section]
                 if status == .Open {
                     let contest = liveContests![section]
                     return contest.lineups.count + 1
-                } else {
-                    return 1
                 }
+                return 1
             }
         }
         return 1
@@ -339,50 +345,78 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
             }
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(String(LineupEntryStandingCell), forIndexPath: indexPath) as! LineupEntryStandingCell
-            let contest = liveContests![indexPath.section]
-            let lineup = contest.lineups[indexPath.row - 1]
-            cell.rankLabel.text = "\(indexPath.row)"
-            cell.usernameLabel.text = contest.getUsername(lineup.id)
-            
-            let rank = Int(contest.lineups.indexOf { $0.id == lineup.id }!)
-            let payout = contest.prizes[safe: rank] ?? 0
-            if payout == 0 {
-                cell.winningsLabel.hidden = true
-            } else {
-                cell.winningsLabel.hidden = false
-            }
-            cell.winningsLabel.text = "$\(payout)"
-            
-            let points = liveDraftGroup!.points(for: lineup)
-            let pointsRange = ("\(points) PTS" as NSString).rangeOfString("PTS")
-            let pointsAttrString = NSMutableAttributedString(string: "\(points) PTS", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.oswald(size: 10)])
-            pointsAttrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor().colorWithAlphaComponent(0.7), range: pointsRange)
-            pointsAttrString.addAttribute(NSFontAttributeName, value: UIFont.oswald(size: 7.5), range: pointsRange)
-            cell.pointsLabel.attributedText = pointsAttrString
-            
-            let players = lineup.players.map { playerId in
-                return self.allPlayers!.filter { $0.id == playerId }.first
-            }
-            var games: [String] = []
-            for player in players {
-                if let p = player as? PlayerWithPositionAndGame {
-                    games.append(p.game.srid)
+            if lineupFinished {
+                let finishedEntry = finishedEntries[indexPath.section]
+                let rankedEntry = finishedEntry.entries[indexPath.row - 1]
+                cell.rankLabel.text = "\(rankedEntry.finalRank)"
+                cell.usernameLabel.text = rankedEntry.username
+                cell.winningsLabel.text = "$\(rankedEntry.payout)"
+
+                let pointsRange = ("\(rankedEntry.points) PTS" as NSString).rangeOfString("PTS")
+                let pointsAttrString = NSMutableAttributedString(string: "\(rankedEntry.points) PTS", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.oswald(size: 10)])
+                pointsAttrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor().colorWithAlphaComponent(0.7), range: pointsRange)
+                pointsAttrString.addAttribute(NSFontAttributeName, value: UIFont.oswald(size: 7.5), range: pointsRange)
+                cell.pointsLabel.attributedText = pointsAttrString
+                
+                let pmrRange = ("0 PMR" as NSString).rangeOfString("PMR")
+                let pmrAttrString = NSMutableAttributedString(string: "0 PMR", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.oswald(size: 10)])
+                pmrAttrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor().colorWithAlphaComponent(0.7), range: pmrRange)
+                pmrAttrString.addAttribute(NSFontAttributeName, value: UIFont.oswald(size: 7.5), range: pmrRange)
+                cell.pmrLabel.attributedText = pmrAttrString
+                
+                if indexPath.row == finishedEntry.entries.count {
+                    cell.dividerView.hidden = true
+                    cell.borderView.hidden = false
+                } else {
+                    cell.dividerView.hidden = false
+                    cell.borderView.hidden = true
                 }
-            }
-            let timeRemaining = games.reduce(0) { $0 + liveDraftGroup!.timeRemaining(for: $1) }
-            let pmr = String(format: "%.0f PMR", timeRemaining)
-            let pmrRange = (pmr as NSString).rangeOfString("PMR")
-            let pmrAttrString = NSMutableAttributedString(string: pmr, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.oswald(size: 10)])
-            pmrAttrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor().colorWithAlphaComponent(0.7), range: pmrRange)
-            pmrAttrString.addAttribute(NSFontAttributeName, value: UIFont.oswald(size: 7.5), range: pmrRange)
-            cell.pmrLabel.attributedText = pmrAttrString
-            
-            if indexPath.row == contest.lineups.count {
-                cell.dividerView.hidden = true
-                cell.borderView.hidden = false
             } else {
-                cell.dividerView.hidden = false
-                cell.borderView.hidden = true
+                let contest = liveContests![indexPath.section]
+                let lineup = contest.lineups[indexPath.row - 1]
+                cell.rankLabel.text = "\(indexPath.row)"
+                cell.usernameLabel.text = contest.getUsername(lineup.id)
+                
+                let rank = Int(contest.lineups.indexOf { $0.id == lineup.id }!)
+                let payout = contest.prizes[safe: rank] ?? 0
+                if payout == 0 {
+                    cell.winningsLabel.hidden = true
+                } else {
+                    cell.winningsLabel.hidden = false
+                }
+                cell.winningsLabel.text = "$\(payout)"
+                
+                let points = liveDraftGroup!.points(for: lineup)
+                let pointsRange = ("\(points) PTS" as NSString).rangeOfString("PTS")
+                let pointsAttrString = NSMutableAttributedString(string: "\(points) PTS", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.oswald(size: 10)])
+                pointsAttrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor().colorWithAlphaComponent(0.7), range: pointsRange)
+                pointsAttrString.addAttribute(NSFontAttributeName, value: UIFont.oswald(size: 7.5), range: pointsRange)
+                cell.pointsLabel.attributedText = pointsAttrString
+                
+                let players = lineup.players.map { playerId in
+                    return self.allPlayers!.filter { $0.id == playerId }.first
+                }
+                var games: [String] = []
+                for player in players {
+                    if let p = player as? PlayerWithPositionAndGame {
+                        games.append(p.game.srid)
+                    }
+                }
+                let timeRemaining = games.reduce(0) { $0 + liveDraftGroup!.timeRemaining(for: $1) }
+                let pmr = String(format: "%.0f PMR", timeRemaining)
+                let pmrRange = (pmr as NSString).rangeOfString("PMR")
+                let pmrAttrString = NSMutableAttributedString(string: pmr, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.oswald(size: 10)])
+                pmrAttrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor().colorWithAlphaComponent(0.7), range: pmrRange)
+                pmrAttrString.addAttribute(NSFontAttributeName, value: UIFont.oswald(size: 7.5), range: pmrRange)
+                cell.pmrLabel.attributedText = pmrAttrString
+                
+                if indexPath.row == contest.lineups.count {
+                    cell.dividerView.hidden = true
+                    cell.borderView.hidden = false
+                } else {
+                    cell.dividerView.hidden = false
+                    cell.borderView.hidden = true
+                }
             }
             
             return cell

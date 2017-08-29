@@ -27,6 +27,7 @@ class Data {
     static let playerReports = MultiCache { srid in API.getPlayerReports(srid: srid) }
     static let playerStatuses = MultiCache { sportName in API.getPlayerStatuses(sportName: sportName) }
     static let getLineupUsernames = MultiCache { contestID in API.getLineupUsernames(contestID: contestID) }
+    static let getContestResult = MultiCache { contestID in API.getContestResult(contestID: contestID) }
 }
 
 //enum SortByOther: ErrorType {

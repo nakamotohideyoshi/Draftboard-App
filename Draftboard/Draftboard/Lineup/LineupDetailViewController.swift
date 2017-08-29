@@ -423,7 +423,7 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupP
         } else {
             cell.timeRemainingView.remaining = 0
         }
-        
+        cell.layer.backgroundColor = UIColor.clearColor().CGColor
         return cell
     }
     

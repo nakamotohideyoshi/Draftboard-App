@@ -116,6 +116,8 @@ class LineupCardCell: UICollectionViewCell {
         entryViewController.lineup = lineup
         entryViewController.liveContests = []
         entryViewController.liveDraftGroup = nil
+        entryViewController.lineupFinished = false
+        entryViewController.cellStatuses = []
         entryViewController.viewDidLoad()
         entryViewController.view.hidden = (lineup == nil)
     }

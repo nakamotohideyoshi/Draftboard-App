@@ -188,17 +188,36 @@ extension Lineup {
         dateFormatter.dateFormat = "yyyy/MM/dd"
         dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")
         
-        return API.playHistory(dateFormatter.stringFromDate((self as! LineupWithStart).start)).then { history -> [LineupFinishedEntry] in
-            if let lineups: [NSDictionary] = try? history.get("lineups") {
-                for l in lineups {
-                    let id: Int = try! l.get("id")
-                    if (id == self.id) {
-                        let entries: [NSDictionary] = try! l.get("entries")
-                        return try entries.map{ try LineupFinishedEntry.init(JSON: $0) }
+        return Promise<[LineupFinishedEntry]> { fulfill, reject in
+            API.playHistory(dateFormatter.stringFromDate((self as! LineupWithStart).start)).then { history -> Void in
+                if let lineups: [NSDictionary] = try? history.get("lineups") {
+                    for l in lineups {
+                        let id: Int = try! l.get("id")
+                        if (id == self.id) {
+                            let entriesJSON: [NSDictionary] = try! l.get("entries")
+                            print(entriesJSON)
+                            let entries: [LineupFinishedEntry] = try entriesJSON.map{ try LineupFinishedEntry.init(JSON: $0) }
+                            var results: [LineupFinishedEntry] = []
+//                            var count = 0
+//                            for entry in entries {
+//                                Data.getContestResult[entry.contestID].get().then { json -> Void in
+//                                    let ranked_entries: [NSDictionary] = try! json.get("ranked_entries")
+//                                    let newEntry = entry
+//                                    let rankedEntries: [FinishedRankedEntry] = try! ranked_entries.map { try FinishedRankedEntry.init(JSON: $0) }
+//                                    newEntry.entries = rankedEntries
+//                                    results.append(newEntry)
+//                                    count += 1
+//                                    if (count == entries.count) {
+//                                        fulfill(results)
+//                                    }
+//                                }
+//                            }
+                            fulfill(entries)
+                        }
                     }
                 }
+                fulfill([])
             }
-            return []
         }
     }
 }

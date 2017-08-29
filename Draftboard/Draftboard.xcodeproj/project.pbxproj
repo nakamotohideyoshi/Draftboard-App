@@ -251,6 +251,7 @@
 		B2787D371EC5A40F00F2DDB8 /* GameLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D361EC5A40F00F2DDB8 /* GameLog.swift */; };
 		B2787D391EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */; };
 		B2787D3B1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */; };
+		B28269E01F550D7A00F6D46E /* FinishedRankedEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28269DF1F550D7A00F6D46E /* FinishedRankedEntry.swift */; };
 		B29F6ACE1E9BF89400E0A75A /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */; };
 		B29F6ACF1E9BF89400E0A75A /* LockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */; };
 		B2A4B7CD1ECFF278002493FD /* Scoring.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2A4B7CC1ECFF278002493FD /* Scoring.plist */; };
@@ -518,6 +519,7 @@
 		B2787D361EC5A40F00F2DDB8 /* GameLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLog.swift; sourceTree = "<group>"; };
 		B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBHitterGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBHitterGameLogCell.swift; sourceTree = "<group>"; };
+		B28269DF1F550D7A00F6D46E /* FinishedRankedEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRankedEntry.swift; sourceTree = "<group>"; };
 		B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockViewController.xib; sourceTree = "<group>"; };
 		B2A4B7CC1ECFF278002493FD /* Scoring.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Scoring.plist; sourceTree = "<group>"; };
@@ -997,6 +999,7 @@
 				3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */,
 				3E8A7E691D39D16C0020681E /* LineupEntry.swift */,
 				B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */,
+				B28269DF1F550D7A00F6D46E /* FinishedRankedEntry.swift */,
 				B2E076921EBB22480052F593 /* Report.swift */,
 				B2787D361EC5A40F00F2DDB8 /* GameLog.swift */,
 				3EC4EDF51DB14C1100D20914 /* Live */,
@@ -1181,6 +1184,7 @@
 				5D6237E21BB620320007E62A /* DraftboardButton.swift in Sources */,
 				3EC4EE051DC2BE7100D20914 /* TimeRemainingView.swift in Sources */,
 				3C1F970E1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift in Sources */,
+				B28269E01F550D7A00F6D46E /* FinishedRankedEntry.swift in Sources */,
 				3E832BC51BE2CB3900084621 /* API.swift in Sources */,
 				3E272EAA1C2880390023B303 /* TeamNames.swift in Sources */,
 				3ECA5F591CEFA36500DEDFC1 /* BlurEffectView.swift in Sources */,

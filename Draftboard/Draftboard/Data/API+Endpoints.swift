@@ -309,4 +309,11 @@ extension API_Endpoints {
             return try json.map { try LineupUsername.init(JSON: $0) }
         }
     }
+    
+    class func getContestResult(contestID contestID: Int) -> Promise<NSDictionary> {
+        let path = "api/contest/\(contestID)/results/"
+        return API.get(path).then { (json: NSDictionary) -> NSDictionary in
+            return json
+        }
+    }
 }
