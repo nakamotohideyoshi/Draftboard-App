@@ -32,8 +32,6 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         // Hide pagination to start
         lineupListView.paginationHeight.constant = 20.0
         lineupListView.paginationView.hidden = true
-        
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -43,6 +41,8 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
         // Get lineups
         DerivedData.allLineupsWithStarts().then { lineups -> Void in
             self.lineups = lineups
+        }.error { err in
+           print("error")
         }
     }
     

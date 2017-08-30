@@ -17,8 +17,11 @@ private typealias API_Public = API
 extension API_Public {
     
     static let agent = "Draftboard iOS" // + version?
-//    static let baseURL = "https://www.draftboard.com/"
-    static let baseURL = "https://staging.draftboard.com/"
+    #if Staging
+        static let baseURL = "https://staging.draftboard.com/"
+    #else
+        static let baseURL = "https://www.draftboard.com/"
+    #endif
 //    static let baseURL = "http://192.168.0.104:8000/"
 //    static let baseURL = "http://localhost:8000/"
 //    static let baseURL = "https://delorean.draftboard.com/"

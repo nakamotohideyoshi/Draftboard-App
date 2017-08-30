@@ -252,6 +252,270 @@
 		B2787D391EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */; };
 		B2787D3B1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */; };
 		B28269E01F550D7A00F6D46E /* FinishedRankedEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28269DF1F550D7A00F6D46E /* FinishedRankedEntry.swift */; };
+		B28269E31F573EDB00F6D46E /* LineupPlayerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F541CEE7DDC00DEDFC1 /* LineupPlayerTableView.swift */; };
+		B28269E41F573EDB00F6D46E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B28269E51F573EDB00F6D46E /* GameLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D361EC5A40F00F2DDB8 /* GameLog.swift */; };
+		B28269E61F573EDB00F6D46E /* DraftboardFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD3C4E41C17AE630040DC71 /* DraftboardFooterView.swift */; };
+		B28269E71F573EDB00F6D46E /* ContestDetailPrizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7D21ED4E15E002493FD /* ContestDetailPrizeCell.swift */; };
+		B28269E81F573EDB00F6D46E /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E608D911C1B72FC0085569D /* Format.swift */; };
+		B28269E91F573EDB00F6D46E /* API+Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C241CD945070021A31D /* API+Endpoints.swift */; };
+		B28269EA1F573EDB00F6D46E /* DraftboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D686F1BB5B59E00855501 /* DraftboardButton.swift */; };
+		B28269EB1F573EDB00F6D46E /* TimeRemainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EE041DC2BE7000D20914 /* TimeRemainingView.swift */; };
+		B28269EC1F573EDB00F6D46E /* ContestsPlayerHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F970D1C49B5E300A5BA0E /* ContestsPlayerHeaderCell.swift */; };
+		B28269ED1F573EDB00F6D46E /* FinishedRankedEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28269DF1F550D7A00F6D46E /* FinishedRankedEntry.swift */; };
+		B28269EE1F573EDB00F6D46E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E832BC41BE2CB3900084621 /* API.swift */; };
+		B28269EF1F573EDB00F6D46E /* TeamNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E272EA91C2880390023B303 /* TeamNames.swift */; };
+		B28269F01F573EDB00F6D46E /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F581CEFA36500DEDFC1 /* BlurEffectView.swift */; };
+		B28269F11F573EDB00F6D46E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783ACA1BD97C54000D8494 /* Model.swift */; };
+		B28269F21F573EDB00F6D46E /* GlobalFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586F1BE2CA01002343BD /* GlobalFilterViewController.swift */; };
+		B28269F31F573EDB00F6D46E /* LineupPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F561CEE7DE500DEDFC1 /* LineupPlayerCell.swift */; };
+		B28269F41F573EDB00F6D46E /* LineupDraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF777AE1D0B54D4002322F3 /* LineupDraftView.swift */; };
+		B28269F51F573EDB00F6D46E /* DerivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA5F811CF75A2300DEDFC1 /* DerivedData.swift */; };
+		B28269F61F573EDB00F6D46E /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF49CEE1C1BA7DC00B371CE /* NotificationViewController.swift */; };
+		B28269F71F573EDB00F6D46E /* PlayerDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCCC1D91D0F000324EB2 /* PlayerDetailTableViewCell.swift */; };
+		B28269F81F573EDB00F6D46E /* DraftboardModalChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB887B41BEC02B0004E156C /* DraftboardModalChoiceController.swift */; };
+		B28269F91F573EDB00F6D46E /* LivePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EE001DB1801000D20914 /* LivePlayer.swift */; };
+		B28269FA1F573EDB00F6D46E /* Data+Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C341CE515C90021A31D /* Data+Old.swift */; };
+		B28269FB1F573EDB00F6D46E /* DraftboardRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9D68731BB5B59E00855501 /* DraftboardRoundButton.swift */; };
+		B28269FC1F573EDB00F6D46E /* NFLQBGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962581EF7B2A100FF1F50 /* NFLQBGameLogCell.swift */; };
+		B28269FD1F573EDB00F6D46E /* DraftboardTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB90F1D8A0F9700F55990 /* DraftboardTextButton.swift */; };
+		B28269FE1F573EDB00F6D46E /* LineupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C3A1CEB88CE0021A31D /* LineupDetailView.swift */; };
+		B28269FF1F573EDB00F6D46E /* PlayerDetailStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */; };
+		B2826A001F573EDB00F6D46E /* AccountViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC731BBEE78700ACF127 /* AccountViewControllerOld.swift */; };
+		B2826A011F573EDB00F6D46E /* DraftboardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B87391BB31B0100B58EDF /* DraftboardImageView.swift */; };
+		B2826A021F573EDB00F6D46E /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */; };
+		B2826A031F573EDB00F6D46E /* LineupMoneyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA381BE050D50077DF0C /* LineupMoneyPoint.swift */; };
+		B2826A041F573EDB00F6D46E /* PayoutSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713521D59315200F25C60 /* PayoutSpot.swift */; };
+		B2826A051F573EDB00F6D46E /* DraftboardModalNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648E81BEAD1B40070D5A3 /* DraftboardModalNavController.swift */; };
+		B2826A061F573EDB00F6D46E /* DraftboardLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B873A1BB31B0100B58EDF /* DraftboardLabel.swift */; };
+		B2826A071F573EDB00F6D46E /* DraftboardLabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCD51D95D2EE00324EB2 /* DraftboardLabeledField.swift */; };
+		B2826A081F573EDB00F6D46E /* LineupCardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C1E1CCADE760021A31D /* LineupCardCollectionView.swift */; };
+		B2826A091F573EDB00F6D46E /* LineupStatCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D86F2761C19043D004E9655 /* LineupStatCurrencyView.swift */; };
+		B2826A0A1F573EDB00F6D46E /* NFLGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962601EF82AB700FF1F50 /* NFLGameLogCell.swift */; };
+		B2826A0B1F573EDB00F6D46E /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */; };
+		B2826A0C1F573EDB00F6D46E /* LineupEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E691D39D16C0020681E /* LineupEntry.swift */; };
+		B2826A0D1F573EDB00F6D46E /* Boxscore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E04ECAB1D02138A00EE325C /* Boxscore.swift */; };
+		B2826A0E1F573EDB00F6D46E /* EntryConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9001D70F35000F55990 /* EntryConfirmationView.swift */; };
+		B2826A0F1F573EDB00F6D46E /* LiveContest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDF61DB164C600D20914 /* LiveContest.swift */; };
+		B2826A101F573EDB00F6D46E /* LineupDraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF777AC1D0B54CB002322F3 /* LineupDraftViewController.swift */; };
+		B2826A111F573EDB00F6D46E /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */; };
+		B2826A121F573EDB00F6D46E /* ContestDetailGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7D41ED5353A002493FD /* ContestDetailGameCell.swift */; };
+		B2826A131F573EDB00F6D46E /* LineupStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D54F4341BF29AF2005BB87F /* LineupStatView.swift */; };
+		B2826A141F573EDB00F6D46E /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C221CD93DF40021A31D /* APIRequest.swift */; };
+		B2826A151F573EDB00F6D46E /* DraftboardModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E99511BB606100017E332 /* DraftboardModalViewController.swift */; };
+		B2826A161F573EDB00F6D46E /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73AAD91C850D89000E7D99 /* CountdownView.swift */; };
+		B2826A171F573EDB00F6D46E /* ContestDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9061D83572500F55990 /* ContestDetailHeaderView.swift */; };
+		B2826A181F573EDB00F6D46E /* DraftboardNibControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B873B1BB31B0100B58EDF /* DraftboardNibControl.swift */; };
+		B2826A191F573EDB00F6D46E /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19DA1C1C03B75000E6B53F /* LoaderView.swift */; };
+		B2826A1A1F573EDB00F6D46E /* ContestPoolEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E671D39C9C30020681E /* ContestPoolEntry.swift */; };
+		B2826A1B1F573EDB00F6D46E /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA3A1BE050D50077DF0C /* PieChart.swift */; };
+		B2826A1C1F573EDB00F6D46E /* LineupSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D63D0A81BD6B711000215DF /* LineupSearchViewController.swift */; };
+		B2826A1D1F573EDB00F6D46E /* DraftboardNibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B873C1BB31B0100B58EDF /* DraftboardNibView.swift */; };
+		B2826A1E1F573EDB00F6D46E /* NFLRBGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269625A1EF8264500FF1F50 /* NFLRBGameLogHeaderCell.swift */; };
+		B2826A1F1F573EDB00F6D46E /* DraftboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B873D1BB31B0100B58EDF /* DraftboardView.swift */; };
+		B2826A201F573EDB00F6D46E /* LineupFinishedEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */; };
+		B2826A211F573EDB00F6D46E /* MLBHitterGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */; };
+		B2826A221F573EDB00F6D46E /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AD21BD97D23000D8494 /* Sport.swift */; };
+		B2826A231F573EDB00F6D46E /* ContestDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9041D7E2F6000F55990 /* ContestDetailView.swift */; };
+		B2826A241F573EDB00F6D46E /* PlayerDetailPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCCA1D91D0C600324EB2 /* PlayerDetailPanelView.swift */; };
+		B2826A251F573EDB00F6D46E /* ContestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF21D480FBD00EDB59F /* ContestListView.swift */; };
+		B2826A261F573EDB00F6D46E /* NSDictionary+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C281CDAB84B0021A31D /* NSDictionary+API.swift */; };
+		B2826A271F573EDB00F6D46E /* DraftboardPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCFB8971C52953F00924EC7 /* DraftboardPagination.swift */; };
+		B2826A281F573EDB00F6D46E /* NFLRBGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269625C1EF827C200FF1F50 /* NFLRBGameLogCell.swift */; };
+		B2826A291F573EDB00F6D46E /* DraftboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E99531BB615590017E332 /* DraftboardViewController.swift */; };
+		B2826A2A1F573EDB00F6D46E /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9021D7E2F2300F55990 /* ContestDetailViewController.swift */; };
+		B2826A2B1F573EDB00F6D46E /* LineupEntryStandingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22246161F4FB82500F406E6 /* LineupEntryStandingCell.swift */; };
+		B2826A2C1F573EDB00F6D46E /* LineupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07C6AE1CEE437400423CCC /* LineupDetailViewController.swift */; };
+		B2826A2D1F573EDB00F6D46E /* Roster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1870E71C05410F006641F8 /* Roster.swift */; };
+		B2826A2E1F573EDB00F6D46E /* DraftboardControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB90D1D8A0F6000F55990 /* DraftboardControl.swift */; };
+		B2826A2F1F573EDB00F6D46E /* API+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C261CDAB75F0021A31D /* API+Errors.swift */; };
+		B2826A301F573EDB00F6D46E /* UIColor+DraftboardColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B87371BB31AC800B58EDF /* UIColor+DraftboardColors.swift */; };
+		B2826A311F573EDB00F6D46E /* DraftboardTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B87221BB31AA800B58EDF /* DraftboardTabBar.swift */; };
+		B2826A321F573EDB00F6D46E /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC21D91CCBA00324EB2 /* PlayerDetailViewController.swift */; };
+		B2826A331F573EDB00F6D46E /* PlayerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC41D91D01500324EB2 /* PlayerDetailView.swift */; };
+		B2826A341F573EDB00F6D46E /* LineupCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C201CCAE35C0021A31D /* LineupCardCell.swift */; };
+		B2826A351F573EDB00F6D46E /* PlayerDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC81D91D0BB00324EB2 /* PlayerDetailTableView.swift */; };
+		B2826A361F573EDB00F6D46E /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */; };
+		B2826A371F573EDB00F6D46E /* LineupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E631D273A220020681E /* LineupEntryViewController.swift */; };
+		B2826A381F573EDB00F6D46E /* DraftboardDetailListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07931C21DCC60002B97B /* DraftboardDetailListItem.swift */; };
+		B2826A391F573EDB00F6D46E /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6C5971BD052FE005A4DC6 /* Spring.swift */; };
+		B2826A3A1F573EDB00F6D46E /* DraftboardSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC751BBF211600ACF127 /* DraftboardSegmentedView.swift */; };
+		B2826A3B1F573EDB00F6D46E /* LineupDraftGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D61F13D8F700D88E64 /* LineupDraftGameCell.swift */; };
+		B2826A3C1F573EDB00F6D46E /* LineupEntryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */; };
+		B2826A3D1F573EDB00F6D46E /* ContestDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9091D8A0AD900F55990 /* ContestDetailTableView.swift */; };
+		B2826A3E1F573EDB00F6D46E /* NFLGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269625E1EF82A8E00FF1F50 /* NFLGameLogHeaderCell.swift */; };
+		B2826A3F1F573EDB00F6D46E /* LineupDraftSortMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259D15E1F19B89B0043F68E /* LineupDraftSortMenuCell.swift */; };
+		B2826A401F573EDB00F6D46E /* DraftboardFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A321B1BCD6591006C758B /* DraftboardFilterButton.swift */; };
+		B2826A411F573EDB00F6D46E /* DraftboardTitlebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B87431BB3388E00B58EDF /* DraftboardTitlebar.swift */; };
+		B2826A421F573EDB00F6D46E /* LineupEntryLiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395E731F3A370D006498B6 /* LineupEntryLiveCell.swift */; };
+		B2826A431F573EDB00F6D46E /* DepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB630A61C10A19000ACEAD3 /* DepositView.swift */; };
+		B2826A441F573EDB00F6D46E /* LabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC6D1BBEE0A600ACF127 /* LabeledField.swift */; };
+		B2826A451F573EDB00F6D46E /* LineupCardToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA644A21C56A27500B44DC5 /* LineupCardToggle.swift */; };
+		B2826A461F573EDB00F6D46E /* LineupDraftSortMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259D15C1F19B8800043F68E /* LineupDraftSortMenuTableView.swift */; };
+		B2826A471F573EDB00F6D46E /* LineupStatPMRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D63D1BF2A5FC00C796ED /* LineupStatPMRView.swift */; };
+		B2826A481F573EDB00F6D46E /* ContestDetailScoringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7CE1ED02480002493FD /* ContestDetailScoringCell.swift */; };
+		B2826A491F573EDB00F6D46E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AC81BD94847000D8494 /* Player.swift */; };
+		B2826A4A1F573EDB00F6D46E /* ContestConfirmationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB14BF81C12498B008E14A4 /* ContestConfirmationModal.swift */; };
+		B2826A4B1F573EDB00F6D46E /* NSURLConnection+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */; };
+		B2826A4C1F573EDB00F6D46E /* LiveDraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDF81DB164DC00D20914 /* LiveDraftGroup.swift */; };
+		B2826A4D1F573EDB00F6D46E /* ContestDetailMyEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7E01ED68701002493FD /* ContestDetailMyEntryCell.swift */; };
+		B2826A4E1F573EDB00F6D46E /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D88B0531C49E591002CA1BB /* ErrorViewController.swift */; };
+		B2826A4F1F573EDB00F6D46E /* EntryConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB8FE1D70F34700F55990 /* EntryConfirmationViewController.swift */; };
+		B2826A501F573EDB00F6D46E /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCD31D95CF8500324EB2 /* AccountView.swift */; };
+		B2826A511F573EDB00F6D46E /* DraftboardModalItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7648EA1BEAD70F0070D5A3 /* DraftboardModalItemView.swift */; };
+		B2826A521F573EDB00F6D46E /* ContestDetailPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB90B1D8A0EBF00F55990 /* ContestDetailPanelView.swift */; };
+		B2826A531F573EDB00F6D46E /* DraftboardButtonHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07971C222ED70002B97B /* DraftboardButtonHeader.swift */; };
+		B2826A541F573EDB00F6D46E /* LiveGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EE021DB1802000D20914 /* LiveGame.swift */; };
+		B2826A551F573EDB00F6D46E /* PlayerGameDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DC21751EB3DFED001E4C4F /* PlayerGameDetailView.swift */; };
+		B2826A561F573EDB00F6D46E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E04ECA91D02132000EE325C /* Game.swift */; };
+		B2826A571F573EDB00F6D46E /* ContestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA4A1BE051A00077DF0C /* ContestsViewController.swift */; };
+		B2826A581F573EDB00F6D46E /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860E41B9FB1CF004013AB /* ResultsViewController.swift */; };
+		B2826A591F573EDB00F6D46E /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CBFD01BDA8E7D006746B2 /* Team.swift */; };
+		B2826A5A1F573EDB00F6D46E /* Realtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C361CE55BE50021A31D /* Realtime.swift */; };
+		B2826A5B1F573EDB00F6D46E /* DraftboardArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAD1BC8504E00FBEE0A /* DraftboardArrowButton.swift */; };
+		B2826A5C1F573EDB00F6D46E /* ContestDetailGDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7E21ED8B994002493FD /* ContestDetailGDescriptionCell.swift */; };
+		B2826A5D1F573EDB00F6D46E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF14B3D1BB21A4200C3F07C /* RootViewController.swift */; };
+		B2826A5E1F573EDB00F6D46E /* NSTimeInterval+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C2E1CE40DBA0021A31D /* NSTimeInterval+Data.swift */; };
+		B2826A5F1F573EDB00F6D46E /* LineupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B01BB61F7B0007E62A /* LineupCardView.swift */; };
+		B2826A601F573EDB00F6D46E /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E076921EBB22480052F593 /* Report.swift */; };
+		B2826A611F573EDB00F6D46E /* LineupDraftSortMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259D1591F195F1F0043F68E /* LineupDraftSortMenuView.swift */; };
+		B2826A621F573EDB00F6D46E /* API+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C2A1CDD153D0021A31D /* API+Date.swift */; };
+		B2826A631F573EDB00F6D46E /* PlayerDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCC61D91D0A800324EB2 /* PlayerDetailHeaderView.swift */; };
+		B2826A641F573EDB00F6D46E /* ContestDetailViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA391BE050D50077DF0C /* ContestDetailViewControllerOld.swift */; };
+		B2826A651F573EDB00F6D46E /* DraftboardNavController+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D86F2741C18D2BB004E9655 /* DraftboardNavController+Cards.swift */; };
+		B2826A661F573EDB00F6D46E /* MLBPitcherGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */; };
+		B2826A671F573EDB00F6D46E /* LineupStatFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD3C4E61C17AEAD0040DC71 /* LineupStatFooterView.swift */; };
+		B2826A681F573EDB00F6D46E /* DraftboardToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D95604D1C60133900E58144 /* DraftboardToggleButton.swift */; };
+		B2826A691F573EDB00F6D46E /* AvatarPMRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF71751BF3C00F00CB972F /* AvatarPMRView.swift */; };
+		B2826A6A1F573EDB00F6D46E /* DraftboardTitlebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF131E1BBAF86F007D8001 /* DraftboardTitlebarButton.swift */; };
+		B2826A6B1F573EDB00F6D46E /* Contest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783AD01BD97D09000D8494 /* Contest.swift */; };
+		B2826A6C1F573EDB00F6D46E /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4BD8A1C73D06400CD760B /* AvatarImageView.swift */; };
+		B2826A6D1F573EDB00F6D46E /* DraftboardContestsUpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C31BE42EB900F75BF2 /* DraftboardContestsUpcomingCell.swift */; };
+		B2826A6E1F573EDB00F6D46E /* DraftboardContestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA4B1BE051A00077DF0C /* DraftboardContestsCell.swift */; };
+		B2826A6F1F573EDB00F6D46E /* LineupCardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B21BB61F7B0007E62A /* LineupCardCellView.swift */; };
+		B2826A701F573EDB00F6D46E /* ContestDetailTableViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7D61ED57A30002493FD /* ContestDetailTableViewHeaderCell.swift */; };
+		B2826A711F573EDB00F6D46E /* LineupEntryUpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395E711F39B397006498B6 /* LineupEntryUpcomingCell.swift */; };
+		B2826A721F573EDB00F6D46E /* Lineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E96695D1BED5C8B005179E0 /* Lineup.swift */; };
+		B2826A731F573EDB00F6D46E /* DraftboardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9151D8B0CA700F55990 /* DraftboardTableView.swift */; };
+		B2826A741F573EDB00F6D46E /* ContestWithEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8713501D59313E00F25C60 /* ContestWithEntries.swift */; };
+		B2826A751F573EDB00F6D46E /* DraftboardLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6A0641C1B38E5009481E6 /* DraftboardLoadingButton.swift */; };
+		B2826A761F573EDB00F6D46E /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E611D2733A30020681E /* Delay.swift */; };
+		B2826A771F573EDB00F6D46E /* LineupEditCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B41BB61F7B0007E62A /* LineupEditCellView.swift */; };
+		B2826A781F573EDB00F6D46E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C301CE40E630021A31D /* Cache.swift */; };
+		B2826A791F573EDB00F6D46E /* DraftboardSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2D6321C0F915F0023D4DB /* DraftboardSegmentedControl.swift */; };
+		B2826A7A1F573EDB00F6D46E /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5829D51BF2894700FFA7D8 /* CircleProgressView.swift */; };
+		B2826A7B1F573EDB00F6D46E /* DraftboardSegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC079A1C222F360002B97B /* DraftboardSegmentCell.swift */; };
+		B2826A7C1F573EDB00F6D46E /* ContestDetailEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7DE1ED6815A002493FD /* ContestDetailEntryCell.swift */; };
+		B2826A7D1F573EDB00F6D46E /* DraftboardTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9111D8A0FB700F55990 /* DraftboardTextLabel.swift */; };
+		B2826A7E1F573EDB00F6D46E /* RealtimePlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDFC1DB16C4C00D20914 /* RealtimePlayerStat.swift */; };
+		B2826A7F1F573EDB00F6D46E /* RealtimeGameBoxscore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDFE1DB16C5700D20914 /* RealtimeGameBoxscore.swift */; };
+		B2826A801F573EDB00F6D46E /* ContestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF41D4C27F400EDB59F /* ContestCell.swift */; };
+		B2826A811F573EDB00F6D46E /* LineupStatFeesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5386D91BF534CF002CDAF3 /* LineupStatFeesView.swift */; };
+		B2826A821F573EDB00F6D46E /* DDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D783ACE1BD97CAA000D8494 /* DDM.swift */; };
+		B2826A831F573EDB00F6D46E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E447D6B1D0284F400BE7F12 /* Extensions.swift */; };
+		B2826A841F573EDB00F6D46E /* DraftboardSegmentedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D26FC7D1BBF2D9D00ACF127 /* DraftboardSegmentedButton.swift */; };
+		B2826A851F573EDB00F6D46E /* ContestDetailScoringHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4B7D01ED4C02D002493FD /* ContestDetailScoringHeaderCell.swift */; };
+		B2826A861F573EDB00F6D46E /* ContestLiveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC735F1BF1472B00DDF60E /* ContestLiveDetailViewController.swift */; };
+		B2826A871F573EDB00F6D46E /* GlobalFilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C726B1BF11EE3005A27B1 /* GlobalFilterItem.swift */; };
+		B2826A881F573EDB00F6D46E /* DraftboardTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32221BCD7BDA006C758B /* DraftboardTabController.swift */; };
+		B2826A891F573EDB00F6D46E /* LineupDraftGamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D21F1329D800D88E64 /* LineupDraftGamesView.swift */; };
+		B2826A8A1F573EDB00F6D46E /* LineupPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E192C381CE6485E0021A31D /* LineupPlayer.swift */; };
+		B2826A8B1F573EDB00F6D46E /* PlayerDetailViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0586B1BE28C95002343BD /* PlayerDetailViewControllerOld.swift */; };
+		B2826A8C1F573EDB00F6D46E /* LineupEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237B81BB61F7B0007E62A /* LineupEditViewController.swift */; };
+		B2826A8D1F573EDB00F6D46E /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE11C0FA8D4009C3287 /* WithdrawView.swift */; };
+		B2826A8E1F573EDB00F6D46E /* LineupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6237BB1BB61F7B0007E62A /* LineupListViewController.swift */; };
+		B2826A8F1F573EDB00F6D46E /* DraftboardDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAC07911C21DCC10002B97B /* DraftboardDetailCell.swift */; };
+		B2826A901F573EDB00F6D46E /* LayoutRancor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA8B5AA1BA7ABC1002EEC32 /* LayoutRancor.swift */; };
+		B2826A911F573EDB00F6D46E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF777B01D0B5B6B002322F3 /* TableView.swift */; };
+		B2826A921F573EDB00F6D46E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCF9BF1BE411BB00F75BF2 /* LoginViewController.swift */; };
+		B2826A931F573EDB00F6D46E /* ContestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF01D480FAE00EDB59F /* ContestListViewController.swift */; };
+		B2826A941F573EDB00F6D46E /* LiveLineup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4EDFA1DB16BED00D20914 /* LiveLineup.swift */; };
+		B2826A951F573EDB00F6D46E /* DraftboardTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE71BBB41F200E85374 /* DraftboardTabBarButton.swift */; };
+		B2826A961F573EDB00F6D46E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB661BFE473B00579F1B /* Data.swift */; };
+		B2826A971F573EDB00F6D46E /* DraftboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A0FF61D4FE84400EDB59F /* DraftboardTableViewCell.swift */; };
+		B2826A981F573EDB00F6D46E /* ContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA521BE0528D0077DF0C /* ContestModel.swift */; };
+		B2826A991F573EDB00F6D46E /* NFLQBGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962561EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift */; };
+		B2826A9A1F573EDB00F6D46E /* ContestDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FB9131D8B0C5B00F55990 /* ContestDetailTableViewCell.swift */; };
+		B2826A9B1F573EDB00F6D46E /* LineupDraftFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259D1571F1920B70043F68E /* LineupDraftFilterView.swift */; };
+		B2826A9C1F573EDB00F6D46E /* LineupStatTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE1D63F1BF2BC0F00C796ED /* LineupStatTimeView.swift */; };
+		B2826A9D1F573EDB00F6D46E /* ContestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA461BE0516C0077DF0C /* ContestsListController.swift */; };
+		B2826A9E1F573EDB00F6D46E /* MoneyBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA501BE051D90077DF0C /* MoneyBar.swift */; };
+		B2826A9F1F573EDB00F6D46E /* LineupSearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3611F11BD6DC330068E868 /* LineupSearchCellView.swift */; };
+		B2826AA01F573EDB00F6D46E /* DraftboardNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A32201BCD72A0006C758B /* DraftboardNavController.swift */; };
+		B2826AA11F573EDB00F6D46E /* DraftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2CB731BFE763400579F1B /* DraftGroup.swift */; };
+		B2826AA21F573EDB00F6D46E /* UIFont+DraftboardFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D901CE91BBB5E7800E85374 /* UIFont+DraftboardFonts.swift */; };
+		B2826AA31F573EDB00F6D46E /* PlayerReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E076941EBB305C0052F593 /* PlayerReportCell.swift */; };
+		B2826AA41F573EDB00F6D46E /* MLBPitcherGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */; };
+		B2826AA51F573EDB00F6D46E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7860E01B9FB195004013AB /* AppDelegate.swift */; };
+		B2826AA61F573EDB00F6D46E /* UIView+Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA71E181C1A714100D1BC12 /* UIView+Traversal.swift */; };
+		B2826AA71F573EDB00F6D46E /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E83CCD11D95CF7500324EB2 /* AccountViewController.swift */; };
+		B2826AA81F573EDB00F6D46E /* ContestsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74CA421BE0513A0077DF0C /* ContestsHeaderCell.swift */; };
+		B2826AA91F573EDB00F6D46E /* LineupEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8A7E651D273A2B0020681E /* LineupEntryView.swift */; };
+		B2826AAA1F573EDB00F6D46E /* LineupDraftGamesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC40D41F13D72800D88E64 /* LineupDraftGamesTableView.swift */; };
+		B2826AAB1F573EDB00F6D46E /* DraftboardBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A321E1BCD6E09006C758B /* DraftboardBadgeButton.swift */; };
+		B2826AAC1F573EDB00F6D46E /* LineupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8018AD1CB5A18300403528 /* LineupListView.swift */; };
+		B2826AAD1F573EDB00F6D46E /* MLBHitterGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */; };
+		B2826AAE1F573EDB00F6D46E /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4412171BAA163700A86111 /* Closures.swift */; };
+		B2826AAF1F573EDB00F6D46E /* ContestPlayerStandingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDC73611BF1499E00DDF60E /* ContestPlayerStandingCell.swift */; };
+		B2826AB11F573EDB00F6D46E /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B437721F273C3C006392D8 /* Sentry.framework */; };
+		B2826AB21F573EDB00F6D46E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE6A0661C1B8B5E009481E6 /* CoreLocation.framework */; };
+		B2826AB31F573EDB00F6D46E /* OMGHTTPURLRQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452041BFBBCE70085FB6D /* OMGHTTPURLRQ.framework */; };
+		B2826AB41F573EDB00F6D46E /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE452051BFBBCE70085FB6D /* PromiseKit.framework */; };
+		B2826AB51F573EDB00F6D46E /* PusherSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E83CCDF1DA445F400324EB2 /* PusherSwift.framework */; };
+		B2826AB71F573EDB00F6D46E /* ContestsPlayerHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1F970B1C49B4D000A5BA0E /* ContestsPlayerHeaderCell.xib */; };
+		B2826AB81F573EDB00F6D46E /* ContestsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA481BE0517B0077DF0C /* ContestsListController.xib */; };
+		B2826AB91F573EDB00F6D46E /* ContestConfirmationModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630AA1C10E85F00ACEAD3 /* ContestConfirmationModal.xib */; };
+		B2826ABA1F573EDB00F6D46E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C91B9FB0E7004013AB /* LaunchScreen.xib */; };
+		B2826ABB1F573EDB00F6D46E /* PermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */; };
+		B2826ABC1F573EDB00F6D46E /* DraftboardDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DAC07951C21DE680002B97B /* DraftboardDetailCell.xib */; };
+		B2826ABD1F573EDB00F6D46E /* LockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */; };
+		B2826ABE1F573EDB00F6D46E /* TeamColors.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26405A71EB6E39000DF6B61 /* TeamColors.plist */; };
+		B2826ABF1F573EDB00F6D46E /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6FBAE21C0FA8D4009C3287 /* WithdrawView.xib */; };
+		B2826AC01F573EDB00F6D46E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7860C71B9FB0E7004013AB /* Images.xcassets */; };
+		B2826AC11F573EDB00F6D46E /* LineupCardCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B31BB61F7B0007E62A /* LineupCardCellView.xib */; };
+		B2826AC21F573EDB00F6D46E /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633E1BAB750F0033C4C2 /* Oswald-Bold.ttf */; };
+		B2826AC31F573EDB00F6D46E /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633F1BAB750F0033C4C2 /* Oswald-Light.ttf */; };
+		B2826AC41F573EDB00F6D46E /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63401BAB750F0033C4C2 /* Oswald-Regular.ttf */; };
+		B2826AC51F573EDB00F6D46E /* ContestPlayerStandingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC73621BF1499E00DDF60E /* ContestPlayerStandingCell.xib */; };
+		B2826AC61F573EDB00F6D46E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6C5941BD0405D005A4DC6 /* RootViewController.xib */; };
+		B2826AC71F573EDB00F6D46E /* LineupEditCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B51BB61F7B0007E62A /* LineupEditCellView.xib */; };
+		B2826AC81F573EDB00F6D46E /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63341BAB75010033C4C2 /* OpenSans-Bold.ttf */; };
+		B2826AC91F573EDB00F6D46E /* GlobalFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB058701BE2CA01002343BD /* GlobalFilterViewController.xib */; };
+		B2826ACA1F573EDB00F6D46E /* LineupSearchCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3611F31BD6DC7D0068E868 /* LineupSearchCellView.xib */; };
+		B2826ACB1F573EDB00F6D46E /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63351BAB75010033C4C2 /* OpenSans-BoldItalic.ttf */; };
+		B2826ACC1F573EDB00F6D46E /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63361BAB75010033C4C2 /* OpenSans-ExtraBold.ttf */; };
+		B2826ACD1F573EDB00F6D46E /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63371BAB75010033C4C2 /* OpenSans-ExtraBoldItalic.ttf */; };
+		B2826ACE1F573EDB00F6D46E /* DraftboardContestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA4C1BE051A00077DF0C /* DraftboardContestsCell.xib */; };
+		B2826ACF1F573EDB00F6D46E /* ContestDetailViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA3E1BE051070077DF0C /* ContestDetailViewControllerOld.xib */; };
+		B2826AD01F573EDB00F6D46E /* AccountViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB14BF41C1218CD008E14A4 /* AccountViewControllerOld.xib */; };
+		B2826AD11F573EDB00F6D46E /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC6E80D1C12059E000F05F7 /* ChangePasswordViewController.xib */; };
+		B2826AD21F573EDB00F6D46E /* PlayerDetailViewControllerOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0586C1BE28C95002343BD /* PlayerDetailViewControllerOld.xib */; };
+		B2826AD31F573EDB00F6D46E /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63381BAB75010033C4C2 /* OpenSans-Italic.ttf */; };
+		B2826AD41F573EDB00F6D46E /* DepositView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CB630A71C10A19000ACEAD3 /* DepositView.xib */; };
+		B2826AD51F573EDB00F6D46E /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E63391BAB75010033C4C2 /* OpenSans-Light.ttf */; };
+		B2826AD61F573EDB00F6D46E /* LabeledField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC6F1BBEE0BD00ACF127 /* LabeledField.xib */; };
+		B2826AD71F573EDB00F6D46E /* AccountSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */; };
+		B2826AD81F573EDB00F6D46E /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633A1BAB75010033C4C2 /* OpenSans-LightItalic.ttf */; };
+		B2826AD91F573EDB00F6D46E /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D88B0541C49E591002CA1BB /* ErrorViewController.xib */; };
+		B2826ADA1F573EDB00F6D46E /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633B1BAB75010033C4C2 /* OpenSans-Regular.ttf */; };
+		B2826ADB1F573EDB00F6D46E /* LineupListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B61BB61F7B0007E62A /* LineupListController.xib */; };
+		B2826ADC1F573EDB00F6D46E /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633C1BAB75010033C4C2 /* OpenSans-Semibold.ttf */; };
+		B2826ADD1F573EDB00F6D46E /* ContestLiveDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDC735D1BF12E0600DDF60E /* ContestLiveDetailViewController.xib */; };
+		B2826ADE1F573EDB00F6D46E /* DraftboardSegmentedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D26FC7B1BBF228400ACF127 /* DraftboardSegmentedView.xib */; };
+		B2826ADF1F573EDB00F6D46E /* LineupCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B11BB61F7B0007E62A /* LineupCardView.xib */; };
+		B2826AE01F573EDB00F6D46E /* card-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0F7EAF1BC86B4E00FBEE0A /* card-bg.png */; };
+		B2826AE11F573EDB00F6D46E /* DraftboardContestsUpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D3214941BE42C7900DCBE2A /* DraftboardContestsUpcomingCell.xib */; };
+		B2826AE21F573EDB00F6D46E /* DraftboardModalItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C245CD41BEAD4EA00A24F43 /* DraftboardModalItemView.xib */; };
+		B2826AE31F573EDB00F6D46E /* LineupSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DD0C8B31BD8615F00CE01C2 /* LineupSearchViewController.xib */; };
+		B2826AE41F573EDB00F6D46E /* ContestsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C74CA441BE051530077DF0C /* ContestsHeaderCell.xib */; };
+		B2826AE51F573EDB00F6D46E /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF49CEF1C1BA7DC00B371CE /* NotificationViewController.xib */; };
+		B2826AE61F573EDB00F6D46E /* Scoring.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2A4B7CC1ECFF278002493FD /* Scoring.plist */; };
+		B2826AE71F573EDB00F6D46E /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D4E633D1BAB75010033C4C2 /* OpenSans-SemiboldItalic.ttf */; };
+		B2826AE81F573EDB00F6D46E /* DraftboardFilterButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D9A321A1BCD6591006C758B /* DraftboardFilterButton.xib */; };
+		B2826AE91F573EDB00F6D46E /* LineupEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D6237B91BB61F7B0007E62A /* LineupEditViewController.xib */; };
+		B2826AEA1F573EDB00F6D46E /* PlayerPhotos in Resources */ = {isa = PBXBuildFile; fileRef = 3EB4BD881C72A62200CD760B /* PlayerPhotos */; };
+		B2826AEB1F573EDB00F6D46E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CDCF9C01BE411BB00F75BF2 /* LoginViewController.xib */; };
+		B2826AF31F5744D700F6D46E /* Info-Staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2826AF21F5744D700F6D46E /* Info-Staging.plist */; };
 		B29F6ACE1E9BF89400E0A75A /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */; };
 		B29F6ACF1E9BF89400E0A75A /* LockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */; };
 		B2A4B7CD1ECFF278002493FD /* Scoring.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2A4B7CC1ECFF278002493FD /* Scoring.plist */; };
@@ -520,6 +784,8 @@
 		B2787D381EC610CA00F2DDB8 /* MLBHitterGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBHitterGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B2787D3A1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBHitterGameLogCell.swift; sourceTree = "<group>"; };
 		B28269DF1F550D7A00F6D46E /* FinishedRankedEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRankedEntry.swift; sourceTree = "<group>"; };
+		B2826AF01F573EDB00F6D46E /* Draftboard Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Draftboard Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2826AF21F5744D700F6D46E /* Info-Staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Staging.plist"; sourceTree = "<group>"; };
 		B29F6ACC1E9BF89400E0A75A /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		B29F6ACD1E9BF89400E0A75A /* LockViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockViewController.xib; sourceTree = "<group>"; };
 		B2A4B7CC1ECFF278002493FD /* Scoring.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Scoring.plist; sourceTree = "<group>"; };
@@ -553,6 +819,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2826AB01F573EDB00F6D46E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2826AB11F573EDB00F6D46E /* Sentry.framework in Frameworks */,
+				B2826AB21F573EDB00F6D46E /* CoreLocation.framework in Frameworks */,
+				B2826AB31F573EDB00F6D46E /* OMGHTTPURLRQ.framework in Frameworks */,
+				B2826AB41F573EDB00F6D46E /* PromiseKit.framework in Frameworks */,
+				B2826AB51F573EDB00F6D46E /* PusherSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -571,6 +849,7 @@
 			isa = PBXGroup;
 			children = (
 				3E7860BB1B9FB0E7004013AB /* Draftboard.app */,
+				B2826AF01F573EDB00F6D46E /* Draftboard Staging.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -606,6 +885,7 @@
 			isa = PBXGroup;
 			children = (
 				3E7860BF1B9FB0E7004013AB /* Info.plist */,
+				B2826AF21F5744D700F6D46E /* Info-Staging.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1050,6 +1330,24 @@
 			productReference = 3E7860BB1B9FB0E7004013AB /* Draftboard.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B28269E11F573EDB00F6D46E /* Draftboard Staging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2826AED1F573EDB00F6D46E /* Build configuration list for PBXNativeTarget "Draftboard Staging" */;
+			buildPhases = (
+				B28269E21F573EDB00F6D46E /* Sources */,
+				B2826AB01F573EDB00F6D46E /* Frameworks */,
+				B2826AB61F573EDB00F6D46E /* Resources */,
+				B2826AEC1F573EDB00F6D46E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Draftboard Staging";
+			productName = Draftboard;
+			productReference = B2826AF01F573EDB00F6D46E /* Draftboard Staging.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1065,6 +1363,9 @@
 						DevelopmentTeam = EFXZ3T8NYM;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
+					};
+					B28269E11F573EDB00F6D46E = {
+						DevelopmentTeam = EFXZ3T8NYM;
 					};
 				};
 			};
@@ -1082,6 +1383,7 @@
 			projectRoot = "";
 			targets = (
 				3E7860BA1B9FB0E7004013AB /* Draftboard */,
+				B28269E11F573EDB00F6D46E /* Draftboard Staging */,
 			);
 		};
 /* End PBXProject section */
@@ -1105,6 +1407,7 @@
 				5D4E63411BAB75D80033C4C2 /* Oswald-Bold.ttf in Resources */,
 				5D4E63421BAB75D80033C4C2 /* Oswald-Light.ttf in Resources */,
 				5D4E63431BAB75D80033C4C2 /* Oswald-Regular.ttf in Resources */,
+				B2826AF31F5744D700F6D46E /* Info-Staging.plist in Resources */,
 				3CDC73641BF1499E00DDF60E /* ContestPlayerStandingCell.xib in Resources */,
 				5DE6C5951BD0405D005A4DC6 /* RootViewController.xib in Resources */,
 				5D6237C21BB61F7B0007E62A /* LineupEditCellView.xib in Resources */,
@@ -1147,10 +1450,87 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2826AB61F573EDB00F6D46E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2826AB71F573EDB00F6D46E /* ContestsPlayerHeaderCell.xib in Resources */,
+				B2826AB81F573EDB00F6D46E /* ContestsListController.xib in Resources */,
+				B2826AB91F573EDB00F6D46E /* ContestConfirmationModal.xib in Resources */,
+				B2826ABA1F573EDB00F6D46E /* LaunchScreen.xib in Resources */,
+				B2826ABB1F573EDB00F6D46E /* PermissionViewController.xib in Resources */,
+				B2826ABC1F573EDB00F6D46E /* DraftboardDetailCell.xib in Resources */,
+				B2826ABD1F573EDB00F6D46E /* LockViewController.xib in Resources */,
+				B2826ABE1F573EDB00F6D46E /* TeamColors.plist in Resources */,
+				B2826ABF1F573EDB00F6D46E /* WithdrawView.xib in Resources */,
+				B2826AC01F573EDB00F6D46E /* Images.xcassets in Resources */,
+				B2826AC11F573EDB00F6D46E /* LineupCardCellView.xib in Resources */,
+				B2826AC21F573EDB00F6D46E /* Oswald-Bold.ttf in Resources */,
+				B2826AC31F573EDB00F6D46E /* Oswald-Light.ttf in Resources */,
+				B2826AC41F573EDB00F6D46E /* Oswald-Regular.ttf in Resources */,
+				B2826AC51F573EDB00F6D46E /* ContestPlayerStandingCell.xib in Resources */,
+				B2826AC61F573EDB00F6D46E /* RootViewController.xib in Resources */,
+				B2826AC71F573EDB00F6D46E /* LineupEditCellView.xib in Resources */,
+				B2826AC81F573EDB00F6D46E /* OpenSans-Bold.ttf in Resources */,
+				B2826AC91F573EDB00F6D46E /* GlobalFilterViewController.xib in Resources */,
+				B2826ACA1F573EDB00F6D46E /* LineupSearchCellView.xib in Resources */,
+				B2826ACB1F573EDB00F6D46E /* OpenSans-BoldItalic.ttf in Resources */,
+				B2826ACC1F573EDB00F6D46E /* OpenSans-ExtraBold.ttf in Resources */,
+				B2826ACD1F573EDB00F6D46E /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				B2826ACE1F573EDB00F6D46E /* DraftboardContestsCell.xib in Resources */,
+				B2826ACF1F573EDB00F6D46E /* ContestDetailViewControllerOld.xib in Resources */,
+				B2826AD01F573EDB00F6D46E /* AccountViewControllerOld.xib in Resources */,
+				B2826AD11F573EDB00F6D46E /* ChangePasswordViewController.xib in Resources */,
+				B2826AD21F573EDB00F6D46E /* PlayerDetailViewControllerOld.xib in Resources */,
+				B2826AD31F573EDB00F6D46E /* OpenSans-Italic.ttf in Resources */,
+				B2826AD41F573EDB00F6D46E /* DepositView.xib in Resources */,
+				B2826AD51F573EDB00F6D46E /* OpenSans-Light.ttf in Resources */,
+				B2826AD61F573EDB00F6D46E /* LabeledField.xib in Resources */,
+				B2826AD71F573EDB00F6D46E /* AccountSettingsView.xib in Resources */,
+				B2826AD81F573EDB00F6D46E /* OpenSans-LightItalic.ttf in Resources */,
+				B2826AD91F573EDB00F6D46E /* ErrorViewController.xib in Resources */,
+				B2826ADA1F573EDB00F6D46E /* OpenSans-Regular.ttf in Resources */,
+				B2826ADB1F573EDB00F6D46E /* LineupListController.xib in Resources */,
+				B2826ADC1F573EDB00F6D46E /* OpenSans-Semibold.ttf in Resources */,
+				B2826ADD1F573EDB00F6D46E /* ContestLiveDetailViewController.xib in Resources */,
+				B2826ADE1F573EDB00F6D46E /* DraftboardSegmentedView.xib in Resources */,
+				B2826ADF1F573EDB00F6D46E /* LineupCardView.xib in Resources */,
+				B2826AE01F573EDB00F6D46E /* card-bg.png in Resources */,
+				B2826AE11F573EDB00F6D46E /* DraftboardContestsUpcomingCell.xib in Resources */,
+				B2826AE21F573EDB00F6D46E /* DraftboardModalItemView.xib in Resources */,
+				B2826AE31F573EDB00F6D46E /* LineupSearchViewController.xib in Resources */,
+				B2826AE41F573EDB00F6D46E /* ContestsHeaderCell.xib in Resources */,
+				B2826AE51F573EDB00F6D46E /* NotificationViewController.xib in Resources */,
+				B2826AE61F573EDB00F6D46E /* Scoring.plist in Resources */,
+				B2826AE71F573EDB00F6D46E /* OpenSans-SemiboldItalic.ttf in Resources */,
+				B2826AE81F573EDB00F6D46E /* DraftboardFilterButton.xib in Resources */,
+				B2826AE91F573EDB00F6D46E /* LineupEditViewController.xib in Resources */,
+				B2826AEA1F573EDB00F6D46E /* PlayerPhotos in Resources */,
+				B2826AEB1F573EDB00F6D46E /* LoginViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		3EE452031BFBB79C0085FB6D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/OMGHTTPURLRQ.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PusherSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		B2826AEC1F573EDB00F6D46E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1382,6 +1762,218 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B28269E21F573EDB00F6D46E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B28269E31F573EDB00F6D46E /* LineupPlayerTableView.swift in Sources */,
+				B28269E41F573EDB00F6D46E /* (null) in Sources */,
+				B28269E51F573EDB00F6D46E /* GameLog.swift in Sources */,
+				B28269E61F573EDB00F6D46E /* DraftboardFooterView.swift in Sources */,
+				B28269E71F573EDB00F6D46E /* ContestDetailPrizeCell.swift in Sources */,
+				B28269E81F573EDB00F6D46E /* Format.swift in Sources */,
+				B28269E91F573EDB00F6D46E /* API+Endpoints.swift in Sources */,
+				B28269EA1F573EDB00F6D46E /* DraftboardButton.swift in Sources */,
+				B28269EB1F573EDB00F6D46E /* TimeRemainingView.swift in Sources */,
+				B28269EC1F573EDB00F6D46E /* ContestsPlayerHeaderCell.swift in Sources */,
+				B28269ED1F573EDB00F6D46E /* FinishedRankedEntry.swift in Sources */,
+				B28269EE1F573EDB00F6D46E /* API.swift in Sources */,
+				B28269EF1F573EDB00F6D46E /* TeamNames.swift in Sources */,
+				B28269F01F573EDB00F6D46E /* BlurEffectView.swift in Sources */,
+				B28269F11F573EDB00F6D46E /* Model.swift in Sources */,
+				B28269F21F573EDB00F6D46E /* GlobalFilterViewController.swift in Sources */,
+				B28269F31F573EDB00F6D46E /* LineupPlayerCell.swift in Sources */,
+				B28269F41F573EDB00F6D46E /* LineupDraftView.swift in Sources */,
+				B28269F51F573EDB00F6D46E /* DerivedData.swift in Sources */,
+				B28269F61F573EDB00F6D46E /* NotificationViewController.swift in Sources */,
+				B28269F71F573EDB00F6D46E /* PlayerDetailTableViewCell.swift in Sources */,
+				B28269F81F573EDB00F6D46E /* DraftboardModalChoiceController.swift in Sources */,
+				B28269F91F573EDB00F6D46E /* LivePlayer.swift in Sources */,
+				B28269FA1F573EDB00F6D46E /* Data+Old.swift in Sources */,
+				B28269FB1F573EDB00F6D46E /* DraftboardRoundButton.swift in Sources */,
+				B28269FC1F573EDB00F6D46E /* NFLQBGameLogCell.swift in Sources */,
+				B28269FD1F573EDB00F6D46E /* DraftboardTextButton.swift in Sources */,
+				B28269FE1F573EDB00F6D46E /* LineupDetailView.swift in Sources */,
+				B28269FF1F573EDB00F6D46E /* PlayerDetailStatsView.swift in Sources */,
+				B2826A001F573EDB00F6D46E /* AccountViewControllerOld.swift in Sources */,
+				B2826A011F573EDB00F6D46E /* DraftboardImageView.swift in Sources */,
+				B2826A021F573EDB00F6D46E /* PermissionViewController.swift in Sources */,
+				B2826A031F573EDB00F6D46E /* LineupMoneyPoint.swift in Sources */,
+				B2826A041F573EDB00F6D46E /* PayoutSpot.swift in Sources */,
+				B2826A051F573EDB00F6D46E /* DraftboardModalNavController.swift in Sources */,
+				B2826A061F573EDB00F6D46E /* DraftboardLabel.swift in Sources */,
+				B2826A071F573EDB00F6D46E /* DraftboardLabeledField.swift in Sources */,
+				B2826A081F573EDB00F6D46E /* LineupCardCollectionView.swift in Sources */,
+				B2826A091F573EDB00F6D46E /* LineupStatCurrencyView.swift in Sources */,
+				B2826A0A1F573EDB00F6D46E /* NFLGameLogCell.swift in Sources */,
+				B2826A0B1F573EDB00F6D46E /* ChangePasswordViewController.swift in Sources */,
+				B2826A0C1F573EDB00F6D46E /* LineupEntry.swift in Sources */,
+				B2826A0D1F573EDB00F6D46E /* Boxscore.swift in Sources */,
+				B2826A0E1F573EDB00F6D46E /* EntryConfirmationView.swift in Sources */,
+				B2826A0F1F573EDB00F6D46E /* LiveContest.swift in Sources */,
+				B2826A101F573EDB00F6D46E /* LineupDraftViewController.swift in Sources */,
+				B2826A111F573EDB00F6D46E /* LockViewController.swift in Sources */,
+				B2826A121F573EDB00F6D46E /* ContestDetailGameCell.swift in Sources */,
+				B2826A131F573EDB00F6D46E /* LineupStatView.swift in Sources */,
+				B2826A141F573EDB00F6D46E /* APIRequest.swift in Sources */,
+				B2826A151F573EDB00F6D46E /* DraftboardModalViewController.swift in Sources */,
+				B2826A161F573EDB00F6D46E /* CountdownView.swift in Sources */,
+				B2826A171F573EDB00F6D46E /* ContestDetailHeaderView.swift in Sources */,
+				B2826A181F573EDB00F6D46E /* DraftboardNibControl.swift in Sources */,
+				B2826A191F573EDB00F6D46E /* LoaderView.swift in Sources */,
+				B2826A1A1F573EDB00F6D46E /* ContestPoolEntry.swift in Sources */,
+				B2826A1B1F573EDB00F6D46E /* PieChart.swift in Sources */,
+				B2826A1C1F573EDB00F6D46E /* LineupSearchViewController.swift in Sources */,
+				B2826A1D1F573EDB00F6D46E /* DraftboardNibView.swift in Sources */,
+				B2826A1E1F573EDB00F6D46E /* NFLRBGameLogHeaderCell.swift in Sources */,
+				B2826A1F1F573EDB00F6D46E /* DraftboardView.swift in Sources */,
+				B2826A201F573EDB00F6D46E /* LineupFinishedEntry.swift in Sources */,
+				B2826A211F573EDB00F6D46E /* MLBHitterGameLogHeaderCell.swift in Sources */,
+				B2826A221F573EDB00F6D46E /* Sport.swift in Sources */,
+				B2826A231F573EDB00F6D46E /* ContestDetailView.swift in Sources */,
+				B2826A241F573EDB00F6D46E /* PlayerDetailPanelView.swift in Sources */,
+				B2826A251F573EDB00F6D46E /* ContestListView.swift in Sources */,
+				B2826A261F573EDB00F6D46E /* NSDictionary+API.swift in Sources */,
+				B2826A271F573EDB00F6D46E /* DraftboardPagination.swift in Sources */,
+				B2826A281F573EDB00F6D46E /* NFLRBGameLogCell.swift in Sources */,
+				B2826A291F573EDB00F6D46E /* DraftboardViewController.swift in Sources */,
+				B2826A2A1F573EDB00F6D46E /* ContestDetailViewController.swift in Sources */,
+				B2826A2B1F573EDB00F6D46E /* LineupEntryStandingCell.swift in Sources */,
+				B2826A2C1F573EDB00F6D46E /* LineupDetailViewController.swift in Sources */,
+				B2826A2D1F573EDB00F6D46E /* Roster.swift in Sources */,
+				B2826A2E1F573EDB00F6D46E /* DraftboardControl.swift in Sources */,
+				B2826A2F1F573EDB00F6D46E /* API+Errors.swift in Sources */,
+				B2826A301F573EDB00F6D46E /* UIColor+DraftboardColors.swift in Sources */,
+				B2826A311F573EDB00F6D46E /* DraftboardTabBar.swift in Sources */,
+				B2826A321F573EDB00F6D46E /* PlayerDetailViewController.swift in Sources */,
+				B2826A331F573EDB00F6D46E /* PlayerDetailView.swift in Sources */,
+				B2826A341F573EDB00F6D46E /* LineupCardCell.swift in Sources */,
+				B2826A351F573EDB00F6D46E /* PlayerDetailTableView.swift in Sources */,
+				B2826A361F573EDB00F6D46E /* AccountSettingsView.swift in Sources */,
+				B2826A371F573EDB00F6D46E /* LineupEntryViewController.swift in Sources */,
+				B2826A381F573EDB00F6D46E /* DraftboardDetailListItem.swift in Sources */,
+				B2826A391F573EDB00F6D46E /* Spring.swift in Sources */,
+				B2826A3A1F573EDB00F6D46E /* DraftboardSegmentedView.swift in Sources */,
+				B2826A3B1F573EDB00F6D46E /* LineupDraftGameCell.swift in Sources */,
+				B2826A3C1F573EDB00F6D46E /* LineupEntryTableView.swift in Sources */,
+				B2826A3D1F573EDB00F6D46E /* ContestDetailTableView.swift in Sources */,
+				B2826A3E1F573EDB00F6D46E /* NFLGameLogHeaderCell.swift in Sources */,
+				B2826A3F1F573EDB00F6D46E /* LineupDraftSortMenuCell.swift in Sources */,
+				B2826A401F573EDB00F6D46E /* DraftboardFilterButton.swift in Sources */,
+				B2826A411F573EDB00F6D46E /* DraftboardTitlebar.swift in Sources */,
+				B2826A421F573EDB00F6D46E /* LineupEntryLiveCell.swift in Sources */,
+				B2826A431F573EDB00F6D46E /* DepositView.swift in Sources */,
+				B2826A441F573EDB00F6D46E /* LabeledField.swift in Sources */,
+				B2826A451F573EDB00F6D46E /* LineupCardToggle.swift in Sources */,
+				B2826A461F573EDB00F6D46E /* LineupDraftSortMenuTableView.swift in Sources */,
+				B2826A471F573EDB00F6D46E /* LineupStatPMRView.swift in Sources */,
+				B2826A481F573EDB00F6D46E /* ContestDetailScoringCell.swift in Sources */,
+				B2826A491F573EDB00F6D46E /* Player.swift in Sources */,
+				B2826A4A1F573EDB00F6D46E /* ContestConfirmationModal.swift in Sources */,
+				B2826A4B1F573EDB00F6D46E /* NSURLConnection+Promise.swift in Sources */,
+				B2826A4C1F573EDB00F6D46E /* LiveDraftGroup.swift in Sources */,
+				B2826A4D1F573EDB00F6D46E /* ContestDetailMyEntryCell.swift in Sources */,
+				B2826A4E1F573EDB00F6D46E /* ErrorViewController.swift in Sources */,
+				B2826A4F1F573EDB00F6D46E /* EntryConfirmationViewController.swift in Sources */,
+				B2826A501F573EDB00F6D46E /* AccountView.swift in Sources */,
+				B2826A511F573EDB00F6D46E /* DraftboardModalItemView.swift in Sources */,
+				B2826A521F573EDB00F6D46E /* ContestDetailPanelView.swift in Sources */,
+				B2826A531F573EDB00F6D46E /* DraftboardButtonHeader.swift in Sources */,
+				B2826A541F573EDB00F6D46E /* LiveGame.swift in Sources */,
+				B2826A551F573EDB00F6D46E /* PlayerGameDetailView.swift in Sources */,
+				B2826A561F573EDB00F6D46E /* Game.swift in Sources */,
+				B2826A571F573EDB00F6D46E /* ContestsViewController.swift in Sources */,
+				B2826A581F573EDB00F6D46E /* ResultsViewController.swift in Sources */,
+				B2826A591F573EDB00F6D46E /* Team.swift in Sources */,
+				B2826A5A1F573EDB00F6D46E /* Realtime.swift in Sources */,
+				B2826A5B1F573EDB00F6D46E /* DraftboardArrowButton.swift in Sources */,
+				B2826A5C1F573EDB00F6D46E /* ContestDetailGDescriptionCell.swift in Sources */,
+				B2826A5D1F573EDB00F6D46E /* RootViewController.swift in Sources */,
+				B2826A5E1F573EDB00F6D46E /* NSTimeInterval+Data.swift in Sources */,
+				B2826A5F1F573EDB00F6D46E /* LineupCardView.swift in Sources */,
+				B2826A601F573EDB00F6D46E /* Report.swift in Sources */,
+				B2826A611F573EDB00F6D46E /* LineupDraftSortMenuView.swift in Sources */,
+				B2826A621F573EDB00F6D46E /* API+Date.swift in Sources */,
+				B2826A631F573EDB00F6D46E /* PlayerDetailHeaderView.swift in Sources */,
+				B2826A641F573EDB00F6D46E /* ContestDetailViewControllerOld.swift in Sources */,
+				B2826A651F573EDB00F6D46E /* DraftboardNavController+Cards.swift in Sources */,
+				B2826A661F573EDB00F6D46E /* MLBPitcherGameLogHeaderCell.swift in Sources */,
+				B2826A671F573EDB00F6D46E /* LineupStatFooterView.swift in Sources */,
+				B2826A681F573EDB00F6D46E /* DraftboardToggleButton.swift in Sources */,
+				B2826A691F573EDB00F6D46E /* AvatarPMRView.swift in Sources */,
+				B2826A6A1F573EDB00F6D46E /* DraftboardTitlebarButton.swift in Sources */,
+				B2826A6B1F573EDB00F6D46E /* Contest.swift in Sources */,
+				B2826A6C1F573EDB00F6D46E /* AvatarImageView.swift in Sources */,
+				B2826A6D1F573EDB00F6D46E /* DraftboardContestsUpcomingCell.swift in Sources */,
+				B2826A6E1F573EDB00F6D46E /* DraftboardContestsCell.swift in Sources */,
+				B2826A6F1F573EDB00F6D46E /* LineupCardCellView.swift in Sources */,
+				B2826A701F573EDB00F6D46E /* ContestDetailTableViewHeaderCell.swift in Sources */,
+				B2826A711F573EDB00F6D46E /* LineupEntryUpcomingCell.swift in Sources */,
+				B2826A721F573EDB00F6D46E /* Lineup.swift in Sources */,
+				B2826A731F573EDB00F6D46E /* DraftboardTableView.swift in Sources */,
+				B2826A741F573EDB00F6D46E /* ContestWithEntries.swift in Sources */,
+				B2826A751F573EDB00F6D46E /* DraftboardLoadingButton.swift in Sources */,
+				B2826A761F573EDB00F6D46E /* Delay.swift in Sources */,
+				B2826A771F573EDB00F6D46E /* LineupEditCellView.swift in Sources */,
+				B2826A781F573EDB00F6D46E /* Cache.swift in Sources */,
+				B2826A791F573EDB00F6D46E /* DraftboardSegmentedControl.swift in Sources */,
+				B2826A7A1F573EDB00F6D46E /* CircleProgressView.swift in Sources */,
+				B2826A7B1F573EDB00F6D46E /* DraftboardSegmentCell.swift in Sources */,
+				B2826A7C1F573EDB00F6D46E /* ContestDetailEntryCell.swift in Sources */,
+				B2826A7D1F573EDB00F6D46E /* DraftboardTextLabel.swift in Sources */,
+				B2826A7E1F573EDB00F6D46E /* RealtimePlayerStat.swift in Sources */,
+				B2826A7F1F573EDB00F6D46E /* RealtimeGameBoxscore.swift in Sources */,
+				B2826A801F573EDB00F6D46E /* ContestCell.swift in Sources */,
+				B2826A811F573EDB00F6D46E /* LineupStatFeesView.swift in Sources */,
+				B2826A821F573EDB00F6D46E /* DDM.swift in Sources */,
+				B2826A831F573EDB00F6D46E /* Extensions.swift in Sources */,
+				B2826A841F573EDB00F6D46E /* DraftboardSegmentedButton.swift in Sources */,
+				B2826A851F573EDB00F6D46E /* ContestDetailScoringHeaderCell.swift in Sources */,
+				B2826A861F573EDB00F6D46E /* ContestLiveDetailViewController.swift in Sources */,
+				B2826A871F573EDB00F6D46E /* GlobalFilterItem.swift in Sources */,
+				B2826A881F573EDB00F6D46E /* DraftboardTabController.swift in Sources */,
+				B2826A891F573EDB00F6D46E /* LineupDraftGamesView.swift in Sources */,
+				B2826A8A1F573EDB00F6D46E /* LineupPlayer.swift in Sources */,
+				B2826A8B1F573EDB00F6D46E /* PlayerDetailViewControllerOld.swift in Sources */,
+				B2826A8C1F573EDB00F6D46E /* LineupEditViewController.swift in Sources */,
+				B2826A8D1F573EDB00F6D46E /* WithdrawView.swift in Sources */,
+				B2826A8E1F573EDB00F6D46E /* LineupListViewController.swift in Sources */,
+				B2826A8F1F573EDB00F6D46E /* DraftboardDetailCell.swift in Sources */,
+				B2826A901F573EDB00F6D46E /* LayoutRancor.swift in Sources */,
+				B2826A911F573EDB00F6D46E /* TableView.swift in Sources */,
+				B2826A921F573EDB00F6D46E /* LoginViewController.swift in Sources */,
+				B2826A931F573EDB00F6D46E /* ContestListViewController.swift in Sources */,
+				B2826A941F573EDB00F6D46E /* LiveLineup.swift in Sources */,
+				B2826A951F573EDB00F6D46E /* DraftboardTabBarButton.swift in Sources */,
+				B2826A961F573EDB00F6D46E /* Data.swift in Sources */,
+				B2826A971F573EDB00F6D46E /* DraftboardTableViewCell.swift in Sources */,
+				B2826A981F573EDB00F6D46E /* ContestModel.swift in Sources */,
+				B2826A991F573EDB00F6D46E /* NFLQBGameLogHeaderCell.swift in Sources */,
+				B2826A9A1F573EDB00F6D46E /* ContestDetailTableViewCell.swift in Sources */,
+				B2826A9B1F573EDB00F6D46E /* LineupDraftFilterView.swift in Sources */,
+				B2826A9C1F573EDB00F6D46E /* LineupStatTimeView.swift in Sources */,
+				B2826A9D1F573EDB00F6D46E /* ContestsListController.swift in Sources */,
+				B2826A9E1F573EDB00F6D46E /* MoneyBar.swift in Sources */,
+				B2826A9F1F573EDB00F6D46E /* LineupSearchCellView.swift in Sources */,
+				B2826AA01F573EDB00F6D46E /* DraftboardNavController.swift in Sources */,
+				B2826AA11F573EDB00F6D46E /* DraftGroup.swift in Sources */,
+				B2826AA21F573EDB00F6D46E /* UIFont+DraftboardFonts.swift in Sources */,
+				B2826AA31F573EDB00F6D46E /* PlayerReportCell.swift in Sources */,
+				B2826AA41F573EDB00F6D46E /* MLBPitcherGameLogCell.swift in Sources */,
+				B2826AA51F573EDB00F6D46E /* AppDelegate.swift in Sources */,
+				B2826AA61F573EDB00F6D46E /* UIView+Traversal.swift in Sources */,
+				B2826AA71F573EDB00F6D46E /* AccountViewController.swift in Sources */,
+				B2826AA81F573EDB00F6D46E /* ContestsHeaderCell.swift in Sources */,
+				B2826AA91F573EDB00F6D46E /* LineupEntryView.swift in Sources */,
+				B2826AAA1F573EDB00F6D46E /* LineupDraftGamesTableView.swift in Sources */,
+				B2826AAB1F573EDB00F6D46E /* DraftboardBadgeButton.swift in Sources */,
+				B2826AAC1F573EDB00F6D46E /* LineupListView.swift in Sources */,
+				B2826AAD1F573EDB00F6D46E /* MLBHitterGameLogCell.swift in Sources */,
+				B2826AAE1F573EDB00F6D46E /* Closures.swift in Sources */,
+				B2826AAF1F573EDB00F6D46E /* ContestPlayerStandingCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -1546,6 +2138,69 @@
 			};
 			name = Release;
 		};
+		B2826AEE1F573EDB00F6D46E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Draftboard, Inc. (EFXZ3T8NYM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Draftboard, Inc. (EFXZ3T8NYM)";
+				DEVELOPMENT_TEAM = EFXZ3T8NYM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"'$(PROJECT_DIR)/Third Party'",
+					"$(PROJECT_DIR)/Third",
+					Party,
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
+				INFOPLIST_FILE = "Draftboard/Info-Staging.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_SWIFT_FLAGS = "-DStaging";
+				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.db;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c322b6c0-f56e-4fbb-acf2-1de8d2c8850a";
+				PROVISIONING_PROFILE_SPECIFIER = StagingAppStore;
+				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B2826AEF1F573EDB00F6D46E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Draftboard, Inc. (EFXZ3T8NYM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Draftboard, Inc. (EFXZ3T8NYM)";
+				DEVELOPMENT_TEAM = EFXZ3T8NYM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"'$(PROJECT_DIR)/Third Party'",
+					"$(PROJECT_DIR)/Third",
+					Party,
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
+				INFOPLIST_FILE = "Draftboard/Info-Staging.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_SWIFT_FLAGS = "-DStaging";
+				PRODUCT_BUNDLE_IDENTIFIER = click.thrash.db;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c322b6c0-f56e-4fbb-acf2-1de8d2c8850a";
+				PROVISIONING_PROFILE_SPECIFIER = StagingAppStore;
+				SWIFT_OBJC_BRIDGING_HEADER = Draftboard/BridgingHeader.h;
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1563,6 +2218,15 @@
 			buildConfigurations = (
 				3E7860DB1B9FB0E7004013AB /* Debug */,
 				3E7860DC1B9FB0E7004013AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2826AED1F573EDB00F6D46E /* Build configuration list for PBXNativeTarget "Draftboard Staging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2826AEE1F573EDB00F6D46E /* Debug */,
+				B2826AEF1F573EDB00F6D46E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

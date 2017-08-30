@@ -9,10 +9,15 @@
 import Foundation
 import PusherSwift
 
+#if Staging
+let pusher_key = "49224807c21863bf259b"
+#else
+let pusher_key = "9754d03a7816e43abb64"
+#endif
+
 class Realtime {
     static var prefix = "anson_"
-    //static var pusher = Pusher(key: "9754d03a7816e43abb64") // Prod
-    static var pusher = Pusher(key: "49224807c21863bf259b") // Staging
+    static var pusher = Pusher(key: pusher_key)
     
     class func getChannel(channelName: String) -> PusherChannel {
         pusher.connect()
