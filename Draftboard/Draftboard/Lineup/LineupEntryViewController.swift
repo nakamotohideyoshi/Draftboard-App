@@ -136,7 +136,6 @@ class LineupEntryViewController: DraftboardViewController {
                     self.lineupEntryView.columnLabel3.text = "Pos / Winning".uppercaseString
                     self.lineupFinished = false
                     self.finishedEntries = []
-                    self.cellStatuses = []
                 }
             }
         }
