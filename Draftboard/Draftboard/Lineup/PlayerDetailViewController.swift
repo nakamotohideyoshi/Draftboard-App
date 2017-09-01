@@ -55,7 +55,6 @@ class PlayerDetailViewController: DraftboardViewController {
         setPlayerImage()
         setGameText()
         setStatValues()
-        setGameStatValues()
         
         nextGameLabel.hidden = true
         
@@ -65,9 +64,9 @@ class PlayerDetailViewController: DraftboardViewController {
         segmentedControl.indexChangedHandler = { [weak self] (_: Int) in self?.filter() }
         
         draftButton.addTarget(self, action: #selector(draftButtonTapped), forControlEvents: .TouchUpInside)
-        print("player detail")
+        
+        setGameStatValues(statData: player?.stat)
         Realtime.onPlayerRawStat(for: sportName!) { stat in
-            print("*****", stat)
             let srid: String = try! stat.get("srid_player")
             if srid == self.player?.srid {
                 self.setGameStatValues(statData: stat)
@@ -76,7 +75,6 @@ class PlayerDetailViewController: DraftboardViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("player id ---->", player!.id)
         player?.getPlayerReports().then { reports -> Void in
             self.reports = reports
             self.tableView.reloadData()
