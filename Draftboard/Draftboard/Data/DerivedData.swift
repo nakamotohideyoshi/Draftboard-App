@@ -138,7 +138,16 @@ extension Lineup {
                 result[player.srid] = player.withGame(gamesByTeam[player.teamSRID]!)
                 return result
             }
-            return players.map { playersWithGamesBySRID[$0.srid]! }
+            let playerWithGames = players.map { playersWithGamesBySRID[$0.srid]! }
+            var results: [PlayerWithPositionAndGame] = []
+            var index = 0
+            for p in playerWithGames {
+                let newPlayer: PlayerWithPositionAndGame = p
+                newPlayer.stat = players[index].stat
+                results.append(newPlayer)
+                index += 1
+            }
+            return results
         }
     }
     
