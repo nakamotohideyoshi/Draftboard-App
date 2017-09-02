@@ -48,11 +48,15 @@ class Player {
             let srid: String = try meta.get("srid")
             let team: NSDictionary = try meta.get("team")
             let teamAlias: String = try team.get("alias")
-            let player_stats: [NSDictionary] = try json.get("player_stats")
+            let player_stats: [NSDictionary]
             let player_stat: NSDictionary?
-            
-            if player_stats.count > 0 {
-                player_stat = player_stats[0]
+            if json["player_stats"] != nil {
+                player_stats = try json.get("player_stats")
+                if player_stats.count > 0 {
+                    player_stat = player_stats[0]
+                } else {
+                    player_stat = nil
+                }
             } else {
                 player_stat = nil
             }
