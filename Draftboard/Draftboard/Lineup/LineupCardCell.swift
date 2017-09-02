@@ -272,6 +272,8 @@ class LineupCardCreateView: UIControl, CancelableTouchControl {
         // Background Image
         bgImageView.image = UIImage(named: "create-card-bg")
         bgImageView.contentMode = .ScaleAspectFill
+        bgImageView.clipsToBounds = true
+        
         // Logo Image
         logoImageView.image = UIImage(named: "logo-create-card")
         logoImageView.contentMode = .ScaleAspectFill
