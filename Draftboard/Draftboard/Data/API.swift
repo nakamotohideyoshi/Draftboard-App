@@ -95,6 +95,18 @@ private extension API_Private {
             return login.then { () -> Promise<NSData> in
                 return API.transmit(request)
             }
+        } else if case let URLError.UnderlyingCocoaError(request, _, _, err) = error {
+            let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
+            let actions = ["Try Again"]
+            
+            vc.actions = actions
+            vc.promise.then { index -> Promise<NSData> in
+                RootViewController.sharedInstance.popAlertViewController()
+                return API.transmit(request as! APIRequest)
+            }
+            
+            RootViewController.sharedInstance.pushAlertViewController(vc)
+            vc.errorLabel.text = "Please check your network connection and try again!"
         }
         return Promise<NSData>(error: error)
     }
