@@ -95,7 +95,7 @@ private extension API_Private {
             return login.then { () -> Promise<NSData> in
                 return API.transmit(request)
             }
-        } else if case let URLError.UnderlyingCocoaError(request, _, _, err) = error {
+        } else if case let URLError.UnderlyingCocoaError(request, _, _, _) = error {
             let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
             let actions = ["Try Again"]
             
