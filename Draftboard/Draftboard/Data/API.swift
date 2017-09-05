@@ -68,7 +68,7 @@ private extension API_Private {
     class func transmit(request: APIRequest) -> Promise<NSData> {
         request.auth()
         return Promise<NSData> { fulfill, reject in
-            NSURLConnection.sendAsynchronousRequest(request, queue: Q) { (_response, _data, _error) in
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (_data, _response, _error) in
                 if let error = _error {
                     return reject(URLError.UnderlyingCocoaError(request, _data, _response, error))
                 }
@@ -84,7 +84,26 @@ private extension API_Private {
                     }
                 }
                 fulfill(data)
-            }
+            })
+            task.resume()
+            
+//            NSURLConnection.sendAsynchronousRequest(request, queue: Q) { (_response, _data, _error) in
+//                if let error = _error {
+//                    return reject(URLError.UnderlyingCocoaError(request, _data, _response, error))
+//                }
+//                guard let data = _data, let response = _response as? NSHTTPURLResponse else {
+//                    return reject(URLError.BadResponse(request, _data, _response))
+//                }
+//                guard let string = String(data: data, encoding: NSUTF8StringEncoding) else {
+//                    return reject(URLError.StringEncoding(request, data, response))
+//                }
+//                for condition in request.errorConditions {
+//                    if let error = condition(request, data, string, response) {
+//                        reject(error)
+//                    }
+//                }
+//                fulfill(data)
+//            }
         }
     }
     
