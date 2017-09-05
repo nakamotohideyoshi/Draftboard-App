@@ -305,6 +305,15 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
         enterContest(contest).error { (error: ErrorType) -> Void in
             self.showError(error)
         }
+        
+//        let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
+//        vc.promise().then { Void -> Void in
+//            RootViewController.sharedInstance.popModalViewController()
+//        }.error { error in
+//            //RootViewController.sharedInstance.popModalViewController()
+//            let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
+//            RootViewController.sharedInstance.pushModalViewController(vc)
+//        }
     }
 
 }

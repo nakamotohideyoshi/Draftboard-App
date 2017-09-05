@@ -241,6 +241,14 @@
 		B259D15A1F195F1F0043F68E /* LineupDraftSortMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259D1591F195F1F0043F68E /* LineupDraftSortMenuView.swift */; };
 		B259D15D1F19B8800043F68E /* LineupDraftSortMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259D15C1F19B8800043F68E /* LineupDraftSortMenuTableView.swift */; };
 		B259D15F1F19B89B0043F68E /* LineupDraftSortMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259D15E1F19B89B0043F68E /* LineupDraftSortMenuCell.swift */; };
+		B260485A1F5E49B400374C1F /* CLGeocoder+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26048591F5E49B400374C1F /* CLGeocoder+Promise.swift */; };
+		B260485C1F5E4A4600374C1F /* CLLocationManager+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260485B1F5E4A4600374C1F /* CLLocationManager+Promise.swift */; };
+		B260485D1F5E4AEC00374C1F /* CLGeocoder+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26048591F5E49B400374C1F /* CLGeocoder+Promise.swift */; };
+		B260485E1F5E4AEC00374C1F /* CLLocationManager+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260485B1F5E4A4600374C1F /* CLLocationManager+Promise.swift */; };
+		B26048611F5E9ECE00374C1F /* LocationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260485F1F5E9ECE00374C1F /* LocationErrorViewController.swift */; };
+		B26048621F5E9ECE00374C1F /* LocationErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B26048601F5E9ECE00374C1F /* LocationErrorViewController.xib */; };
+		B26048631F5EA81B00374C1F /* LocationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260485F1F5E9ECE00374C1F /* LocationErrorViewController.swift */; };
+		B26048641F5EAB8700374C1F /* LocationErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B26048601F5E9ECE00374C1F /* LocationErrorViewController.xib */; };
 		B26405A81EB6E39000DF6B61 /* TeamColors.plist in Resources */ = {isa = PBXBuildFile; fileRef = B26405A71EB6E39000DF6B61 /* TeamColors.plist */; };
 		B26962571EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962561EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift */; };
 		B26962591EF7B2A100FF1F50 /* NFLQBGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26962581EF7B2A100FF1F50 /* NFLQBGameLogCell.swift */; };
@@ -773,6 +781,10 @@
 		B259D1591F195F1F0043F68E /* LineupDraftSortMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftSortMenuView.swift; sourceTree = "<group>"; };
 		B259D15C1F19B8800043F68E /* LineupDraftSortMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftSortMenuTableView.swift; sourceTree = "<group>"; };
 		B259D15E1F19B89B0043F68E /* LineupDraftSortMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDraftSortMenuCell.swift; sourceTree = "<group>"; };
+		B26048591F5E49B400374C1F /* CLGeocoder+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLGeocoder+Promise.swift"; sourceTree = "<group>"; };
+		B260485B1F5E4A4600374C1F /* CLLocationManager+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Promise.swift"; sourceTree = "<group>"; };
+		B260485F1F5E9ECE00374C1F /* LocationErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationErrorViewController.swift; sourceTree = "<group>"; };
+		B26048601F5E9ECE00374C1F /* LocationErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationErrorViewController.xib; sourceTree = "<group>"; };
 		B26405A71EB6E39000DF6B61 /* TeamColors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TeamColors.plist; sourceTree = "<group>"; };
 		B26962561EF7837800FF1F50 /* NFLQBGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLQBGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B26962581EF7B2A100FF1F50 /* NFLQBGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFLQBGameLogCell.swift; sourceTree = "<group>"; };
@@ -1001,6 +1013,8 @@
 			isa = PBXGroup;
 			children = (
 				3EB2CB781BFE813500579F1B /* NSURLConnection+Promise.swift */,
+				B26048591F5E49B400374C1F /* CLGeocoder+Promise.swift */,
+				B260485B1F5E4A4600374C1F /* CLLocationManager+Promise.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1030,6 +1044,8 @@
 				5DB14BF41C1218CD008E14A4 /* AccountViewControllerOld.xib */,
 				3C5A6F061C16559E00C030B3 /* PermissionViewController.swift */,
 				3C5A6F071C16559E00C030B3 /* PermissionViewController.xib */,
+				B260485F1F5E9ECE00374C1F /* LocationErrorViewController.swift */,
+				B26048601F5E9ECE00374C1F /* LocationErrorViewController.xib */,
 				5DB14BF61C121965008E14A4 /* AccountSettingsView.swift */,
 				5D26FC711BBEE77300ACF127 /* AccountSettingsView.xib */,
 				3CC6E80C1C12059E000F05F7 /* ChangePasswordViewController.swift */,
@@ -1444,6 +1460,7 @@
 				B2A4B7CD1ECFF278002493FD /* Scoring.plist in Resources */,
 				5D4E634D1BAB75D80033C4C2 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				5D9A321C1BCD6591006C758B /* DraftboardFilterButton.xib in Resources */,
+				B26048621F5E9ECE00374C1F /* LocationErrorViewController.xib in Resources */,
 				5D6237C61BB61F7B0007E62A /* LineupEditViewController.xib in Resources */,
 				3EB4BD891C72A62200CD760B /* PlayerPhotos in Resources */,
 				3CDCF9C21BE411BB00F75BF2 /* LoginViewController.xib in Resources */,
@@ -1454,6 +1471,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B26048641F5EAB8700374C1F /* LocationErrorViewController.xib in Resources */,
 				B2826AB71F573EDB00F6D46E /* ContestsPlayerHeaderCell.xib in Resources */,
 				B2826AB81F573EDB00F6D46E /* ContestsListController.xib in Resources */,
 				B2826AB91F573EDB00F6D46E /* ContestConfirmationModal.xib in Resources */,
@@ -1671,6 +1689,7 @@
 				B2DC21761EB3DFED001E4C4F /* PlayerGameDetailView.swift in Sources */,
 				3E04ECAA1D02132000EE325C /* Game.swift in Sources */,
 				3C74CA4D1BE051A00077DF0C /* ContestsViewController.swift in Sources */,
+				B260485C1F5E4A4600374C1F /* CLLocationManager+Promise.swift in Sources */,
 				5D6237D41BB61FD60007E62A /* ResultsViewController.swift in Sources */,
 				5D1CBFD11BDA8E7D006746B2 /* Team.swift in Sources */,
 				3E192C371CE55BE50021A31D /* Realtime.swift in Sources */,
@@ -1740,6 +1759,7 @@
 				3E9FB9141D8B0C5B00F55990 /* ContestDetailTableViewCell.swift in Sources */,
 				B259D1581F1920B70043F68E /* LineupDraftFilterView.swift in Sources */,
 				5DE1D6401BF2BC0F00C796ED /* LineupStatTimeView.swift in Sources */,
+				B260485A1F5E49B400374C1F /* CLGeocoder+Promise.swift in Sources */,
 				3C74CA471BE0516C0077DF0C /* ContestsListController.swift in Sources */,
 				3C74CA511BE051D90077DF0C /* MoneyBar.swift in Sources */,
 				5D3611F21BD6DC330068E868 /* LineupSearchCellView.swift in Sources */,
@@ -1754,6 +1774,7 @@
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
 				3E8A7E661D273A2C0020681E /* LineupEntryView.swift in Sources */,
 				B2CC40D51F13D72800D88E64 /* LineupDraftGamesTableView.swift in Sources */,
+				B26048611F5E9ECE00374C1F /* LocationErrorViewController.swift in Sources */,
 				5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */,
 				3E8018AE1CB5A18300403528 /* LineupListView.swift in Sources */,
 				B2787D3B1EC6156A00F2DDB8 /* MLBHitterGameLogCell.swift in Sources */,
@@ -1766,6 +1787,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B26048631F5EA81B00374C1F /* LocationErrorViewController.swift in Sources */,
+				B260485D1F5E4AEC00374C1F /* CLGeocoder+Promise.swift in Sources */,
+				B260485E1F5E4AEC00374C1F /* CLLocationManager+Promise.swift in Sources */,
 				B28269E31F573EDB00F6D46E /* LineupPlayerTableView.swift in Sources */,
 				B28269E41F573EDB00F6D46E /* (null) in Sources */,
 				B28269E51F573EDB00F6D46E /* GameLog.swift in Sources */,
