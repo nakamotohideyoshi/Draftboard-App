@@ -30,7 +30,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Messaging goes here.</string>
+	<string>Due to current legislation, we are required to verify that you are located in a state where daily fantasy is legal.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Oswald-Bold.ttf</string>

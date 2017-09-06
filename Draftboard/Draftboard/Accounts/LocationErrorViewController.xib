@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,6 +20,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationErrorViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionLabel" destination="1tO-AJ-yT4" id="SV8-tW-egm"/>
+                <outlet property="gotItButton" destination="IWp-ZR-aUQ" id="535-Ul-MCq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,11 +34,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCn-OV-Wf7" userLabel="Top Container">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="233.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="167"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQO-bc-18D" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="94" y="150.5" width="187" height="67"/>
-                            <string key="text">SORRY, BUT DAILY FANTASY SPORTS ARE NOT LEGALIN YOUR STATE</string>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION UNAVAILABLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQO-bc-18D" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
+                            <rect key="frame" x="94" y="128.5" width="187" height="22.5"/>
                             <fontDescription key="fontDescription" name="Oswald-Regular" family="Oswald" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -50,31 +51,32 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-big-exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="034-SJ-Ozn" customClass="DraftboardImageView" customModule="Draftboard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="233.5" width="375" height="133.5"/>
+                    <rect key="frame" x="0.0" y="167" width="375" height="133"/>
                     <color key="tintColor" red="0.3516054153" green="0.36195579169999997" blue="0.4706665277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft5-eP-iIg" userLabel="Bottom Container">
-                    <rect key="frame" x="0.0" y="367" width="375" height="300"/>
+                    <rect key="frame" x="0.0" y="300" width="375" height="367"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tO-AJ-yT4" customClass="DraftboardLabel" customModule="Draftboard" customModuleProvider="target">
                             <rect key="frame" x="78" y="8" width="220" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="220" id="4SD-ZT-zev"/>
                             </constraints>
-                            <string key="text">If you feel this is error, please contact our support team by either using the button below, or by sending an email to support@draftboard.com</string>
+                            <string key="text">If you feel this is error, please contact 
+our support team by either using the button below, or by sending an email to support@draftboard.com</string>
                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
                             <color key="textColor" red="0.52549019610000003" green="0.52941176469999995" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWp-ZR-aUQ" customClass="DraftboardLoadingButton" customModule="Draftboard" customModuleProvider="target">
-                            <rect key="frame" x="45" y="211" width="285" height="49"/>
+                            <rect key="frame" x="45" y="278" width="285" height="49"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="49" id="ABK-bu-jb6"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="CONTACT US"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="GOT IT"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
@@ -102,9 +104,9 @@
                 <constraint firstItem="wR6-Eb-x6G" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="buS-t3-KyC"/>
                 <constraint firstAttribute="trailing" secondItem="ft5-eP-iIg" secondAttribute="trailing" id="jpp-Bu-1eQ"/>
                 <constraint firstItem="xCn-OV-Wf7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pku-1k-gb1"/>
-                <constraint firstItem="ft5-eP-iIg" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.45" id="rJz-wE-fre"/>
+                <constraint firstItem="ft5-eP-iIg" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.55" id="rJz-wE-fre"/>
                 <constraint firstItem="034-SJ-Ozn" firstAttribute="bottom" secondItem="ft5-eP-iIg" secondAttribute="top" id="wop-yN-kgJ"/>
-                <constraint firstItem="xCn-OV-Wf7" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.35" id="xvK-9j-5Sd"/>
+                <constraint firstItem="xCn-OV-Wf7" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.25" id="xvK-9j-5Sd"/>
                 <constraint firstAttribute="trailing" secondItem="wR6-Eb-x6G" secondAttribute="trailing" id="yzc-vh-3sp"/>
                 <constraint firstAttribute="trailing" secondItem="xCn-OV-Wf7" secondAttribute="trailing" id="zyi-4d-cJe"/>
             </constraints>

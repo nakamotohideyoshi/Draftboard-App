@@ -246,11 +246,26 @@ extension ButtonDelegate: EnterButtonDelegate {
     func tappedEnterButton(contest contest: Contest, completionHandler: ((Bool) -> Void)) {
         if pendingEntries[contest.id]?.count > 0 { return }
         
-        enterContest(contest).always{
-            completionHandler(true)
-        }.error { (error: ErrorType) -> Void in
-            completionHandler(false)
-            self.showError(error)
+        let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
+        vc.descriptionText = "Before you can enter contests we need to verify you are in a location where daily fantasy sports contests are legal. Your location data will only be available to us while you are using the Draftboard app."
+        vc.promise().then { Void -> Void in
+            self.enterContest(contest).always{
+                completionHandler(true)
+            }.error { (error: ErrorType) in
+                completionHandler(false)
+                self.showError(error)
+                RootViewController.sharedInstance.popModalViewController()
+            }
+        }.error { error in
+            if case let LocationError.InvalidState(state) = error {
+                let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
+                vc.descriptionText = "Looks like you’re in \(state), a state we do not currently operate in. Unfortunately, we are unable to process your contest entry while you are in \(state). Please contact support@draftboard.com if you have further questions."
+                RootViewController.sharedInstance.pushModalViewController(vc)
+            } else if case LocationError.InvalidCountry(_) = error {
+                let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
+                vc.descriptionText = "Looks like you’re outside the US or Canada. Unfortunately, we are unable to process your contest entry while you are outside the US or Canada. Please contact support@draftboard.com if you have further questions."
+                RootViewController.sharedInstance.pushModalViewController(vc)
+            }
         }
     }
 }
@@ -298,24 +313,29 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     // ContestCellActionButtonDelegate
     
     func actionButtonTappedForCell(cell: ContestCell) {
-        guard let indexPath = tableView.indexPathForCell(cell) else { return }
-        let contest = contests![indexPath.item]
-        if pendingEntries[contest.id]?.count > 0 { return }
-        
-        enterContest(contest).error { (error: ErrorType) -> Void in
-            self.showError(error)
+        let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
+        vc.descriptionText = "Before you can enter contests we need to verify you are in a location where daily fantasy sports contests are legal. Your location data will only be available to us while you are using the Draftboard app."
+        vc.promise().then { Void -> Void in
+            guard let indexPath = self.tableView.indexPathForCell(cell) else { return }
+            let contest = self.contests![indexPath.item]
+            if self.pendingEntries[contest.id]?.count > 0 { return }
+    
+            return self.enterContest(contest).error { (error: ErrorType) in
+                self.showError(error)
+                RootViewController.sharedInstance.popModalViewController()
+            }
+        }.error { error in
+            if case let LocationError.InvalidState(state) = error {
+                let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
+                vc.descriptionText = "Looks like you’re in \(state), a state we do not currently operate in. Unfortunately, we are unable to process your contest entry while you are in \(state). Please contact support@draftboard.com if you have further questions."
+                RootViewController.sharedInstance.pushModalViewController(vc)
+            } else if case LocationError.InvalidCountry(_) = error {
+                let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
+                vc.descriptionText = "Looks like you’re outside the US or Canada. Unfortunately, we are unable to process your contest entry while you are outside the US or Canada. Please contact support@draftboard.com if you have further questions."
+                RootViewController.sharedInstance.pushModalViewController(vc)
+            }
         }
-        
-//        let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
-//        vc.promise().then { Void -> Void in
-//            RootViewController.sharedInstance.popModalViewController()
-//        }.error { error in
-//            //RootViewController.sharedInstance.popModalViewController()
-//            let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
-//            RootViewController.sharedInstance.pushModalViewController(vc)
-//        }
     }
-
 }
 
 enum ContestEntryError: ErrorType {

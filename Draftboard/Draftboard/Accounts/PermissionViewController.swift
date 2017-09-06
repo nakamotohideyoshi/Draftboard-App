@@ -11,7 +11,8 @@ import CoreLocation
 import PromiseKit
 
 enum LocationError: ErrorType {
-    case InvalidState
+    case InvalidState(String)
+    case InvalidCountry(String)
     case Unknown
 }
 
@@ -33,6 +34,8 @@ class PermissionViewController: DraftboardModalViewController, CLLocationManager
     
     let allowedStates = ["CA", "PA", "OH", "NC", "MI", "NJ", "WI", "MN", "SC", "KY", "OR", "OK", "CT", "UT", "NM", "NE",
                          "WV", "RI", "SD", "ND", "AK", "WY", "MA", "TN", "MD", "CO", "AR", "KS", "ME", "MS"]
+    
+    var descriptionText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +66,8 @@ class PermissionViewController: DraftboardModalViewController, CLLocationManager
         
         loaderView.hidden = true
         titleLabel1.hidden = true
+        
+        descriptionLabel.text = descriptionText
     }
     
     var denied: Bool = false {
@@ -116,13 +121,12 @@ class PermissionViewController: DraftboardModalViewController, CLLocationManager
                     self.fulfill()
                 } else if placemark.ISOcountryCode == "US" {
                     if self.allowedStates.contains(placemark.administrativeArea ?? "") {
-                        //self.fulfill()
-                        self.reject(LocationError.InvalidState)
+                        self.fulfill()
                     } else {
-                        self.reject(LocationError.InvalidState)
+                        self.reject(LocationError.InvalidState(placemark.administrativeArea ?? ""))
                     }
                 } else {
-                    self.reject(LocationError.InvalidState)
+                    self.reject(LocationError.InvalidCountry(placemark.ISOcountryCode ?? ""))
                 }
             }
 
