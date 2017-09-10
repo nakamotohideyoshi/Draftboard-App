@@ -36,7 +36,6 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     
     override func viewWillAppear(animated: Bool) {
         // Reload what's already there
-        lineups = nil
         update()
         // Get lineups
         DerivedData.allLineupsWithStarts().then { lineups -> Void in
@@ -58,6 +57,7 @@ class LineupListViewController: DraftboardViewController, UIActionSheetDelegate 
     
     func update() {
         loaderView.hidden = (lineups != nil)
+        loaderView.resumeSpinning()
         cardCollectionView.hidden = (lineups == nil)
         cardCollectionView.reloadData()
         updateSubtitle()
