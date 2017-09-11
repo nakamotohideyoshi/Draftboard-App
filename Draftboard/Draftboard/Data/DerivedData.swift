@@ -204,7 +204,6 @@ extension Lineup {
                         let id: Int = try! l.get("id")
                         if (id == self.id) {
                             let entriesJSON: [NSDictionary] = try! l.get("entries")
-                            print(entriesJSON)
                             let entries: [LineupFinishedEntry] = try entriesJSON.map{ try LineupFinishedEntry.init(JSON: $0) }
                             var results: [LineupFinishedEntry] = []
                             var count = 0

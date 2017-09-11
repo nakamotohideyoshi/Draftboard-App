@@ -215,8 +215,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         if lineup?.isLive == true {
             if lineupFinished {
-                let status = cellStatuses![section]
-                if status == .Open {
+                let status = cellStatuses![safe: section]
+                if status != nil && status == .Open {
                     let entry = finishedEntries[section]
                     return entry.entries.count + 1
                 }
@@ -430,9 +430,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, LineupE
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.row == 0 {
             if lineup?.isLive == true {
-                if lineupFinished {
-                } else {
-                    let status = cellStatuses![indexPath.section]
+                let status = cellStatuses![safe: indexPath.section]
+                if status != nil {
                     if status == .Open {
                         cellStatuses![indexPath.section] = .Closed
                     } else {
