@@ -167,9 +167,9 @@ extension API_Endpoints {
         }
     }
     
-    class func signup(firstname firstname: String, lastname: String, username: String, email: String, password: String, birthYear: String, birthMonth: String, birthDay: String, zipcode: String) -> Promise<Void> {
+    class func signup(username: String, email: String, password: String) -> Promise<Void> {
         let path = "api/account/register/"
-        let params = ["first": firstname, "last": lastname, "username": username, "email": email, "password": password, "birth_year": birthYear, "birth_month": birthMonth, "birth_day": birthDay, "postal_code": zipcode]
+        let params = ["username": username, "email": email, "password": password]
         return API.post(path, JSON: params).then { (data: NSDictionary) -> Void in
             
         }

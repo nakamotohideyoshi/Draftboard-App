@@ -60,12 +60,12 @@ class LabeledField: DraftboardNibView, UITextFieldDelegate {
     }
     
     func didTapNextButton(button: UIBarButtonItem) {
-        if textField.tag > 0 && textField.tag < 7 {
+        if textField.tag > 0 && textField.tag < 4 {
             let nextTag = textField.tag + 1;
             let prevTag = textField.tag - 1;
             var tags: [Int] = [Int]()
-            if (nextTag < 7) {
-                for index in nextTag...6 {
+            if (nextTag < 4) {
+                for index in nextTag...3 {
                     tags += [index]
                 }
             }

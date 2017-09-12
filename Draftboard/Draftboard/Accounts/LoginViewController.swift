@@ -21,12 +21,9 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     @IBOutlet weak var rememberSwitch: UISwitch!
     
     @IBOutlet weak var signupContainer: UIView!
-    @IBOutlet weak var fullNameField: LabeledField!
     @IBOutlet weak var usernameField: LabeledField!
     @IBOutlet weak var emailField: LabeledField!
     @IBOutlet weak var signupPasswordField: LabeledField!
-    @IBOutlet weak var birthField: LabeledField!
-    @IBOutlet weak var zipcodeField: LabeledField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var signupButton: DraftboardLoadingButton!
     let segmentedControl = DraftboardSegmentedControl(choices: [], textColor: .greyCool(), textSelectedColor: .greenDraftboard())
@@ -41,12 +38,10 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         
         loginField.delegate = self
         passwordField.delegate = self
-        fullNameField.delegate = self
+        
         usernameField.delegate = self
         emailField.delegate = self
         signupPasswordField.delegate = self
-        birthField.delegate = self
-        zipcodeField.delegate = self
         
         tapGestureRecognizer = UITapGestureRecognizer()
         tapGestureRecognizer.addTarget(self, action: .didTap)
@@ -74,23 +69,14 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         signupButton.iconImageView.hidden = true
         signupButton.disabled = true
         
-        fullNameField.textField.addTarget(self, action: .fullnameChanged, forControlEvents: .EditingChanged)
-        fullNameField.textField.tag = 1
+        
         usernameField.textField.addTarget(self, action: .usernameChanged, forControlEvents: .EditingChanged)
-        usernameField.textField.tag = 2
+        usernameField.textField.tag = 1
         emailField.textField.addTarget(self, action: .emailChanged, forControlEvents: .EditingChanged)
-        emailField.textField.tag = 3
+        emailField.textField.tag = 2
         emailField.textField.keyboardType = .EmailAddress
         signupPasswordField.textField.addTarget(self, action: .signupPasswordChanged, forControlEvents: .EditingChanged)
-        signupPasswordField.textField.tag = 4
-        birthField.textField.addTarget(self, action: .birthChanged, forControlEvents: .EditingChanged)
-        birthField.textField.tag = 5
-        birthField.textField.keyboardType = .NumberPad
-        birthField.labelType = .Birthday
-        zipcodeField.textField.addTarget(self, action: .zipcodeChanged, forControlEvents: .EditingChanged)
-        zipcodeField.textField.tag = 6
-        zipcodeField.textField.keyboardType = .NumberPad
-        zipcodeField.labelType = .Zipcode
+        signupPasswordField.textField.tag = 3
         
         signupContainer.hidden = true
         
@@ -207,14 +193,11 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     }
     
     func updateSignupButtonStatus() {
-        let validFullname = fullnameValid(fullNameField.textField.text)
         let validUsername = signupUsernameValid(usernameField.textField.text)
         let validEmail = emailValid(emailField.textField.text)
         let validPassword = signupPasswordValid(signupPasswordField.textField.text)
-        let validBirth = birthValid(birthField.textField.text)
-        let validZipcode = zipcodeValid(zipcodeField.textField.text)
-        
-        if validFullname && validUsername && validEmail && validPassword && validBirth && validZipcode {
+
+        if validUsername && validEmail && validPassword {
             if signupButton.disabled {
                 signupButton.userInteractionEnabled = true
                 signupButton.iconImageView.hidden = false
@@ -260,27 +243,6 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         return false
     }
     
-    func fullnameValid(fullname: String?) -> Bool {
-        if fullname == nil {
-            return false
-        }
-        
-        let trimmedString = fullname!.stringByTrimmingCharactersInSet(
-            NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        )
-        
-        if trimmedString.characters.count > 0 {
-            let fullNameArr: [String] = trimmedString.componentsSeparatedByString(" ")
-            if fullNameArr.count != 2 {
-                return false
-            } else {
-                return true
-            }
-        }
-        
-        return false
-    }
-
     func signupUsernameValid(username: String?) -> Bool {
         if username == nil {
             return false
@@ -319,47 +281,6 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         }
         
         let trimmedString = password!.stringByTrimmingCharactersInSet(
-            NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        )
-        
-        if trimmedString.characters.count > 0 {
-            return true
-        }
-        
-        return false
-    }
-    
-    func birthValid(birth: String?) -> Bool {
-        if birth == nil {
-            return false
-        }
-        
-        let trimmedString = birth!.stringByTrimmingCharactersInSet(
-            NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        )
-        
-        if trimmedString.characters.count > 0 {
-            let birthdayArr: [String] = trimmedString.componentsSeparatedByString("/")
-            if birthdayArr.count != 3 {
-                return false
-            } else {
-                if birthdayArr[0].characters.count == 2 && birthdayArr[1].characters.count == 2 && birthdayArr[2].characters.count == 4 {
-                    return true
-                } else {
-                    return false
-                }
-            }
-        }
-        
-        return false
-    }
-    
-    func zipcodeValid(zipcode: String?) -> Bool {
-        if zipcode == nil {
-            return false
-        }
-        
-        let trimmedString = zipcode!.stringByTrimmingCharactersInSet(
             NSCharacterSet.whitespaceAndNewlineCharacterSet()
         )
         
@@ -421,7 +342,7 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
         scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         if segmentedControl.currentIndex == 1 {
             var emptyField: UITextField!
-            for index in 1...6 {
+            for index in 1...3 {
                 let inputField = signupContainer.viewWithTag(index) as! UITextField!
                 if inputField.text == "" {
                     emptyField = inputField
@@ -510,21 +431,12 @@ class LoginViewController: DraftboardModalViewController, UITextFieldDelegate, U
     }
     
     func signup() {
-        let fullname = fullNameField.textField.text ?? ""
-        let fullnameArr = fullname.componentsSeparatedByString(" ")
-        let firstname = fullnameArr[0]
-        let lastname = fullnameArr[1]
         let username = usernameField.textField.text ?? ""
         let email = emailField.textField.text ?? ""
         let password = signupPasswordField.textField.text ?? ""
-        let birthday = birthField.textField.text ?? ""
-        let birthdayArr = birthday.componentsSeparatedByString("/")
-        let birthYear = birthdayArr[2]
-        let birthMonth = birthdayArr[0]
-        let birthDay = birthdayArr[1]
-        let zipcode = zipcodeField.textField.text ?? ""
         
-        API.signup(firstname: firstname, lastname: lastname, username: username, email: email, password: password, birthYear: birthYear, birthMonth: birthMonth, birthDay: birthDay, zipcode: zipcode).then { () -> Void in
+        
+        API.signup(username, email: email, password: password).then { () -> Void in
             
             let vc = ErrorViewController(nibName: "ErrorViewController", bundle: nil)
             let actions = ["Log In"]
@@ -592,10 +504,7 @@ private extension Selector {
     static let didTapSignup = #selector(LoginViewController.didTapSignup(_:))
     static let passwordChanged = #selector(LoginViewController.passwordChanged(_:))
     static let loginChanged = #selector(LoginViewController.loginChanged(_:))
-    static let fullnameChanged = #selector(LoginViewController.fullnameChanged(_:))
     static let usernameChanged = #selector(LoginViewController.usernameChanged(_:))
     static let emailChanged = #selector(LoginViewController.emailChanged(_:))
     static let signupPasswordChanged = #selector(LoginViewController.signupPasswordChanged(_:))
-    static let birthChanged = #selector(LoginViewController.birthChanged(_:))
-    static let zipcodeChanged = #selector(LoginViewController.zipcodeChanged(_:))
 }

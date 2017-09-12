@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,10 +17,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Draftboard" customModuleProvider="target">
             <connections>
-                <outlet property="birthField" destination="Xfs-uf-wXA" id="tyc-ie-ZAr"/>
                 <outlet property="descriptionTextView" destination="ST8-VX-MBb" id="48s-3U-5rm"/>
                 <outlet property="emailField" destination="RVx-mE-VzF" id="Lvr-7Z-sSc"/>
-                <outlet property="fullNameField" destination="Ygw-eY-BUB" id="bxN-TG-d8o"/>
                 <outlet property="loginButton" destination="1XO-l8-dAf" id="6OD-yL-rRe"/>
                 <outlet property="loginContainer" destination="4bR-3r-Aib" id="NHy-jh-SqF"/>
                 <outlet property="loginField" destination="2kz-Pv-XKj" id="9ql-hV-q0i"/>
@@ -33,7 +31,6 @@
                 <outlet property="signupPasswordField" destination="Cg7-gU-NDu" id="dvO-z3-Uc1"/>
                 <outlet property="usernameField" destination="Z4M-hp-kaY" id="BEu-As-6Yx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="zipcodeField" destination="UWc-Lo-aja" id="l3S-5d-HPj"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -48,7 +45,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJV-dH-EVN">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQP-3X-iJG" userLabel="logoContainer">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
@@ -154,18 +151,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c0O-7b-XbV" userLabel="signupContainer">
                                     <rect key="frame" x="15" y="350" width="345" height="450"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ygw-eY-BUB" userLabel="fullNameField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="hZo-57-diW"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="full name"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Your first and last names"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4M-hp-kaY" userLabel="usernameField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="50" width="345" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="XgZ-sB-BO0"/>
                                             </constraints>
@@ -175,7 +162,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVx-mE-VzF" userLabel="emailField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="100" width="345" height="50"/>
+                                            <rect key="frame" x="0.0" y="50" width="345" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="NYT-p8-LoY"/>
                                             </constraints>
@@ -185,7 +172,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-gU-NDu" userLabel="passwordField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="150" width="345" height="50"/>
+                                            <rect key="frame" x="0.0" y="100" width="345" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="WY7-Or-Poc"/>
                                             </constraints>
@@ -195,29 +182,8 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="secureEntry" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xfs-uf-wXA" userLabel="birthField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="200" width="345" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="4EJ-Sl-aNO"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="date of birth"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="MM/DD/YYYY"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWc-Lo-aja" userLabel="zipcodeField" customClass="LabeledField" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="250" width="345" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="Ps2-4v-Ze5"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="zip code"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Your current residence"/>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorder" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ST8-VX-MBb">
-                                            <rect key="frame" x="0.0" y="340" width="345" height="50"/>
+                                            <rect key="frame" x="0.0" y="190" width="345" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="uUb-Pg-7Pa"/>
                                             </constraints>
@@ -227,7 +193,7 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEF-DK-GBi" userLabel="Signup Button" customClass="DraftboardLoadingButton" customModule="Draftboard" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="430" width="325" height="50"/>
+                                            <rect key="frame" x="10" y="280" width="325" height="50"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="Sov-t0-OuA"/>
@@ -239,38 +205,29 @@
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Xfs-uf-wXA" secondAttribute="trailing" id="0nG-c9-HmO"/>
                                         <constraint firstAttribute="trailing" secondItem="Cg7-gU-NDu" secondAttribute="trailing" id="0yR-1Y-v1X"/>
                                         <constraint firstItem="NEF-DK-GBi" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" constant="10" id="1ih-q5-EJs"/>
                                         <constraint firstItem="RVx-mE-VzF" firstAttribute="top" secondItem="Z4M-hp-kaY" secondAttribute="bottom" id="5BB-3r-nb5"/>
                                         <constraint firstAttribute="trailing" secondItem="Z4M-hp-kaY" secondAttribute="trailing" id="AC0-wT-8RH"/>
+                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="leading" secondItem="Cg7-gU-NDu" secondAttribute="leading" id="APO-S3-cDM"/>
+                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="top" secondItem="Cg7-gU-NDu" secondAttribute="bottom" constant="40" id="DMy-ae-3Le"/>
                                         <constraint firstAttribute="height" constant="450" id="KMQ-Rn-FFb"/>
-                                        <constraint firstItem="Xfs-uf-wXA" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="LA8-VP-797"/>
                                         <constraint firstItem="RVx-mE-VzF" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="MI8-Up-WOR"/>
-                                        <constraint firstItem="UWc-Lo-aja" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="P54-2l-FWS"/>
                                         <constraint firstItem="Cg7-gU-NDu" firstAttribute="top" secondItem="RVx-mE-VzF" secondAttribute="bottom" id="Q6s-wd-89k"/>
                                         <constraint firstItem="Cg7-gU-NDu" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="RJD-c6-8r9"/>
                                         <constraint firstItem="Z4M-hp-kaY" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="TF1-JW-zQi"/>
-                                        <constraint firstAttribute="trailing" secondItem="UWc-Lo-aja" secondAttribute="trailing" id="UiQ-YF-lO6"/>
-                                        <constraint firstItem="Ygw-eY-BUB" firstAttribute="top" secondItem="c0O-7b-XbV" secondAttribute="top" id="YRk-f4-XeK"/>
-                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="leading" secondItem="UWc-Lo-aja" secondAttribute="leading" id="ZfF-hD-TZ0"/>
-                                        <constraint firstItem="Ygw-eY-BUB" firstAttribute="leading" secondItem="c0O-7b-XbV" secondAttribute="leading" id="bIo-yE-UTk"/>
+                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="trailing" secondItem="Cg7-gU-NDu" secondAttribute="trailing" id="aHE-Jq-5fT"/>
                                         <constraint firstItem="NEF-DK-GBi" firstAttribute="top" secondItem="ST8-VX-MBb" secondAttribute="bottom" constant="40" id="cLj-B1-o4z"/>
                                         <constraint firstAttribute="trailing" secondItem="RVx-mE-VzF" secondAttribute="trailing" id="ead-yu-jWL"/>
-                                        <constraint firstItem="UWc-Lo-aja" firstAttribute="top" secondItem="Xfs-uf-wXA" secondAttribute="bottom" id="gX0-yP-6ka"/>
-                                        <constraint firstItem="Z4M-hp-kaY" firstAttribute="top" secondItem="Ygw-eY-BUB" secondAttribute="bottom" id="nDP-BG-hdC"/>
+                                        <constraint firstItem="Z4M-hp-kaY" firstAttribute="top" secondItem="c0O-7b-XbV" secondAttribute="top" id="hYp-B8-No0"/>
                                         <constraint firstAttribute="trailing" secondItem="NEF-DK-GBi" secondAttribute="trailing" constant="10" id="q7q-Tj-Qp3"/>
-                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="top" secondItem="UWc-Lo-aja" secondAttribute="bottom" constant="40" id="vet-5e-5HY"/>
-                                        <constraint firstItem="ST8-VX-MBb" firstAttribute="trailing" secondItem="UWc-Lo-aja" secondAttribute="trailing" id="wea-9T-pbJ"/>
-                                        <constraint firstItem="Xfs-uf-wXA" firstAttribute="top" secondItem="Cg7-gU-NDu" secondAttribute="bottom" id="xpp-pu-avV"/>
-                                        <constraint firstAttribute="trailing" secondItem="Ygw-eY-BUB" secondAttribute="trailing" id="zT1-Mp-G1p"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="aQP-3X-iJG" firstAttribute="leading" secondItem="NJV-dH-EVN" secondAttribute="leading" id="4rV-fr-9eQ"/>
                                 <constraint firstItem="aQP-3X-iJG" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" id="9h6-LG-35N"/>
-                                <constraint firstAttribute="height" constant="900" id="C3k-DG-S2h"/>
+                                <constraint firstAttribute="height" constant="750" id="C3k-DG-S2h"/>
                                 <constraint firstItem="4bR-3r-Aib" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" constant="350" id="CcY-wY-SAD"/>
                                 <constraint firstItem="c0O-7b-XbV" firstAttribute="top" secondItem="NJV-dH-EVN" secondAttribute="top" constant="350" id="LfV-HO-eZE"/>
                                 <constraint firstAttribute="trailing" secondItem="c0O-7b-XbV" secondAttribute="trailing" constant="15" id="O5H-2P-LMi"/>
