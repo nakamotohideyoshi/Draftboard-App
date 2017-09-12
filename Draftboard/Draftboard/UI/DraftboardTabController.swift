@@ -128,7 +128,8 @@ class DraftboardTabController: UIViewController, DraftboardTabBarDelegate {
            self.switchNavController(contestNC)
         }
         else if (buttonType == .Profile) {
-            self.switchNavController(profileNC)
+            //self.switchNavController(profileNC)
+            print("profile NC")
         }
     }
     

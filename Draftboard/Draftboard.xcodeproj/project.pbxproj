@@ -232,6 +232,10 @@
 		B20C305F1F3ABAC300BA4668 /* LineupFinishedEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */; };
 		B20C30611F3F97F100BA4668 /* PlayerDetailStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */; };
 		B22246171F4FB82500F406E6 /* LineupEntryStandingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22246161F4FB82500F406E6 /* LineupEntryStandingCell.swift */; };
+		B223B1C01F67DD80000A247E /* AccountModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B223B1BE1F67DD80000A247E /* AccountModalView.swift */; };
+		B223B1C11F67DD80000A247E /* AccountModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B223B1BF1F67DD80000A247E /* AccountModalViewController.swift */; };
+		B223B1C21F67DD8E000A247E /* AccountModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B223B1BF1F67DD80000A247E /* AccountModalViewController.swift */; };
+		B223B1C31F67DD8E000A247E /* AccountModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B223B1BE1F67DD80000A247E /* AccountModalView.swift */; };
 		B22450131EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */; };
 		B22450151EC54C560098BC24 /* MLBPitcherGameLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */; };
 		B2395E701F39AF5F006498B6 /* LineupEntryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */; };
@@ -772,6 +776,8 @@
 		B20C305E1F3ABAC300BA4668 /* LineupFinishedEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupFinishedEntry.swift; sourceTree = "<group>"; };
 		B20C30601F3F97F100BA4668 /* PlayerDetailStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailStatsView.swift; sourceTree = "<group>"; };
 		B22246161F4FB82500F406E6 /* LineupEntryStandingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryStandingCell.swift; sourceTree = "<group>"; };
+		B223B1BE1F67DD80000A247E /* AccountModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModalView.swift; sourceTree = "<group>"; };
+		B223B1BF1F67DD80000A247E /* AccountModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModalViewController.swift; sourceTree = "<group>"; };
 		B22450121EC4E7190098BC24 /* MLBPitcherGameLogHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogHeaderCell.swift; sourceTree = "<group>"; };
 		B22450141EC54C560098BC24 /* MLBPitcherGameLogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLBPitcherGameLogCell.swift; sourceTree = "<group>"; };
 		B2395E6F1F39AF5E006498B6 /* LineupEntryTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupEntryTableView.swift; sourceTree = "<group>"; };
@@ -944,6 +950,8 @@
 			children = (
 				3E83CCD11D95CF7500324EB2 /* AccountViewController.swift */,
 				3E83CCD31D95CF8500324EB2 /* AccountView.swift */,
+				B223B1BF1F67DD80000A247E /* AccountModalViewController.swift */,
+				B223B1BE1F67DD80000A247E /* AccountModalView.swift */,
 			);
 			name = "Account (New)";
 			path = Account;
@@ -1654,6 +1662,7 @@
 				3E83CCC31D91CCBA00324EB2 /* PlayerDetailViewController.swift in Sources */,
 				3E83CCC51D91D01500324EB2 /* PlayerDetailView.swift in Sources */,
 				3E192C211CCAE35C0021A31D /* LineupCardCell.swift in Sources */,
+				B223B1C01F67DD80000A247E /* AccountModalView.swift in Sources */,
 				3E83CCC91D91D0BB00324EB2 /* PlayerDetailTableView.swift in Sources */,
 				5DB14BF71C121965008E14A4 /* AccountSettingsView.swift in Sources */,
 				3E8A7E641D273A220020681E /* LineupEntryViewController.swift in Sources */,
@@ -1773,6 +1782,7 @@
 				3E83CCD21D95CF7500324EB2 /* AccountViewController.swift in Sources */,
 				3C74CA431BE0513A0077DF0C /* ContestsHeaderCell.swift in Sources */,
 				3E8A7E661D273A2C0020681E /* LineupEntryView.swift in Sources */,
+				B223B1C11F67DD80000A247E /* AccountModalViewController.swift in Sources */,
 				B2CC40D51F13D72800D88E64 /* LineupDraftGamesTableView.swift in Sources */,
 				B26048611F5E9ECE00374C1F /* LocationErrorViewController.swift in Sources */,
 				5D9A321F1BCD6E09006C758B /* DraftboardBadgeButton.swift in Sources */,
@@ -1787,6 +1797,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B223B1C21F67DD8E000A247E /* AccountModalViewController.swift in Sources */,
+				B223B1C31F67DD8E000A247E /* AccountModalView.swift in Sources */,
 				B26048631F5EA81B00374C1F /* LocationErrorViewController.swift in Sources */,
 				B260485D1F5E4AEC00374C1F /* CLGeocoder+Promise.swift in Sources */,
 				B260485E1F5E4AEC00374C1F /* CLLocationManager+Promise.swift in Sources */,

@@ -118,7 +118,12 @@ class DraftboardTabBar: UIView {
     func buttonTap(button: DraftboardTabBarButton) {
         let index = buttons.indexOf(button)
         if (index != nil) {
-            selectButtonAtIndex(index!, animated: true)
+            if index == 2 {
+                let accountModalView = AccountModalViewController()
+                RootViewController.sharedInstance.pushModalViewController(accountModalView)
+            } else {
+                selectButtonAtIndex(index!, animated: true)
+            }
         }
     }
     
