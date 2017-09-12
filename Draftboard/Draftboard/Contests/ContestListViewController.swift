@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import PromiseKit
 
 class ContestListViewController: DraftboardViewController {
@@ -246,7 +247,11 @@ extension ButtonDelegate: EnterButtonDelegate {
     func tappedEnterButton(contest contest: Contest, completionHandler: ((Bool) -> Void)) {
         if pendingEntries[contest.id]?.count > 0 { return }
         
+        let locAuthStatus = CLLocationManager.authorizationStatus()
         let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
+        if locAuthStatus == .Denied || locAuthStatus == .Restricted {
+            vc.denied = true
+        }
         vc.descriptionText = "Before you can enter contests we need to verify you are in a location where daily fantasy sports contests are legal. Your location data will only be available to us while you are using the Draftboard app."
         vc.promise().then { Void -> Void in
             self.enterContest(contest).always{
@@ -265,6 +270,8 @@ extension ButtonDelegate: EnterButtonDelegate {
                 let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
                 vc.descriptionText = "Looks like you’re outside the US or Canada. Unfortunately, we are unable to process your contest entry while you are outside the US or Canada. Please contact support@draftboard.com if you have further questions."
                 RootViewController.sharedInstance.pushModalViewController(vc)
+            } else if case LocationError.Unknown = error {
+                RootViewController.sharedInstance.popModalViewController()
             }
         }
     }
@@ -313,7 +320,11 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
     // ContestCellActionButtonDelegate
     
     func actionButtonTappedForCell(cell: ContestCell) {
+        let locAuthStatus = CLLocationManager.authorizationStatus()
         let vc = PermissionViewController(nibName: "PermissionViewController", bundle: nil)
+        if locAuthStatus == .Denied || locAuthStatus == .Restricted {
+            vc.denied = true
+        }
         vc.descriptionText = "Before you can enter contests we need to verify you are in a location where daily fantasy sports contests are legal. Your location data will only be available to us while you are using the Draftboard app."
         vc.promise().then { Void -> Void in
             guard let indexPath = self.tableView.indexPathForCell(cell) else { return }
@@ -333,6 +344,8 @@ extension TableViewDelegate: UITableViewDataSource, UITableViewDelegate, Contest
                 let vc = LocationErrorViewController(nibName: "LocationErrorViewController", bundle: nil)
                 vc.descriptionText = "Looks like you’re outside the US or Canada. Unfortunately, we are unable to process your contest entry while you are outside the US or Canada. Please contact support@draftboard.com if you have further questions."
                 RootViewController.sharedInstance.pushModalViewController(vc)
+            } else if case LocationError.Unknown = error {
+                RootViewController.sharedInstance.popModalViewController()
             }
         }
     }

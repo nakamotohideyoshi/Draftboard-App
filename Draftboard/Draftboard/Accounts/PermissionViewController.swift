@@ -70,17 +70,7 @@ class PermissionViewController: DraftboardModalViewController, CLLocationManager
         descriptionLabel.text = descriptionText
     }
     
-    var denied: Bool = false {
-        didSet {
-            if (denied) {
-                titleLabel.text = "PERMISSION DENIED"
-                descriptionLabel.text = permissionDeniedText()
-                grantBtn.userInteractionEnabled = true
-                grantBtn.textValue = "ALLOW"
-                grantBtn.loading = false
-            }
-        }
-    }
+    var denied: Bool = false
     
     func promise() -> Promise<Void> {
         RootViewController.sharedInstance.pushModalViewController(self)
@@ -133,6 +123,9 @@ class PermissionViewController: DraftboardModalViewController, CLLocationManager
             //RootViewController.sharedInstance.locationPermissionsComplete()
         }
         else if status == .Denied || status == .Restricted {
+            if denied == false {
+                self.reject(LocationError.Unknown)
+            }
             denied = true
         }
     }

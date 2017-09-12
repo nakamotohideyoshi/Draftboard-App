@@ -79,7 +79,7 @@ We are going to ask that you share your location with the Draftboard app.</strin
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="textBold" value="YES"/>
-                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="GRANT PERMISSION"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="textValue" value="I UNDERSTAND"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
